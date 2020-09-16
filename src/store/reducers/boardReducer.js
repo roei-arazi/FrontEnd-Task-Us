@@ -58,37 +58,12 @@ export function boardReducer(state=initialState, action){
             }
         case 'ADD_TASK':
             console.log('got group id:', action.groupId);
-            console.log('got group id:', state.boards.map(board => {
-                board.groups.map(group => {
-                    if(group.id === action.groupId) group.tasks.push({
-                        id: _makeid(),
-                        name: 'sneeze',
-                        createdAt: 1123124124241,
-                        members: [{
-                            _id: 1234,
-                            name: 'osher',
-                            imgUrl: 'www/sfasf'
-                        }],
-                        status: 'done/progress/stuck',
-                        priority: 1,
-                        dueDate: 214124124125,
-                        note: 'dont forget about this',
-                        lastUpdated: 'yesterday',
-                        isSelected: false,
-                        posts: [],
-                        tags: ['ui', 'ux'],
-                        attachedImgs: []
-                    })
-                    return group;
-                })
-                return board
-            }));
             return {
                 ...state,
                 boards: state.boards.map(board => {
                     board.groups.map(group => {
                         if(group.id === action.groupId) group.tasks.push({
-                            id: 21412,
+                            id: _makeid(),
                             name: 'sneeze',
                             createdAt: 1123124124241,
                             members: [{
