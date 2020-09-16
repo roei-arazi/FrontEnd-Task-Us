@@ -1,5 +1,5 @@
 export const boardService = {
-    loadBoard,
+    loadBoards,
     updateBoard,
     addGroup
 }
@@ -94,9 +94,9 @@ let boards = [{
     ]
 }]
 
-async function loadBoard(id) {
+async function loadBoards(id) {
     try {
-        return board.find(board => board._id === id);
+        return boards.find(board => board._id === id);
     } catch (err) {
         console.log('boardService: Coulnd\'t get board');
         throw err;
@@ -105,7 +105,7 @@ async function loadBoard(id) {
 
 async function updateBoard(boardToSave) {
     try {
-        board = boardToSave;
+        const board = boardToSave;
     } catch (err) {
         console.log('boardService: Couldn\'t update board');
         throw err;
