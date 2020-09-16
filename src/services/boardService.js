@@ -94,9 +94,9 @@ let boards = [{
     ]
 }]
 
-async function loadBoards(id) {
+async function loadBoards() {
     try {
-        return boards.find(board => board._id === id);
+        return JSON.parse(JSON.stringify(boards));
     } catch (err) {
         console.log('boardService: Coulnd\'t get board');
         throw err;
