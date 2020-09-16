@@ -12,7 +12,7 @@ export function boardReducer(state=initialState, action){
         case 'ADD_GROUP':
             const boards = [...state.boards]
             const boardIdx = boards.find(board => board._id === action.boardId);
-            boards[boardIdx].push({
+            boards[boardIdx].groups.push({
                 _id: 124,
                 name: 'week1',
                 createdAt: 'date',
