@@ -53,44 +53,44 @@ let boards = [{
         }]
     }],
     activityLog: [{
-            createdAt: 124124125124,
-            byUser: {
-                _id: 123,
-                imgUrl: 'www.imgur',
-                fullName: 'shucks mcgee'
-            },
-            description: 'removed task "do the dishes"',
-            task: {
-                id: 123,
-                name: 'do the dishes'
-            }
+        createdAt: 124124125124,
+        byUser: {
+            _id: 123,
+            imgUrl: 'www.imgur',
+            fullName: 'shucks mcgee'
         },
-        {
-            createdAt: 12412541251,
-            byUser: {
-                _id: 123,
-                imgUrl: 'www.imgur',
-                fullName: 'shucks mcgee'
-            },
-            description: 'changed group name from project2 to project3',
-            group: {
-                id: 142,
-                name: 'project3'
-            }
-        },
-        {
-            createdAt: 4514512352135,
-            byUser: {
-                _id: 123,
-                imgUrl: 'www.imgur',
-                fullName: 'shucks mcgee'
-            },
-            description: 'added group project2',
-            group: {
-                id: 142,
-                name: 'project2'
-            }
+        description: 'removed task "do the dishes"',
+        task: {
+            id: 123,
+            name: 'do the dishes'
         }
+    },
+    {
+        createdAt: 12412541251,
+        byUser: {
+            _id: 123,
+            imgUrl: 'www.imgur',
+            fullName: 'shucks mcgee'
+        },
+        description: 'changed group name from project2 to project3',
+        group: {
+            id: 142,
+            name: 'project3'
+        }
+    },
+    {
+        createdAt: 4514512352135,
+        byUser: {
+            _id: 123,
+            imgUrl: 'www.imgur',
+            fullName: 'shucks mcgee'
+        },
+        description: 'added group project2',
+        group: {
+            id: 142,
+            name: 'project2'
+        }
+    }
     ]
 }]
 
@@ -112,7 +112,7 @@ async function updateBoard(boardToSave) {
     }
 }
 
-async function addGroup(boardId){
+async function addGroup(boardId) {
     const group = {
         _id: 124,
         name: 'week1',
@@ -145,10 +145,10 @@ async function addGroup(boardId){
             attachedImgs: []
         }]
     }
-    try{
+    try {
         const boardIdx = boards.findIndex(board => board._id === boardId);
         boards[boardIdx].groups.push(group)
-    }catch(err){
+    } catch (err) {
         console.log('boardService: Couldn\'t add group');
         throw err;
     }

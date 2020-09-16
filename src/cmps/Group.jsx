@@ -1,10 +1,14 @@
 import React from 'react';
+import { Task } from './Task'
 
-export function Group(){
-
-    return(
+export function Group(props) {
+    const tasks = [{ name: 'task1' }, { name: 'task2' }]
+    return (
         <section className="group">
-
+            <h1>Group {props.group.name}</h1>
+            {tasks.map(task => {
+                return <Task task={task} />
+            })}
         </section>
     )
 }

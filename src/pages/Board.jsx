@@ -1,35 +1,71 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Boardbar } from '../cmps/Boardbar';
+import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
+import { Group } from '../cmps/Group';
+// Reducers funcs
+import { loadBoards, addGroup } from '../store/actions/boardActions'
 
 class _Board extends Component {
-state = {
 
-}
+    boardId = '123'
 
-componentDidMount() {
-console.log(Board, this.props);
-}
+    async componentDidMount() {
 
-render() {
-return (
-<section className="board">
-<Navbar />
-<Boardbar />
-</section>
-)
-}
+        //TODO: change loadBoard argument to this.props.match.params.id
+
+        try {
+            if (!this.props.boards) {
+                await this.props.loadBoards()
+                return
+            }
+        } catch (err) {
+            console.log('Error', err)
+        }
+
+    }
+
+
+    onAddGroup = async () => {
+        console.log('Adding group',)
+        try {
+            await this.props.addGroup(this.boardId)
+        } catch (err) {
+            console.log('Error', err)
+        }
+    }
+
+    render() {
+        // const board = this.props.boards.find(board => board._id === this.boardId)
+        const board = {
+            groups: [{ name: 'group1' }, { name: 'group2' }]
+        }
+        if (!board) return <h1>Loading..</h1>
+        return (
+            <section className="board">
+                <Navbar />
+                <Boardbar />
+                <BoardHeader onAddGroup={this.onAddGroup} />
+
+                {board.groups.map(group => {
+                    return <Group group={group} />
+                })}
+
+            </section>
+        )
+    }
 }
 
 const mapStateToProps = state => {
-return {
-
-}
+    return {
+        boards: state.boardReducer.boards
+    }
 }
 
 const mapDispatchToProps = {
-
+    loadBoards,
+    addGroup
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);

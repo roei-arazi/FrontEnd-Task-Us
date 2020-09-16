@@ -1,10 +1,10 @@
 import React from 'react';
 
-export function Task(){
+export function Task(props) {
 
-    return(
+    return (
         <section className="task">
-
+            <h1>task: {props.task.name}</h1>
         </section>
     )
 }
