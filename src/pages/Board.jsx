@@ -16,7 +16,7 @@ class _Board extends Component {
         //TODO: change loadBoard argument to this.props.match.params.id
 
         try {
-            if (!this.props.boards) {
+            if (!this.props.boards || this.props.boards.length === 0) {
                 await this.props.loadBoards()
                 return
             }
@@ -36,7 +36,7 @@ class _Board extends Component {
         }
     }
     onRemoveGroup = async (groupId) => {
-        console.log('Removing group',)
+        console.log('Removing group, group id:', groupId)
         try {
             await this.props.removeGroup(groupId)
         } catch (err) {
@@ -47,7 +47,7 @@ class _Board extends Component {
     render() {
         // const board = this.props.boards.find(board => board._id === this.boardId)
         const board = {
-            groups: [{ name: 'group1' }, { name: 'group2' }]
+            groups: [{ _id: 'g1', name: 'group1' }, { _id: 'g2', name: 'group2' }]
         }
         if (!board) return <h1>Loading..</h1>
         return (
