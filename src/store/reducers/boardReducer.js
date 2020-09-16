@@ -4,10 +4,11 @@ const initialState={
 
 export function boardReducer(state=initialState, action){
     switch (action.type) {
-        // case value:
-            
-        //     break;
-    
+        case 'SET_BOARD':
+            return {
+                ...state,
+                board: action.board
+            }
         default:
             return state
     }
