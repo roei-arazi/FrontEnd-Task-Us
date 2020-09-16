@@ -38,6 +38,7 @@ export class Task extends Component {
                     >
 
                         <ContentEditable
+                            className="cursor-initial"
                             innerRef={this.contentEditable}
                             html={elTaskName} // innerHTML of the editable div
                             disabled={false}       // use true to disable editing
