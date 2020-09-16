@@ -35,6 +35,14 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
+    onRemoveGroup = async (groupId) => {
+        console.log('Removing group',)
+        try {
+            await this.props.removeGroup(groupId)
+        } catch (err) {
+            console.log('Error', err)
+        }
+    }
 
     render() {
         // const board = this.props.boards.find(board => board._id === this.boardId)
@@ -49,7 +57,7 @@ class _Board extends Component {
                 <BoardHeader onAddGroup={this.onAddGroup} />
 
                 {board.groups.map(group => {
-                    return <Group group={group} />
+                    return <Group onRemoveGroup={this.onRemoveGroup} group={group} />
                 })}
 
             </section>

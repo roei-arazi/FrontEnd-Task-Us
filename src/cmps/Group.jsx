@@ -9,6 +9,9 @@ export function Group(props) {
             {tasks.map(task => {
                 return <Task task={task} />
             })}
+            <button onClick={() => {
+                props.onRemoveGroup(props.group._id)
+            }}>Delete Group</button>
         </section>
     )
 }
