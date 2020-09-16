@@ -1,23 +1,23 @@
-.navbar{
-    width:200px;
+.navbar {
+    width: 150px;
     background-color: $color1;
     height: 100vh;
-    position: fixed;
 
-    .logo{
-        margin-top:20px;
+    .icon {
+        font-size: 2rem;
+        color: $colorTxt;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
-    .icon{
-     font-size: 3rem;
-     color:$colorTxt;
-
-     &:hover{
-         cursor: pointer;
-     }
+    .logo {
+        margin-top: 20px;
+        font-size: 3rem;
     }
 
-    .navbar-links{
-    height: 40%;
+    .navbar-links {
+        height: 40%;
     }
 }
