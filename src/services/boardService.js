@@ -1,7 +1,8 @@
 export const boardService = {
     loadBoards,
     updateBoard,
-    addGroup
+    addGroup,
+    removeGroup
 }
 
 let boards = [{
@@ -157,7 +158,7 @@ async function addGroup(boardId) {
 
 async function removeGroup(groupId){
     boards = boards.map(board => {
-        board.groups = board.groups.filter(group => group.id !== action.groupId)
+        board.groups = board.groups.filter(group => group.id !== groupId)
         return board;
     })
 }

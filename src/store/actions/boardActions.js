@@ -47,3 +47,6 @@ export function addGroup(boardId){
         }
     }
 }
+
+export function addTask(){}
+export function removeTask(){}
