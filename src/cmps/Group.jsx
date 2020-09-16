@@ -2,7 +2,6 @@ import React from 'react';
 import { Task } from './Task'
 
 export function Group(props) {
-    const tasks = [{ id: 't1', name: 'task1' }, { id: 't2', name: 'task2' }]
     return (
         <section className="group padding-x-15 padding-y-15">
             <div className="group-header-container">
@@ -15,7 +14,7 @@ export function Group(props) {
             </div>
 
 
-            {tasks.map(task => {
+            {props.group.tasks.map(task => {
                 return <Task onRemoveTask={props.onRemoveTask} key={task.id} task={task} />
             })}
             <button onClick={() => {
