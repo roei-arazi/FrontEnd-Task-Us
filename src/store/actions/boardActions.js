@@ -1,14 +1,24 @@
 import {boardService} from '../../services/boardService'
 
 export function loadBoards(){
-    console.log('setting boards...');
     return async dispatch =>{
         try{
         const boards = await boardService.loadBoards();
-        console.log('got in actions:', boards);
         dispatch({type: 'SET_BOARDS', boards})
         }catch(err){
             console.log('boardActions: Couldn\'t load boards');
+            throw err;
+        }
+    }
+}
+
+export function removeGroup(groupId){
+    return async dispatch =>{
+        try{
+        dispatch({type: 'REMOVE_GROUP', groupId});
+        boardService.removeGroup(groupId)
+        }catch(err){
+            console.log('boardActions: Couldn\'t remove group');
             throw err;
         }
     }
