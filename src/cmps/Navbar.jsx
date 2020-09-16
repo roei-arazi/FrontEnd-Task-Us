@@ -24,9 +24,9 @@ class _Navbar extends Component {
         return (
             <section className="navbar flex column space-between align-center">
                 <NavLink to="/">
-                <IconContext.Provider value={{ className: 'icon logo' }}>
-                    <FaAd />
-                </IconContext.Provider>
+                    <IconContext.Provider value={{ className: 'icon logo' }}>
+                        <FaAd />
+                    </IconContext.Provider>
                 </NavLink>
                 <ul className="navbar-links flex column space-around">
                     {isNotificationShown && <Notifications />}

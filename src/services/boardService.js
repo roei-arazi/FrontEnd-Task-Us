@@ -1,7 +1,8 @@
 export const boardService = {
     loadBoards,
     updateBoard,
-    addGroup
+    addGroup,
+    removeGroup
 }
 
 let boards = [{
@@ -21,7 +22,7 @@ let boards = [{
         lastSeen: 'yesterday'
     }],
     groups: [{
-        _id: 124,
+        id: '123',
         name: 'week1',
         createdAt: 'date',
         color: 'blue',
@@ -113,7 +114,6 @@ async function updateBoard(boardToSave) {
 }
 
 async function addGroup(boardId) {
-        console.log('got in service:', boardId);
     const group = {
         _id: 124,
         name: 'week1',
@@ -148,11 +148,17 @@ async function addGroup(boardId) {
     }
     try {
         const boardIdx = boards.findIndex(board => board._id === boardId);
-        console.log('idx:', boardIdx);
         boards[boardIdx].groups.push(group)
         // return Promise.resolve()
     } catch (err) {
         console.log('boardService: Couldn\'t add group');
         throw err;
     }
+}
+
+async function removeGroup(groupId){
+    boards = boards.map(board => {
+        board.groups = board.groups.filter(group => group.id !== groupId)
+        return board;
+    })
 }
