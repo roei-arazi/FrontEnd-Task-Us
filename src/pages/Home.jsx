@@ -13,7 +13,7 @@ console.log(Home, this.props);
 render() {
 return (
 <section className="home">
-
+<h1>Home</h1>
 </section>
 )
 }

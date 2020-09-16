@@ -4,9 +4,9 @@ const initialState={
 
 export function userReducer(state=initialState, action){
     switch (action.type) {
-        case value:
+        // case value:
             
-            break;
+        //     break;
     
         default:
             return state
