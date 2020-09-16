@@ -3,22 +3,6 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FaAd, FaBell, FaCalendar, FaPortrait } from 'react-icons/fa'
 
-<<<<<<< HEAD
-class _Navbar extends Component {
-    state = {
-
-    }
-
-    componentDidMount() {
-
-    }
-
-    render() {
-        return (
-            <div>
-
-            </div>
-=======
 import { Notifications } from './Notifications';
 import { IconContext } from 'react-icons/lib';
 
@@ -61,7 +45,6 @@ class _Navbar extends Component {
                     </NavLink>
                 </ul>
             </section>
->>>>>>> c3c00249c89b22be8306d9fd6ee954f453e61440
         )
     }
 }

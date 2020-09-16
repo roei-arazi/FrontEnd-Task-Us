@@ -2,20 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FaCog } from 'react-icons/fa'
 
-<<<<<<< HEAD
-class _Boardbar extends Component {
-    state = {
-
-    }
-
-    componentDidMount() {
-    }
-
-    render() {
-        return (
-            <section className="board-bar">
-
-=======
 
 class _Boardbar extends Component {
     state = {
@@ -35,7 +21,6 @@ class _Boardbar extends Component {
                     <li><FaCog />Board 1</li>
                     <li><FaCog />Board 2</li>
                 </ul>
->>>>>>> c3c00249c89b22be8306d9fd6ee954f453e61440
             </section>
         )
     }
