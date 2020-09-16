@@ -64,14 +64,13 @@ class _Board extends Component {
         }
     }
 
-    onDragEnd=()=>{
+    onDragEnd = result => {
+        const {destination, source, draggableId}= result
 
-    }
-    onDragEnd=()=>{
-
-    }
-    onDragEnd=()=>{
-        
+        if(!destination) return;
+        if(destination.droppableId === source.droppableId
+            &&
+            destination.index===source.index)return;
     }
 
     render() {
@@ -85,12 +84,12 @@ class _Board extends Component {
                 <div className="board-container">
                     <BoardHeader onAddGroup={this.onAddGroup} />
                     <DragDropContext
-                    onDragEnd={this.onDragEnd}
+                        onDragEnd={this.onDragEnd}
                     >
-                    {board.groups.map(group => {
-                        return <Group key={group._id} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
-                            onRemoveGroup={this.onRemoveGroup} group={group} />
-                    })}
+                        {board.groups.map(group => {
+                            return <Group key={group._id} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
+                                onRemoveGroup={this.onRemoveGroup} group={group} />
+                        })}
                     </DragDropContext>
                 </div>
             </section>
