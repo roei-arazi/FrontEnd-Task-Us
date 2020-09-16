@@ -54,12 +54,12 @@ class _Board extends Component {
             <section className="board">
                 <Navbar />
                 <Boardbar />
-                <BoardHeader onAddGroup={this.onAddGroup} />
-
-                {board.groups.map(group => {
-                    return <Group key={group._id} onRemoveGroup={this.onRemoveGroup} group={group} />
-                })}
-
+                <div className="board-container">
+                    <BoardHeader onAddGroup={this.onAddGroup} />
+                    {board.groups.map(group => {
+                        return <Group key={group._id} onRemoveGroup={this.onRemoveGroup} group={group} />
+                    })}
+                </div>
             </section>
         )
     }
