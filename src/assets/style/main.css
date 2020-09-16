@@ -72,14 +72,19 @@ button {
   padding-bottom: 15px;
 }
 
-.board-container {
-  width: 100%;
-}
-
 .board {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.board .board-container {
+  width: 100%;
+}
+
+.board .board-container .groups-container {
+  height: 86vh;
+  overflow-y: overlay;
 }
 
 .boardbar {
@@ -153,6 +158,7 @@ button {
 .board-header {
   padding-top: 30px;
   padding-bottom: 30px;
+  padding-right: 30px;
   background-color: #ed6663;
   display: -webkit-box;
   display: -ms-flexbox;

@@ -1,6 +1,13 @@
-.board-container {
-    width: 100%;
-}
 .board {
     display: flex;
+
+    .board-container {
+        width: 100%;
+
+        .groups-container {
+            height: 86vh;
+            overflow-y: overlay;
+        }
+    }
+
 }

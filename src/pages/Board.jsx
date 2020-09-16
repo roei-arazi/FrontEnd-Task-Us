@@ -65,25 +65,25 @@ class _Board extends Component {
     }
 
     onDragEnd = result => {
-        const {destination, source, draggableId}= result
+        const { destination, source, draggableId } = result
         const board = this.props.boards.find(board => board._id === this.boardId)
-        const group = board.groups.find(group=> group.id===source.droppableId)
-        if(!destination) return;
-        if(destination.droppableId === source.droppableId
+        const group = board.groups.find(group => group.id === source.droppableId)
+        if (!destination) return;
+        if (destination.droppableId === source.droppableId
             &&
-            destination.index===source.index)return;
+            destination.index === source.index) return;
 
-            const newTaskIds= Array.from(group.tasks)
+        const newTaskIds = Array.from(group.tasks)
 
-            newTaskIds.splice(source.index, 1)
-            newTaskIds.splice(destination.index, 0, draggableId)
+        newTaskIds.splice(source.index, 1)
+        newTaskIds.splice(destination.index, 0, draggableId)
 
-            const newGroup={
-                ...group,
-                tasks:newTaskIds
-            }
+        const newGroup = {
+            ...group,
+            tasks: newTaskIds
+        }
 
-            this.setState({group:newGroup})
+        this.setState({ group: newGroup })
     }
 
     render() {
@@ -96,14 +96,16 @@ class _Board extends Component {
                 <Boardbar />
                 <div className="board-container">
                     <BoardHeader onAddGroup={this.onAddGroup} />
-                    <DragDropContext
-                        onDragEnd={this.onDragEnd}
-                    >
-                        {board.groups.map(group => {
-                            return <Group key={group._id} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
-                                onRemoveGroup={this.onRemoveGroup} group={group} />
-                        })}
-                    </DragDropContext>
+                    <div className="groups-container padding-x-15 ">
+                        <DragDropContext
+                            onDragEnd={this.onDragEnd}
+                        >
+                            {board.groups.map(group => {
+                                return <Group key={group._id} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
+                                    onRemoveGroup={this.onRemoveGroup} group={group} />
+                            })}
+                        </DragDropContext>
+                    </div>
                 </div>
             </section>
         )
