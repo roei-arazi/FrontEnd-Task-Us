@@ -7,7 +7,7 @@ import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 // Reducers funcs
-import { loadBoards, addGroup, removeGroup, addTask, removeTask } from '../store/actions/boardActions'
+import { loadBoards, addGroup, removeGroup, addTask, removeTask, editTask } from '../store/actions/boardActions'
 
 class _Board extends Component {
 
@@ -63,6 +63,15 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
+    onEditTask = async (task) => {
+        console.log('Editing task, got task:', task)
+        try {
+            await this.props.editTask(task)
+        } catch (err) {
+            console.log('Error', err)
+        }
+    }
+    //---------------------Draggable----------------------
 
     onDragEnd = result => {
         const { destination, source, draggableId } = result
@@ -101,7 +110,8 @@ class _Board extends Component {
                             onDragEnd={this.onDragEnd}
                         >
                             {board.groups.map(group => {
-                                return <Group key={group._id} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
+                                return <Group key={group._id}
+                                    onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                                     onRemoveGroup={this.onRemoveGroup} group={group} />
                             })}
                         </DragDropContext>
@@ -123,7 +133,8 @@ const mapDispatchToProps = {
     addGroup,
     removeGroup,
     addTask,
-    removeTask
+    removeTask,
+    editTask
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);

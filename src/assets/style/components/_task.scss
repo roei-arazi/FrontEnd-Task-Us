@@ -1,5 +1,7 @@
 .task {
     display: flex;
+    background-color: $color3;
+    margin-bottom: 10px;
 
     *:not(first-child) {
         margin-left: 15px;
