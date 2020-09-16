@@ -1,11 +1,9 @@
 import {boardService} from '../../services/boardService'
 
 export function loadBoards(){
-    console.log('setting boards...');
     return async dispatch =>{
         try{
         const boards = await boardService.loadBoards();
-        console.log('got in actions:', boards);
         dispatch({type: 'SET_BOARDS', boards})
         }catch(err){
             console.log('boardActions: Couldn\'t load boards');

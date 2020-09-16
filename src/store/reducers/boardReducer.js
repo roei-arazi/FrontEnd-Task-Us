@@ -5,7 +5,6 @@ const initialState={
 export function boardReducer(state=initialState, action){
     switch (action.type) {
         case 'SET_BOARDS':
-            console.log(action.boards);
             return {
                 ...state,
                 boards: action.boards
@@ -45,7 +44,6 @@ export function boardReducer(state=initialState, action){
                     attachedImgs: []
                 }]
             })
-            console.log('boards:', boards);
             return{
                 ...state,
                 boards
