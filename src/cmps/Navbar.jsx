@@ -3,22 +3,6 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FaAd, FaBell, FaCalendar, FaPortrait } from 'react-icons/fa'
 
-<<<<<<< HEAD
-class _Navbar extends Component {
-    state = {
-
-    }
-
-    componentDidMount() {
-
-    }
-
-    render() {
-        return (
-            <div>
-
-            </div>
-=======
 import { Notifications } from './Notifications';
 import { IconContext } from 'react-icons/lib';
 
@@ -40,9 +24,9 @@ class _Navbar extends Component {
         return (
             <section className="navbar flex column space-between align-center">
                 <NavLink to="/">
-                <IconContext.Provider value={{ className: 'icon logo' }}>
-                    <FaAd />
-                </IconContext.Provider>
+                    <IconContext.Provider value={{ className: 'icon logo' }}>
+                        <FaAd />
+                    </IconContext.Provider>
                 </NavLink>
                 <ul className="navbar-links flex column space-around">
                     {isNotificationShown && <Notifications />}
@@ -61,7 +45,6 @@ class _Navbar extends Component {
                     </NavLink>
                 </ul>
             </section>
->>>>>>> c3c00249c89b22be8306d9fd6ee954f453e61440
         )
     }
 }
