@@ -2,27 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class _Navbar extends Component {
-state = {
+    state = {
 
-}
+    }
 
-componentDidMount() {
-console.log(Navbar, this.props);
-}
+    componentDidMount() {
 
-render() {
-return (
-<div>
+    }
 
-</div>
-)
-}
+    render() {
+        return (
+            <div>
+
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = state => {
-return {
+    return {
 
-}
+    }
 }
 
 const mapDispatchToProps = {

@@ -18,7 +18,6 @@ class _Board extends Component {
         try {
             console.log('this.props.boards', this.props.boards)
             if (!this.props.boards || !this.props.boards.length) {
-                console.log('LOADING BOARDS',)
                 await this.props.loadBoards()
                 return
             }
@@ -30,7 +29,6 @@ class _Board extends Component {
 
 
     onAddGroup = async () => {
-        console.log('Adding group',)
         try {
             await this.props.addGroup(this.boardId)
         } catch (err) {
@@ -59,7 +57,7 @@ class _Board extends Component {
                 <BoardHeader onAddGroup={this.onAddGroup} />
 
                 {board.groups.map(group => {
-                    return <Group onRemoveGroup={this.onRemoveGroup} group={group} />
+                    return <Group key={group._id} onRemoveGroup={this.onRemoveGroup} group={group} />
                 })}
 
             </section>

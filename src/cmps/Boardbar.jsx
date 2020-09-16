@@ -2,27 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class _Boardbar extends Component {
-state = {
+    state = {
 
-}
+    }
 
-componentDidMount() {
-console.log(Boardbar, this.props);
-}
+    componentDidMount() {
+    }
 
-render() {
-return (
-<section className="board-bar">
+    render() {
+        return (
+            <section className="board-bar">
 
-</section>
-)
-}
+            </section>
+        )
+    }
 }
 
 const mapStateToProps = state => {
-return {
+    return {
 
-}
+    }
 }
 
 const mapDispatchToProps = {
