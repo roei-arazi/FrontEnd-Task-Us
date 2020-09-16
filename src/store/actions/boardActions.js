@@ -48,5 +48,26 @@ export function addGroup(boardId){
     }
 }
 
-export function addTask(){}
-export function removeTask(){}
+export function addTask(groupId){
+    return async dispatch => {
+        try{
+            boardService.addTask(groupId);
+            dispatch({type: 'ADD_TASK', groupId})
+        }catch(err){
+            console.log('boardActions: Coulnd\'t add task');
+            throw err;
+        }
+    }
+}
+
+export function removeTask(taskId){
+    return async dispatch => {
+        try{
+            boardService.removeTask(taskId);
+            dispatch({type: 'REMOVE_TASK', taskId})
+        }catch(err){
+            console.log('boardActions: Coulnd\'t add task');
+            throw err;
+        }
+    }
+}

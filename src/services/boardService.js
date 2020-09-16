@@ -2,7 +2,9 @@ export const boardService = {
     loadBoards,
     updateBoard,
     addGroup,
-    removeGroup
+    removeGroup,
+    addTask,
+    removeTask
 }
 
 let boards = [{
@@ -115,7 +117,7 @@ async function updateBoard(boardToSave) {
 
 async function addGroup(boardId) {
     const group = {
-        _id: 124,
+        id: _makeid(),
         name: 'week1',
         createdAt: 'date',
         color: 'blue',
@@ -161,4 +163,55 @@ async function removeGroup(groupId){
         board.groups = board.groups.filter(group => group.id !== groupId)
         return board;
     })
+}
+
+async function removeTask(taskId){
+    boards = boards.map(board => {
+        board.groups = board.groups.map(group => {
+            group.tasks = group.tasks.filter(task => task.id === taskId)
+            return group;
+        })
+        return board;
+    })
+}
+
+async function addTask(groupId){
+    const task = {
+        id: 21412,
+        name: 'sneeze',
+        createdAt: 1123124124241,
+        members: [{
+            _id: 1234,
+            name: 'osher',
+            imgUrl: 'www/sfasf'
+        }],
+        status: 'done/progress/stuck',
+        priority: 1,
+        dueDate: 214124124125,
+        note: 'dont forget about this',
+        lastUpdated: 'yesterday',
+        isSelected: false,
+        posts: [],
+        tags: ['ui', 'ux'],
+        attachedImgs: []
+    }
+    boards = boards.map(board => {
+        board.groups = board.groups.map(group => {
+            if(group.id === groupId) group.tasks.push(task)
+            return group;
+        } )
+        return board;
+    })
+}
+
+function _makeid(length = 7){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for(var i=0; i < length; i++)
+    {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
 }

@@ -1,11 +1,12 @@
 .navbar {
     width: 150px;
-    background-color: $color1;
+    background-color: $color2;
     height: 100vh;
+    padding-right: 15px;
 
     .icon {
         font-size: 2rem;
-        color: $colorTxt;
+        color: $colorIcons;
 
         &:hover {
             cursor: pointer;

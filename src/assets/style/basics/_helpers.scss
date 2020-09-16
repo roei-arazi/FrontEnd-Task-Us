@@ -1,25 +1,34 @@
 // FLEX
-.flex{
+.flex {
     display: flex;
 }
 
-.column{
+.column {
     flex-direction: column;
 }
 
-.justify-center{
+.justify-center {
     justify-content: center;
 }
 
-.align-center{
+.align-center {
     align-items: center;
 }
 
-.space-between{
+.space-between {
     justify-content: space-between;
 }
 
-.space-around{
+.space-around {
     justify-content: space-around;
 }
 
+.padding-x-15 {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.padding-y-15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
