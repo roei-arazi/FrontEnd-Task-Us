@@ -10,7 +10,7 @@ export const boardService = {
 let boards = [{
     _id: '123',
     boardCreator: {
-        _id: 12312,
+        _id: '12312',
         fullName: 'fullname mcgee',
         imgUrl: 'www.imgur.com/sasf'
     },
@@ -24,7 +24,7 @@ let boards = [{
         lastSeen: 'yesterday'
     }],
     groups: [{
-        id: '123',
+        id: _makeid(),
         name: 'week1',
         createdAt: 'date',
         color: 'blue',
@@ -36,7 +36,7 @@ let boards = [{
             name: 'due date'
         }],
         tasks: [{
-            id: 21412,
+            id: _makeid(),
             name: 'sneeze',
             createdAt: 1123124124241,
             members: [{
@@ -129,7 +129,7 @@ async function addGroup(boardId) {
             name: 'due date'
         }],
         tasks: [{
-            id: 21412,
+            id: _makeid(),
             name: 'sneeze',
             createdAt: 1123124124241,
             members: [{
@@ -177,7 +177,7 @@ async function removeTask(taskId){
 
 async function addTask(groupId){
     const task = {
-        id: 21412,
+        id: _makeid(),
         name: 'sneeze',
         createdAt: 1123124124241,
         members: [{

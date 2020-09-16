@@ -26,7 +26,7 @@ export function boardReducer(state=initialState, action){
                             name: 'due date'
                         }],
                         tasks: [{
-                            id: 21412,
+                            id: _makeid(),
                             name: 'sneeze',
                             createdAt: 1123124124241,
                             members: [{
