@@ -7,11 +7,15 @@ export function Group(props) {
         <section className="group">
             <h1>Group {props.group.name}</h1>
             {tasks.map(task => {
-                return <Task key={task._id} task={task} />
+                return <Task onRemoveTask={props.onRemoveTask} key={task._id} task={task} />
             })}
             <button onClick={() => {
                 props.onRemoveGroup(props.group._id)
             }}>Delete Group</button>
+
+            <button onClick={() => {
+                props.onAddTask(props.group._id)
+            }}>Add New Task</button>
         </section>
     )
 }

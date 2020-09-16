@@ -5,7 +5,7 @@ import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 // Reducers funcs
-import { loadBoards, addGroup } from '../store/actions/boardActions'
+import { loadBoards, addGroup, removeGroup, addTask, removeTask } from '../store/actions/boardActions'
 
 class _Board extends Component {
 
@@ -27,7 +27,7 @@ class _Board extends Component {
 
     }
 
-
+    //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
         try {
             await this.props.addGroup(this.boardId)
@@ -39,6 +39,24 @@ class _Board extends Component {
         console.log('Removing group, group id:', groupId)
         try {
             await this.props.removeGroup(groupId)
+        } catch (err) {
+            console.log('Error', err)
+        }
+    }
+
+    //-----------------TASKS CRUD------------------------
+    onRemoveTask = async (taskId) => {
+        console.log('Removing task, task id:', taskId)
+        try {
+            await this.props.removeTask(taskId)
+        } catch (err) {
+            console.log('Error', err)
+        }
+    }
+    oAddTask = async (groupId) => {
+        console.log('Removing task, task id:', groupId)
+        try {
+            await this.props.addTask(groupId)
         } catch (err) {
             console.log('Error', err)
         }
@@ -57,7 +75,8 @@ class _Board extends Component {
                 <div className="board-container">
                     <BoardHeader onAddGroup={this.onAddGroup} />
                     {board.groups.map(group => {
-                        return <Group key={group._id} onRemoveGroup={this.onRemoveGroup} group={group} />
+                        return <Group key={group._id} oAddTask={this.oAddTask} onRemoveTask={this.onRemoveTask}
+                            onRemoveGroup={this.onRemoveGroup} group={group} />
                     })}
                 </div>
             </section>
@@ -73,7 +92,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loadBoards,
-    addGroup
+    addGroup,
+    removeGroup,
+    addTask,
+    removeTask
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);
