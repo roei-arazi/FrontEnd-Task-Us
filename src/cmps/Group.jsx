@@ -6,7 +6,7 @@ export function Group(props) {
     return (
         <section className="group">
             <h1>Group {props.group.name}</h1>
-            {tasks.map(task => {
+            {props.group.tasks.map(task => {
                 return <Task onRemoveTask={props.onRemoveTask} key={task.id} task={task} />
             })}
             <button onClick={() => {
