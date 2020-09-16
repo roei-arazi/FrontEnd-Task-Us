@@ -1,0 +1,23 @@
+.navbar{
+    width:200px;
+    background-color: $color1;
+    height: 100vh;
+    position: fixed;
+
+    .logo{
+        margin-top:20px;
+    }
+
+    .icon{
+     font-size: 3rem;
+     color:$colorTxt;
+
+     &:hover{
+         cursor: pointer;
+     }
+    }
+
+    .navbar-links{
+    height: 40%;
+    }
+}

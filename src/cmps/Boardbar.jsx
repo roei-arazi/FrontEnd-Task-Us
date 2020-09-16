@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FaCog } from 'react-icons/fa'
+
 
 class _Boardbar extends Component {
-state = {
+    state = {
 
-}
+    }
 
-componentDidMount() {
-console.log(Boardbar, this.props);
-}
+    componentDidMount() {
+        console.log(Boardbar, this.props);
+    }
 
-render() {
-return (
-<section className="board-bar">
-
-</section>
-)
-}
+    render() {
+        return (
+            <section className="boardbar fixed column">
+                <h1>Boards</h1>
+                <input type="text" placeholder="Search Board" />
+                <ul>
+                    <li><FaCog />Board 1</li>
+                    <li><FaCog />Board 2</li>
+                </ul>
+            </section>
+        )
+    }
 }
 
 const mapStateToProps = state => {
-return {
+    return {
 
-}
+    }
 }
 
 const mapDispatchToProps = {

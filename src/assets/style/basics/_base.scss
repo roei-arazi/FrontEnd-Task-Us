@@ -1,0 +1,23 @@
+*{
+    box-sizing: border-box;
+    outline-style: none;
+}
+
+body{
+    margin:0;
+}
+
+ul{
+    list-style: none;
+    padding:0;
+}
+
+img{
+    object-fit: cover;
+    width:100%;
+}
+
+a{
+    color:inherit;
+    text-decoration: none;
+}
