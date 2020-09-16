@@ -97,6 +97,17 @@ export function boardReducer(state=initialState, action){
                     return board;
                 })
             }
+        case 'EDIT_TASK':
+            return {
+                ...state,
+                boards: state.boards.map(board =>{
+                    board.groups = board.groups.map(group =>{
+                        group.tasks = group.tasks.map(task => task.id === action.task.id ? action.task : task);
+                        return group;
+                    })
+                    return board;
+                })
+            }
         default:
             return state
     }

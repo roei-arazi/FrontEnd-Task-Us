@@ -97,7 +97,7 @@ class _Board extends Component {
 
     render() {
         const board = this.props.boards.find(board => board._id === this.boardId)
-
+        console.log('got board:', board);
         if (!board) return <h1>Loading..</h1>
         return (
             <section className="board">
