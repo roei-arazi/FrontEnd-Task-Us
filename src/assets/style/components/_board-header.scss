@@ -1,0 +1,12 @@
+.board-header {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: $color1;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid $colorTxt;
+
+    h1 {
+        margin-bottom: 10px;
+    }
+}

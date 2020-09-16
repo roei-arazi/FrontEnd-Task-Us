@@ -13,7 +13,7 @@ class _Boardbar extends Component {
 
     render() {
         return (
-            <section className="boardbar fixed column">
+            <section className="boardbar padding-x-15 padding-y-15 fixed column">
                 <h1>Boards</h1>
                 <input type="text" placeholder="Search Board" />
                 <ul>

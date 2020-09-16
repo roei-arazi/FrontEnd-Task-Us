@@ -64,9 +64,7 @@ class _Board extends Component {
 
     render() {
         const board = this.props.boards.find(board => board._id === this.boardId)
-        // const board = {
-        //     groups: [{ _id: 'g1', name: 'group1' }, { _id: 'g2', name: 'group2' }]
-        // }
+
         if (!board) return <h1>Loading..</h1>
         return (
             <section className="board">
