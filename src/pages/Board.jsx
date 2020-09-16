@@ -53,8 +53,8 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
-    oAddTask = async (groupId) => {
-        console.log('Removing task, task id:', groupId)
+    onAddTask = async (groupId) => {
+        console.log('Adding task, task id:', groupId)
         try {
             await this.props.addTask(groupId)
         } catch (err) {
@@ -75,7 +75,7 @@ class _Board extends Component {
                 <div className="board-container">
                     <BoardHeader onAddGroup={this.onAddGroup} />
                     {board.groups.map(group => {
-                        return <Group key={group._id} oAddTask={this.oAddTask} onRemoveTask={this.onRemoveTask}
+                        return <Group key={group._id} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                             onRemoveGroup={this.onRemoveGroup} group={group} />
                     })}
                 </div>
