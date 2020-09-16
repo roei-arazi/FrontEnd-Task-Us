@@ -5,13 +5,13 @@ const initialState={
 export function boardReducer(state=initialState, action){
     switch (action.type) {
         case 'SET_BOARDS':
+            console.log(action.boards);
             return {
                 ...state,
                 boards: action.boards
             }
         case 'ADD_GROUP':
             const boards = [...state.boards]
-            console.log('boards:', boards);
             const boardIdx = boards.findIndex(board => board._id === action.boardId);
             boards[boardIdx].groups.push({
                 _id: 124,
@@ -45,6 +45,7 @@ export function boardReducer(state=initialState, action){
                     attachedImgs: []
                 }]
             })
+            console.log('boards:', boards);
             return{
                 ...state,
                 boards
