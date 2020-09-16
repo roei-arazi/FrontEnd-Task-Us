@@ -9,7 +9,6 @@ class _Boardbar extends Component {
     }
 
     componentDidMount() {
-        console.log(Boardbar, this.props);
     }
 
     render() {

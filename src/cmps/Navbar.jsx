@@ -12,7 +12,7 @@ class _Navbar extends Component {
     }
 
     componentDidMount() {
-        console.log(Navbar, this.props);
+
     }
 
     toggleNotifications = () => {
@@ -38,7 +38,7 @@ class _Navbar extends Component {
                             <li><FaCalendar /></li>
                         </IconContext.Provider>
                     </NavLink>
-                    <NavLink to="/user">
+                    <NavLink to="/user/123">
                         <IconContext.Provider value={{ className: 'icon' }}>
                             <li><FaPortrait /></li>
                         </IconContext.Provider>

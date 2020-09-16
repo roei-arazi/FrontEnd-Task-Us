@@ -1,8 +1,11 @@
-.boardbar{
-    width:200px;
+.boardbar {
+    width: 150px;
     height: 100vh;
-    margin-left: 200px;
-    border:1px solid black;
-    position: fixed;
-    padding-left:10px;
+    padding-left: 10px;
+    background-color: grey;
+    padding-top: 20px;
+
+    input {
+        width: 90%;
+    }
 }

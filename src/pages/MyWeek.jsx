@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
 
@@ -17,6 +18,9 @@ return (
 <section className="my-week">
 <Navbar />
 <Boardbar />
+<div style={{marginLeft:'350px'}}>
+<h1>Under Construction...</h1>
+</div>
 </section>
 )
 }
