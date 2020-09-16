@@ -16,7 +16,9 @@ class _Board extends Component {
         //TODO: change loadBoard argument to this.props.match.params.id
 
         try {
-            if (!this.props.boards || this.props.boards.length === 0) {
+            console.log('this.props.boards', this.props.boards)
+            if (!this.props.boards || !this.props.boards.length) {
+                console.log('LOADING BOARDS',)
                 await this.props.loadBoards()
                 return
             }
@@ -45,10 +47,10 @@ class _Board extends Component {
     }
 
     render() {
-        // const board = this.props.boards.find(board => board._id === this.boardId)
-        const board = {
-            groups: [{ _id: 'g1', name: 'group1' }, { _id: 'g2', name: 'group2' }]
-        }
+        const board = this.props.boards.find(board => board._id === this.boardId)
+        // const board = {
+        //     groups: [{ _id: 'g1', name: 'group1' }, { _id: 'g2', name: 'group2' }]
+        // }
         if (!board) return <h1>Loading..</h1>
         return (
             <section className="board">
