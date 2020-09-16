@@ -13,7 +13,7 @@ export function boardReducer(state=initialState, action){
             const boards = [...state.boards]
             const boardIdx = boards.findIndex(board => board._id === action.boardId);
             boards[boardIdx].groups.push({
-                _id: 124,
+                _id: _makeid(),
                 name: 'week1',
                 createdAt: 'date',
                 color: 'blue',
@@ -48,7 +48,27 @@ export function boardReducer(state=initialState, action){
                 ...state,
                 boards
             }
+        case 'REMOVE_GROUP':
+            return{
+                ...state,
+                boards: state.boards.map(board => {
+                    board.groups = board.groups.filter(group => group.id !== action.groupId)
+                    return board;
+                })
+            }
         default:
             return state
     }
+}
+
+function _makeid(length = 7){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for(var i=0; i < length; i++)
+    {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
 }

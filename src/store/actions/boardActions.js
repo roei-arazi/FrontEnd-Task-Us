@@ -12,6 +12,18 @@ export function loadBoards(){
     }
 }
 
+export function removeGroup(groupId){
+    return async dispatch =>{
+        try{
+        dispatch({type: 'REMOVE_GROUP', groupId});
+        boardService.removeGroup(groupId)
+        }catch(err){
+            console.log('boardActions: Couldn\'t remove group');
+            throw err;
+        }
+    }
+}
+
 // export function updateBoard(boardToSave){
 //     return async dispatch =>{
 //         try{

@@ -21,7 +21,7 @@ let boards = [{
         lastSeen: 'yesterday'
     }],
     groups: [{
-        _id: 124,
+        id: '123',
         name: 'week1',
         createdAt: 'date',
         color: 'blue',
@@ -153,4 +153,11 @@ async function addGroup(boardId) {
         console.log('boardService: Couldn\'t add group');
         throw err;
     }
+}
+
+async function removeGroup(groupId){
+    boards = boards.map(board => {
+        board.groups = board.groups.filter(group => group.id !== action.groupId)
+        return board;
+    })
 }
