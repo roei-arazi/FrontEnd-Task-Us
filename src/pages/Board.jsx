@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+
 import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
@@ -62,6 +64,16 @@ class _Board extends Component {
         }
     }
 
+    onDragEnd=()=>{
+
+    }
+    onDragEnd=()=>{
+
+    }
+    onDragEnd=()=>{
+        
+    }
+
     render() {
         const board = this.props.boards.find(board => board._id === this.boardId)
         // const board = {
@@ -74,10 +86,14 @@ class _Board extends Component {
                 <Boardbar />
                 <div className="board-container">
                     <BoardHeader onAddGroup={this.onAddGroup} />
+                    <DragDropContext
+                    onDragEnd={this.onDragEnd}
+                    >
                     {board.groups.map(group => {
                         return <Group key={group._id} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                             onRemoveGroup={this.onRemoveGroup} group={group} />
                     })}
+                    </DragDropContext>
                 </div>
             </section>
         )
