@@ -4,14 +4,15 @@ const initialState={
 
 export function boardReducer(state=initialState, action){
     switch (action.type) {
-        case 'SET_BOARD':
+        case 'SET_BOARDS':
             return {
                 ...state,
-                board: action.board
+                boards: action.boards
             }
         case 'ADD_GROUP':
             const boards = [...state.boards]
-            const boardIdx = boards.find(board => board._id === action.boardId);
+            console.log('boards:', boards);
+            const boardIdx = boards.findIndex(board => board._id === action.boardId);
             boards[boardIdx].groups.push({
                 _id: 124,
                 name: 'week1',
