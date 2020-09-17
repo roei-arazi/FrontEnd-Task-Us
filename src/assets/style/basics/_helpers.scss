@@ -47,6 +47,11 @@
     transform: rotate(180deg);
 }
 
+.clickable-header:hover {
+    transition: color .3s;
+    color: rgba($colorIconsHover, .75);
+}
+
 .cursor-initial {
     cursor: initial;
 }
