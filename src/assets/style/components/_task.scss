@@ -4,6 +4,36 @@
     margin-bottom: 10px;
     height: 65px;
 
+    
+input{
+    max-width:100px;
+}
+}
+
+.label-box{
+    width:100%;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.label-list{
+    height:200px;
+    width:150px;
+    background-color: #ffffff;
+    z-index: 1;
+    padding:10px;
+    border-radius: 5px;
+
+    .label-selector{
+        width:90%;
+        text-align: center;
+        padding: 5px 0;
+        margin-bottom:10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 }
 
 .drag {
@@ -20,14 +50,7 @@
     }
 }
 
-.react-date-picker{
 
-}
-
-input{
-    max-width:100px;
-    margin-left: -25px;
-}
 
 .task-img-container {
     height: 100%;
@@ -90,4 +113,29 @@ input{
                 font-size: 0.8rem;
                 font-weight: bold;
             }
+}
+
+// Labels
+.stuck{
+    background-color: #cb4848;
+}
+
+.working{
+    background-color:#e6c91d;
+}
+
+.done{
+    background-color: #20cb20;
+}
+
+.low{
+    background-color: #c5c5ea;
+}
+
+.medium{
+    background-color: orange;
+}
+
+.high{
+    background-color: #ac361e;
 }
