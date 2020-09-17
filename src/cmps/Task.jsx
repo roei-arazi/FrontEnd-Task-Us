@@ -13,17 +13,13 @@ export class Task extends Component {
 
 
     componentDidMount() {
-
         this.contentEditable = React.createRef();
-        console.log('this.contentEditable', this.contentEditable)
         this.setState({ ...this.props.task })
     }
 
 
     handleChange = (ev) => {
-        console.log('EV', ev.target)
         this.setState({ name: ev.target.value });
-        console.log('STATE', this.state.name)
     }
 
     render() {

@@ -10,7 +10,6 @@ state = {
 }
 
 componentDidMount() {
-console.log(UserProfile, this.props);
 }
 
 render() {

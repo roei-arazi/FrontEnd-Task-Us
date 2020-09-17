@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Task } from './Task'
-import { Droppable, Droppable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 //Material ui
 import { Tooltip, Zoom } from '@material-ui/core';
 import { RiDeleteBin2Line } from 'react-icons/ri'
@@ -19,10 +19,8 @@ export class Group extends Component {
         this.setState({ ...this.props.group })
     }
 
-    handleChange = (ev) => {
-        console.log('EV', ev.target)
+    handleChange = (ev) => {     
         this.setState({ name: ev.target.value });
-        console.log('STATE', this.state.name)
     }
 
     render() {

@@ -20,6 +20,7 @@ class _Board extends Component {
 
     async componentDidMount() {
 
+        
         //TODO: change loadBoard argument to this.props.match.params.id
 
         try {
@@ -49,8 +50,6 @@ class _Board extends Component {
         }
     }
     onEditGroup = async (group, changedValue, originalValue) => {
-        console.log('changed Value', changedValue)
-        console.log('original Value', originalValue)
 
         if (changedValue === originalValue) return // No changes were made
 
@@ -63,7 +62,6 @@ class _Board extends Component {
 
     //-----------------TASKS CRUD------------------------
     onRemoveTask = async (taskId) => {
-        console.log('Removing task, task id:', taskId)
         try {
             await this.props.removeTask(taskId)
         } catch (err) {
@@ -71,7 +69,6 @@ class _Board extends Component {
         }
     }
     onAddTask = async (groupId) => {
-        console.log('Adding task, task id:', groupId)
         try {
             await this.props.addTask(groupId)
         } catch (err) {
@@ -79,7 +76,6 @@ class _Board extends Component {
         }
     }
     onEditTask = async (task) => {
-        console.log('Editing task, got task:', task)
         try {
             await this.props.editTask(task)
         } catch (err) {
@@ -153,7 +149,6 @@ class _Board extends Component {
     
                 board.groups.splice(startIdx, 1, newStartGroup)
                 board.groups.splice(endIdx, 1, newFinishGroup)
-                console.log('ROW 136!', board);
                 try {
                     this.props.updateBoard(board)
                 } catch (err) {
@@ -170,13 +165,12 @@ class _Board extends Component {
     render() {
         const board = this.props.boards.find(board => board._id === this.boardId)
         if (!board) return <h1>Loading..</h1>
-        console.log(board);
         return (
             <section className="board">
                 <Navbar />
                 <Boardbar />
                 <div className="board-container">
-                    <BoardHeader onAddGroup={this.onAddGroup} />
+                    <BoardHeader board={board} onAddGroup={this.onAddGroup} />
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
