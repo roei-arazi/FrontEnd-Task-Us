@@ -96,7 +96,7 @@ let boards = [{
     }
     ]
 },{
-    _id: _makeid(),
+    _id: '23442',
     boardCreator: {
         _id: '12312',
         fullName: 'fullname mcgee',

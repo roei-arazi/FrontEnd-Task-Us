@@ -16,16 +16,16 @@ import {
 
 class _Board extends Component {
 
-    boardId = '123'
+    state = {
+        boardId: ''
+    }
 
     async componentDidMount() {
-
-        
         //TODO: change loadBoard argument to this.props.match.params.id
-
         try {
             if (!this.props.boards || !this.props.boards.length) {
-                await this.props.loadBoards()
+                await this.props.loadBoards();
+                this.setState({ boardId: this.props.match.params.id })
                 return
             }
         } catch (err) {
@@ -34,10 +34,21 @@ class _Board extends Component {
 
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            this.setState({ boardId: this.props.match.params.id })
+        }
+    }
+
+    onEditBoard = (boardName, boardDescription) => {
+        const board = this.props.board.find(board => board._id === this.state.boardId)
+        this.props.updateBoard({...board, name: boardName, description: boardDescription})
+    }
+
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
         try {
-            await this.props.addGroup(this.boardId)
+            await this.props.addGroup(this.state.boardId)
         } catch (err) {
             console.log('Error', err)
         }
@@ -91,31 +102,31 @@ class _Board extends Component {
             &&
             destination.index === source.index) return;
 
-        const board = this.props.boards.find(board => board._id === this.boardId)
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
 
         if (type === 'group') {
             const newGroups = Array.from(board.groups)
             const draggedGroup = newGroups.find(group => group.id === draggableId)
             newGroups.splice(source.index, 1)
             newGroups.splice(destination.index, 0, draggedGroup)
-            board.groups=newGroups
-            try{
+            board.groups = newGroups
+            try {
                 await this.props.updateBoard(board)
-            }catch(err){
+            } catch (err) {
                 console.log('Error', err);
             }
-        }else{
+        } else {
             const groupStart = board.groups.find(group => group.id === source.droppableId)
             const groupEnd = board.groups.find(group => group.id === destination.droppableId)
-    
+
             if (groupStart.id === groupEnd.id) {
-    
+
                 const newTasks = Array.from(groupStart.tasks)
                 const newTask = groupStart.tasks.find(task => task.id === draggableId)
-    
+
                 newTasks.splice(source.index, 1)
                 newTasks.splice(destination.index, 0, newTask)
-    
+
                 const newGroup = {
                     ...groupStart,
                     tasks: newTasks
@@ -124,12 +135,12 @@ class _Board extends Component {
                 board.groups.splice(newIdx, 1, newGroup)
                 try {
                     await this.props.updateBoard(board)
-    
+
                 } catch (err) {
                     console.log('Error', err);
                 }
             } else {
-    
+
                 const startTasks = Array.from(groupStart.tasks)
                 startTasks.splice(source.index, 1)
                 const newStartGroup = {
@@ -143,10 +154,10 @@ class _Board extends Component {
                     ...groupEnd,
                     tasks: endTasks
                 }
-    
+
                 const startIdx = board.groups.findIndex(group => group.id === newStartGroup.id)
                 const endIdx = board.groups.findIndex(group => group.id === newFinishGroup.id)
-    
+
                 board.groups.splice(startIdx, 1, newStartGroup)
                 board.groups.splice(endIdx, 1, newFinishGroup)
                 try {
@@ -163,7 +174,7 @@ class _Board extends Component {
     }
 
     render() {
-        const board = this.props.boards.find(board => board._id === this.boardId)
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
         if (!board) return <h1>Loading..</h1>
         return (
             <section className="board">
