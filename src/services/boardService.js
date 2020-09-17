@@ -210,6 +210,7 @@ async function updateBoard(boardToSave) {
 }
 
 async function removeBoard(boardId){
+    console.log('deleting boardId:', boardId)
     try{
         boards = boards.filter(board => board._id !== boardId);
     }catch(err){
