@@ -117,6 +117,7 @@ button {
 
 .board .board-container {
   width: 100%;
+  overflow: hidden;
 }
 
 .board .board-container .groups-container {
