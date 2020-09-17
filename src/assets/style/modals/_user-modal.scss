@@ -1,25 +1,32 @@
-.user-modal-col {
-    font-size: 1.5rem;
-    display: flex;
-    flex-direction: column;
-
-    button {
-        width: fit-content;
+.user-profile {
+    .fade-wrapper {
+        position: absolute;
+        background-color: $color2;
     }
 
-    img {
-        align-self: center;
-        border-radius: 50px;
-        cursor: pointer;
-    }
+    .user-modal-col {
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: column;
 
-    form {
-        margin-top: 25px;
-    }
+        button {
+            width: fit-content;
+        }
 
-    table {
-        border-collapse: separate;
-        border-spacing: 15px 30px;
-    }
+        img {
+            align-self: center;
+            border-radius: 50px;
+            cursor: pointer;
+        }
 
+        form {
+            margin-top: 25px;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 15px 30px;
+        }
+
+    }
 }
