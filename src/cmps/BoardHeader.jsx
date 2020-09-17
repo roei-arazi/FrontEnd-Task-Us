@@ -18,6 +18,12 @@ export class BoardHeader extends React.Component{
         this.setState({...this.props.board})
     }
 
+    // componentDidUpdate(prevProps, prevState){
+    //     if(prevProps.match.params.id === this.props.match.params.id){
+    //         this.setState({...this.props.board})
+    //     }
+    // }
+
     handleChangeName=(ev)=>{
         console.log(ev.target.value);
        this.setState({name:ev.target.value})

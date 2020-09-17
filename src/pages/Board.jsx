@@ -35,6 +35,7 @@ class _Board extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
+            console.log('changing to:', this.props.match.params.id);
             this.setState({ boardId: this.props.match.params.id })
         }
     }
@@ -42,7 +43,7 @@ class _Board extends Component {
     onEditBoard = (boardName, boardDescription) => {
         console.log(boardName);
         const board = this.props.boards.find(board => board._id === this.state.boardId)
-        this.props.updateBoard({...board, name: boardName, description: boardDescription})
+        this.props.updateBoard({ ...board, name: boardName, description: boardDescription })
     }
 
     //------------------GROUP CRUD-----------------
@@ -176,6 +177,7 @@ class _Board extends Component {
     render() {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         if (!board) return <h1>Loading..</h1>
+        console.log('rendering board:', this.state.boardId);
         return (
             <section className="board">
                 <Navbar />
