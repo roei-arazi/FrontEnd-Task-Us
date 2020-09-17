@@ -106,9 +106,13 @@ async function loadBoards() {
     }
 }
 
-async function updateBoard(boardToSave) {
+async function updateBoard(groupToSave) {
+    const idx = boards[0].groups.find(group => group.id === groupToSave.id)
+    const newBoards = JSON.parse(JSON.stringify(boards))
     try {
-        const board = boardToSave;
+        newBoards[0].groups.splice(idx, 1, groupToSave)
+
+        return newBoards.splice(0, 1, newBoards[0])
     } catch (err) {
         console.log('boardService: Couldn\'t update board');
         throw err;
@@ -158,14 +162,14 @@ async function addGroup(boardId) {
     }
 }
 
-async function removeGroup(groupId){
+async function removeGroup(groupId) {
     boards = boards.map(board => {
         board.groups = board.groups.filter(group => group.id !== groupId)
         return board;
     })
 }
 
-async function removeTask(taskId){
+async function removeTask(taskId) {
     boards = boards.map(board => {
         board.groups = board.groups.map(group => {
             group.tasks = group.tasks.filter(task => task.id === taskId)
@@ -175,7 +179,7 @@ async function removeTask(taskId){
     })
 }
 
-async function addTask(groupId){
+async function addTask(groupId) {
     const task = {
         id: _makeid(),
         name: 'sneeze',
@@ -197,19 +201,18 @@ async function addTask(groupId){
     }
     boards = boards.map(board => {
         board.groups = board.groups.map(group => {
-            if(group.id === groupId) group.tasks.push(task)
+            if (group.id === groupId) group.tasks.push(task)
             return group;
-        } )
+        })
         return board;
     })
 }
 
-function _makeid(length = 7){
+function _makeid(length = 7) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for(var i=0; i < length; i++)
-    {
+    for (var i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
 

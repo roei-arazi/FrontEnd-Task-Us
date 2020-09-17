@@ -7,7 +7,7 @@ import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 // Reducers funcs
-import { loadBoards, addGroup, removeGroup, editGroup, addTask, removeTask, editTask } from '../store/actions/boardActions'
+import { updateBoard, loadBoards, addGroup, editGroup, removeGroup, addTask, removeTask, editTask } from '../store/actions/boardActions'
 
 class _Board extends Component {
 
@@ -81,32 +81,40 @@ class _Board extends Component {
     }
     //---------------------Draggable----------------------
 
-    onDragEnd = result => {
+    onDragEnd = async result => {
         const { destination, source, draggableId } = result
-        const board = this.props.boards.find(board => board._id === this.boardId)
-        const group = board.groups.find(group => group.id === source.droppableId)
         if (!destination) return;
         if (destination.droppableId === source.droppableId
             &&
             destination.index === source.index) return;
 
-        const newTaskIds = Array.from(group.tasks)
+        const board = this.props.boards.find(board => board._id === this.boardId)
+        const group = board.groups.find(group => group.id === source.droppableId)
+        const newTasks = Array.from(group.tasks)
 
-        newTaskIds.splice(source.index, 1)
-        newTaskIds.splice(destination.index, 0, draggableId)
+        const newTask = group.tasks.find(task => task.id === draggableId)
+
+        newTasks.splice(source.index, 1)
+        newTasks.splice(destination.index, 0, newTask)
 
         const newGroup = {
             ...group,
-            tasks: newTaskIds
+            tasks: newTasks
+        }
+        console.log(newGroup);
+        try {
+            await this.props.updateBoard(newGroup)
+
+        } catch (err) {
+            console.log('Error', err);
         }
 
-        this.setState({ group: newGroup })
     }
 
     render() {
         const board = this.props.boards.find(board => board._id === this.boardId)
-        console.log('got board:', board);
         if (!board) return <h1>Loading..</h1>
+        console.log(board);
         return (
             <section className="board">
                 <Navbar />
@@ -143,7 +151,8 @@ const mapDispatchToProps = {
     addTask,
     removeTask,
     editTask,
-    editGroup
+    editGroup,
+    updateBoard
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);

@@ -13,7 +13,7 @@ export class Task extends Component {
 
         this.contentEditable = React.createRef();
         console.log('this.contentEditable', this.contentEditable)
-        this.setState({ ...this.props.task }, console.log('STATE:', this.state))
+        this.setState({ ...this.props.task })
     }
 
 
@@ -25,7 +25,7 @@ export class Task extends Component {
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
-        console.log('STATE:', this.state)
+        
         const elTaskName = this.state.name
 
         return (
