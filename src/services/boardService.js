@@ -55,7 +55,7 @@ let boards = [{
             isSelected: false,
             posts: [],
             tags: ['ui', 'ux'],
-            attachedImgs: []
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
         }]
     }],
     activityLog: [{
@@ -143,7 +143,7 @@ let boards = [{
             isSelected: false,
             posts: [],
             tags: ['ui', 'ux'],
-            attachedImgs: []
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
         }]
     }],
     activityLog: [{

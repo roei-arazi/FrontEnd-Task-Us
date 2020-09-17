@@ -4,6 +4,7 @@ import { Draggable } from 'react-beautiful-dnd'
 //Material ui
 import { Tooltip, Zoom, TextField, FormControl, MenuItem, Select, InputLabel, Input } from '@material-ui/core';
 import { MdDeleteSweep } from 'react-icons/md'
+import { cloudinaryService } from '../services/cloudinaryService';
 
 export class Task extends Component {
 
@@ -26,7 +27,13 @@ export class Task extends Component {
 
     handleChange = async (ev) => {
         await this.setState({ [ev.target.name]: ev.target.value })
-        this.props.onEditTask(this.state)   
+        this.props.onEditTask(this.state)
+    }
+
+    uploadImg = async (ev) => {
+        const res = await cloudinaryService.uploadImg(ev)
+        this.setState({ attachedImgs: [res.url, ...this.state.attachedImgs] })
+        this.props.onEditTask(this.state)
     }
 
     render() {
@@ -35,7 +42,7 @@ export class Task extends Component {
         return (
             <Draggable draggableId={this.state.id} index={this.props.index}>
                 {(provided, snapshot) => (
-                    <section key={this.props.task.id} className={`task padding-y-15 padding-x-15 align-center ${snapshot.isDragging ? 'drag' : ''}`}
+                    <section key={this.props.task.id} className={`task align-center ${snapshot.isDragging ? 'drag' : ''}`}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
@@ -116,9 +123,14 @@ export class Task extends Component {
                                 <MenuItem value="high" className="red">High</MenuItem>
                             </Select>
                         </FormControl>
-                    
-                    <label htmlFor="task-imgs">IMG</label>
-                    <input type="file" id="task-imgs" hidden />
+                        <div className="task-img-container">
+                            <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img src={this.state.attachedImgs[0]} /> : 'IMG'}</label>
+                            <input type="file" id="task-imgs" onChange={this.uploadImg} hidden />
+                            <div className="task-number-of-imgs">{this.state.attachedImgs.length ? this.state.attachedImgs.length : 0}</div>
+                        </div>
+                        <div className="task-img-container">
+                            
+                        </div>
                     </section>
                 )}
             </Draggable>
