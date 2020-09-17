@@ -119,33 +119,35 @@ class _Board extends Component {
             } catch (err) {
                 console.log('Error', err);
             }
+        }else{
+
+            const startTasks = Array.from(groupStart.tasks)
+            startTasks.splice(source.index, 1)
+            const newStartGroup = {
+                ...groupStart,
+                tasks: startTasks
+            }
+            const endTasks = Array.from(groupEnd.tasks)
+            const newTaskToPaste = groupStart.tasks.find(task => task.id === draggableId)
+            endTasks.splice(destination.index, 0, newTaskToPaste)
+            const newFinishGroup = {
+                ...groupEnd,
+                tasks: endTasks
+            }
+    
+            const startIdx = board.groups.findIndex(group => group.id === newStartGroup.id)
+            const endIdx = board.groups.findIndex(group => group.id === newFinishGroup.id)
+    
+            board.groups.splice(startIdx, 1, newStartGroup)
+            board.groups.splice(endIdx, 1, newFinishGroup)
+            console.log('ROW 136!', board);
+            try {
+                this.props.updateBoard(board)
+            } catch (err) {
+                console.log('Error', err);
+            }
         }
 
-        const startTasks = Array.from(groupStart.tasks)
-        startTasks.splice(source.index, 1)
-        const newStartGroup = {
-            ...groupStart,
-            tasks: startTasks
-        }
-        const endTasks = Array.from(groupEnd.tasks)
-        const newTaskToPaste = groupStart.tasks.find(task => task.id === draggableId)
-        endTasks.splice(destination.index, 0, newTaskToPaste)
-        const newFinishGroup = {
-            ...groupEnd,
-            tasks: endTasks
-        }
-
-        const startIdx = board.groups.findIndex(group => group.id === newStartGroup.id)
-        const endIdx = board.groups.findIndex(group => group.id === newFinishGroup.id)
-
-        board.groups.splice(startIdx, 1, newStartGroup)
-        board.groups.splice(endIdx, 1, newFinishGroup)
-        console.log('ROW 136!', board);
-        try {
-            this.props.updateBoard(board)
-        } catch (err) {
-            console.log('Error', err);
-        }
 
     }
 
@@ -164,7 +166,7 @@ class _Board extends Component {
                             onDragEnd={this.onDragEnd}
                         >
                             {board.groups.map(group => {
-                                return <Group key={group._id}
+                                return <Group key={group.id}
                                     onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                                     onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} group={group} />
                             })}
