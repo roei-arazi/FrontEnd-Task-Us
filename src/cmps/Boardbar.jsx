@@ -41,14 +41,12 @@ class _Boardbar extends Component {
     render() {
         const { boards } = this.props;
         const { anchorEl, selectedBoardId } = this.state;
-        console.log('anchorEl', anchorEl, 'boardId', selectedBoardId);
         return (
             <section className="boardbar padding-x-15 padding-y-15 fixed column">
                 <h1>Boards</h1>
                 <input type="text" placeholder="Search Board" />
                 <ul>
                     {boards.map((board, idx) => {
-                        console.log('rendering board:', board._id);
                         return <li
                             className="flex"
 
