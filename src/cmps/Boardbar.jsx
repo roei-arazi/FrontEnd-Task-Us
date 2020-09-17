@@ -19,7 +19,6 @@ class _Boardbar extends Component {
     }
 
     handleOpen = (ev) => {
-        console.log('got target', ev.currentTarget);
         this.setState({anchorEl: ev.currentTarget})
     }
 

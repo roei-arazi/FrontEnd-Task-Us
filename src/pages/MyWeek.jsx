@@ -10,7 +10,6 @@ state = {
 }
 
 componentDidMount() {
-console.log(MyWeek, this.props);
 }
 
 render() {

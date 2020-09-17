@@ -197,6 +197,11 @@ svg:hover {
 
 .boardbar input {
   width: 90%;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid linear-gradient(#053250, #d0e1ec);
+  border-top: 2px solid linear-gradient(#053250, #d0e1ec);
+  padding: 10px 5px;
 }
 
 .boardbar svg {

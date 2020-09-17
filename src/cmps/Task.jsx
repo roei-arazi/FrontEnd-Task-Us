@@ -5,25 +5,22 @@ import { Draggable } from 'react-beautiful-dnd'
 import { Tooltip, Zoom } from '@material-ui/core';
 import { MdDeleteSweep } from 'react-icons/md'
 
+
+let isEditDisabled = false
 export class Task extends Component {
 
     state = {
         id: ''
     }
 
-    isEditDisabled = false
     componentDidMount() {
-
         this.contentEditable = React.createRef();
-        console.log('this.contentEditable', this.contentEditable)
         this.setState({ ...this.props.task })
     }
 
 
     handleChange = (ev) => {
-        console.log('EV', ev.target)
         this.setState({ name: ev.target.value });
-        console.log('STATE', this.state.name)
     }
 
     render() {
@@ -48,7 +45,7 @@ export class Task extends Component {
                             className="cursor-initial"
                             innerRef={this.contentEditable}
                             html={elTaskName} // innerHTML of the editable div
-                            disabled={this.isEditDisabled}       // use true to disable editing
+                            disabled={isEditDisabled}       // use true to disable editing
                             onChange={this.handleChange} // handle innerHTML change
                             onBlur={() => {
                                 this.props.onEditTask(this.state)
@@ -56,7 +53,7 @@ export class Task extends Component {
                             onKeyDown={(ev) => {
 
                                 if (ev.key === 'Enter') {
-                                    this.isEditDisabled = true
+                                    isEditDisabled = true
                                     this.props.onEditTask(this.state)
                                 }
                             }}

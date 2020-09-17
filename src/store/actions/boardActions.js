@@ -90,7 +90,6 @@ export function removeTask(taskId) {
 }
 
 export function editTask(task) {
-    console.log('got from action::', task)
     return async dispatch => {
         try {
             // boardService.editTask(task);

@@ -8,7 +8,6 @@ state = {
 }
 
 componentDidMount() {
-console.log(Signup, this.props);
 }
 
 render() {
