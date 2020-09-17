@@ -7,9 +7,21 @@
         margin-bottom: 10px;
     }
 
+    .group-header-right{
+        >*{
+            width:100px;
+            text-align: center;
+        }
+        *:not(:first-child) {
+            margin-left: 15px;
+        }
+    }
+
     .task-list {
         min-height: 100px;
     }
+
+    
 }
 
 .drag-over {

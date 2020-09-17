@@ -4,10 +4,6 @@
     margin-bottom: 10px;
     height: 65px;
 
-    *:not(:first-child) {
-        margin-left: 15px;
-    }
-
 }
 
 .drag {
@@ -15,8 +11,25 @@
     border: 2px black solid
 }
 
+.task-right{
+    height:100%;
+
+    >*{
+        width:100px;
+        margin-left: 15px;
+    }
+}
+
+.react-date-picker{
+
+}
+
+input{
+    max-width:100px;
+    margin-left: -25px;
+}
+
 .task-img-container {
-    width: 80px;
     height: 100%;
     position: relative;
 
@@ -38,4 +51,43 @@
         font-size: 0.8rem;
         font-weight: bold;
     }
+
+}
+        .user-img-container{
+            height:50px;
+            position: relative;
+            text-align: center;
+    
+            img {
+                cursor: pointer;
+                height:100%;
+                border-radius: 50%;
+                width:50%;
+            }
+
+            .member-letter{
+                height:100%;
+                width:50%;
+                margin:0 auto;
+                font-size: 2rem;
+                border-radius: 50%;
+                background-color: $colorIcons;
+                color: $color3;
+                padding-top:6px;
+                cursor: pointer;
+            }
+
+            .task-number-of-imgs {
+                position: absolute;
+                background-color: $color2;
+                color:$colorIcons;
+                border-radius: 50%;
+                width: 15px;
+                height: 15px;
+                top: 0;
+                text-align: center;
+                right: 20px;
+                font-size: 0.8rem;
+                font-weight: bold;
+            }
 }

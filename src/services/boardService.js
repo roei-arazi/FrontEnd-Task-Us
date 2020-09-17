@@ -45,17 +45,35 @@ let boards = [{
             members: [{
                 _id: 1234,
                 name: 'osher',
-                imgUrl: 'www/sfasf'
+                imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
             }],
             status: 'done',
             priority: 'low',
-            dueDate: '25-09-1973',
+            dueDate: Date.now(),
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
             tags: ['ui', 'ux'],
-            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+            attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: ''
+            }],
+            status: 'done',
+            priority: 'low',
+            dueDate: Date.now(),
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
         }]
     }],
     activityLog: [{
@@ -137,7 +155,7 @@ let boards = [{
             }],
             status: 'stuck',
             priority: 'medium',
-            dueDate: '1992-08-13',
+            dueDate: Date.now(),
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
             isSelected: false,
