@@ -22,7 +22,7 @@ export class BoardHeader extends React.Component{
     //     if(prevProps.match.params.id === this.props.match.params.id){
     //         this.setState({...this.props.board})
     //     }
-    // }
+    // } 
 
     handleChangeName=(ev)=>{
         console.log(ev.target.value);
