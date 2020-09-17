@@ -26,17 +26,17 @@ export function removeGroup(groupId) {
     }
 }
 
-// export function updateBoard(boardToSave){
-//     return async dispatch =>{
-//         try{
-//         await boardService.updateBoard(boardToSave);
-//         dispatch({type: 'SET_BOARD', board: boardToSave})
-//         }catch(err){
-//             console.log('boardActions: Couldn\'t update board');
-//             throw err;
-//         }
-//     }
-// }
+export function updateBoard(groupToSave){
+    return async dispatch =>{
+        try{
+        const boards=await boardService.updateBoard(groupToSave);
+        dispatch({type: 'SET_BOARD', boards})
+        }catch(err){
+            console.log('boardActions: Couldn\'t update board');
+            throw err;
+        }
+    }
+}
 
 export function addGroup(boardId) {
     return async dispatch => {

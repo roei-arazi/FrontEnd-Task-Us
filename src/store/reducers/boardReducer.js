@@ -108,6 +108,12 @@ export function boardReducer(state=initialState, action){
                     return board;
                 })
             }
+            case 'SET_BOARD':
+                console.log('Gtot boards from reducer',action.boards);
+                return{
+                    ...state,
+                    boards: action.boards
+                }
         default:
             return state
     }
