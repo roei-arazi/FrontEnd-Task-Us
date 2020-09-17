@@ -4,33 +4,32 @@
     margin-bottom: 10px;
     height: 65px;
 
-    
-input{
-    max-width:100px;
-}
+
+    input {
+        max-width: 100px;
+    }
 }
 
-.label-box{
-    width:100%;
+.label-box {
+    width: 100%;
     text-align: center;
     border-radius: 5px;
     padding: 5px 0;
     cursor: pointer;
 }
 
-.label-list{
-    height:200px;
-    width:150px;
+.label-list {
+    width: 150px;
     background-color: #ffffff;
     z-index: 1;
-    padding:10px;
+    padding: 10px;
     border-radius: 5px;
 
-    .label-selector{
-        width:90%;
+    .label-selector {
+        width: 90%;
         text-align: center;
         padding: 5px 0;
-        margin-bottom:10px;
+        margin-bottom: 10px;
         border-radius: 5px;
         cursor: pointer;
     }
@@ -41,11 +40,11 @@ input{
     border: 2px black solid
 }
 
-.task-right{
-    height:100%;
+.task-right {
+    height: 100%;
 
-    >*{
-        width:100px;
+    >* {
+        width: 100px;
         margin-left: 15px;
     }
 }
@@ -58,84 +57,95 @@ input{
 
     img {
         cursor: pointer;
-        height:100%;
+        height: 100%;
     }
 
     .task-number-of-imgs {
+        font-family: monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        width: 20px;
+        height: 20px;
+        margin-right: -8px;
+        margin-top: -8px;
         position: absolute;
-        background-color: $color2;
-        color:$colorIcons;
+        background-color: $colorIcons;
+        color: $color1;
         border-radius: 50%;
-        width: 15px;
-        height: 15px;
         top: 0;
         text-align: center;
         right: 0;
-        font-size: 0.8rem;
         font-weight: bold;
     }
 
 }
-        .user-img-container{
-            height:50px;
-            position: relative;
-            text-align: center;
-    
-            img {
-                cursor: pointer;
-                height:100%;
-                border-radius: 50%;
-                width:50%;
-            }
 
-            .member-letter{
-                height:100%;
-                width:50%;
-                margin:0 auto;
-                font-size: 2rem;
-                border-radius: 50%;
-                background-color: $colorIcons;
-                color: $color3;
-                padding-top:6px;
-                cursor: pointer;
-            }
+.user-img-container {
+    height: 50px;
+    position: relative;
+    text-align: center;
 
-            .task-number-of-imgs {
-                position: absolute;
-                background-color: $color2;
-                color:$colorIcons;
-                border-radius: 50%;
-                width: 15px;
-                height: 15px;
-                top: 0;
-                text-align: center;
-                right: 20px;
-                font-size: 0.8rem;
-                font-weight: bold;
-            }
+    img {
+        cursor: pointer;
+        height: 100%;
+        border-radius: 50%;
+        width: 50%;
+    }
+
+    .member-letter {
+        height: 100%;
+        width: 50%;
+        margin: 0 auto;
+        font-size: 2rem;
+        border-radius: 50%;
+        background-color: $colorIcons;
+        color: $color3;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .task-number-of-imgs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: monospace;
+        position: absolute;
+        background-color: rgba($colorIcons, .95);
+        color: $color1;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        top: 0;
+        right: 0;
+        text-align: center;
+        font-size: 19px;
+        font-weight: bold;
+    }
 }
 
 // Labels
-.stuck{
+.stuck {
     background-color: #cb4848;
 }
 
-.working{
-    background-color:#e6c91d;
+.working {
+    background-color: #e6c91d;
 }
 
-.done{
+.done {
     background-color: #20cb20;
 }
 
-.low{
+.low {
     background-color: #c5c5ea;
 }
 
-.medium{
+.medium {
     background-color: orange;
 }
 
-.high{
+.high {
     background-color: #ac361e;
 }

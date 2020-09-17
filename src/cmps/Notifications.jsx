@@ -7,5 +7,5 @@ export function Notifications() {
             <h3>notifications</h3>
         </section>
     )
-    
+
 }

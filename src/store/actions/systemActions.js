@@ -9,3 +9,14 @@ export function doneLoading() {
   }
 }
 
+export function showSnackbar(msg){
+  return dispath => {
+    dispath({type: 'SHOW_SNACKBAR', msg})
+  }
+}
+
+export function hideSnackbar(){
+  return dispatch => {
+    dispatch({type: 'HIDE_SNACKBAR'})
+  }
+}
