@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FaCog, FaPlus } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom';
-import { Menu, MenuItem, Snackbar, Button } from '@material-ui/core';
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
+//Material ui
+import { FaCog, FaPlus } from 'react-icons/fa'
+import { Menu, MenuItem, Snackbar, Button } from '@material-ui/core';
 
 class _Boardbar extends Component {
     state = {
@@ -63,13 +64,18 @@ class _Boardbar extends Component {
                     message="Board deleted."
                     action={<Button color="primary" onClick={this.handleSnackbarClose}>Close</Button>}
                 />
-                <h1>Boards</h1>
+                <div className="boardbar-header">
+                    <h1>Boards</h1>
+                    <button>
+                        <FaPlus onClick={this.props.addBoard} />
+                    </button>
+
+                </div>
                 <input type="text" placeholder="Search Board" />
-                <FaPlus onClick={this.props.addBoard} />
                 <ul>
                     {boards.map((board, idx) => {
                         return <li
-                            className="flex"
+                            className="flex align-center"
 
                             key={idx}>
                             <FaCog onClick={(ev) => this.handleMenuOpen(ev, board._id)} />

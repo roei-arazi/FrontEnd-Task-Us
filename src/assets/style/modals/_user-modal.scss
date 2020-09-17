@@ -1,32 +1,78 @@
 .user-profile {
-    .fade-wrapper {
-        position: absolute;
-        background-color: $color2;
+    .user-container {
+        position: relative;
+
+        .modal-screen {
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+
+            .modal-container {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                background-color: $color2;
+                // box-shadow: ;
+            }
+
+            .user-modal-col {
+                font-size: 1.5rem;
+                display: flex;
+                flex-direction: column;
+
+
+                img {
+                    align-self: center;
+                    border-radius: 50px;
+                    cursor: pointer;
+                }
+
+                form {
+                    margin-top: 25px;
+
+                    input {
+                        padding: 10px;
+                        width: 35%;
+                        background-color: transparent;
+                        border: 1px solid $color1;
+                        margin: 10px 0;
+
+                        &::placeholder {
+                            color: $color1;
+                        }
+
+                        &:focus {
+                            transition: .3s;
+                            background-color: $color1;
+
+                            &::placeholder {
+                                color: $colorTxt;
+                            }
+                        }
+
+                    }
+
+
+
+                    // input::placeholder {
+                    //     color: $color1;
+
+                    // }
+
+                    button {
+                        margin-top: 40px;
+                    }
+
+                }
+
+                table {
+                    border-collapse: separate;
+                    border-spacing: 15px 30px;
+                }
+
+            }
+        }
     }
 
-    .user-modal-col {
-        font-size: 1.5rem;
-        display: flex;
-        flex-direction: column;
 
-        button {
-            width: fit-content;
-        }
-
-        img {
-            align-self: center;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-
-        form {
-            margin-top: 25px;
-        }
-
-        table {
-            border-collapse: separate;
-            border-spacing: 15px 30px;
-        }
-
-    }
 }
