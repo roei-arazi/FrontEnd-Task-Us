@@ -24,7 +24,7 @@ class _Boardbar extends Component {
     }
 
     handleSnackbarOpen = () => {
-        this.setState({ isSnackbarOpen: true });
+        this.setState({ isSnackbarOpen: true })
     }
 
     handleSnackbarClose = () => {
