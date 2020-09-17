@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Task } from './Task'
 import { Droppable } from 'react-beautiful-dnd';
+//Material ui
+import { Tooltip, Zoom } from '@material-ui/core';
+import { RiDeleteBin2Line } from 'react-icons/ri'
+
 import ContentEditable from 'react-contenteditable';
+import { BiMessageAltAdd } from 'react-icons/bi';
 
 export class Group extends Component {
 
@@ -25,7 +30,7 @@ export class Group extends Component {
         const elGroupName = this.state.name
 
         return (
-            <section className="group">
+            <section key={this.props.group.id} className="group">
                 <div className="group-header-container padding-y-15">
                     <h1>
                         <ContentEditable
@@ -39,13 +44,17 @@ export class Group extends Component {
                             }}
                         />
                     </h1>
-                    <button onClick={() => {
-                        this.props.onRemoveGroup(this.props.group.id)
-                    }}>Delete Group</button>
+                    <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>
+                        <div className='icon-container'>
+                            <RiDeleteBin2Line onClick={() => {
+                                this.props.onRemoveGroup(this.props.group.id)
+                            }} />
+                        </div>
+                    </Tooltip>
                 </div>
                 <Droppable droppableId={this.props.group.id}>
-                    {provided =>
-                        <div className="task-list"
+                    {(provided, snapshot) =>
+                        <div className={`task-list ${snapshot.isDraggingOver ? 'drag-over' : ''}`}
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                         >
@@ -56,9 +65,14 @@ export class Group extends Component {
                         </div>
                     }
                 </Droppable>
-                <button onClick={() => {
-                    this.props.onAddTask(this.props.group.id)
-                }}>Add New Task</button>
+
+                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Add New Task" arrow>
+                    <div className='icon-container rotate180'>
+                        <BiMessageAltAdd onClick={() => {
+                            this.props.onAddTask(this.props.group.id)
+                        }} />
+                    </div>
+                </Tooltip>
             </section>
         )
     }

@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { FaAd, FaBell, FaCalendar, FaPortrait } from 'react-icons/fa'
 
 import { Notifications } from './Notifications';
-import { IconContext } from 'react-icons/lib';
 
 class _Navbar extends Component {
     state = {
@@ -22,26 +21,18 @@ class _Navbar extends Component {
     render() {
         const { isNotificationShown } = this.state
         return (
-            <section className="navbar flex column space-between align-center">
+            <section className="navbar flex column space-between align-center padding-y-15">
                 <NavLink to="/">
-                    <IconContext.Provider value={{ className: 'icon logo' }}>
-                        <FaAd />
-                    </IconContext.Provider>
+                    <FaAd />
                 </NavLink>
                 <ul className="navbar-links flex column space-around">
                     {isNotificationShown && <Notifications />}
-                    <IconContext.Provider value={{ className: 'icon' }}>
-                        <li onClick={this.toggleNotifications}><FaBell /></li>
-                    </IconContext.Provider>
+                    <li onClick={this.toggleNotifications}><FaBell /></li>
                     <NavLink to="/myweek">
-                        <IconContext.Provider value={{ className: 'icon' }}>
-                            <li><FaCalendar /></li>
-                        </IconContext.Provider>
+                        <li><FaCalendar /></li>
                     </NavLink>
                     <NavLink to="/user/123">
-                        <IconContext.Provider value={{ className: 'icon' }}>
-                            <li><FaPortrait /></li>
-                        </IconContext.Provider>
+                        <li><FaPortrait /></li>
                     </NavLink>
                 </ul>
             </section>
