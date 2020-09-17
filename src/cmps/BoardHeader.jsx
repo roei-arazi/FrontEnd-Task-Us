@@ -3,14 +3,13 @@ import { BiAddToQueue } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@material-ui/core';
 import ContentEditable from 'react-contenteditable';
 
-let isEditDisabled = false
 
 export class BoardHeader extends React.Component{
-
+    
     state={
-       _id:''
+        _id:''
     }
-
+    
 
     componentDidMount(){
         this.editableName = React.createRef();
@@ -49,7 +48,7 @@ export class BoardHeader extends React.Component{
                                 }}
                                 onKeyDown={(ev) => {
                                     if (ev.key === 'Enter') {
-                                        isEditDisabled = true
+                                        ev.target.blur()
                                         this.props.onEditBoard(elBoardName, elBoardDesc)
                                     }
                                 }}
@@ -60,14 +59,14 @@ export class BoardHeader extends React.Component{
                                 className="cursor-initial"
                                 innerRef={this.editableDescription}
                                 html={elBoardDesc} // innerHTML of the editable div
-                                disabled={false}       // use true to disable editing
+                                disabled={false}        // use true to disable editing
                                 onChange={this.handleChangeDesc} // handle innerHTML change
                                 onBlur={() => {
                                     this.props.onEditBoard(elBoardName, elBoardDesc)
                                 }}
                                 onKeyDown={(ev) => {
                                     if (ev.key === 'Enter') {
-                                        isEditDisabled = true
+                                        ev.target.blur() 
                                         this.props.onEditBoard(elBoardName, elBoardDesc)
                                     }
                                 }}

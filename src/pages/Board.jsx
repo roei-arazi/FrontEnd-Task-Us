@@ -40,7 +40,7 @@ class _Board extends Component {
     }
 
     onEditBoard = (boardName, boardDescription) => {
-        const board = this.props.board.find(board => board._id === this.state.boardId)
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
         this.props.updateBoard({...board, name: boardName, description: boardDescription})
     }
 
@@ -180,7 +180,7 @@ class _Board extends Component {
                 <Navbar />
                 <Boardbar />
                 <div className="board-container">
-                    <BoardHeader board={board} onAddGroup={this.onAddGroup} />
+                    <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard} />
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
