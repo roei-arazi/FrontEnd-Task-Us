@@ -45,7 +45,7 @@ let boards = [{
             createdAt: 1123124124241,
             members: [{
                 _id: 1234,
-                name: 'osher',
+                name: 'david',
                 imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
             }],
             status: 'done',
@@ -63,7 +63,7 @@ let boards = [{
             createdAt: 1123124124241,
             members: [{
                 _id: 1234,
-                name: 'osher',
+                name: 'david',
                 imgUrl: ''
             }],
             status: 'done',
@@ -273,7 +273,7 @@ async function addBoard(){
                 createdAt: 1123124124241,
                 members: [{
                     _id: 1234,
-                    name: 'osher',
+                    name: 'david',
                     imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
                 }],
                 status: 'done',
@@ -291,7 +291,7 @@ async function addBoard(){
                 createdAt: 1123124124241,
                 members: [{
                     _id: 1234,
-                    name: 'osher',
+                    name: 'David',
                     imgUrl: ''
                 }],
                 status: 'done',

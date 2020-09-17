@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import { hideSnackbar } from '../store/actions/systemActions.js';
 
-function _Notification(props){
-    const {isSnackbarShown} = props;
+function _Popup(props){
+    const {isSnackbarShown, snackbarShown} = props;
     return <Snackbar
     anchorOrigin={{
         vertical: 'bottom',
@@ -13,7 +13,7 @@ function _Notification(props){
     }}
     open={isSnackbarShown}
     autoHideDuration={3000}
-    message="Board deleted."
+    message={snackbarShown}
     action={<Button color="primary" onClick={props.hideSnackbar}>Close</Button>}
 />
 }
@@ -29,4 +29,4 @@ const mapDispatchToProps = {
     hideSnackbar
 }
 
-export const Notification = connect(mapStateToProps, mapDispatchToProps)(_Notification)
+export const Popup = connect(mapStateToProps, mapDispatchToProps)(_Popup)

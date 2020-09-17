@@ -34,8 +34,8 @@ export function boardReducer(state=initialState, action){
                                 name: 'osher',
                                 imgUrl: 'www/sfasf'
                             }],
-                            status: 'done/progress/stuck',
-                            priority: 1,
+                            status: 'done',
+                            priority: 'low',
                             dueDate: 214124124125,
                             note: 'dont forget about this',
                             lastUpdated: 'yesterday',
@@ -78,8 +78,8 @@ export function boardReducer(state=initialState, action){
                                 name: 'osher',
                                 imgUrl: 'www/sfasf'
                             }],
-                            status: 'done/progress/stuck',
-                            priority: 1,
+                            status: 'progress',
+                            priority: 'low',
                             dueDate: 214124124125,
                             note: 'dont forget about this',
                             lastUpdated: 'yesterday',

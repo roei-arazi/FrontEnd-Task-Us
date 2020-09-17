@@ -6,6 +6,8 @@ import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
+import {Popup} from '../cmps/Popup'
+import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 // Reducers funcs
 import {
     updateBoard, loadBoards,   //BOARD
@@ -50,6 +52,8 @@ class _Board extends Component {
     onAddGroup = async () => {
         try {
             await this.props.addGroup(this.state.boardId)
+            await this.props.showSnackbar('Added group.');
+            setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
             console.log('Error', err)
         }
@@ -57,6 +61,8 @@ class _Board extends Component {
     onRemoveGroup = async (groupId) => {
         try {
             await this.props.removeGroup(groupId)
+            await this.props.showSnackbar('Removed group.');
+            setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
             console.log('Error', err)
         }
@@ -67,6 +73,8 @@ class _Board extends Component {
 
         try {
             await this.props.editGroup(group)
+            await this.props.showSnackbar('Updated group.');
+            setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
             console.log('Error', err)
         }
@@ -76,6 +84,8 @@ class _Board extends Component {
     onRemoveTask = async (taskId) => {
         try {
             await this.props.removeTask(taskId)
+            await this.props.showSnackbar('Removed task.');
+            setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
             console.log('Error', err)
         }
@@ -83,6 +93,8 @@ class _Board extends Component {
     onAddTask = async (groupId) => {
         try {
             await this.props.addTask(groupId)
+            await this.props.showSnackbar('Added task.');
+            setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
             console.log('Error', err)
         }
@@ -90,6 +102,8 @@ class _Board extends Component {
     onEditTask = async (task) => {
         try {
             await this.props.editTask(task)
+            await this.props.showSnackbar('Updated task.');
+            setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
             console.log('Error', err)
         }
@@ -204,6 +218,7 @@ class _Board extends Component {
                         </DragDropContext>
                     </div>
                 </div>
+                <Popup />
             </section>
         )
     }
@@ -223,7 +238,9 @@ const mapDispatchToProps = {
     removeTask,
     editTask,
     editGroup,
-    updateBoard
+    updateBoard,
+    showSnackbar,
+    hideSnackbar
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);

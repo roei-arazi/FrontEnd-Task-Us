@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem} from '@material-ui/core';
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
-import {Notification} from '../cmps/Notification'
+import {Popup} from './Popup'
 
 class _Boardbar extends Component {
     state = {
@@ -73,7 +73,7 @@ class _Boardbar extends Component {
                     <MenuItem onClick={() => this.onBoardRemove(selectedBoardId)}>Delete</MenuItem>
                     <MenuItem onClick={this.handleMenuClose}>Edit</MenuItem>
                 </Menu>
-                <Notification />
+                {/* <Popup /> */}
             </section>
         )
     }
