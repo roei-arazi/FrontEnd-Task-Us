@@ -9,7 +9,6 @@ import ContentEditable from 'react-contenteditable';
 import { BiMessageAltAdd } from 'react-icons/bi';
 
 
-let isEditDisabled = false
 export class Group extends Component {
 
     state = {
@@ -42,14 +41,14 @@ export class Group extends Component {
                                     className="cursor-initial"
                                     innerRef={this.contentEditable}
                                     html={elGroupName} // innerHTML of the editable div
-                                    disabled={isEditDisabled}       // use true to disable editing
+                                    disabled={false}       // use true to disable editing
                                     onChange={this.handleChange} // handle innerHTML change
                                     onBlur={() => {
                                         this.props.onEditGroup(this.state, this.state.name, elGroupName)
                                     }}
                                     onKeyDown={(ev) => {
                                         if (ev.key === 'Enter') {
-                                            isEditDisabled = true
+                                            ev.target.blur()
                                             this.props.onEditTask(this.state)
                                         }
                                     }}

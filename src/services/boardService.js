@@ -4,7 +4,8 @@ export const boardService = {
     addGroup,
     removeGroup,
     addTask,
-    removeTask
+    removeTask,
+    removeBoard
 }
 
 let boards = [{
@@ -195,6 +196,7 @@ async function loadBoards() {
 }
 
 async function updateBoard(boardToSave) {
+    console.log('updating board...', boardToSave);
     const newBoards = JSON.parse(JSON.stringify(boards))
     const idx = newBoards.findIndex(board => board._id === boardToSave._id)
     try { 
@@ -202,6 +204,15 @@ async function updateBoard(boardToSave) {
         return newBoards
     } catch (err) {
         console.log('boardService: Couldn\'t update board');
+        throw err;
+    }
+}
+
+async function removeBoard(boardId){
+    try{
+        boards = boards.filter(board => board._id !== boardId);
+    }catch(err){
+        console.log('boardService: Couldn\'t remove board');
         throw err;
     }
 }

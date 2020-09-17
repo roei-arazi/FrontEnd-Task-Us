@@ -120,6 +120,11 @@ export function boardReducer(state=initialState, action){
                     ...state,
                     boards: action.boards
                 }
+            case 'REMOVE_BOARD':
+                return {
+                    ...state,
+                    boards: state.boards.filter(board => board._id !== action.boardId)
+                }
         default:
             return state
     }

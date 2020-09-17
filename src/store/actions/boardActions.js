@@ -25,6 +25,18 @@ export function updateBoard(boardToSave) {
         }
     }
 }
+
+export function removeBoard(boardId){
+    return async dispatch => {
+        try {
+            boardService.removeBoard(boardId);
+            dispatch({type: 'REMOVE_BOARD', boardId})
+        }catch(err){
+            console.log('boardActions: Couldn\'t remove board');
+            throw err;
+        }
+    }
+}
 //------------------GROUP CRUD-----------------
 
 export function removeGroup(groupId) {
