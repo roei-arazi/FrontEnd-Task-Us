@@ -49,7 +49,7 @@ class _Boardbar extends Component {
     }
 
     render() {
-        const { boards } = this.props;
+        const { boards } = this.props
         const { anchorEl, selectedBoardId, isSnackbarOpen } = this.state;
         return (
             <section className="boardbar padding-x-15 padding-y-15 fixed column">
@@ -62,7 +62,7 @@ class _Boardbar extends Component {
                     autoHideDuration={3000}
                     onClose={this.handleSnackbarClose}
                     message="Board deleted."
-                    action={<Button color="secondary" onClick={this.handleSnackbarClose}>Close</Button>}
+                    action={<Button color="primary" onClick={this.handleSnackbarClose}>Close</Button>}
                 />
                 <h1>Boards</h1>
                 <input type="text" placeholder="Search Board" />
