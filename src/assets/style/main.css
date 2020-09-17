@@ -175,7 +175,7 @@ svg:hover {
   padding-left: 10px;
   background-color: #e8effb;
   padding-top: 20px;
-  border-right: 2px solid #1b262c;
+  border-right: 1px solid rgba(27, 38, 44, 0.35);
   border-top-left-radius: 15px;
   -webkit-box-shadow: -23px 3px 47px -22px rgba(0, 0, 0, 0.75);
           box-shadow: -23px 3px 47px -22px rgba(0, 0, 0, 0.75);
@@ -247,7 +247,7 @@ svg:hover {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  border-bottom: 2px solid #1b262c;
+  border-bottom: 1px solid rgba(27, 38, 44, 0.35);
 }
 
 .board-header h1 {
@@ -272,6 +272,13 @@ svg:hover {
   min-height: 100px;
 }
 
+.drag-over {
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  padding: 10px;
+  background-color: #e8effb;
+}
+
 .task {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -282,5 +289,11 @@ svg:hover {
 
 .task *:not(:first-child) {
   margin-left: 15px;
+}
+
+.drag {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border: 2px black solid;
 }
 /*# sourceMappingURL=main.css.map */
