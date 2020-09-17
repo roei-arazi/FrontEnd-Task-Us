@@ -37,6 +37,18 @@ export function removeBoard(boardId){
         }
     }
 }
+
+export function addBoard(){
+    return async dispatch => {
+        try {
+            boardService.addBoard();
+            dispatch({type: 'ADD_BOARD'})
+        }catch(err){
+            console.log('boardActions: Couldn\'t add board');
+            throw err;
+        }
+    }
+}
 //------------------GROUP CRUD-----------------
 
 export function removeGroup(groupId) {
