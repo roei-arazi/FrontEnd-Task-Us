@@ -96,7 +96,7 @@ let boards = [{
     }
     ]
 },{
-    _id: _makeid(),
+    _id: '23442',
     boardCreator: {
         _id: '12312',
         fullName: 'fullname mcgee',
@@ -199,7 +199,6 @@ async function updateBoard(boardToSave) {
     const idx = newBoards.findIndex(board => board._id === boardToSave._id)
     try { 
         newBoards.splice(idx, 1, boardToSave)
-        console.log('Board Service',newBoards);
         return newBoards
     } catch (err) {
         console.log('boardService: Couldn\'t update board');
