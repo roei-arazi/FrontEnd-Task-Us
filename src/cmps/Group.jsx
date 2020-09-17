@@ -31,7 +31,7 @@ export class Group extends Component {
 
         return (
             <section key={this.props.group.id} className="group">
-                <div className="group-header-container padding-y-15">
+                <div className="group-header-container align-center padding-y-15">
                     <h1>
                         <ContentEditable
                             className="cursor-initial"

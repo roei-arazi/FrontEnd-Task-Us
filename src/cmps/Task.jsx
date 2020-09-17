@@ -11,7 +11,7 @@ export class Task extends Component {
         id: ''
     }
 
-
+    isEditDisabled = false
     componentDidMount() {
 
         this.contentEditable = React.createRef();
@@ -48,10 +48,17 @@ export class Task extends Component {
                             className="cursor-initial"
                             innerRef={this.contentEditable}
                             html={elTaskName} // innerHTML of the editable div
-                            disabled={false}       // use true to disable editing
+                            disabled={this.isEditDisabled}       // use true to disable editing
                             onChange={this.handleChange} // handle innerHTML change
                             onBlur={() => {
                                 this.props.onEditTask(this.state)
+                            }}
+                            onKeyDown={(ev) => {
+
+                                if (ev.key === 'Enter') {
+                                    this.isEditDisabled = true
+                                    this.props.onEditTask(this.state)
+                                }
                             }}
                         />
 
