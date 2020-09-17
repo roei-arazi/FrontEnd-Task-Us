@@ -125,6 +125,117 @@ export function boardReducer(state=initialState, action){
                     ...state,
                     boards: state.boards.filter(board => board._id !== action.boardId)
                 }
+            case 'ADD_BOARD':
+                return {
+                    ...state,
+                    boards: [...state.boards, {
+                        _id: _makeid(),
+                        boardCreator: {
+                            _id: '12312',
+                            fullName: 'fullname mcgee',
+                            imgUrl: 'www.imgur.com/sasf'
+                        },
+                        name: `board ${state.boards.length + 1}`,
+                        createdAt: Date.now(),
+                        description: 'Enter description here',
+                        members: [{
+                            _id: 'u101',
+                            fullname: 'shicks mcgee',
+                            imgUrl: 'imgure/sfasfa',
+                            lastSeen: 'yesterday'
+                        }],
+                        groups: [{
+                            id: _makeid(),
+                            name: 'group 1',
+                            createdAt: 'date',
+                            color: 'blue',
+                            lastUpdated: 198465168486,
+                            isTagsShown: false,
+                            tags: [],
+                            columns: [{
+                                type: 'date',
+                                name: 'due date'
+                            }],
+                            tasks: [{
+                                id: _makeid(),
+                                name: 'sneeze',
+                                createdAt: 1123124124241,
+                                members: [{
+                                    _id: 1234,
+                                    name: 'osher',
+                                    imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
+                                }],
+                                status: 'done',
+                                priority: 'low',
+                                dueDate: Date.now(),
+                                note: 'dont forget about this',
+                                lastUpdated: 'yesterday',
+                                isSelected: false,
+                                posts: [],
+                                tags: ['ui', 'ux'],
+                                attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+                            },{
+                                id: _makeid(),
+                                name: 'sneeze',
+                                createdAt: 1123124124241,
+                                members: [{
+                                    _id: 1234,
+                                    name: 'osher',
+                                    imgUrl: ''
+                                }],
+                                status: 'done',
+                                priority: 'low',
+                                dueDate: Date.now(),
+                                note: 'dont forget about this',
+                                lastUpdated: 'yesterday',
+                                isSelected: false,
+                                posts: [],
+                                tags: ['ui', 'ux'],
+                                attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+                            }]
+                        }],
+                        activityLog: [{
+                            createdAt: 124124125124,
+                            byUser: {
+                                _id: 123,
+                                imgUrl: 'www.imgur',
+                                fullName: 'shucks mcgee'
+                            },
+                            description: 'removed task "do the dishes"',
+                            task: {
+                                id: 123,
+                                name: 'do the dishes'
+                            }
+                        },
+                        {
+                            createdAt: 12412541251,
+                            byUser: {
+                                _id: 123,
+                                imgUrl: 'www.imgur',
+                                fullName: 'shucks mcgee'
+                            },
+                            description: 'changed group name from project2 to project3',
+                            group: {
+                                id: 142,
+                                name: 'project3'
+                            }
+                        },
+                        {
+                            createdAt: 4514512352135,
+                            byUser: {
+                                _id: 123,
+                                imgUrl: 'www.imgur',
+                                fullName: 'shucks mcgee'
+                            },
+                            description: 'added group project2',
+                            group: {
+                                id: 142,
+                                name: 'project2'
+                            }
+                        }
+                        ]
+                    }]
+                }
         default:
             return state
     }

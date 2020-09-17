@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FaCog } from 'react-icons/fa'
+import { FaCog, FaPlus } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem, Snackbar, Button } from '@material-ui/core';
-import { removeBoard } from '../store/actions/boardActions.js';
+import { removeBoard, addBoard } from '../store/actions/boardActions.js';
 
 class _Boardbar extends Component {
     state = {
@@ -37,11 +37,10 @@ class _Boardbar extends Component {
         this.handleMenuClose()
         if (boards.length === 1) {
             console.log('you need at least one board!');
-            // this.createNotification('warning', 'you need at least one board!')
             return;
         }
-        this.handleSnackbarOpen();
         await removeBoard(boardId);
+        await this.handleSnackbarOpen();
         if (id === boardId) {
             const idx = boards.findIndex(board => board._id !== boardId)
             history.push(`/board/${boards[idx]._id}`)
@@ -66,6 +65,7 @@ class _Boardbar extends Component {
                 />
                 <h1>Boards</h1>
                 <input type="text" placeholder="Search Board" />
+                <FaPlus onClick={this.props.addBoard} />
                 <ul>
                     {boards.map((board, idx) => {
                         return <li
@@ -99,7 +99,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    removeBoard
+    removeBoard,
+    addBoard
 }
 
 export const Boardbar = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Boardbar));
