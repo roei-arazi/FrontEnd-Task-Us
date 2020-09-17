@@ -19,16 +19,16 @@ class _Boardbar extends Component {
     }
 
     handleOpen = (ev) => {
-        this.setState({anchorEl: ev.currentTarget})
+        this.setState({ anchorEl: ev.currentTarget })
     }
 
-    handleClose = ()=>{
-        this.setState({anchorEl: null})
+    handleClose = () => {
+        this.setState({ anchorEl: null })
     }
 
     render() {
         const { boards } = this.props;
-        const {anchorEl} = this.state;
+        const { anchorEl } = this.state;
         return (
             <section className="boardbar padding-x-15 padding-y-15 fixed column">
                 <h1>Boards</h1>
@@ -39,7 +39,7 @@ class _Boardbar extends Component {
                     {boards.map((board, idx) => {
                         return <li
                             className="flex"
-                            
+
                             key={idx}>
                             <FaCog onClick={this.handleOpen} />
                             <Menu
