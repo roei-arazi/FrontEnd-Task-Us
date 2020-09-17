@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable'
 import { Draggable } from 'react-beautiful-dnd'
 //Material ui
-import { Tooltip, Zoom } from '@material-ui/core';
+import { Tooltip, Zoom, TextField, FormControl, MenuItem, Select, InputLabel, Input } from '@material-ui/core';
 import { MdDeleteSweep } from 'react-icons/md'
 
 export class Task extends Component {
@@ -16,8 +16,17 @@ export class Task extends Component {
         this.setState({ ...this.props.task })
     }
 
-    handleChange = (ev) => {
+    handleNameChange = (ev) => {
         this.setState({ name: ev.target.value });
+    }
+
+    handleDateChange = (ev) => {
+        this.setState({ dueDate: ev.target.value })
+    }
+
+    handleChange = async (ev) => {
+        await this.setState({ [ev.target.name]: ev.target.value })
+        this.props.onEditTask(this.state)   
     }
 
     render() {
@@ -43,7 +52,7 @@ export class Task extends Component {
                                 innerRef={this.contentEditable}
                                 html={elTaskName} // innerHTML of the editable div
                                 disabled={false}       // use true to disable editing
-                                onChange={this.handleChange} // handle innerHTML change
+                                onChange={this.handleNameChange} // handle innerHTML change
                                 onBlur={() => {
                                     this.props.onEditTask(this.state)
                                 }}
@@ -56,6 +65,60 @@ export class Task extends Component {
                                 }}
                             />
                         </h2>
+                        <form className="task-date" noValidate>
+                            <TextField
+                                id="date"
+                                label="Due Date"
+                                type="date"
+                                value={this.state.dueDate}
+                                className="task-date"
+                                onChange={this.handleDateChange}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                onBlur={() => {
+                                    this.props.onEditTask(this.state)
+                                }}
+                                onKeyDown={(ev) => {
+                                    if (ev.key === 'Enter') {
+                                        ev.target.blur()
+                                        this.props.onEditTask(this.state)
+                                        // this.ChangeEditState()
+                                    }
+                                }}
+                            />
+                        </form>
+                        <FormControl className="status">
+                            <InputLabel id="task-status-label">Status</InputLabel>
+                            <Select
+                                labelId="task-status-label"
+                                id="task-status"
+                                value={this.state.status}
+                                name="status"
+                                onChange={this.handleChange}
+                            >
+                                <MenuItem value="stuck" className="red">Stuck</MenuItem>
+                                <MenuItem value="working on it" className="yellow">Working on it</MenuItem>
+                                <MenuItem value="done" className="green">Done</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl className="priority">
+                            <InputLabel id="task-priority-label">Priority</InputLabel>
+                            <Select
+                                labelId="task-priority-label"
+                                id="task-priority"
+                                value={this.state.priority}
+                                name="priority"
+                                onChange={this.handleChange}
+                            >
+                                <MenuItem value="low" className="green">Low</MenuItem>
+                                <MenuItem value="medium" className="yello">Medium</MenuItem>
+                                <MenuItem value="high" className="red">High</MenuItem>
+                            </Select>
+                        </FormControl>
+                    
+                    <label htmlFor="task-imgs">IMG</label>
+                    <input type="file" id="task-imgs" hidden />
                     </section>
                 )}
             </Draggable>

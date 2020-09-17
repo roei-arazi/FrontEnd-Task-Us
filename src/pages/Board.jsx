@@ -177,7 +177,7 @@ class _Board extends Component {
     render() {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         if (!board) return <h1>Loading..</h1>
-        console.log('rendering board:', this.state.boardId);
+        console.log('rendering board:', board);
         return (
             <section className="board">
                 <Navbar />

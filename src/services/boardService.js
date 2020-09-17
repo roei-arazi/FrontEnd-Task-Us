@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const boardService = {
     loadBoards,
     updateBoard,
@@ -16,7 +18,7 @@ let boards = [{
         imgUrl: 'www.imgur.com/sasf'
     },
     name: 'board1',
-    createdAt: 24124135124,
+    createdAt: moment().calendar(),
     description: 'Enter description here',
     members: [{
         _id: 'u101',
@@ -45,9 +47,9 @@ let boards = [{
                 name: 'osher',
                 imgUrl: 'www/sfasf'
             }],
-            status: 'done/progress/stuck',
-            priority: 1,
-            dueDate: 214124124125,
+            status: 'done',
+            priority: 'low',
+            dueDate: '25-09-1973',
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
             isSelected: false,
@@ -104,7 +106,7 @@ let boards = [{
         imgUrl: 'www.imgur.com/sasf'
     },
     name: 'board2',
-    createdAt: 24124135124,
+    createdAt: moment().calendar(),
     description: 'Enter description here',
     members: [{
         _id: 'u101',
@@ -133,9 +135,9 @@ let boards = [{
                 name: 'osher',
                 imgUrl: 'www/sfasf'
             }],
-            status: 'done/progress/stuck',
-            priority: 1,
-            dueDate: 214124124125,
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: '1992-08-13',
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
             isSelected: false,
@@ -196,7 +198,6 @@ async function loadBoards() {
 }
 
 async function updateBoard(boardToSave) {
-    console.log('updating board...', boardToSave);
     const newBoards = JSON.parse(JSON.stringify(boards))
     const idx = newBoards.findIndex(board => board._id === boardToSave._id)
     try { 
