@@ -44,6 +44,16 @@
   padding-bottom: 15px;
 }
 
+.padding-x-30 {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.padding-y-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .cursor-initial {
   cursor: initial;
 }
@@ -110,7 +120,7 @@ button {
 }
 
 .board .board-container .groups-container {
-  height: 85vh;
+  height: 80vh;
   overflow-y: overlay;
 }
 
@@ -156,8 +166,8 @@ button {
 }
 
 .navbar {
-  min-width: 150px;
-  width: 150px;
+  min-width: 100px;
+  width: 100px;
   background-color: #59405c;
   height: 100vh;
   padding-right: 15px;
@@ -191,10 +201,7 @@ button {
 }
 
 .board-header {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-right: 30px;
-  height: 15vh;
+  height: 20vh;
   background-color: #ed6663;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -209,13 +216,22 @@ button {
   margin-bottom: 10px;
 }
 
-.group-header-container {
+.group {
+  margin-bottom: 10px;
+}
+
+.group .group-header-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.group .task-list {
+  min-height: 100px;
 }
 
 .task {
@@ -226,7 +242,7 @@ button {
   margin-bottom: 10px;
 }
 
-.task *:not(first-child) {
+.task *:not(:first-child) {
   margin-left: 15px;
 }
 /*# sourceMappingURL=main.css.map */

@@ -7,8 +7,12 @@ import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 // Reducers funcs
-import { updateBoard, loadBoards, addGroup, editGroup, removeGroup, addTask, removeTask, editTask } from '../store/actions/boardActions'
-import { boardService } from '../services/boardService';
+import {
+    updateBoard, loadBoards,   //BOARD
+    addGroup, editGroup, removeGroup, //GROUP
+    addTask, removeTask, editTask  //TASK
+}
+    from '../store/actions/boardActions'
 
 class _Board extends Component {
 
@@ -19,7 +23,6 @@ class _Board extends Component {
         //TODO: change loadBoard argument to this.props.match.params.id
 
         try {
-            console.log('this.props.boards', this.props.boards)
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards()
                 return
@@ -39,17 +42,20 @@ class _Board extends Component {
         }
     }
     onRemoveGroup = async (groupId) => {
-        console.log('Removing group, group id:', groupId)
         try {
             await this.props.removeGroup(groupId)
         } catch (err) {
             console.log('Error', err)
         }
     }
-    onEditGroup = async (groupId) => {
-        console.log('Editing group, group id:', groupId)
+    onEditGroup = async (group, changedValue, originalValue) => {
+        console.log('changed Value', changedValue)
+        console.log('original Value', originalValue)
+
+        if (changedValue === originalValue) return // No changes were made
+
         try {
-            await this.props.editGroup(groupId)
+            await this.props.editGroup(group, changedValue)
         } catch (err) {
             console.log('Error', err)
         }
@@ -153,7 +159,7 @@ class _Board extends Component {
                 <Boardbar />
                 <div className="board-container">
                     <BoardHeader onAddGroup={this.onAddGroup} />
-                    <div className="groups-container padding-x-15 ">
+                    <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
                         >

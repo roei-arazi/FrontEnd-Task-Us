@@ -3,7 +3,7 @@ import React from 'react';
 export function BoardHeader(props) {
 
     return (
-        <section className="board-header align-center  padding-x-15">
+        <section className="board-header align-center padding-x-30 padding-y-30 ">
             <div className="col flex column">
                 <h1>Board header</h1>
                 <p>Change board's description</p>

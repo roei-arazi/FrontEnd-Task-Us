@@ -1,4 +1,14 @@
-.group-header-container {
-    display: flex;
-    justify-content: space-between;
+.group {
+    margin-bottom: 10px;
+
+    .group-header-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .task-list {
+        min-height: 100px;
+
+    }
 }
