@@ -141,7 +141,15 @@ label,
 
 button {
   padding: 15px;
+  background-color: #64b5eb;
+  border: 0;
   cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+button:hover {
+  background-color: rgba(100, 181, 235, 0.65);
 }
 
 svg {
@@ -183,6 +191,23 @@ svg:hover {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.ReactModalPortal * {
+  z-index: 999;
+}
+
+.ReactModalPortal div {
+  background-color: rgba(2, 9, 29, 0.9) !important;
+}
+
+.ReactModalPortal div div {
+  background-color: #2a77aa !important;
+  border: 0 !important;
+}
+
+.user-profile-big {
+  width: 250px;
 }
 
 @font-face {
@@ -227,8 +252,8 @@ svg:hover {
   padding-top: 20px;
   border-right: 1px solid rgba(27, 38, 44, 0.35);
   border-top-left-radius: 15px;
-  -webkit-box-shadow: -23px 3px 47px -22px rgba(0, 0, 0, 0.75);
-          box-shadow: -23px 3px 47px -22px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -20px -15px 16px -22px;
+          box-shadow: -20px -15px 16px -22px;
   margin-left: -15px;
   z-index: 2;
   display: -webkit-box;
@@ -340,6 +365,7 @@ svg:hover {
   display: flex;
   background-color: #d0e1ec;
   margin-bottom: 10px;
+  height: 65px;
 }
 
 .task *:not(:first-child) {
@@ -350,6 +376,31 @@ svg:hover {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   border: 2px black solid;
+}
+
+.task-img-container {
+  width: 80px;
+  height: 100%;
+  position: relative;
+}
+
+.task-img-container img {
+  cursor: pointer;
+  height: 100%;
+}
+
+.task-img-container .task-number-of-imgs {
+  position: absolute;
+  background-color: #2a77aa;
+  color: #1e2547;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  text-align: center;
+  right: 0;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .user-profile .user-container {
@@ -374,7 +425,6 @@ svg:hover {
 }
 
 .user-profile .user-container img {
-  width: 250px;
   border-radius: 50px;
 }
 
@@ -403,5 +453,39 @@ svg:hover {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.user-modal-col {
+  font-size: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.user-modal-col button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.user-modal-col img {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.user-modal-col form {
+  margin-top: 25px;
+}
+
+.user-modal-col table {
+  border-collapse: separate;
+  border-spacing: 15px 30px;
 }
 /*# sourceMappingURL=main.css.map */

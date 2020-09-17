@@ -1,0 +1,25 @@
+.user-modal-col {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+
+    button {
+        width: fit-content;
+    }
+
+    img {
+        align-self: center;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    form {
+        margin-top: 25px;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 15px 30px;
+    }
+
+}
