@@ -8,6 +8,7 @@ import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 // Reducers funcs
 import { updateBoard, loadBoards, addGroup, editGroup, removeGroup, addTask, removeTask, editTask } from '../store/actions/boardActions'
+import { boardService } from '../services/boardService';
 
 class _Board extends Component {
 
@@ -89,23 +90,54 @@ class _Board extends Component {
             destination.index === source.index) return;
 
         const board = this.props.boards.find(board => board._id === this.boardId)
-        const group = board.groups.find(group => group.id === source.droppableId)
-        const newTasks = Array.from(group.tasks)
-
-        const newTask = group.tasks.find(task => task.id === draggableId)
-
-        newTasks.splice(source.index, 1)
-        newTasks.splice(destination.index, 0, newTask)
-
-        const newGroup = {
-            ...group,
-            tasks: newTasks
+        const groupStart = board.groups.find(group => group.id === source.droppableId)
+        const groupEnd= board.groups.find(group => group.id === destination.droppableId)
+        
+        if(groupStart.id===groupEnd.id){
+            
+            const newTasks = Array.from(groupStart.tasks)
+            const newTask = groupStart.tasks.find(task => task.id === draggableId)
+    
+            newTasks.splice(source.index, 1)
+            newTasks.splice(destination.index, 0, newTask)
+    
+            const newGroup = {
+                ...groupStart,
+                tasks: newTasks
+            }
+            const newIdx= board.groups.findIndex(group=> group.id===newGroup.id)
+            board.groups.splice(newIdx,1,newGroup)
+            try {
+                await this.props.updateBoard(board)
+    
+            } catch (err) {
+                console.log('Error', err);
+            }
         }
-        console.log(newGroup);
-        try {
-            await this.props.updateBoard(newGroup)
 
-        } catch (err) {
+        const startTasks= Array.from(groupStart.tasks)
+        startTasks.splice(source.index,1)
+        const newStartGroup={
+            ...groupStart,
+            tasks:startTasks
+        }
+        const endTasks= Array.from(groupEnd.tasks)
+        const newTaskToPaste= groupStart.tasks.find(task=> task.id===draggableId)
+        endTasks.splice(destination.index,0, newTaskToPaste)
+        const newFinishGroup={
+            ...groupEnd,
+            tasks:endTasks
+        }
+
+        const startIdx=board.groups.findIndex(group=> group.id===newStartGroup.id)
+        const endIdx=board.groups.findIndex(group=> group.id===newFinishGroup.id)
+
+        board.groups.splice(startIdx,1,newStartGroup)
+        board.groups.splice(endIdx,1,newFinishGroup)
+        console.log('ROW 136!', board);
+        try{
+            this.props.updateBoard(board)
+        }catch(err){
             console.log('Error', err);
         }
 

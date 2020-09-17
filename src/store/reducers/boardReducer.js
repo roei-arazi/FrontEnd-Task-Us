@@ -109,7 +109,7 @@ export function boardReducer(state=initialState, action){
                 })
             }
             case 'SET_BOARD':
-                console.log('Gtot boards from reducer',action.boards);
+                console.log('Got boards from reducer',action.boards);
                 return{
                     ...state,
                     boards: action.boards

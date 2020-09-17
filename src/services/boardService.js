@@ -106,13 +106,13 @@ async function loadBoards() {
     }
 }
 
-async function updateBoard(groupToSave) {
-    const idx = boards[0].groups.find(group => group.id === groupToSave.id)
+async function updateBoard(boardToSave) {
     const newBoards = JSON.parse(JSON.stringify(boards))
-    try {
-        newBoards[0].groups.splice(idx, 1, groupToSave)
-
-        return newBoards.splice(0, 1, newBoards[0])
+    const idx = newBoards.findIndex(board => board._id === boardToSave._id)
+    try { 
+        newBoards.splice(idx, 1, boardToSave)
+        console.log('Board Service',newBoards);
+        return newBoards
     } catch (err) {
         console.log('boardService: Couldn\'t update board');
         throw err;
