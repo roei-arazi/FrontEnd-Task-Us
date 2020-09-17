@@ -51,9 +51,16 @@ export function addGroup(boardId) {
         }
     }
 }
-export function editGroup(group, changedValue) {
-    console.log('elGroupChange', changedValue)
-    console.log('editing group from actions, got group:', group)
+export function editGroup(group) {
+    return async dispatch =>{
+        try{
+            dispatch({type: 'EDIT_GROUP', group})
+            // boardService.editGroup(group)
+        }catch(err){
+            console.log('boardActions: Coulnd\'t edit group');
+            throw err;
+        }
+    }
     //TODO: save changes made to the group
 }
 //-----------------TASKS CRUD------------------------

@@ -55,7 +55,7 @@ class _Board extends Component {
         if (changedValue === originalValue) return // No changes were made
 
         try {
-            await this.props.editGroup(group, changedValue)
+            await this.props.editGroup(group)
         } catch (err) {
             console.log('Error', err)
         }
