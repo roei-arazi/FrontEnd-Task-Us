@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable'
 import { Draggable } from 'react-beautiful-dnd'
+//Material ui
+import { Tooltip, Zoom } from '@material-ui/core';
+import { MdDeleteSweep } from 'react-icons/md'
 
 export class Task extends Component {
 
@@ -35,6 +38,12 @@ export class Task extends Component {
                         ref={provided.innerRef}
                     >
 
+                        <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>
+                            <div className='icon-container'>
+                                <MdDeleteSweep onClick={() => { this.props.onRemoveTask(this.state.id) }} />
+                            </div>
+                        </Tooltip>
+
                         <ContentEditable
                             className="cursor-initial"
                             innerRef={this.contentEditable}
@@ -46,11 +55,9 @@ export class Task extends Component {
                             }}
                         />
 
-                        <button onClick={() => { this.props.onRemoveTask(this.state.id) }}>Remove task</button>
                     </section>
                 )}
             </Draggable>
         )
     }
-
 }

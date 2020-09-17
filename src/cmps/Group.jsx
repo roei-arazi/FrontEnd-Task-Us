@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Task } from './Task'
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Droppable, Droppable } from 'react-beautiful-dnd';
+//Material ui
+import { Tooltip, Zoom } from '@material-ui/core';
+import { RiDeleteBin2Line } from 'react-icons/ri'
+
 import ContentEditable from 'react-contenteditable';
+import { BiMessageAltAdd } from 'react-icons/bi';
 
 export class Group extends Component {
 
@@ -44,9 +49,13 @@ export class Group extends Component {
                             }}
                             />
                     </h1>
-                    <button onClick={() => {
-                        this.props.onRemoveGroup(this.props.group.id)
-                    }}>Delete Group</button>
+                    <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>
+                        <div className='icon-container'>
+                            <RiDeleteBin2Line onClick={() => {
+                                this.props.onRemoveGroup(this.props.group.id)
+                            }} />
+                        </div>
+                    </Tooltip>
                 </div>
                 <Droppable droppableId={this.props.group.id} type="task">
                     {(provided, snapshot) =>
@@ -61,9 +70,14 @@ export class Group extends Component {
                         </div>
                     }
                 </Droppable>
-                <button onClick={() => {
-                    this.props.onAddTask(this.props.group.id)
-                }}>Add New Task</button>
+
+                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Add New Task" arrow>
+                    <div className='icon-container rotate180'>
+                        <BiMessageAltAdd onClick={() => {
+                            this.props.onAddTask(this.props.group.id)
+                        }} />
+                    </div>
+                </Tooltip>
             </section>
             }
             </Draggable>

@@ -1,4 +1,7 @@
 import React from 'react';
+import { BiAddToQueue } from 'react-icons/bi'
+import { Tooltip, Zoom } from '@material-ui/core';
+
 
 export function BoardHeader(props) {
 
@@ -9,7 +12,12 @@ export function BoardHeader(props) {
                 <p>Change board's description</p>
             </div>
             <div className="col flex align-center">
-                <button onClick={props.onAddGroup}>Add Group</button>
+                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Add Group" arrow>
+                    <div className='icon-container'>
+                        <BiAddToQueue onClick={props.onAddGroup} />
+                    </div>
+                </Tooltip>
+
             </div>
         </section>
     )
