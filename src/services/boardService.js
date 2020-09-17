@@ -48,7 +48,7 @@ let boards = [{
                 imgUrl: 'www/sfasf'
             }],
             status: 'done',
-            priority: 1,
+            priority: 'low',
             dueDate: '25-09-1973',
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
@@ -136,7 +136,7 @@ let boards = [{
                 imgUrl: 'www/sfasf'
             }],
             status: 'stuck',
-            priority: 1,
+            priority: 'medium',
             dueDate: '1992-08-13',
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
