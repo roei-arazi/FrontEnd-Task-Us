@@ -5,8 +5,6 @@ import { Draggable } from 'react-beautiful-dnd'
 import { Tooltip, Zoom } from '@material-ui/core';
 import { MdDeleteSweep } from 'react-icons/md'
 
-
-let isEditDisabled = false
 export class Task extends Component {
 
     state = {
@@ -17,7 +15,6 @@ export class Task extends Component {
         this.contentEditable = React.createRef();
         this.setState({ ...this.props.task })
     }
-
 
     handleChange = (ev) => {
         this.setState({ name: ev.target.value });
@@ -40,25 +37,25 @@ export class Task extends Component {
                                 <MdDeleteSweep onClick={() => { this.props.onRemoveTask(this.state.id) }} />
                             </div>
                         </Tooltip>
-
-                        <ContentEditable
-                            className="cursor-initial"
-                            innerRef={this.contentEditable}
-                            html={elTaskName} // innerHTML of the editable div
-                            disabled={isEditDisabled}       // use true to disable editing
-                            onChange={this.handleChange} // handle innerHTML change
-                            onBlur={() => {
-                                this.props.onEditTask(this.state)
-                            }}
-                            onKeyDown={(ev) => {
-
-                                if (ev.key === 'Enter') {
-                                    isEditDisabled = true
+                        <h2>
+                            <ContentEditable
+                                className="cursor-initial"
+                                innerRef={this.contentEditable}
+                                html={elTaskName} // innerHTML of the editable div
+                                disabled={false}       // use true to disable editing
+                                onChange={this.handleChange} // handle innerHTML change
+                                onBlur={() => {
                                     this.props.onEditTask(this.state)
-                                }
-                            }}
-                        />
-
+                                }}
+                                onKeyDown={(ev) => {
+                                    if (ev.key === 'Enter') {
+                                        ev.target.blur()
+                                        this.props.onEditTask(this.state)
+                                        // this.ChangeEditState()
+                                    }
+                                }}
+                            />
+                        </h2>
                     </section>
                 )}
             </Draggable>

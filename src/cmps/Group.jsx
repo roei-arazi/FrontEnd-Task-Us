@@ -54,7 +54,9 @@ export class Group extends Component {
                                         }
                                     }}
                                 />
+
                             </h1>
+
                             <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>
                                 <div className='icon-container'>
                                     <RiDeleteBin2Line onClick={() => {
@@ -63,6 +65,7 @@ export class Group extends Component {
                                 </div>
                             </Tooltip>
                         </div>
+
                         <Droppable droppableId={this.props.group.id} type="task">
                             {(provided, snapshot) =>
                                 <div className={`task-list ${snapshot.isDraggingOver ? 'drag-over' : ''}`}
@@ -73,6 +76,7 @@ export class Group extends Component {
                                         return <Task onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id} task={task} />
                                     })}
                                     {provided.placeholder}
+
                                 </div>
                             }
                         </Droppable>
@@ -84,10 +88,11 @@ export class Group extends Component {
                                 }} />
                             </div>
                         </Tooltip>
+
                     </section>
                 }
             </Draggable>
         )
     }
 
-}
+} 
