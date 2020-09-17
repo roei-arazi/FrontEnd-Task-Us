@@ -218,11 +218,9 @@ button {
 
 .group {
   margin-bottom: 10px;
-  min-height: 100px;
 }
 
 .group .group-header-container {
-  padding: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -230,6 +228,10 @@ button {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.group .task-list {
+  min-height: 100px;
 }
 
 .task {

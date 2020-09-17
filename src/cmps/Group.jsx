@@ -26,7 +26,7 @@ export class Group extends Component {
 
         return (
             <section className="group">
-                <div className="group-header-container">
+                <div className="group-header-container padding-y-15">
                     <h1>
                         <ContentEditable
                             className="cursor-initial"
