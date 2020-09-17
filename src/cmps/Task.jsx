@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable'
 import { Draggable } from 'react-beautiful-dnd'
 import DatePicker from "react-datepicker";
+import es from 'date-fns/locale/es'
 import "react-datepicker/dist/react-datepicker.css";
 //Material ui
 import { Tooltip, Zoom, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
@@ -12,8 +13,8 @@ export class Task extends Component {
 
     state = {
         id: '',
-        isStatusShown:false,
-        isPriorityShown:false
+        isStatusShown: false,
+        isPriorityShown: false
     }
 
     componentDidMount() {
@@ -31,10 +32,10 @@ export class Task extends Component {
     }
 
     handleChange = async (data) => {
-        if(data==='Stuck' || data==='Working on it' || data==='Done'){
+        if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
 
-            await this.setState({status:data})
-        }else await this.setState({priority:data})
+            await this.setState({ status: data })
+        } else await this.setState({ priority: data })
         this.props.onEditTask(this.state)
     }
 
@@ -44,12 +45,12 @@ export class Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    openModal=(data)=>{
-        if(data==='status'){
-            this.setState({isStatusShown: !this.state.isStatusShown})
+    openModal = (data) => {
+        if (data === 'status') {
+            this.setState({ isStatusShown: !this.state.isStatusShown })
 
-        }else{
-            this.setState({isPriorityShown: !this.state.isPriorityShown})
+        } else {
+            this.setState({ isPriorityShown: !this.state.isPriorityShown })
         }
     }
 
@@ -94,50 +95,53 @@ export class Task extends Component {
                             </h2>
                         </div>
                         <div className="task-right flex align-center">
-                            <DatePicker
-                                selected={this.state.dueDate}
-                                onChange={this.handleDateChange}
-                            />
+                            <label>
+                                <DatePicker
+                                    selected={this.state.dueDate}
+                                    onChange={this.handleDateChange}
+                                    dateFormat="dd/MM/yyyy"
+                                />
+                            </label>
                             <div className="label-container relative">
-                                <div className={`label-box ${this.state.status.split(" ")[0].toLowerCase()}`} onClick={()=>this.openModal('status')}>
+                                <div className={`label-box ${this.state.status.split(" ")[0].toLowerCase()}`} onClick={() => this.openModal('status')}>
                                     <p>{this.state.status}</p>
-                                    {this.state.isStatusShown &&  
-                                    <div className="label-list absolute flex column align-center">
-                                    <section className="label-selector stuck" onClick={()=>this.handleChange("Stuck")}>
-                                        <p>Stuck</p>
-                                    </section>
-                                    <section className="label-selector working" onClick={()=>this.handleChange("Working on it")}>
-                                        <p>Working on it</p>
-                                    </section>
-                                    <section className="label-selector done" onClick={()=>this.handleChange("Done")}>
-                                        <p>Done</p>
-                                    </section>
-                                    </div>
+                                    {this.state.isStatusShown &&
+                                        <div className="label-list absolute flex column align-center">
+                                            <section className="label-selector stuck" onClick={() => this.handleChange("Stuck")}>
+                                                <p>Stuck</p>
+                                            </section>
+                                            <section className="label-selector working" onClick={() => this.handleChange("Working on it")}>
+                                                <p>Working on it</p>
+                                            </section>
+                                            <section className="label-selector done" onClick={() => this.handleChange("Done")}>
+                                                <p>Done</p>
+                                            </section>
+                                        </div>
                                     }
-                                   
+
                                 </div>
                             </div>
 
                             <div className="label-container relative">
-                                <div className={`label-box ${this.state.priority.toLowerCase()}`} onClick={()=>this.openModal('priority')}>
+                                <div className={`label-box ${this.state.priority.toLowerCase()}`} onClick={() => this.openModal('priority')}>
                                     <p>{this.state.priority}</p>
-                                    {this.state.isPriorityShown && 
-                                     <div className="label-list absolute flex column align-center">
-                                    <section className="label-selector low" onClick={()=>this.handleChange("Low")}>
-                                        <p>Low</p>
-                                    </section>
-                                    <section className="label-selector medium" onClick={()=>this.handleChange("Medium")}>
-                                        <p>Medium</p>
-                                    </section>
-                                    <section className="label-selector high" onClick={()=>this.handleChange("High")}>
-                                        <p>High</p>
-                                    </section>
-                                    </div>
+                                    {this.state.isPriorityShown &&
+                                        <div className="label-list absolute flex column align-center">
+                                            <section className="label-selector low" onClick={() => this.handleChange("Low")}>
+                                                <p>Low</p>
+                                            </section>
+                                            <section className="label-selector medium" onClick={() => this.handleChange("Medium")}>
+                                                <p>Medium</p>
+                                            </section>
+                                            <section className="label-selector high" onClick={() => this.handleChange("High")}>
+                                                <p>High</p>
+                                            </section>
+                                        </div>
                                     }
-                                   
+
                                 </div>
                             </div>
- 
+
                             <div className="task-img-container">
                                 <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img src={this.state.attachedImgs[0]} /> : 'IMG'}</label>
                                 <input type="file" id="task-imgs" onChange={this.uploadImg} hidden />
