@@ -56,6 +56,15 @@ export function boardReducer(state=initialState, action){
                     return board;
                 })
             }
+        case 'EDIT_GROUP':
+            return {
+                ...state,
+                boards: state.boards.map(board =>{
+                    console.log('editing board:', board, action.group);
+                    board.groups = board.groups.map(group => group.id === action.group.id ? action.group : group)
+                    return board;
+                })
+            }
         case 'ADD_TASK':
             console.log('got group id:', action.groupId);
             return {
