@@ -47,7 +47,14 @@ label,
 
 button {
   padding: 15px;
+  background-color: $buttonColor;
+  border: 0;
   cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    background-color: rgba($buttonColor, .65);
+  }
 }
 
 svg {
@@ -84,4 +91,27 @@ svg {
 
 .icon-container {
   width: fit-content;
+}
+
+.ReactModalPortal {
+
+  * {
+    z-index: 999;
+  }
+
+  //Bg overlay
+  div {
+    background-color: rgba($colorModalOverlay, .90) !important;
+
+    //Modal body
+    div {
+      background-color: $color2 !important;
+      border: 0 !important;
+    }
+  }
+}
+
+//Profile pics
+.user-profile-big {
+  width: 250px;
 }

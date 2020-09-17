@@ -1,13 +1,11 @@
 // BASICS
-
-
 @import './basics/mixins';
 @import './basics/variables';
 @import './basics/helpers';
 @import './basics/base';
 @import './basics/typography';
-// VIEWS
 
+// VIEWS
 @import './views/board';
 @import './views/home';
 @import './views/login';
@@ -15,7 +13,6 @@
 @import './views/user-profile';
 
 // COMPONENTS
-
 @import './components/boardbar';
 @import './components/navbar';
 @import './components/notifications';
@@ -23,3 +20,6 @@
 @import './components/group';
 @import './components/task';
 @import './components/user-profile';
+
+//MODALS
+@import './modals/user-modal';
