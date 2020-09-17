@@ -3,34 +3,87 @@ import { BiAddToQueue } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@material-ui/core';
 import ContentEditable from 'react-contenteditable';
 
+let isEditDisabled = false
 
-export function BoardHeader(props) {
-    const elBoardName= props.board.name
-    const contentEditable = React.createRef();
-    return (
-        <section className="board-header align-center padding-x-30 padding-y-30 ">
-            <div className="col flex column">
-            <ContentEditable
-                            className="cursor-initial"
-                            innerRef={contentEditable}
-                            html={elBoardName} // innerHTML of the editable div
-                            disabled={false}       // use true to disable editing
-                            onChange={props.handleChange} // handle innerHTML change
-                            onBlur={() => {
-                                props.onEditBoard(props.board)
-                            }}
-                        />
-                <h1>Board header</h1>
-                <p>Change board's description</p>
-            </div>
-            <div className="col flex align-center">
-                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Add Group" arrow>
-                    <div className='icon-container'>
-                        <BiAddToQueue onClick={props.onAddGroup} />
-                    </div>
-                </Tooltip>
+export class BoardHeader extends React.Component{
 
-            </div>
-        </section>
-    )
+    state={
+       _id:''
+    }
+
+
+    componentDidMount(){
+        this.editableName = React.createRef();
+        this.editableDescription = React.createRef();
+
+        this.setState({...this.props.board})
+    }
+
+    handleChangeName=(ev)=>{
+       this.setState({name:ev.target.value})
+    }
+
+    handleChangeDesc=(ev)=>{
+        console.log(ev.target.value);
+       this.setState({description:ev.target.value})
+    }
+
+    render(){
+        if(!this.state._id) return <h1>Loading...</h1>
+
+        const elBoardName= this.state.name
+        const elBoardDesc= this.state.description
+
+        return (
+            <section className="board-header align-center padding-x-30 padding-y-30 ">
+                <div className="col flex column">
+                <h1>
+                    <ContentEditable
+                                className="cursor-initial"
+                                innerRef={this.editableName}
+                                html={elBoardName} // innerHTML of the editable div
+                                disabled={false}       // use true to disable editing
+                                onChange={this.handleChangeName} // handle innerHTML change
+                                onBlur={() => {
+                                    this.props.onEditBoard(elBoardName, elBoardDesc)
+                                }}
+                                onKeyDown={(ev) => {
+                                    if (ev.key === 'Enter') {
+                                        isEditDisabled = true
+                                        this.props.onEditBoard(elBoardName, elBoardDesc)
+                                    }
+                                }}
+                            />
+                    </h1>
+                <h5>
+                   <ContentEditable
+                                className="cursor-initial"
+                                innerRef={this.editableDescription}
+                                html={elBoardDesc} // innerHTML of the editable div
+                                disabled={false}       // use true to disable editing
+                                onChange={this.handleChangeDesc} // handle innerHTML change
+                                onBlur={() => {
+                                    this.props.onEditBoard(elBoardName, elBoardDesc)
+                                }}
+                                onKeyDown={(ev) => {
+                                    if (ev.key === 'Enter') {
+                                        isEditDisabled = true
+                                        this.props.onEditBoard(elBoardName, elBoardDesc)
+                                    }
+                                }}
+                            /> 
+                   </h5>  
+                </div>
+                <div className="col flex align-center">
+                    <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Add Group" arrow>
+                        <div className='icon-container'>
+                            <BiAddToQueue onClick={this.props.onAddGroup} />
+                        </div>
+                    </Tooltip>
+    
+                </div>
+            </section>
+        )
+    }
+
 }

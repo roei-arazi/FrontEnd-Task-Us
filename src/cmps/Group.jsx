@@ -45,6 +45,7 @@ export class Group extends Component {
                             onBlur={() => {
                                 this.props.onEditGroup(this.state, this.state.name, elGroupName)
                             }}
+                            
                             />
                     </h1>
                     <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>

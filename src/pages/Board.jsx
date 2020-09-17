@@ -31,8 +31,9 @@ class _Board extends Component {
         } catch (err) {
             console.log('Error', err)
         }
-
     }
+
+
 
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
