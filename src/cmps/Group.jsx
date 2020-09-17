@@ -30,7 +30,7 @@ export class Group extends Component {
         const elGroupName = this.state.name
 
         return (
-            <section className="group">
+            <section key={this.props.group.id} className="group">
                 <div className="group-header-container padding-y-15">
                     <h1>
                         <ContentEditable
@@ -53,8 +53,8 @@ export class Group extends Component {
                     </Tooltip>
                 </div>
                 <Droppable droppableId={this.props.group.id}>
-                    {provided =>
-                        <div className="task-list"
+                    {(provided, snapshot) =>
+                        <div className={`task-list ${snapshot.isDraggingOver ? 'drag-over' : ''}`}
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                         >
