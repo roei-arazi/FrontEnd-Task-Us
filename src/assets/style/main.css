@@ -87,16 +87,26 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+  font-family: noto-sans;
   color: #053250;
 }
 
 p {
+  font-family: roboto;
   color: #1b262c;
 }
 
@@ -123,14 +133,14 @@ svg:hover {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #1e2547;
+  background: #f7fbfd;
   border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: -webkit-gradient(linear, left top, left bottom, from(#053250), to(#d0e1ec));
-  background: linear-gradient(#053250, #d0e1ec);
+  background: -webkit-gradient(linear, left top, left bottom, from(#053250), to(#2a77aa));
+  background: linear-gradient(#053250, #2a77aa);
   border-radius: 5px;
 }
 
@@ -144,6 +154,16 @@ svg:hover {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(../../font/roboto.ttf);
+}
+
+@font-face {
+  font-family: noto-sans;
+  src: url(../../font/noto-sans.ttf);
 }
 
 .board {
@@ -160,6 +180,7 @@ svg:hover {
 .board .board-container .groups-container {
   height: 80vh;
   overflow-y: overlay;
+  background-color: #f7fbfd;
 }
 
 .user-profile {
@@ -195,13 +216,12 @@ svg:hover {
   margin-bottom: 15px;
 }
 
+.boardbar h4 {
+  cursor: pointer;
+}
+
 .boardbar input {
   width: 90%;
-  background: transparent;
-  border: 0;
-  border-bottom: 2px solid linear-gradient(#053250, #d0e1ec);
-  border-top: 2px solid linear-gradient(#053250, #d0e1ec);
-  padding: 10px 5px;
 }
 
 .boardbar svg {
@@ -238,9 +258,10 @@ svg:hover {
   position: absolute;
   width: 200px;
   height: 200px;
-  top: 284px;
-  right: -102px;
+  top: 315px;
+  left: 50px;
   background-color: #d0e1ec;
+  z-index: 3;
 }
 
 .board-header {
