@@ -45,10 +45,10 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
-    onEditGroup = async (groupId) => {
-        console.log('Editing group, group id:', groupId)
+    onEditGroup = async (group) => {
+        console.log('Editing group, group:', group)
         try {
-            await this.props.editGroup(groupId)
+            await this.props.editGroup(group)
         } catch (err) {
             console.log('Error', err)
         }

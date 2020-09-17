@@ -51,8 +51,8 @@ export function addGroup(boardId) {
         }
     }
 }
-export function editGroup(groupdId) {
-    console.log('editing group from actions, groupdId:', groupdId)
+export function editGroup(group) {
+    console.log('editing group from actions, got group:', group)
     //TODO: save changes made to the group
 }
 //-----------------TASKS CRUD------------------------
