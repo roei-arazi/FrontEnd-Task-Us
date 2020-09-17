@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FaCog, FaPlus } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom';
-import { Menu, MenuItem, Snackbar, Button } from '@material-ui/core';
+import { Menu, MenuItem} from '@material-ui/core';
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
+import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import {Notification} from '../cmps/Notification'
 
 class _Boardbar extends Component {
     state = {
@@ -23,14 +25,6 @@ class _Boardbar extends Component {
         this.setState({ anchorEl: null })
     }
 
-    handleSnackbarOpen = () => {
-        this.setState({ isSnackbarOpen: true });
-    }
-
-    handleSnackbarClose = () => {
-        this.setState({ isSnackbarOpen: false });
-    }
-
     onBoardRemove = async (boardId) => {
         const { boards, match, history, removeBoard } = this.props
         const { id } = match.params;
@@ -40,7 +34,8 @@ class _Boardbar extends Component {
             return;
         }
         await removeBoard(boardId);
-        await this.handleSnackbarOpen();
+        await this.props.showSnackbar('Removed board.');
+        setTimeout(() => this.props.hideSnackbar(), 3000)
         if (id === boardId) {
             const idx = boards.findIndex(board => board._id !== boardId)
             history.push(`/board/${boards[idx]._id}`)
@@ -48,21 +43,12 @@ class _Boardbar extends Component {
     }
 
     render() {
-        const { boards } = this.props
-        const { anchorEl, selectedBoardId, isSnackbarOpen } = this.state;
+        const { boards, isSnackbarShown } = this.props
+        const { anchorEl, selectedBoardId} = this.state;
+        console.log('isSnackbarShown', isSnackbarShown);
         return (
             <section className="boardbar padding-x-15 padding-y-15 fixed column">
-                <Snackbar
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    }}
-                    open={isSnackbarOpen}
-                    autoHideDuration={3000}
-                    onClose={this.handleSnackbarClose}
-                    message="Board deleted."
-                    action={<Button color="primary" onClick={this.handleSnackbarClose}>Close</Button>}
-                />
+                
                 <h1>Boards</h1>
                 <input type="text" placeholder="Search Board" />
                 <FaPlus onClick={this.props.addBoard} />
@@ -84,9 +70,10 @@ class _Boardbar extends Component {
                     open={Boolean(anchorEl)}
                     onClose={this.handleMenuClose}
                 >
-                    <MenuItem onClick={() => this.onBoardRemove(selectedBoardId)}>Delete board id: {selectedBoardId}</MenuItem>
+                    <MenuItem onClick={() => this.onBoardRemove(selectedBoardId)}>Delete</MenuItem>
                     <MenuItem onClick={this.handleMenuClose}>Edit</MenuItem>
                 </Menu>
+                <Notification />
             </section>
         )
     }
@@ -100,7 +87,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     removeBoard,
-    addBoard
+    addBoard,
+    showSnackbar,
+    hideSnackbar
 }
 
 export const Boardbar = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Boardbar));
