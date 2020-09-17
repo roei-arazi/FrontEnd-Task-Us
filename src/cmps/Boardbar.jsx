@@ -3,15 +3,11 @@ import { connect } from 'react-redux';
 import { FaCog } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
-
+import { removeBoard } from '../store/actions/boardActions.js';
 
 class _Boardbar extends Component {
     state = {
         anchorEl: null
-    }
-
-    componentDidMount() {
-
     }
 
     onMoveToBoard(id) {
@@ -22,8 +18,19 @@ class _Boardbar extends Component {
         this.setState({ anchorEl: ev.currentTarget })
     }
 
-    handleClose = () => {
+    onBoardRemove = (boardId) => {
+        const { id } = this.props.match.params;
+        if (this.props.boards.length === 1) {
+            console.log('you need at least one board!');
+            return;
+        }
+        this.props.removeBoard(boardId);
+        if (id === boardId) this.props.history.push(`/board/${this.props.boards[0]._id}`)
         this.setState({ anchorEl: null })
+    }
+
+    handleClose = ()=>{
+        this.setState({anchorEl: null})
     }
 
     render() {
@@ -48,7 +55,7 @@ class _Boardbar extends Component {
                                 open={Boolean(anchorEl)}
                                 onClose={this.handleClose}
                             >
-                                <MenuItem onClick={this.handleClose}>Delete</MenuItem>
+                                <MenuItem onClick={() => this.onBoardRemove(board._id)}>Delete</MenuItem>
                                 <MenuItem onClick={this.handleClose}>Edit</MenuItem>
                             </Menu>
                             <h4 onClick={() => this.onMoveToBoard(board._id)}>{board.name}</h4>
@@ -67,7 +74,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-
+    removeBoard
 }
 
 export const Boardbar = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Boardbar));
