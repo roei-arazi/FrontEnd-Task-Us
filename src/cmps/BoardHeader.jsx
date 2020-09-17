@@ -19,20 +19,16 @@ export class BoardHeader extends React.Component{
     }
 
     handleChangeName=(ev)=>{
+        console.log(ev.target.value);
        this.setState({name:ev.target.value})
     }
 
     handleChangeDesc=(ev)=>{
-        console.log(ev.target.value);
        this.setState({description:ev.target.value})
     }
 
     render(){
         if(!this.state._id) return <h1>Loading...</h1>
-
-        const elBoardName= this.state.name
-        const elBoardDesc= this.state.description
-
         return (
             <section className="board-header align-center padding-x-30 padding-y-30 ">
                 <div className="col flex column">
@@ -40,16 +36,16 @@ export class BoardHeader extends React.Component{
                     <ContentEditable
                                 className="cursor-initial"
                                 innerRef={this.editableName}
-                                html={elBoardName} // innerHTML of the editable div
+                                html={this.state.name} // innerHTML of the editable div
                                 disabled={false}       // use true to disable editing
                                 onChange={this.handleChangeName} // handle innerHTML change
                                 onBlur={() => {
-                                    this.props.onEditBoard(elBoardName, elBoardDesc)
+                                    this.props.onEditBoard(this.state.name, this.state.description)
                                 }}
                                 onKeyDown={(ev) => {
                                     if (ev.key === 'Enter') {
                                         ev.target.blur()
-                                        this.props.onEditBoard(elBoardName, elBoardDesc)
+                                        this.props.onEditBoard(this.state.name, this.state.description)
                                     }
                                 }}
                             />
@@ -58,16 +54,16 @@ export class BoardHeader extends React.Component{
                    <ContentEditable
                                 className="cursor-initial"
                                 innerRef={this.editableDescription}
-                                html={elBoardDesc} // innerHTML of the editable div
+                                html={this.state.description} // innerHTML of the editable div
                                 disabled={false}        // use true to disable editing
                                 onChange={this.handleChangeDesc} // handle innerHTML change
                                 onBlur={() => {
-                                    this.props.onEditBoard(elBoardName, elBoardDesc)
+                                    this.props.onEditBoard(this.state.name, this.state.description)
                                 }}
                                 onKeyDown={(ev) => {
                                     if (ev.key === 'Enter') {
                                         ev.target.blur() 
-                                        this.props.onEditBoard(elBoardName, elBoardDesc)
+                                        this.props.onEditBoard(this.state.name, this.state.description)
                                     }
                                 }}
                             /> 
