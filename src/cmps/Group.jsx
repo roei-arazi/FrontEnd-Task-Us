@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Task } from './Task'
-import { Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import ContentEditable from 'react-contenteditable';
 
 export class Group extends Component {
@@ -25,9 +25,14 @@ export class Group extends Component {
         const elGroupName = this.state.name
 
         return (
-            <section key={this.props.group.id} className="group">
-                <div className="group-header-container padding-y-15">
-                    <h1>
+            <Draggable draggableId={this.props.group.id} index={this.props.index}>
+            {(provided, snapshot)=>
+            <section key={this.props.group.id} className="group"
+            {...provided.draggableProps}
+            
+            ref={provided.innerRef}>
+                <div className="group-header-container padding-y-15" {...provided.dragHandleProps}>
+                    <h1 >
                         <ContentEditable
                             className="cursor-initial"
                             innerRef={this.contentEditable}
@@ -37,17 +42,17 @@ export class Group extends Component {
                             onBlur={() => {
                                 this.props.onEditGroup(this.state, this.state.name, elGroupName)
                             }}
-                        />
+                            />
                     </h1>
                     <button onClick={() => {
                         this.props.onRemoveGroup(this.props.group.id)
                     }}>Delete Group</button>
                 </div>
-                <Droppable droppableId={this.props.group.id}>
+                <Droppable droppableId={this.props.group.id} type="task">
                     {(provided, snapshot) =>
                         <div className={`task-list ${snapshot.isDraggingOver ? 'drag-over' : ''}`}
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
                         >
                             {this.props.group.tasks.map((task, index) => {
                                 return <Task onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id} task={task} />
@@ -60,6 +65,8 @@ export class Group extends Component {
                     this.props.onAddTask(this.props.group.id)
                 }}>Add New Task</button>
             </section>
+            }
+            </Draggable>
         )
     }
 
