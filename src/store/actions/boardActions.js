@@ -51,7 +51,8 @@ export function addGroup(boardId) {
         }
     }
 }
-export function editGroup(group) {
+export function editGroup(group, changedValue) {
+    console.log('elGroupChange', changedValue)
     console.log('editing group from actions, got group:', group)
     //TODO: save changes made to the group
 }

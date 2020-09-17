@@ -23,9 +23,9 @@ export class Group extends Component {
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elGroupName = this.state.name
-        console.log('STATE:', this.state)
+
         return (
-            <section className="group padding-x-15 padding-y-15">
+            <section className="group">
                 <div className="group-header-container">
                     <h1>
                         <ContentEditable
@@ -35,7 +35,7 @@ export class Group extends Component {
                             disabled={false}       // use true to disable editing
                             onChange={this.handleChange} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditGroup(this.state)
+                                this.props.onEditGroup(this.state, this.state.name, elGroupName)
                             }}
                         />
                     </h1>

@@ -1,4 +1,11 @@
-.group-header-container {
-    display: flex;
-    justify-content: space-between;
+.group {
+    margin-bottom: 10px;
+    min-height: 100px;
+
+    .group-header-container {
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
 }
