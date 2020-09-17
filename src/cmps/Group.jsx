@@ -35,8 +35,17 @@ export class Group extends Component {
                         {...provided.draggableProps}
 
                         ref={provided.innerRef}>
-                        <div className="group-header-container  align-center  padding-y-15" {...provided.dragHandleProps}>
-                            <h1 >
+                        <div className="group-header-container flex space-between align-center" {...provided.dragHandleProps}>
+                            <div className="group-header-left flex">
+                        <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>
+                                <div className='icon-container'>
+                                    <RiDeleteBin2Line onClick={() => {
+                                        this.props.onRemoveGroup(this.props.group.id)
+                                    }} />
+                                    
+                                </div>
+                            </Tooltip>
+                            <h1 className="group-title">
                                 <ContentEditable
                                     className="cursor-initial"
                                     innerRef={this.contentEditable}
@@ -53,16 +62,19 @@ export class Group extends Component {
                                         }
                                     }}
                                 />
-
                             </h1>
+                            </div>
+                                    <div className="group-header-right flex">
 
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>
-                                <div className='icon-container'>
-                                    <RiDeleteBin2Line onClick={() => {
-                                        this.props.onRemoveGroup(this.props.group.id)
-                                    }} />
-                                </div>
-                            </Tooltip>
+                            <h3>Due-Date</h3>
+                            <h3>Status</h3>
+                            <h3>Priority</h3>
+                            <h3>Images</h3>
+                            <h3>Members</h3>
+                                   
+
+                           
+                            </div>
                         </div>
 
                         <Droppable droppableId={this.props.group.id} type="task">
