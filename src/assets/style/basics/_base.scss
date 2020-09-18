@@ -45,6 +45,21 @@ label,
   color: $colorTxt;
 }
 
+
+input {
+  padding: 10px;
+  width: 35%;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid $color3;
+  margin: 10px 0;
+
+  &::placeholder {
+    color: $colorHeader;
+  }
+
+}
+
 button {
   font-family: noto-sans;
   padding: 15px;

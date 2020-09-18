@@ -147,6 +147,31 @@ label,
   color: #1b262c;
 }
 
+input {
+  padding: 10px;
+  width: 35%;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid #85b2ec;
+  margin: 10px 0;
+}
+
+input::-webkit-input-placeholder {
+  color: #053250;
+}
+
+input:-ms-input-placeholder {
+  color: #053250;
+}
+
+input::-ms-input-placeholder {
+  color: #053250;
+}
+
+input::placeholder {
+  color: #053250;
+}
+
 button {
   font-family: noto-sans;
   padding: 15px;
@@ -182,7 +207,7 @@ svg:hover {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f7fbfd;
+  background: #d0e1ec;
   border-radius: 5px;
 }
 
@@ -225,6 +250,40 @@ span.span-user-details {
   src: url(../../font/noto-sans.ttf);
 }
 
+@-webkit-keyframes scale-in-ver-bottom {
+  0% {
+    -webkit-transform: scaleY(0);
+            transform: scaleY(0);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in-ver-bottom {
+  0% {
+    -webkit-transform: scaleY(0);
+            transform: scaleY(0);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    opacity: 1;
+  }
+}
+
 .board {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -239,7 +298,7 @@ span.span-user-details {
 .board .board-container .groups-container {
   height: 80vh;
   overflow-y: overlay;
-  background-color: #f7fbfd;
+  background-color: #d0e1ec;
 }
 
 .user-profile {
@@ -378,7 +437,7 @@ span.span-user-details {
   height: 200px;
   top: 315px;
   left: 50px;
-  background-color: #d0e1ec;
+  background-color: #85b2ec;
   z-index: 3;
 }
 
@@ -432,7 +491,7 @@ span.span-user-details {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #d0e1ec;
+  background-color: #85b2ec;
   margin-bottom: 10px;
   height: 65px;
 }
@@ -543,7 +602,7 @@ span.span-user-details {
   font-size: 2rem;
   border-radius: 50%;
   background-color: #1e2547;
-  color: #d0e1ec;
+  color: #85b2ec;
   padding-top: 6px;
   cursor: pointer;
 }
@@ -685,52 +744,6 @@ span.span-user-details {
 
 .user-profile .user-container .modal-screen .user-modal-col form {
   margin-top: 25px;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input {
-  padding: 10px;
-  width: 35%;
-  background-color: transparent;
-  border: 1px solid #e8effb;
-  margin: 10px 0;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input::-webkit-input-placeholder {
-  color: #e8effb;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input:-ms-input-placeholder {
-  color: #e8effb;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input::-ms-input-placeholder {
-  color: #e8effb;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input::placeholder {
-  color: #e8effb;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input:focus {
-  -webkit-transition: .3s;
-  transition: .3s;
-  background-color: #e8effb;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input:focus::-webkit-input-placeholder {
-  color: #1b262c;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input:focus:-ms-input-placeholder {
-  color: #1b262c;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input:focus::-ms-input-placeholder {
-  color: #1b262c;
-}
-
-.user-profile .user-container .modal-screen .user-modal-col form input:focus::placeholder {
-  color: #1b262c;
 }
 
 .user-profile .user-container .modal-screen .user-modal-col form button {

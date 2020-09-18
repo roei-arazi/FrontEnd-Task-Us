@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
-import { Fade } from '@material-ui/core';
 import { loadBoards } from '../store/actions/boardActions'
+import { Fade } from '@material-ui/core';
+
 class _UserProfile extends Component {
     state = {
         isModalOpen: false
@@ -36,14 +37,14 @@ class _UserProfile extends Component {
                             <h3>Username: <span className="span-user-details">yithak133</span> </h3>
                         </div>
                     </div>
-
+                    {/* Modal */}
                     <Fade in={this.state.isModalOpen}>
                         <div className="modal-screen flex justify-center align-center">
                             <div className="modal-container padding-x-15 padding-y-15">
+
                                 <div className="user-modal-col">
                                     <img className="user-profile-big" src="https://via.placeholder.com/250" alt="" />
                                 </div>
-
                                 <div className="user-modal-col">
                                     <form className="form-container flex justify-center column  align-center" action="">
                                         <input placeholder="Email" type="email" />
