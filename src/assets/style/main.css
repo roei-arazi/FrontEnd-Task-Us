@@ -201,27 +201,10 @@ svg:hover {
   color: rgba(15, 76, 117, 0.75);
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #d0e1ec;
-  border-radius: 5px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: -webkit-gradient(linear, left top, left bottom, from(#053250), to(#2a77aa));
-  background: linear-gradient(#053250, #2a77aa);
-  border-radius: 5px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: -webkit-gradient(linear, left top, left bottom, from(#053250), to(#2a77aa));
-  background: linear-gradient(#053250, #2a77aa);
+span.span-user-details {
+  font-family: roboto;
+  letter-spacing: 0.5px;
+  color: #1b262c;
 }
 
 .icon-container {
@@ -231,10 +214,12 @@ svg:hover {
   position: relative;
 }
 
-span.span-user-details {
-  font-family: roboto;
-  letter-spacing: 0.5px;
-  color: #1b262c;
+.content-editable {
+  border: 2px dotted transparent;
+}
+
+.content-editable:focus {
+  border: 2px dotted #2a77aa;
 }
 
 .user-profile-big {
@@ -297,6 +282,26 @@ span.span-user-details {
   width: 100%;
   height: 100%;
   z-index: 998;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #d0e1ec;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: -webkit-gradient(linear, left top, left bottom, from(#053250), to(#2a77aa));
+  background: linear-gradient(#053250, #2a77aa);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: -webkit-gradient(linear, left top, left bottom, from(#053250), to(#2a77aa));
+  background: linear-gradient(#053250, #2a77aa);
 }
 
 @font-face {
@@ -370,6 +375,7 @@ span.span-user-details {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
 }
 
 .my-week-container {
@@ -380,34 +386,68 @@ span.span-user-details {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 20px 50px;
+  padding: 0px 50px;
   width: 100%;
 }
 
 .my-week-container h1 {
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
   font-size: 1.9rem;
+  margin-bottom: 50px;
+}
+
+.my-week-header {
+  height: 20vh;
 }
 
 .task-preview {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 10px;
-}
-
-.task-preview .user-img-container {
-  width: 100px;
 }
 
 .task-preview .user-img-container .member-letter {
   width: 50px;
 }
 
-.upcoming-tasks-container :nth-child(2) {
+.task-preview * {
+  width: 100px;
+  text-align: center;
+}
+
+.task-preview .label-box {
+  height: 90%;
+  border-radius: 5px;
+  width: 100px;
+}
+
+.task-preview .task-location {
+  color: gray;
+}
+
+.task-preview .task-location span {
+  cursor: pointer;
+}
+
+.task-preview .task-location span:hover {
+  text-decoration: underline;
+}
+
+.upcoming-tasks-container {
+  max-height: 75vh;
+  overflow-y: overlay;
+}
+
+.upcoming-tasks-container > :nth-child(even) {
   background-color: #e8effb;
+}
+
+.no-tasks {
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .boardbar {
@@ -477,6 +517,11 @@ span.span-user-details {
   padding: 0;
   max-height: 80%;
   overflow: overlay;
+}
+
+.boardbar ul {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
 .boardbar ul svg {
@@ -711,6 +756,7 @@ span.span-user-details {
 .task-img-container img {
   cursor: pointer;
   height: 100%;
+  border-bottom-right-radius: 5px;
 }
 
 .task-img-container .task-number-of-imgs {
