@@ -14,7 +14,6 @@ export class Notifications extends Component {
 
     async componentDidMount() {
         const users = await userService.loadUsers()
-        console.log('USERS', users)
         this.setState({ users, isModalOpen: true })
     }
 
@@ -28,7 +27,6 @@ export class Notifications extends Component {
                         <h1>Notifications</h1>
                         <MdDeleteSweep />
                     </header>
-                    {/* TODO: change the map */}
                     <div className="notifications-container">
                         {this.state.users.map(user => {
                             return (
@@ -38,10 +36,10 @@ export class Notifications extends Component {
                                     </div>
                                     <div className="notification-msg flex align-center column">
                                         <div>
-                                            <h2>{user.name}</h2>
+                                            <h2>{user.fullName}</h2>
                                         </div>
                                         <div>
-                                            <p>{user.name} changed something</p>
+                                            <p>{user.fullName} changed something</p>
                                         </div>
                                         <div>
                                             <p>a day ago</p>

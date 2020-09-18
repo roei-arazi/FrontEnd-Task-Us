@@ -24,9 +24,10 @@ class _Navbar extends Component {
                         <FaAd />
                     </NavLink>
 
-                    <div className="icon-container" onClick={this.toggleNotifications}>
+                    {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
+                    <div className="icon-container" >
                         {isNotificationShown && <Notifications loggedUser={this.props.loggedUser} />}
-                        <FaBell />
+                        <FaBell onClick={this.toggleNotifications} />
                     </div>
                 </ul>
 

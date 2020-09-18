@@ -1,34 +1,29 @@
 .notifications {
     position: absolute;
     width: 600px;
-    top: 0;
+    top: -15px;
     left: 50px;
     background-color: $color3;
     z-index: 999;
     box-shadow: 0px 0px 10px 0px #4b4b4bad;
     border-radius: 10px;
 
-    &:before {
-        right: 100%;
-        top: 50%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-        border-color: rgba(194, 225, 245, 0);
-        border-right-color: $color3;
-        border-width: 10px;
-        margin-top: -232px;
-    }
-
-
-
-
     header {
         margin-bottom: 20px;
         width: 95%;
+
+        &:before {
+            right: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(194, 225, 245, 0);
+            border-right-color: $color3;
+            border-width: 10px;
+        }
     }
 
     .notifications-container {
