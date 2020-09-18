@@ -46,7 +46,7 @@ export class Group extends Component {
                                 </Tooltip>
                                 <h1 className="group-title">
                                     <ContentEditable
-                                        className="cursor-initial"
+                                        className="content-editable cursor-initial"
                                         innerRef={this.contentEditable}
                                         html={elGroupName} // innerHTML of the editable div
                                         disabled={false}       // use true to disable editing

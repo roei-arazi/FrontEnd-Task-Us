@@ -18,17 +18,17 @@
             cursor: pointer;
         }
 
-        h3{
+        h3 {
             margin-bottom: 10px;
         }
 
-        .user-box-info{
-           p{
-               text-align:left;
-           }
+        .user-box-info {
+            p {
+                text-align: left;
+            }
         }
 
-        .board-users-box{
+        .board-users-box {
             padding: 10px 0;
             cursor: pointer;
         }
@@ -93,6 +93,7 @@
     img {
         cursor: pointer;
         height: 100%;
+        border-bottom-right-radius: 5px;
     }
 
     .task-number-of-imgs {
