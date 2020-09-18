@@ -72,7 +72,7 @@ export class Group extends Component {
                             </div>
                             <div className="group-header-right flex">
 
-                                <h3>Notes</h3>
+                                <h3>Updates</h3>
                                 <h3>Members</h3>
                                 <h3>Status</h3>
                                 <h3>Due-Date</h3>
