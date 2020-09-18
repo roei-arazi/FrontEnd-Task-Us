@@ -3,7 +3,7 @@
     position: relative;
 }
 
-.my-week-container { 
+.my-week-container {
     display: flex;
     flex-direction: column;
     padding: 0px 50px;
@@ -14,13 +14,15 @@
     }
 }
 
-.my-week-header{
+.my-week-header {
     height: 20vh;
+    img{
+        height: 100%; 
+    }
 }
 
 .task-preview {
-    display: flex; 
-    // padding: 10px; 
+    display: flex;
     .user-img-container .member-letter {
         width: 50px;
     }
@@ -45,14 +47,19 @@
 }
 
 .upcoming-tasks-container {
-    > :nth-child(even) {
-        background-color: $color1;
-    }
     max-height: 75vh;
     overflow-y: overlay;
 }
 
-.no-tasks{
+.upcoming-tasks {
+    width: 95%;
+    > :nth-child(even) {
+        background-color: $color1; 
+        border-radius: 5px;
+    }
+}
+
+.no-tasks {
     font-size: 3rem;
     position: absolute;
     top: 50%;
