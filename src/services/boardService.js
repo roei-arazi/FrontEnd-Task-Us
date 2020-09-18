@@ -50,7 +50,7 @@ let boards = [{
             }],
             status: 'done',
             priority: 'low',
-            dueDate: Date.now(),
+            dueDate: Date.now() + 1000 * 60 * 60,
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
             isSelected: false,

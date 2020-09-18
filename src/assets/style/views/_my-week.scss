@@ -1,0 +1,13 @@
+.my-week{
+    display: flex;
+}
+
+.my-week-container{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 50px;
+    width: 100%;
+    & h1{
+        align-self: center;
+    }
+}

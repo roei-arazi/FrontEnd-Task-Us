@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable'
 import { Draggable } from 'react-beautiful-dnd'
 import DatePicker from "react-datepicker";
-import es from 'date-fns/locale/es'
 import "react-datepicker/dist/react-datepicker.css";
 //Material ui
-import { Tooltip, Zoom, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
+import { Tooltip, Zoom } from '@material-ui/core';
 import { MdDeleteSweep } from 'react-icons/md'
 import { cloudinaryService } from '../services/cloudinaryService';
 
@@ -143,12 +142,12 @@ export class Task extends Component {
                             </div>
 
                             <div className="task-img-container">
-                                <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img src={this.state.attachedImgs[0]} /> : 'IMG'}</label>
+                                <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img alt="profile" src={this.state.attachedImgs[0]} /> : 'IMG'}</label>
                                 <input type="file" id="task-imgs" onChange={this.uploadImg} hidden />
                                 <div className="task-number-of-imgs"><span>{this.state.attachedImgs.length ? this.state.attachedImgs.length : 0}</span></div>
                             </div>
                             <div className="user-img-container">
-                                {this.state.members ? this.state.members[0].imgUrl ? <img src={this.state.members[0].imgUrl} /> :
+                                {this.state.members ? this.state.members[0].imgUrl ? <img alt="profile" src={this.state.members[0].imgUrl} /> :
                                     <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div> : ''}
                                 <div className="task-number-of-imgs"><span>+{this.state.members.length ? this.state.members.length : 0}</span></div>
                             </div>
