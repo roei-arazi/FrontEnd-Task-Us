@@ -83,6 +83,11 @@ class _Task extends Component {
         this.props.history.push(`/user/${userId}`)
     }
 
+    focusText = () =>{
+        setTimeout(() => {
+            document.execCommand('selectAll', false, null)
+          }, 0)
+    }
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
@@ -108,6 +113,7 @@ class _Task extends Component {
                                 </Tooltip>
                                 <h2>
                                     <ContentEditable
+                                        onFocus={this.focusText}
                                         className="cursor-initial"
                                         innerRef={this.contentEditable}
                                         html={elTaskName} // innerHTML of the editable div

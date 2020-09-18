@@ -101,12 +101,19 @@ span.span-user-details {
 }
 
 .content-editable {
+  padding: 0 4px;
   border: 2px dotted transparent;
+}
+
+.content-editable:hover {
+  border: 2px dotted $color3;
 }
 
 .content-editable:focus {
   border: 2px dotted $color2;
+  color: rgba($colorTxt, .85);
 }
+
 
 //Profile pics
 .user-profile-big {
