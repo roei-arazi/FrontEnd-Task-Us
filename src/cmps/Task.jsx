@@ -57,15 +57,28 @@ export class Task extends Component {
         }
     }
 
-    onRemoveMember = () => {
+    onRemoveMemberFromTask = (memberId) => {
+        const memberIdx= this.state.members.findIndex(member=>{
+            console.log('memberId',memberId);
+            console.log('member._id',member._id);
+            return member._id===memberId
+        })
+        console.log(memberIdx);
+        const members= JSON.parse(JSON.stringify(this.state.members))
+        const updatedMembers= members.splice(memberIdx,1)
+        this.setState({members: updatedMembers})
+    }
 
+    onAddUserToTask = (userId) => {
+        const newUser= this.props.users.find(user=> user._id===userId)
+        this.setState({members: [...this.state.members, newUser]})
+        // this.props.addUserToTask()
     }
 
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name
-        console.log(this.props.users);
         return (
             <Draggable draggableId={this.state.id} index={this.props.index}>
                 {(provided, snapshot) => (
@@ -107,15 +120,35 @@ export class Task extends Component {
                                 {this.state.members ? this.state.members[0].imgUrl ? <img alt="profile" src={this.state.members[0].imgUrl} /> :
                                     <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div> : ''}
                                 <div className="task-number-of-imgs"><span>+{this.state.members.length ? this.state.members.length : 0}</span></div>
-                                {this.state.isUsersShown && <div className="users-modal">
-                                    {this.state.members.map((member, idx) =>
-                                        <ul key={member._id} className="user-box">
-                                            <li>{member.name}</li>
-                                            <li>{member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div>}</li>
-                                            <button onClick={() => this.onRemoveMember(member._id)}>Remove</button>
-                                        </ul>
-                                    )}
-                                </div>}
+                                {this.state.isUsersShown &&
+                                    <div className="users-modal">
+                                        <div className="task-users-box">
+                                            <h3>Board Members</h3>
+                                            {this.state.members.map(member =>
+                                                <ul key={member._id} className="user-box flex space-between">
+                                                    <li>{member.name}</li>
+                                                    <li>{member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.name.charAt(0).toUpperCase()}</div>}</li>
+                                                    <button onClick={() => this.onRemoveMemberFromTask(member._id)}>Remove</button>
+                                                </ul>
+                                            )}
+                                        </div>
+                                        <div className="board-users-box">
+                                            <h3>Board Members</h3>
+                                            {this.props.users.map(user => {
+                                                return this.state.members.map(member => {
+                                                    if (member._id !== user._id) {
+                                                        return <ul key={user._id} className="user-box flex space-between">
+                                                            <li>{user.name}</li>
+                                                            <li>{user.imgUrl ? <img src={user.imgUrl} alt="profile" /> : <div className="member-letter">{user.name.charAt(0).toUpperCase()}</div>}</li>
+                                                            <button onClick={() => this.onAddUserToTask(user._id)}>Add</button>
+                                                        </ul>
+                                                    }
+                                                })
+                                            })
+                                            }
+                                        </div>
+
+                                    </div>}
                             </div>
 
                             <div className="label-container relative">
