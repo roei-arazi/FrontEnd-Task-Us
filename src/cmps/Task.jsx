@@ -88,7 +88,7 @@ class _Task extends Component {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
         const { isUsersShown, isStatusShown, isPriorityShown } = this.state
-
+        console.log(this.state.priority);
         return (
             <React.Fragment>
                 {(isUsersShown || isStatusShown || isPriorityShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}

@@ -89,11 +89,16 @@
 .task-img-container {
     height: 100%;
     position: relative;
+    text-align: center;
 
     img {
         cursor: pointer;
         height: 100%;
         border-bottom-right-radius: 5px;
+    }
+
+    .no-images{
+        padding-top: 15px;
     }
 
     .task-number-of-imgs {
@@ -115,6 +120,7 @@
         right: 0;
         font-weight: bold;
     }
+
 
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 
 export function Priority(props){
+    console.log(props.priority);
     return(
         <div className="label-container relative">
         <div className={`label-box ${props.priority.toLowerCase()}`} onClick={() => props.openModal('priority')}>
