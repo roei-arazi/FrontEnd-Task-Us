@@ -85,7 +85,6 @@ class _Task extends Component {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-
                         <div className="task-left flex">
                             <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>
                                 <div className='icon-container'>
