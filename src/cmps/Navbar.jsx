@@ -2,16 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FaAd, FaBell, FaCalendar, FaPortrait } from 'react-icons/fa'
-
 import { Notifications } from './Notifications';
 
 class _Navbar extends Component {
     state = {
         isNotificationShown: false
-    }
-
-    componentDidMount() {
-
     }
 
     toggleNotifications = () => {
@@ -26,7 +21,7 @@ class _Navbar extends Component {
                     <FaAd />
                 </NavLink>
                 <ul className="navbar-links flex column space-around">
-                    {isNotificationShown && <Notifications />}
+                    {isNotificationShown && <Notifications loggedUser={this.props.loggedUser} />}
                     <li onClick={this.toggleNotifications}><FaBell /></li>
                     <NavLink to="/myweek">
                         <li><FaCalendar /></li>

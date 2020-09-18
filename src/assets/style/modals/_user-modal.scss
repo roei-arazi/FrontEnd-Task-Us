@@ -30,28 +30,6 @@
                 form {
                     margin-top: 25px;
 
-                    input {
-                        padding: 10px;
-                        width: 35%;
-                        background-color: transparent;
-                        border: 1px solid $color1;
-                        margin: 10px 0;
-
-                        &::placeholder {
-                            color: $color1;
-                        }
-
-                        &:focus {
-                            transition: .3s;
-                            background-color: $color1;
-
-                            &::placeholder {
-                                color: $colorTxt;
-                            }
-                        }
-
-                    }
-
                     button {
                         margin-top: 40px;
                     }
