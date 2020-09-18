@@ -152,7 +152,7 @@ let boards = [{
             members: [{
                 _id: 1234,
                 name: 'osher',
-                imgUrl: 'www/sfasf'
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
             }],
             status: 'stuck',
             priority: 'medium',

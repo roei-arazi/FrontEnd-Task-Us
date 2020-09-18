@@ -7,7 +7,25 @@
     flex-direction: column;
     padding: 20px 50px;
     width: 100%;
-    & h1{
+    h1{
         align-self: center;
+        font-size: 1.9rem;
+    }
+}
+
+.task-preview{
+    display: flex;
+    padding: 10px;
+    .user-img-container{
+        width: 100px;
+        .member-letter{
+            width: 50px;
+        }
+    }
+}
+
+.upcoming-tasks-container{
+    :nth-child(2){
+        background-color: $color1;
     }
 }
