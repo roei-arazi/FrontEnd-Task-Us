@@ -4,6 +4,20 @@
     margin-bottom: 10px;
     height: 65px;
 
+    .users-modal{
+        background-color: #ffffff;
+        z-index: 1;
+        padding: 10px;
+        width:250px;
+        border-radius: 5px;
+
+        .task-users-box{
+            border-bottom: 2px solid $color2;
+            padding:10px 0;
+
+        }
+    }
+
 
     input {
         max-width: 100px;
