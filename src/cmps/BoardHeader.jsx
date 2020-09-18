@@ -10,7 +10,6 @@ export class BoardHeader extends React.Component {
         _id: ''
     }
 
-
     componentDidMount() {
         this.editableName = React.createRef();
         this.editableDescription = React.createRef();
@@ -34,6 +33,12 @@ export class BoardHeader extends React.Component {
         this.setState({ description: ev.target.value })
     }
 
+    focusText = () =>{
+        setTimeout(() => {
+            document.execCommand('selectAll', false, null)
+          }, 0)
+    }
+
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         return (
@@ -41,6 +46,7 @@ export class BoardHeader extends React.Component {
                 <div className="col flex column">
                     <h1>
                         <ContentEditable
+                            onFocus={this.focusText}
                             className="content-editable cursor-initial"
                             innerRef={this.editableName}
                             html={this.state.name} // innerHTML of the editable div
@@ -59,6 +65,7 @@ export class BoardHeader extends React.Component {
                     </h1>
                     <h5>
                         <ContentEditable
+                        onFocus={this.focusText}
                             className="content-editable cursor-initial"
                             innerRef={this.editableDescription}
                             html={this.state.description} // innerHTML of the editable div
