@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable'
+import { withRouter } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd'
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
 //Material ui
 import { Tooltip, Zoom } from '@material-ui/core';
 import { MdDeleteSweep } from 'react-icons/md'
+
+// Inside Imports
 import { cloudinaryService } from '../services/cloudinaryService';
-import { withRouter } from 'react-router-dom';
+import { Members } from './task-cmps/Members';
+import { Status } from './task-cmps/Status'
+import { Date } from './task-cmps/Date';
+import { Priority } from './task-cmps/Priority';
+import { Images } from './task-cmps/Images';
 
 class _Task extends Component {
 
@@ -58,6 +65,10 @@ class _Task extends Component {
         }
     }
 
+    closeModal = () => {
+        this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false })
+    }
+
     onRemoveMemberFromTask = (memberId) => {
         this.setState({ members: this.state.members.filter(member => member._id !== memberId) })
     }
@@ -76,138 +87,60 @@ class _Task extends Component {
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
-        const usersToAdd = this.props.users.filter(user => !this.state.members.some(member => member._id === user._id))
+        const { isUsersShown, isStatusShown, isPriorityShown } = this.state
+
         return (
-            <Draggable draggableId={this.state.id} index={this.props.index}>
-                {(provided, snapshot) => (
-                    <section key={this.props.task.id} className={`task flex space-between align-center ${snapshot.isDragging ? 'drag' : ''}`}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                    >
-                        <div className="task-left flex">
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>
-                                <div className='icon-container'>
-                                    <MdDeleteSweep onClick={() => { this.props.onRemoveTask(this.state.id) }} />
-                                </div>
-                            </Tooltip>
-                            <h2>
-                                <ContentEditable
-                                    className="cursor-initial"
-                                    innerRef={this.contentEditable}
-                                    html={elTaskName} // innerHTML of the editable div
-                                    disabled={false}       // use true to disable editing
-                                    onChange={this.handleNameChange} // handle innerHTML change
-                                    onBlur={() => {
-                                        this.props.onEditTask(this.state)
-                                    }}
-                                    onKeyDown={(ev) => {
-                                        if (ev.key === 'Enter') {
-                                            ev.target.blur()
+            <React.Fragment>
+                {(isUsersShown || isStatusShown || isPriorityShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
+                <Draggable draggableId={this.state.id} index={this.props.index}>
+                    {(provided, snapshot) => (
+                        <section key={this.props.task.id} className={`task flex space-between align-center ${snapshot.isDragging ? 'drag' : ''}`}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                        >
+
+                            <div className="task-left flex">
+                                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>
+                                    <div className='icon-container'>
+                                        <MdDeleteSweep onClick={() => { this.props.onRemoveTask(this.state.id) }} />
+                                    </div>
+                                </Tooltip>
+                                <h2>
+                                    <ContentEditable
+                                        className="cursor-initial"
+                                        innerRef={this.contentEditable}
+                                        html={elTaskName} // innerHTML of the editable div
+                                        disabled={false}       // use true to disable editing
+                                        onChange={this.handleNameChange} // handle innerHTML change
+                                        onBlur={() => {
                                             this.props.onEditTask(this.state)
-                                            // this.ChangeEditState()
-                                        }
-                                    }}
-                                />
-                            </h2>
-                        </div>
-                        <div className="task-right flex align-center">
-
-                            <div className="user-img-container relative" onClick={() => this.openModal('users')}>
-
-                                {this.state.members.length ? this.state.members[0].imgUrl ? <img alt="profile" src={this.state.members[0].imgUrl} /> :
-                                    <div className="member-letter">{this.state.members[0].fullName.charAt(0).toUpperCase()}</div> : <div className="member-letter">0</div>}
-                                <div className="task-number-of-imgs"><span>+{this.state.members.length ? this.state.members.length : 0}</span></div>
-                                {this.state.isUsersShown &&
-                                    <div className="users-modal absolute">
-                                        <div className="task-users-box">
-                                            <h3>Task Members</h3>
-                                            {this.state.members.map(member =>
-                                                <section key={member._id} className="user-box flex space-between">
-                                                    <div className="user-box-info flex  align-center" onClick={() => this.goToUserProfile(member._id)}>
-                                                        {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
-                                                        <p>{member.fullName}</p>
-                                                    </div>
-                                                    <button onClick={() => this.onRemoveMemberFromTask(member._id)}>Remove</button>
-                                                </section>
-                                            )}
-                                        </div>
-                                        <div className="board-users-box">
-                                            <h3>Board Members</h3>
-                                            {usersToAdd.map(user => {
-                                                return <section key={user._id} className="user-box flex space-between">
-                                                    <div className="user-box-info flex  align-center"  onClick={() => this.goToUserProfile(user._id)}>
-                                                        {user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
-                                                            <div className="member-letter">{user.fullName.charAt(0).toUpperCase()}</div>}
-                                                        <p>{user.fullName}</p>
-                                                    </div>
-                                                    <button onClick={() => this.onAddUserToTask(user._id)}>Add</button>
-                                                </section>
-                                            })}
-                                        </div>
-
-                                    </div>}
+                                        }}
+                                        onKeyDown={(ev) => {
+                                            if (ev.key === 'Enter') {
+                                                ev.target.blur()
+                                                this.props.onEditTask(this.state)
+                                                // this.ChangeEditState()
+                                            }
+                                        }}
+                                    />
+                                </h2>
                             </div>
-
-                            <div className="label-container relative">
-                                <div className={`label-box ${this.state.status.split(" ")[0].toLowerCase()}`} onClick={() => this.openModal('status')}>
-                                    <p>{this.state.status}</p>
-                                    {this.state.isStatusShown &&
-                                        <div className="label-list absolute flex column align-center">
-                                            <section className="label-selector stuck" onClick={() => this.handleChange("Stuck")}>
-                                                <p>Stuck</p>
-                                            </section>
-                                            <section className="label-selector working" onClick={() => this.handleChange("Working on it")}>
-                                                <p>Working on it</p>
-                                            </section>
-                                            <section className="label-selector done" onClick={() => this.handleChange("Done")}>
-                                                <p>Done</p>
-                                            </section>
-                                        </div>
-                                    }
-
-                                </div>
+                            <div className="task-right flex align-center">
+                                <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}
+                                    openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
+                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
+                                <Status status={this.state.status} isStatusShown={isStatusShown}
+                                    handleChange={this.handleChange} openModal={this.openModal} />
+                                <Date dueDate={this.state.dueDate} handleDateChange={this.handleDateChange} />
+                                <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} />
+                                <Images attachedImgs={this.state.attachedImgs} uploadImg={this.uploadImg} />
                             </div>
-
-                            <label>
-                                <DatePicker
-                                    selected={this.state.dueDate}
-                                    onChange={this.handleDateChange}
-                                    dateFormat="dd/MM/yyyy"
-                                />
-                            </label>
-
-
-                            <div className="label-container relative">
-                                <div className={`label-box ${this.state.priority.toLowerCase()}`} onClick={() => this.openModal('priority')}>
-                                    <p>{this.state.priority}</p>
-                                    {this.state.isPriorityShown &&
-                                        <div className="label-list absolute flex column align-center">
-                                            <section className="label-selector low" onClick={() => this.handleChange("Low")}>
-                                                <p>Low</p>
-                                            </section>
-                                            <section className="label-selector medium" onClick={() => this.handleChange("Medium")}>
-                                                <p>Medium</p>
-                                            </section>
-                                            <section className="label-selector high" onClick={() => this.handleChange("High")}>
-                                                <p>High</p>
-                                            </section>
-                                        </div>
-                                    }
-
-                                </div>
-                            </div>
-
-                            <div className="task-img-container">
-                                <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img src={this.state.attachedImgs[0]} /> : ''}</label>
-                                <input type="file" id="task-imgs" onChange={this.uploadImg} hidden />
-                                {this.state.attachedImgs.length ?
-                                    <div className="task-number-of-imgs"><span>{this.state.attachedImgs.length}</span></div> : ''}
-                            </div>
-                        </div>
-                    </section>
-                )}
-            </Draggable>
+                        </section>
+                    )}
+                </Draggable>
+            </React.Fragment>
         )
     }
 }
