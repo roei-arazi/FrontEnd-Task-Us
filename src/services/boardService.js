@@ -44,8 +44,8 @@ let boards = [{
             name: 'sneeze',
             createdAt: 1123124124241,
             members: [{
-                _id: 1234,
-                name: 'david',
+                _id: 'asfasdfqw12412d1',
+                name: 'Liam',
                 imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
             }],
             status: 'done',
@@ -57,7 +57,7 @@ let boards = [{
             posts: [],
             tags: ['ui', 'ux'],
             attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
-        },{
+        }, {
             id: _makeid(),
             name: 'sneeze',
             createdAt: 1123124124241,
@@ -117,7 +117,7 @@ let boards = [{
         }
     }
     ]
-},{
+}, {
     _id: '23442',
     boardCreator: {
         _id: '12312',
@@ -219,7 +219,7 @@ async function loadBoards() {
 async function updateBoard(boardToSave) {
     const newBoards = JSON.parse(JSON.stringify(boards))
     const idx = newBoards.findIndex(board => board._id === boardToSave._id)
-    try { 
+    try {
         newBoards.splice(idx, 1, boardToSave)
         return newBoards
     } catch (err) {
@@ -228,17 +228,17 @@ async function updateBoard(boardToSave) {
     }
 }
 
-async function removeBoard(boardId){
+async function removeBoard(boardId) {
     console.log('deleting boardId:', boardId)
-    try{
+    try {
         boards = boards.filter(board => board._id !== boardId);
-    }catch(err){
+    } catch (err) {
         console.log('boardService: Couldn\'t remove board');
         throw err;
     }
 }
 
-async function addBoard(){
+async function addBoard() {
     const board = {
         _id: _makeid(),
         boardCreator: {
@@ -285,7 +285,7 @@ async function addBoard(){
                 posts: [],
                 tags: ['ui', 'ux'],
                 attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
-            },{
+            }, {
                 id: _makeid(),
                 name: 'sneeze',
                 createdAt: 1123124124241,
@@ -346,9 +346,9 @@ async function addBoard(){
         }
         ]
     }
-    try{
+    try {
         boards.push(board);
-    }catch(err){
+    } catch (err) {
         console.log('boardService: Couldn\'t add board');
         throw err;
     }
