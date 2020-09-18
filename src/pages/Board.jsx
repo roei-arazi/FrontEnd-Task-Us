@@ -6,7 +6,7 @@ import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
-import {Popup} from '../cmps/Popup'
+import { Popup } from '../cmps/Popup'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 // Reducers funcs
 import {
@@ -23,16 +23,14 @@ class _Board extends Component {
     }
 
     async componentDidMount() {
-        //TODO: change loadBoard argument to this.props.match.params.id
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();
-                this.setState({ boardId: this.props.match.params.id })
-                return
             }
         } catch (err) {
             console.log('Error', err)
         }
+        this.setState({ boardId: this.props.match.params.id })
     }
 
     componentDidUpdate(prevProps, prevState) {
