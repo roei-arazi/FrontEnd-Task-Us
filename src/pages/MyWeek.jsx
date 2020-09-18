@@ -52,7 +52,7 @@ class _MyWeek extends Component {
                     {upcomingTasks.length ?
                         <div className="upcoming-tasks-container">
                             {upcomingTasks.map(task => <div
-                                key={task.id}
+                                key={task.id} 
                                 className="task-preview space-between align-center padding-x-15">
                                 <div>
                                     <h2>{task.name}</h2>
