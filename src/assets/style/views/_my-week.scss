@@ -1,6 +1,8 @@
 .my-week {
-    display: flex;
     position: relative;
+    input {
+        font-size: 1.2rem;
+    }
 }
 
 .my-week-container {
@@ -15,16 +17,28 @@
 }
 
 .my-week-header {
-    height: 20vh;
-    img{
-        height: 100%; 
+    margin: 5vh 0px;
+    height: 15vh;  
+    div {
+        width: 50%; 
+        h1{
+            margin: auto;
+        }
+        img {
+            height: 100px;
+            width: 100px;
+        }
     }
 }
 
 .task-preview {
     display: flex;
-    .user-img-container .member-letter {
-        width: 50px;
+    .user-img-container{ 
+        width: 80px;
+        img, .member-letter, .task-number-of-imgs {
+            height: 45px; 
+            width: 45px;
+        }
     }
     * {
         width: 100px;
@@ -47,14 +61,14 @@
 }
 
 .upcoming-tasks-container {
-    max-height: 75vh;
+    max-height: 70vh;
     overflow-y: overlay;
 }
 
 .upcoming-tasks {
     width: 95%;
     > :nth-child(even) {
-        background-color: $color1; 
+        background-color: $color1;
         border-radius: 5px;
     }
 }

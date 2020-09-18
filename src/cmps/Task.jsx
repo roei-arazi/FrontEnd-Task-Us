@@ -83,14 +83,11 @@ class _Task extends Component {
         this.props.history.push(`/user/${userId}`)
     }
 
-<<<<<<< HEAD
-=======
     focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
         }, 0)
     }
->>>>>>> 2ebe36dd7782511254fb4cbf24b589c803a160a2
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
