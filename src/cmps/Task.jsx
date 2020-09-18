@@ -121,6 +121,7 @@ class _Task extends Component {
                                 </Tooltip>
                                 <h2>
                                     <ContentEditable
+                                        onFocus={this.focusText}
                                         className="cursor-initial content-editable"
                                         innerRef={this.contentEditable}
                                         html={elTaskName} // innerHTML of the editable div
