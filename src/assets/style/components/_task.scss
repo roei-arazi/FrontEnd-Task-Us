@@ -7,7 +7,7 @@
 
     .users-modal {
         background-color: #ffffff;
-        z-index: 1;
+        z-index: 999;
         padding: 10px;
         width: 250px;
         border-radius: 5px;
@@ -56,7 +56,7 @@
 .label-list {
     width: 150px;
     background-color: #ffffff;
-    z-index: 1;
+    z-index: 999;
     padding: 10px;
     border-radius: 5px;
 
