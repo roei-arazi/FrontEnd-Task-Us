@@ -46,7 +46,7 @@
     }
     .label-box {
         height: 90%;
-        border-radius: 5px;
+        border-radius: 1px;
         width: 100px;
     }
     .task-location {
@@ -68,8 +68,8 @@
 .upcoming-tasks {
     width: 95%;
     > :nth-child(even) {
-        background-color: $color1;
-        border-radius: 5px;
+        background-color: $colorBgBoardBars;
+        border-radius: 1px;
     }
 }
 

@@ -11,3 +11,23 @@
         opacity: 1;
     }
 }
+
+@keyframes custom-animation-in {
+    from {
+        transform: rotateX(140deg) scale(32);
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+@keyframes custom-animation-out {
+    from {
+        transform: none;
+    }
+
+    to {
+        transform: rotateX(-270deg) scale(0);
+    }
+}

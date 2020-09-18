@@ -1,5 +1,13 @@
 .group {
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: $colorFontTaskGroup;
+    }
+
     .group-header-container {
         display: flex;
         justify-content: space-between;
@@ -27,5 +35,5 @@
 .drag-over {
     transition: 0.3s ease;
     padding: 10px;
-    background-color: $color1;
+    background-color: $colorBgBoardBars;
 }

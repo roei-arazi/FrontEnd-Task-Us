@@ -1,13 +1,17 @@
 .navbar {
     min-width: 100px;
     width: 100px;
-    background-color: $color2;
+    background-color: $colorMainNav;
     height: 100vh;
     padding-right: 15px;
 
+    svg {
+        color: $colorIconsNav;
+    }
+
     .icon {
         font-size: 2rem;
-        color: $colorIcons;
+        color: $colorIconsTasks;
 
         &:hover {
             cursor: pointer;

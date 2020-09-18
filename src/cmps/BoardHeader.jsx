@@ -2,6 +2,8 @@ import React from 'react';
 import { BiAddToQueue } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@material-ui/core';
 import ContentEditable from 'react-contenteditable';
+//React animations
+import { AnimateOnChange } from 'react-animation';
 
 
 export class BoardHeader extends React.Component {
@@ -44,6 +46,7 @@ export class BoardHeader extends React.Component {
     }
 
     render() {
+
         if (!this.state._id) return <h1>Loading...</h1>
         return (
             <section className="board-header align-center padding-x-30 padding-y-30 ">
@@ -96,17 +99,12 @@ export class BoardHeader extends React.Component {
                     <button onClick={this.onToggleActivities}>ACTIVITIES</button>
                 </div>
                 {
-                    this.state.isActivitiesOpen &&
-                    <React.Fragment>
+                    this.state.isActivitiesOpen && <div onClick={this.onToggleActivities} className='modal-screen-wrapper'></div>
 
-                        <div className="side-modal">
-                            activites
-                     </div>
-
-                        <div onClick={this.onToggleActivities} className="modal-screen-wrapper"></div>
-
-                    </React.Fragment>
                 }
+                <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
+                    activites
+                     </div>
             </section>
         )
     }

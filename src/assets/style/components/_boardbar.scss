@@ -3,15 +3,20 @@
     width: 150px;
     height: 100vh;
     padding-left: 10px;
-    background-color: $color1;
+    background-color: $colorBgBoardBars;
     padding-top: 20px;
-    border-right: 1px solid rgba($colorTxt, .35);
+    border-right: 1px solid rgba($colorFontTaskGroup, .35);
     border-top-left-radius: 15px;
     box-shadow: -12px -20px 20px -18px;
     margin-left: -15px;
     z-index: 2;
     display: flex;
     align-items: center;
+
+    svg {
+        font-size: 18px;
+        color: $colorIconsBoardBars;
+    }
 
     .boardbar-header {
         display: flex;
@@ -26,10 +31,9 @@
             height: fit-content;
             border-radius: 50%;
 
-            svg {
-                font-size: 18px;
-            }
         }
+
+
 
     }
 

@@ -1,11 +1,19 @@
 .board-header {
     height: 20vh;
-    background-color: $color1;
+    background-color: $colorBgBoardBars;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgba($colorTxt, .35);
+    border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
 
     h1 {
         margin-bottom: 10px;
+    }
+
+    svg {
+        color: $colorIconsBoardBars;
+
+        &:hover {
+            color: $colorIconsBoardBarsHover;
+        }
     }
 }

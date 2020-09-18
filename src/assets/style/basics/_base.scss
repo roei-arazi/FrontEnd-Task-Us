@@ -35,14 +35,14 @@ h4,
 h5,
 h6 {
   font-family: noto-sans;
-  color: $colorHeader;
+  color: $colorFontNav;
 }
 
 p,
 label,
 ::placeholder {
   font-family: roboto;
-  color: $colorTxt;
+  color: $colorFontTaskGroup;
 }
 
 
@@ -51,11 +51,11 @@ input {
   width: 35%;
   background-color: transparent;
   border: 0;
-  border-bottom: 2px solid $color3;
+  border-bottom: 2px solid $colorTask;
   margin: 10px 0;
 
   &::placeholder {
-    color: $colorHeader;
+    color: $colorFontNav;
   }
 
 }
@@ -63,7 +63,7 @@ input {
 button {
   font-family: noto-sans;
   padding: 15px;
-  color: $colorTxt;
+  color: $colorFontTaskGroup;
   background-color: $buttonColor;
   border: 0;
   cursor: pointer;
@@ -79,11 +79,9 @@ button {
 svg {
   font-size: 2rem;
   cursor: pointer;
-  color: $colorIcons;
 
   &:hover {
     transition: color .3s;
-    color: rgba($colorIconsHover, .75);
   }
 }
 
@@ -91,7 +89,7 @@ svg {
 span.span-user-details {
   font-family: roboto;
   letter-spacing: 0.5px;
-  color: $colorTxt;
+  color: $colorFontTaskGroup;
 }
 
 .icon-container {
@@ -106,12 +104,12 @@ span.span-user-details {
 }
 
 .content-editable:hover {
-  border: 2px dotted $color3;
+  border: 2px dotted $colorTask;
 }
 
 .content-editable:focus {
-  border: 2px dotted $color2;
-  color: rgba($colorTxt, .85);
+  border: 2px dotted $colorMainNav;
+  color: rgba($colorFontTaskGroup, .85);
 }
 
 
@@ -138,8 +136,8 @@ span.span-user-details {
     margin: 0 auto;
     font-size: 2rem;
     border-radius: 50%;
-    background-color: $colorIcons;
-    color: $color3;
+    background-color: $colorIconsTasks;
+    color: $colorTask;
     padding-top: 6px;
     cursor: pointer;
   }
@@ -150,8 +148,8 @@ span.span-user-details {
     align-items: center;
     font-family: monospace;
     position: absolute;
-    background-color: rgba($colorIcons, .95);
-    color: $color1;
+    background-color: $colorPlusCircle;
+    color: $colorPlusCircleFont;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -169,15 +167,15 @@ span.span-user-details {
 }
 
 ::-webkit-scrollbar-track {
-  background: $color4;
-  border-radius: 5px;
+  background: $colorBg;
+  border-radius: 1px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient($colorHeader, $color2);
-  border-radius: 5px;
+  background: linear-gradient($colorFontNav, $colorMainNav);
+  border-radius: 1px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient($colorHeader, $color2)
+  background: linear-gradient($colorFontNav, $colorMainNav)
 }

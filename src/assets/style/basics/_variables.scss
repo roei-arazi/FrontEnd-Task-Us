@@ -1,11 +1,24 @@
-$color1: #e8effb;
-$color2:#2a77aa;
-$color3:#85b2ec;
-$color4:#d0e1ec;
-$color5:#f7fbfd;
-$colorHeader:#053250;
-$colorTxt:#1b262c;
-$colorIcons:#1e2547;
-$colorIconsHover:#0f4c75;
+//bg
+$colorBgBoardBars: #333333;
+$colorTask:#e2e1c8;
+$colorBg:#f2f1df;
+//fonts
+$colorMainNav:#bcbba6;
+$colorFontNav: #f2f1dfb0;
+$colorFontTaskGroup: #6d6d6d;
+//icons
+$colorIconsNav:#31312c;
+$colorIconsBoardBars:#f2f1df;
+$colorIconsTasks:#31312c;
+//icons hover
+$colorIconsTasksHover: #111111;
+$colorIconsBoardBarsHover:#f4f3f0;
+//circles
+$colorPlusCircle:#787864f1;
+$colorPlusCircleFont:#f2f1dfb0;
+//inputs
+$colorDatePicker:#f7f7dc;
+
+
 $colorModalOverlay:#02091d;
 $buttonColor:#64b5eb;

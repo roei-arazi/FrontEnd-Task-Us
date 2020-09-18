@@ -1,19 +1,27 @@
 .task {
     display: flex;
-    background-color: $color3;
+    background-color: $colorTask;
     margin-bottom: 10px;
     height: 65px;
-    border-radius: 5px;
+    border-radius: 1px;
+
+    svg {
+        color: $colorIconsTasks;
+
+        &:hover {
+            color: $colorIconsTasksHover;
+        }
+    }
 
     .users-modal {
         background-color: #ffffff;
         z-index: 999;
         padding: 10px;
         width: 250px;
-        border-radius: 5px;
+        border-radius: 1px;
 
         .task-users-box {
-            border-bottom: 2px solid $color2;
+            border-bottom: 2px solid $colorMainNav;
             padding: 10px 0;
             cursor: pointer;
         }
@@ -36,10 +44,10 @@
 
     input {
         width: 100%;
-        background-color: $color1;
+        background-color: $colorDatePicker;
         border: 0;
         padding: 7.5px 0;
-        border-radius: 5px;
+        border-radius: 1px;
         text-align: center;
         cursor: pointer;
     }
@@ -48,7 +56,7 @@
 .label-box {
     width: 100%;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 1px;
     padding: 5px 0;
     cursor: pointer;
 }
@@ -58,14 +66,14 @@
     background-color: #ffffff;
     z-index: 999;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 1px;
 
     .label-selector {
         width: 90%;
         text-align: center;
         padding: 5px 0;
         margin-bottom: 10px;
-        border-radius: 5px;
+        border-radius: 1px;
         cursor: pointer;
     }
 }
@@ -83,7 +91,7 @@
         margin-left: 15px;
     }
 
-    .notes-container{
+    .notes-container {
         text-align: center;
     }
 }
@@ -98,10 +106,10 @@
     img {
         cursor: pointer;
         height: 100%;
-        border-bottom-right-radius: 5px;
+        border-bottom-right-radius: 1px;
     }
 
-    .no-images{
+    .no-images {
         padding-top: 15px;
     }
 
@@ -116,8 +124,8 @@
         margin-right: -8px;
         margin-top: -8px;
         position: absolute;
-        background-color: $colorIcons;
-        color: $color1;
+        background-color: $colorPlusCircle;
+        color: $colorPlusCircleFont;
         border-radius: 50%;
         top: 0;
         text-align: center;
@@ -131,25 +139,25 @@
 
 // Labels
 .stuck {
-    background-color: #cb4848;
+    background-color: #b94444;
 }
 
 .working {
-    background-color: #e6c91d;
+    background-color: #c5b139;
 }
 
 .done {
-    background-color: #20cb20;
+    background-color: #407740;
 }
 
 .low {
-    background-color: #c5c5ea;
+    background-color: #cfcfb4
 }
 
 .medium {
-    background-color: orange;
+    background-color: #848569
 }
 
 .high {
-    background-color: #ac361e;
+    background-color: #515243
 }
