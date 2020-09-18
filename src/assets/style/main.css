@@ -281,15 +281,6 @@ span.span-user-details {
   font-weight: bold;
 }
 
-.modal-screen-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 998;
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -766,12 +757,17 @@ span.span-user-details {
 .task-img-container {
   height: 100%;
   position: relative;
+  text-align: center;
 }
 
 .task-img-container img {
   cursor: pointer;
   height: 100%;
   border-bottom-right-radius: 5px;
+}
+
+.task-img-container .no-images {
+  padding-top: 15px;
 }
 
 .task-img-container .task-number-of-imgs {
@@ -875,6 +871,15 @@ span.span-user-details {
           justify-content: space-between;
 }
 
+.modal-screen-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
+}
+
 .user-profile .user-container {
   position: relative;
 }
@@ -928,5 +933,8 @@ span.span-user-details {
   background-color: #e8effb;
   -webkit-animation: scale-in-ver-bottom;
           animation: scale-in-ver-bottom;
+  z-index: 999;
+  -webkit-box-shadow: 10px -2px 18px 3px;
+          box-shadow: 10px -2px 18px 3px;
 }
 /*# sourceMappingURL=main.css.map */

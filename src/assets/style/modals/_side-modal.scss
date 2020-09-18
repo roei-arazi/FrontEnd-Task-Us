@@ -6,4 +6,6 @@
     width: 400px;
     background-color: $color1;
     animation: scale-in-ver-bottom;
+    z-index: 999;
+    box-shadow: 10px -2px 18px 3px;
 }
