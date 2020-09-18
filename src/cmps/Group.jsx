@@ -31,49 +31,48 @@ export class Group extends Component {
         return (
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>
-                    <section key={this.props.group.id} className="group"
+                    <section key={this.props.group.id} className="group padding-y-30"
                         {...provided.draggableProps}
 
                         ref={provided.innerRef}>
                         <div className="group-header-container flex space-between align-center" {...provided.dragHandleProps}>
                             <div className="group-header-left flex">
-                        <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>
-                                <div className='icon-container'>
-                                    <RiDeleteBin2Line onClick={() => {
-                                        this.props.onRemoveGroup(this.props.group.id)
-                                    }} />
-                                    
-                                </div>
-                            </Tooltip>
-                            <h1 className="group-title">
-                                <ContentEditable
-                                    className="cursor-initial"
-                                    innerRef={this.contentEditable}
-                                    html={elGroupName} // innerHTML of the editable div
-                                    disabled={false}       // use true to disable editing
-                                    onChange={this.handleChange} // handle innerHTML change
-                                    onBlur={() => {
-                                        this.props.onEditGroup(this.state, this.state.name, elGroupName)
-                                    }}
-                                    onKeyDown={(ev) => {
-                                        if (ev.key === 'Enter') {
-                                            ev.target.blur()
-                                            this.props.onEditTask(this.state)
-                                        }
-                                    }}
-                                />
-                            </h1>
+                                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>
+                                    <div className='icon-container'>
+                                        <RiDeleteBin2Line onClick={() => {
+                                            this.props.onRemoveGroup(this.props.group.id)
+                                        }} />
+
+                                    </div>
+                                </Tooltip>
+                                <h1 className="group-title">
+                                    <ContentEditable
+                                        className="cursor-initial"
+                                        innerRef={this.contentEditable}
+                                        html={elGroupName} // innerHTML of the editable div
+                                        disabled={false}       // use true to disable editing
+                                        onChange={this.handleChange} // handle innerHTML change
+                                        onBlur={() => {
+                                            this.props.onEditGroup(this.state, this.state.name, elGroupName)
+                                        }}
+                                        onKeyDown={(ev) => {
+                                            if (ev.key === 'Enter') {
+                                                ev.target.blur()
+                                                this.props.onEditTask(this.state)
+                                            }
+                                        }}
+                                    />
+                                </h1>
                             </div>
-                                    <div className="group-header-right flex">
+                            <div className="group-header-right flex">
 
-                            <h3>Due-Date</h3>
-                            <h3>Status</h3>
-                            <h3>Priority</h3>
-                            <h3>Images</h3>
-                            <h3>Members</h3>
-                                   
+                                <h3>Members</h3>
+                                <h3>Status</h3>
+                                <h3>Due-Date</h3>
+                                <h3>Priority</h3>
+                                <h3>Images</h3>
 
-                           
+
                             </div>
                         </div>
 
@@ -84,7 +83,8 @@ export class Group extends Component {
                                     {...provided.droppableProps}
                                 >
                                     {this.props.group.tasks.map((task, index) => {
-                                        return <Task onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id} task={task} />
+                                        return <Task onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id}
+                                            task={task} users={this.props.users} />
                                     })}
                                     {provided.placeholder}
 

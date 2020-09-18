@@ -248,6 +248,30 @@ span.span-user-details {
   display: flex;
 }
 
+.my-week {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.my-week-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 20px 50px;
+  width: 100%;
+}
+
+.my-week-container h1 {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
 .boardbar {
   min-width: 150px;
   width: 150px;
@@ -374,10 +398,6 @@ span.span-user-details {
   margin-bottom: 10px;
 }
 
-.group {
-  margin-bottom: 10px;
-}
-
 .group .group-header-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -419,6 +439,12 @@ span.span-user-details {
 
 .task input {
   max-width: 100px;
+  background-color: #e8effb;
+  border: 0;
+  padding: 7.5px 0;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .label-box {

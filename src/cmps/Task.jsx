@@ -13,7 +13,8 @@ export class Task extends Component {
     state = {
         id: '',
         isStatusShown: false,
-        isPriorityShown: false
+        isPriorityShown: false,
+        isUsersShown: false
     }
 
     componentDidMount() {
@@ -48,16 +49,23 @@ export class Task extends Component {
         if (data === 'status') {
             this.setState({ isStatusShown: !this.state.isStatusShown })
 
-        } else {
+        } else if (data === 'users') {
+            this.setState({ isUsersShown: !this.state.isUsersShown })
+        }
+        else {
             this.setState({ isPriorityShown: !this.state.isPriorityShown })
         }
     }
 
+    onRemoveMember = () => {
+
+    }
 
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name
+        console.log(this.props.users);
         return (
             <Draggable draggableId={this.state.id} index={this.props.index}>
                 {(provided, snapshot) => (
@@ -94,13 +102,22 @@ export class Task extends Component {
                             </h2>
                         </div>
                         <div className="task-right flex align-center">
-                            <label>
-                                <DatePicker
-                                    selected={this.state.dueDate}
-                                    onChange={this.handleDateChange}
-                                    dateFormat="dd/MM/yyyy"
-                                />
-                            </label>
+
+                            <div className="user-img-container" onClick={() => this.openModal('users')}>
+                                {this.state.members ? this.state.members[0].imgUrl ? <img alt="profile" src={this.state.members[0].imgUrl} /> :
+                                    <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div> : ''}
+                                <div className="task-number-of-imgs"><span>+{this.state.members.length ? this.state.members.length : 0}</span></div>
+                                {this.state.isUsersShown && <div className="users-modal">
+                                    {this.state.members.map((member, idx) =>
+                                        <ul key={member._id} className="user-box">
+                                            <li>{member.name}</li>
+                                            <li>{member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div>}</li>
+                                            <button onClick={() => this.onRemoveMember(member._id)}>Remove</button>
+                                        </ul>
+                                    )}
+                                </div>}
+                            </div>
+
                             <div className="label-container relative">
                                 <div className={`label-box ${this.state.status.split(" ")[0].toLowerCase()}`} onClick={() => this.openModal('status')}>
                                     <p>{this.state.status}</p>
@@ -120,6 +137,15 @@ export class Task extends Component {
 
                                 </div>
                             </div>
+
+                            <label>
+                                <DatePicker
+                                    selected={this.state.dueDate}
+                                    onChange={this.handleDateChange}
+                                    dateFormat="dd/MM/yyyy"
+                                />
+                            </label>
+
 
                             <div className="label-container relative">
                                 <div className={`label-box ${this.state.priority.toLowerCase()}`} onClick={() => this.openModal('priority')}>
@@ -142,14 +168,10 @@ export class Task extends Component {
                             </div>
 
                             <div className="task-img-container">
-                                <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img alt="profile" src={this.state.attachedImgs[0]} /> : 'IMG'}</label>
+                                <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img src={this.state.attachedImgs[0]} /> : ''}</label>
                                 <input type="file" id="task-imgs" onChange={this.uploadImg} hidden />
-                                <div className="task-number-of-imgs"><span>{this.state.attachedImgs.length ? this.state.attachedImgs.length : 0}</span></div>
-                            </div>
-                            <div className="user-img-container">
-                                {this.state.members ? this.state.members[0].imgUrl ? <img alt="profile" src={this.state.members[0].imgUrl} /> :
-                                    <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div> : ''}
-                                <div className="task-number-of-imgs"><span>+{this.state.members.length ? this.state.members.length : 0}</span></div>
+                                {this.state.attachedImgs.length ?
+                                    <div className="task-number-of-imgs"><span>{this.state.attachedImgs.length}</span></div> : ''}
                             </div>
                         </div>
                     </section>
