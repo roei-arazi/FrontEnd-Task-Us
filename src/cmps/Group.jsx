@@ -66,12 +66,11 @@ export class Group extends Component {
                             </div>
                             <div className="group-header-right flex">
 
-                                <h3>Due-Date</h3>
+                                <h3>Members</h3>
                                 <h3>Status</h3>
+                                <h3>Due-Date</h3>
                                 <h3>Priority</h3>
                                 <h3>Images</h3>
-                                <h3>Members</h3>
-
 
 
                             </div>
@@ -84,7 +83,8 @@ export class Group extends Component {
                                     {...provided.droppableProps}
                                 >
                                     {this.props.group.tasks.map((task, index) => {
-                                        return <Task onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id} task={task} />
+                                        return <Task onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id}
+                                            task={task} users={this.props.users} />
                                     })}
                                     {provided.placeholder}
 

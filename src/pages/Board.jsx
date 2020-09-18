@@ -9,6 +9,7 @@ import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 // Reducers funcs
+import { loadUsers } from '../store/actions/userActions'
 import {
     updateBoard, loadBoards,   //BOARD
     addGroup, editGroup, removeGroup, //GROUP
@@ -26,6 +27,13 @@ class _Board extends Component {
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();
+                try {
+                    if (!this.props.users || !this.props.users.length) {
+                        await this.props.loadUsers(); 
+                    }
+                } catch (err) {
+                    console.log('Error', err)
+                }
             }
         } catch (err) {
             console.log('Error', err)
@@ -188,7 +196,9 @@ class _Board extends Component {
 
     render() {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
+        const users= this.props.users
         if (!board) return <h1>Loading..</h1>
+        board.members=users
         console.log('rendering board:', board);
         return (
             <section className="board">
@@ -208,7 +218,7 @@ class _Board extends Component {
                                         {board.groups.map((group, index) => {
                                             return <Group key={group.id} index={index}
                                                 onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
-                                                onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} group={group} />
+                                                onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} group={group} users={users}/>
                                         })}
                                     </div>
                                 }
@@ -224,7 +234,8 @@ class _Board extends Component {
 
 const mapStateToProps = state => {
     return {
-        boards: state.boardReducer.boards
+        boards: state.boardReducer.boards,
+        users: state.userReducer.users
     }
 }
 
@@ -238,7 +249,8 @@ const mapDispatchToProps = {
     editGroup,
     updateBoard,
     showSnackbar,
-    hideSnackbar
+    hideSnackbar,
+    loadUsers
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);
