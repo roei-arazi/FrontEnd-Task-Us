@@ -27,7 +27,6 @@ export class Group extends Component {
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elGroupName = this.state.name
-
         return (
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>

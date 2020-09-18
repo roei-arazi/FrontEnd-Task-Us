@@ -58,27 +58,20 @@ export class Task extends Component {
     }
 
     onRemoveMemberFromTask = (memberId) => {
-        const memberIdx= this.state.members.findIndex(member=>{
-            console.log('memberId',memberId);
-            console.log('member._id',member._id);
-            return member._id===memberId
-        })
-        console.log(memberIdx);
-        const members= JSON.parse(JSON.stringify(this.state.members))
-        const updatedMembers= members.splice(memberIdx,1)
-        this.setState({members: updatedMembers})
+        this.setState({ members: this.state.members.filter(member => member._id !== memberId) })
     }
 
     onAddUserToTask = (userId) => {
-        const newUser= this.props.users.find(user=> user._id===userId)
-        this.setState({members: [...this.state.members, newUser]})
+        const newUser = this.props.users.find(user => user._id === userId)
+        this.setState({ members: [...this.state.members, newUser] })
         // this.props.addUserToTask()
     }
 
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
-        const elTaskName = this.state.name
+        const elTaskName = this.state.name;
+        const usersToAdd = this.props.users.filter(user => !this.state.members.some(member => member._id === user._id))
         return (
             <Draggable draggableId={this.state.id} index={this.props.index}>
                 {(provided, snapshot) => (
@@ -134,18 +127,14 @@ export class Task extends Component {
                                         </div>
                                         <div className="board-users-box">
                                             <h3>Board Members</h3>
-                                            {this.props.users.map(user => {
-                                                return this.state.members.map(member => {
-                                                    if (member._id !== user._id) {
-                                                        return <ul key={user._id} className="user-box flex space-between">
-                                                            <li>{user.name}</li>
-                                                            <li>{user.imgUrl ? <img src={user.imgUrl} alt="profile" /> : <div className="member-letter">{user.name.charAt(0).toUpperCase()}</div>}</li>
-                                                            <button onClick={() => this.onAddUserToTask(user._id)}>Add</button>
-                                                        </ul>
-                                                    }
-                                                })
-                                            })
-                                            }
+                                            {usersToAdd.map(user => {
+                                                return <ul key={user._id} className="user-box flex space-between">
+                                                <li>{user.name}</li>
+                                                <li>{user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
+                                                    <div className="member-letter">{user.name.charAt(0).toUpperCase()}</div>}</li>
+                                                <button onClick={() => this.onAddUserToTask(user._id)}>Add</button>
+                                            </ul>
+                                            })}
                                         </div>
 
                                     </div>}
