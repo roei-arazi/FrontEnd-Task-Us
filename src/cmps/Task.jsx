@@ -83,17 +83,12 @@ class _Task extends Component {
         this.props.history.push(`/user/${userId}`)
     }
 
-    focusText = () =>{
-        setTimeout(() => {
-            document.execCommand('selectAll', false, null)
-          }, 0)
-    }
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
         const { isUsersShown, isStatusShown, isPriorityShown } = this.state
-        console.log(this.state.priority);
+        
         return (
             <React.Fragment>
                 {(isUsersShown || isStatusShown || isPriorityShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
@@ -113,7 +108,6 @@ class _Task extends Component {
                                 </Tooltip>
                                 <h2>
                                     <ContentEditable
-                                        onFocus={this.focusText}
                                         className="cursor-initial"
                                         innerRef={this.contentEditable}
                                         html={elTaskName} // innerHTML of the editable div
