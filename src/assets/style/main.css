@@ -240,6 +240,55 @@ span.span-user-details {
   width: 250px;
 }
 
+.user-img-container {
+  height: 50px;
+  position: relative;
+  text-align: center;
+}
+
+.user-img-container img {
+  cursor: pointer;
+  height: 100%;
+  border-radius: 50%;
+  width: 50%;
+}
+
+.user-img-container .member-letter {
+  height: 100%;
+  width: 50%;
+  margin: 0 auto;
+  font-size: 2rem;
+  border-radius: 50%;
+  background-color: #1e2547;
+  color: #85b2ec;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+.user-img-container .task-number-of-imgs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: monospace;
+  position: absolute;
+  background-color: rgba(30, 37, 71, 0.95);
+  color: #e8effb;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  right: 0;
+  text-align: center;
+  font-size: 19px;
+  font-weight: bold;
+}
+
 @font-face {
   font-family: roboto;
   src: url(../../font/roboto.ttf);
@@ -329,6 +378,26 @@ span.span-user-details {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  font-size: 1.9rem;
+}
+
+.task-preview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+}
+
+.task-preview .user-img-container {
+  width: 100px;
+}
+
+.task-preview .user-img-container .member-letter {
+  width: 50px;
+}
+
+.upcoming-tasks-container :nth-child(2) {
+  background-color: #e8effb;
 }
 
 .boardbar {
@@ -579,55 +648,6 @@ span.span-user-details {
   top: 0;
   text-align: center;
   right: 0;
-  font-weight: bold;
-}
-
-.user-img-container {
-  height: 50px;
-  position: relative;
-  text-align: center;
-}
-
-.user-img-container img {
-  cursor: pointer;
-  height: 100%;
-  border-radius: 50%;
-  width: 50%;
-}
-
-.user-img-container .member-letter {
-  height: 100%;
-  width: 50%;
-  margin: 0 auto;
-  font-size: 2rem;
-  border-radius: 50%;
-  background-color: #1e2547;
-  color: #85b2ec;
-  padding-top: 6px;
-  cursor: pointer;
-}
-
-.user-img-container .task-number-of-imgs {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-family: monospace;
-  position: absolute;
-  background-color: rgba(30, 37, 71, 0.95);
-  color: #e8effb;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  top: 0;
-  right: 0;
-  text-align: center;
-  font-size: 19px;
   font-weight: bold;
 }
 
