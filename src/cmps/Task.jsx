@@ -83,17 +83,20 @@ class _Task extends Component {
         this.props.history.push(`/user/${userId}`)
     }
 
-    focusText = () =>{
+<<<<<<< HEAD
+=======
+    focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
-          }, 0)
+        }, 0)
     }
+>>>>>>> 2ebe36dd7782511254fb4cbf24b589c803a160a2
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
         const { isUsersShown, isStatusShown, isPriorityShown } = this.state
-
+        
         return (
             <React.Fragment>
                 {(isUsersShown || isStatusShown || isPriorityShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
@@ -113,7 +116,6 @@ class _Task extends Component {
                                 </Tooltip>
                                 <h2>
                                     <ContentEditable
-                                        onFocus={this.focusText}
                                         className="cursor-initial"
                                         innerRef={this.contentEditable}
                                         html={elTaskName} // innerHTML of the editable div
@@ -142,6 +144,7 @@ class _Task extends Component {
                                 <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                                 <Images attachedImgs={this.state.attachedImgs} uploadImg={this.uploadImg} />
+                                <button onClick={this.props.onToggleUpdates}>UPDATES LOL</button>
                             </div>
                         </section>
                     )}

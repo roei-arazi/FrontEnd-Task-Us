@@ -20,7 +20,9 @@ import {
 class _Board extends Component {
 
     state = {
-        boardId: ''
+        boardId: '',
+        isUpdatesOpen: false,
+        isActivitiesOpen: false
     }
 
     async componentDidMount() {
@@ -29,7 +31,7 @@ class _Board extends Component {
                 await this.props.loadBoards();
                 try {
                     if (!this.props.users || !this.props.users.length) {
-                        await this.props.loadUsers(); 
+                        await this.props.loadUsers();
                     }
                 } catch (err) {
                     console.log('Error', err)
@@ -187,25 +189,28 @@ class _Board extends Component {
                     console.log('Error', err);
                 }
             }
-
         }
+    }
 
-
-
+    onToggleActivities = () => {
+        this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
+    }
+    onToggleUpdates = () => {
+        this.setState({ isUpdatesOpen: !this.state.isUpdatesOpen })
     }
 
     render() {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
-        const users= this.props.users
+        const users = this.props.users
         if (!board) return <h1>Loading..</h1>
-        board.members=users
+        board.members = users
         console.log('rendering board:', board);
         return (
             <section className="board">
                 <Navbar />
                 <Boardbar />
                 <div className="board-container">
-                    <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard} />
+                    <BoardHeader onToggleActivities={this.onToggleActivities} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard} />
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
@@ -217,8 +222,8 @@ class _Board extends Component {
                                         {...provided.droppableProps}>
                                         {board.groups.map((group, index) => {
                                             return <Group key={group.id} index={index}
-                                                onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
-                                                onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} group={group} users={users}/>
+                                                onToggleUpdates={this.onToggleUpdates} onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
+                                                onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} group={group} users={users} />
                                         })}
                                     </div>
                                 }
@@ -227,6 +232,12 @@ class _Board extends Component {
                     </div>
                 </div>
                 <Popup />
+
+                {/* <UpdateModal />
+                <ActivitiesModal /> */}
+                {this.state.isUpdatesOpen && <div className="side-modal">  updates </div>}
+                {this.state.isActivitiesOpen && <div className="side-modal"> activites </div>}
+
             </section>
         )
     }

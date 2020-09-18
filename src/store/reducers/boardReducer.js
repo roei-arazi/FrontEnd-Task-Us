@@ -34,7 +34,7 @@ export function boardReducer(state=initialState, action){
                                 name: 'osher',
                                 imgUrl: 'www/sfasf'
                             }],
-                            status: 'done',
+                            status: 'Done',
                             priority: 'low',
                             dueDate: 214124124125,
                             note: 'dont forget about this',
@@ -165,7 +165,7 @@ export function boardReducer(state=initialState, action){
                                     name: 'osher',
                                     imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
                                 }],
-                                status: 'done',
+                                status: 'Done',
                                 priority: 'low',
                                 dueDate: Date.now(),
                                 note: 'dont forget about this',
@@ -183,7 +183,7 @@ export function boardReducer(state=initialState, action){
                                     name: 'osher',
                                     imgUrl: ''
                                 }],
-                                status: 'done',
+                                status: 'Donw',
                                 priority: 'low',
                                 dueDate: Date.now(),
                                 note: 'dont forget about this',

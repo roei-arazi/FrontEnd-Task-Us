@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
-import { FaPlus, FaCog } from 'react-icons/fa';
+import { FaCog } from 'react-icons/fa';
+import { IoIosAddCircle } from 'react-icons/io';
 
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
@@ -51,9 +52,7 @@ class _Boardbar extends Component {
 
                 <div className="boardbar-header">
                     <h1>Boards</h1>
-                    <button>
-                        <FaPlus onClick={this.props.addBoard} />
-                    </button>
+                    <IoIosAddCircle onClick={this.props.addBoard} />
                 </div>
                 <input type="text" placeholder="Search Board" />
                 <ul>

@@ -1,0 +1,9 @@
+.side-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 400px;
+    background-color: $color1;
+    animation: scale-in-ver-bottom;
+}
