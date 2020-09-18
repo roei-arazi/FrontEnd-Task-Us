@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
-import { cloudinaryService } from '../services/cloudinaryService';
-import { VscClose } from 'react-icons/vsc';
-import { Fade, FormControlLabel, Switch } from '@material-ui/core';
+import { Fade } from '@material-ui/core';
+import { loadBoards } from '../store/actions/boardActions'
 class _UserProfile extends Component {
     state = {
         isModalOpen: false
+    }
+    componentDidMount() {
+        this.props.loadBoards()
     }
     toggleModal = () => {
         this.setState({ isModalOpen: !this.state.isModalOpen })
@@ -20,7 +22,7 @@ class _UserProfile extends Component {
                 <Navbar />
                 <Boardbar />
                 <div className="user-container">
-                    <header className="header-container padding-x-15 flex justify-center  align-center">
+                    <header className="header-container padding-x-15 padding-y-15 flex justify-center  align-center">
                         <img className="user-profile-big" src="https://via.placeholder.com/250" alt="" />
                     </header>
 
@@ -36,44 +38,20 @@ class _UserProfile extends Component {
                     </div>
 
                     <Fade in={this.state.isModalOpen}>
-                        <div onClick={this.toggleModal} className="modal-screen">
-                            <div className="fade-wrapper">
+                        <div className="modal-screen flex justify-center align-center">
+                            <div className="modal-container padding-x-15 padding-y-15">
                                 <div className="user-modal-col">
-                                    <VscClose onClick={this.toggleModal} />
                                     <img className="user-profile-big" src="https://via.placeholder.com/250" alt="" />
                                 </div>
 
                                 <div className="user-modal-col">
                                     <form className="form-container flex justify-center column  align-center" action="">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <label htmlFor="email">Email:</label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="email" name="email" id="email" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label htmlFor="fullName">Full name:</label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="fullName" id="fullName" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label htmlFor="username">Username:</label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="username" id="username" />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <input placeholder="Email" type="email" />
+                                        <input placeholder="Username" type="text" />
+                                        <input placeholder="Password" type="password" />
+                                        <input placeholder="Full Name" type="text" />
                                         <button>Save Changes</button>
+                                        <button onClick={this.toggleModal}>Cancel</button>
                                     </form>
                                 </div>
                             </div>
@@ -94,7 +72,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-
+    loadBoards
 }
 
 export const UserProfile = connect(mapStateToProps, mapDispatchToProps)(_UserProfile);

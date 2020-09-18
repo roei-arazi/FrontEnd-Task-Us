@@ -145,12 +145,12 @@ export class Task extends Component {
                             <div className="task-img-container">
                                 <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img src={this.state.attachedImgs[0]} /> : 'IMG'}</label>
                                 <input type="file" id="task-imgs" onChange={this.uploadImg} hidden />
-                                <div className="task-number-of-imgs">{this.state.attachedImgs.length ? this.state.attachedImgs.length : 0}</div>
+                                <div className="task-number-of-imgs"><span>{this.state.attachedImgs.length ? this.state.attachedImgs.length : 0}</span></div>
                             </div>
                             <div className="user-img-container">
                                 {this.state.members ? this.state.members[0].imgUrl ? <img src={this.state.members[0].imgUrl} /> :
                                     <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div> : ''}
-                                <div className="task-number-of-imgs">{this.state.members.length ? this.state.members.length : 0}</div>
+                                <div className="task-number-of-imgs"><span>+{this.state.members.length ? this.state.members.length : 0}</span></div>
                             </div>
                         </div>
                     </section>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FaCog, FaPlus } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom';
-import { Menu, MenuItem} from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
+import { FaPlus, FaCog } from 'react-icons/fa';
+
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 
@@ -43,18 +44,22 @@ class _Boardbar extends Component {
 
     render() {
         const { boards, isSnackbarShown } = this.props
-        const { anchorEl, selectedBoardId} = this.state;
+        const { anchorEl, selectedBoardId } = this.state;
         console.log('isSnackbarShown', isSnackbarShown);
         return (
             <section className="boardbar padding-x-15 padding-y-15 fixed column">
-                
-                <h1>Boards</h1>
+
+                <div className="boardbar-header">
+                    <h1>Boards</h1>
+                    <button>
+                        <FaPlus onClick={this.props.addBoard} />
+                    </button>
+                </div>
                 <input type="text" placeholder="Search Board" />
-                <FaPlus onClick={this.props.addBoard} />
                 <ul>
                     {boards.map((board, idx) => {
                         return <li
-                            className="flex"
+                            className="flex align-center"
 
                             key={idx}>
                             <FaCog onClick={(ev) => this.handleMenuOpen(ev, board._id)} />

@@ -8,7 +8,6 @@
 
         .header-container {
             width: 100%;
-            height: 40vh;
             background-color: $color1;
             border-bottom: 1px solid rgba($colorTxt, .35);
 
@@ -20,7 +19,7 @@
     }
 
     .user-details-container {
-        height: 60vh;
+        height: 400px;
         width: 100%;
 
         h2 {

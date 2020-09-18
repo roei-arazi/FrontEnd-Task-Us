@@ -13,7 +13,27 @@
     display: flex;
     align-items: center;
 
-    h1,
+    .boardbar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 15px;
+
+        button {
+            display: flex;
+            padding: 5px;
+            height: fit-content;
+            border-radius: 50%;
+
+            svg {
+                font-size: 18px;
+            }
+        }
+
+    }
+
+
     li,
     input {
         margin-bottom: 15px;
@@ -27,7 +47,17 @@
         width: 90%;
     }
 
-    svg {
-        margin-right: 5px;
+    ul {
+        padding: 0;
+        max-height: 80%;
+        overflow: overlay;
     }
+
+    ul {
+        svg {
+            margin-right: 5px;
+            font-size: 15px;
+        }
+    }
+
 }
