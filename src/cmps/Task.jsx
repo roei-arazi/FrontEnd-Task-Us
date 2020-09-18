@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ContentEditable from 'react-contenteditable'
 import { withRouter } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd'
@@ -16,7 +17,7 @@ import { Status } from './task-cmps/Status'
 import { Date } from './task-cmps/Date';
 import { Priority } from './task-cmps/Priority';
 import { Images } from './task-cmps/Images';
-import { Notes } from './task-cmps/Notes';
+import { Updates } from './task-cmps/Updates';
 
 class _Task extends Component {
 
@@ -71,7 +72,7 @@ class _Task extends Component {
     }
 
     closeModal = () => {
-        this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false })
+        this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false, isNotesShown: false })
     }
 
     onRemoveMemberFromTask = (memberId) => {
@@ -81,7 +82,6 @@ class _Task extends Component {
     onAddUserToTask = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
         this.setState({ members: [...this.state.members, newUser] })
-        // this.props.addUserToTask()
     }
 
     goToUserProfile(userId) {
@@ -101,7 +101,10 @@ class _Task extends Component {
 
         return (
             <React.Fragment>
-                {(isUsersShown || isStatusShown || isPriorityShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
+                {isNotesShown && <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
+                notes={this.state.notes}
+                />}
+                {(isUsersShown || isStatusShown || isPriorityShown || isNotesShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
                 <Draggable draggableId={this.state.id} index={this.props.index}>
                     {(provided, snapshot) => (
                         <section key={this.props.task.id} className={`task flex space-between align-center ${snapshot.isDragging ? 'drag' : ''}`}
@@ -138,7 +141,7 @@ class _Task extends Component {
                             </div>
                             <div className="task-right flex align-center">
                             <div onClick={()=>this.openModal('notes')} className="notes-container"><BsChatDots /></div>
-                                {isNotesShown && <Notes />}
+                                
                                 <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
@@ -151,6 +154,7 @@ class _Task extends Component {
                                 
                             </div>
                         </section>
+                        
                     )}
                 </Draggable>
             </React.Fragment>
@@ -158,4 +162,14 @@ class _Task extends Component {
     }
 }
 
-export const Task = withRouter(_Task)
+const mapStateToProps = state => {
+    return {
+        loggedUser: state.userReducer.loggedUser
+    }
+}
+
+const mapDispatchToProps = {
+   
+}
+
+export const Task = connect(mapStateToProps, mapDispatchToProps)(_Task);
