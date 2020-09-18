@@ -153,8 +153,8 @@ let boards = [{
             posts: [],
             tags: ['ui', 'ux'],
             attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
-        }]
-    }],
+        },]
+    },],
     activityLog: [{
         createdAt: 124124125124,
         byUser: {
