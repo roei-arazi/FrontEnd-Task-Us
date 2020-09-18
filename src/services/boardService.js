@@ -50,7 +50,7 @@ let boards = [{
             }],
             status: 'done',
             priority: 'low',
-            dueDate: Date.now() + 1000 * 60 * 60,
+            dueDate: Date.now() + 1000 * 60 * 60 * 24 * 45,
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
             isSelected: false,
@@ -68,7 +68,7 @@ let boards = [{
             }],
             status: 'done',
             priority: 'low',
-            dueDate: Date.now(),
+            dueDate: Date.now() + 1000 * 60 * 60 * 24 * 45,
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
             isSelected: false,
@@ -156,14 +156,302 @@ let boards = [{
             }],
             status: 'stuck',
             priority: 'medium',
-            dueDate: Date.now(),
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
             note: 'dont forget about this',
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
             tags: ['ui', 'ux'],
             attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
-        }]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },{
+            id: _makeid(),
+            name: 'sneeze',
+            createdAt: 1123124124241,
+            members: [{
+                _id: 1234,
+                name: 'osher',
+                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+            }],
+            status: 'stuck',
+            priority: 'medium',
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            note: 'dont forget about this',
+            lastUpdated: 'yesterday',
+            isSelected: false,
+            posts: [],
+            tags: ['ui', 'ux'],
+            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+        },]
     }],
     activityLog: [{
         createdAt: 124124125124,
