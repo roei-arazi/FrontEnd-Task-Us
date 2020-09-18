@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable'
 import { withRouter } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd'
+import { MdDeleteSweep } from 'react-icons/md'
+import { BsChatDots } from 'react-icons/bs'
 import "react-datepicker/dist/react-datepicker.css";
 
 //Material ui
 import { Tooltip, Zoom } from '@material-ui/core';
-import { MdDeleteSweep } from 'react-icons/md'
 
 // Inside Imports
 import { cloudinaryService } from '../services/cloudinaryService';
@@ -15,6 +16,7 @@ import { Status } from './task-cmps/Status'
 import { Date } from './task-cmps/Date';
 import { Priority } from './task-cmps/Priority';
 import { Images } from './task-cmps/Images';
+import { Notes } from './task-cmps/Notes';
 
 class _Task extends Component {
 
@@ -22,7 +24,8 @@ class _Task extends Component {
         id: '',
         isStatusShown: false,
         isPriorityShown: false,
-        isUsersShown: false
+        isUsersShown: false,
+        isNotesShown: false
     }
 
     componentDidMount() {
@@ -59,6 +62,8 @@ class _Task extends Component {
 
         } else if (data === 'users') {
             this.setState({ isUsersShown: !this.state.isUsersShown })
+        } else if (data === 'notes') {
+            this.setState({ isNotesShown: !this.state.isNotesShown })
         }
         else {
             this.setState({ isPriorityShown: !this.state.isPriorityShown })
@@ -83,20 +88,17 @@ class _Task extends Component {
         this.props.history.push(`/user/${userId}`)
     }
 
-<<<<<<< HEAD
-=======
     focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
         }, 0)
     }
->>>>>>> 2ebe36dd7782511254fb4cbf24b589c803a160a2
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
-        const { isUsersShown, isStatusShown, isPriorityShown } = this.state
-        
+        const { isUsersShown, isStatusShown, isPriorityShown, isNotesShown } = this.state
+
         return (
             <React.Fragment>
                 {(isUsersShown || isStatusShown || isPriorityShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
@@ -135,6 +137,8 @@ class _Task extends Component {
                                 </h2>
                             </div>
                             <div className="task-right flex align-center">
+                            <div onClick={()=>this.openModal('notes')} className="notes-container"><BsChatDots /></div>
+                                {isNotesShown && <Notes />}
                                 <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
@@ -144,7 +148,7 @@ class _Task extends Component {
                                 <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                                 <Images attachedImgs={this.state.attachedImgs} uploadImg={this.uploadImg} />
-                                <button onClick={this.props.onToggleUpdates}>UPDATES LOL</button>
+                                
                             </div>
                         </section>
                     )}
