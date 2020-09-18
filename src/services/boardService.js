@@ -21,12 +21,7 @@ let boards = [{
     name: 'board1',
     createdAt: moment().calendar(),
     description: 'Enter description here',
-    members: [{
-        _id: 'u101',
-        fullname: 'shicks mcgee',
-        imgUrl: 'imgure/sfasfa',
-        lastSeen: 'yesterday'
-    }],
+    members: [],
     groups: [{
         id: _makeid(),
         name: 'week1',
@@ -44,9 +39,9 @@ let boards = [{
             name: 'sneeze',
             createdAt: 1123124124241,
             members: [{
-                _id: 'asfasdfqw12412d1',
-                name: 'Liam',
-                imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
+                _id: 'asfasdw12412d1wd',
+                fullName: 'Liam Zety',
+                imgUrl: 'https://via.placeholder.com/100',
             }],
             status: 'done',
             priority: 'low',
@@ -62,9 +57,9 @@ let boards = [{
             name: 'sneeze',
             createdAt: 1123124124241,
             members: [{
-                _id: 1234,
-                name: 'david',
-                imgUrl: ''
+                _id: 'asfasdfq12d1wd',
+                fullName: 'Roei Arazi',
+                imgUrl: 'https://via.placeholder.com/100',
             }],
             status: 'done',
             priority: 'low',
@@ -127,12 +122,7 @@ let boards = [{
     name: 'board2',
     createdAt: moment().calendar(),
     description: 'Enter description here',
-    members: [{
-        _id: 'u101',
-        fullname: 'shicks mcgee',
-        imgUrl: 'imgure/sfasfa',
-        lastSeen: 'yesterday'
-    }],
+    members: [],
     groups: [{
         id: _makeid(),
         name: 'week1',
@@ -150,9 +140,9 @@ let boards = [{
             name: 'sneeze',
             createdAt: 1123124124241,
             members: [{
-                _id: 1234,
-                name: 'osher',
-                imgUrl: 'https://img-9gag-fun.9cache.com/photo/aM9wrqR_460s.jpg'
+                _id: 'asfasdfqw12412d1',
+                fullName: 'Osher Kabada',
+                imgUrl: 'https://via.placeholder.com/100',
             }],
             status: 'stuck',
             priority: 'medium',
@@ -272,9 +262,9 @@ async function addBoard() {
                 name: 'sneeze',
                 createdAt: 1123124124241,
                 members: [{
-                    _id: 1234,
-                    name: 'david',
-                    imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
+                    _id: 'asfasdfq12d1wd',
+                    fullName: 'Roei Arazi',
+                    imgUrl: 'https://via.placeholder.com/100',
                 }],
                 status: 'done',
                 priority: 'low',
@@ -290,9 +280,9 @@ async function addBoard() {
                 name: 'sneeze',
                 createdAt: 1123124124241,
                 members: [{
-                    _id: 1234,
-                    name: 'David',
-                    imgUrl: ''
+                    _id: 'asfasdfq12d1wd',
+                    fullName: 'Roei Arazi',
+                    imgUrl: 'https://via.placeholder.com/100',
                 }],
                 status: 'done',
                 priority: 'low',

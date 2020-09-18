@@ -68,8 +68,8 @@ class _Task extends Component {
         // this.props.addUserToTask()
     }
 
-    goToUserProfile(userId){
-       console.log(this.props.history.push(`/user/${userId}`)); 
+    goToUserProfile(userId) {
+        this.props.history.push(`/user/${userId}`)
     }
 
 
@@ -115,35 +115,35 @@ class _Task extends Component {
                         <div className="task-right flex align-center">
 
                             <div className="user-img-container relative" onClick={() => this.openModal('users')}>
-    
+
                                 {this.state.members.length ? this.state.members[0].imgUrl ? <img alt="profile" src={this.state.members[0].imgUrl} /> :
-                                    <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div> : <div className="member-letter">0</div>}
+                                    <div className="member-letter">{this.state.members[0].fullName.charAt(0).toUpperCase()}</div> : <div className="member-letter">0</div>}
                                 <div className="task-number-of-imgs"><span>+{this.state.members.length ? this.state.members.length : 0}</span></div>
                                 {this.state.isUsersShown &&
                                     <div className="users-modal absolute">
                                         <div className="task-users-box">
                                             <h3>Task Members</h3>
                                             {this.state.members.map(member =>
-                                                <ul key={member._id} className="user-box flex space-between">
-                                                    <div className="user-box-info flex" onClick={()=>this.goToUserProfile(member._id)}>
-                                                    <li><p>{member.name}</p></li>
-                                                    <li>{member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.name.charAt(0).toUpperCase()}</div>}</li>
+                                                <section key={member._id} className="user-box flex space-between">
+                                                    <div className="user-box-info flex  align-center" onClick={() => this.goToUserProfile(member._id)}>
+                                                        {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
+                                                        <p>{member.fullName}</p>
                                                     </div>
                                                     <button onClick={() => this.onRemoveMemberFromTask(member._id)}>Remove</button>
-                                                </ul>
+                                                </section>
                                             )}
                                         </div>
                                         <div className="board-users-box">
                                             <h3>Board Members</h3>
                                             {usersToAdd.map(user => {
-                                                return <ul key={user._id} className="user-box flex space-between">
-                                                    <div className="user-box-info flex">
-                                                <li>{user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
-                                                    <div className="member-letter">{user.name.charAt(0).toUpperCase()}</div>}</li>
-                                                <li><p>{user.name}</p></li>
-                                                </div>
-                                                <button onClick={() => this.onAddUserToTask(user._id)}>Add</button>
-                                            </ul>
+                                                return <section key={user._id} className="user-box flex space-between">
+                                                    <div className="user-box-info flex  align-center"  onClick={() => this.goToUserProfile(user._id)}>
+                                                        {user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
+                                                            <div className="member-letter">{user.fullName.charAt(0).toUpperCase()}</div>}
+                                                        <p>{user.fullName}</p>
+                                                    </div>
+                                                    <button onClick={() => this.onAddUserToTask(user._id)}>Add</button>
+                                                </section>
                                             })}
                                         </div>
 
@@ -213,4 +213,4 @@ class _Task extends Component {
     }
 }
 
-export const Task=withRouter(_Task)
+export const Task = withRouter(_Task)
