@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-.wrap{
+.wrap {
     flex-wrap: wrap;
 }
 
@@ -27,11 +27,11 @@
     justify-content: space-around;
 }
 
-.relative{
+.relative {
     position: relative;
 }
 
-.absolute{
+.absolute {
     position: absolute;
 }
 
@@ -61,7 +61,7 @@
 
 .clickable-header:hover {
     transition: color .3s;
-    color: rgba($colorIconsBoardBarsHover, .75);
+    color: rgba($colorIconsTasksHover, .75);
 }
 
 .cursor-initial {

@@ -7,6 +7,10 @@
 
     svg {
         color: $colorIconsNav;
+
+        &:hover {
+            color: $colorIconsTasksHover;
+        }
     }
 
     .icon {

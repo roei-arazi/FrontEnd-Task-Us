@@ -102,7 +102,7 @@ class _Task extends Component {
         return (
             <React.Fragment>
                 {isNotesShown && <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
-                notes={this.state.notes}
+                    notes={this.state.notes}
                 />}
                 {(isUsersShown || isStatusShown || isPriorityShown || isNotesShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
                 <Draggable draggableId={this.state.id} index={this.props.index}>
@@ -121,7 +121,7 @@ class _Task extends Component {
                                 </Tooltip>
                                 <h2>
                                     <ContentEditable
-                                        className="cursor-initial"
+                                        className="cursor-initial content-editable"
                                         innerRef={this.contentEditable}
                                         html={elTaskName} // innerHTML of the editable div
                                         disabled={false}       // use true to disable editing
@@ -140,8 +140,8 @@ class _Task extends Component {
                                 </h2>
                             </div>
                             <div className="task-right flex align-center">
-                            <div onClick={()=>this.openModal('notes')} className="notes-container"><BsChatDots /></div>
-                                
+                                <div onClick={() => this.openModal('notes')} className="notes-container"><BsChatDots /></div>
+
                                 <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
@@ -151,10 +151,10 @@ class _Task extends Component {
                                 <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                                 <Images attachedImgs={this.state.attachedImgs} uploadImg={this.uploadImg} />
-                                
+
                             </div>
                         </section>
-                        
+
                     )}
                 </Draggable>
             </React.Fragment>
@@ -169,7 +169,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-   
+
 }
 
 export const Task = connect(mapStateToProps, mapDispatchToProps)(_Task);

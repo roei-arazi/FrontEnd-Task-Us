@@ -1,11 +1,8 @@
 .my-week {
     position: relative;
-    input {
-        font-size: 1.2rem;
-    }
 }
 
-.search-container{
+.search-container {
     margin: 0 auto;
     width: 80%;
 }
@@ -15,6 +12,31 @@
     flex-direction: column;
     padding: 0px 50px;
     width: 100%;
+    background-color: $colorBg;
+
+    input {
+        font-size: 1.2rem;
+        color: $colorInputFieldFocus;
+        border-bottom-color: $colorInputFieldDark;
+
+        &::placeholder {
+            color: $colorInputFieldDark;
+        }
+
+        &:focus {
+            background-color: $colorInputFieldFocus;
+
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: $colorFontUserDetails;
+    }
+
     h1 {
         font-size: 1.9rem;
         margin-bottom: 50px;
@@ -23,12 +45,15 @@
 
 .my-week-header {
     margin: 5vh 0px;
-    height: 15vh;  
+    height: 15vh;
+
     div {
-        width: 50%; 
-        h1{
+        width: 50%;
+
+        h1 {
             margin: auto;
         }
+
         img {
             height: 100px;
             width: 100px;
@@ -38,26 +63,35 @@
 
 .task-preview {
     display: flex;
-    .user-img-container{ 
+
+    .user-img-container {
         width: 80px;
-        img, .member-letter, .task-number-of-imgs {
+
+        img,
+        .member-letter,
+        .task-number-of-imgs {
             height: 45px;
             width: 45px;
         }
     }
+
     * {
         width: 100px;
         text-align: center;
     }
+
     .label-box {
         height: 90%;
         border-radius: 1px;
         width: 100px;
     }
+
     .task-location {
         color: gray;
+
         span {
             cursor: pointer;
+
             &:hover {
                 text-decoration: underline;
             }
@@ -72,6 +106,7 @@
 
 .upcoming-tasks {
     width: 95%;
+
     > :nth-child(even) {
         background-color: $colorBgBoardBars;
         border-radius: 1px;

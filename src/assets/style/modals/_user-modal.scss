@@ -11,8 +11,7 @@
                 width: 100%;
                 height: 100%;
                 position: absolute;
-                background-color: $colorMainNav;
-                // box-shadow: ;
+                background-color: $colorBgBoardBars;
             }
 
             .user-modal-col {
@@ -32,8 +31,12 @@
 
                     button {
                         margin-top: 40px;
-                    }
+                        background-color: transparent;
 
+                        &:hover {
+                            background-color: #373737;
+                        }
+                    }
                 }
 
             }

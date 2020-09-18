@@ -8,6 +8,14 @@
     box-shadow: 0px 0px 10px 0px #4b4b4bad;
     border-radius: 10px;
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: $colorFontTaskGroup;
+    }
+
     header {
         margin-bottom: 20px;
         width: 95%;

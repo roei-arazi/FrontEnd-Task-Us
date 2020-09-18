@@ -20,10 +20,10 @@ class _UserProfile extends Component {
         this.setState({ isModalOpen: !this.state.isModalOpen })
     }
     render() {
-        if (!this.props.userProfile) return <div>Loading...</div>
+        if (!this.props.userProfile) return <h1>Loading...</h1>
         const { loggedUser, userProfile } = this.props
         const { email, fullName, username } = this.props.userProfile
-
+        console.log('IOM HERE', this.props.userProfile)
         return (
             <section className="user-profile">
                 <Navbar />
@@ -58,7 +58,7 @@ class _UserProfile extends Component {
                                         <input placeholder="Password" type="password" />
                                         <input placeholder="Full Name" type="text" />
                                         <button>Save Changes</button>
-                                        <button onClick={this.toggleModal}>Cancel</button>
+                                        <button className="secondary-btn" onClick={this.toggleModal}>Cancel</button>
                                     </form>
                                 </div>
                             </div>

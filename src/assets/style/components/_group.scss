@@ -8,6 +8,18 @@
         color: $colorFontTaskGroup;
     }
 
+    svg {
+        color: $colorIconsTasks;
+
+        &:hover {
+            color: $colorIconsTasksHover;
+        }
+    }
+
+    .content-editable:hover {
+        border: 2px dotted $colorFontTaskGroup;
+    }
+
     .group-header-container {
         display: flex;
         justify-content: space-between;

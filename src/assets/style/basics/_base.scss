@@ -34,14 +34,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: noto-sans;
+  font-family: font1;
   color: $colorFontNav;
 }
 
 p,
 label,
 ::placeholder {
-  font-family: roboto;
+  font-family: font1;
   color: $colorFontTaskGroup;
 }
 
@@ -58,13 +58,17 @@ input {
     color: $colorFontNav;
   }
 
+  &:focus {
+    background-color: $colorInputFieldFocus;
+  }
+
 }
 
 button {
-  font-family: noto-sans;
+  font-family: font1;
   padding: 15px;
-  color: $colorFontTaskGroup;
-  background-color: $buttonColor;
+  color: $colorFontNav;
+  background-color: $buttonColorCTA;
   border: 0;
   cursor: pointer;
   font-size: 1rem;
@@ -72,7 +76,7 @@ button {
   transition: .3s;
 
   &:hover {
-    background-color: rgba($buttonColor, .65);
+    background-color: rgba($colorIconsBoardBarsHover, .2);
   }
 }
 
@@ -87,7 +91,7 @@ svg {
 
 
 span.span-user-details {
-  font-family: roboto;
+  font-family: font1;
   letter-spacing: 0.5px;
   color: $colorFontTaskGroup;
 }
