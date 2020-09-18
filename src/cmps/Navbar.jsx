@@ -15,6 +15,7 @@ class _Navbar extends Component {
 
     render() {
         const { isNotificationShown } = this.state
+        const { loggedUser } = this.props
         return (
             <section className="navbar flex column space-between align-center padding-y-15">
 
@@ -33,8 +34,8 @@ class _Navbar extends Component {
                     <NavLink to="/myweek">
                         <div className="icon-container"><FaCalendar /></div>
                     </NavLink>
-                    <NavLink to="/user/123">
-                        <div className="icon-container"><FaPortrait /></div>
+                    <NavLink to={`/user/${loggedUser._id}`}>
+                        <li><FaPortrait /></li>
                     </NavLink>
                 </ul>
             </section>
@@ -44,7 +45,7 @@ class _Navbar extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        loggedUser: state.userReducer.loggedUser
     }
 }
 

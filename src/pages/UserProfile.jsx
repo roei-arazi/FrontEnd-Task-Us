@@ -1,23 +1,29 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Fade } from '@material-ui/core';
+
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
 import { loadBoards } from '../store/actions/boardActions'
-import { Fade } from '@material-ui/core';
+import { getUserById } from '../store/actions/userActions';
 
 class _UserProfile extends Component {
     state = {
         isModalOpen: false
     }
-    componentDidMount() {
+    async componentDidMount() {
         this.props.loadBoards()
+        this.props.getUserById(this.props.match.params.id)
     }
     toggleModal = () => {
         this.setState({ isModalOpen: !this.state.isModalOpen })
     }
     render() {
-        console.log('STATE:', this.state.isModalOpen)
+        if (!this.props.userProfile) return <div>Loading...</div>
+        const { loggedUser, userProfile } = this.props
+        const { email, fullName, username } = this.props.userProfile
+
         return (
             <section className="user-profile">
                 <Navbar />
@@ -28,13 +34,13 @@ class _UserProfile extends Component {
                     </header>
 
                     <div className="user-details-container padding-x-30 padding-y-30 align-center  flex column">
-                        <h2 onClick={this.toggleModal}
-                            className="clickable-header">Edit Profile</h2>
+                        {loggedUser._id === userProfile._id ? <h2 onClick={this.toggleModal}
+                            className="clickable-header">Edit Profile</h2> : ''}
                         <div className="user-details-inner-container">
 
-                            <h3>Email: <span className="span-user-details">user@email</span></h3>
-                            <h3>Full Name: <span className="span-user-details">Yitzhak yaka</span></h3>
-                            <h3>Username: <span className="span-user-details">yithak133</span> </h3>
+                            <h3>Email: <span className="span-user-details">{email}</span></h3>
+                            <h3>Full Name: <span className="span-user-details">{fullName}</span></h3>
+                            <h3>Username: <span className="span-user-details">{username}</span> </h3>
                         </div>
                     </div>
                     {/* Modal */}
@@ -68,12 +74,15 @@ class _UserProfile extends Component {
 
 const mapStateToProps = state => {
     return {
-        modal: state.systemReducer.modal
+        modal: state.systemReducer.modal,
+        userProfile: state.userReducer.userProfile,
+        loggedUser: state.userReducer.loggedUser
     }
 }
 
 const mapDispatchToProps = {
-    loadBoards
+    loadBoards,
+    getUserById
 }
 
 export const UserProfile = connect(mapStateToProps, mapDispatchToProps)(_UserProfile);
