@@ -48,25 +48,28 @@ class _MyWeek extends Component {
                 <Boardbar /><div className="my-week-container">
                     <div className="my-week-header flex align-center">
                         <h1>My week's schedule</h1>
+                        <img src="my-week-calendar.png" alt=""/>
                     </div>
                     {upcomingTasks.length ?
-                        <div className="upcoming-tasks-container">
-                            {upcomingTasks.map(task => <div
-                                key={task.id} 
-                                className="task-preview space-between align-center padding-x-15">
-                                <div>
-                                    <h2>{task.name}</h2>
-                                    <p className="task-location">Board: <span onClick={() => this.props.history.push(`/board/${task.boardId}`)}>{task.boardName}</span></p>
-                                </div>
-                                <div className={`label-box ${task.status}`}>{task.status}</div>
-                                <div className="user-img-container">
-                                    {task.members ? task.members[0].imgUrl ? <img alt="profile" src={task.members[0].imgUrl} /> :
-                                        <div className="member-letter">{task.members[0].name.charAt(0).toUpperCase()}</div> : ''}
-                                    <div className="task-number-of-imgs"><span>+{task.members.length ? task.members.length : 0}</span></div>
-                                </div>
-                                <h2>{this.getDaysFromNow(task.dueDate)}</h2>
-                            </div>)}
-                        </div> :
+                        <section className="upcoming-tasks-container">
+                            <div className="upcoming-tasks">
+                                {upcomingTasks.map(task => <div
+                                    key={task.id}
+                                    className="task-preview space-between align-center padding-x-15">
+                                    <div>
+                                        <h2>{task.name}</h2>
+                                        <p className="task-location">Board: <span onClick={() => this.props.history.push(`/board/${task.boardId}`)}>{task.boardName}</span></p>
+                                    </div>
+                                    <div className={`label-box ${task.status}`}>{task.status}</div>
+                                    <div className="user-img-container">
+                                        {task.members ? task.members[0].imgUrl ? <img alt="profile" src={task.members[0].imgUrl} /> :
+                                            <div className="member-letter">{task.members[0].name.charAt(0).toUpperCase()}</div> : ''}
+                                        <div className="task-number-of-imgs"><span>+{task.members.length ? task.members.length : 0}</span></div>
+                                    </div>
+                                    <h2>{this.getDaysFromNow(task.dueDate)}</h2>
+                                </div>)}
+                            </div>
+                        </section> :
                         <h1 className="no-tasks">No tasks left for this week</h1>
                     }
                 </div>
