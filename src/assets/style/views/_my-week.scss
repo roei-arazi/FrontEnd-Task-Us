@@ -5,6 +5,11 @@
     }
 }
 
+.search-container{
+    margin: 0 auto;
+    width: 80%;
+}
+
 .my-week-container {
     display: flex;
     flex-direction: column;
@@ -36,7 +41,7 @@
     .user-img-container{ 
         width: 80px;
         img, .member-letter, .task-number-of-imgs {
-            height: 45px; 
+            height: 45px;
             width: 45px;
         }
     }

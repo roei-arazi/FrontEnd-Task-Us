@@ -46,7 +46,12 @@ let boards = [{
             status: 'Done',
             priority: 'low',
             dueDate: Date.now() + 1000 * 60 * 60 * 24 * 3,
-            note: 'dont forget about this',
+            notes: [
+                {
+                    txt:'dont forget about this',
+                    member:'Roei Arazi'
+                }
+            ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
@@ -64,7 +69,12 @@ let boards = [{
             status: 'Stuck',
             priority: 'low',
             dueDate: Date.now() + 1000 * 60 * 60 * 24 * 2,
-            note: 'dont forget about this',
+            notes: [
+                {
+                    txt:'dont forget about this',
+                    member:'Roei Arazi'
+                }
+            ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
@@ -147,14 +157,19 @@ let boards = [{
             status: 'stuck',
             priority: 'medium',
             dueDate: Date.now() + 1000 * 60 * 60 * 24,
-            note: 'dont forget about this',
+            notes: [
+                {
+                    txt:'dont forget about this',
+                    member:'Roei Arazi'
+                }
+            ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
             tags: ['ui', 'ux'],
             attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
-        }]
-    }],
+        },]
+    },],
     activityLog: [{
         createdAt: 124124125124,
         byUser: {
@@ -269,7 +284,12 @@ async function addBoard() {
                 status: 'Stuck',
                 priority: 'low',
                 dueDate: Date.now(),
-                note: 'dont forget about this',
+                notes: [
+                    {
+                        txt:'dont forget about this',
+                        member:'Roei Arazi'
+                    }
+                ],
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
@@ -287,7 +307,12 @@ async function addBoard() {
                 status: 'Working on it',
                 priority: 'low',
                 dueDate: Date.now(),
-                note: 'dont forget about this',
+                notes: [
+                    {
+                        txt:'dont forget about this',
+                        member:'Roei Arazi'
+                    }
+                ],
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
@@ -369,7 +394,12 @@ async function addGroup(boardId) {
             status: 'Working on it',
             priority: 'low',
             dueDate: 214124124125,
-            note: 'dont forget about this',
+            notes: [
+                {
+                    txt:'dont forget about this',
+                    member:'Roei Arazi'
+                }
+            ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
@@ -417,7 +447,12 @@ async function addTask(groupId) {
         status: 'Done',
         priority: 'low',
         dueDate: 214124124125,
-        note: 'dont forget about this',
+        notes: [
+            {
+                txt:'dont forget about this',
+                member:'Roei Arazi'
+            }
+        ],
         lastUpdated: 'yesterday',
         isSelected: false,
         posts: [],

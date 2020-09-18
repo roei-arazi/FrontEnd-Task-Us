@@ -5,14 +5,19 @@ import { loadBoards } from '../store/actions/boardActions'
 import { Navbar } from '../cmps/Navbar';
 import moment from 'moment'
 import { withRouter } from 'react-router-dom';
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 class _MyWeek extends Component {
     state = {
-        searchVal: ''
+        searchVal: '',
+        isOrderReversed: false
     }
 
     componentDidMount() {
-        this.props.loadBoards();
+        if (!this.props.boards || !this.props.boards.length) {
+            this.props.loadBoards();
+        }
+
     }
 
     getUpcomingTasks(maxDaysLeft, minDaysLeft = -5) {
@@ -29,6 +34,12 @@ class _MyWeek extends Component {
                 }));
             })
         })
+        tasks.sort((task1, task2) => {
+            const res = this.state.isOrderReversed ? -1 : 1;
+            if (task1.dueDate < task2.dueDate) return -res;
+            if (task1.dueDate > task2.dueDate) return res;
+            return 0;
+        })
         return tasks;
     }
 
@@ -40,14 +51,18 @@ class _MyWeek extends Component {
         return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'
     }
 
-    handleChange = ({target}) =>{
-        this.setState({searchVal: target.value})
+    handleChange = ({ target }) => {
+        this.setState({ searchVal: target.value })
+    }
+
+    reverseOrder = () => {
+        this.setState({ isOrderReversed: !this.state.isOrderReversed })
     }
 
     render() {
         let upcomingTasks = this.getUpcomingTasks(7);
-        const {searchVal} = this.state;
-        if(searchVal)   upcomingTasks = upcomingTasks.filter(task => task.name.toLowerCase().includes(searchVal.toLocaleLowerCase()))
+        const { searchVal, isOrderReversed } = this.state;
+        if (searchVal) upcomingTasks = upcomingTasks.filter(task => task.name.toLowerCase().includes(searchVal.toLocaleLowerCase()))
         return (
             <section className="my-week flex">
                 <Navbar />
@@ -57,10 +72,15 @@ class _MyWeek extends Component {
                             <img src="my-week-calendar.png" alt="" />
                             <h1>My week</h1>
                         </div>
-                    <input onChange={this.handleChange} value={searchVal} type="text" placeholder="search" />
+                        <h2>Upcoming tasks</h2>
+                    </div>
+                    <div className="search-container flex space-between align-center">
+                        <input onChange={this.handleChange} value={searchVal} type="text" placeholder="search" />
+                            {isOrderReversed ? <FaArrowUp size="1.5rem" onClick={this.reverseOrder} /> : <FaArrowDown size="1.5rem" onClick={this.reverseOrder} />}
                     </div>
                     {upcomingTasks.length ?
                         <section className="upcoming-tasks-container">
+
                             <div className="upcoming-tasks">
                                 {upcomingTasks.map(task => <div
                                     key={task.id}
@@ -69,7 +89,7 @@ class _MyWeek extends Component {
                                         <h2>{task.name}</h2>
                                         <p className="task-location">Board: <span onClick={() => this.props.history.push(`/board/${task.boardId}`)}>{task.boardName}</span></p>
                                     </div>
-                                    <div className={`label-box ${task.status}`}>{task.status}</div>
+                                    <div className={`label-box ${task.status.toLocaleLowerCase()}`}>{task.status}</div>
                                     <div className="user-img-container">
                                         {task.members ? task.members[0].imgUrl ? <img alt="profile" src={task.members[0].imgUrl} /> :
                                             <div className="member-letter">{task.members[0].name.charAt(0).toUpperCase()}</div> : ''}
