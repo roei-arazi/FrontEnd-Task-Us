@@ -83,6 +83,14 @@ class _Task extends Component {
         this.props.history.push(`/user/${userId}`)
     }
 
+<<<<<<< HEAD
+=======
+    focusText = () => {
+        setTimeout(() => {
+            document.execCommand('selectAll', false, null)
+        }, 0)
+    }
+>>>>>>> 2ebe36dd7782511254fb4cbf24b589c803a160a2
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
@@ -136,6 +144,7 @@ class _Task extends Component {
                                 <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                                 <Images attachedImgs={this.state.attachedImgs} uploadImg={this.uploadImg} />
+                                <button onClick={this.props.onToggleUpdates}>UPDATES LOL</button>
                             </div>
                         </section>
                     )}
