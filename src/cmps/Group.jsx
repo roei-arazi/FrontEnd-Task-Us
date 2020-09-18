@@ -24,10 +24,10 @@ export class Group extends Component {
         this.setState({ name: ev.target.value });
     }
 
-    focusText = () =>{
+    focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
-          }, 0)
+        }, 0)
     }
 
     render() {
@@ -52,7 +52,7 @@ export class Group extends Component {
                                 </Tooltip>
                                 <h1 className="group-title">
                                     <ContentEditable
-                                    onFocus={this.focusText}
+                                        onFocus={this.focusText}
                                         className="content-editable cursor-initial"
                                         innerRef={this.contentEditable}
                                         html={elGroupName} // innerHTML of the editable div
@@ -89,7 +89,7 @@ export class Group extends Component {
                                     {...provided.droppableProps}
                                 >
                                     {this.props.group.tasks.map((task, index) => {
-                                        return <Task onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id}
+                                        return <Task onToggleUpdates={this.props.onToggleUpdates} onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id}
                                             task={task} users={this.props.users} />
                                     })}
                                     {provided.placeholder}

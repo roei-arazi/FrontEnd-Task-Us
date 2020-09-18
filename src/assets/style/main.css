@@ -215,11 +215,17 @@ span.span-user-details {
 }
 
 .content-editable {
+  padding: 0 4px;
   border: 2px dotted transparent;
+}
+
+.content-editable:hover {
+  border: 2px dotted #85b2ec;
 }
 
 .content-editable:focus {
   border: 2px dotted #2a77aa;
+  color: rgba(27, 38, 44, 0.85);
 }
 
 .user-profile-big {
@@ -399,6 +405,10 @@ span.span-user-details {
   height: 20vh;
 }
 
+.my-week-header img {
+  height: 100%;
+}
+
 .task-preview {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -437,8 +447,13 @@ span.span-user-details {
   overflow-y: overlay;
 }
 
-.upcoming-tasks-container > :nth-child(even) {
+.upcoming-tasks {
+  width: 95%;
+}
+
+.upcoming-tasks > :nth-child(even) {
   background-color: #e8effb;
+  border-radius: 5px;
 }
 
 .no-tasks {
@@ -673,7 +688,7 @@ span.span-user-details {
 
 .task .users-modal {
   background-color: #ffffff;
-  z-index: 1;
+  z-index: 999;
   padding: 10px;
   width: 250px;
   border-radius: 5px;
@@ -719,7 +734,7 @@ span.span-user-details {
 .label-list {
   width: 150px;
   background-color: #ffffff;
-  z-index: 1;
+  z-index: 999;
   padding: 10px;
   border-radius: 5px;
 }
@@ -902,5 +917,16 @@ span.span-user-details {
 
 .user-profile .user-container .modal-screen .user-modal-col form button {
   margin-top: 40px;
+}
+
+.side-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 400px;
+  background-color: #e8effb;
+  -webkit-animation: scale-in-ver-bottom;
+          animation: scale-in-ver-bottom;
 }
 /*# sourceMappingURL=main.css.map */

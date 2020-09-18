@@ -33,10 +33,10 @@ export class BoardHeader extends React.Component {
         this.setState({ description: ev.target.value })
     }
 
-    focusText = () =>{
+    focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
-          }, 0)
+        }, 0)
     }
 
     render() {
@@ -65,7 +65,7 @@ export class BoardHeader extends React.Component {
                     </h1>
                     <h5>
                         <ContentEditable
-                        onFocus={this.focusText}
+                            onFocus={this.focusText}
                             className="content-editable cursor-initial"
                             innerRef={this.editableDescription}
                             html={this.state.description} // innerHTML of the editable div
@@ -89,7 +89,7 @@ export class BoardHeader extends React.Component {
                             <BiAddToQueue onClick={this.props.onAddGroup} />
                         </div>
                     </Tooltip>
-
+                    <button onClick={this.props.onToggleActivities}>ACTIVITIES</button>
                 </div>
             </section>
         )
