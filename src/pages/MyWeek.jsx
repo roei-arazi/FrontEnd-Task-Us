@@ -31,6 +31,15 @@ class _MyWeek extends Component {
         return tasks;
     }
 
+    getDaysFromNow(date){
+        // const now = moment(Date.now())
+        // const dueDate = moment(date);
+        if(moment(date).isBefore(moment(Date.now()).add(1, 'days'))){
+            return moment(Date.now()).fromNow(moment(date))
+        }
+
+    }
+
     render() {
         return (
             <section className="my-week">
@@ -43,6 +52,7 @@ class _MyWeek extends Component {
                         {this.getUpcomingTasks(7).map(task => <div
                             key={task.id} className="task-preview space-between align-center">
                             <h2>{task.name}</h2>
+                            <h2>{this.getDaysFromNow((task.dueDate + 1000 * 60 * 60 * 24 * 6))}</h2>
                             <div className="user-img-container">
                                 {task.members ? task.members[0].imgUrl ? <img alt="profile" src={task.members[0].imgUrl} /> :
                                     <div className="member-letter">{task.members[0].name.charAt(0).toUpperCase()}</div> : ''}
