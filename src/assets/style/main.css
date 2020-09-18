@@ -228,6 +228,7 @@ svg:hover {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  position: relative;
 }
 
 span.span-user-details {
@@ -497,17 +498,69 @@ span.span-user-details {
 }
 
 .navbar .navbar-links {
-  height: 40%;
+  height: 25%;
 }
 
 .notifications {
   position: absolute;
-  width: 200px;
-  height: 200px;
-  top: 315px;
+  width: 600px;
+  top: 0;
   left: 50px;
   background-color: #85b2ec;
-  z-index: 3;
+  z-index: 999;
+  -webkit-box-shadow: 0px 0px 10px 0px #4b4b4bad;
+          box-shadow: 0px 0px 10px 0px #4b4b4bad;
+  border-radius: 10px;
+}
+
+.notifications:before {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(194, 225, 245, 0);
+  border-right-color: #85b2ec;
+  border-width: 10px;
+  margin-top: -232px;
+}
+
+.notifications header {
+  margin-bottom: 20px;
+  width: 95%;
+}
+
+.notifications .notifications-container {
+  overflow-y: overlay;
+  max-height: 400px;
+}
+
+.notifications .notifications-container .notification {
+  width: 95%;
+  margin-bottom: 15px;
+  background-color: #d0e1ec;
+  border-radius: 5px;
+  padding: 25px;
+  line-height: 1.8;
+}
+
+.notifications .notifications-container .notification .user-img-container {
+  text-align: initial;
+}
+
+.notifications .notifications-container .notification .user-img-container img {
+  height: auto;
+  width: 80px;
+}
+
+.notifications .notifications-container .notification .notification-msg {
+  margin-left: 15px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .board-header {

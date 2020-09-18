@@ -17,17 +17,24 @@ class _Navbar extends Component {
         const { isNotificationShown } = this.state
         return (
             <section className="navbar flex column space-between align-center padding-y-15">
-                <NavLink to="/">
-                    <FaAd />
-                </NavLink>
+
                 <ul className="navbar-links flex column space-around">
-                    {isNotificationShown && <Notifications loggedUser={this.props.loggedUser} />}
-                    <li onClick={this.toggleNotifications}><FaBell /></li>
+                    <NavLink to="/">
+                        <FaAd />
+                    </NavLink>
+
+                    <div className="icon-container" onClick={this.toggleNotifications}>
+                        {isNotificationShown && <Notifications loggedUser={this.props.loggedUser} />}
+                        <FaBell />
+                    </div>
+                </ul>
+
+                <ul className="navbar-links flex column space-around">
                     <NavLink to="/myweek">
-                        <li><FaCalendar /></li>
+                        <div className="icon-container"><FaCalendar /></div>
                     </NavLink>
                     <NavLink to="/user/123">
-                        <li><FaPortrait /></li>
+                        <div className="icon-container"><FaPortrait /></div>
                     </NavLink>
                 </ul>
             </section>
