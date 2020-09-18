@@ -143,14 +143,16 @@ export class Task extends Component {
                             </div>
 
                             <div className="task-img-container">
-                                <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img src={this.state.attachedImgs[0]} /> : 'IMG'}</label>
+                                <label htmlFor="task-imgs">{this.state.attachedImgs.length ? <img src={this.state.attachedImgs[0]} /> : ''}</label>
                                 <input type="file" id="task-imgs" onChange={this.uploadImg} hidden />
-                                <div className="task-number-of-imgs"><span>{this.state.attachedImgs.length ? this.state.attachedImgs.length : 0}</span></div>
+                                {this.state.attachedImgs.length ?
+                                    <div className="task-number-of-imgs"><span>{this.state.attachedImgs.length}</span></div> : ''}
                             </div>
                             <div className="user-img-container">
                                 {this.state.members ? this.state.members[0].imgUrl ? <img src={this.state.members[0].imgUrl} /> :
                                     <div className="member-letter">{this.state.members[0].name.charAt(0).toUpperCase()}</div> : ''}
-                                <div className="task-number-of-imgs"><span>+{this.state.members.length ? this.state.members.length : 0}</span></div>
+                                {this.state.members.length &&
+                                    <div className="task-number-of-imgs"><span>+{this.state.members.length}</span></div>}
                             </div>
                         </div>
                     </section>
