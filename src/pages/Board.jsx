@@ -21,8 +21,6 @@ class _Board extends Component {
 
     state = {
         boardId: '',
-        isUpdatesOpen: false,
-        isActivitiesOpen: false
     }
 
     async componentDidMount() {
@@ -191,14 +189,6 @@ class _Board extends Component {
             }
         }
     }
-
-    onToggleActivities = () => {
-        this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
-    }
-    onToggleUpdates = () => {
-        this.setState({ isUpdatesOpen: !this.state.isUpdatesOpen })
-    }
-
     render() {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         const users = this.props.users
@@ -210,7 +200,7 @@ class _Board extends Component {
                 <Navbar />
                 <Boardbar />
                 <div className="board-container">
-                    <BoardHeader onToggleActivities={this.onToggleActivities} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard} />
+                    <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard} />
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
@@ -222,7 +212,7 @@ class _Board extends Component {
                                         {...provided.droppableProps}>
                                         {board.groups.map((group, index) => {
                                             return <Group key={group.id} index={index}
-                                                onToggleUpdates={this.onToggleUpdates} onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
+                                                onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                                                 onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} group={group} users={users} />
                                         })}
                                     </div>
@@ -232,12 +222,6 @@ class _Board extends Component {
                     </div>
                 </div>
                 <Popup />
-
-                {/* <UpdateModal />
-                <ActivitiesModal /> */}
-                {this.state.isUpdatesOpen && <div className="side-modal">  updates </div>}
-                {this.state.isActivitiesOpen && <div className="side-modal"> activites </div>}
-
             </section>
         )
     }

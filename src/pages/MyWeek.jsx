@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 
 class _MyWeek extends Component {
     state = {
-
+        searchVal: ''
     }
 
     componentDidMount() {
@@ -40,15 +40,24 @@ class _MyWeek extends Component {
         return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'
     }
 
+    handleChange = ({target}) =>{
+        this.setState({searchVal: target.value})
+    }
+
     render() {
-        const upcomingTasks = this.getUpcomingTasks(7);
+        let upcomingTasks = this.getUpcomingTasks(7);
+        const {searchVal} = this.state;
+        if(searchVal)   upcomingTasks = upcomingTasks.filter(task => task.name.toLowerCase().includes(searchVal.toLocaleLowerCase()))
         return (
-            <section className="my-week">
+            <section className="my-week flex">
                 <Navbar />
-                <Boardbar /><div className="my-week-container">
-                    <div className="my-week-header flex align-center">
-                        <h1>My week's schedule</h1>
-                        <img src="my-week-calendar.png" alt=""/>
+                <Boardbar /><div className="my-week-container flex column space around ">
+                    <div className="my-week-header flex column space-around">
+                        <div className="flex align-center space-around">
+                            <img src="my-week-calendar.png" alt="" />
+                            <h1>My week</h1>
+                        </div>
+                    <input onChange={this.handleChange} value={searchVal} type="text" placeholder="search" />
                     </div>
                     {upcomingTasks.length ?
                         <section className="upcoming-tasks-container">
