@@ -7,7 +7,8 @@ import ContentEditable from 'react-contenteditable';
 export class BoardHeader extends React.Component {
 
     state = {
-        _id: ''
+        _id: '',
+        isActivitiesOpen: false
     }
 
     componentDidMount() {
@@ -37,6 +38,9 @@ export class BoardHeader extends React.Component {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
         }, 0)
+    }
+    onToggleActivities = () => {
+        this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
     }
 
     render() {
@@ -89,8 +93,20 @@ export class BoardHeader extends React.Component {
                             <BiAddToQueue onClick={this.props.onAddGroup} />
                         </div>
                     </Tooltip>
-                    <button onClick={this.props.onToggleActivities}>ACTIVITIES</button>
+                    <button onClick={this.onToggleActivities}>ACTIVITIES</button>
                 </div>
+                {
+                    this.state.isActivitiesOpen &&
+                    <React.Fragment>
+
+                        <div className="side-modal">
+                            activites
+                     </div>
+
+                        <div onClick={this.onToggleActivities} className="modal-screen-wrapper"></div>
+
+                    </React.Fragment>
+                }
             </section>
         )
     }
