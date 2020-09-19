@@ -1,13 +1,16 @@
 .activities {
-    span {
-        color: $colorFontUserDetails;
-    }
 
-    .activitiy-desc-container {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 370px;
+    .activity {
+        .activity-desc-container {
+            >*:not(:first-child) {
+                margin-left: 15px;
+            }
+        }
+
+        .date-created {
+            margin-left: 15px;
+            color: $colorFontUserDetails;
+        }
     }
 
     .user-img-container {
@@ -18,4 +21,5 @@
             width: 40px;
         }
     }
+
 }

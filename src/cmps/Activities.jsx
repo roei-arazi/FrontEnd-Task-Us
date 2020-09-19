@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import Truncate from 'react-truncate';
 export default class Activities extends Component {
 
     componentDidMount() {
@@ -25,20 +26,25 @@ export default class Activities extends Component {
                     <input placeholder="Search" />
                 </div>
 
-                <div className="activitiy-list column flex ">
-                    {activityLog.map(activitiy => {
+                <div className="activity-list column flex ">
+                    {activityLog.map(activity => {
 
                         return (
-                            <div key={activitiy.id} className="activitiy space-between flex align-center">
-                                <div className="activitiy-desc-container hide-long-txt flex align-center">
+                            <div key={activity.id} className="activity space-between flex align-center">
+                                <div className="activity-desc-container flex align-center">
                                     <div className="user-img-container">
-                                        <img src={activitiy.byUser.imgUrl} alt="" />
+                                        <img src={activity.byUser.imgUrl} alt="" />
                                     </div>
-                                    <h2>{activitiy.byUser.fullName}</h2>
-                                    <p>{activitiy.description}</p>
+                                    <h2>{activity.byUser.fullName}</h2>
+                                    <p>
+                                        <Truncate lines={1} ellipsis={"..."} width={250}>
+                                            {activity.description}
+                                        </Truncate>
+                                    </p>
                                 </div>
 
-                                <span>{this.getDaysFromNow(activitiy.createdAt)}</span>
+                                <span className="date-created">{this.getDaysFromNow(activity.createdAt)}</span>
+
                             </div>
                         )
                     })}
