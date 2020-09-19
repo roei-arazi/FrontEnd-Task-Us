@@ -45,7 +45,7 @@ class _Signup extends Component {
                     <section>
                         <legend>Username *</legend>
                         <Field className="sign-login-input"type="text" name="username" />
-                    </section>
+                    </section> 
                     <ErrorMessage name="username" component="span" />
                     <section>
                         <legend>Password *</legend>
