@@ -1,6 +1,22 @@
 .activities {
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: $colorFontUserDetails;
+
+    }
+
+    overflow-y: overlay;
+    max-height: 90vh;
+
     .activity {
+        background-color: $colorFontNav;
+        border-radius: 1px;
+        margin-bottom: 5px;
+
         .activity-desc-container {
             >*:not(:first-child) {
                 margin-left: 15px;
@@ -19,6 +35,18 @@
         img {
             height: auto;
             width: 40px;
+        }
+    }
+
+    svg {
+        color: $buttonColorCTA;
+    }
+
+    input {
+        border-bottom: 2px solid $buttonColorCTA;
+
+        &::placeholder {
+            color: $buttonColorCTA;
         }
     }
 
