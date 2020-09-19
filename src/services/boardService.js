@@ -225,8 +225,14 @@ async function loadBoards() {
     }
 }
 
-async function updateBoard(boardToSave) {
+async function updateBoard(boardToSave, filterBy) {
     const newBoards = JSON.parse(JSON.stringify(boards))
+    
+   if(filterBy.groupId) {
+    boardToSave.groups.filter(group=> group.id===filterBy.groupId)
+      
+   }
+
     const idx = newBoards.findIndex(board => board._id === boardToSave._id)
     try {
         newBoards.splice(idx, 1, boardToSave)

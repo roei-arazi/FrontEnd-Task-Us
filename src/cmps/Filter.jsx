@@ -1,45 +1,56 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { updateBoard } from '../store/actions/boardActions';
 
 class _Filter extends Component {
     state = {
-        _id: ''
+        _id: '',
+        filterBy: {
+            groupId: '',
+        }
     }
 
     componentDidMount() {
         this.setState({ ...this.props.board })
     }
 
-    filterGroups = (groupName) => {
-        this.setState({ groups: this.state.groups.filter(group => group.name !== groupName) })
+    filterGroups = async (groupId) => {
+        await this.setState({filterBy:{...this.state.filterBy, groupId}})
+
+        var queryParams = new URLSearchParams();
+        for (let key in this.state.filterBy) {
+            queryParams.set(key, this.state.filterBy[key])
+        }
+        this.props.history.push(`/board/${this.state._id}?${queryParams}`)
     }
-    
-    removeGroupFilter = (groupName) => {
-        const newGroup= this.props.board.groups.find(group=> group.name===groupName)
-        this.setState({ groups: [...this.state.groups,newGroup] })
-    }
+
+    // removeGroupFilter = async (groupId) => {
+    //     const newGroup = this.props.board.groups.find(group => group.id !== groupId)
+    //     await this.setState({ groups: [...this.state.groups, newGroup], 
+    //         filterBy: { ...this.state.filterBy,groupIds: [...this.state.filterBy.groupIds, groupId]}})
+    //         this.props.updateBoard(this.state, this.state.filterBy)
+    // }
 
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { groups } = this.state
-        const groupsToAdd = this.props.board.groups.filter(group => !this.state.groups.some(selectedGroup => selectedGroup.name === group.name))
-        console.log(groupsToAdd);
-        console.log(groups);
+        const groupsToFilter = this.props.board.groups.filter(group => !this.state.groups.some(selectedGroup => selectedGroup.id === group.id))
+        console.log(this.state.filterBy);
         return (
             <div className="filter-modal flex absolute">
-                <h1>Filter</h1>
 
                 <section className="group-name-filter">
                     <h3>Groups</h3>
-                    <div className="groups">
-                    {groupsToAdd.map((group, idx) => <p key={idx} onClick={() => this.removeGroupFilter(group.name)}>{group.name}</p>)}
+                    <div className="groups">                      
+                        {groups.map((group, idx) => <p key={idx} onClick={() => this.filterGroups(group.id)}>{group.name}</p>)}
                     </div>
-                    
-                    {this.state.groups.length && 
-                        <div className="selected-groups" style={{backgroundColor:"white"}}>
-                           {groups.map((group, idx) => <p key={idx} onClick={() => this.filterGroups(group.name)}>{group.name}</p>)}
-                        </div>
-                    }
+
+                    {/* <div className="selected-groups" style={{ backgroundColor: "white" }}>
+                    <p>Selected Groups</p>
+                    {this.state.groups.length &&
+                            groups.map((group, idx) => <p key={idx} onClick={() => this.filterGroups(group.id)}>{group.name}</p>)}
+                        </div> */}
                 </section>
 
                 <section className="task-name-filter">
@@ -69,7 +80,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-
+    updateBoard
 }
 
-export const Filter = connect(mapStateToProps, mapDispatchToProps)(_Filter);
+export const Filter = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Filter));

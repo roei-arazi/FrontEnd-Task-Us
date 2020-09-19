@@ -84,7 +84,7 @@ class _Board extends Component {
             await this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
-            console.log('Error', err)
+            console.log('Error', err) 
         }
     }
 

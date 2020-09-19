@@ -49,3 +49,15 @@ export function signup(userCred){
         }
     }
 }
+
+export function guestLogin(){
+    return async dispatch =>{
+        try{
+            const user = await userService.guestLogin();
+            dispatch({type: 'SET_USER', user})
+        }catch(err){
+            console.log('userActions: Couldn\'t login as a guest');
+            throw err;
+        }
+    }
+}

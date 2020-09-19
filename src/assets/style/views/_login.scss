@@ -1,25 +1,32 @@
-.login{
+.login {
     background-color: $colorBg;
     height: 100vh;
-    svg{
-        position: absolute;
-        top: 20px;
-        left: 20px;
-    }
+    color: $colorFontNav;
 }
 
-.login-form{
+.go-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: $colorIconsTasks;
+}
+
+.login-form {
     background-color: $colorBgBoardBars;
+    padding: 20px;
     position: absolute;
     width: 50%;
-    height: 50%;
+    min-height: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    input, button{
+    border-radius: 5px;
+    .login-input,
+    button,
+    label {
         width: 90%;
     }
-    a{
-        color: $colorFontNav;
+    svg{
+        font-size: 5rem;
     }
 }
