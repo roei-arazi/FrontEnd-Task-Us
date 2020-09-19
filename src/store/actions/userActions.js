@@ -25,3 +25,10 @@ export function getUserById(userId){
         }
     }
 }
+
+export function login(userCred){
+    return async dispatch => {
+        const user = await userService.login(userCred);
+        dispatch({type: 'LOGIN'})
+    }
+}
