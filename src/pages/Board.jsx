@@ -96,9 +96,9 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
-    onAddTask = async (groupId) => {
+    onAddTask = async (groupId, taskName) => {
         try {
-            await this.props.addTask(groupId)
+            await this.props.addTask(groupId, taskName)
             await this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {

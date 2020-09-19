@@ -48,8 +48,8 @@ let boards = [{
             dueDate: Date.now() + 1000 * 60 * 60 * 24 * 3,
             notes: [
                 {
-                    txt:'dont forget about this',
-                    member:'Roei Arazi'
+                    txt: 'dont forget about this',
+                    member: 'Roei Arazi'
                 }
             ],
             lastUpdated: 'yesterday',
@@ -71,8 +71,8 @@ let boards = [{
             dueDate: Date.now() + 1000 * 60 * 60 * 24 * 2,
             notes: [
                 {
-                    txt:'dont forget about this',
-                    member:'Roei Arazi'
+                    txt: 'dont forget about this',
+                    member: 'Roei Arazi'
                 }
             ],
             lastUpdated: 'yesterday',
@@ -159,8 +159,8 @@ let boards = [{
             dueDate: Date.now() + 1000 * 60 * 60 * 24,
             notes: [
                 {
-                    txt:'dont forget about this',
-                    member:'Roei Arazi'
+                    txt: 'dont forget about this',
+                    member: 'Roei Arazi'
                 }
             ],
             lastUpdated: 'yesterday',
@@ -285,8 +285,8 @@ async function addBoard() {
                 dueDate: Date.now(),
                 notes: [
                     {
-                        txt:'dont forget about this',
-                        member:'Roei Arazi'
+                        txt: 'dont forget about this',
+                        member: 'Roei Arazi'
                     }
                 ],
                 lastUpdated: 'yesterday',
@@ -308,8 +308,8 @@ async function addBoard() {
                 dueDate: Date.now(),
                 notes: [
                     {
-                        txt:'dont forget about this',
-                        member:'Roei Arazi'
+                        txt: 'dont forget about this',
+                        member: 'Roei Arazi'
                     }
                 ],
                 lastUpdated: 'yesterday',
@@ -395,8 +395,8 @@ async function addGroup(boardId) {
             dueDate: 214124124125,
             notes: [
                 {
-                    txt:'dont forget about this',
-                    member:'Roei Arazi'
+                    txt: 'dont forget about this',
+                    member: 'Roei Arazi'
                 }
             ],
             lastUpdated: 'yesterday',
@@ -433,10 +433,10 @@ async function removeTask(taskId) {
     })
 }
 
-async function addTask(groupId) {
+async function addTask(groupId, taskName = 'Change Task Name') {
     const task = {
         id: _makeid(),
-        name: 'sneeze',
+        name: taskName,
         createdAt: 1123124124241,
         members: [{
             _id: 1234,
@@ -448,8 +448,8 @@ async function addTask(groupId) {
         dueDate: 214124124125,
         notes: [
             {
-                txt:'dont forget about this',
-                member:'Roei Arazi'
+                txt: 'dont forget about this',
+                member: 'Roei Arazi'
             }
         ],
         lastUpdated: 'yesterday',

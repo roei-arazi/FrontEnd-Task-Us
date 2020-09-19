@@ -6,7 +6,6 @@ import { Tooltip, Zoom } from '@material-ui/core';
 import { RiDeleteBin2Line } from 'react-icons/ri'
 
 import ContentEditable from 'react-contenteditable';
-import { BiMessageAltAdd } from 'react-icons/bi';
 
 
 export class Group extends Component {
@@ -16,6 +15,7 @@ export class Group extends Component {
     }
 
     componentDidMount() {
+        this.elInputAdd = React.createRef();
         this.contentEditable = React.createRef();
         this.setState({ ...this.props.group })
     }
@@ -50,7 +50,7 @@ export class Group extends Component {
 
                                     </div>
                                 </Tooltip>
-                                <h1 className="group-title">
+                                <h1 style={{ color: this.state.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}
                                         className="content-editable cursor-initial"
@@ -90,8 +90,10 @@ export class Group extends Component {
                                     {...provided.droppableProps}
                                 >
                                     {this.props.group.tasks.map((task, index) => {
-                                        return <Task onToggleUpdates={this.props.onToggleUpdates} onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id}
-                                            task={task} users={this.props.users} />
+                                        return <Task onToggleUpdates={this.props.onToggleUpdates}
+                                            onEditTask={this.props.onEditTask} index={index}
+                                            onRemoveTask={this.props.onRemoveTask} key={task.id}
+                                            group={this.props.group} task={task} users={this.props.users} />
                                     })}
                                     {provided.placeholder}
 
@@ -99,14 +101,15 @@ export class Group extends Component {
                             }
                         </Droppable>
 
-                        <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Add New Task" arrow>
-                            <div className='icon-container rotate180'>
-                                <BiMessageAltAdd onClick={() => {
-                                    this.props.onAddTask(this.props.group.id)
-                                }} />
-                            </div>
-                        </Tooltip>
-
+                        <div className="task task-add">
+                            <form onSubmit={(ev) => {
+                                ev.preventDefault()
+                                this.props.onAddTask(this.props.group.id, this.elInputAdd.current.value)
+                                this.elInputAdd.current.value = ''
+                            }} action="">
+                                <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
+                            </form>
+                        </div>
                     </section>
                 }
             </Draggable>

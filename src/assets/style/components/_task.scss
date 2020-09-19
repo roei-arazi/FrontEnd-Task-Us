@@ -1,8 +1,8 @@
 .task {
     display: flex;
     background-color: $colorTask;
-    margin-bottom: 10px;
-    height: 65px;
+    margin-bottom: 2px;
+    height: 40px;
     border-radius: 1px;
 
     .users-modal {
@@ -38,10 +38,10 @@
         width: 100%;
         background-color: $colorDatePicker;
         border: 0;
-        padding: 7.5px 0;
+        padding-top: 7.5px;
+        padding-bottom: 7.5px;
         border-radius: 1px;
         text-align: center;
-        cursor: pointer;
     }
 }
 
@@ -73,6 +73,14 @@
 .drag {
     transition: 0.3s;
     border: 2px black solid
+}
+
+.task-left {
+    .task-color {
+        background: red;
+        width: 7px;
+        height: 40px;
+    }
 }
 
 .task-right {
@@ -180,4 +188,13 @@
 
 .high {
     background-color: #515243
+}
+
+.stuck,
+.working,
+.done,
+.low,
+.medium,
+.high {
+    color: #f1f1f1;
 }
