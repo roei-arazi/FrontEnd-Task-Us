@@ -43,10 +43,6 @@ class _Login extends Component {
                         <legend>Username *</legend>
                         <Field className="sign-login-input" type="text" name="username" />
                     </section>
-                    <section>
-                        <legend>Email *</legend>
-                        <Field className="sign-login-input" type="text" name="email" />
-                    </section>
                     <ErrorMessage name="email" component="span" />
                     <section>
                         <legend>Password *</legend>

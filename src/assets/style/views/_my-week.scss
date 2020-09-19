@@ -3,8 +3,9 @@
 }
 
 .search-container {
-    margin: 0 auto;
-    width: 80%;
+    width: 95%;
+    padding-left: 15px;
+    padding-right: 50px; 
 }
 
 .my-week-container {
@@ -46,10 +47,8 @@
 .my-week-header {
     margin: 5vh 0px;
     height: 15vh;
-
+    width: 500px;
     div {
-        width: 50%;
-
         h1 {
             margin: auto;
         }
@@ -115,6 +114,11 @@
             color: $colorFontNav;
         } 
     }
+}
+
+.greeting-container{ 
+    width: 90%;
+    margin-left: 50px;
 }
 
 .no-tasks {

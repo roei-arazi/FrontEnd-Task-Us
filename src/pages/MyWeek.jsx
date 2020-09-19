@@ -67,19 +67,23 @@ class _MyWeek extends Component {
     render() {
         let upcomingTasks = this.getUpcomingTasks(7);
         const { searchVal, isOrderReversed } = this.state;
+        const firstName = this.props.loggedUser.fullName.split(' ')[0]
         if (searchVal) upcomingTasks = upcomingTasks.filter(task => task.name.toLowerCase().includes(searchVal.toLocaleLowerCase()))
         return (
             <section className="my-week flex">
                 <Navbar />
-                <Boardbar /><div className="my-week-container flex column space around ">
+                <Boardbar /><div className="my-week-container flex column space around">
                     <div className="my-week-header flex column space-around">
                         <div className="flex align-center space-around">
                             <img src="my-week-calendar.png" alt="" />
-                            <h1>My week</h1>
+                            <section className="greeting-container">
+                                <h1>{`Hey ${firstName},`}</h1>
+                                <h1>Welcome to My Week</h1>
+                            </section>
                         </div>
-                        <h2>Upcoming tasks</h2>
                     </div>
                     <div className="search-container flex space-between align-center">
+                        <h2>Upcoming:</h2>
                         <input onChange={this.handleChange} value={searchVal} type="text" placeholder="search" />
                         {isOrderReversed ?
                             <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
@@ -123,7 +127,8 @@ class _MyWeek extends Component {
 
 const mapStateToProps = state => {
     return {
-        boards: state.boardReducer.boards
+        boards: state.boardReducer.boards,
+        loggedUser: state.userReducer.loggedUser
     }
 }
 

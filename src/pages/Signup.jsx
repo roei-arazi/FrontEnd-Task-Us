@@ -4,7 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
 import { Tooltip, Zoom } from '@material-ui/core';
-import {signup} from '../store/actions/userActions.js'
+import {signup, guestLogin} from '../store/actions/userActions.js'
 
 class _Signup extends Component {
 
@@ -14,7 +14,8 @@ class _Signup extends Component {
 
     onSignup = async (values, {resetForm}) => {
         resetForm();
-        await this.props.login(values);
+        const {username, password, email} = values;
+        await this.props.signup({username, password, email});
         if(this.props.loggedUser)   this.props.history.push('/board/123')
     }
 
@@ -35,7 +36,7 @@ class _Signup extends Component {
                     if (!formValues.username) errors.username = 'Required';
                     if (!formValues.password) errors.password = 'Required';
                     if (formValues.confirm !== formValues.password) errors.confirm = 'Doesn\'t match password';
-                    if (!re.test(formValues.email)) errors.email = 'Invalid email address'
+                    if (!re.test(formValues.email.toLowerCase())) errors.email = 'Invalid email address'
                     return errors;
                 }}
                 onSubmit={this.onSignup}
@@ -46,7 +47,11 @@ class _Signup extends Component {
                         <legend>Username *</legend>
                         <Field className="sign-login-input"type="text" name="username" />
                     </section> 
-                    <ErrorMessage name="username" component="span" />
+                    <section>
+                        <legend>Email *</legend>
+                        <Field className="sign-login-input" type="text" name="email" />
+                    </section>
+                    <ErrorMessage name="email" component="span" />
                     <section>
                         <legend>Password *</legend>
                     <Field className="sign-login-input" type="text" name="password" />
@@ -54,7 +59,7 @@ class _Signup extends Component {
                     <ErrorMessage name="password" component="span" />
                     <section>
                         <legend>Confirm password *</legend>
-                    <Field className="sign-login-input" type="text" name="password" />
+                    <Field className="sign-login-input" type="text" name="confirm" />
                     </section>
                     <ErrorMessage name="confirm" component="span" />
                     <button type="submit">Signup</button>
@@ -79,6 +84,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     signup,
+    guestLogin
 }
 
 export const Signup = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Signup));

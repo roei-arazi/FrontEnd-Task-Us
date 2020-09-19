@@ -117,6 +117,7 @@ async function signup(userCred) {
         ...userCred
     }
     users.push(user);
+    return user;
 }
 
 async function guestLogin() {
