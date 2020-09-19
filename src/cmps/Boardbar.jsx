@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { HiOutlineCog } from 'react-icons/hi';
 import { BsFilePlus } from 'react-icons/bs';
-import {FaArrowsAltH} from 'react-icons/fa'
+import { FaArrowsAltH } from 'react-icons/fa';
+import { Tooltip, Zoom } from '@material-ui/core';
 
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
@@ -45,20 +46,28 @@ class _Boardbar extends Component {
         }
     }
 
+    onToggleShown = () => {
+        this.setState({ isShown: !this.state.isShown })
+    }
+
     render() {
         const { boards, isSnackbarShown } = this.props
         const { anchorEl, selectedBoardId, isShown } = this.state;
         console.log('isSnackbarShown', isSnackbarShown);
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
-                <FaArrowsAltH className="board-bar-toggle" />
-                <div className="boardbar-header">
+                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Toggle board bar" arrow>
+                    <div className="board-bar-toggle-container">
+                        <FaArrowsAltH onClick={this.onToggleShown} className="board-bar-toggle" />
+                    </div>
+                </Tooltip>
+                {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
                     <BsFilePlus onClick={this.props.addBoard} />
-                </div>
-                <input type="text" placeholder="Search Board" />
+                </div>}
+                {isShown && <input type="text" placeholder="Search Board" />}
                 <ul>
-                    {boards.map((board, idx) => {
+                    {isShown && boards.map((board, idx) => {
                         return <li
                             className="flex align-center"
 

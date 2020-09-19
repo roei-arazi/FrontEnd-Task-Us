@@ -12,76 +12,62 @@
     z-index: 2;
     display: flex;
     align-items: center;
-    overflow: hidden;
- 
-    &.board-bar-shown{
-    width: 150px;
-    padding: 15px;
-    padding-left: 10px;
-    overflow: visible;
+    // overflow: hidden;
+    transition: width .3s;
+    &.board-bar-shown {
+        width: 150px;
+        padding: 15px;
+        padding-left: 10px;
+        overflow: visible;
     }
-
-    .board-bar-toggle{
+    .board-bar-toggle-container {
         position: absolute;
         right: 0px;
         transform: translate(50%, 0);
-        transition: transform .3s; 
-        &:hover{
-            transform: translate(50%, 0), rotate(180deg);
+        svg {
+            transition: transform .3s;
+        } 
+        &:hover svg { 
+            transform: rotate(180deg);
         }
     }
-
     svg {
         font-size: 25px;
         color: $colorIconsBoardBars;
     }
-
     .boardbar-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
         margin-bottom: 15px;
-
         button {
             display: flex;
             padding: 5px;
             height: fit-content;
             border-radius: 50%;
-
         }
-
-
-
     }
-
-
     li,
     input {
         margin-bottom: 15px;
     }
-
     h4 {
         cursor: pointer;
     }
-
     input {
         width: 90%;
     }
-
     ul {
         padding: 0;
         max-height: 80%;
         overflow: overlay;
     }
-
     ul {
         align-self: flex-start;
-
         svg {
             margin-right: 5px;
             font-size: 15px;
         }
     }
-
 }
