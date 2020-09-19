@@ -40,10 +40,10 @@ class _Filter extends Component {
         return (
             <div className="filter-modal flex absolute">
 
-                <section className="group-name-filter">
+                <section className="group-name-filter flex column align-center">
                     <h3>Groups</h3>
                     <div className="groups">                      
-                        {groups.map((group, idx) => <p key={idx} onClick={() => this.filterGroups(group.id)}>{group.name}</p>)}
+                        {groups.map((group, idx) => <button key={idx} onClick={() => this.filterGroups(group.id)}>{group.name}</button>)}
                     </div>
 
                     {/* <div className="selected-groups" style={{ backgroundColor: "white" }}>
@@ -53,19 +53,19 @@ class _Filter extends Component {
                         </div> */}
                 </section>
 
-                <section className="task-name-filter">
+                <section className="task-name-filter flex column align-center">
                     <h3>Tasks</h3>
                 </section>
-                <section className="task-member-filter">
+                <section className="task-member-filter flex column align-center">
                     <h3>Member</h3>
                 </section>
-                <section className="task-priority-filter">
+                <section className="task-priority-filter flex column align-center">
                     <h3>Priority</h3>
                 </section>
-                <section className="task-status-filter">
+                <section className="task-status-filter flex column align-center">
                     <h3>Status</h3>
                 </section>
-                <section className="task-date-filter">
+                <section className="task-date-filter flex column align-center">
                     <h3>Due-Date</h3>
                 </section>
             </div>

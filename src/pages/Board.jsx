@@ -67,6 +67,7 @@ class _Board extends Component {
         } catch (err) {
             console.log('Error', err)
         }
+        this.props.history.push(`/board/${this.state.boardId}`)
     }
     onRemoveGroup = async (groupId) => {
         try {
@@ -203,19 +204,19 @@ class _Board extends Component {
         const users = this.props.users
         if (!board) return <h1>Loading..</h1>
         const searchParams = queryString.parse(this.props.location.search)
-        let filteredBoard = board;
+        let filteredBoard = JSON.parse(JSON.stringify(board));
         if (searchParams.groupId) {
-            filteredBoard = { ...board, groups: board.groups.filter(group => group.id === searchParams.groupId) }
+            filteredBoard = { ...filteredBoard, groups: filteredBoard.groups.filter(group => group.id === searchParams.groupId) }
         }
         if (this.state.txt) {
             filteredBoard = {
                 ...filteredBoard,
                 groups: filteredBoard.groups.map(group =>{
-                    group.tasks = group.tasks.filter(task => task.name.toLowerCase().includes(this.state.txt.toLowerCase()))
+                    group.tasks = group.tasks.filter(task => task.name.toLowerCase().includes(this.state.txt.toLowerCase())        
+                        )
                     return group;
                 })
             }
-            console.log(filteredBoard);
         }
 
         board.members = users

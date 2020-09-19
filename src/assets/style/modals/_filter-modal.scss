@@ -4,5 +4,31 @@
     min-height:400px;
     top:30px;
     right:0;
-    background-color: $colorMainNav;
+    background-color: $colorBg;
+    border-radius: 5px;
+    border:2px solid $colorBgBoardBars;
+    padding:0 15px 10px 0;
+
+    >*{
+        width:100px;
+        margin: 0 10px;
+
+        h3{
+            color:$colorBgBoardBars;
+            margin:10px 0;
+        }
+
+        button{
+            padding: 5px 10px;
+            width:100%;
+            background-color: $colorBgBoardBars;
+            color:$colorFontNav;
+            margin-bottom:5px;
+        }
+        button:hover{
+            background-color: $colorIconsTasksHover;
+        }
+    }
+
+
 }
