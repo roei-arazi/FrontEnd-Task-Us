@@ -143,14 +143,22 @@
 
 .updates-images {
     height:100%;
+  
 
     .image-list{
-        margin-top: 20px;
+        margin: 50px 10px 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(200px, 1fr));
+        grid-gap:10px;
     }
 
     .updates-image {
-        width: 50%;
-        padding: 10px;
+        width: 100%;
+
+        img{
+            height: 200px;
+
+        }
     }
 
     label {
