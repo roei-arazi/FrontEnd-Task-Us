@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
-import { FaCog } from 'react-icons/fa';
-import { IoIosAddCircle } from 'react-icons/io';
+import { HiOutlineCog } from 'react-icons/hi';
+import { BsFilePlus } from 'react-icons/bs';
 
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
@@ -52,7 +52,7 @@ class _Boardbar extends Component {
 
                 <div className="boardbar-header">
                     <h1>Boards</h1>
-                    <IoIosAddCircle onClick={this.props.addBoard} />
+                    <BsFilePlus onClick={this.props.addBoard} />
                 </div>
                 <input type="text" placeholder="Search Board" />
                 <ul>
@@ -61,7 +61,7 @@ class _Boardbar extends Component {
                             className="flex align-center"
 
                             key={idx}>
-                            <FaCog onClick={(ev) => this.handleMenuOpen(ev, board._id)} />
+                            <HiOutlineCog onClick={(ev) => this.handleMenuOpen(ev, board._id)} />
 
                             <h4 onClick={() => this.onMoveToBoard(board._id)}>{board.name}</h4>
                         </li>
