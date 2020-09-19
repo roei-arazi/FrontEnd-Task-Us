@@ -22,7 +22,7 @@ class _Board extends Component {
 
     state = {
         boardId: '',
-        txt:''
+        txt: ''
     }
 
     async componentDidMount() {
@@ -194,8 +194,8 @@ class _Board extends Component {
         }
     }
 
-    handleSearch=(ev)=>{
-        this.setState({txt: ev.target.value})
+    handleSearch = (ev) => {
+        this.setState({ txt: ev.target.value })
     }
 
     render() {
@@ -203,17 +203,19 @@ class _Board extends Component {
         const users = this.props.users
         if (!board) return <h1>Loading..</h1>
         const searchParams = queryString.parse(this.props.location.search)
-        let filteredBoard=board;
-        if(searchParams.groupId){
-            filteredBoard = {...board,groups:board.groups.filter(group => group.id === searchParams.groupId)}
+        let filteredBoard = board;
+        if (searchParams.groupId) {
+            filteredBoard = { ...board, groups: board.groups.filter(group => group.id === searchParams.groupId) }
         }
-        if(this.state.txt){
-            filteredBoard= {...filteredBoard,
-                groups:filteredBoard.groups.map(group=> 
-                    group.tasks.filter(task=>{task.name.toLowerCase().includes(this.state.txt.toLowerCase()) 
-                console.log(task.name)
-                console.log(this.state.txt)}))}
-        console.log(filteredBoard);
+        if (this.state.txt) {
+            filteredBoard = {
+                ...filteredBoard,
+                groups: filteredBoard.groups.map(group =>{
+                    group.tasks = group.tasks.filter(task => task.name.toLowerCase().includes(this.state.txt.toLowerCase()))
+                    return group;
+                })
+            }
+            console.log(filteredBoard);
         }
 
         board.members = users
@@ -223,8 +225,8 @@ class _Board extends Component {
                 <Navbar />
                 <Boardbar />
                 <div className="board-container">
-                    <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard} 
-                    handleSearch={this.handleSearch} />
+                    <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
+                        handleSearch={this.handleSearch} />
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
