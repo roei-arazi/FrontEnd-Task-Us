@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import queryString from 'query-string'
 
 import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
@@ -84,7 +85,7 @@ class _Board extends Component {
             await this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
-            console.log('Error', err) 
+            console.log('Error', err)
         }
     }
 
@@ -195,6 +196,11 @@ class _Board extends Component {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         const users = this.props.users
         if (!board) return <h1>Loading..</h1>
+        const searchParams = queryString.parse(this.props.location.search)
+        let filteredBoard=board;
+        if(searchParams.groupId){
+            filteredBoard = {...board,groups:board.groups.filter(group => group.id === searchParams.groupId)}
+        }
         board.members = users
         console.log('rendering board:', board);
         return (
@@ -212,7 +218,7 @@ class _Board extends Component {
                                     <div className={`group-list`}
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}>
-                                        {board.groups.map((group, index) => {
+                                        {filteredBoard.groups.map((group, index) => {
                                             return <Group key={group.id} index={index}
                                                 onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                                                 onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} group={group} users={users} />
