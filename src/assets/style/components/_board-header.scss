@@ -17,6 +17,18 @@
         }
     }
 
+    button {
+        color: $colorFontTaskGroup;
+        font-weight: 700;
+        background-color: $colorMainNav;
+        font-size: 0.8rem;
+        padding: 12px 8px;
+
+        &:hover {
+            background-color: $colorIconsBoardBarsHover;
+        }
+    }
+
     .col-right {
         svg {
             font-size: 25px;
