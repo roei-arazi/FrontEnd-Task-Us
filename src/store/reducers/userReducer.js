@@ -10,8 +10,8 @@ const initialState = {
         isAdmin: true,
         boards: [{ id: '212', name: 'board1' }],
         notifications: [
-            { isRead: false, content: "notification liam" },
-            { isRead: false, content: "notification doll" }
+            { isRead: false, content: "notification liam", byUser: {_id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100'} },
+            { isRead: false, content: "notification doll", byUser: {_id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100'}  }
         ],
         birthDay: '2nd August 1997',
         company: 'adidas',

@@ -20,6 +20,7 @@ export class Notifications extends Component {
 
     render() {
         if (!this.state.users) return <h1>Loading...</h1>
+        const {loggedUser} = this.props;
         return (
 
             <Fade in={this.state.isModalOpen}>
@@ -29,24 +30,23 @@ export class Notifications extends Component {
                         <MdDeleteSweep />
                     </header>
                     <div className="notifications-container">
-                        {this.state.users.map(user => {
+                        {loggedUser.notifications.map((notification, idx)=> {
                             return (
-                                <div key={user._id} className="notification flex ">
+                                <div key={idx} className="notification flex ">
                                     <div className="user-img-container">
-                                        <img src={user.imgUrl} alt="profile" />
+                                        <img src={notification.byUser.imgUrl} alt="profile" />
                                     </div>
                                     <div className="notification-msg flex align-center column">
                                         <h2>
                                             <Truncate lines={1} ellipsis={"..."} width={350}>
-                                                {user.fullName}
+                                                {notification.byUser.fullName}
                                             </Truncate>
                                         </h2>
                                         <p>
                                             <Truncate lines={1} ellipsis={"..."} width={350}>
-                                                {user.fullName} changedmyyy wtf wtf wtf wcafffffffffffffffffffffffffffcacv shitxxxxxxxxxffffffffffffff something@@@@@@@@@@@@@@@@@@@@@@@@@@
+                                                {notification.byUser.fullName + ' ' + notification.content}
                                             </Truncate>
                                         </p>
-
                                         <div>
                                             <p>a day ago</p>
                                         </div>
