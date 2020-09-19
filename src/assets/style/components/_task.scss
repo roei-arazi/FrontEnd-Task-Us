@@ -85,6 +85,7 @@
 
 .task-right {
     height: 100%;
+    margin-right:10px;
 
     >* {
         width: 100px;
@@ -136,12 +137,37 @@
 
 }
 
+.updates-header{
+    margin-bottom: 20px;
+}
+
 .updates-images {
     height:100%;
+
+    .image-list{
+        margin-top: 20px;
+    }
+
     .updates-image {
         width: 50%;
         padding: 10px;
     }
+
+    label {
+        font-family: font1;
+        padding: 15px;
+        color: $colorFontNav;
+        background-color: $buttonColorCTA;
+        border: 0;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 2px;
+        transition: .3s;
+      
+        &:hover {
+          background-color: rgba($colorIconsBoardBarsHover, .2);
+        }
+      }
 
 }
 
