@@ -84,6 +84,7 @@ let boards = [{
     }],
     activityLog: [{
         createdAt: 124124125124,
+        id: _makeid(),
         byUser: {
             _id: 'asfasdw12412d1wd',
             fullName: 'Liam Zety',
@@ -97,6 +98,7 @@ let boards = [{
     },
     {
         createdAt: 12412541251,
+        id: _makeid(),
         byUser: {
             _id: 'asfasdw12412d1wd',
             fullName: 'Liam Zety',
@@ -110,6 +112,7 @@ let boards = [{
     },
     {
         createdAt: 4514512352135,
+        id: _makeid(),
         byUser: {
             _id: 'asfasdw12412d1wd',
             fullName: 'Liam Zety',
@@ -171,6 +174,7 @@ let boards = [{
         },]
     },],
     activityLog: [{
+        id: _makeid(),
         createdAt: 124124125124,
         byUser: {
             _id: 123,
@@ -320,6 +324,7 @@ async function addBoard() {
             }]
         }],
         activityLog: [{
+            id: _makeid(),
             createdAt: 124124125124,
             byUser: {
                 _id: 123,

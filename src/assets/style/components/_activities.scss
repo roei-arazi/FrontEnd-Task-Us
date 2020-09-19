@@ -1,0 +1,21 @@
+.activities {
+    span {
+        color: $colorFontUserDetails;
+    }
+
+    .activitiy-desc-container {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 370px;
+    }
+
+    .user-img-container {
+        text-align: initial;
+
+        img {
+            height: auto;
+            width: 40px;
+        }
+    }
+}

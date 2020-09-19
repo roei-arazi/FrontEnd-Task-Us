@@ -1,11 +1,10 @@
 .side-modal {
     position: fixed;
     top: 0;
-    // right: 0;
     left: 100%;
     height: 100%;
     width: 500px;
-    background-color: $colorBgBoardBars;
+    background-color: $colorMainNav;
     z-index: 999;
     box-shadow: 10px -2px 18px 3px;
     transition: .3s ease-in;
@@ -13,5 +12,4 @@
 
 .animate-side-modal {
     transform: translate(-100%, 0);
-    animation: scale-in-ver-bottom;
 }
