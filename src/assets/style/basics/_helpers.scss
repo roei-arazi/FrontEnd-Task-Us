@@ -68,10 +68,19 @@
     cursor: initial;
 }
 
-.hide-long-txt {
-    max-width: 370px;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
+//----------Probably will not work on android------------
+//     .hide-long-txt {
+//     flex: 1;
+//     min-width: 0;
+
+//     >p {
+//         white-space: nowrap;
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+//     }
+// }
+//-----------Works on android but not the right code we need...--------------
+// display: -webkit-box;
+// -webkit-line-clamp: 1;
+// -webkit-box-orient: vertical;
+// overflow: hidden;

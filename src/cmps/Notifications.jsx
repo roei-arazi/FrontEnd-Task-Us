@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 // change from this file to the global state
 import { userService } from "../services/userService";
 import { Fade } from '@material-ui/core';
+import Truncate from 'react-truncate';
 import { MdDeleteSweep } from 'react-icons/md';
 export class Notifications extends Component {
 
@@ -35,12 +36,17 @@ export class Notifications extends Component {
                                         <img src={user.imgUrl} alt="profile" />
                                     </div>
                                     <div className="notification-msg flex align-center column">
-                                        <div>
-                                            <h2>{user.fullName}</h2>
-                                        </div>
-                                        <div>
-                                            <p>{user.fullName} changed something</p>
-                                        </div>
+                                        <h2>
+                                            <Truncate lines={1} ellipsis={"..."} width={350}>
+                                                {user.fullName}
+                                            </Truncate>
+                                        </h2>
+                                        <p>
+                                            <Truncate lines={1} ellipsis={"..."} width={350}>
+                                                {user.fullName} changedmyyy wtf wtf wtf wcafffffffffffffffffffffffffffcacv shitxxxxxxxxxffffffffffffff something@@@@@@@@@@@@@@@@@@@@@@@@@@
+                                            </Truncate>
+                                        </p>
+
                                         <div>
                                             <p>a day ago</p>
                                         </div>

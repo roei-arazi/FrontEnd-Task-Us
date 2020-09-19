@@ -46,8 +46,8 @@ export class BoardHeader extends React.Component {
         this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
     }
 
-    onToggleFilters =()=>{
-        this.setState({isFiltersOpen: !this.state.isFiltersOpen})
+    onToggleFilters = () => {
+        this.setState({ isFiltersOpen: !this.state.isFiltersOpen })
     }
 
     render() {
@@ -104,18 +104,18 @@ export class BoardHeader extends React.Component {
                     <button onClick={this.onToggleActivities}>ACTIVITIES</button>
 
                     <div className="filters-container relative">
-                    <button onClick={this.onToggleFilters}>Filters</button>
-                {this.state.isFiltersOpen && <Filter board={this.props.board} />}
+                        <button onClick={this.onToggleFilters}>Filters</button>
+                        {this.state.isFiltersOpen && <Filter board={this.props.board} />}
                     </div>
                 </div>
                 {this.state.isFiltersOpen && <div onClick={this.onToggleFilters} className='modal-screen-wrapper'></div>}
-                
+
                 {
                     this.state.isActivitiesOpen && <div onClick={this.onToggleActivities} className='modal-screen-wrapper'></div>
 
                 }
                 <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
-                    <Activities board={this.props.board} />
+                    <Activities onToggleActivities={this.onToggleActivities} board={this.props.board} />
                 </div>
             </section>
         )
