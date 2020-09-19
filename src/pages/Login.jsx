@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
 import { Tooltip, Zoom } from '@material-ui/core';
+import {login, signup, guestLogin} from '../store/actions/userActions.js'
 
 class _Login extends Component {
 
-    onLogin = () => {
+    componentDidMount(){
+        if(this.props.loggedUser)   this.props.history.push('/board/123')
+    }
 
+    onLogin = async (values, {resetForm}) => {
+        console.log('got function:', resetForm);
+        resetForm();
+        await this.props.login(values);
+        if(this.props.loggedUser)   this.props.history.push('/board/123')
     }
 
     render() {
@@ -26,18 +34,25 @@ class _Login extends Component {
                 onSubmit={this.onLogin}
             >
                 <Form className="login-form flex column align-center space-around">
-                    <h2>Login</h2>
-                    <Field label="Username:" type="text" name="username" />
+                    <FaUserCircle />
+                    <label>
+                        <legend>Username: </legend>
+                        <Field className="login-input" label="Username:" type="text" name="username" />
+                    </label>
                     <ErrorMessage name="username" component="span" />
-                    <Field label="Password:" type="text" name="password" />
+                    <label>
+                        <legend>Password: </legend>
+                    <Field className="login-input" label="Password:" type="text" name="password" />
+                    </label>
                     <ErrorMessage name="password" component="span" />
                     <button type="submit">Login</button>
                     <a href="/#/signup">Don't have an account? sign up here.</a>
+                    <button>Or try as a guest!</button>
                 </Form>
             </Formik>
             <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Back to home" arrow>
                 <div>
-                    <NavLink to="/"><FaArrowLeft /></NavLink>
+                    <NavLink to="/"><FaArrowLeft className="go-back" /></NavLink>
                 </div>
             </Tooltip>
         </div>
@@ -46,12 +61,14 @@ class _Login extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        loggedUser: state.userReducer.loggedUser
     }
 }
 
 const mapDispatchToProps = {
-
+    login,
+    signup,
+    guestLogin
 }
 
-export const Login = connect(mapStateToProps, mapDispatchToProps)(_Login);
+export const Login = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Login));

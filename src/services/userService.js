@@ -47,7 +47,8 @@ export const userService = {
     loadUsers,
     getUserById,
     login,
-    signup
+    signup,
+    guestLogin
 }
 
 async function loadUsers() {
@@ -93,6 +94,23 @@ async function signup(userCred){
         ...userCred
         }
     users.push(user);
+}
+
+async function guestLogin(){
+    const user = {
+        _id: _makeid(),
+        username: 'guest',
+        fullName: 'guest mcgee',
+        password: 'none',
+        imgUrl: 'https://via.placeholder.com/100',
+        isAdmin: true,
+        boards: [{id: '212', name: 'board1' }],
+        notifications: [],
+        birthDay: '2nd August 1997',
+        company: 'adidas',
+        phoneNumber: '0224132124',
+        
+        }
 }
 
 function _makeid(length = 7) {
