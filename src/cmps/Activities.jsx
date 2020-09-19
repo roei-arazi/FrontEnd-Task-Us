@@ -3,6 +3,7 @@ import moment from 'moment'
 import Truncate from 'react-truncate';
 import { Tooltip, Zoom } from '@material-ui/core';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { AiOutlineClose } from 'react-icons/ai';
 
 export default class Activities extends Component {
 
@@ -58,7 +59,7 @@ export default class Activities extends Component {
         return (
             <section className="activities flex column padding-y-15">
                 <header className="padding-x-15">
-                    <button onClick={this.props.onToggleActivities}>X</button>
+                    <AiOutlineClose onClick={this.props.onToggleActivities} />
                     <h1><span>{this.state.board.name}</span> Log</h1>
                     <div className="filters-container space-between flex align-center">
                         <input onChange={this.handleSearch} type="text" placeholder="Search" />
