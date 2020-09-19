@@ -3,13 +3,15 @@ import { BiAddToQueue } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@material-ui/core';
 import ContentEditable from 'react-contenteditable';
 import Activities from './Activities';
+import { Filter } from './Filter';
 
 
 export class BoardHeader extends React.Component {
 
     state = {
         _id: '',
-        isActivitiesOpen: false
+        isActivitiesOpen: false,
+        isFiltersOpen: false
     }
 
     componentDidMount() {
@@ -42,6 +44,10 @@ export class BoardHeader extends React.Component {
     }
     onToggleActivities = () => {
         this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
+    }
+
+    onToggleFilters =()=>{
+        this.setState({isFiltersOpen: !this.state.isFiltersOpen})
     }
 
     render() {
@@ -96,7 +102,14 @@ export class BoardHeader extends React.Component {
                         </div>
                     </Tooltip>
                     <button onClick={this.onToggleActivities}>ACTIVITIES</button>
+
+                    <div className="filters-container relative">
+                    <button onClick={this.onToggleFilters}>Filters</button>
+                {this.state.isFiltersOpen && <Filter board={this.props.board} />}
+                    </div>
                 </div>
+                {this.state.isFiltersOpen && <div onClick={this.onToggleFilters} className='modal-screen-wrapper'></div>}
+                
                 {
                     this.state.isActivitiesOpen && <div onClick={this.onToggleActivities} className='modal-screen-wrapper'></div>
 
