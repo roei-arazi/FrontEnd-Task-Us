@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { FaAd, FaBell, FaCalendar, FaPortrait } from 'react-icons/fa'
+import { FaAd, FaPortrait } from 'react-icons/fa'
+import { IoIosNotificationsOutline } from 'react-icons/io'
+import { BsCalendar } from 'react-icons/bs'
+import { CgProfile } from 'react-icons/cg'
 import { Notifications } from './Notifications';
 
 class _Navbar extends Component {
@@ -27,16 +30,16 @@ class _Navbar extends Component {
                     {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
                     <div className="icon-container" >
                         {isNotificationShown && <Notifications loggedUser={this.props.loggedUser} />}
-                        <FaBell onClick={this.toggleNotifications} />
+                        <IoIosNotificationsOutline onClick={this.toggleNotifications} />
                     </div>
                 </ul>
 
                 <ul className="navbar-links flex column space-around">
                     <NavLink to="/myweek">
-                        <div className="icon-container"><FaCalendar /></div>
+                        <div className="icon-container"><BsCalendar /></div>
                     </NavLink>
                     <NavLink to={`/user/${loggedUser._id}`}>
-                        <li><FaPortrait /></li>
+                        <li><CgProfile /></li>
                     </NavLink>
                 </ul>
             </section>

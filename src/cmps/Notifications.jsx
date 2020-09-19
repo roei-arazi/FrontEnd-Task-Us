@@ -31,7 +31,7 @@ export class Notifications extends Component {
                     <div className="notifications-container">
                         {this.state.users.map(user => {
                             return (
-                                <div className="notification flex ">
+                                <div key={user._id} className="notification flex ">
                                     <div className="user-img-container">
                                         <img src={user.imgUrl} alt="profile" />
                                     </div>
