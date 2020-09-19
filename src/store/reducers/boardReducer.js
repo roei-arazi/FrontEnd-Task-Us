@@ -1,5 +1,6 @@
 const initialState = {
-    boards: []
+    boards: [],
+    filterBy:{}
 }
 
 export function boardReducer(state = initialState, action) {

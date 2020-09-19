@@ -16,6 +16,18 @@
         color: $colorFontTaskGroup;
     }
 
+    .hide-long-txt {
+        flex: 1;
+        min-width: 0;
+
+        >p,
+        >h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
     header {
         margin-bottom: 20px;
         width: 95%;
