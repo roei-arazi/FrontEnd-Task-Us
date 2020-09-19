@@ -1,8 +1,8 @@
 .boardbar {
-    min-width: 150px;
-    width: 150px;
+    // min-width: 150px;
+    position: relative;
     height: 100vh;
-    padding-left: 10px;
+    width: 0px;
     background-color: $colorBgBoardBars;
     padding-top: 20px;
     border-right: 1px solid rgba($colorFontTaskGroup, .35);
@@ -12,6 +12,24 @@
     z-index: 2;
     display: flex;
     align-items: center;
+    overflow: hidden;
+ 
+    &.board-bar-shown{
+    width: 150px;
+    padding: 15px;
+    padding-left: 10px;
+    overflow: visible;
+    }
+
+    .board-bar-toggle{
+        position: absolute;
+        right: 0px;
+        transform: translate(50%, 0);
+        transition: transform .3s; 
+        &:hover{
+            transform: translate(50%, 0), rotate(180deg);
+        }
+    }
 
     svg {
         font-size: 25px;

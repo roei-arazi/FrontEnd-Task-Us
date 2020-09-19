@@ -9,17 +9,14 @@ import { MdDeleteSweep } from 'react-icons/md';
 export class Notifications extends Component {
 
     state = {
-        users: null,
         isModalOpen: null
     }
 
     async componentDidMount() {
-        const users = await userService.loadUsers()
-        this.setState({ users, isModalOpen: true })
+        this.setState({isModalOpen: true })
     }
 
     render() {
-        if (!this.state.users) return <h1>Loading...</h1>
         const {loggedUser} = this.props;
         return (
 
@@ -44,7 +41,7 @@ export class Notifications extends Component {
                                         </h2>
                                         <p>
                                             <Truncate lines={1} ellipsis={"..."} width={350}>
-                                                {notification.byUser.fullName + ' ' + notification.content}
+                                                {notification.content}
                                             </Truncate>
                                         </p>
                                         <div>

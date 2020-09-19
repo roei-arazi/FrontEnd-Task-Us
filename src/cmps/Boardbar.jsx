@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { HiOutlineCog } from 'react-icons/hi';
 import { BsFilePlus } from 'react-icons/bs';
+import {FaArrowsAltH} from 'react-icons/fa'
 
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
@@ -12,7 +13,8 @@ class _Boardbar extends Component {
     state = {
         anchorEl: null,
         selectedBoardId: '',
-        isSnackbarOpen: false
+        isSnackbarOpen: false,
+        isShown: true
     }
     onMoveToBoard(id) {
         this.props.history.push(`/board/${id}`)
@@ -45,11 +47,11 @@ class _Boardbar extends Component {
 
     render() {
         const { boards, isSnackbarShown } = this.props
-        const { anchorEl, selectedBoardId } = this.state;
+        const { anchorEl, selectedBoardId, isShown } = this.state;
         console.log('isSnackbarShown', isSnackbarShown);
         return (
-            <section className="boardbar padding-x-15 padding-y-15 fixed column">
-
+            <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
+                <FaArrowsAltH className="board-bar-toggle" />
                 <div className="boardbar-header">
                     <h1>Boards</h1>
                     <BsFilePlus onClick={this.props.addBoard} />
