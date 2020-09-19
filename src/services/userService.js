@@ -1,45 +1,54 @@
 let users = [{
-        _id: 'asfasdfq12d1wd',
-        username: 'frize',
-        fullName: 'Roei Arazi',
-        password: '3333',
-        email: 'frize@gmail.com',
-        imgUrl: 'https://via.placeholder.com/100',
-        isAdmin: true,
-        boards: [{ id: '212', name: 'board1' }],
-        notifications: [],
-        birthDay: '2nd August 1997',
-        company: 'adidas',
-        phoneNumber: '0224132124'
-    },
-    {
-        _id: 'asfasdfqw12412d1',
-        username: 'anstrio',
-        fullName: 'Osher Kabada',
-        password: '2222',
-        email: 'anstrio@gmail.com',
-        imgUrl: 'https://via.placeholder.com/100',
-        isAdmin: true,
-        boards: [{ id: '212', name: 'board1' }],
-        notifications: [],
-        birthDay: '2nd August 1997',
-        company: 'adidas',
-        phoneNumber: '0224127124'
-    },
-    {
-        _id: 'asfasdw12412d1wd',
-        username: 'smoking',
-        fullName: 'Liam Zety',
-        password: '1111',
-        email: 'smoking@gmail.com',
-        imgUrl: 'https://via.placeholder.com/100',
-        isAdmin: true,
-        boards: [{ id: '212', name: 'board1' }],
-        notifications: [],
-        birthDay: '2nd August 1997',
-        company: 'adidas',
-        phoneNumber: '0224112124'
-    }
+    _id: 'asfasdfq12d1wd',
+    username: 'frize',
+    fullName: 'Roei Arazi',
+    password: '3333',
+    email: 'frize@gmail.com',
+    imgUrl: 'https://via.placeholder.com/100',
+    isAdmin: true,
+    boards: [{ id: '212', name: 'board1' }],
+    notifications: [
+        { isRead: false, content: "notification roei" },
+        { isRead: false, content: "notification doll" }
+    ],
+    birthDay: '2nd August 1997',
+    company: 'adidas',
+    phoneNumber: '0224132124'
+},
+{
+    _id: 'asfasdfqw12412d1',
+    username: 'anstrio',
+    fullName: 'Osher Kabada',
+    password: '2222',
+    email: 'anstrio@gmail.com',
+    imgUrl: 'https://via.placeholder.com/100',
+    isAdmin: true,
+    boards: [{ id: '212', name: 'board1' }],
+    notifications: [
+        { isRead: false, content: "notification osher" },
+        { isRead: false, content: "notification doll" }
+    ],
+    birthDay: '2nd August 1997',
+    company: 'adidas',
+    phoneNumber: '0224127124'
+},
+{
+    _id: 'asfasdw12412d1wd',
+    username: 'smoking',
+    fullName: 'Liam Zety',
+    password: '1111',
+    email: 'smoking@gmail.com',
+    imgUrl: 'https://via.placeholder.com/100',
+    isAdmin: true,
+    boards: [{ id: '212', name: 'board1' }],
+    notifications: [
+        { isRead: false, content: "notification liam" },
+        { isRead: false, content: "notification doll" }
+    ],
+    birthDay: '2nd August 1997',
+    company: 'adidas',
+    phoneNumber: '0224112124'
+}
 ]
 
 export const userService = {
@@ -47,7 +56,8 @@ export const userService = {
     getUserById,
     login,
     signup,
-    guestLogin
+    guestLogin,
+    markAsRead
 }
 
 async function loadUsers() {
@@ -55,6 +65,20 @@ async function loadUsers() {
         return JSON.parse(JSON.stringify(users));
     } catch (err) {
         console.log('userService: Coulnd\'t get users');
+        throw err;
+    }
+}
+
+async function markAsRead(loggedUser) {
+    loggedUser.notifications.forEach(notification => {
+        notification.isRead = true
+    })
+    console.log('USER:u', loggedUser)
+    try {
+        return loggedUser
+
+    } catch (err) {
+        console.log('userService: Something went wrong');
         throw err;
     }
 }
@@ -113,7 +137,7 @@ async function guestLogin() {
     try {
         users.push(user);
         return user
-    }catch (err) {
+    } catch (err) {
         console.log('userService: Couldn\'t login as guest');
         throw err;
     }

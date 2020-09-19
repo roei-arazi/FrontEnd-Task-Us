@@ -56,8 +56,8 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    sendNote=async(notes)=>{
-        await this.setState({notes})
+    sendNote = async (notes) => {
+        await this.setState({ notes })
         this.props.onEditTask(this.state)
     }
 
@@ -79,18 +79,18 @@ class _Task extends Component {
         this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false, isUpdatesShown: false })
     }
 
-    onRemoveMemberFromTask = async(memberId) => {
+    onRemoveMemberFromTask = async (memberId) => {
         await this.setState({ members: this.state.members.filter(member => member._id !== memberId) })
         this.props.onEditTask(this.state)
     }
 
-    onAddUserToTask = async(userId) => {
+    onAddUserToTask = async (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
         await this.setState({ members: [...this.state.members, newUser] })
         this.props.onEditTask(this.state)
     }
 
-    goToUserProfile=(userId)=> {
+    goToUserProfile = (userId) => {
         this.props.history.push(`/user/${userId}`)
     }
 
@@ -107,11 +107,13 @@ class _Task extends Component {
 
         return (
             <React.Fragment>
-                <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal` }> 
-                <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
-                    notes={this.state.notes} uploadImg={this.uploadImg} sendNote={this.sendNote}
-                /></div>
-               
+                <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
+
+                    <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
+                        notes={this.state.notes} uploadImg={this.uploadImg} sendNote={this.sendNote}
+                    />
+                </div>
+
                 {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
                 <Draggable draggableId={this.state.id} index={this.props.index}>
                     {(provided, snapshot) => (
@@ -151,7 +153,7 @@ class _Task extends Component {
                             </div>
 
                             <div className="task-right flex align-center">
-                          
+
                                 <div onClick={() => this.openModal('notes')} className="notes-container"><BsChatDots /></div>
 
                                 <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}

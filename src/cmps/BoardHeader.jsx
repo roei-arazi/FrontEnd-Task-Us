@@ -108,15 +108,16 @@ export class BoardHeader extends React.Component {
                         {this.state.isFiltersOpen && <Filter board={this.props.board} />}
                     </div>
                 </div>
-                {this.state.isFiltersOpen && <div onClick={this.onToggleFilters} className='modal-screen-wrapper'></div>}
-
-                {
-                    this.state.isActivitiesOpen && <div onClick={this.onToggleActivities} className='modal-screen-wrapper'></div>
-
-                }
                 <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
                     <Activities onToggleActivities={this.onToggleActivities} board={this.props.board} />
                 </div>
+                {
+                    this.state.isFiltersOpen && <div onClick={this.onToggleFilters} className='modal-screen-wrapper'></div>
+                }
+
+                {
+                    this.state.isActivitiesOpen && <div onClick={this.onToggleActivities} className='modal-screen-wrapper'></div>
+                }
             </section>
         )
     }

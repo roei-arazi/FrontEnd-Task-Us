@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { FaAd, FaPortrait } from 'react-icons/fa'
-import { IoIosNotificationsOutline } from 'react-icons/io'
+import { FaAd } from 'react-icons/fa'
+import { VscBell, VscBellDot } from 'react-icons/vsc'
 import { BsCalendar } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
 import { Notifications } from './Notifications';
-
+import { markAsRead } from '../store/actions/userActions'
 class _Navbar extends Component {
     state = {
         isNotificationShown: false
     }
 
     toggleNotifications = () => {
+        this.onMarkAsRead()
         this.setState({ isNotificationShown: !this.state.isNotificationShown })
+    }
+    onMarkAsRead = () => {
+        this.props.markAsRead(this.props.loggedUser)
     }
 
     render() {
@@ -29,8 +33,20 @@ class _Navbar extends Component {
 
                     {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
                     <div className="icon-container" >
-                        {isNotificationShown && <Notifications loggedUser={this.props.loggedUser} />}
-                        <IoIosNotificationsOutline onClick={this.toggleNotifications} />
+
+                        <p className="notifications-counter cursor-pointer">
+                            {
+                                loggedUser.notifications.filter(notification => !notification.isRead).length === 0
+                                    ? ''
+                                    : loggedUser.notifications.filter(notification => !notification.isRead).length
+                            }
+                        </p>
+
+                        {isNotificationShown && <Notifications loggedUser={loggedUser} />}
+
+                        {loggedUser.notifications.some(notification => !notification.isRead)
+                            ? <VscBellDot onClick={this.toggleNotifications} />
+                            : <VscBell onClick={this.toggleNotifications} />}
                     </div>
                 </ul>
 
@@ -54,7 +70,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-
+    markAsRead
 }
 
 export const Navbar = connect(mapStateToProps, mapDispatchToProps)(_Navbar);

@@ -9,12 +9,15 @@ const initialState = {
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
         boards: [{ id: '212', name: 'board1' }],
-        notifications: [],
+        notifications: [
+            { isRead: false, content: "notification liam" },
+            { isRead: false, content: "notification doll" }
+        ],
         birthDay: '2nd August 1997',
         company: 'adidas',
         phoneNumber: '0224132124'
     },
-    userProfile:null
+    userProfile: null
 }
 
 export function userReducer(state = initialState, action) {
@@ -24,12 +27,12 @@ export function userReducer(state = initialState, action) {
                 ...state,
                 users: action.users
             }
-            case 'SHOW_PROFILE':
-                return {
-                    ...state,
-                    userProfile:action.user
-                }
-            case 'SET_USER':
+        case 'SHOW_PROFILE':
+            return {
+                ...state,
+                userProfile: action.user
+            }
+        case 'SET_USER':
             return {
                 ...state,
                 loggedUser: action.user

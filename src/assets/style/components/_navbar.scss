@@ -30,6 +30,18 @@
     .navbar-links {
         height: 25%;
     }
-}
 
-// 
+    .notifications-counter {
+        position: absolute;
+        right: -5px;
+        top: -3px;
+        font-size: 15px;
+        color: #b94444;
+        background: $colorIconsNav;
+        width: 20px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        border-radius: 40%;
+    }
+}

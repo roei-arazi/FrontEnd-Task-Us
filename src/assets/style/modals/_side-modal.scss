@@ -6,10 +6,21 @@
     width: 500px;
     background-color: $colorTask;
     z-index: 999;
-    box-shadow: 10px -2px 18px 3px;
-    transition: .3s ease-in;
+    transition: .4s;
+
+    &:hover+.modal-screen-wrapper {
+        transition: .2s ease-out;
+        background-color: #1f1d0987;
+    }
+
+    +.modal-screen-wrapper {
+        transition: .2s ease-out;
+        background-color: transparent;
+    }
+
 }
 
 .animate-side-modal {
+    transition: .4s;
     transform: translate(-100%, 0);
 }
