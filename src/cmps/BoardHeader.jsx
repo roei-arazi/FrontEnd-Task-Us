@@ -2,8 +2,7 @@ import React from 'react';
 import { BiAddToQueue } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@material-ui/core';
 import ContentEditable from 'react-contenteditable';
-//React animations
-// import { AnimateOnChange } from 'react-animation';
+import Activities from './Activities';
 
 
 export class BoardHeader extends React.Component {
@@ -103,8 +102,8 @@ export class BoardHeader extends React.Component {
 
                 }
                 <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
-                    activites
-                     </div>
+                    <Activities board={this.props.board} />
+                </div>
             </section>
         )
     }

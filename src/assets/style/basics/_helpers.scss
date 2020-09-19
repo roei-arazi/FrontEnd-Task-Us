@@ -67,3 +67,11 @@
 .cursor-initial {
     cursor: initial;
 }
+
+.hide-long-txt {
+    max-width: 370px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
