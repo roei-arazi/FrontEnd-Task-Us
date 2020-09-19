@@ -16,4 +16,63 @@
             color: $colorIconsBoardBarsHover;
         }
     }
+
+    .col-right {
+        svg {
+            font-size: 25px;
+        }
+
+        .search-outer-container {
+            flex-direction: row-reverse;
+        }
+
+        input {
+            width: 50px;
+            animation: shorten .4s;
+
+            +svg {
+                transition: .4s;
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            &:focus {
+                animation: widen .4s;
+                width: 200px;
+
+                +svg {
+                    transition: .4s;
+                    transform: translate(200px, 0) rotate(90deg);
+
+                }
+            }
+        }
+
+        >* {
+            margin-left: 30px;
+
+            >* {
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+@keyframes widen {
+    0% {
+        width: 50px;
+    }
+
+    100% {
+        width: 200px;
+    }
+}
+
+@keyframes shorten {
+    0% {
+        width: 200px;
+    }
+
+    100% {
+        width: 50px;
+    }
 }

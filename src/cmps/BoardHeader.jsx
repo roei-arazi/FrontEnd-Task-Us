@@ -1,6 +1,6 @@
 import React from 'react';
-import { BiAddToQueue } from 'react-icons/bi'
-import { Tooltip, Zoom } from '@material-ui/core';
+import { GoRequestChanges, GoSearch } from 'react-icons/go'
+import { VscListFilter } from 'react-icons/vsc'
 import ContentEditable from 'react-contenteditable';
 import Activities from './Activities';
 import { Filter } from './Filter';
@@ -11,7 +11,8 @@ export class BoardHeader extends React.Component {
     state = {
         _id: '',
         isActivitiesOpen: false,
-        isFiltersOpen: false
+        isFiltersOpen: false,
+        elSetting: null
     }
 
     componentDidMount() {
@@ -50,12 +51,20 @@ export class BoardHeader extends React.Component {
         this.setState({ isFiltersOpen: !this.state.isFiltersOpen })
     }
 
+    handleMenuOpen = (ev, boardId) => {
+        this.setState({ elSetting: ev.currentTarget })
+    }
+
+    handleMenuClose = () => {
+        this.setState({ elSetting: null })
+    }
+
     render() {
 
         if (!this.state._id) return <h1>Loading...</h1>
         return (
             <section className="board-header align-center padding-x-30 padding-y-30 ">
-                <div className="col flex column">
+                <div className="col-left flex column">
                     <h1>
                         <ContentEditable
                             onFocus={this.focusText}
@@ -95,18 +104,23 @@ export class BoardHeader extends React.Component {
                         />
                     </h5>
                 </div>
-                <div className="col flex align-center">
-                    <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Add Group" arrow>
-                        <div className='icon-container'>
-                            <BiAddToQueue onClick={this.props.onAddGroup} />
-                        </div>
-                    </Tooltip>
-                    <button onClick={this.onToggleActivities}>ACTIVITIES</button>
+                <div className="col-right flex align-center">
+                    <button onClick={this.props.onAddGroup}>Add New Group</button>
+                    <div className="search-outer-container flex align-center">
+                        <input placeholder="Search" type='text' />
+                        <GoSearch />
+                    </div>
+                    <div className="activities-outer-container flex align-center">
+                        <GoRequestChanges />
+                        <h2 onClick={this.onToggleActivities}>Activity Log</h2>
+                    </div>
 
-                    <div className="filters-container relative">
-                        <button onClick={this.onToggleFilters}>Filters</button>
+                    <div className="filters-outer-container relative flex align-center">
+                        <VscListFilter />
+                        <h2 onClick={this.onToggleFilters}>Filter</h2>
                         {this.state.isFiltersOpen && <Filter board={this.props.board} />}
                     </div>
+
                 </div>
                 <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
                     <Activities onToggleActivities={this.onToggleActivities} board={this.props.board} />
@@ -118,6 +132,7 @@ export class BoardHeader extends React.Component {
                 {
                     this.state.isActivitiesOpen && <div onClick={this.onToggleActivities} className='modal-screen-wrapper'></div>
                 }
+
             </section>
         )
     }
