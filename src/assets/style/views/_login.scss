@@ -1,6 +1,11 @@
 .login{
     background-color: $colorBg;
     height: 100vh;
+    svg{
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
 }
 
 .login-form{
@@ -13,5 +18,8 @@
     transform: translate(-50%, -50%);
     input, button{
         width: 90%;
+    }
+    a{
+        color: $colorFontNav;
     }
 }

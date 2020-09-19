@@ -45,14 +45,16 @@ let users = [
 
 export const userService = {
     loadUsers,
-    getUserById
+    getUserById,
+    login,
+    signup
 }
 
 async function loadUsers() {
     try {
         return JSON.parse(JSON.stringify(users));
     } catch (err) {
-        console.log('boardService: Coulnd\'t get users');
+        console.log('userService: Coulnd\'t get users');
         throw err;
     }
 }
@@ -62,7 +64,43 @@ async function getUserById(userId){
     try{
         return user
     }catch (err) {
-        console.log('boardService: Coulnd\'t get user');
+        console.log('userService: Coulnd\'t get user');
         throw err;
     }
+}
+
+async function login(userCred){
+    try{
+        const user = users.find(user => user.username === userCred.username && user.password === userCred.password);
+        if(!user) throw 'Wrong username or password'
+        return user;
+    }catch(err){
+        console.log('userService: Wrong username or password');
+        throw err;
+    }
+}
+
+async function signup(userCred){
+    const user = {
+        _id: _makeid(),
+        imgUrl: 'https://via.placeholder.com/100',
+        isAdmin: true,
+        boards: [{id: '212', name: 'board1' }],
+        notifications: [],
+        birthDay: '2nd August 1997',
+        company: 'adidas',
+        phoneNumber: '0224132124',
+        ...userCred
+        }
+    users.push(user);
+}
+
+function _makeid(length = 7) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
 }

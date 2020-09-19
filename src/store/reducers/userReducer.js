@@ -29,7 +29,11 @@ export function userReducer(state = initialState, action) {
                     ...state,
                     userProfile:action.user
                 }
-
+            case 'SET_USER':
+            return {
+                ...state,
+                loggedUser: action.user
+            }
         default:
             return state
     }

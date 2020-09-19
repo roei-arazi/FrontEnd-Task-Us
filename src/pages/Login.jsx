@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Tooltip, Zoom } from '@material-ui/core';
 
 class _Login extends Component {
 
@@ -21,7 +23,7 @@ class _Login extends Component {
                     if (!formValues.password) errors.password = 'Required';
                     return errors;
                 }}
-                onSubmit={this.onSubmit}
+                onSubmit={this.onLogin}
             >
                 <Form className="login-form flex column align-center space-around">
                     <h2>Login</h2>
@@ -33,6 +35,11 @@ class _Login extends Component {
                     <a href="/#/signup">Don't have an account? sign up here.</a>
                 </Form>
             </Formik>
+            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Back to home" arrow>
+                <div>
+                    <NavLink to="/"><FaArrowLeft /></NavLink>
+                </div>
+            </Tooltip>
         </div>
     }
 }
