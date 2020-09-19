@@ -3,7 +3,7 @@ import { BiAddToQueue } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@material-ui/core';
 import ContentEditable from 'react-contenteditable';
 //React animations
-import { AnimateOnChange } from 'react-animation';
+// import { AnimateOnChange } from 'react-animation';
 
 
 export class BoardHeader extends React.Component {

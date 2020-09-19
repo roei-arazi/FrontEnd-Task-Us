@@ -129,10 +129,30 @@
 }
 
 .updates-images {
-
+    height:100%;
     .updates-image {
         width: 50%;
         padding: 10px;
+    }
+
+}
+
+.updates-notes{
+    height:100%;
+
+    .notes-messages{
+
+        .notes-form{
+            width: 100%;            
+        }
+
+        .note-text{
+            width:90%;
+            background-color: $colorTask;
+            border-radius:7px;
+            padding: 10px;
+            margin: 10px;
+        }
     }
 }
 

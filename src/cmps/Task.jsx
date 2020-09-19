@@ -26,7 +26,7 @@ class _Task extends Component {
         isStatusShown: false,
         isPriorityShown: false,
         isUsersShown: false,
-        isNotesShown: false
+        isUpdatesShown: false
     }
 
     componentDidMount() {
@@ -64,7 +64,7 @@ class _Task extends Component {
         } else if (data === 'users') {
             this.setState({ isUsersShown: !this.state.isUsersShown })
         } else if (data === 'notes') {
-            this.setState({ isNotesShown: !this.state.isNotesShown })
+            this.setState({ isUpdatesShown: !this.state.isUpdatesShown })
         }
         else {
             this.setState({ isPriorityShown: !this.state.isPriorityShown })
@@ -72,16 +72,18 @@ class _Task extends Component {
     }
 
     closeModal = () => {
-        this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false, isNotesShown: false })
+        this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false, isUpdatesShown: false })
     }
 
-    onRemoveMemberFromTask = (memberId) => {
-        this.setState({ members: this.state.members.filter(member => member._id !== memberId) })
+    onRemoveMemberFromTask = async(memberId) => {
+        await this.setState({ members: this.state.members.filter(member => member._id !== memberId) })
+        this.props.onEditTask(this.state)
     }
 
-    onAddUserToTask = (userId) => {
+    onAddUserToTask = async(userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
-        this.setState({ members: [...this.state.members, newUser] })
+        await this.setState({ members: [...this.state.members, newUser] })
+        this.props.onEditTask(this.state)
     }
 
     goToUserProfile(userId) {
@@ -97,14 +99,14 @@ class _Task extends Component {
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
-        const { isUsersShown, isStatusShown, isPriorityShown, isNotesShown } = this.state
+        const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown } = this.state
 
         return (
             <React.Fragment>
-                {isNotesShown && <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
-                    notes={this.state.notes}
+                {isUpdatesShown && <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
+                    notes={this.state.notes} uploadImg={this.uploadImg}
                 />}
-                {(isUsersShown || isStatusShown || isPriorityShown || isNotesShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
+                {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
                 <Draggable draggableId={this.state.id} index={this.props.index}>
                     {(provided, snapshot) => (
                         <section key={this.props.task.id} className={`task flex space-between align-center ${snapshot.isDragging ? 'drag' : ''}`}
@@ -140,7 +142,9 @@ class _Task extends Component {
                                     />
                                 </h2>
                             </div>
+
                             <div className="task-right flex align-center">
+                          
                                 <div onClick={() => this.openModal('notes')} className="notes-container"><BsChatDots /></div>
 
                                 <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}

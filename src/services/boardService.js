@@ -14,9 +14,9 @@ export const boardService = {
 let boards = [{
     _id: '123',
     boardCreator: {
-        _id: '12312',
-        fullName: 'fullname mcgee',
-        imgUrl: 'www.imgur.com/sasf'
+        _id: 'asfasdw12412d1wd',
+        fullName: 'Liam Zety',
+        imgUrl: 'https://via.placeholder.com/100',
     },
     name: 'board1',
     createdAt: moment().calendar(),
@@ -85,9 +85,9 @@ let boards = [{
     activityLog: [{
         createdAt: 124124125124,
         byUser: {
-            _id: 123,
-            imgUrl: 'www.imgur',
-            fullName: 'shucks mcgee'
+            _id: 'asfasdw12412d1wd',
+            fullName: 'Liam Zety',
+            imgUrl: 'https://via.placeholder.com/100',
         },
         description: 'removed task "do the dishes"',
         task: {
@@ -98,9 +98,9 @@ let boards = [{
     {
         createdAt: 12412541251,
         byUser: {
-            _id: 123,
-            imgUrl: 'www.imgur',
-            fullName: 'shucks mcgee'
+            _id: 'asfasdw12412d1wd',
+            fullName: 'Liam Zety',
+            imgUrl: 'https://via.placeholder.com/100',
         },
         description: 'changed group name from project2 to project3',
         group: {
@@ -111,9 +111,9 @@ let boards = [{
     {
         createdAt: 4514512352135,
         byUser: {
-            _id: 123,
-            imgUrl: 'www.imgur',
-            fullName: 'shucks mcgee'
+            _id: 'asfasdw12412d1wd',
+            fullName: 'Liam Zety',
+            imgUrl: 'https://via.placeholder.com/100',
         },
         description: 'added group project2',
         group: {
@@ -125,9 +125,9 @@ let boards = [{
 }, {
     _id: '23442',
     boardCreator: {
-        _id: '12312',
-        fullName: 'fullname mcgee',
-        imgUrl: 'www.imgur.com/sasf'
+        _id: 'asfasdw12412d1wd',
+        fullName: 'Liam Zety',
+        imgUrl: 'https://via.placeholder.com/100',
     },
     name: 'board2',
     createdAt: moment().calendar(),
@@ -247,18 +247,17 @@ async function addBoard() {
     const board = {
         _id: _makeid(),
         boardCreator: {
-            _id: '12312',
-            fullName: 'fullname mcgee',
-            imgUrl: 'www.imgur.com/sasf'
+            _id: 'asfasdw12412d1wd',
+            fullName: 'Liam Zety',
+            imgUrl: 'https://via.placeholder.com/100',
         },
         name: `board ${boards.length + 1}`,
         createdAt: moment().calendar(),
         description: 'Enter description here',
         members: [{
-            _id: 'u101',
-            fullname: 'shicks mcgee',
-            imgUrl: 'imgure/sfasfa',
-            lastSeen: 'yesterday'
+            _id: 'asfasdw12412d1wd',
+            fullName: 'Liam Zety',
+            imgUrl: 'https://via.placeholder.com/100',
         }],
         groups: [{
             id: _makeid(),

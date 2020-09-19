@@ -47,7 +47,7 @@ export class Updates extends React.Component {
         const { attachedImgs } = this.props
         const {notes} = this.state
         return (
-            <div className="side-modal">
+            <div className="side-modal animate-side-modal">
 
 
                 <div className="updates-header flex column align-center">
@@ -59,16 +59,26 @@ export class Updates extends React.Component {
                 </div>
                 {this.state.isImagesShown &&
                     <div className="updates-images flex wrap">
+                        <div className="image-uploader">
+                            <label htmlFor="task-imgs"><button>Upload Image</button></label>
+                        <input type="file" id="task-imgs" onChange={this.props.uploadImg} hidden />
+                        
+                     </div>
+                        <div className="image-list flex wrap">
                         {attachedImgs.map((imgUrl, idx) => <div key={idx} className="updates-image"><img src={imgUrl} /></div>)}
+                        </div>
                     </div>
                 }
 
                 {this.state.isNotesShown &&
                     <div className="updates-notes flex column">
-                        {notes.map((note, idx) => <p className="note-text" key={idx}>{note.member}:{note.txt}</p>)}
-                        <form onSubmit={this.sendNote}>
+                        <form onSubmit={this.sendNote} className="notes-form flex column justify-center align-center">
                         <input type="text" value={this.state.note.txt} onChange={this.handleChange} />
+                        <button>Send</button>
                         </form>
+                        <div className="notes-messages">
+                        {notes.map((note, idx) => <p className="note-text" key={idx}>{note.member}: {note.txt}</p>)}
+                        </div>
                     </div>
                 }
             </div>
