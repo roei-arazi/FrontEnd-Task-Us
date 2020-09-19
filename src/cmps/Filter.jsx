@@ -17,10 +17,10 @@ class _Filter extends Component {
 
     filterGroups = async (groupId) => {
         await this.setState({filterBy:{...this.state.filterBy, groupId}})
-
+        console.log(this.state.filterBy);  
         var queryParams = new URLSearchParams();
         for (let key in this.state.filterBy) {
-            queryParams.set(key, this.state.filterBy[key])
+            queryParams.set(key, groupId)
         }
         this.props.history.push(`/board/${this.state._id}?${queryParams}`)
     }

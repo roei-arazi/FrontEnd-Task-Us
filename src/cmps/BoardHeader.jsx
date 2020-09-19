@@ -4,9 +4,10 @@ import { VscListFilter } from 'react-icons/vsc'
 import ContentEditable from 'react-contenteditable';
 import Activities from './Activities';
 import { Filter } from './Filter';
+import { withRouter } from 'react-router-dom';
 
 
-export class BoardHeader extends React.Component {
+export class _BoardHeader extends React.Component {
 
     state = {
         _id: '',
@@ -30,7 +31,6 @@ export class BoardHeader extends React.Component {
     }
 
     handleChangeName = (ev) => {
-        console.log(ev.target.value);
         this.setState({ name: ev.target.value })
     }
 
@@ -107,7 +107,7 @@ export class BoardHeader extends React.Component {
                 <div className="col-right flex align-center">
                     <button onClick={this.props.onAddGroup}>Add New Group</button>
                     <div className="search-outer-container flex align-center">
-                        <input placeholder="Search" type='text' />
+                        <input placeholder="Search" type='text' onChange={this.props.handleSearch}/>
                         <GoSearch />
                     </div>
                     <div className="activities-outer-container flex align-center">
@@ -115,9 +115,9 @@ export class BoardHeader extends React.Component {
                         <h2 onClick={this.onToggleActivities}>Activity Log</h2>
                     </div>
 
-                    <div className="filters-outer-container relative flex align-center">
+                    <div className="filters-outer-container relative flex align-center"  onClick={this.onToggleFilters}>
                         <VscListFilter />
-                        <h2 onClick={this.onToggleFilters}>Filter</h2>
+                        <h2>Filter</h2>
                         {this.state.isFiltersOpen && <Filter board={this.props.board} />}
                     </div>
 
@@ -138,3 +138,5 @@ export class BoardHeader extends React.Component {
     }
 
 }
+
+export const BoardHeader= withRouter(_BoardHeader)
