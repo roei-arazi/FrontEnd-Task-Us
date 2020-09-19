@@ -1,8 +1,8 @@
 .task {
     display: flex;
     background-color: $colorTask;
-    margin-bottom: 10px;
-    height: 65px;
+    margin-bottom: 2px;
+    height: 40px;
     border-radius: 1px;
 
     .users-modal {
@@ -73,6 +73,14 @@
 .drag {
     transition: 0.3s;
     border: 2px black solid
+}
+
+.task-left {
+    .task-color {
+        background: red;
+        width: 7px;
+        height: 40px;
+    }
 }
 
 .task-right {

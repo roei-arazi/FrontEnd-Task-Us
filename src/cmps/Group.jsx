@@ -50,7 +50,7 @@ export class Group extends Component {
 
                                     </div>
                                 </Tooltip>
-                                <h1 className="group-title">
+                                <h1 style={{ color: this.state.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}
                                         className="content-editable cursor-initial"
@@ -90,8 +90,10 @@ export class Group extends Component {
                                     {...provided.droppableProps}
                                 >
                                     {this.props.group.tasks.map((task, index) => {
-                                        return <Task onToggleUpdates={this.props.onToggleUpdates} onEditTask={this.props.onEditTask} index={index} onRemoveTask={this.props.onRemoveTask} key={task.id}
-                                            task={task} users={this.props.users} />
+                                        return <Task onToggleUpdates={this.props.onToggleUpdates}
+                                            onEditTask={this.props.onEditTask} index={index}
+                                            onRemoveTask={this.props.onRemoveTask} key={task.id}
+                                            group={this.props.group} task={task} users={this.props.users} />
                                     })}
                                     {provided.placeholder}
 
