@@ -4,7 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
 import { Tooltip, Zoom } from '@material-ui/core';
-import {login, signup, guestLogin} from '../store/actions/userActions.js'
+import {login, guestLogin} from '../store/actions/userActions.js'
 
 class _Login extends Component {
 
@@ -25,7 +25,7 @@ class _Login extends Component {
 
     render() {
         const initialValues = { username: '', password: '' }
-        return <div className="login">
+        return <div className="sign-login">
             <Formik
                 initialValues={initialValues}
 
@@ -37,17 +37,21 @@ class _Login extends Component {
                 }}
                 onSubmit={this.onLogin}
             >
-                <Form className="login-form flex column align-center space-around">
+                <Form className="sign-login-form flex column align-center space-around">
                     <FaUserCircle />
-                    <label>
-                        <legend>Username: </legend>
-                        <Field className="login-input" label="Username:" type="text" name="username" />
-                    </label>
-                    <ErrorMessage name="username" component="span" />
-                    <label>
-                        <legend>Password: </legend>
-                    <Field className="login-input" label="Password:" type="text" name="password" />
-                    </label>
+                    <section>
+                        <legend>Username *</legend>
+                        <Field className="sign-login-input" type="text" name="username" />
+                    </section>
+                    <section>
+                        <legend>Email *</legend>
+                        <Field className="sign-login-input" type="text" name="email" />
+                    </section>
+                    <ErrorMessage name="email" component="span" />
+                    <section>
+                        <legend>Password *</legend>
+                    <Field className="sign-login-input" type="text" name="password" />
+                    </section>
                     <ErrorMessage name="password" component="span" />
                     <button type="submit">Login</button>
                     <a href="/#/signup">Don't have an account? sign up here.</a>
@@ -55,8 +59,8 @@ class _Login extends Component {
                 </Form>
             </Formik>
             <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Back to home" arrow>
-                <div>
-                    <NavLink to="/"><FaArrowLeft className="go-back" /></NavLink>
+                <div className="go-back">
+                    <NavLink to="/"><FaArrowLeft /></NavLink>
                 </div>
             </Tooltip>
         </div>
@@ -71,7 +75,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     login,
-    signup,
     guestLogin
 }
 
