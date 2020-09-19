@@ -62,7 +62,7 @@ export class Updates extends React.Component {
                             <label htmlFor="task-imgs">Upload Image</label>
                             <input type="file" id="task-imgs" onChange={this.props.uploadImg} hidden />
                         </div>
-                        <div className="image-list flex wrap">
+                        <div className="image-list">
                             {attachedImgs.map((imgUrl, idx) => <div key={idx} className="updates-image"><img src={imgUrl} /></div>)}
                         </div>
                     </div>

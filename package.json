@@ -11,6 +11,7 @@
     "formik": "^2.1.5",
     "moment": "^2.28.0",
     "node-sass": "^4.14.1",
+    "query-string": "^6.13.2",
     "react": "^16.13.1",
     "react-animation": "^1.2.2",
     "react-beautiful-dnd": "^13.0.0",
