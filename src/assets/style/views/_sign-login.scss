@@ -1,17 +1,19 @@
-.login {
+.sign-login {
     background-color: $colorBg;
     height: 100vh;
     color: $colorFontNav;
 }
 
-.go-back {
+.go-back{
     position: absolute;
-    top: 20px;
+    top: 20px; 
     left: 20px;
+    height: fit-content;
+    width: fit-content;
     color: $colorIconsTasks;
 }
 
-.login-form {
+.sign-login-form {
     background-color: $colorBgBoardBars;
     padding: 20px;
     position: absolute;
@@ -27,9 +29,12 @@
             background-color: #373737;
         }
     }
-    .login-input,
+    a:hover{
+        background-color: #373737;
+    }
+    .sign-login-input,
     button,
-    label {
+    section {
         width: 90%;
         color: $colorFontNav;
     }
