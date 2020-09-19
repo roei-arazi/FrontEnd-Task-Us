@@ -21,10 +21,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
+    button{
+        background-color: $colorBgBoardBars;
+        &:hover {
+            background-color: #373737;
+        }
+    }
     .login-input,
     button,
     label {
         width: 90%;
+        color: $colorFontNav;
     }
     svg{
         font-size: 5rem;

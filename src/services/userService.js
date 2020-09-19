@@ -1,5 +1,4 @@
-let users = [
-    {
+let users = [{
         _id: 'asfasdfq12d1wd',
         username: 'frize',
         fullName: 'Roei Arazi',
@@ -7,12 +6,12 @@ let users = [
         email: 'frize@gmail.com',
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
-        boards: [{id: '212', name: 'board1' }],
+        boards: [{ id: '212', name: 'board1' }],
         notifications: [],
         birthDay: '2nd August 1997',
         company: 'adidas',
         phoneNumber: '0224132124'
-        },
+    },
     {
         _id: 'asfasdfqw12412d1',
         username: 'anstrio',
@@ -21,12 +20,12 @@ let users = [
         email: 'anstrio@gmail.com',
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
-        boards: [{id: '212', name: 'board1' }],
+        boards: [{ id: '212', name: 'board1' }],
         notifications: [],
         birthDay: '2nd August 1997',
         company: 'adidas',
         phoneNumber: '0224127124'
-        },
+    },
     {
         _id: 'asfasdw12412d1wd',
         username: 'smoking',
@@ -35,12 +34,12 @@ let users = [
         email: 'smoking@gmail.com',
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
-        boards: [{id: '212', name: 'board1' }],
+        boards: [{ id: '212', name: 'board1' }],
         notifications: [],
         birthDay: '2nd August 1997',
         company: 'adidas',
         phoneNumber: '0224112124'
-        }
+    }
 ]
 
 export const userService = {
@@ -60,43 +59,43 @@ async function loadUsers() {
     }
 }
 
-async function getUserById(userId){
-    const user= users.find(user=> user._id===userId)
-    try{
+async function getUserById(userId) {
+    const user = users.find(user => user._id === userId)
+    try {
         return user
-    }catch (err) {
+    } catch (err) {
         console.log('userService: Coulnd\'t get user');
         throw err;
     }
 }
 
-async function login(userCred){
-    try{
+async function login(userCred) {
+    try {
         const user = users.find(user => user.username === userCred.username && user.password === userCred.password);
-        if(!user) throw 'Wrong username or password'
+        if (!user) throw 'Wrong username or password'
         return user;
-    }catch(err){
+    } catch (err) {
         console.log('userService: Wrong username or password');
         throw err;
     }
 }
 
-async function signup(userCred){
+async function signup(userCred) {
     const user = {
         _id: _makeid(),
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
-        boards: [{id: '212', name: 'board1' }],
+        boards: [{ id: '212', name: 'board1' }],
         notifications: [],
         birthDay: '2nd August 1997',
         company: 'adidas',
         phoneNumber: '0224132124',
         ...userCred
-        }
+    }
     users.push(user);
 }
 
-async function guestLogin(){
+async function guestLogin() {
     const user = {
         _id: _makeid(),
         username: 'guest',
@@ -104,13 +103,20 @@ async function guestLogin(){
         password: 'none',
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
-        boards: [{id: '212', name: 'board1' }],
+        boards: [{ id: '212', name: 'board1' }],
         notifications: [],
         birthDay: '2nd August 1997',
         company: 'adidas',
         phoneNumber: '0224132124',
-        
-        }
+
+    }
+    try {
+        users.push(user);
+        return user
+    }catch (err) {
+        console.log('userService: Couldn\'t login as guest');
+        throw err;
+    }
 }
 
 function _makeid(length = 7) {

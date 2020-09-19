@@ -111,6 +111,9 @@
     > :nth-child(even) {
         background-color: $colorBgBoardBars;
         border-radius: 1px;
+        * {
+            color: $colorFontNav;
+        } 
     }
 }
 

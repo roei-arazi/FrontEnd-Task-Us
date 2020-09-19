@@ -9,14 +9,18 @@ import {login, signup, guestLogin} from '../store/actions/userActions.js'
 class _Login extends Component {
 
     componentDidMount(){
-        if(this.props.loggedUser)   this.props.history.push('/board/123')
+        // if(this.props.loggedUser)   this.props.history.push('/board/123')
     }
 
     onLogin = async (values, {resetForm}) => {
-        console.log('got function:', resetForm);
         resetForm();
         await this.props.login(values);
         if(this.props.loggedUser)   this.props.history.push('/board/123')
+    }
+
+    onGuestLogin = async () =>{
+        await this.props.guestLogin();
+        this.props.history.push('/board/123')
     }
 
     render() {
@@ -47,7 +51,7 @@ class _Login extends Component {
                     <ErrorMessage name="password" component="span" />
                     <button type="submit">Login</button>
                     <a href="/#/signup">Don't have an account? sign up here.</a>
-                    <button>Or try as a guest!</button>
+                    <button onClick={this.onGuestLogin}>Or try as a guest!</button>
                 </Form>
             </Formik>
             <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Back to home" arrow>
