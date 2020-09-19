@@ -1,33 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Tooltip, Zoom } from '@material-ui/core';
 
 class _Login extends Component {
-state = {
 
-}
+    onLogin = () => {
 
-componentDidMount() {
-}
+    }
 
-render() {
-return (
-<section className="login">
-<div style={{marginLeft:'350px'}}>
-<h1>Under Construction...</h1>
-<NavLink to="/board/123">
-<button>Go To Board!</button>
-</NavLink>
-</div>
-</section>
-)
-}
+    render() {
+        const initialValues = { username: '', password: '' }
+        return <div className="login">
+            <Formik
+                initialValues={initialValues}
+
+                validate={formValues => {
+                    const errors = {};
+                    if (!formValues.username) errors.username = 'Required';
+                    if (!formValues.password) errors.password = 'Required';
+                    return errors;
+                }}
+                onSubmit={this.onLogin}
+            >
+                <Form className="login-form flex column align-center space-around">
+                    <h2>Login</h2>
+                    <Field label="Username:" type="text" name="username" />
+                    <ErrorMessage name="username" component="span" />
+                    <Field label="Password:" type="text" name="password" />
+                    <ErrorMessage name="password" component="span" />
+                    <button type="submit">Login</button>
+                    <a href="/#/signup">Don't have an account? sign up here.</a>
+                </Form>
+            </Formik>
+            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Back to home" arrow>
+                <div>
+                    <NavLink to="/"><FaArrowLeft /></NavLink>
+                </div>
+            </Tooltip>
+        </div>
+    }
 }
 
 const mapStateToProps = state => {
-return {
+    return {
 
-}
+    }
 }
 
 const mapDispatchToProps = {

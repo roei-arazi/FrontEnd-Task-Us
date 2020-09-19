@@ -25,3 +25,27 @@ export function getUserById(userId){
         }
     }
 }
+
+export function login(userCred){
+    return async dispatch => {
+        try{
+            const user = await userService.login(userCred);
+            dispatch({type: 'SET_USER', user})
+        }catch(err){
+            console.log('userActions: Couldn\'t login');
+            throw err;
+        }
+    }
+}
+
+export function signup(userCred){
+    return async dispatch =>{
+        try{
+            const user = await userService.signup(userCred);
+            dispatch({type: 'SET_USER', user})
+        }catch(err){
+            console.log('userActions: Couldn\'t signup');
+            throw err;
+        }
+    }
+}

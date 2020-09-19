@@ -6,6 +6,7 @@ import { Navbar } from '../cmps/Navbar';
 import moment from 'moment'
 import { withRouter } from 'react-router-dom';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { Tooltip, Zoom } from '@material-ui/core';
 
 class _MyWeek extends Component {
     state = {
@@ -59,6 +60,10 @@ class _MyWeek extends Component {
         this.setState({ isOrderReversed: !this.state.isOrderReversed })
     }
 
+    moveToUserProfile = (userId) => {
+        this.props.history.push(`/user/${userId}`)
+    }
+
     render() {
         let upcomingTasks = this.getUpcomingTasks(7);
         const { searchVal, isOrderReversed } = this.state;
@@ -76,7 +81,14 @@ class _MyWeek extends Component {
                     </div>
                     <div className="search-container flex space-between align-center">
                         <input onChange={this.handleChange} value={searchVal} type="text" placeholder="search" />
-                            {isOrderReversed ? <FaArrowUp size="1.5rem" onClick={this.reverseOrder} /> : <FaArrowDown size="1.5rem" onClick={this.reverseOrder} />}
+                        {isOrderReversed ?
+                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
+                                <div><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
+                            </Tooltip> :
+                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
+                                <div><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
+                            </Tooltip>
+                        }
                     </div>
                     {upcomingTasks.length ?
                         <section className="upcoming-tasks-container">
@@ -91,8 +103,8 @@ class _MyWeek extends Component {
                                     </div>
                                     <div className={`label-box ${task.status.toLocaleLowerCase()}`}>{task.status}</div>
                                     <div className="user-img-container">
-                                        {task.members ? task.members[0].imgUrl ? <img alt="profile" src={task.members[0].imgUrl} /> :
-                                            <div className="member-letter">{task.members[0].name.charAt(0).toUpperCase()}</div> : ''}
+                                        {task.members ? task.members[0].imgUrl ? <img onClick={() => this.moveToUserProfile(task.members[0]._id)} alt="profile" src={task.members[0].imgUrl} /> :
+                                            <div onClick={() => this.moveToUserProfile(task.members[0]._id)} className="member-letter">{task.members[0].name.charAt(0).toUpperCase()}</div> : ''}
                                         <div className="task-number-of-imgs"><span>+{task.members.length ? task.members.length : 0}</span></div>
                                     </div>
                                     <h2>{this.getDaysFromNow(task.dueDate)}</h2>

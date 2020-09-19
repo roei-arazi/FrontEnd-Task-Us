@@ -30,24 +30,25 @@ export class Updates extends React.Component {
         this.setState({note:{...this.state.note, txt: ev.target.value}})
     }
 
-    sendNote =(ev)=>{
+    sendNote =async (ev)=>{
         ev.preventDefault()
         const notes= JSON.parse(JSON.stringify(this.state.notes))
+        if(!this.state.note.txt || this.state.note.txt.split('').every(letter=> letter===' '))return
         const newNote={
             txt: this.state.note.txt,
             member: this.props.loggedUser.fullName
         }
         notes.push(newNote)
-
-        this.setState({notes, note:{txt:''}})
+        await this.setState({notes, note:{txt:''}})    
         
+        this.props.sendNote(this.state.notes)
     }
 
     render() {
         const { attachedImgs } = this.props
         const {notes} = this.state
         return (
-            <div className="side-modal animate-side-modal">
+            <React.Fragment>
 
 
                 <div className="updates-header flex column align-center">
@@ -58,11 +59,10 @@ export class Updates extends React.Component {
                     </div>
                 </div>
                 {this.state.isImagesShown &&
-                    <div className="updates-images flex wrap">
+                    <div className="updates-images flex column align-center">
                         <div className="image-uploader">
-                            <label htmlFor="task-imgs"><button>Upload Image</button></label>
-                        <input type="file" id="task-imgs" onChange={this.props.uploadImg} hidden />
-                        
+                            <label htmlFor="task-imgs">Upload Image</label>
+                        <input type="file" id="task-imgs" onChange={this.props.uploadImg} hidden />           
                      </div>
                         <div className="image-list flex wrap">
                         {attachedImgs.map((imgUrl, idx) => <div key={idx} className="updates-image"><img src={imgUrl} /></div>)}
@@ -81,7 +81,7 @@ export class Updates extends React.Component {
                         </div>
                     </div>
                 }
-            </div>
+           </React.Fragment>
 
         )
     }

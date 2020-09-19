@@ -48,10 +48,12 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = (boardName, boardDescription) => {
+    onEditBoard = async (boardName, boardDescription) => {
         console.log(boardName);
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         this.props.updateBoard({ ...board, name: boardName, description: boardDescription })
+        await this.props.showSnackbar('Updated board.');
+        setTimeout(() => this.props.hideSnackbar(), 3000)
     }
 
     //------------------GROUP CRUD-----------------

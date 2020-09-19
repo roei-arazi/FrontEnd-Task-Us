@@ -16,7 +16,6 @@ import { Members } from './task-cmps/Members';
 import { Status } from './task-cmps/Status'
 import { Date } from './task-cmps/Date';
 import { Priority } from './task-cmps/Priority';
-import { Images } from './task-cmps/Images';
 import { Updates } from './task-cmps/Updates';
 
 class _Task extends Component {
@@ -57,6 +56,11 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
+    sendNote=async(notes)=>{
+        await this.setState({notes})
+        this.props.onEditTask(this.state)
+    }
+
     openModal = (data) => {
         if (data === 'status') {
             this.setState({ isStatusShown: !this.state.isStatusShown })
@@ -86,7 +90,7 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    goToUserProfile(userId) {
+    goToUserProfile=(userId)=> {
         this.props.history.push(`/user/${userId}`)
     }
 
@@ -103,9 +107,11 @@ class _Task extends Component {
 
         return (
             <React.Fragment>
-                {isUpdatesShown && <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
-                    notes={this.state.notes} uploadImg={this.uploadImg}
-                />}
+                <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal` }> 
+                <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
+                    notes={this.state.notes} uploadImg={this.uploadImg} sendNote={this.sendNote}
+                /></div>
+               
                 {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
                 <Draggable draggableId={this.state.id} index={this.props.index}>
                     {(provided, snapshot) => (
@@ -156,8 +162,6 @@ class _Task extends Component {
                                 <Date dueDate={this.state.dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
-                                <Images attachedImgs={this.state.attachedImgs} uploadImg={this.uploadImg} />
-
                             </div>
                         </section>
 
@@ -174,8 +178,5 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = {
 
-}
-
-export const Task = connect(mapStateToProps, mapDispatchToProps)(_Task);
+export const Task = connect(mapStateToProps)(withRouter(_Task));
