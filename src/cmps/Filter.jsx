@@ -15,7 +15,7 @@ class _Filter extends Component {
     }
     
     removeGroupFilter = (groupName) => {
-        const newGroup= this.state.groups.find(group=> group.name===groupName)
+        const newGroup= this.props.board.groups.find(group=> group.name===groupName)
         this.setState({ groups: [...this.state.groups,newGroup] })
     }
 
