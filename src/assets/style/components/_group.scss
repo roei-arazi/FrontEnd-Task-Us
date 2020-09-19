@@ -41,11 +41,35 @@
         min-height: 100px;
     }
 
+    .task-add {
+        border: 1px solid transparent;
 
+        form {
+            width: 100%;
+        }
+
+        input {
+            height: 100%;
+            margin: 0;
+            text-align: initial;
+            font-family: font1;
+            font-size: 1em;
+            font-weight: 700;
+            background-color: $colorBg;
+
+            &::placeholder {
+                color: $colorFontTaskGroup;
+            }
+        }
+
+        &:hover {
+            border: 1px solid $colorFontTaskGroup;
+        }
+    }
 }
 
 .drag-over {
     transition: 0.3s ease;
     padding: 10px;
-    background-color: $colorBgBoardBars;
+    background-color: rgba($colorMainNav, 0.5)
 }

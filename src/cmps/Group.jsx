@@ -6,7 +6,6 @@ import { Tooltip, Zoom } from '@material-ui/core';
 import { RiDeleteBin2Line } from 'react-icons/ri'
 
 import ContentEditable from 'react-contenteditable';
-import { BiMessageAltAdd } from 'react-icons/bi';
 
 
 export class Group extends Component {
@@ -16,6 +15,7 @@ export class Group extends Component {
     }
 
     componentDidMount() {
+        this.elInputAdd = React.createRef();
         this.contentEditable = React.createRef();
         this.setState({ ...this.props.group })
     }
@@ -99,14 +99,15 @@ export class Group extends Component {
                             }
                         </Droppable>
 
-                        <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Add New Task" arrow>
-                            <div className='icon-container rotate180'>
-                                <BiMessageAltAdd onClick={() => {
-                                    this.props.onAddTask(this.props.group.id)
-                                }} />
-                            </div>
-                        </Tooltip>
-
+                        <div className="task task-add">
+                            <form onSubmit={(ev) => {
+                                ev.preventDefault()
+                                this.props.onAddTask(this.props.group.id, this.elInputAdd.current.value)
+                                this.elInputAdd.current.value = ''
+                            }} action="">
+                                <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
+                            </form>
+                        </div>
                     </section>
                 }
             </Draggable>
