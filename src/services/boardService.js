@@ -18,7 +18,7 @@ let boards = [{
         fullName: 'Liam Zety',
         imgUrl: 'https://via.placeholder.com/100',
     },
-    name: 'board1',
+    name: 'Board 1',
     createdAt: moment().calendar(),
     description: 'Enter description here',
     members: [],
@@ -99,7 +99,7 @@ let boards = [{
         },
         description: 'removed task "do the dishes"',
         task: {
-            id: 123, 
+            id: 123,
             name: 'do the dishes'
         }
     },
@@ -139,7 +139,7 @@ let boards = [{
         fullName: 'Liam Zety',
         imgUrl: 'https://via.placeholder.com/100',
     },
-    name: 'board2',
+    name: 'Board 2',
     createdAt: moment().calendar(),
     description: 'Enter description here',
     members: [],

@@ -34,7 +34,7 @@ class _Navbar extends Component {
                     </NavLink>
 
                     {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
-                    <div className="icon-container" onClick={!this.state.isNotificationShown && this.toggleNotifications} >
+                    <div className="icon-container" onClick={!this.state.isNotificationShown ? this.toggleNotifications : () => { }} >
                         {
                             loggedUser.notifications.filter(notification => !notification.isRead).length === 0
                                 ? ''

@@ -39,7 +39,7 @@ export function boardReducer(state = initialState, action) {
                             status: 'Done',
                             priority: 'Low',
                             dueDate: 214124124125,
-                            updates:[],
+                            updates: [],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -82,7 +82,7 @@ export function boardReducer(state = initialState, action) {
                             status: 'progress',
                             priority: 'Low',
                             dueDate: 214124124125,
-                            updates:[],
+                            updates: [],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -128,25 +128,21 @@ export function boardReducer(state = initialState, action) {
         case 'ADD_BOARD':
             return {
                 ...state,
+
                 boards: [...state.boards, {
                     _id: _makeid(),
                     boardCreator: {
-                        _id: '12312',
-                        fullName: 'fullname mcgee',
-                        imgUrl: 'www.imgur.com/sasf'
+                        _id: 'asfasdw12412d1wd',
+                        fullName: 'Liam Zety',
+                        imgUrl: 'https://via.placeholder.com/100',
                     },
-                    name: `board ${state.boards.length + 1}`,
+                    name: `Board ${state.boards.length + 1}`,
                     createdAt: Date.now(),
                     description: 'Enter description here',
-                    members: [{
-                        _id: 'u101',
-                        fullname: 'shicks mcgee',
-                        imgUrl: 'imgure/sfasfa',
-                        lastSeen: 'yesterday'
-                    }],
+                    members: [],
                     groups: [{
                         id: _makeid(),
-                        name: 'group 1',
+                        name: 'week1',
                         createdAt: 'date',
                         color: 'blue',
                         lastUpdated: 198465168486,
@@ -161,21 +157,28 @@ export function boardReducer(state = initialState, action) {
                             name: 'sneeze',
                             createdAt: 1123124124241,
                             members: [{
-                                _id: 1234,
-                                name: 'osher',
-                                imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
+                                _id: 'asfasdw12412d1wd',
+                                fullName: 'Liam Zety',
+                                imgUrl: 'https://via.placeholder.com/100',
                             }],
                             status: 'Done',
                             priority: 'Low',
-                            dueDate: Date.now(),
-                            updates:[{
-                                txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                                member: 'Osher Kabada'
-                            }],
+                            dueDate: Date.now() + 1000 * 60 * 60 * 24 * 3,
+                            updates: [
+                                {
+                                    txt: 'dont forget about this',
+                                    member: 'Roei Arazi'
+                                },
+                                {
+                                    txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                                    member: 'Liam Zety'
+                                }
+                            ],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
-                            tags: ['ui', 'ux']
+                            tags: ['ui', 'ux'],
+                            attachedImgs: []
                         }, {
                             id: _makeid(),
                             name: 'sneeze',
@@ -188,9 +191,9 @@ export function boardReducer(state = initialState, action) {
                             status: 'Donw',
                             priority: 'Low',
                             dueDate: Date.now(),
-                            updates:[{
-                                txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                                member:'Osher Kabada'
+                            updates: [{
+                                txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                                member: 'Osher Kabada'
                             }],
                             lastUpdated: 'yesterday',
                             isSelected: false,

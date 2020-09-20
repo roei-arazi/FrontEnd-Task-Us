@@ -6,8 +6,8 @@ import { systemReducer } from './reducers/systemReducer'
 
 
 const mainReducer = combineReducers({
-    boardReducer,
     userReducer,
+    boardReducer,
     systemReducer
 })
 

@@ -184,6 +184,16 @@ input:focus {
   background-color: #a2a19f0a;
 }
 
+::-moz-selection {
+  background-color: #111111;
+  color: #a7a58f;
+}
+
+::selection {
+  background-color: #111111;
+  color: #a7a58f;
+}
+
 button {
   font-family: font1;
   padding: 15px;
@@ -198,7 +208,7 @@ button {
 }
 
 button:hover {
-  background-color: rgba(155, 154, 152, 0.2);
+  background-color: rgba(167, 165, 143, 0.2);
 }
 
 svg {
@@ -694,7 +704,7 @@ div[role="menuContainer"] > div > ul > li {
 }
 
 .boardbar svg:hover {
-  color: #9b9a98;
+  color: #a7a58f;
 }
 
 .boardbar .board-bar-toggle-container {
@@ -933,7 +943,7 @@ div[role="menuContainer"] > div > ul > li {
 }
 
 .board-header svg:hover {
-  color: #9b9a98;
+  color: #a7a58f;
 }
 
 .board-header button {
@@ -945,7 +955,7 @@ div[role="menuContainer"] > div > ul > li {
 }
 
 .board-header button:hover {
-  background-color: #9b9a98;
+  background-color: #a7a58f;
 }
 
 .board-header .col-right svg {
@@ -1108,6 +1118,13 @@ div[role="menuContainer"] > div > ul > li {
   color: #bcbba6;
   cursor: -webkit-grab;
   cursor: grab;
+  margin: 0px 8px 0 12px;
+}
+
+.group .drag-icon:hover svg, .group .drag-icon:active svg {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  color: #333333;
 }
 
 .delete-group-icon,
@@ -1127,8 +1144,8 @@ div[role="menuContainer"] > div > ul > li {
   height: 150px;
   background-color: #fff;
   z-index: 10000;
-  top: 25px;
-  left: 115px;
+  top: -12px;
+  left: 136px;
   border-radius: 5px;
   -webkit-box-shadow: 0px 3px 10px -5px #484444;
           box-shadow: 0px 3px 10px -5px #484444;
@@ -1160,6 +1177,10 @@ div[role="menuContainer"] > div > ul > li {
   margin-bottom: 2px;
   height: 40px;
   border-radius: 1px;
+}
+
+.task .task-left h2 {
+  margin-left: 15px;
 }
 
 .task svg {
@@ -1200,7 +1221,7 @@ div[role="menuContainer"] > div > ul > li {
 }
 
 .task .users-modal h3 {
-  margin-bottom: 10px;
+  margin-left: 35px;
 }
 
 .task .users-modal .user-box {
@@ -1237,8 +1258,7 @@ div[role="menuContainer"] > div > ul > li {
 }
 
 .task .icon-container {
-  position: absolute;
-  left: -20px;
+  margin-left: 5px;
 }
 
 .task .react-datepicker {
@@ -1259,6 +1279,14 @@ div[role="menuContainer"] > div > ul > li {
   border-bottom-color: #484444;
 }
 
+.task .react-datepicker .react-datepicker__day:hover {
+  background-color: #e1dfbdf5;
+}
+
+.task .react-datepicker .react-datepicker__day--selected {
+  background-color: #484444;
+}
+
 .task .react-datepicker .react-datepicker__header {
   background-color: #484444;
 }
@@ -1271,15 +1299,35 @@ div[role="menuContainer"] > div > ul > li {
   color: #f2f1dfb0;
 }
 
+.task-label-name {
+  height: 100%;
+  width: 100%;
+}
+
+.task-label-name:hover {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  -webkit-filter: brightness(0.8);
+          filter: brightness(0.8);
+}
+
 .label-box {
   width: 100%;
   text-align: center;
   border-radius: 1px;
   padding: 5px 0;
-  cursor: pointer;
+  cursor: default;
 }
 
-.label-list {
+.label-box .label-list > *:hover {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-filter: brightness(0.8);
+          filter: brightness(0.8);
+}
+
+.label-box .label-list {
   width: 150px;
   background-color: #eae9d5;
   -webkit-box-shadow: 0px 3px 10px -5px #484444;
@@ -1290,7 +1338,7 @@ div[role="menuContainer"] > div > ul > li {
   right: 0;
 }
 
-.label-list .label-selector {
+.label-box .label-list .label-selector {
   width: 90%;
   text-align: center;
   padding: 5px 0;
@@ -1327,6 +1375,22 @@ div[role="menuContainer"] > div > ul > li {
 
 .task-right .notes-container {
   text-align: center;
+}
+
+.task-right .notes-container .task-number-of-imgs {
+  font-family: monospace;
+  font-size: 15px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: #787864f1;
+  color: #f2f1dfb0;
+  border-radius: 50%;
+  text-align: center;
+  right: 25px;
+  font-weight: bold;
+  bottom: 8px;
+  cursor: pointer;
 }
 
 .user-img-container {
@@ -1386,6 +1450,7 @@ div[role="menuContainer"] > div > ul > li {
   text-align: center;
   right: 25px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .task-img-container {
@@ -1611,7 +1676,6 @@ div[role="menuContainer"] > div > ul > li {
       -ms-grid-row-align: center;
       align-self: center;
   border-radius: 50%;
-  cursor: pointer;
   width: 250px;
   height: 250px;
 }
@@ -1638,6 +1702,10 @@ div[role="menuContainer"] > div > ul > li {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.user-profile .user-container .modal-screen .user-modal-col .user-profile-big {
+  cursor: pointer;
 }
 
 .user-profile .user-container .modal-screen .user-modal-col form {
@@ -1695,7 +1763,8 @@ div[role="menuContainer"] > div > ul > li {
   right: 0;
   background-color: #f2f1df;
   border-radius: 5px;
-  border: 2px solid #333333;
+  -webkit-box-shadow: 0px 3px 10px -5px #484444;
+          box-shadow: 0px 3px 10px -5px #484444;
   padding: 0 15px 10px 0;
   z-index: 998;
   cursor: auto;

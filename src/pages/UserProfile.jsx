@@ -101,7 +101,7 @@ class _UserProfile extends Component {
                                         <input value={this.state.user.password} onChange={this.handleChange} name="password" placeholder="Password" type="password" />
                                         <input value={this.state.user.fullName} onChange={this.handleChange} name="fullName" placeholder="Full Name" type="text" />
                                         <button onClick={this.updateProfile}>Save Changes</button>
-                                        <button className="secondary-btn" onClick={this.toggleModal}>Cancel</button>
+                                        <button type="button" className="secondary-btn" onClick={this.toggleModal}>Cancel</button>
                                     </form>
                                 </div>
                             </div>
