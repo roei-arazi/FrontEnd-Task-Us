@@ -38,7 +38,10 @@ function _Filter(props) {
                 <section className="group-name-filter flex column align-center">
                     <h3>Groups</h3>
                     <div className="filter-list">
-                        {groups.map((group, idx) => <button className={filterBy.groupId === group.id ? 'remove-filter-btn' : ''} key={idx} onClick={() => onSetFilter('groupId', group.id)}>{group.name}</button>)}
+                        {groups.map((group, idx) => <button
+                            className={filterBy.groupId === group.id ? 'remove-filter-btn' : ''}
+                            key={idx}
+                            onClick={() => onSetFilter('groupId', group.id)}>{group.name}</button>)}
                     </div>
                 </section>
                 <section className="task-member-filter flex column align-center">
@@ -48,7 +51,7 @@ function _Filter(props) {
                             className={filterBy.memberId === member._id ? 'remove-filter-btn' : ''}
                             key={member._id}
                             onClick={() => onSetFilter('memberId', member._id)}>{member.fullName}</button>)}
-                    </div> 
+                    </div>
                 </section>
                 <section className="task-priority-filter flex column align-center">
                     <h3>Priority</h3>
