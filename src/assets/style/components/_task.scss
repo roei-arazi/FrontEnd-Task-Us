@@ -14,12 +14,10 @@
     svg {
         font-size: 2rem;
     }
-
     .task-remove-icon {
         font-size: 1.2rem;
         transform: rotate(180deg);
     }
-
     .users-modal {
         background-color: #eae9d5;
         z-index: 999;
@@ -29,47 +27,41 @@
         top: 35px;
         right: 0;
         box-shadow: $modalsShadow;
-
         .task-users-box {
             border-bottom: 2px solid $colorMainNav;
             padding: 10px 0;
             cursor: pointer;
-
             svg {
                 font-size: 1.5rem;
                 color: #333333;
             }
-
             .member-name {
                 margin-left: 10px;
             }
         }
-
         h3 {
             margin-left: 35px;
         }
-
+        .user-box{
+            margin-bottom: 10px;
+        }
         .user-box-info {
             p {
                 text-align: left;
             }
         }
-
         .board-users-box {
             padding: 10px 0;
             cursor: pointer;
-
             .member-name {
                 margin-left: 10px;
             }
-
             svg {
                 font-size: 1.5rem;
                 color: #333333;
             }
         }
     }
-
     input {
         width: 100%;
         background-color: $colorDatePicker;
@@ -80,23 +72,18 @@
         text-align: center;
         color: #4d4b4b;
     }
-
     .icon-container {
         margin-left:5px;
     }
-
     .react-datepicker {
         background-color: #eae9d5;
         box-shadow: $modalsShadow;
-
         .react-datepicker__navigation--next {
             border-left-color: #e1dfbdf5;
         }
-
         .react-datepicker__navigation--previous {
             border-right-color: #e1dfbdf5;
         }
-
         .react-datepicker__triangle {
             border-bottom-color: #484444;
         }
@@ -110,11 +97,9 @@
 
         .react-datepicker__header {
             background-color: #484444;
-
             .react-datepicker__current-month {
                 color: #f2f1dfb0;
             }
-
             .react-datepicker__day-names {
                 >* {
                     color: #f2f1dfb0;
@@ -141,7 +126,6 @@
     padding: 10px;
     border-radius: 1px;
     right: 0;
-
     .label-selector {
         width: 90%;
         text-align: center;
@@ -159,7 +143,6 @@
 
 .task-left {
     position: relative;
-
     .task-color {
         background: red;
         width: 7px;
@@ -170,12 +153,10 @@
 .task-right {
     height: 100%;
     margin-right: 10px;
-
     >* {
         width: 100px;
         margin-left: 15px;
     }
-
     .notes-container {
         text-align: center;
 
@@ -201,32 +182,28 @@
     height: 50px;
     position: relative;
     text-align: center;
-
     img {
         cursor: pointer;
         border-radius: 50%;
         width: 30px;
     }
-
     .no-members-container {
         position: relative;
-
         .no-members-icon {
             height: 30px;
             width: 30px;
         }
-
         .no-members-icon-plus {
             position: absolute;
-            top: 9px;
-            right: -15px;
+            top: 10px;
+            right: -20px;
+            font-size: 20px;
             background-color: $colorPlusCircle;
             color: $colorPlusCircleFont;
             border-radius: 50%;
             transform: translate(-50%, -50%);
         }
     }
-
     .member-letter {
         height: 100%;
         width: 50%;
@@ -238,7 +215,6 @@
         padding-top: 6px;
         cursor: pointer;
     }
-
     .task-number-of-imgs {
         font-family: monospace;
         font-size: 15px;
@@ -259,13 +235,11 @@
     height: 100%;
     position: relative;
     text-align: center;
-
     img {
         cursor: pointer;
         height: 100%;
         border-bottom-right-radius: 1px;
     }
-
     .no-images {
         padding-top: 15px;
     }
@@ -273,20 +247,15 @@
 
 .updates-header {
     margin-bottom: 20px;
-
     h1 {
         margin: 15px 0 30px;
     }
-
     .updates-header-options {
         width: 100%;
-
         >* {
             margin: 0 auto;
         }
     }
-
-
     label {
         font-family: font1;
         padding: 15px;
@@ -298,16 +267,13 @@
         border-radius: 2px;
         transition: .3s;
         margin: 20px 0;
-
         &:hover {
             background-color: $colorIconsTasksHover;
         }
     }
-
     input {
         border-bottom: 2px solid $buttonColorCTA;
         width: 150px;
-
         &::placeholder {
             color: $colorFontUserDetails
         }
@@ -322,25 +288,20 @@
     border-bottom: 1px solid #b5ad91;
     border-top: 1px solid #b5ad91;
 
-   
-
     .update-box {
         padding: 10px;
         box-shadow: 0px 3px 10px -5px #484444;
         margin: 10px;
         background-color: $colorBg;
         width: fit-content;
-
         .member-name {
             font-weight: bold;
         }
-
         .update-text {
             font-weight: initial;
             display: inline;
             word-break: break-all;
         }
-
         img {
             height: 200px;
             width: 200px;

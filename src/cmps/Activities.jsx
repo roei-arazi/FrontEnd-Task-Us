@@ -18,7 +18,7 @@ export default class Activities extends Component {
 
 
     handleSearch = ({ target }) => {
-        const filteredActivities = this.state.activityLog.filter((activitiy) => {
+        const filteredActivities = this.props.activityLog.filter((activitiy) => {
             return activitiy.description.toLowerCase()
                 .includes(target.value.toLocaleLowerCase())
                 ||
@@ -29,7 +29,7 @@ export default class Activities extends Component {
     }
 
     reverseOrder = () => {
-        const filteredActivities = this.state.activityLog.sort((activitiy1, activitiy2) => {
+        const filteredActivities = this.state.filteredActivities.sort((activitiy1, activitiy2) => {
             const res = this.state.isOrderReversed ? -1 : 1;
             if (activitiy1.createdAt < activitiy2.createdAt) return -res;
             if (activitiy1.createdAt > activitiy2.createdAt) return res;
@@ -43,6 +43,7 @@ export default class Activities extends Component {
     render() {
         if (!this.state.filteredActivities) return <h1>Loading...</h1>
         const { isOrderReversed, filteredActivities } = this.state;
+        console.log('FILTER AICIAT2', filteredActivities)
 
         return (
             <section className="activities flex column padding-y-15">
