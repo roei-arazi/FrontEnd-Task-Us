@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Task } from './Task'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import {  Menu, MenuItem } from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
 //Material ui
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
-import { AiOutlineDelete,AiOutlineDrag } from 'react-icons/ai'
+import { AiOutlineDelete, AiOutlineDrag } from 'react-icons/ai'
 
 import ContentEditable from 'react-contenteditable';
 import { CgColorPicker } from 'react-icons/cg';
@@ -43,7 +43,6 @@ export class Group extends Component {
     }
 
     handleColorsOpen = (ev) => {
-        console.log(this.state);
         this.setState({ elGroupColors: ev.currentTarget })
     }
 

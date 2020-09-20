@@ -29,7 +29,6 @@ class _UserProfile extends Component {
 
     async componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
-            console.log('changing to:', this.props.match.params.id);
             await this.setState({ user: { ...this.state.user, id: this.props.match.params.id } })
             this.props.getUserById(this.props.match.params.id)
         }

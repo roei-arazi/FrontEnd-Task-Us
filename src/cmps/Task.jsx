@@ -51,10 +51,9 @@ class _Task extends Component {
     }
 
     uploadImg = async (ev, user) => {
-        console.log(user);
         const res = await cloudinaryService.uploadImg(ev)
-        const newImg={
-            member:this.props.loggedUser.fullName,
+        const newImg = {
+            member: this.props.loggedUser.fullName,
             txt: res.url
         }
         this.setState({ updates: [newImg, ...this.state.updates] })
@@ -79,7 +78,7 @@ class _Task extends Component {
                 break;
             case 'priority':
                 this.setState({ isPriorityShown: !this.state.isPriorityShown })
-                break;    
+                break;
             default:
                 break;
         }
@@ -163,12 +162,12 @@ class _Task extends Component {
 
                             <div className="task-right flex align-center">
 
-                            <div className="task-label-name">
-                                <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
-                                {(this.state.updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{this.state.updates.length}</span></div>}
+                                <div className="task-label-name">
+                                    <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
+                                        {(this.state.updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{this.state.updates.length}</span></div>}
+                                    </div>
                                 </div>
-                                </div>
-                                        
+
                                 <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />

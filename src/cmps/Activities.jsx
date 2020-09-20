@@ -43,7 +43,6 @@ export default class Activities extends Component {
     render() {
         if (!this.state.filteredActivities) return <h1>Loading...</h1>
         const { isOrderReversed, filteredActivities } = this.state;
-        console.log('FILTER AICIAT2', filteredActivities)
 
         return (
             <section className="activities flex column padding-y-15">

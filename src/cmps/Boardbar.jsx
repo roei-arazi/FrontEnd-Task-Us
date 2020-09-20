@@ -55,9 +55,8 @@ class _Boardbar extends Component {
     }
 
     render() {
-        const { boards, isSnackbarShown } = this.props
+        const { boards } = this.props
         const { anchorEl, selectedBoardId, isShown } = this.state;
-        console.log('isSnackbarShown', isSnackbarShown);
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
                 {

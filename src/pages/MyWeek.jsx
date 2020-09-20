@@ -46,7 +46,6 @@ class _MyWeek extends Component {
 
     getDaysFromNow(date) {
         if (moment(date).isAfter(moment(Date.now()).add(1, 'day').endOf('day'))) {
-            console.log('from now:', moment(date).format());
             return moment(date).format('dddd')
         }
         return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'

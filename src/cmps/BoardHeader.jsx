@@ -24,7 +24,6 @@ export class _BoardHeader extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('prev props:', prevProps);
         if (prevProps.board._id !== this.props.board._id) {
             this.setState({ ...this.props.board })
         }

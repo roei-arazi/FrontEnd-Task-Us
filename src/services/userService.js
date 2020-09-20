@@ -74,7 +74,6 @@ async function markAsRead(loggedUser) {
     loggedUser.notifications.forEach(notification => {
         notification.isRead = true
     })
-    console.log('USER:u', loggedUser)
     try {
         return loggedUser
 
