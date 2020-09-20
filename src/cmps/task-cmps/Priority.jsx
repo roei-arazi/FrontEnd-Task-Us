@@ -4,7 +4,9 @@ export function Priority(props){
     return(
         <div className="label-container relative">
         <div className={`label-box ${props.priority.toLowerCase()}`} onClick={() => props.openModal('priority')}>
+        <div className="task-label-name">
             <p>{props.priority}</p>
+            </div>
             {props.isPriorityShown &&
                 <div className="label-list absolute flex column align-center">
                     <section className="label-selector low" onClick={() => props.handleChange("Low")}>
