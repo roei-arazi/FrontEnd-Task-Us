@@ -58,9 +58,8 @@ export class Group extends Component {
 
                                 <IoIosArrowDropdownCircle style={{ color: this.state.color }}
                                     className="drop-down-menu-icon" onClick={this.handleMenuOpen} />
-
-
                                 <Menu
+                                    role="menuContainer"
                                     anchorEl={ElGroupSettings}
                                     keepMounted
                                     open={Boolean(ElGroupSettings)}
@@ -69,7 +68,7 @@ export class Group extends Component {
                                     <MenuItem onClick={() => {
                                         this.props.onRemoveGroup(this.props.group.id)
                                     }}>
-                                        <AiOutlineDelete /> Delete Board
+                                        <AiOutlineDelete className="delete-group-icon" /> Delete Group
                                     </MenuItem>
                                 </Menu>
 
