@@ -73,7 +73,7 @@ class _UserProfile extends Component {
                         <img className="user-profile-big" src={imgUrl} alt="" />
                     </header>
 
-                    <div className="user-details-container padding-x-30 padding-y-30 align-center  flex column">
+                    <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">
                         {loggedUser._id === userProfile._id ? <h2 onClick={this.toggleModal}
                             className="clickable-header">Edit Profile</h2> : ''}
                         <div className="user-details-inner-container">
