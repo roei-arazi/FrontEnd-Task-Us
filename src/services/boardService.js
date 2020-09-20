@@ -46,17 +46,21 @@ let boards = [{
             status: 'Done',
             priority: 'low',
             dueDate: Date.now() + 1000 * 60 * 60 * 24 * 3,
-            notes: [
+            updates: [
                 {
                     txt: 'dont forget about this',
                     member: 'Roei Arazi'
+                },
+                {
+                    txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    member:'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
             tags: ['ui', 'ux'],
-            attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+            attachedImgs: []
         }, {
             id: _makeid(),
             name: 'sneeze',
@@ -69,17 +73,20 @@ let boards = [{
             status: 'Stuck',
             priority: 'low',
             dueDate: Date.now() + 1000 * 60 * 60 * 24 * 2,
-            notes: [
+            updates: [
                 {
                     txt: 'dont forget about this',
                     member: 'Roei Arazi'
+                },
+                {
+                    txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    member:'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux'],
-            attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+            tags: ['ui', 'ux']
         }]
     }],
     activityLog: [{
@@ -160,17 +167,20 @@ let boards = [{
             status: 'stuck',
             priority: 'medium',
             dueDate: Date.now() + 1000 * 60 * 60 * 24,
-            notes: [
+            updates: [
                 {
                     txt: 'dont forget about this',
                     member: 'Roei Arazi'
+                },
+                {
+                    txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    member:'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux'],
-            attachedImgs: ["https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg"]
+            tags: ['ui', 'ux']
         },]
     },],
     activityLog: [{
@@ -293,17 +303,20 @@ async function addBoard() {
                 status: 'Stuck',
                 priority: 'low',
                 dueDate: Date.now(),
-                notes: [
+                updates: [
                     {
                         txt: 'dont forget about this',
                         member: 'Roei Arazi'
+                    },
+                    {
+                        txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                        member:'Liam Zety'
                     }
                 ],
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
-                tags: ['ui', 'ux'],
-                attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+                tags: ['ui', 'ux']
             }, {
                 id: _makeid(),
                 name: 'sneeze',
@@ -316,17 +329,20 @@ async function addBoard() {
                 status: 'Working on it',
                 priority: 'low',
                 dueDate: Date.now(),
-                notes: [
+                updates: [
                     {
                         txt: 'dont forget about this',
                         member: 'Roei Arazi'
+                    },
+                    {
+                        txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                        member:'Liam Zety'
                     }
                 ],
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
-                tags: ['ui', 'ux'],
-                attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+                tags: ['ui', 'ux']
             }]
         }],
         activityLog: [{
@@ -404,17 +420,20 @@ async function addGroup(boardId) {
             status: 'Working on it',
             priority: 'low',
             dueDate: 214124124125,
-            notes: [
+            updates: [
                 {
                     txt: 'dont forget about this',
                     member: 'Roei Arazi'
+                },
+                {
+                    txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    member:'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux'],
-            attachedImgs: []
+            tags: ['ui', 'ux']
         }]
     }
     try {
@@ -457,17 +476,20 @@ async function addTask(groupId, taskName = 'Change Task Name') {
         status: 'Done',
         priority: 'low',
         dueDate: 214124124125,
-        notes: [
+        updates: [
             {
                 txt: 'dont forget about this',
                 member: 'Roei Arazi'
+            },
+            {
+                txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                member:'Liam Zety'
             }
         ],
         lastUpdated: 'yesterday',
         isSelected: false,
         posts: [],
-        tags: ['ui', 'ux'],
-        attachedImgs: []
+        tags: ['ui', 'ux']
     }
     boards = boards.map(board => {
         board.groups = board.groups.map(group => {

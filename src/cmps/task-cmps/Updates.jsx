@@ -5,16 +5,16 @@ import { CgNotes } from 'react-icons/cg'
 export class Updates extends React.Component {
 
     state = {
-        isImagesShown: true,
+        isImagesShown: false,
         isNotesShown: false,
-        note: {
+        update: {
             txt: ''
         },
-        notes:[]
+        updates:[],
     }
 
     componentDidMount() {
-        this.setState({ notes: this.props.notes })
+        this.setState({ updates: this.props.updates })
     }
 
     toggleUpdates = (data) => {
@@ -28,36 +28,37 @@ export class Updates extends React.Component {
     }
 
     handleChange = (ev) => {
-        this.setState({ note: { ...this.state.note, txt: ev.target.value } })
+        this.setState({ update: { ...this.state.update, txt: ev.target.value } })
     }
 
     sendNote = async (ev) => {
         ev.preventDefault()
-        const notes = JSON.parse(JSON.stringify(this.state.notes))
-        if (!this.state.note.txt || this.state.note.txt.split('').every(letter => letter === ' ')) return
+        const updates = JSON.parse(JSON.stringify(this.state.updates))
+        if (!this.state.update.txt || this.state.update.txt.split('').every(letter => letter === ' ')) return
         const newNote = {
-            txt: this.state.note.txt,
+            txt: this.state.update.txt,
             member: this.props.loggedUser.fullName
         }
-        notes.push(newNote)
-        await this.setState({ notes, note: { txt: '' } })
+        updates.push(newNote)
+        await this.setState({ updates, update: { txt: '' } })
 
-        this.props.sendNote(this.state.notes)
+        this.props.sendNote(this.state.updates)
     }
 
     render() {
+        if(!this.state.updates) return <h1>Loading...</h1>;
         const { attachedImgs } = this.props
-        const { notes } = this.state
+        const { updates } = this.props
         return (
             <React.Fragment>
                 <div className=" updates-header flex column align-center">
                     <h1>Updates</h1>
                     <div className="updates-icons flex align-center">
                         <IoMdImages onClick={() => this.toggleUpdates('images')} />
-                        <CgNotes onClick={() => this.toggleUpdates('notes')} />
+                        <CgNotes onClick={() => this.toggleUpdates('updates')} />
                     </div>
                 </div>
-                {this.state.isImagesShown &&
+                {/* {this.state.isImagesShown &&
                     <div className="updates-images flex column align-center">
                         <div className="image-uploader">
                             <label htmlFor="task-imgs">Upload Image</label>
@@ -72,14 +73,21 @@ export class Updates extends React.Component {
                 {this.state.isNotesShown &&
                     <div className="updates-notes flex column">
                         <form onSubmit={this.sendNote} className="notes-form flex column justify-center align-center">
-                            <input type="text" value={this.state.note.txt} onChange={this.handleChange} />
+                            <input type="text" value={this.state.update.txt} onChange={this.handleChange} />
                             <button>Send</button>
                         </form>
                         <div className="notes-messages">
-                            {notes.map((note, idx) => <p className="note-text" key={idx}>{note.member}: {note.txt}</p>)}
+                            {updates.map((update, idx) => <p className="update-text" key={idx}>{update.member}: {update.txt}</p>)}
                         </div>
                     </div>
-                }
+                } */}
+
+                <div className="updates-container flex column">
+                    {updates.map((update,idx)=>{
+                        if(update.txt.includes('https://res')) return <div key={idx} className="update-box">{update.member}: <img src={update.txt} /></div>
+                        else return <div className="update-box"><p className="update-text" key={idx}>{update.member}: {update.txt}</p></div>
+                    })}
+                </div>
             </React.Fragment>
 
         )

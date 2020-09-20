@@ -88,10 +88,11 @@
     background-color: #fff;
     z-index: 10000;
     top: 25px;
-    left: 105px;
+    left: 115px;
     border-radius:5px;
-    box-shadow: 5px 5px 5px grey;
+    box-shadow:0px 3px 10px -5px #484444;
    cursor: auto;
+   background-color: $colorIconsBoardBars;
 
     .color-pick{
         width:30px;
@@ -99,5 +100,14 @@
         border-radius: 50%;
         margin:5px;
         cursor:pointer;
+
+        &:hover{
+            transition:0.2s;
+            width:32px;
+            height:32px;
+            margin:4px;
+        }
     }
+
+
 }

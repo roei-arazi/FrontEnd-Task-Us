@@ -5,6 +5,7 @@ import { ListItem, Menu, MenuItem, MenuList } from '@material-ui/core';
 //Material ui
 import { Tooltip, Zoom } from '@material-ui/core';
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
+import {GrDrag} from 'react-icons/gr'
 import { AiOutlineDelete } from 'react-icons/ai'
 
 import ContentEditable from 'react-contenteditable';
@@ -62,6 +63,7 @@ export class Group extends Component {
         } catch (err) {
             console.log('Error', err)
         }
+        this.setState({ ElGroupSettings: null ,elGroupColors: false})
     }
 
     render() {
@@ -75,7 +77,7 @@ export class Group extends Component {
                         {...provided.draggableProps}
 
                         ref={provided.innerRef}>
-                        <div className="group-header-container flex space-between align-center" {...provided.dragHandleProps}>
+                        <div className="group-header-container flex space-between align-center">
                             <div className="group-header-left align-center flex relative">
 
                                 <IoIosArrowDropdownCircle style={{ color: this.props.group.color }}
@@ -99,17 +101,22 @@ export class Group extends Component {
 
                                 </Menu>
                                 {elGroupColors &&
-                                            <div className="color-picker absolute flex wrap">                     
-                                                    <div onClick={() => this.onChangeGroupColor('red')} className="color-pick" style={{ backgroundColor: 'red' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('green')} className="color-pick" style={{ backgroundColor: 'green' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('blue')} className="color-pick" style={{ backgroundColor: 'blue' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('yellow')} className="color-pick" style={{ backgroundColor: 'yellow' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('orange')} className="color-pick" style={{ backgroundColor: 'orange' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('black')} className="color-pick" style={{ backgroundColor: 'black' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('brown')} className="color-pick" style={{ backgroundColor: 'brown' }}></div>                                   
+                                            <div className="color-picker absolute flex wrap justify-center align-center">                     
+                                                    <div onClick={() => this.onChangeGroupColor('#ffcbcb')} className="color-pick" style={{ backgroundColor: '#ffcbcb' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('#f0a500')} className="color-pick" style={{ backgroundColor: '#f0a500' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('#70adb5')} className="color-pick" style={{ backgroundColor: '#70adb5' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('#1a1c20')} className="color-pick" style={{ backgroundColor: '#1a1c20' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('#9d65c9')} className="color-pick" style={{ backgroundColor: '#9d65c9' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('#931a25')} className="color-pick" style={{ backgroundColor: '#931a25' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('#7ea04d')} className="color-pick" style={{ backgroundColor: '#7ea04d' }}></div>                                   
+                                                    <div onClick={() => this.onChangeGroupColor('#838383')} className="color-pick" style={{ backgroundColor: '#838383' }}></div>                                   
+                                                    <div onClick={() => this.onChangeGroupColor('#1d2d50')} className="color-pick" style={{ backgroundColor: '#1d2d50' }}></div>                                   
                                             </div>
                                         }
-
+                                        <div className="drag-icon" {...provided.dragHandleProps}>
+                                        <GrDrag  style={{cursor:'grab', color: '#333333'}}  />
+                                        </div>
+                                    
                                 <h1 style={{ color: this.props.group.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}

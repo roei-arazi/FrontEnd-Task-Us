@@ -56,8 +56,8 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    sendNote = async (notes) => {
-        await this.setState({ notes })
+    sendNote = async (updates) => {
+        await this.setState({ updates })
         this.props.onEditTask(this.state)
     }
 
@@ -110,7 +110,7 @@ class _Task extends Component {
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
 
                     <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
-                        notes={this.state.notes} uploadImg={this.uploadImg} sendNote={this.sendNote}
+                        updates={this.state.updates} uploadImg={this.uploadImg} sendNote={this.sendNote}
                     />
                 </div>
 
