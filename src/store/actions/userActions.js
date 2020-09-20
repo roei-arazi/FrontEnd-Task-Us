@@ -74,6 +74,20 @@ export function markAsRead(loggedUser) {
     }
 }
 
+export function removeNotifications(loggedUser) {
+    const user = loggedUser
+    user.notifications = []
+
+    return async dispatch => {
+        try {
+            dispatch({ type: 'UPDATE_PROFILE', user })
+        } catch (err) {
+            console.log('ERROR, couldnt remove notifications', err);
+        }
+    }
+
+}
+
 export function updateProfile(loggedUser) {
     return async dispatch => {
         try {

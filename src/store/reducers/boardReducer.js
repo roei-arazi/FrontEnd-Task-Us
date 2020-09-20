@@ -1,6 +1,7 @@
 const initialState = {
     boards: [],
-    filterBy:{}
+    filterBy: {},
+    isBoardbarShown: true
 }
 
 export function boardReducer(state = initialState, action) {
@@ -38,7 +39,11 @@ export function boardReducer(state = initialState, action) {
                             status: 'Done',
                             priority: 'low',
                             dueDate: 214124124125,
+<<<<<<< HEAD
                             updates:[],
+=======
+                            notes: [],
+>>>>>>> 95823fb145b9ec44ba6662267b193f8afeea5474
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -81,7 +86,11 @@ export function boardReducer(state = initialState, action) {
                             status: 'progress',
                             priority: 'low',
                             dueDate: 214124124125,
+<<<<<<< HEAD
                             updates:[],
+=======
+                            notes: [],
+>>>>>>> 95823fb145b9ec44ba6662267b193f8afeea5474
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -167,10 +176,14 @@ export function boardReducer(state = initialState, action) {
                             status: 'Done',
                             priority: 'low',
                             dueDate: Date.now(),
+<<<<<<< HEAD
                             updates:[{
                                 txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
                                 member: 'Osher Kabada'
                             }],
+=======
+                            notes: [],
+>>>>>>> 95823fb145b9ec44ba6662267b193f8afeea5474
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -187,10 +200,14 @@ export function boardReducer(state = initialState, action) {
                             status: 'Donw',
                             priority: 'low',
                             dueDate: Date.now(),
+<<<<<<< HEAD
                             updates:[{
                                 txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
                                 member:'Osher Kabada'
                             }],
+=======
+                            notes: [],
+>>>>>>> 95823fb145b9ec44ba6662267b193f8afeea5474
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -243,6 +260,11 @@ export function boardReducer(state = initialState, action) {
             return {
                 ...state,
                 filterBy: action.filter
+            }
+        case 'TOGGLE_BOARDBAR':
+            return {
+                ...state,
+                isBoardbarShown: !state.isBoardbarShown
             }
         default:
             return state

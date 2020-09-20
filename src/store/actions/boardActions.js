@@ -127,14 +127,22 @@ export function editTask(task) {
 
 //-----------------FILTER ACTIONS------------------------
 
-export function setFilter(filter){
-    return dispatch =>{
-        dispatch({type: 'SET_FILTER', filter})
+export function setFilter(filter) {
+    return dispatch => {
+        dispatch({ type: 'SET_FILTER', filter })
     }
 }
 
-export function clearFilter(){
-    return dispatch =>{
-        dispatch({type: 'SET_FILTER', filter: {}})
+export function clearFilter() {
+    return dispatch => {
+        dispatch({ type: 'SET_FILTER', filter: {} })
+    }
+}
+//---------------------BOARD BAR--------------------
+
+
+export function toggleBoardbar() {
+    return dispatch => {
+        dispatch({ type: 'TOGGLE_BOARDBAR' })
     }
 }

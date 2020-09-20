@@ -72,7 +72,8 @@
     }
 }
 
-.delete-group-icon {
+.delete-group-icon,
+.color-group-icon {
     margin-right: 5px;
 }
 
@@ -82,22 +83,30 @@
     background-color: rgba($colorMainNav, 0.5)
 }
 
-.color-picker{
-    width:120px;
-    height:150px;
+.color-picker {
+    width: 120px;
+    height: 150px;
     background-color: #fff;
     z-index: 10000;
     top: 25px;
+<<<<<<< HEAD
     left: 115px;
     border-radius:5px;
     box-shadow:0px 3px 10px -5px #484444;
    cursor: auto;
    background-color: $colorIconsBoardBars;
+=======
+    left: 105px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px grey;
+    cursor: auto;
+>>>>>>> 95823fb145b9ec44ba6662267b193f8afeea5474
 
-    .color-pick{
-        width:30px;
-        height:30px;
+    .color-pick {
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
+<<<<<<< HEAD
         margin:5px;
         cursor:pointer;
 
@@ -107,6 +116,10 @@
             height:32px;
             margin:4px;
         }
+=======
+        margin: 5px;
+        cursor: pointer;
+>>>>>>> 95823fb145b9ec44ba6662267b193f8afeea5474
     }
 
 

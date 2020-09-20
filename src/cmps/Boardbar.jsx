@@ -6,7 +6,7 @@ import { HiOutlineCog } from 'react-icons/hi';
 import { BsFilePlus, BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs';
 import { Tooltip, Zoom } from '@material-ui/core';
 
-import { removeBoard, addBoard } from '../store/actions/boardActions.js';
+import { removeBoard, addBoard, toggleBoardbar } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 
 class _Boardbar extends Component {
@@ -14,8 +14,12 @@ class _Boardbar extends Component {
         anchorEl: null,
         selectedBoardId: '',
         isSnackbarOpen: false,
-        isShown: true
+        isShown: ''
     }
+    componentDidMount() {
+        this.setState({ isShown: this.props.isBoardbarShown })
+    }
+
     onMoveToBoard(id) {
         this.props.history.push(`/board/${id}`)
     }
@@ -46,6 +50,7 @@ class _Boardbar extends Component {
     }
 
     onToggleShown = () => {
+        this.props.toggleBoardbar()
         this.setState({ isShown: !this.state.isShown })
     }
 
@@ -68,7 +73,8 @@ class _Boardbar extends Component {
                         : (
                             <Tooltip enterDelay={800} TransitionComponent={Zoom} title="Toggle Board" arrow>
                                 <div className="board-bar-toggle-container">
-                                    <BsArrowsExpand onClick={this.onToggleShown} className="board-bar-toggle" />
+                                    <BsArrowsExpand style={{ color: this.props.location.pathname.includes('/myweek') && '#151515' }}
+                                        onClick={this.onToggleShown} className="board-bar-toggle" />
                                 </div>
                             </Tooltip>
                         )
@@ -109,7 +115,8 @@ class _Boardbar extends Component {
 
 const mapStateToProps = state => {
     return {
-        boards: state.boardReducer.boards
+        boards: state.boardReducer.boards,
+        isBoardbarShown: state.boardReducer.isBoardbarShown
     }
 }
 
@@ -117,7 +124,8 @@ const mapDispatchToProps = {
     removeBoard,
     addBoard,
     showSnackbar,
-    hideSnackbar
+    hideSnackbar,
+    toggleBoardbar
 }
 
 export const Boardbar = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Boardbar));
