@@ -67,10 +67,10 @@ export class Updates extends React.Component {
                 <div className="updates-container flex column">
 
                     {updates.map((update, idx) => {
-                        console.log(update.txt);
+                       
                         if (update.txt.includes('https://res') || update.txt.includes('http://res')) {
-                        return <div key={idx} className="update-box flex wrap column"><p className="member-name">{update.member} :</p> <img src={update.txt} /></div>
-                    }else return <div className="update-box"><p className="member-name" key={idx}>{update.member}: <p class="update-text">{update.txt}</p></p></div>
+                        return <div key={idx} className="update-box flex wrap column"><p className="member-name">{update.member}</p> <img src={update.txt} /></div>
+                    }else return <div key={idx} className="update-box"><p className="member-name" key={idx}>{update.member}</p> <p className="update-text">{update.txt}</p></div>
                     })}
                 </div>
             </React.Fragment>
