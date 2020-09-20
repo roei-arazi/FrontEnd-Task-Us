@@ -237,6 +237,11 @@ export function boardReducer(state = initialState, action) {
                     ]
                 }]
             }
+        case 'SET_FILTER':
+            return {
+                ...state,
+                filterBy: action.filter
+            }
         default:
             return state
     }

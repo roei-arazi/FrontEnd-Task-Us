@@ -1,54 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateBoard } from '../store/actions/boardActions';
+import { setFilter} from '../store/actions/boardActions';
 
 class _Filter extends Component {
     state = {
-        _id: '',
-        filterBy: {
-            groupId: '',
-            taskId: ''
-        }
+        _id: ''
     }
 
     componentDidMount() {
+        console.log('mounting filter again');
         this.setState({ ...this.props.board })
     }
     
 
-    filterGroups = async (groupId) => {
-        await this.setState({ filterBy:  groupId })
-        console.log(this.state.filterBy);
-        var queryParams = new URLSearchParams();
-        for (let key in this.state.filterBy) {
-            queryParams.set(key, this.state.filterBy[key])
-        }
-        this.props.history.push(`/board/${this.state._id}?${queryParams}`)
+    filterGroups = (groupId) => {
+        const {filterBy, setFilter} = this.props;
+        setFilter({...filterBy, groupId})
     }
 
     filterTasks = async (taskId) => {
-        await this.setState({ filterBy: { ...this.state.filterBy, taskId } })
-        console.log(this.state.filterBy);
-        var queryParams = new URLSearchParams();
-        for (let key in this.state.filterBy) {
-            queryParams.set(key, this.state.filterBy[key])
-        }
-        this.props.history.push(`/board/${this.state._id}?${queryParams}`)
+        const {filterBy, setFilter} = this.props;
+        setFilter({...filterBy, taskId})
     }
 
     // removeGroupFilter = async (groupId) => {
-    //     const newGroup = this.props.board.groups.find(group => group.id !== groupId)
-    //     await this.setState({ groups: [...this.state.groups, newGroup], 
-    //         filterBy: { ...this.state.filterBy,groupIds: [...this.state.filterBy.groupIds, groupId]}})
-    //         this.props.updateBoard(this.state, this.state.filterBy)
     // }
 
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
-        const { groups } = this.state
-        const groupsToFilter = this.props.board.groups.filter(group => !this.state.groups.some(selectedGroup => selectedGroup.id === group.id))
-        console.log(this.state.filterBy);
+        const { groups } = this.state;
         return (
             <div className="filter-modal flex absolute">
 
@@ -88,12 +69,12 @@ class _Filter extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        filterBy: state.boardReducer.filterBy
     }
 }
 
 const mapDispatchToProps = {
-    updateBoard
+    setFilter
 }
 
 export const Filter = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Filter));

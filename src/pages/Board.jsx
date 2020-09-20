@@ -201,8 +201,9 @@ class _Board extends Component {
 
     render() {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
-        const users = this.props.users
+        const {users, filterBy} = this.props
         if (!board) return <h1>Loading..</h1>
+        console.log('applying filter:', filterBy);
         const searchParams = queryString.parse(this.props.location.search)
         let filteredBoard = JSON.parse(JSON.stringify(board));
         if (searchParams.groupId) {
@@ -257,7 +258,8 @@ class _Board extends Component {
 const mapStateToProps = state => {
     return {
         boards: state.boardReducer.boards,
-        users: state.userReducer.users
+        users: state.userReducer.users,
+        filterBy: state.boardReducer.filterBy
     }
 }
 
