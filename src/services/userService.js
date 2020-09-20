@@ -58,7 +58,7 @@ export const userService = {
     signup,
     guestLogin,
     markAsRead,
-    updateProfile
+    updateProfile,
 }
 
 async function loadUsers() {
@@ -145,21 +145,22 @@ async function guestLogin() {
     }
 }
 
-async function updateProfile(loggedUser){
-    const user= users.find(user=> user._id === loggedUser._id)
+async function updateProfile(loggedUser) {
+    const user = users.find(user => user._id === loggedUser._id)
 
-    try{
-        if(loggedUser.username) user.username=loggedUser.username
-        if(loggedUser.password) user.password= loggedUser.password
-        if(loggedUser.email) user.email= loggedUser.email
-        if(loggedUser.fullName) user.fullName= loggedUser.fullName
-        if(loggedUser.imgUrl) user.imgUrl= loggedUser.imgUrl
+    try {
+        if (loggedUser.username) user.username = loggedUser.username
+        if (loggedUser.password) user.password = loggedUser.password
+        if (loggedUser.email) user.email = loggedUser.email
+        if (loggedUser.fullName) user.fullName = loggedUser.fullName
+        if (loggedUser.imgUrl) user.imgUrl = loggedUser.imgUrl
         return user
-    }catch(err){
-        console.log('ERROR, couldnt update user',err);
+    } catch (err) {
+        console.log('ERROR, couldnt update user', err);
     }
-    
+
 }
+
 
 function _makeid(length = 7) {
     var text = "";

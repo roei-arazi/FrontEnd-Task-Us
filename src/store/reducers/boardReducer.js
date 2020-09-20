@@ -1,6 +1,7 @@
 const initialState = {
     boards: [],
-    filterBy:{}
+    filterBy: {},
+    isBoardbarShown: true
 }
 
 export function boardReducer(state = initialState, action) {
@@ -38,7 +39,7 @@ export function boardReducer(state = initialState, action) {
                             status: 'Done',
                             priority: 'low',
                             dueDate: 214124124125,
-                            notes:[],
+                            notes: [],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -82,7 +83,7 @@ export function boardReducer(state = initialState, action) {
                             status: 'progress',
                             priority: 'low',
                             dueDate: 214124124125,
-                            notes:[],
+                            notes: [],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -169,7 +170,7 @@ export function boardReducer(state = initialState, action) {
                             status: 'Done',
                             priority: 'low',
                             dueDate: Date.now(),
-                            notes:[],
+                            notes: [],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -187,7 +188,7 @@ export function boardReducer(state = initialState, action) {
                             status: 'Donw',
                             priority: 'low',
                             dueDate: Date.now(),
-                            notes:[],
+                            notes: [],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
@@ -241,6 +242,11 @@ export function boardReducer(state = initialState, action) {
             return {
                 ...state,
                 filterBy: action.filter
+            }
+        case 'TOGGLE_BOARDBAR':
+            return {
+                ...state,
+                isBoardbarShown: !state.isBoardbarShown
             }
         default:
             return state

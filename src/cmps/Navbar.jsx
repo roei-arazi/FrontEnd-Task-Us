@@ -7,7 +7,7 @@ import { VscBell, VscBellDot } from 'react-icons/vsc'
 import { BsCalendar } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
 import { Notifications } from './Notifications';
-import { markAsRead } from '../store/actions/userActions'
+import { markAsRead, removeNotifications } from '../store/actions/userActions'
 class _Navbar extends Component {
     state = {
         isNotificationShown: false
@@ -24,7 +24,7 @@ class _Navbar extends Component {
 
     render() {
         const { isNotificationShown } = this.state
-        const { loggedUser } = this.props
+        const { loggedUser, removeNotifications } = this.props
         return (
             <section className="navbar flex column space-between align-center padding-y-15">
 
@@ -45,7 +45,7 @@ class _Navbar extends Component {
                         {
                             isNotificationShown &&
                             <Fade in={this.state.isNotificationShown}>
-                                <Notifications loggedUser={loggedUser} />
+                                <Notifications removeNotifications={removeNotifications} loggedUser={loggedUser} />
                             </Fade>
                         }
 
@@ -75,7 +75,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    markAsRead
+    markAsRead,
+    removeNotifications
 }
 
 export const Navbar = connect(mapStateToProps, mapDispatchToProps)(_Navbar);
