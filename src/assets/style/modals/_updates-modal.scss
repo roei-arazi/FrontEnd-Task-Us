@@ -1,0 +1,79 @@
+
+.updates-header {
+    margin-bottom: 20px;
+    h1{
+        margin: 15px 0 30px;
+    }
+
+    .updates-header-options{
+        width:100%;
+
+        >*{
+            margin:0 auto;
+        }
+    }
+
+
+    label {
+        font-family: font1;
+        padding: 15px;
+        color: $colorFontNav;
+        background-color: $buttonColorCTA;
+        border: 0;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 2px;
+        transition: .3s;
+        margin:20px 0;
+    
+        &:hover {
+            background-color: $colorIconsTasksHover;
+        }
+    }
+
+    input{
+        border-bottom:2px solid $buttonColorCTA;
+        width:150px;
+
+        &::placeholder{
+            color:$colorFontUserDetails
+        }
+    }
+}
+
+
+.updates-container{
+
+    overflow: overlay;
+    padding:0 10px;
+    height: 75vh;
+    background-color: #dddfc6;
+    border-bottom: 1px solid #b5ad91;
+    border-top: 1px solid #b5ad91;
+
+    .update-box{
+
+        padding:10px;
+        box-shadow:0px 3px 10px -5px #484444;
+        margin:10px;
+        background-color: $colorBg;
+        width: fit-content;
+
+        .member-name{
+            font-weight: bold;
+        }
+
+        .update-text{
+            font-weight: initial;
+            display: inline;
+            word-break: break-all;
+        }
+
+        img {
+            height: 200px;
+            width:200px;
+        }   
+    }   
+   
+}
+
