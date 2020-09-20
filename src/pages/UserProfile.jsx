@@ -6,12 +6,22 @@ import { Fade } from '@material-ui/core';
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
 import { loadBoards } from '../store/actions/boardActions'
-import { getUserById } from '../store/actions/userActions';
+import { getUserById, updateProfile } from '../store/actions/userActions';
 
 class _UserProfile extends Component {
     state = {
-        isModalOpen: false
+        isModalOpen: false,
+        user:{
+            _id:this.props.match.params.id,
+            email:'',
+            username:'',
+            passowrd:'',
+            fullName:'',
+            imgUrl:''
+        }
+        
     }
+
     async componentDidMount() {
         this.props.loadBoards()
         this.props.getUserById(this.props.match.params.id)
@@ -19,6 +29,16 @@ class _UserProfile extends Component {
     toggleModal = () => {
         this.setState({ isModalOpen: !this.state.isModalOpen })
     }
+
+    handleChange=({target})=>{
+        this.setState({user:{...this.state.user,[target.name]: target.value}})
+    }
+
+    updateProfile=(ev)=>{
+        ev.preventDefault()
+        this.props.updateProfile(this.state.user)
+    }
+
     render() {
         if (!this.props.userProfile) return <h1>Loading...</h1>
         const { loggedUser, userProfile } = this.props
@@ -53,11 +73,11 @@ class _UserProfile extends Component {
                                 </div>
                                 <div className="user-modal-col">
                                     <form className="form-container flex justify-center column  align-center" action="">
-                                        <input placeholder="Email" type="email" />
-                                        <input placeholder="Username" type="text" />
-                                        <input placeholder="Password" type="password" />
-                                        <input placeholder="Full Name" type="text" />
-                                        <button>Save Changes</button>
+                                        <input value={this.state.user.email} onChange={this.handleChange} name="email" placeholder="Email" type="email" />
+                                        <input value={this.state.user.username} onChange={this.handleChange} name="username" placeholder="Username" type="text" />
+                                        <input value={this.state.user.password} onChange={this.handleChange} name="password" placeholder="Password" type="password" />
+                                        <input value={this.state.user.fullName} onChange={this.handleChange} name="fullName" placeholder="Full Name" type="text" />
+                                        <button onClick={this.updateProfile}>Save Changes</button>
                                         <button className="secondary-btn" onClick={this.toggleModal}>Cancel</button>
                                     </form>
                                 </div>
@@ -82,7 +102,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loadBoards,
-    getUserById
+    getUserById,
+    updateProfile
 }
 
 export const UserProfile = connect(mapStateToProps, mapDispatchToProps)(_UserProfile);

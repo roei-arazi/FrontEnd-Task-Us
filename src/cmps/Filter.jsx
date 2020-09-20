@@ -8,19 +8,31 @@ class _Filter extends Component {
         _id: '',
         filterBy: {
             groupId: '',
+            taskId: ''
         }
     }
 
     componentDidMount() {
         this.setState({ ...this.props.board })
     }
+    
 
     filterGroups = async (groupId) => {
-        await this.setState({filterBy:{...this.state.filterBy, groupId}})
-        console.log(this.state.filterBy);  
+        await this.setState({ filterBy:  groupId })
+        console.log(this.state.filterBy);
         var queryParams = new URLSearchParams();
         for (let key in this.state.filterBy) {
-            queryParams.set(key, groupId)
+            queryParams.set(key, this.state.filterBy[key])
+        }
+        this.props.history.push(`/board/${this.state._id}?${queryParams}`)
+    }
+
+    filterTasks = async (taskId) => {
+        await this.setState({ filterBy: { ...this.state.filterBy, taskId } })
+        console.log(this.state.filterBy);
+        var queryParams = new URLSearchParams();
+        for (let key in this.state.filterBy) {
+            queryParams.set(key, this.state.filterBy[key])
         }
         this.props.history.push(`/board/${this.state._id}?${queryParams}`)
     }
@@ -42,7 +54,7 @@ class _Filter extends Component {
 
                 <section className="group-name-filter flex column align-center">
                     <h3>Groups</h3>
-                    <div className="groups">                      
+                    <div className="groups">
                         {groups.map((group, idx) => <button key={idx} onClick={() => this.filterGroups(group.id)}>{group.name}</button>)}
                     </div>
 
@@ -55,6 +67,7 @@ class _Filter extends Component {
 
                 <section className="task-name-filter flex column align-center">
                     <h3>Tasks</h3>
+                    {groups.map(group => group.tasks.map((task, idx) => <button key={idx} onClick={() => this.filterTasks(task.id)}>{task.name}</button>))}
                 </section>
                 <section className="task-member-filter flex column align-center">
                     <h3>Member</h3>

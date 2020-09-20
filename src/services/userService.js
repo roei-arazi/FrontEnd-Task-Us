@@ -57,7 +57,8 @@ export const userService = {
     login,
     signup,
     guestLogin,
-    markAsRead
+    markAsRead,
+    updateProfile
 }
 
 async function loadUsers() {
@@ -142,6 +143,10 @@ async function guestLogin() {
         console.log('userService: Couldn\'t login as guest');
         throw err;
     }
+}
+
+async function updateProfile(loggedUser){
+    
 }
 
 function _makeid(length = 7) {
