@@ -25,6 +25,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
+
     }
 
     .group-header-right {
@@ -75,4 +76,24 @@
     transition: 0.3s ease;
     padding: 10px;
     background-color: rgba($colorMainNav, 0.5)
+}
+
+.color-picker{
+    width:120px;
+    height:150px;
+    background-color: #fff;
+    z-index: 10000;
+    top: 25px;
+    left: 105px;
+    border-radius:5px;
+    box-shadow: 5px 5px 5px grey;
+   cursor: auto;
+
+    .color-pick{
+        width:30px;
+        height:30px;
+        border-radius: 50%;
+        margin:5px;
+        cursor:pointer;
+    }
 }

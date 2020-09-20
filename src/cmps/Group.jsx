@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Task } from './Task'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { Menu, MenuItem } from '@material-ui/core';
+import { ListItem, Menu, MenuItem, MenuList } from '@material-ui/core';
 //Material ui
 import { Tooltip, Zoom } from '@material-ui/core';
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
 import { AiOutlineDelete } from 'react-icons/ai'
 
 import ContentEditable from 'react-contenteditable';
+import { CgColorPicker } from 'react-icons/cg';
 
 
 export class Group extends Component {
@@ -15,6 +16,7 @@ export class Group extends Component {
     state = {
         id: '',
         ElGroupSettings: null,
+        elGroupColors: false,
     }
 
     componentDidMount() {
@@ -33,19 +35,39 @@ export class Group extends Component {
         }, 0)
     }
 
-    handleMenuOpen = (ev, boardId) => {
+    handleMenuOpen = (ev) => {
         this.setState({ ElGroupSettings: ev.currentTarget })
     }
 
     handleMenuClose = () => {
-        this.setState({ ElGroupSettings: null })
+        this.setState({ ElGroupSettings: null ,elGroupColors: false})
     }
 
+    handleColorsOpen = (ev) => {
+        console.log(this.state);
+        this.setState({ elGroupColors: ev.currentTarget })
+    }
+
+    handleColorsToggle = () => {
+        this.setState({ elGroupColors: !this.state.elGroupColors })
+    }
+
+    onChangeGroupColor = async (color) => {
+        const newGroup = {
+            ...this.props.group,
+            color
+        }
+        try {
+            await this.props.onEditGroup(newGroup, color, this.state.color)
+        } catch (err) {
+            console.log('Error', err)
+        }
+    }
 
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
-        const { name, ElGroupSettings } = this.state;
-        console.log('STATE?', this.state)
+        const { name, ElGroupSettings, elGroupColors } = this.state;
+
         return (
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>
@@ -56,9 +78,8 @@ export class Group extends Component {
                         <div className="group-header-container flex space-between align-center" {...provided.dragHandleProps}>
                             <div className="group-header-left align-center flex relative">
 
-                                <IoIosArrowDropdownCircle style={{ color: this.state.color }}
+                                <IoIosArrowDropdownCircle style={{ color: this.props.group.color }}
                                     className="drop-down-menu-icon" onClick={this.handleMenuOpen} />
-
 
                                 <Menu
                                     anchorEl={ElGroupSettings}
@@ -69,12 +90,27 @@ export class Group extends Component {
                                     <MenuItem onClick={() => {
                                         this.props.onRemoveGroup(this.props.group.id)
                                     }}>
-                                        <AiOutlineDelete /> Delete Board
+                                        <AiOutlineDelete /> Delete Group
                                     </MenuItem>
+                                    <MenuItem onClick={this.handleColorsToggle}>
+                                        <CgColorPicker /> Change Color
+                                       
+                                    </MenuItem>
+
                                 </Menu>
+                                {elGroupColors &&
+                                            <div className="color-picker absolute flex wrap">                     
+                                                    <div onClick={() => this.onChangeGroupColor('red')} className="color-pick" style={{ backgroundColor: 'red' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('green')} className="color-pick" style={{ backgroundColor: 'green' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('blue')} className="color-pick" style={{ backgroundColor: 'blue' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('yellow')} className="color-pick" style={{ backgroundColor: 'yellow' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('orange')} className="color-pick" style={{ backgroundColor: 'orange' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('black')} className="color-pick" style={{ backgroundColor: 'black' }}></div>
+                                                    <div onClick={() => this.onChangeGroupColor('brown')} className="color-pick" style={{ backgroundColor: 'brown' }}></div>                                   
+                                            </div>
+                                        }
 
-
-                                <h1 style={{ color: this.state.color }} className="group-title">
+                                <h1 style={{ color: this.props.group.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}
                                         className="content-editable cursor-initial"
