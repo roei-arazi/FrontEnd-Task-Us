@@ -101,7 +101,6 @@ export class Group extends Component {
 
                                 </Menu>
                                 {elGroupColors &&
-<<<<<<< HEAD
                                             <div className="color-picker absolute flex wrap justify-center align-center">                     
                                                     <div onClick={() => this.onChangeGroupColor('#ffcbcb')} className="color-pick" style={{ backgroundColor: '#ffcbcb' }}></div>
                                                     <div onClick={() => this.onChangeGroupColor('#f0a500')} className="color-pick" style={{ backgroundColor: '#f0a500' }}></div>
@@ -118,19 +117,6 @@ export class Group extends Component {
                                         <GrDrag  style={{cursor:'grab', color: '#333333'}}  />
                                         </div>
                                     
-=======
-                                    <div className="color-picker absolute flex wrap">
-                                        <div onClick={() => this.onChangeGroupColor('red')} className="color-pick" style={{ backgroundColor: 'red' }}></div>
-                                        <div onClick={() => this.onChangeGroupColor('green')} className="color-pick" style={{ backgroundColor: 'green' }}></div>
-                                        <div onClick={() => this.onChangeGroupColor('blue')} className="color-pick" style={{ backgroundColor: 'blue' }}></div>
-                                        <div onClick={() => this.onChangeGroupColor('yellow')} className="color-pick" style={{ backgroundColor: 'yellow' }}></div>
-                                        <div onClick={() => this.onChangeGroupColor('orange')} className="color-pick" style={{ backgroundColor: 'orange' }}></div>
-                                        <div onClick={() => this.onChangeGroupColor('black')} className="color-pick" style={{ backgroundColor: 'black' }}></div>
-                                        <div onClick={() => this.onChangeGroupColor('brown')} className="color-pick" style={{ backgroundColor: 'brown' }}></div>
-                                    </div>
-                                }
-
->>>>>>> 95823fb145b9ec44ba6662267b193f8afeea5474
                                 <h1 style={{ color: this.props.group.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}
