@@ -4,6 +4,14 @@
     margin-bottom: 2px;
     height: 40px;
     border-radius: 1px;
+    svg {
+        font-size: 2rem;
+    }
+
+    .task-remove-icon {
+        font-size: 1.2rem;
+        transform: rotate(180deg);
+    }
 
     .users-modal {
         background-color: #ffffff;
@@ -11,29 +19,24 @@
         padding: 10px;
         width: 250px;
         border-radius: 1px;
-
         .task-users-box {
             border-bottom: 2px solid $colorMainNav;
             padding: 10px 0;
             cursor: pointer;
         }
-
         h3 {
             margin-bottom: 10px;
         }
-
         .user-box-info {
             p {
                 text-align: left;
             }
         }
-
         .board-users-box {
             padding: 10px 0;
             cursor: pointer;
         }
     }
-
     input {
         width: 100%;
         background-color: $colorDatePicker;
@@ -43,7 +46,6 @@
         border-radius: 1px;
         text-align: center;
     }
-
     .icon-container {
         position: absolute;
         left: -20px;
@@ -64,7 +66,6 @@
     z-index: 999;
     padding: 10px;
     border-radius: 1px;
-
     .label-selector {
         width: 90%;
         text-align: center;
@@ -82,7 +83,6 @@
 
 .task-left {
     position: relative;
-
     .task-color {
         background: red;
         width: 7px;
@@ -93,36 +93,44 @@
 .task-right {
     height: 100%;
     margin-right: 10px;
-
-
-
     >* {
         width: 100px;
         margin-left: 15px;
     }
-
     .notes-container {
         text-align: center;
     }
 }
 
-
-
 .user-img-container {
     height: 50px;
     position: relative;
     text-align: center;
-
     img {
         cursor: pointer;
         border-radius: 50%;
         width: 30px;
     }
-
+    .no-members-container {
+        position: relative;
+        .no-members-icon {
+            height: 30px;
+            width: 30px;
+        }
+        .no-members-icon-plus {
+            position: absolute;
+            top: 9px;
+            right: -15px;
+            
+            background-color: $colorPlusCircle;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+    } 
     .member-letter {
         height: 100%;
         width: 50%;
-        margin: 0 auto;
+        margin: 0 auto; 
         font-size: 2rem;
         border-radius: 50%;
         background-color: $colorIconsTasks;
@@ -130,7 +138,6 @@
         padding-top: 6px;
         cursor: pointer;
     }
-
     .task-number-of-imgs {
         font-family: monospace;
         font-size: 15px;
@@ -150,22 +157,19 @@
     height: 100%;
     position: relative;
     text-align: center;
-
     img {
         cursor: pointer;
         height: 100%;
         border-bottom-right-radius: 1px;
     }
-
     .no-images {
         padding-top: 15px;
     }
-
-
 }
 
 .updates-header {
     margin-bottom: 20px;
+<<<<<<< HEAD
     h1{
         margin: 15px 0 30px;
     }
@@ -180,6 +184,24 @@
     }
 
 
+=======
+}
+
+.updates-images {
+    height: 100%;
+    .image-list {
+        margin: 50px 10px 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 10px;
+    }
+    .updates-image {
+        width: 100%;
+        img {
+            height: 200px;
+        }
+    }
+>>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
     label {
         font-family: font1;
         padding: 15px;
@@ -190,12 +212,16 @@
         font-size: 1rem;
         border-radius: 2px;
         transition: .3s;
+<<<<<<< HEAD
         margin:20px 0;
     
+=======
+>>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
         &:hover {
             background-color: rgba($colorIconsBoardBarsHover, .2);
         }
     }
+<<<<<<< HEAD
 
     input{
         border-bottom:2px solid $buttonColorCTA;
@@ -229,6 +255,22 @@
             font-weight: initial;
             display: inline;
             word-break: break-all;
+=======
+}
+
+.updates-notes {
+    height: 100%;
+    .notes-messages {
+        .notes-form {
+            width: 100%;
+        }
+        .note-text {
+            width: 90%;
+            background-color: $colorTask;
+            border-radius: 7px;
+            padding: 10px;
+            margin: 10px;
+>>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
         }
 
         img {
@@ -239,8 +281,11 @@
    
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
 // Labels
 .stuck {
     background-color: #b94444;
