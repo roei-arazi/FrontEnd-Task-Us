@@ -48,7 +48,7 @@ function _Filter(props) {
                             className={filterBy.memberId === member._id ? 'remove-filter-btn' : ''}
                             key={member._id}
                             onClick={() => onSetFilter('memberId', member._id)}>{member.fullName}</button>)}
-                    </div>
+                    </div> 
                 </section>
                 <section className="task-priority-filter flex column align-center">
                     <h3>Priority</h3>
