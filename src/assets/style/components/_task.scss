@@ -170,6 +170,22 @@
 
 .updates-header {
     margin-bottom: 20px;
+<<<<<<< HEAD
+    h1{
+        margin: 15px 0 30px;
+    }
+
+    .updates-header-options{
+        width:100%;
+
+        >*{
+            margin:0 auto;
+
+        }
+    }
+
+
+=======
 }
 
 .updates-images {
@@ -186,6 +202,7 @@
             height: 200px;
         }
     }
+>>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
     label {
         font-family: font1;
         padding: 15px;
@@ -196,10 +213,50 @@
         font-size: 1rem;
         border-radius: 2px;
         transition: .3s;
+<<<<<<< HEAD
+        margin:20px 0;
+    
+=======
+>>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
         &:hover {
             background-color: rgba($colorIconsBoardBarsHover, .2);
         }
     }
+<<<<<<< HEAD
+
+    input{
+        border-bottom:2px solid $buttonColorCTA;
+        width:150px;
+    }
+}
+
+
+.updates-container{
+
+    overflow: overlay;
+    padding:0 10px;
+    height: 72vh;
+    background-color: #dddfc6;
+    border-bottom: 1px solid #b5ad91;
+    border-top: 1px solid #b5ad91;
+
+    .update-box{
+
+        padding:10px;
+        box-shadow:0px 3px 10px -5px #484444;
+        margin:10px;
+        background-color: $colorBg;
+        width: fit-content;
+
+        .member-name{
+            font-weight: bold;
+        }
+
+        .update-text{
+            font-weight: initial;
+            display: inline;
+            word-break: break-all;
+=======
 }
 
 .updates-notes {
@@ -214,10 +271,22 @@
             border-radius: 7px;
             padding: 10px;
             margin: 10px;
+>>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
         }
-    }
+
+        img {
+            height: 200px;
+            width:200px;
+        }   
+    }   
+   
 }
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
 // Labels
 .stuck {
     background-color: #b94444;

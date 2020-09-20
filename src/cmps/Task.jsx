@@ -50,9 +50,14 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    uploadImg = async (ev) => {
+    uploadImg = async (ev, user) => {
+        console.log(user);
         const res = await cloudinaryService.uploadImg(ev)
-        this.setState({ attachedImgs: [res.url, ...this.state.attachedImgs] })
+        const newImg={
+            member:this.props.loggedUser.fullName,
+            txt: res.url
+        }
+        this.setState({ updates: [newImg, ...this.state.updates] })
         this.props.onEditTask(this.state)
     }
 
