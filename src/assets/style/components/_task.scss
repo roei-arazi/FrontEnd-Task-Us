@@ -85,7 +85,7 @@
 
 .task-right {
     height: 100%;
-    margin-right:10px;
+    margin-right: 10px;
 
     >* {
         width: 100px;
@@ -98,6 +98,43 @@
 }
 
 
+.user-img-container {
+    height: 50px;
+    position: relative;
+    text-align: center;
+
+    img {
+        cursor: pointer;
+        border-radius: 50%;
+        width: 30px;
+    }
+
+    .member-letter {
+        height: 100%;
+        width: 50%;
+        margin: 0 auto;
+        font-size: 2rem;
+        border-radius: 50%;
+        background-color: $colorIconsTasks;
+        color: $colorTask;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .task-number-of-imgs {
+        font-family: monospace;
+        font-size: 15px;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: $colorPlusCircle;
+        color: $colorPlusCircleFont;
+        border-radius: 50%;
+        text-align: center;
+        right: 25px;
+        font-weight: bold;
+    }
+}
 
 .task-img-container {
     height: 100%;
@@ -114,48 +151,28 @@
         padding-top: 15px;
     }
 
-    .task-number-of-imgs {
-        font-family: monospace;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 15px;
-        width: 20px;
-        height: 20px;
-        margin-right: -8px;
-        margin-top: -8px;
-        position: absolute;
-        background-color: $colorPlusCircle;
-        color: $colorPlusCircleFont;
-        border-radius: 50%;
-        top: 0;
-        text-align: center;
-        right: 0;
-        font-weight: bold;
-    }
-
 
 }
 
-.updates-header{
+.updates-header {
     margin-bottom: 20px;
 }
 
 .updates-images {
-    height:100%;
-  
+    height: 100%;
 
-    .image-list{
+
+    .image-list {
         margin: 50px 10px 20px;
         display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(200px, 1fr));
-        grid-gap:10px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 10px;
     }
 
     .updates-image {
         width: 100%;
 
-        img{
+        img {
             height: 200px;
 
         }
@@ -171,27 +188,27 @@
         font-size: 1rem;
         border-radius: 2px;
         transition: .3s;
-      
+
         &:hover {
-          background-color: rgba($colorIconsBoardBarsHover, .2);
+            background-color: rgba($colorIconsBoardBarsHover, .2);
         }
-      }
+    }
 
 }
 
-.updates-notes{
-    height:100%;
+.updates-notes {
+    height: 100%;
 
-    .notes-messages{
+    .notes-messages {
 
-        .notes-form{
-            width: 100%;            
+        .notes-form {
+            width: 100%;
         }
 
-        .note-text{
-            width:90%;
+        .note-text {
+            width: 90%;
             background-color: $colorTask;
-            border-radius:7px;
+            border-radius: 7px;
             padding: 10px;
             margin: 10px;
         }

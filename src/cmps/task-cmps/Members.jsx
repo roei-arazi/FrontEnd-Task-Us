@@ -3,11 +3,11 @@ import React from 'react'
 export function Members(props) {
     const usersToAdd = props.users.filter(user => !props.members.some(member => member._id === user._id))
     return (
-        <div className="user-img-container relative" onClick={() => props.openModal('users')}>
+        <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
 
             {props.members.length ? props.members[0].imgUrl ? <img alt="profile" src={props.members[0].imgUrl} /> :
                 <div className="member-letter">{props.members[0].fullName.charAt(0).toUpperCase()}</div> : <div className="member-letter">0</div>}
-            <div className="task-number-of-imgs"><span>+{props.members.length ? props.members.length : 0}</span></div>
+            <div className="task-number-of-imgs flex justify-center align-center"><span>+{props.members.length ? props.members.length : 0}</span></div>
             {props.isUsersShown &&
                 <div className="users-modal absolute">
                     <div className="task-users-box">

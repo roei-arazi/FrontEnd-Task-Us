@@ -55,10 +55,10 @@ export class Group extends Component {
                         ref={provided.innerRef}>
                         <div className="group-header-container flex space-between align-center" {...provided.dragHandleProps}>
                             <div className="group-header-left align-center flex relative">
-                                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Options" arrow>
-                                    <IoIosArrowDropdownCircle style={{ color: this.state.color }}
-                                        className="drop-down-menu-icon" onClick={this.handleMenuOpen} />
-                                </Tooltip>
+
+                                <IoIosArrowDropdownCircle style={{ color: this.state.color }}
+                                    className="drop-down-menu-icon" onClick={this.handleMenuOpen} />
+
 
                                 <Menu
                                     anchorEl={ElGroupSettings}
