@@ -87,7 +87,8 @@ class _Board extends Component {
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
         try {
-            await this.props.addGroup(this.state.boardId)
+            await this.props.addGroup(this.state.boardId);
+            this.props.clearFilter();
             await this.props.showSnackbar('Added group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -131,7 +132,8 @@ class _Board extends Component {
         if(!taskName) taskName = 'New task'
         try {
             await this.props.addTask(groupId, taskName)
-            await this.props.showSnackbar('Added task.');
+            this.props.clearFilter()
+            this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
             console.log('Error', err)
