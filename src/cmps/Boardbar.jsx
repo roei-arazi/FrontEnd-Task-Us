@@ -57,7 +57,7 @@ class _Boardbar extends Component {
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
                 {
                     isShown ? (
-                        <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Toggle board bar" arrow>
+                        <Tooltip enterDelay={800} TransitionComponent={Zoom} title="Toggle Board" arrow>
                             <div className="board-bar-toggle-container">
                                 <BsArrowsCollapse style={{ color: this.props.location.pathname.includes('/myweek') && '#151515' }}
                                     onClick={this.onToggleShown} className="board-bar-toggle" />
@@ -66,7 +66,7 @@ class _Boardbar extends Component {
                     )
 
                         : (
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Toggle board bar" arrow>
+                            <Tooltip enterDelay={800} TransitionComponent={Zoom} title="Toggle Board" arrow>
                                 <div className="board-bar-toggle-container">
                                     <BsArrowsExpand onClick={this.onToggleShown} className="board-bar-toggle" />
                                 </div>
@@ -92,6 +92,7 @@ class _Boardbar extends Component {
                     })}
                 </ul>
                 <Menu
+                    role="menuContainer"
                     anchorEl={anchorEl}
                     keepMounted
                     open={Boolean(anchorEl)}

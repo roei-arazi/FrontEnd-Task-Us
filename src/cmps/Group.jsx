@@ -80,8 +80,8 @@ export class Group extends Component {
 
                                 <IoIosArrowDropdownCircle style={{ color: this.props.group.color }}
                                     className="drop-down-menu-icon" onClick={this.handleMenuOpen} />
-
                                 <Menu
+                                    role="menuContainer"
                                     anchorEl={ElGroupSettings}
                                     keepMounted
                                     open={Boolean(ElGroupSettings)}

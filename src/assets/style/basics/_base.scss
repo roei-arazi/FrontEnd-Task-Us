@@ -127,7 +127,22 @@ span.span-user-details {
   width: 250px;
 }
 
+//Menu container
+div[role="menuContainer"]>div {
+  font-family: monspace;
+  box-shadow: 0px 3px 10px -5px #484444 !important;
+}
 
+//Menu
+div[role="menuContainer"]>div>ul {
+  background: $colorBg !important;
+  color: $colorFontTaskGroup !important;
+}
+
+//Menu font
+div[role="menuContainer"]>div>ul>li {
+  font-family: font1;
+}
 
 //Scrollbar
 ::-webkit-scrollbar {
