@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { HiOutlineCog } from 'react-icons/hi';
-import { BsFilePlus } from 'react-icons/bs';
-import { FaArrowsAltH } from 'react-icons/fa';
+import { BsFilePlus, BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs';
 import { Tooltip, Zoom } from '@material-ui/core';
 
 import { removeBoard, addBoard } from '../store/actions/boardActions.js';
@@ -56,11 +55,25 @@ class _Boardbar extends Component {
         console.log('isSnackbarShown', isSnackbarShown);
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
-                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Toggle board bar" arrow>
-                    <div className="board-bar-toggle-container">
-                        <FaArrowsAltH onClick={this.onToggleShown} className="board-bar-toggle" />
-                    </div>
-                </Tooltip>
+                {
+                    isShown ? (
+                        <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Toggle board bar" arrow>
+                            <div className="board-bar-toggle-container">
+                                <BsArrowsCollapse style={{ color: this.props.location.pathname.includes('/myweek') && '#151515' }}
+                                    onClick={this.onToggleShown} className="board-bar-toggle" />
+                            </div>
+                        </Tooltip>
+                    )
+
+                        : (
+                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Toggle board bar" arrow>
+                                <div className="board-bar-toggle-container">
+                                    <BsArrowsExpand onClick={this.onToggleShown} className="board-bar-toggle" />
+                                </div>
+                            </Tooltip>
+                        )
+                }
+
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
                     <BsFilePlus onClick={this.props.addBoard} />

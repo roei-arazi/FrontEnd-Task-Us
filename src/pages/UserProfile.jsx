@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Fade } from '@material-ui/core';
-
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
 import { loadBoards } from '../store/actions/boardActions'
@@ -60,9 +59,6 @@ class _UserProfile extends Component {
         if (!this.props.userProfile) return <h1>Loading...</h1>
         const { loggedUser, userProfile } = this.props
         const { email, fullName, username, imgUrl } = this.props.userProfile
-        console.log('STATE', this.state.user);
-        console.log('PROFILE', userProfile);
-        console.log('LOGGEDUSER', loggedUser);
 
         return (
             <section className="user-profile">
