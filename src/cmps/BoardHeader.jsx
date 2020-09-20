@@ -118,7 +118,12 @@ export class _BoardHeader extends React.Component {
                     <div onClick={this.onToggleFilters} className="filters-outer-container relative flex align-center cursor-pointer"  >
                         <VscListFilter />
                         <h2>Filter</h2>
-                        {this.state.isFiltersOpen && <Filter board={this.props.board} />}
+                        {
+                            this.state.isFiltersOpen &&
+
+                            <Filter board={this.props.board} />
+
+                        }
                     </div>
 
                 </div>

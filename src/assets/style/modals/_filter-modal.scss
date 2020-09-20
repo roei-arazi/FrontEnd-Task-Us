@@ -8,28 +8,35 @@
     border-radius: 5px;
     border: 2px solid $colorBgBoardBars;
     padding: 0 15px 10px 0;
+    z-index: 998;
+
     >* {
         max-height: 100%;
         width: 100px;
         margin: 0 10px;
-        .filter-list{
+
+        .filter-list {
             max-height: 100%;
             overflow-y: overlay;
-            .remove-filter-btn{
+
+            .remove-filter-btn {
                 background-color: $buttonColorSecondary;
             }
         }
+
         h3 {
             color: $colorBgBoardBars;
             margin: 10px 0;
         }
+
         button {
             padding: 5px 10px;
             width: 100%;
             background-color: $colorBgBoardBars;
-            color: $colorFontNav; 
+            color: $colorFontNav;
             margin-bottom: 5px;
         }
+
         button:hover {
             background-color: $colorIconsTasksHover;
         }

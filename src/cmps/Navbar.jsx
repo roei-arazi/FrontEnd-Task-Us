@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Fade } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { FaAd } from 'react-icons/fa'
 import { VscBell, VscBellDot } from 'react-icons/vsc'
@@ -44,9 +43,8 @@ class _Navbar extends Component {
                         }
                         {
                             isNotificationShown &&
-                            <Fade in={this.state.isNotificationShown}>
-                                <Notifications removeNotifications={removeNotifications} loggedUser={loggedUser} />
-                            </Fade>
+                            <Notifications removeNotifications={removeNotifications} loggedUser={loggedUser} />
+
                         }
 
                         {loggedUser.notifications.some(notification => !notification.isRead)
