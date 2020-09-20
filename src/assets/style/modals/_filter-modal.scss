@@ -1,5 +1,5 @@
 .filter-modal {
-    z-index: 999;
+    z-index: 1000;
     min-width: 500px;
     height: 400px;
     top: 30px;
@@ -9,6 +9,7 @@
     border: 2px solid $colorBgBoardBars;
     padding: 0 15px 10px 0;
     z-index: 998;
+    cursor:auto;
 
     >* {
         max-height: 100%;
@@ -20,7 +21,7 @@
             overflow-y: overlay;
 
             .remove-filter-btn {
-                background-color: $buttonColorSecondary;
+                background-color: $colorBgBoardBars;   
             }
         }
 
@@ -32,7 +33,7 @@
         button {
             padding: 5px 10px;
             width: 100%;
-            background-color: $colorBgBoardBars;
+            background-color: $buttonColorSecondary;
             color: $colorFontNav;
             margin-bottom: 5px;
         }
