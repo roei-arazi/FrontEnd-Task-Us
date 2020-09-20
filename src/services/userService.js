@@ -4,7 +4,7 @@ let users = [{
     fullName: 'Roei Arazi',
     password: '3333',
     email: 'frize@gmail.com',
-    imgUrl: 'https://via.placeholder.com/100',
+    imgUrl: 'https://via.placeholder.com/250',
     isAdmin: true,
     boards: [{ id: '212', name: 'board1' }],
     notifications: [
@@ -21,7 +21,7 @@ let users = [{
     fullName: 'Osher Kabada',
     password: '2222',
     email: 'anstrio@gmail.com',
-    imgUrl: 'https://via.placeholder.com/100',
+    imgUrl: 'https://via.placeholder.com/250',
     isAdmin: true,
     boards: [{ id: '212', name: 'board1' }],
     notifications: [
@@ -38,7 +38,7 @@ let users = [{
     fullName: 'Liam Zety',
     password: '1111',
     email: 'smoking@gmail.com',
-    imgUrl: 'https://via.placeholder.com/100',
+    imgUrl: 'https://via.placeholder.com/250',
     isAdmin: true,
     boards: [{ id: '212', name: 'board1' }],
     notifications: [
@@ -146,6 +146,18 @@ async function guestLogin() {
 }
 
 async function updateProfile(loggedUser){
+    const user= users.find(user=> user._id === loggedUser._id)
+
+    try{
+        if(loggedUser.username) user.username=loggedUser.username
+        if(loggedUser.password) user.password= loggedUser.password
+        if(loggedUser.email) user.email= loggedUser.email
+        if(loggedUser.fullName) user.fullName= loggedUser.fullName
+        if(loggedUser.imgUrl) user.imgUrl= loggedUser.imgUrl
+        return user
+    }catch(err){
+        console.log('ERROR, couldnt update user',err);
+    }
     
 }
 

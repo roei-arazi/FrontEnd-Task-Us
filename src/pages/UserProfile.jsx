@@ -7,50 +7,70 @@ import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
 import { loadBoards } from '../store/actions/boardActions'
 import { getUserById, updateProfile } from '../store/actions/userActions';
+import { cloudinaryService } from '../services/cloudinaryService';
 
 class _UserProfile extends Component {
     state = {
         isModalOpen: false,
-        user:{
-            _id:this.props.match.params.id,
-            email:'',
-            username:'',
-            passowrd:'',
-            fullName:'',
-            imgUrl:''
+        user: {
+            _id: this.props.match.params.id,
+            email: '',
+            username: '',
+            passowrd: '',
+            fullName: '',
+            imgUrl: ''
         }
-        
     }
 
     async componentDidMount() {
         this.props.loadBoards()
-        this.props.getUserById(this.props.match.params.id)
+        await this.props.getUserById(this.props.match.params.id)
+        this.setState({ user: { ...this.state.user, imgUrl: this.props.userProfile.imgUrl } })
     }
+
+    async componentDidUpdate(prevProps, prevState) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            console.log('changing to:', this.props.match.params.id);
+            await this.setState({ user: { ...this.state.user, id: this.props.match.params.id } })
+            this.props.getUserById(this.props.match.params.id)
+        }
+    }
+
     toggleModal = () => {
         this.setState({ isModalOpen: !this.state.isModalOpen })
     }
 
-    handleChange=({target})=>{
-        this.setState({user:{...this.state.user,[target.name]: target.value}})
+    handleChange = ({ target }) => {
+        this.setState({ user: { ...this.state.user, [target.name]: target.value } })
     }
 
-    updateProfile=(ev)=>{
+    updateProfile = (ev) => {
         ev.preventDefault()
         this.props.updateProfile(this.state.user)
+        this.toggleModal()
+    }
+
+
+    uploadImg = async (ev) => {
+        const res = await cloudinaryService.uploadImg(ev)
+        this.setState({ user: { ...this.state.user, imgUrl: res.url } })
     }
 
     render() {
         if (!this.props.userProfile) return <h1>Loading...</h1>
         const { loggedUser, userProfile } = this.props
-        const { email, fullName, username } = this.props.userProfile
-        console.log('IOM HERE', this.props.userProfile)
+        const { email, fullName, username, imgUrl } = this.props.userProfile
+        console.log('STATE', this.state.user);
+        console.log('PROFILE', userProfile);
+        console.log('LOGGEDUSER', loggedUser);
+
         return (
             <section className="user-profile">
                 <Navbar />
                 <Boardbar />
                 <div className="user-container">
                     <header className="header-container padding-x-15 padding-y-15 flex justify-center  align-center">
-                        <img className="user-profile-big" src="https://via.placeholder.com/250" alt="" />
+                        <img className="user-profile-big" src={imgUrl} alt="" />
                     </header>
 
                     <div className="user-details-container padding-x-30 padding-y-30 align-center  flex column">
@@ -68,8 +88,15 @@ class _UserProfile extends Component {
                         <div className="modal-screen flex justify-center align-center">
                             <div className="modal-container padding-x-15 padding-y-15">
 
-                                <div className="user-modal-col">
-                                    <img className="user-profile-big" src="https://via.placeholder.com/250" alt="" />
+                                <div className="user-modal-col align-center">
+
+
+                                    <label> {this.state.user.imgUrl ?
+                                        <img className="user-profile-big" src={this.state.user.imgUrl} alt="profile-img" />
+                                        : <div>{this.props.loggedUser.fullName}</div>}
+                                        <input type="file" onChange={this.uploadImg} hidden />
+                                    </label>
+
                                 </div>
                                 <div className="user-modal-col">
                                     <form className="form-container flex justify-center column  align-center" action="">

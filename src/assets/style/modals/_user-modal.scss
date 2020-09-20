@@ -2,6 +2,14 @@
     .user-container {
         position: relative;
 
+        .user-profile-big{
+            align-self: center;
+            border-radius: 50%;
+            cursor: pointer;
+            width:250px;
+            height:250px;
+        }
+
         .modal-screen {
             width: 100%;
             height: 100vh;
@@ -20,11 +28,6 @@
                 flex-direction: column;
 
 
-                img {
-                    align-self: center;
-                    border-radius: 50px;
-                    cursor: pointer;
-                }
 
                 form {
                     margin-top: 25px;
