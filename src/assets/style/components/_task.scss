@@ -8,12 +8,10 @@
     svg {
         font-size: 2rem;
     }
-
     .task-remove-icon {
         font-size: 1.2rem;
         transform: rotate(180deg);
     }
-
     .users-modal {
         background-color: #eae9d5;
         z-index: 999;
@@ -188,13 +186,12 @@
             position: absolute;
             top: 9px;
             right: -15px;
-
             background-color: $colorPlusCircle;
+            color: $colorPlusCircleFont;
             border-radius: 50%;
             transform: translate(-50%, -50%);
         }
     }
-
     .member-letter {
         height: 100%;
         width: 50%;
@@ -221,8 +218,6 @@
         font-weight: bold;
     }
 }
-
-
 
 
 // Labels
