@@ -66,6 +66,11 @@ input {
 
 }
 
+::selection{
+  background-color: $colorIconsTasksHover ;
+  color: $colorIconsBoardBarsHover;
+}
+
 button {
   font-family: font1;
   padding: 15px;

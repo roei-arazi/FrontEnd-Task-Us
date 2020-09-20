@@ -5,7 +5,6 @@
         .user-profile-big{
             align-self: center;
             border-radius: 50%;
-            cursor: pointer;
             width:250px;
             height:250px;
         }
@@ -26,6 +25,10 @@
                 font-size: 1.5rem;
                 display: flex;
                 flex-direction: column;
+
+                .user-profile-big{
+                    cursor: pointer;
+                }
 
 
 

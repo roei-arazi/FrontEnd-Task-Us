@@ -67,16 +67,21 @@ class _Task extends Component {
     }
 
     openModal = (data) => {
-        if (data === 'status') {
-            this.setState({ isStatusShown: !this.state.isStatusShown })
-
-        } else if (data === 'users') {
-            this.setState({ isUsersShown: !this.state.isUsersShown })
-        } else if (data === 'updates') {
-            this.setState({ isUpdatesShown: !this.state.isUpdatesShown })
-        }
-        else {
-            this.setState({ isPriorityShown: !this.state.isPriorityShown })
+        switch (data) {
+            case 'status':
+                this.setState({ isStatusShown: !this.state.isStatusShown })
+                break;
+            case 'users':
+                this.setState({ isUsersShown: !this.state.isUsersShown })
+                break;
+            case 'updates':
+                this.setState({ isUpdatesShown: !this.state.isUpdatesShown })
+                break;
+            case 'priority':
+                this.setState({ isPriorityShown: !this.state.isPriorityShown })
+                break;    
+            default:
+                break;
         }
     }
 
@@ -113,8 +118,7 @@ class _Task extends Component {
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-
-                    <Updates attachedImgs={this.state.attachedImgs} loggedUser={this.props.loggedUser}
+                    <Updates loggedUser={this.props.loggedUser}
                         updates={this.state.updates} uploadImg={this.uploadImg} sendNote={this.sendNote}
                     />
                 </div>
@@ -159,8 +163,10 @@ class _Task extends Component {
 
                             <div className="task-right flex align-center">
 
-                                <div onClick={() => this.openModal('updates')} className="notes-container"><BsChatDots /></div>
-
+                                <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
+                                {(this.state.updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{this.state.updates.length}</span></div>}
+                                </div>
+                                        
                                 <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />

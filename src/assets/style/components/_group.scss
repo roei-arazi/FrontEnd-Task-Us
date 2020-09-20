@@ -75,6 +75,13 @@
         svg {
             color: $colorMainNav;
             cursor: grab;
+            margin: 0px 8px 0 12px;
+        }
+        &:hover {
+            svg{
+                transition: 0.3s;
+                color: $colorBgBoardBars;
+            }
         }
     }
 }

@@ -37,7 +37,7 @@ export function boardReducer(state = initialState, action) {
                                 imgUrl: 'https://via.placeholder.com/100',
                             }],
                             status: 'Done',
-                            priority: 'low',
+                            priority: 'Low',
                             dueDate: 214124124125,
                             updates:[],
                             lastUpdated: 'yesterday',
@@ -80,7 +80,7 @@ export function boardReducer(state = initialState, action) {
                                 imgUrl: 'https://via.placeholder.com/100',
                             }],
                             status: 'progress',
-                            priority: 'low',
+                            priority: 'Low',
                             dueDate: 214124124125,
                             updates:[],
                             lastUpdated: 'yesterday',
@@ -166,7 +166,7 @@ export function boardReducer(state = initialState, action) {
                                 imgUrl: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600347674/lkbdxs1hovtz82o97qqq.jpg'
                             }],
                             status: 'Done',
-                            priority: 'low',
+                            priority: 'Low',
                             dueDate: Date.now(),
                             updates:[{
                                 txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
@@ -186,7 +186,7 @@ export function boardReducer(state = initialState, action) {
                                 imgUrl: ''
                             }],
                             status: 'Donw',
-                            priority: 'low',
+                            priority: 'Low',
                             dueDate: Date.now(),
                             updates:[{
                                 txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
