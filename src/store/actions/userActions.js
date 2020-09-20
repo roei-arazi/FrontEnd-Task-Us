@@ -73,3 +73,15 @@ export function markAsRead(loggedUser) {
         }
     }
 }
+
+export function updateProfile(loggedUser) {
+    return async dispatch => {
+        try {
+            const user = await userService.updateProfile(loggedUser)
+            dispatch({ type: 'UPDATE_PROFILE', user })
+        } catch (err) {
+            console.log('userActions: Couldn\'t login as a guest');
+            throw err;
+        }
+    }
+}
