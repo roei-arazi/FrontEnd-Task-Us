@@ -81,6 +81,9 @@ class _Board extends Component {
         if(filterBy.dueDate){
             filterTasks(task => task.dueDate === filterBy.dueDate)
         }
+        if(this.state.txt){
+            filterTasks(task=> task.name.toLowerCase().includes(this.state.txt.toLowerCase()))
+        }
         return filteredBoard
     }
 

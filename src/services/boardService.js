@@ -44,7 +44,7 @@ let boards = [{
                 imgUrl: 'https://via.placeholder.com/100',
             }],
             status: 'Done',
-            priority: 'low',
+            priority: 'Low',
             dueDate: Date.now() + 1000 * 60 * 60 * 24 * 3,
             updates: [
                 {
@@ -71,7 +71,7 @@ let boards = [{
                 imgUrl: 'https://via.placeholder.com/100',
             }],
             status: 'Stuck',
-            priority: 'low',
+            priority: 'Low',
             dueDate: Date.now() + 1000 * 60 * 60 * 24 * 2,
             updates: [
                 {
@@ -317,7 +317,7 @@ async function addBoard() {
                     imgUrl: 'https://via.placeholder.com/100',
                 }],
                 status: 'Stuck',
-                priority: 'low',
+                priority: 'Low',
                 dueDate: Date.now(),
                 updates: [
                     {
@@ -343,7 +343,7 @@ async function addBoard() {
                     imgUrl: 'https://via.placeholder.com/100',
                 }],
                 status: 'Working on it',
-                priority: 'low',
+                priority: 'Low',
                 dueDate: Date.now(),
                 updates: [
                     {
@@ -434,7 +434,7 @@ async function addGroup(boardId) {
                 imgUrl: 'www/sfasf'
             }],
             status: 'Working on it',
-            priority: 'low',
+            priority: 'Low',
             dueDate: 214124124125,
             updates: [
                 {
@@ -490,7 +490,7 @@ async function addTask(groupId, taskName = 'Change Task Name') {
             imgUrl: 'www/sfasf'
         }],
         status: 'Done',
-        priority: 'low',
+        priority: 'Low',
         dueDate: 214124124125,
         updates: [
             {

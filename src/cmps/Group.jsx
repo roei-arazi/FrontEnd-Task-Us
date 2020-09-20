@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Task } from './Task'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { ListItem, Menu, MenuItem, MenuList } from '@material-ui/core';
+import {  Menu, MenuItem } from '@material-ui/core';
 //Material ui
-import { Tooltip, Zoom } from '@material-ui/core';
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
-import { GrDrag } from 'react-icons/gr'
-import { AiOutlineDelete } from 'react-icons/ai'
+import { AiOutlineDelete,AiOutlineDrag } from 'react-icons/ai'
 
 import ContentEditable from 'react-contenteditable';
 import { CgColorPicker } from 'react-icons/cg';
@@ -114,7 +112,7 @@ export class Group extends Component {
                                     </div>
                                 }
                                 <div className="drag-icon" {...provided.dragHandleProps}>
-                                    <GrDrag />
+                                    <AiOutlineDrag />
                                 </div>
 
                                 <h1 style={{ color: this.props.group.color }} className="group-title">
