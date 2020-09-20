@@ -40,7 +40,7 @@ export class Group extends Component {
     }
 
     handleMenuClose = () => {
-        this.setState({ ElGroupSettings: null ,elGroupColors: false})
+        this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
 
     handleColorsOpen = (ev) => {
@@ -90,25 +90,25 @@ export class Group extends Component {
                                     <MenuItem onClick={() => {
                                         this.props.onRemoveGroup(this.props.group.id)
                                     }}>
-                                        <AiOutlineDelete /> Delete Group
+                                        <AiOutlineDelete className="delete-group-icon" /> Delete Group
                                     </MenuItem>
                                     <MenuItem onClick={this.handleColorsToggle}>
-                                        <CgColorPicker /> Change Color
-                                       
+                                        <CgColorPicker className="color-group-icon" /> Change Color
+
                                     </MenuItem>
 
                                 </Menu>
                                 {elGroupColors &&
-                                            <div className="color-picker absolute flex wrap">                     
-                                                    <div onClick={() => this.onChangeGroupColor('red')} className="color-pick" style={{ backgroundColor: 'red' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('green')} className="color-pick" style={{ backgroundColor: 'green' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('blue')} className="color-pick" style={{ backgroundColor: 'blue' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('yellow')} className="color-pick" style={{ backgroundColor: 'yellow' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('orange')} className="color-pick" style={{ backgroundColor: 'orange' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('black')} className="color-pick" style={{ backgroundColor: 'black' }}></div>
-                                                    <div onClick={() => this.onChangeGroupColor('brown')} className="color-pick" style={{ backgroundColor: 'brown' }}></div>                                   
-                                            </div>
-                                        }
+                                    <div className="color-picker absolute flex wrap">
+                                        <div onClick={() => this.onChangeGroupColor('red')} className="color-pick" style={{ backgroundColor: 'red' }}></div>
+                                        <div onClick={() => this.onChangeGroupColor('green')} className="color-pick" style={{ backgroundColor: 'green' }}></div>
+                                        <div onClick={() => this.onChangeGroupColor('blue')} className="color-pick" style={{ backgroundColor: 'blue' }}></div>
+                                        <div onClick={() => this.onChangeGroupColor('yellow')} className="color-pick" style={{ backgroundColor: 'yellow' }}></div>
+                                        <div onClick={() => this.onChangeGroupColor('orange')} className="color-pick" style={{ backgroundColor: 'orange' }}></div>
+                                        <div onClick={() => this.onChangeGroupColor('black')} className="color-pick" style={{ backgroundColor: 'black' }}></div>
+                                        <div onClick={() => this.onChangeGroupColor('brown')} className="color-pick" style={{ backgroundColor: 'brown' }}></div>
+                                    </div>
+                                }
 
                                 <h1 style={{ color: this.props.group.color }} className="group-title">
                                     <ContentEditable
