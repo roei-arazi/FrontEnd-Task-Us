@@ -1,6 +1,7 @@
 const initialState = {
     boards: [],
-    filterBy:{}
+    filterBy: {},
+    isBoardbarShown: true
 }
 
 export function boardReducer(state = initialState, action) {
@@ -38,12 +39,11 @@ export function boardReducer(state = initialState, action) {
                             status: 'Done',
                             priority: 'low',
                             dueDate: 214124124125,
-                            notes:[],
+                            updates:[],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
-                            tags: ['ui', 'ux'],
-                            attachedImgs: []
+                            tags: ['ui', 'ux']
                         }]
                     })
                     return board;
@@ -82,12 +82,11 @@ export function boardReducer(state = initialState, action) {
                             status: 'progress',
                             priority: 'low',
                             dueDate: 214124124125,
-                            notes:[],
+                            updates:[],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
-                            tags: ['ui', 'ux'],
-                            attachedImgs: []
+                            tags: ['ui', 'ux']
                         })
                         return group;
                     })
@@ -169,12 +168,14 @@ export function boardReducer(state = initialState, action) {
                             status: 'Done',
                             priority: 'low',
                             dueDate: Date.now(),
-                            notes:[],
+                            updates:[{
+                                txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                                member: 'Osher Kabada'
+                            }],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
-                            tags: ['ui', 'ux'],
-                            attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+                            tags: ['ui', 'ux']
                         }, {
                             id: _makeid(),
                             name: 'sneeze',
@@ -187,12 +188,14 @@ export function boardReducer(state = initialState, action) {
                             status: 'Donw',
                             priority: 'low',
                             dueDate: Date.now(),
-                            notes:[],
+                            updates:[{
+                                txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                                member:'Osher Kabada'
+                            }],
                             lastUpdated: 'yesterday',
                             isSelected: false,
                             posts: [],
-                            tags: ['ui', 'ux'],
-                            attachedImgs: ['https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg']
+                            tags: ['ui', 'ux']
                         }]
                     }],
                     activityLog: [{
@@ -241,6 +244,11 @@ export function boardReducer(state = initialState, action) {
             return {
                 ...state,
                 filterBy: action.filter
+            }
+        case 'TOGGLE_BOARDBAR':
+            return {
+                ...state,
+                isBoardbarShown: !state.isBoardbarShown
             }
         default:
             return state

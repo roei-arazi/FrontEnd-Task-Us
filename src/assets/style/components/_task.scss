@@ -4,6 +4,15 @@
     margin-bottom: 2px;
     height: 40px;
     border-radius: 1px;
+    svg {
+        font-size: 2rem;
+    }
+
+    .task-remove-icon {
+        font-size: 1.2rem;
+        transform: rotate(180deg);
+    }
+
     .users-modal {
         background-color: #ffffff;
         z-index: 999;
@@ -112,6 +121,7 @@
             position: absolute;
             top: 9px;
             right: -15px;
+            
             background-color: $colorPlusCircle;
             border-radius: 50%;
             transform: translate(-50%, -50%);
