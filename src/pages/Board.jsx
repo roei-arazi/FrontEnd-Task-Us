@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import queryString from 'query-string'
 
 import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
@@ -14,7 +13,8 @@ import { loadUsers } from '../store/actions/userActions'
 import {
     updateBoard, loadBoards,   //BOARD
     addGroup, editGroup, removeGroup, //GROUP
-    addTask, removeTask, editTask  //TASK
+    addTask, removeTask, editTask,  //TASK
+    clearFilter //FILTER
 }
     from '../store/actions/boardActions'
 
@@ -45,17 +45,30 @@ class _Board extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
-            console.log('changing to:', this.props.match.params.id);
+            this.props.clearFilter();
             this.setState({ boardId: this.props.match.params.id })
         }
     }
 
     onEditBoard = async (boardName, boardDescription) => {
-        console.log(boardName);
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         this.props.updateBoard({ ...board, name: boardName, description: boardDescription })
         await this.props.showSnackbar('Updated board.');
         setTimeout(() => this.props.hideSnackbar(), 3000)
+    }
+
+    applyFilter = (board, filterBy) => {
+        const filteredBoard = JSON.parse(JSON.stringify(board))
+        if (filterBy.groupId) {
+            filteredBoard.groups = filteredBoard.groups.filter(group => group.id === filterBy.groupId)
+        }
+        if (filterBy.taskId) {
+            filteredBoard.groups = filteredBoard.groups.map(group => {
+                group.tasks = group.tasks.filter(task => task.id === filterBy.taskId)
+                return group;
+            })
+        }
+        return filteredBoard
     }
 
     //------------------GROUP CRUD-----------------
@@ -201,27 +214,11 @@ class _Board extends Component {
 
     render() {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
-        const {users, filterBy} = this.props
+        const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
-        console.log('applying filter:', filterBy);
-        const searchParams = queryString.parse(this.props.location.search)
-        let filteredBoard = JSON.parse(JSON.stringify(board));
-        if (searchParams.groupId) {
-            filteredBoard = { ...filteredBoard, groups: filteredBoard.groups.filter(group => group.id === searchParams.groupId) }
-        }
-        if (this.state.txt) {
-            filteredBoard = {
-                ...filteredBoard,
-                groups: filteredBoard.groups.map(group =>{
-                    group.tasks = group.tasks.filter(task => task.name.toLowerCase().includes(this.state.txt.toLowerCase())        
-                        )
-                    return group;
-                })
-            }
-        }
-
+        const filteredBoard = this.applyFilter(board, filterBy);
+        console.log('applied filter:', filterBy);
         board.members = users
-        console.log('rendering board:', board);
         return (
             <section className="board">
                 <Navbar />
@@ -274,7 +271,8 @@ const mapDispatchToProps = {
     updateBoard,
     showSnackbar,
     hideSnackbar,
-    loadUsers
+    loadUsers,
+    clearFilter
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);

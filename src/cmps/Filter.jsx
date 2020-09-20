@@ -24,9 +24,6 @@ class _Filter extends Component {
         setFilter({...filterBy, taskId})
     }
 
-    // removeGroupFilter = async (groupId) => {
-    // }
-
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { groups } = this.state;
