@@ -52,6 +52,7 @@ class _Board extends Component {
 
     onEditBoard = async (boardName, boardDescription) => {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
+        if(boardName === board.name && boardDescription === board.description) return;
         this.props.updateBoard({ ...board, name: boardName, description: boardDescription })
         await this.props.showSnackbar('Updated board.');
         setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -62,11 +63,23 @@ class _Board extends Component {
         if (filterBy.groupId) {
             filteredBoard.groups = filteredBoard.groups.filter(group => group.id === filterBy.groupId)
         }
-        if (filterBy.taskId) {
-            filteredBoard.groups = filteredBoard.groups.map(group => {
-                group.tasks = group.tasks.filter(task => task.id === filterBy.taskId)
+        function filterTasks(cb){
+            filteredBoard.groups = filteredBoard.groups.map(group =>{
+                group.tasks = group.tasks.filter(cb)
                 return group;
             })
+        }
+        if(filterBy.memberId){
+            filterTasks(task => task.members.some(member => member._id === filterBy.memberId))
+        }
+        if(filterBy.taskPriority){
+            filterTasks(task => task.priority.toLowerCase() === filterBy.taskPriority.toLowerCase())
+        }
+        if(filterBy.taskStatus){
+            filterTasks(task => task.status.toLowerCase() === filterBy.taskStatus.toLowerCase())
+        }
+        if(filterBy.dueDate){
+            filterTasks(task => task.dueDate === filterBy.dueDate)
         }
         return filteredBoard
     }
@@ -116,6 +129,7 @@ class _Board extends Component {
         }
     }
     onAddTask = async (groupId, taskName) => {
+        if(!taskName) taskName = 'New task'
         try {
             await this.props.addTask(groupId, taskName)
             await this.props.showSnackbar('Added task.');
@@ -215,10 +229,10 @@ class _Board extends Component {
 
     render() {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
+        console.log('current board:', board);
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
         const filteredBoard = this.applyFilter(board, filterBy);
-        console.log('applied filter:', filterBy);
         board.members = users
         return (
             <section className="board">

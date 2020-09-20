@@ -1,34 +1,37 @@
-.filter-modal{
-    z-index:999;
-    min-width:500px;
-    min-height:400px;
-    top:30px;
-    right:0;
+.filter-modal {
+    z-index: 999;
+    min-width: 500px;
+    height: 400px;
+    top: 30px;
+    right: 0;
     background-color: $colorBg;
     border-radius: 5px;
-    border:2px solid $colorBgBoardBars;
-    padding:0 15px 10px 0;
-
-    >*{
-        width:100px;
+    border: 2px solid $colorBgBoardBars;
+    padding: 0 15px 10px 0;
+    >* {
+        max-height: 100%;
+        width: 100px;
         margin: 0 10px;
-
-        h3{
-            color:$colorBgBoardBars;
-            margin:10px 0;
+        .filter-list{
+            max-height: 100%;
+            overflow-y: overlay;
+            .remove-filter-btn{
+                background-color: $buttonColorSecondary;
+            }
         }
-
-        button{
+        h3 {
+            color: $colorBgBoardBars;
+            margin: 10px 0;
+        }
+        button {
             padding: 5px 10px;
-            width:100%;
+            width: 100%;
             background-color: $colorBgBoardBars;
-            color:$colorFontNav;
-            margin-bottom:5px;
+            color: $colorFontNav; 
+            margin-bottom: 5px;
         }
-        button:hover{
+        button:hover {
             background-color: $colorIconsTasksHover;
         }
     }
-
-
 }
