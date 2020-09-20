@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import { Fade } from '@material-ui/core';
 import Truncate from 'react-truncate';
 import { AiOutlineDelete } from 'react-icons/ai';
@@ -19,7 +20,6 @@ export class Notifications extends Component {
 
     render() {
         const { loggedUser } = this.props;
-        console.log('HERE AFTER DELETION', loggedUser)
         return (
 
             <Fade in={this.state.isModalOpen}>
@@ -51,7 +51,7 @@ export class Notifications extends Component {
                                                 </Truncate>
                                             </p>
                                             <div>
-                                                <p>a day ago</p>
+                                                <p>{moment(notification.createdAt).fromNow()}</p>
                                             </div>
                                         </div>
                                     </div>

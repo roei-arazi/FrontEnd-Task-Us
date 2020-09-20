@@ -44,13 +44,6 @@ export default class Activities extends Component {
     }
 
 
-    getDaysFromNow(date) {
-        if (moment(date).isAfter(moment(Date.now()).add(1, 'day').endOf('day'))) {
-            console.log('from now:', moment(date).format());
-            return moment(date).format('dddd')
-        }
-        return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'
-    }
     render() {
         if (!this.state.filteredActivities || !this.state.board) return <h1>Loading...</h1>
         const { searchVal, isOrderReversed, filteredActivities } = this.state;
@@ -86,13 +79,13 @@ export default class Activities extends Component {
                                     </div>
                                     <h2>{activity.byUser.fullName}</h2>
                                     <p>
-                                        <Truncate lines={1} ellipsis={"..."} width={250}>
+                                        <Truncate lines={1} ellipsis={"..."} width={550}>
                                             {activity.description}
                                         </Truncate>
                                     </p>
                                 </div>
 
-                                <span className="date-created">{this.getDaysFromNow(activity.createdAt)}</span>
+                                <p className="date-created">{moment(activity.createdAt).fromNow()}</p>
 
                             </div>
                         )

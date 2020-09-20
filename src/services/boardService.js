@@ -52,8 +52,8 @@ let boards = [{
                     member: 'Roei Arazi'
                 },
                 {
-                    txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                    member:'Liam Zety'
+                    txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    member: 'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
@@ -79,8 +79,8 @@ let boards = [{
                     member: 'Roei Arazi'
                 },
                 {
-                    txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                    member:'Liam Zety'
+                    txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    member: 'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
@@ -173,8 +173,8 @@ let boards = [{
                     member: 'Roei Arazi'
                 },
                 {
-                    txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                    member:'Liam Zety'
+                    txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    member: 'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
@@ -222,6 +222,19 @@ let boards = [{
             id: 142,
             name: 'project2'
         }
+    },
+    {
+        createdAt: 2514512352135,
+        byUser: {
+            _id: 123,
+            imgUrl: 'www.imgur',
+            fullName: 'sfafa mcgee'
+        },
+        description: 'added group project2 lorem245252525225lorem245252525225lorem245252525225lorem245252525225lorem245252525225lorem245252525225lorem245252525225lorem245252525225',
+        group: {
+            id: 142,
+            name: 'project2'
+        }
     }
     ]
 }]
@@ -237,11 +250,11 @@ async function loadBoards() {
 
 async function updateBoard(boardToSave, filterBy) {
     const newBoards = JSON.parse(JSON.stringify(boards))
-    
-   if(filterBy.groupId) {
-    boardToSave.groups.filter(group=> group.id===filterBy.groupId)
-      
-   }
+
+    if (filterBy.groupId) {
+        boardToSave.groups.filter(group => group.id === filterBy.groupId)
+
+    }
 
     const idx = newBoards.findIndex(board => board._id === boardToSave._id)
     try {
@@ -309,8 +322,8 @@ async function addBoard() {
                         member: 'Roei Arazi'
                     },
                     {
-                        txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                        member:'Liam Zety'
+                        txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                        member: 'Liam Zety'
                     }
                 ],
                 lastUpdated: 'yesterday',
@@ -335,8 +348,8 @@ async function addBoard() {
                         member: 'Roei Arazi'
                     },
                     {
-                        txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                        member:'Liam Zety'
+                        txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                        member: 'Liam Zety'
                     }
                 ],
                 lastUpdated: 'yesterday',
@@ -426,8 +439,8 @@ async function addGroup(boardId) {
                     member: 'Roei Arazi'
                 },
                 {
-                    txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                    member:'Liam Zety'
+                    txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    member: 'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
@@ -482,8 +495,8 @@ async function addTask(groupId, taskName = 'Change Task Name') {
                 member: 'Roei Arazi'
             },
             {
-                txt:'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                member:'Liam Zety'
+                txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                member: 'Liam Zety'
             }
         ],
         lastUpdated: 'yesterday',
