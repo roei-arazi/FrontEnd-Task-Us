@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ContentEditable from 'react-contenteditable'
 import { withRouter } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd'
-import { MdDeleteSweep } from 'react-icons/md'
+import { RiDeleteBack2Line } from 'react-icons/ri'
 import { BsChatDots } from 'react-icons/bs'
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -127,7 +127,7 @@ class _Task extends Component {
                                 <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
                                 <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>
                                     <div className='icon-container'>
-                                        <MdDeleteSweep onClick={() => { this.props.onRemoveTask(this.state.id) }} />
+                                        <RiDeleteBack2Line className="task-remove-icon" onClick={() => { this.props.onRemoveTask(this.state.id) }} />
                                     </div>
                                 </Tooltip>
                                 <h2>

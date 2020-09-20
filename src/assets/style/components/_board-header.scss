@@ -75,21 +75,20 @@
         }
     }
 
+    .filters-outer-container,
     .activities-outer-container {
         padding: 10px;
         border-radius: 15px;
+        transition: .3s;
 
         &:hover {
             background-color: rgba(128, 128, 128, 0.342);
         }
-    }
 
-    .filters-outer-container {
-        padding: 10px;
-        border-radius: 15px;
-
-        &:hover {
-            background-color: rgba(128, 128, 128, 0.342);
+        svg {
+            &:hover {
+                color: $colorIconsBoardBars;
+            }
         }
     }
 }

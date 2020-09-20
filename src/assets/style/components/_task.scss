@@ -5,6 +5,15 @@
     height: 40px;
     border-radius: 1px;
 
+    svg {
+        font-size: 2rem;
+    }
+
+    .task-remove-icon {
+        font-size: 1.2rem;
+        transform: rotate(180deg);
+    }
+
     .users-modal {
         background-color: #ffffff;
         z-index: 999;
