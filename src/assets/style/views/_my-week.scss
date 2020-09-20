@@ -1,129 +1,145 @@
 .my-week {
     position: relative;
-}
 
-.search-container {
-    width: 95%;
-    padding-left: 15px;
-    padding-right: 50px; 
-}
 
-.my-week-container {
-    display: flex;
-    flex-direction: column;
-    padding: 0px 50px;
-    width: 100%;
-    background-color: $colorBg;
+    .search-container {
+        width: 95%;
+        padding-left: 15px;
+        padding-right: 50px;
+    }
 
-    input {
-        font-size: 1.2rem;
-        color: $colorInputFieldFocus;
-        border-bottom-color: $colorInputFieldDark;
+    .my-week-container {
+        display: flex;
+        flex-direction: column;
+        padding: 0px 50px;
+        width: 100%;
+        background-color: $colorBg;
 
-        &::placeholder {
-            color: $colorInputFieldDark;
+        input {
+            font-size: 1.2rem;
+            color: $colorInputFieldFocus;
+            border-bottom-color: $colorInputFieldDark;
+
+            &::placeholder {
+                color: $colorInputFieldDark;
+            }
+
+            &:focus {
+                background-color: $colorInputFieldFocus;
+
+            }
         }
 
-        &:focus {
-            background-color: $colorInputFieldFocus;
-
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            color: $colorFontUserDetails;
         }
-    }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-        color: $colorFontUserDetails;
-    }
-
-    h1 {
-        font-size: 1.9rem;
-        margin-bottom: 50px;
-    }
-}
-
-.my-week-header {
-    margin: 5vh 0px;
-    height: 15vh;
-    width: 500px;
-    div {
         h1 {
-            margin: auto;
-        }
-        img {
-            height: 100px;
-            width: 110px; 
-            filter: grayscale(1);
-        }
-    }
-}
-
-.task-preview {
-    display: flex;
-
-    .user-img-container {
-        width: 80px;
-
-        img,
-        .member-letter,
-        .task-number-of-imgs {
-            height: 45px;
-            width: 45px;
+            font-size: 1.9rem;
+            margin-bottom: 50px;
         }
     }
 
-    * {
-        width: 100px;
-        text-align: center;
-    }
+    .my-week-header {
+        margin: 5vh 0px;
+        height: 15vh;
+        width: 500px;
 
-    .label-box {
-        height: 90%;
-        border-radius: 1px;
-        width: 100px;
-    }
+        div {
+            h1 {
+                margin: auto;
+            }
 
-    .task-location {
-        color: gray;
-
-        span {
-            cursor: pointer;
-
-            &:hover {
-                text-decoration: underline;
+            img {
+                height: 100px;
+                width: 110px;
+                filter: grayscale(1);
             }
         }
     }
-}
 
-.upcoming-tasks-container {
-    max-height: 70vh;
-    overflow-y: overlay;
-}
+    .task-preview {
+        display: flex;
 
-.upcoming-tasks {
-    width: 95%;
+        .user-img-container {
+            width: 80px;
 
-    > :nth-child(even) {
-        background-color: $colorBgBoardBars;
-        border-radius: 1px;
+            img,
+            .member-letter {
+                height: 30px;
+                width: 30px;
+            }
+
+            .task-number-of-imgs {
+                right: 15px;
+                height: 20px;
+                width: 20px;
+
+            }
+        }
+
         * {
-            color: $colorFontNav;
-        } 
+            width: 100px;
+            text-align: center;
+        }
+
+        .label-box {
+            height: 90%;
+            border-radius: 1px;
+            width: 100px;
+        }
+
+        .task-location {
+            color: gray;
+
+            span {
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
     }
-}
 
-.greeting-container{ 
-    width: 90%;
-    margin-left: 50px;
-}
+    .upcoming-tasks-container {
+        max-height: 70vh;
+        overflow-y: overlay;
+    }
 
-.no-tasks {
-    font-size: 3rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    .upcoming-tasks {
+        width: 95%;
+
+        > :nth-child(even) {
+            background-color: $colorBgBoardBars;
+            border-radius: 1px;
+
+            *:not(.label-box) {
+                color: $colorFontNav;
+            }
+
+            .label-box {
+                p {
+                    color: #f1f1f1;
+                }
+            }
+        }
+    }
+
+    .greeting-container {
+        width: 90%;
+        margin-left: 50px;
+    }
+
+    .no-tasks {
+        font-size: 3rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }

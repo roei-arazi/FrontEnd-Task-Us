@@ -105,11 +105,11 @@ class _MyWeek extends Component {
                                         <h2>{task.name}</h2>
                                         <p className="task-location">Board: <span onClick={() => this.props.history.push(`/board/${task.boardId}`)}>{task.boardName}</span></p>
                                     </div>
-                                    <div className={`label-box ${task.status.toLocaleLowerCase()}`}>{task.status}</div>
-                                    <div className="user-img-container">
+                                    <div className={`label-box ${task.status.toLocaleLowerCase()}`}> <p>{task.status}</p></div>
+                                    <div className="user-img-container flex justify-center align-center">
                                         {task.members ? task.members[0].imgUrl ? <img onClick={() => this.moveToUserProfile(task.members[0]._id)} alt="profile" src={task.members[0].imgUrl} /> :
                                             <div onClick={() => this.moveToUserProfile(task.members[0]._id)} className="member-letter">{task.members[0].name.charAt(0).toUpperCase()}</div> : ''}
-                                        <div className="task-number-of-imgs"><span>+{task.members.length ? task.members.length : 0}</span></div>
+                                        <div className="task-number-of-imgs flex justify-center align-center"><span>+{task.members.length ? task.members.length : 0}</span></div>
                                     </div>
                                     <h2>{this.getDaysFromNow(task.dueDate)}</h2>
                                 </div>)}

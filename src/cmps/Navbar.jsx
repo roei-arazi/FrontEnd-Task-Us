@@ -33,15 +33,13 @@ class _Navbar extends Component {
 
                     {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
                     <div className="icon-container" >
-
-                        <p className="notifications-counter cursor-pointer">
-                            {
-                                loggedUser.notifications.filter(notification => !notification.isRead).length === 0
-                                    ? ''
-                                    : loggedUser.notifications.filter(notification => !notification.isRead).length
-                            }
-                        </p>
-
+                        {
+                            loggedUser.notifications.filter(notification => !notification.isRead).length === 0
+                                ? ''
+                                : <p className="notifications-counter cursor-pointer">
+                                    {loggedUser.notifications.filter(notification => !notification.isRead).length}
+                                </p>
+                        }
                         {isNotificationShown && <Notifications loggedUser={loggedUser} />}
 
                         {loggedUser.notifications.some(notification => !notification.isRead)
