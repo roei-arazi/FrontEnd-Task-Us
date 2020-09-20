@@ -105,7 +105,7 @@ export class _BoardHeader extends React.Component {
                     </h5>
                 </div>
                 <div className="col-right flex align-center">
-                    <button onClick={this.props.onAddGroup}>Add New Group</button>
+                    <button onClick={this.props.onAddGroup}>New Group</button>
                     <div className="search-outer-container flex align-center">
                         <input placeholder="Search" type='text' onChange={this.props.handleSearch} />
                         <GoSearch />
