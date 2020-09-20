@@ -198,6 +198,7 @@ let boards = [{
         }
     },
     {
+        id: _makeid(),
         createdAt: 12412541251,
         byUser: {
             _id: 123,
@@ -211,6 +212,7 @@ let boards = [{
         }
     },
     {
+        id: _makeid(),
         createdAt: 4514512352135,
         byUser: {
             _id: 123,
@@ -224,6 +226,7 @@ let boards = [{
         }
     },
     {
+        id: _makeid(),
         createdAt: 2514512352135,
         byUser: {
             _id: 123,

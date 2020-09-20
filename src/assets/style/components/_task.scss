@@ -136,8 +136,9 @@
             position: absolute;
             top: 9px;
             right: -15px;
-
+            font-size: 20px;
             background-color: $colorPlusCircle;
+            color: $colorPlusCircleFont;
             border-radius: 50%;
             transform: translate(-50%, -50%);
         }
@@ -198,7 +199,6 @@
 
         >* {
             margin: 0 auto;
-
         }
     }
 
@@ -216,28 +216,29 @@
         margin: 20px 0;
 
         &:hover {
-            background-color: rgba($colorIconsBoardBarsHover, .2);
+            background-color: $colorIconsTasksHover;
         }
     }
 
     input {
         border-bottom: 2px solid $buttonColorCTA;
         width: 150px;
+
+        &::placeholder {
+            color: $colorFontUserDetails
+        }
     }
 }
 
-
 .updates-container {
-
     overflow: overlay;
     padding: 0 10px;
-    height: 72vh;
+    height: 75vh;
     background-color: #dddfc6;
     border-bottom: 1px solid #b5ad91;
     border-top: 1px solid #b5ad91;
 
     .update-box {
-
         padding: 10px;
         box-shadow: 0px 3px 10px -5px #484444;
         margin: 10px;
@@ -259,10 +260,7 @@
             width: 200px;
         }
     }
-
 }
-
-
 
 // Labels
 .stuck {

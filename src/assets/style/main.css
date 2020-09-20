@@ -1294,7 +1294,9 @@ div[role="menuContainer"] > div > ul > li {
   position: absolute;
   top: 9px;
   right: -15px;
+  font-size: 20px;
   background-color: #787864f1;
+  color: #f2f1dfb0;
   border-radius: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -1373,7 +1375,7 @@ div[role="menuContainer"] > div > ul > li {
 }
 
 .updates-header label:hover {
-  background-color: rgba(155, 154, 152, 0.2);
+  background-color: #111111;
 }
 
 .updates-header input {
@@ -1381,10 +1383,26 @@ div[role="menuContainer"] > div > ul > li {
   width: 150px;
 }
 
+.updates-header input::-webkit-input-placeholder {
+  color: #4d4b4b;
+}
+
+.updates-header input:-ms-input-placeholder {
+  color: #4d4b4b;
+}
+
+.updates-header input::-ms-input-placeholder {
+  color: #4d4b4b;
+}
+
+.updates-header input::placeholder {
+  color: #4d4b4b;
+}
+
 .updates-container {
   overflow: overlay;
   padding: 0 10px;
-  height: 72vh;
+  height: 75vh;
   background-color: #dddfc6;
   border-bottom: 1px solid #b5ad91;
   border-top: 1px solid #b5ad91;

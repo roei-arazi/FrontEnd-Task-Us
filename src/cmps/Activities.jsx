@@ -8,21 +8,17 @@ import { AiOutlineClose } from 'react-icons/ai';
 export default class Activities extends Component {
 
     state = {
-        board: '',
-        searchVal: '',
         isOrderReversed: false,
         filteredActivities: ''
     }
 
     componentDidMount() {
-        this.setState({ board: this.props.board })
-        this.setState({ filteredActivities: this.props.board.activityLog })
-        console.log('', this.state.filteredActivities)
+        this.setState({ filteredActivities: this.props.activityLog })
     }
 
 
     handleSearch = ({ target }) => {
-        const filteredActivities = this.state.board.activityLog.filter((activitiy) => {
+        const filteredActivities = this.state.activityLog.filter((activitiy) => {
             return activitiy.description.toLowerCase()
                 .includes(target.value.toLocaleLowerCase())
                 ||
@@ -33,7 +29,7 @@ export default class Activities extends Component {
     }
 
     reverseOrder = () => {
-        const filteredActivities = this.state.board.activityLog.sort((activitiy1, activitiy2) => {
+        const filteredActivities = this.state.activityLog.sort((activitiy1, activitiy2) => {
             const res = this.state.isOrderReversed ? -1 : 1;
             if (activitiy1.createdAt < activitiy2.createdAt) return -res;
             if (activitiy1.createdAt > activitiy2.createdAt) return res;
@@ -45,15 +41,14 @@ export default class Activities extends Component {
 
 
     render() {
-        if (!this.state.filteredActivities || !this.state.board) return <h1>Loading...</h1>
-        const { searchVal, isOrderReversed, filteredActivities } = this.state;
-        console.log('FILTER AICIAT2', filteredActivities)
+        if (!this.state.filteredActivities) return <h1>Loading...</h1>
+        const { isOrderReversed, filteredActivities } = this.state;
 
         return (
             <section className="activities flex column padding-y-15">
                 <header className="padding-x-15">
                     <AiOutlineClose onClick={this.props.onToggleActivities} />
-                    <h1><span>{this.state.board.name}</span> Log</h1>
+                    <h1><span>{this.props.boardName}</span> Log</h1>
                     <div className="filters-container space-between flex align-center">
                         <input onChange={this.handleSearch} type="text" placeholder="Search" />
                         {isOrderReversed ?

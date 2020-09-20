@@ -128,7 +128,8 @@ export class _BoardHeader extends React.Component {
 
                 </div>
                 <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
-                    <Activities onToggleActivities={this.onToggleActivities} board={this.props.board} />
+                    <Activities onToggleActivities={this.onToggleActivities}
+                        boardName={this.props.board.name} activityLog={this.props.board.activityLog} />
                 </div>
                 {
                     this.state.isFiltersOpen && <div onClick={this.onToggleFilters} className='modal-screen-wrapper'></div>
