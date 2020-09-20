@@ -10,6 +10,7 @@
 
     svg {
         color: $colorIconsTasks;
+        font-size: 1.5rem;
 
         &:hover {
             color: $colorIconsTasksHover;
@@ -27,7 +28,8 @@
     }
 
     .group-header-right {
-        margin-right:10px;
+        margin-right: 10px;
+
         >* {
             width: 100px;
             text-align: center;

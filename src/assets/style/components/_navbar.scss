@@ -6,6 +6,7 @@
     padding-right: 15px;
 
     svg {
+        font-size: 30px;
         color: $colorIconsNav;
 
         &:hover {
@@ -33,16 +34,17 @@
 
     .notifications-counter {
         position: absolute;
-        right: -5px;
+        right: -3px;
         top: -3px;
-        font-size: 15px;
+        font-size: 13px;
+        width: 17px;
+        height: 17px;
         color: #b94444;
-        background: $colorIconsNav;
-        width: 20px;
+        background: #31312c;
         justify-content: center;
         display: flex;
         align-items: center;
-        border-radius: 40%;
+        border-radius: 50%;
         font-weight: 700;
     }
 }

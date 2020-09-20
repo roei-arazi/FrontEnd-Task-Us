@@ -63,7 +63,7 @@ export class _BoardHeader extends React.Component {
 
         if (!this.state._id) return <h1>Loading...</h1>
         return (
-            <section className="board-header align-center padding-x-30 padding-y-30 ">
+            <section className="board-header align-center padding-x-30 padding-y-45 ">
                 <div className="col-left flex column">
                     <h1>
                         <ContentEditable
@@ -107,15 +107,15 @@ export class _BoardHeader extends React.Component {
                 <div className="col-right flex align-center">
                     <button onClick={this.props.onAddGroup}>Add New Group</button>
                     <div className="search-outer-container flex align-center">
-                        <input placeholder="Search" type='text' onChange={this.props.handleSearch}/>
+                        <input placeholder="Search" type='text' onChange={this.props.handleSearch} />
                         <GoSearch />
                     </div>
-                    <div className="activities-outer-container flex align-center">
+                    <div onClick={this.onToggleActivities} className="activities-outer-container flex align-center  cursor-pointer">
                         <GoRequestChanges />
-                        <h2 onClick={this.onToggleActivities}>Activity Log</h2>
+                        <h2 >Activity Log</h2>
                     </div>
 
-                    <div className="filters-outer-container relative flex align-center"  onClick={this.onToggleFilters}>
+                    <div onClick={this.onToggleFilters} className="filters-outer-container relative flex align-center cursor-pointer"  >
                         <VscListFilter />
                         <h2>Filter</h2>
                         {this.state.isFiltersOpen && <Filter board={this.props.board} />}
@@ -139,4 +139,4 @@ export class _BoardHeader extends React.Component {
 
 }
 
-export const BoardHeader= withRouter(_BoardHeader)
+export const BoardHeader = withRouter(_BoardHeader)

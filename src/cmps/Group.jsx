@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Task } from './Task'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { Menu, MenuItem } from '@material-ui/core';
 //Material ui
 import { Tooltip, Zoom } from '@material-ui/core';
-import { RiDeleteBin2Line } from 'react-icons/ri'
+import { IoIosArrowDropdownCircle } from 'react-icons/io'
+import { AiOutlineDelete } from 'react-icons/ai'
 
 import ContentEditable from 'react-contenteditable';
 
@@ -11,13 +13,14 @@ import ContentEditable from 'react-contenteditable';
 export class Group extends Component {
 
     state = {
-        id: ''
+        id: '',
+        ElGroupSettings: null,
     }
 
     componentDidMount() {
         this.elInputAdd = React.createRef();
         this.contentEditable = React.createRef();
-        this.setState({ ...this.props.group })
+        this.setState({ ...this.state, ...this.props.group })
     }
 
     handleChange = (ev) => {
@@ -30,36 +33,57 @@ export class Group extends Component {
         }, 0)
     }
 
+    handleMenuOpen = (ev, boardId) => {
+        this.setState({ ElGroupSettings: ev.currentTarget })
+    }
+
+    handleMenuClose = () => {
+        this.setState({ ElGroupSettings: null })
+    }
+
+
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
-        const elGroupName = this.state.name
+        const { name, ElGroupSettings } = this.state;
+        console.log('STATE?', this.state)
         return (
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>
-                    <section key={this.props.group.id} className="group padding-y-30"
+                    <section key={this.props.group.id} className="group padding-y-45"
                         {...provided.draggableProps}
 
                         ref={provided.innerRef}>
                         <div className="group-header-container flex space-between align-center" {...provided.dragHandleProps}>
-                            <div className="group-header-left flex">
-                                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Group" arrow>
-                                    <div className='icon-container'>
-                                        <RiDeleteBin2Line onClick={() => {
-                                            this.props.onRemoveGroup(this.props.group.id)
-                                        }} />
-
-                                    </div>
+                            <div className="group-header-left align-center flex relative">
+                                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Options" arrow>
+                                    <IoIosArrowDropdownCircle style={{ color: this.state.color }}
+                                        className="drop-down-menu-icon" onClick={this.handleMenuOpen} />
                                 </Tooltip>
+
+                                <Menu
+                                    anchorEl={ElGroupSettings}
+                                    keepMounted
+                                    open={Boolean(ElGroupSettings)}
+                                    onClose={this.handleMenuClose}
+                                >
+                                    <MenuItem onClick={() => {
+                                        this.props.onRemoveGroup(this.props.group.id)
+                                    }}>
+                                        <AiOutlineDelete /> Delete Board
+                                    </MenuItem>
+                                </Menu>
+
+
                                 <h1 style={{ color: this.state.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}
                                         className="content-editable cursor-initial"
                                         innerRef={this.contentEditable}
-                                        html={elGroupName} // innerHTML of the editable div
+                                        html={name} // innerHTML of the editable div
                                         disabled={false}       // use true to disable editing
                                         onChange={this.handleChange} // handle innerHTML change
                                         onBlur={() => {
-                                            this.props.onEditGroup(this.state, this.state.name, elGroupName)
+                                            this.props.onEditGroup(this.state, this.state.name, name)
                                         }}
                                         onKeyDown={(ev) => {
                                             if (ev.key === 'Enter') {

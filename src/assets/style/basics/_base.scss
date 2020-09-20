@@ -5,6 +5,10 @@
   padding: 0;
 }
 
+html {
+  font-size: 12px;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -80,7 +84,7 @@ button {
 }
 
 svg {
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
 
   &:hover {
@@ -88,6 +92,10 @@ svg {
   }
 }
 
+.drop-down-menu-icon {
+  position: absolute;
+  left: -20px;
+}
 
 span.span-user-details {
   font-family: font1;
