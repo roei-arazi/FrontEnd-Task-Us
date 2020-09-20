@@ -99,7 +99,7 @@ let boards = [{
         },
         description: 'removed task "do the dishes"',
         task: {
-            id: 123,
+            id: 123, 
             name: 'do the dishes'
         }
     },
