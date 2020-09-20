@@ -10,6 +10,7 @@ export class Updates extends React.Component {
         note: {
             txt: ''
         },
+        notes:[]
     }
 
     componentDidMount() {

@@ -67,7 +67,7 @@ class _Task extends Component {
 
         } else if (data === 'users') {
             this.setState({ isUsersShown: !this.state.isUsersShown })
-        } else if (data === 'notes') {
+        } else if (data === 'updates') {
             this.setState({ isUpdatesShown: !this.state.isUpdatesShown })
         }
         else {
@@ -154,7 +154,7 @@ class _Task extends Component {
 
                             <div className="task-right flex align-center">
 
-                                <div onClick={() => this.openModal('notes')} className="notes-container"><BsChatDots /></div>
+                                <div onClick={() => this.openModal('updates')} className="notes-container"><BsChatDots /></div>
 
                                 <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
