@@ -14,7 +14,7 @@ function _Popup(props){
     open={isSnackbarShown}
     autoHideDuration={3000}
     message={snackbarShown}
-    action={<Button color="primary" onClick={props.hideSnackbar}>Close</Button>}
+    action={<Button style={{color: '#f2f1dfb0'}} onClick={props.hideSnackbar}>Close</Button>}
 />
 }
 
