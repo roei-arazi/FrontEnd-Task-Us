@@ -15,16 +15,28 @@
     }
 
     .users-modal {
-        background-color: #ffffff;
+        background-color: #eae9d5;
         z-index: 999;
         padding: 10px;
         width: 250px;
         border-radius: 1px;
+        top: 35px;
+        right: 0;
+        box-shadow: $modalsShadow;
 
         .task-users-box {
             border-bottom: 2px solid $colorMainNav;
             padding: 10px 0;
             cursor: pointer;
+
+            svg {
+                font-size: 1.5rem;
+                color: #333333;
+            }
+
+            .member-name {
+                margin-left: 10px;
+            }
         }
 
         h3 {
@@ -40,6 +52,15 @@
         .board-users-box {
             padding: 10px 0;
             cursor: pointer;
+
+            .member-name {
+                margin-left: 10px;
+            }
+
+            svg {
+                font-size: 1.5rem;
+                color: #333333;
+            }
         }
     }
 
@@ -51,11 +72,43 @@
         padding-bottom: 7.5px;
         border-radius: 1px;
         text-align: center;
+        color: #4d4b4b;
     }
 
     .icon-container {
         position: absolute;
         left: -20px;
+    }
+
+    .react-datepicker {
+        background-color: #eae9d5;
+        box-shadow: $modalsShadow;
+
+        .react-datepicker__navigation--next {
+            border-left-color: #e1dfbdf5;
+        }
+
+        .react-datepicker__navigation--previous {
+            border-right-color: #e1dfbdf5;
+        }
+
+        .react-datepicker__triangle {
+            border-bottom-color: #484444;
+        }
+
+        .react-datepicker__header {
+            background-color: #484444;
+
+            .react-datepicker__current-month {
+                color: #f2f1dfb0;
+            }
+
+            .react-datepicker__day-names {
+                >* {
+                    color: #f2f1dfb0;
+                }
+            }
+        }
     }
 }
 
@@ -69,10 +122,12 @@
 
 .label-list {
     width: 150px;
-    background-color: #ffffff;
+    background-color: #eae9d5;
+    box-shadow: $modalsShadow;
     z-index: 999;
     padding: 10px;
     border-radius: 1px;
+    right: 0;
 
     .label-selector {
         width: 90%;
@@ -86,7 +141,7 @@
 
 .drag {
     transition: 0.3s;
-    border: 2px black solid
+    border: 2px $colorMainNav solid
 }
 
 .task-left {
@@ -136,7 +191,6 @@
             position: absolute;
             top: 9px;
             right: -15px;
-            font-size: 20px;
             background-color: $colorPlusCircle;
             color: $colorPlusCircleFont;
             border-radius: 50%;

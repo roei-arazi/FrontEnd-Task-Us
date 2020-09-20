@@ -1173,17 +1173,30 @@ div[role="menuContainer"] > div > ul > li {
 }
 
 .task .users-modal {
-  background-color: #ffffff;
+  background-color: #eae9d5;
   z-index: 999;
   padding: 10px;
   width: 250px;
   border-radius: 1px;
+  top: 35px;
+  right: 0;
+  -webkit-box-shadow: 0px 3px 10px -5px #484444;
+          box-shadow: 0px 3px 10px -5px #484444;
 }
 
 .task .users-modal .task-users-box {
   border-bottom: 2px solid #bcbba6;
   padding: 10px 0;
   cursor: pointer;
+}
+
+.task .users-modal .task-users-box svg {
+  font-size: 1.5rem;
+  color: #333333;
+}
+
+.task .users-modal .task-users-box .member-name {
+  margin-left: 10px;
 }
 
 .task .users-modal h3 {
@@ -1199,6 +1212,15 @@ div[role="menuContainer"] > div > ul > li {
   cursor: pointer;
 }
 
+.task .users-modal .board-users-box .member-name {
+  margin-left: 10px;
+}
+
+.task .users-modal .board-users-box svg {
+  font-size: 1.5rem;
+  color: #333333;
+}
+
 .task input {
   width: 100%;
   background-color: #f7f7dc;
@@ -1207,11 +1229,42 @@ div[role="menuContainer"] > div > ul > li {
   padding-bottom: 7.5px;
   border-radius: 1px;
   text-align: center;
+  color: #4d4b4b;
 }
 
 .task .icon-container {
   position: absolute;
   left: -20px;
+}
+
+.task .react-datepicker {
+  background-color: #eae9d5;
+  -webkit-box-shadow: 0px 3px 10px -5px #484444;
+          box-shadow: 0px 3px 10px -5px #484444;
+}
+
+.task .react-datepicker .react-datepicker__navigation--next {
+  border-left-color: #e1dfbdf5;
+}
+
+.task .react-datepicker .react-datepicker__navigation--previous {
+  border-right-color: #e1dfbdf5;
+}
+
+.task .react-datepicker .react-datepicker__triangle {
+  border-bottom-color: #484444;
+}
+
+.task .react-datepicker .react-datepicker__header {
+  background-color: #484444;
+}
+
+.task .react-datepicker .react-datepicker__header .react-datepicker__current-month {
+  color: #f2f1dfb0;
+}
+
+.task .react-datepicker .react-datepicker__header .react-datepicker__day-names > * {
+  color: #f2f1dfb0;
 }
 
 .label-box {
@@ -1224,10 +1277,13 @@ div[role="menuContainer"] > div > ul > li {
 
 .label-list {
   width: 150px;
-  background-color: #ffffff;
+  background-color: #eae9d5;
+  -webkit-box-shadow: 0px 3px 10px -5px #484444;
+          box-shadow: 0px 3px 10px -5px #484444;
   z-index: 999;
   padding: 10px;
   border-radius: 1px;
+  right: 0;
 }
 
 .label-list .label-selector {
@@ -1242,7 +1298,7 @@ div[role="menuContainer"] > div > ul > li {
 .drag {
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  border: 2px black solid;
+  border: 2px #bcbba6 solid;
 }
 
 .task-left {
@@ -1294,7 +1350,6 @@ div[role="menuContainer"] > div > ul > li {
   position: absolute;
   top: 9px;
   right: -15px;
-  font-size: 20px;
   background-color: #787864f1;
   color: #f2f1dfb0;
   border-radius: 50%;
@@ -1667,5 +1722,95 @@ div[role="menuContainer"] > div > ul > li {
 
 .filter-modal > * button:hover {
   background-color: #111111;
+}
+
+.updates-header {
+  margin-bottom: 20px;
+}
+
+.updates-header h1 {
+  margin: 15px 0 30px;
+}
+
+.updates-header .updates-header-options {
+  width: 100%;
+}
+
+.updates-header .updates-header-options > * {
+  margin: 0 auto;
+}
+
+.updates-header label {
+  font-family: font1;
+  padding: 15px;
+  color: #f2f1dfb0;
+  background-color: #31312c;
+  border: 0;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 2px;
+  -webkit-transition: .3s;
+  transition: .3s;
+  margin: 20px 0;
+}
+
+.updates-header label:hover {
+  background-color: #111111;
+}
+
+.updates-header input {
+  border-bottom: 2px solid #31312c;
+  width: 150px;
+}
+
+.updates-header input::-webkit-input-placeholder {
+  color: #4d4b4b;
+}
+
+.updates-header input:-ms-input-placeholder {
+  color: #4d4b4b;
+}
+
+.updates-header input::-ms-input-placeholder {
+  color: #4d4b4b;
+}
+
+.updates-header input::placeholder {
+  color: #4d4b4b;
+}
+
+.updates-container {
+  overflow: overlay;
+  padding: 0 10px;
+  height: 75vh;
+  background-color: #dddfc6;
+  border-bottom: 1px solid #b5ad91;
+  border-top: 1px solid #b5ad91;
+}
+
+.updates-container .update-box {
+  padding: 10px;
+  -webkit-box-shadow: 0px 3px 10px -5px #484444;
+          box-shadow: 0px 3px 10px -5px #484444;
+  margin: 10px;
+  background-color: #f2f1df;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.updates-container .update-box .member-name {
+  font-weight: bold;
+}
+
+.updates-container .update-box .update-text {
+  font-weight: initial;
+  display: inline;
+  word-break: break-all;
+}
+
+.updates-container .update-box img {
+  height: 200px;
+  width: 200px;
 }
 /*# sourceMappingURL=main.css.map */
