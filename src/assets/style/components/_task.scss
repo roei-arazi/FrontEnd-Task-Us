@@ -170,28 +170,12 @@
 
 .updates-header {
     margin-bottom: 20px;
-<<<<<<< HEAD
-    h1{
-        margin: 15px 0 30px;
-    }
-
-    .updates-header-options{
-        width:100%;
-
-        >*{
-            margin:0 auto;
-
-        }
-    }
-
-
-=======
 }
 
 .updates-images {
     height: 100%;
     .image-list {
-        margin: 50px 10px 20px;
+        margin: 50px 10px 20px; 
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         grid-gap: 10px;
@@ -202,7 +186,6 @@
             height: 200px;
         }
     }
->>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
     label {
         font-family: font1;
         padding: 15px;
@@ -213,16 +196,10 @@
         font-size: 1rem;
         border-radius: 2px;
         transition: .3s;
-<<<<<<< HEAD
-        margin:20px 0;
-    
-=======
->>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
         &:hover {
             background-color: rgba($colorIconsBoardBarsHover, .2);
         }
     }
-<<<<<<< HEAD
 
     input{
         border-bottom:2px solid $buttonColorCTA;
@@ -256,22 +233,6 @@
             font-weight: initial;
             display: inline;
             word-break: break-all;
-=======
-}
-
-.updates-notes {
-    height: 100%;
-    .notes-messages {
-        .notes-form {
-            width: 100%;
-        }
-        .note-text {
-            width: 90%;
-            background-color: $colorTask;
-            border-radius: 7px;
-            padding: 10px;
-            margin: 10px;
->>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
         }
 
         img {
@@ -282,11 +243,8 @@
    
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 515e7bc96d63c2dfc1c3abb59be0a9becfdc6c72
 // Labels
 .stuck {
     background-color: #b94444;
