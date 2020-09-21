@@ -1,5 +1,6 @@
 import moment from 'moment'
 import httpService from './httpService'
+import socketService from './socketService';
 
 export const boardService = {
     loadBoards,
@@ -247,6 +248,7 @@ async function loadBoards() {
 }
 
 function updateBoard(boardToSave) {
+    socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
 }
@@ -400,24 +402,24 @@ function addGroup(board) {
 }
 
 function removeGroup(groupId, board) {
-    board.groups= board.groups.filter(group => group.id !== groupId)
+    board.groups = board.groups.filter(group => group.id !== groupId)
     updateBoard(board)
     return board
 }
 
 function updateGroup(updatedGroup, board) {
-    board.groups= board.groups.map(group=> group.id===updatedGroup.id ? updatedGroup : group)
+    board.groups = board.groups.map(group => group.id === updatedGroup.id ? updatedGroup : group)
     updateBoard(board)
     return board
 }
 
 async function removeTask(taskId, board) {
-        board.groups = board.groups.map(group => {
-            group.tasks = group.tasks.filter(task => task.id !== taskId)
-            return group;
-        })
-        updateBoard(board)
-        return board;
+    board.groups = board.groups.map(group => {
+        group.tasks = group.tasks.filter(task => task.id !== taskId)
+        return group;
+    })
+    updateBoard(board)
+    return board;
 
 }
 
@@ -437,15 +439,15 @@ async function addTask(groupId, taskName = 'Change Task Name', board) {
         tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
     }
     board.groups.map(group => {
-            if (group.id === groupId) group.tasks.push(task)
-            return group;
-        })
-        updateBoard(board)
-        return board;
+        if (group.id === groupId) group.tasks.push(task)
+        return group;
+    })
+    updateBoard(board)
+    return board;
 
 }
 
-function updateTask(updatedTask, board){
+function updateTask(updatedTask, board) {
     board.groups = board.groups.map(group => {
         group.tasks = group.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
         return group;

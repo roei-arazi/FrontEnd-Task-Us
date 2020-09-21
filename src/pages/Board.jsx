@@ -27,8 +27,6 @@ class _Board extends Component {
 
 
     async componentDidMount() {
-        socketService.setup();
-        socketService.emit('board', this.props.match.params.id);
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();
@@ -46,10 +44,6 @@ class _Board extends Component {
         this.setState({ boardId: this.props.match.params.id })
     }
 
-    componentWillUnmount() {
-        socketService.off('board', this.addMsg);
-        socketService.terminate();
-    }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
@@ -192,8 +186,7 @@ class _Board extends Component {
             newGroups.splice(destination.index, 0, draggedGroup)
             board.groups = newGroups
             try {
-                await this.props.updateBoard(board)
-                socketService.emit('drag', board);
+                this.props.updateBoard(board)
 
             } catch (err) {
                 console.log('Error', err);
@@ -218,7 +211,7 @@ class _Board extends Component {
                 board.groups.splice(newIdx, 1, newGroup)
                 try {
                     await this.props.updateBoard(board)
-                    socketService.emit('drag', board);
+
 
                 } catch (err) {
                     console.log('Error', err);
@@ -246,7 +239,7 @@ class _Board extends Component {
                 board.groups.splice(endIdx, 1, newFinishGroup)
                 try {
                     await this.props.updateBoard(board)
-                    socketService.emit('drag', board);
+
                 } catch (err) {
                     console.log('Error', err);
                 }
