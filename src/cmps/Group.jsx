@@ -8,6 +8,7 @@ import { AiOutlineDelete, AiOutlineDrag } from 'react-icons/ai'
 
 import ContentEditable from 'react-contenteditable';
 import { CgColorPicker } from 'react-icons/cg';
+import socketService from '../services/socketService.js'
 
 
 export class Group extends Component {
@@ -21,6 +22,9 @@ export class Group extends Component {
     componentDidMount() {
         this.elInputAdd = React.createRef();
         this.contentEditable = React.createRef();
+        socketService.on('updatedBoard', () =>{
+            this.setState({ ...this.state, ...this.props.group })
+        })
         this.setState({ ...this.state, ...this.props.group })
     }
 
@@ -50,13 +54,13 @@ export class Group extends Component {
         this.setState({ elGroupColors: !this.state.elGroupColors })
     }
 
-    onChangeGroupColor = async (color) => {
+    onChangeGroupColor = (color) => {
         const newGroup = {
             ...this.props.group,
             color
         }
         try {
-            await this.props.onEditGroup(newGroup, color, this.state.color)
+            this.props.onEditGroup(newGroup, color, this.state.color)
         } catch (err) {
             console.log('Error', err)
         }
