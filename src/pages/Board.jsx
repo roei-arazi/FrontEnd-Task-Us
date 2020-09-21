@@ -87,8 +87,9 @@ class _Board extends Component {
             filterTasks(task => {
                 console.log('TASK?', task)
                 return (
-                    task.name.toLowerCase().includes(this.state.txt.toLowerCase()) ||
-                    task.tags.some(tag => tag.txt.toLowerCase().includes(this.state.txt.toLowerCase()))
+                    task.name.toLowerCase().includes(this.state.txt.toLowerCase())
+                    //  ||
+                    // task.tags.some(tag => tag.txt.toLowerCase().includes(this.state.txt.toLowerCase()))
                 )
 
             })

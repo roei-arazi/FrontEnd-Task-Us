@@ -9,7 +9,15 @@ const initialState = {
             "imgUrl" : "https://via.placeholder.com/250",
             "isAdmin" : true,
             "boards" : [],
-            "notifications" : [],
+            "notifications" : [ 
+                {
+                byUser: 
+                {
+                    fullName: "Liam Zety","imgUrl" : "https://via.placeholder.com/250" 
+                },
+                content:"just uploaded the logo!",
+                createdAt:Date.now()
+            }],
             "birthDay" : "2nd August 1997",
             "company" : "adidas",
             "phoneNumber" : "0224132124"
