@@ -4,21 +4,24 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
 import { Tooltip, Zoom } from '@material-ui/core';
-import {login, guestLogin} from '../store/actions/userActions.js'
+
+import { login, guestLogin } from '../store/actions/userActions.js'
+import { loadBoards } from '../store/actions/boardActions'
 
 class _Login extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         // if(this.props.loggedUser)   this.props.history.push('/board/123')
+        this.props.loadBoards()
     }
 
-    onLogin = async (values, {resetForm}) => {
+    onLogin = async (values, { resetForm }) => {
         resetForm();
         await this.props.login(values);
-        if(this.props.loggedUser)   this.props.history.push('/board/123')
+        if (this.props.loggedUser) this.props.history.push('/board/123')
     }
 
-    onGuestLogin = async () =>{
+    onGuestLogin = async () => {
         await this.props.guestLogin();
         this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
@@ -46,7 +49,7 @@ class _Login extends Component {
                     <ErrorMessage name="email" component="span" />
                     <section>
                         <legend>Password *</legend>
-                    <Field className="sign-login-input" type="text" name="password" />
+                        <Field className="sign-login-input" type="text" name="password" />
                     </section>
                     <ErrorMessage name="password" component="span" />
                     <button type="submit">Login</button>
@@ -65,13 +68,15 @@ class _Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        loggedUser: state.userReducer.loggedUser
+        loggedUser: state.userReducer.loggedUser,
+        boards: state.boardReducer.boards
     }
 }
 
 const mapDispatchToProps = {
     login,
-    guestLogin
+    guestLogin,
+    loadBoards
 }
 
 export const Login = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Login));
