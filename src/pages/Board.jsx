@@ -76,7 +76,7 @@ class _Board extends Component {
             filterTasks(task => task.priority.toLowerCase() === filterBy.taskPriority.toLowerCase())
         }
         if (filterBy.taskStatus) {
-            filterTasks(task => task.status.toLowerCase() === filterBy.taskStatus.toLowerCase())
+            filterTasks(task => task.status.toLowerCase() === filterBy.taskStatus.toLowerCase()) 
         }
         if (filterBy.dueDate) {
             filterTasks(task => task.dueDate === filterBy.dueDate)
