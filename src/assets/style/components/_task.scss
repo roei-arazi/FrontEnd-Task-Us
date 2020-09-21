@@ -294,6 +294,24 @@
     }
 }
 
+.updates-image-modal {
+    animation: scale-in-ver-top .3s;
+    padding: 25px 25px 0;
+    box-shadow: $modalsShadow;
+    background-color: $colorTask;
+    top: 5vh;
+    left: 5vw;
+    position: absolute;
+    z-index: 999;
+
+    img {
+        box-shadow: $modalsShadow;
+        height: 600px;
+        width: 548px;
+
+    }
+}
+
 .updates-header {
     margin-bottom: 20px;
 

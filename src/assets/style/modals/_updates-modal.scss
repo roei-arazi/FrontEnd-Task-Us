@@ -1,15 +1,15 @@
-
 .updates-header {
     margin-bottom: 20px;
-    h1{
+
+    h1 {
         margin: 15px 0 30px;
     }
 
-    .updates-header-options{
-        width:100%;
+    .updates-header-options {
+        width: 100%;
 
-        >*{
-            margin:0 auto;
+        >* {
+            margin: 0 auto;
         }
     }
 
@@ -24,46 +24,49 @@
         font-size: 1rem;
         border-radius: 2px;
         transition: .3s;
-        margin:20px 0;
-    
+        margin: 20px 0;
+
         &:hover {
             background-color: $colorIconsTasksHover;
         }
     }
 
-    input{
-        border-bottom:2px solid $buttonColorCTA;
-        width:150px;
+    input {
+        border-bottom: 2px solid $buttonColorCTA;
+        width: 150px;
 
-        &::placeholder{
-            color:$colorFontUserDetails
+        &::placeholder {
+            color: $colorFontUserDetails
         }
     }
 }
 
 
-.updates-container{
 
+
+.updates-container {
+    
     overflow: overlay;
-    padding:0 10px;
+    padding: 0 10px;
     height: 75vh;
     background-color: #dddfc6;
     border-bottom: 1px solid #b5ad91;
     border-top: 1px solid #b5ad91;
 
-    .update-box{
 
-        padding:10px;
-        box-shadow:0px 3px 10px -5px #484444;
-        margin:10px;
+    .update-box {
+
+        padding: 10px;
+        box-shadow: 0px 3px 10px -5px #484444;
+        margin: 10px;
         background-color: $colorBg;
         width: fit-content;
 
-        .member-name{
+        .member-name {
             font-weight: bold;
         }
 
-        .update-text{
+        .update-text {
             font-weight: initial;
             display: inline;
             word-break: break-all;
@@ -71,9 +74,8 @@
 
         img {
             height: 200px;
-            width:200px;
-        }   
-    }   
-   
-}
+            width: 200px;
+        }
+    }
 
+}
