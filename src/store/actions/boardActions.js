@@ -28,6 +28,18 @@ export function updateBoard(boardToSave) {
     }
 }
 
+export function recieveUpdate(boardToSave) {
+    return async dispatch => {
+        try {
+            boardService.updateBoard(boardToSave, false);
+            dispatch({ type: 'SET_BOARD', board: boardToSave })
+        } catch (err) {
+            console.log('boardActions: Couldn\'t update board');
+            throw err;
+        }
+    }
+}
+
 export function removeBoard(boardId) {
     return async dispatch => {
         try {

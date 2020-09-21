@@ -47,9 +47,9 @@ function _Filter(props) {
                 <section className="task-member-filter flex column align-center">
                     <h3>Member</h3>
                     <div className="filter-list">
-                        {members.map(member => <button
+                        {members.map((member,idx) => <button
                             className={filterBy.memberId === member._id ? 'remove-filter-btn' : ''}
-                            key={member._id}
+                            key={idx}
                             onClick={() => onSetFilter('memberId', member._id)}>{member.fullName}</button>)}
                     </div>
                 </section>

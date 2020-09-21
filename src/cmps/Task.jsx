@@ -18,6 +18,7 @@ import { Date } from './task-cmps/Date';
 import { Priority } from './task-cmps/Priority';
 import { Updates } from './task-cmps/Updates';
 import { Tags } from './task-cmps/Tags';
+import Truncate from 'react-truncate';
 
 class _Task extends Component {
 
@@ -33,6 +34,13 @@ class _Task extends Component {
     componentDidMount() {
         this.contentEditable = React.createRef();
         this.setState({ ...this.props.task })
+        this.setState({
+            isStatusShown: false,
+            isPriorityShown: false,
+            isUsersShown: false,
+            isUpdatesShown: false,
+            isTagsShown: false
+        })
     }
 
     handleNameChange = (ev) => {
@@ -60,7 +68,7 @@ class _Task extends Component {
 
     }
 
-    uploadImg = async (ev, user) => {
+    uploadImg = async (ev) => {
         const res = await cloudinaryService.uploadImg(ev)
         const newImg = {
             member: this.props.loggedUser.fullName,
@@ -70,8 +78,8 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    sendNote = async (updates) => {
-        await this.setState({ updates })
+    sendNote = async (newUpdates) => {
+        await this.setState({ updates: [...newUpdates] })
         this.props.onEditTask(this.state)
     }
 
@@ -126,6 +134,7 @@ class _Task extends Component {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
         const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown } = this.state
+        console.log(this.state);
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
@@ -168,7 +177,7 @@ class _Task extends Component {
                                                 // this.ChangeEditState()
                                             }
                                         }}
-                                    />
+                                        />
                                 </h2>
                             </div>
 
