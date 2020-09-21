@@ -3,12 +3,10 @@
 
 # Task-Us
 
-- **Working in a large scale company?**
 > Managing our work together.
 
-
 ## About
-
+- **Working in a large scale company?**
 > Do you need to keep track of hundreds of tasks?
 > Need an efficient way to manage your co-workers / employees?
 
