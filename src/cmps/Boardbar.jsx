@@ -18,17 +18,11 @@ class _Boardbar extends Component {
         isShown: ''
     } 
     componentDidMount() {
-        // socketService.setup();
-        socketService.emit('board', this.props.match.params.id);
         socketService.on('updatedBoard', updatedBoard => {
             console.log('got board:', updatedBoard);
              this.props.recieveUpdate(updatedBoard)
             });
         this.setState({ isShown: this.props.isBoardbarShown })
-    }
-    componentWillUnmount() {
-        // socketService.off('updatedBoard');
-        socketService.terminate();
     }
 
     onMoveToBoard(id) {

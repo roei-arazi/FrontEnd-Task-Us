@@ -58,7 +58,7 @@ class _Navbar extends Component {
                     <NavLink to="/myweek">
                         <div className="icon-container"><BsCalendar /></div>
                     </NavLink>
-                    <NavLink to={`/user/${loggedUser._id}`}>
+                    <NavLink to={loggedUser ? `/user/${loggedUser._id}` : '/login'}>
                         <li><CgProfile /></li>
                     </NavLink>
                 </ul>

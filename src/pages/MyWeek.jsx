@@ -108,9 +108,6 @@ class _MyWeek extends Component {
                                     <div className="user-img-container flex justify-center align-center">
                                         {task.members.length !== 0 && (task.members[0].imgUrl ? <img onClick={() => this.moveToUserProfile(task.members[0]._id)} alt="profile" src={task.members[0].imgUrl} />:
                                         <div onClick={() => this.moveToUserProfile(task.members[0]._id)} className="member-letter">{task.members[0].fullName.charAt(0).toUpperCase()}</div>)}
-                                        {/* {task.members.length !== 0 ? task.members[0].imgUrl ? <img onClick={() => this.moveToUserProfile(task.members[0]._id)} alt="profile" src={task.members[0].imgUrl} /> :
-                                            <div onClick={() => this.moveToUserProfile(task.members[0]._id)} className="member-letter">{task.members[0].fullName.charAt(0).toUpperCase()}</div> : ''}
-                                        <div className="task-number-of-imgs flex justify-center align-center"><span>{task.members.length ? task.members.length : 0}</span></div> */}
                                     </div>
                                     <h2>{this.getDaysFromNow(task.dueDate)}</h2>
                                 </div>)}
