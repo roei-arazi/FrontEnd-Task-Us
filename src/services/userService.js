@@ -36,7 +36,7 @@ let users = [{
     "boards": [],
     "notifications": [],
     "birthDay": '2nd August 1997',
-    "company": 'adidas', 
+    "company": 'adidas',
     "phoneNumber": '0224112124'
 }
 ]
@@ -109,10 +109,10 @@ async function signup(userCred) {
         phoneNumber: '0224132124',
         ...userCred
     }
-    try{
+    try {
         const newUser = await httpService.post('auth/signup', user)
         return newUser;
-    }catch (err) {
+    } catch (err) {
         console.log('userService: Couldn\'t sign up');
         throw err;
     }
@@ -146,8 +146,7 @@ async function updateUser(loggedUser) {
     const userIdx = users.findIndex(user => user._id === loggedUser._id)
 
     try {
-        users[userIdx] = {...loggedUser}
-        console.log('in user service:', loggedUser);
+        users[userIdx] = { ...loggedUser }
     } catch (err) {
         console.log('ERROR, couldnt update user', err);
     }

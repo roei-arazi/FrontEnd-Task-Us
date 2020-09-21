@@ -4,7 +4,6 @@ export const cloudinaryService = {
 }
 
 async function uploadImg(ev, taskState) {
-    console.log('TASK STATE FROM CLOUDNARY', taskState)
     const CLOUD_NAME = "dtg7n0zye"
     const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
 

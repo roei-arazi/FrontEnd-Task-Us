@@ -20,7 +20,6 @@ async function loadBoards() {
 }
 
 function updateBoard(boardToSave, echo = true) {
-    console.log('echoing...', echo);
     if (echo) socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
@@ -123,7 +122,6 @@ async function addBoard() {
         ]
     }
     const newBoard = await httpService.post(`board`, board);
-    console.log('got from database:', newBoard);
     return newBoard;
 }
 

@@ -87,7 +87,6 @@ class _Board extends Component {
         }
         if (this.state.txt) {
             filterTasks(task => {
-                console.log('TASK?', task)
                 return (
                     task.name.toLowerCase().includes(this.state.txt.toLowerCase())
                     //  ||
@@ -259,12 +258,10 @@ class _Board extends Component {
 
     render() {
         if (this.props.boards.length === 0) return <h1>Loading...</h1>
-        console.log(this.props.boards);
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
         const filteredBoard = this.applyFilter(board, filterBy);
-        console.log('FILTERED BORAD', filteredBoard)
         board.members = users
         return (
             <section className="board">

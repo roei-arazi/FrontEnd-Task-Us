@@ -59,7 +59,6 @@ export class Updates extends React.Component {
                         </form>
                         <div className="image-uploader">
                             <label htmlFor="task-imgs">Upload Image</label>
-                            {console.log('state <!!!!!></!!!!!>', this.state)}
                             <input type="file" id="task-imgs" onChange={(ev) => {
                                 this.uploadImg(ev)
                             }} hidden />

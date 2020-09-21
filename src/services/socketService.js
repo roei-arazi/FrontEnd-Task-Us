@@ -23,7 +23,6 @@ function terminate() {
 }
 
 function on(eventName, cb) {
-    console.log('socket:', socket);
     socket.on(eventName, cb);
 }
 
