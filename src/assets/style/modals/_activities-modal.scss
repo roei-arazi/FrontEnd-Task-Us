@@ -1,9 +1,13 @@
 .activities {
     overflow-y: overlay;
-    max-height: 90vh;
+    max-height: 75vh;
 
     header {
         margin-bottom: 25px;
+
+        h1 {
+            margin-top: 25px;
+        }
     }
 
     h1,
@@ -35,8 +39,6 @@
     }
 
     .user-img-container {
-        text-align: initial;
-
         img {
             height: auto;
             width: 40px;

@@ -1,20 +1,20 @@
 .side-modal {
     position: fixed;
     top: 0;
-    left: 500%;
+    left: 200%;
     height: 100%;
-    width: 500px;
+    width: 650px;
     background-color: $colorTask;
     z-index: 999;
-    transition: .2s;
+    transition: .4s;
 
     &:hover+.modal-screen-wrapper {
-        transition: .2s;
+        transition: .4s;
         background-color: #1f1d0987;
     }
 
     +.modal-screen-wrapper {
-        transition: .2s;
+        transition: .4s;
         background-color: transparent;
     }
 
@@ -22,7 +22,7 @@
 
 .animate-side-modal {
     box-shadow: $modalsShadow;
-    transition: .2s;
+    transition: .4s;
     left: 100%;
     transform: translate(-100%, 0);
 }
