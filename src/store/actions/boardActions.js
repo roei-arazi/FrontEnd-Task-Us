@@ -114,6 +114,7 @@ export function removeTask(taskId) {
 }
 
 export function editTask(task) {
+    console.log('Updated task', task)
     return async dispatch => {
         try {
             // boardService.editTask(task);
