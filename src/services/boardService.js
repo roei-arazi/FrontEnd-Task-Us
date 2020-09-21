@@ -244,12 +244,8 @@ async function loadBoards() {
     return await httpService.get(`board`)
 }
 
-async function updateBoard(boardToSave, filterBy) {
-    if (filterBy.groupId) {
-        boardToSave.groups.filter(group => group.id === filterBy.groupId)
-    }
+async function updateBoard(boardToSave) {
     return httpService.put(`board/${boardToSave._id}`, boardToSave)
-
 }
 
 async function removeBoard(boardId) {
@@ -375,51 +371,46 @@ async function addBoard() {
     return httpService.post(`board`, board)
 }
 
-async function addGroup(boardId) {
+async function addGroup(board) {
     const group = {
-        id: _makeid(),
-        name: 'week1',
-        createdAt: 'date',
-        color: '#70ADB5',
-        lastUpdated: 198465168486,
-        isTagsShown: false,
-        tags: [],
-        columns: [{
-            type: 'date',
-            name: 'due date'
+        "id": _makeid(),
+        "name": 'week1',
+        "createdAt": 'date',
+        "color": '#70ADB5',
+        "lastUpdated": 198465168486,
+        "isTagsShown": false,
+        "tags": [],
+        "columns": [{
+            "type": 'date',
+            "name": 'due date'
         }],
-        tasks: [{
-            id: _makeid(),
-            name: 'sneeze',
-            createdAt: 1123124124241,
-            members: [{
-                _id: 1234,
-                name: 'osher',
-                imgUrl: 'www/sfasf'
-            }],
-            status: 'Working on it',
-            priority: 'Low',
-            dueDate: 214124124125,
-            updates: [
+        "tasks": [{
+            "id": _makeid(),
+            "name": 'sneeze',
+            "createdAt": 1123124124241,
+            "members": [],
+            "status": 'Working on it',
+            "priority": 'Low',
+            "dueDate": 214124124125,
+            "updates": [
                 {
-                    txt: 'dont forget about this',
-                    member: 'Roei Arazi'
+                    "txt": 'dont forget about this',
+                    "member": 'Roei Arazi'
                 },
                 {
-                    txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                    member: 'Liam Zety'
+                    "txt": 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    "member": 'Liam Zety'
                 }
             ],
-            lastUpdated: 'yesterday',
-            isSelected: false,
-            posts: [],
-            tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
+            "lastUpdated": 'yesterday',
+            "isSelected": false,
+            "posts": [],
+            "tags": ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
         }]
     }
     try {
-        const boardIdx = boards.findIndex(board => board._id === boardId);
-        boards[boardIdx].groups.push(group)
-        // return Promise.resolve()
+        board.groups.push(group)
+        return updateBoard(board)
     } catch (err) {
         console.log('boardService: Couldn\'t add group');
         throw err;
