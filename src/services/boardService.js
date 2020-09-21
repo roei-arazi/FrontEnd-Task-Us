@@ -1,4 +1,3 @@
-import { makeStyles } from '@material-ui/core'
 import moment from 'moment'
 import httpService from './httpService'
 
@@ -56,11 +55,11 @@ let boards = [{
                     "member": 'Liam Zety'
                 }
             ],
-            lastUpdated: 'yesterday',
-            isSelected: false,
-            posts: [],
-            tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux'],
-            attachedImgs: []
+            "lastUpdated": 'yesterday',
+            "isSelected": false,
+            "posts": [],
+            "tags": ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux'],
+            "attachedImgs": []
         }, {
             "id": "o187345to",
             "name": 'sneeze',
@@ -83,10 +82,10 @@ let boards = [{
                     "member": 'Liam Zety'
                 }
             ],
-            lastUpdated: 'yesterday',
-            isSelected: false,
-            posts: [],
-            tags: [{ txt: 'uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', color: '#f1f4a5' }, { txt: 'ux', color: '#f1f4a5' }]
+            "lastUpdated": 'yesterday',
+            "isSelected": false,
+            "posts": [],
+            "tags": [{ txt: 'uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', color: '#f1f4a5' }, { txt: 'ux', color: '#f1f4a5' }]
         }]
     }],
     "activityLog": [{
@@ -241,7 +240,9 @@ let boards = [{
 }]
 
 async function loadBoards() {
-    return await httpService.get(`board`)
+    const boards = await httpService.get(`board`)
+    console.log('BOARD ', boards)
+    return boards
 }
 
 async function updateBoard(boardToSave, filterBy) {
