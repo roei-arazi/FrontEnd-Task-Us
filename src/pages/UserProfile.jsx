@@ -23,7 +23,7 @@ class _UserProfile extends Component {
     }
 
     async componentDidMount() { 
-        if(!this.props.boards.length) this.props.loadBoards()
+        this.props.loadBoards()
         const user = await userService.getUserById(this.props.match.params.id)
         this.setState({ user: { ...user} })
     }

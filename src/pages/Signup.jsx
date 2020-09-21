@@ -17,9 +17,14 @@ class _Signup extends Component {
 
     onSignup = async (values, {resetForm}) => {
         resetForm();
-        const {username, password, email} = values;
-        await this.props.signup({username, password, email});
-        if(this.props.loggedUser)   this.props.history.push('/board/123')
+        const {username, password, email, fullName} = values;
+        try{
+            await this.props.signup({username, password, email, fullName});
+            this.props.history.push(`/board/${this.props.boards[0]._id}`)
+        }catch(err){
+            console.log('Signup: Couldn\'t sign up');
+            throw err;
+        }
     }
 
     onGuestLogin = async () =>{
@@ -28,7 +33,7 @@ class _Signup extends Component {
     }
 
     render() {
-        const initialValues = { username: '', password: '' }
+        const initialValues = { username: '', password: '', confirm: '', email: '', fullName: '' }
         return <div className="sign-login">
             <Formik
                 initialValues={initialValues}
@@ -49,27 +54,27 @@ class _Signup extends Component {
                     <FaUserCircle />
                     <section>
                         <legend>Username *</legend>
-                        <Field className="sign-login-input"type="text" name="username" />
+                        <Field autoComplete="something" className="sign-login-input" type="text" name="username" />
                     </section> 
                     <ErrorMessage name="username" component="span" />
                     <section>
                         <legend>Full name *</legend>
-                        <Field className="sign-login-input"type="text" name="fullName" />
+                        <Field autoComplete="something" className="sign-login-input"type="text" name="fullName" />
                     </section> 
                     <ErrorMessage name="fullName" component="span" />
                     <section>
                         <legend>Email *</legend>
-                        <Field className="sign-login-input" type="text" name="email" />
+                        <Field autoComplete="something" className="sign-login-input" type="text" name="email" />
                     </section>
                     <ErrorMessage name="email" component="span" />
                     <section>
                         <legend>Password *</legend>
-                    <Field className="sign-login-input" type="text" name="password" />
+                    <Field autoComplete="something" className="sign-login-input" type="text" name="password" />
                     </section>
                     <ErrorMessage name="password" component="span" />
                     <section>
                         <legend>Confirm password *</legend>
-                    <Field className="sign-login-input" type="text" name="confirm" />
+                    <Field autoComplete="something" className="sign-login-input" type="text" name="confirm" />
                     </section>
                     <ErrorMessage name="confirm" component="span" />
                     <button type="submit">Signup</button>

@@ -74,8 +74,9 @@ async function markAsRead(loggedUser) {
 }
 
 async function getUserById(userId) {
-    const user = users.find(user => user._id === userId)
     try {
+        const user = await httpService.get(`user/${userId}`);
+        console.log('got from service:', user);
         return user
     } catch (err) {
         console.log('userService: Coulnd\'t get user');
