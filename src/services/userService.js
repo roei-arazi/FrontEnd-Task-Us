@@ -74,6 +74,7 @@ async function markAsRead(loggedUser) {
 }
 
 async function getUserById(userId) {
+    console.log('got to user service', userId);
     try {
         const user = await httpService.get(`user/${userId}`);
         console.log('got from service:', user);
