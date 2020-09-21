@@ -216,7 +216,6 @@ async function addTask(groupId, taskName = 'Change Task Name', board) {
     })
     updateBoard(board)
     return board;
-
 }
 
 function updateTask(updatedTask, board) {

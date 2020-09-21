@@ -36,7 +36,7 @@ class _Boardbar extends Component {
     handleMenuClose = () => {
         this.setState({ anchorEl: null })
     }
-
+ 
     onBoardRemove = async (boardId) => {
         const { boards, match, history, removeBoard } = this.props
         const { id } = match.params;

@@ -130,7 +130,7 @@ export function editTask(task, board) {
     return dispatch => {
         try {
             const updatedBoard = boardService.updateTask(task, board);
-            dispatch({ type: 'EDIT_TASK', board: updatedBoard })
+            dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {
             console.log('boardActions: Coulnd\'t edit task');
             throw err;
