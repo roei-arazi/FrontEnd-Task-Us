@@ -12,7 +12,6 @@ import socketService from '../services/socketService.js'
 import { Tooltip, Zoom } from '@material-ui/core';
 
 // Inside Imports
-import { cloudinaryService } from '../services/cloudinaryService';
 import { Members } from './task-cmps/Members';
 import { Status } from './task-cmps/Status'
 import { Date } from './task-cmps/Date';
@@ -35,12 +34,15 @@ class _Task extends Component {
     }
 
     componentDidMount() {
+        console.log('this.props.task', this.props.task)
         this.contentEditable = React.createRef();
-        socketService.on('updatedBoard', () =>{
-            this.setState({ ...this.props.task })
+        socketService.on('updatedBoard', () => {
+
+            this.setState({ ...this.state, ...this.props.task })
         })
-        this.setState({ ...this.props.task })
         this.setState({
+            ...this.state,
+            ...this.props.task,
             isStatusShown: false,
             isPriorityShown: false,
             isUsersShown: false,
@@ -73,17 +75,8 @@ class _Task extends Component {
 
     }
 
-    uploadImg = async (ev) => {
-        const res = await cloudinaryService.uploadImg(ev)
-        const newImg = {
-            member: this.props.loggedUser.fullName,
-            txt: res.url
-        }
-        this.setState({ updates: [newImg, ...this.state.updates] })
-        this.props.onEditTask(this.state)
-    }
-
     sendNote = (newUpdates) => {
+        console.log('task state after send note', this.state)
         this.setState({ updates: [...newUpdates] })
         this.props.onEditTask(this.state)
     }
@@ -136,7 +129,6 @@ class _Task extends Component {
     }
 
     onToggleImageModal = (imgUrl) => {
-        console.log('IMAGE URL', imgUrl)
         this.setState({ imgUrl, isImageModalShown: !this.state.isImageModalShown })
 
     }
@@ -149,7 +141,8 @@ class _Task extends Component {
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates isImageModalShown={this.state.isImageModalShown} loggedUser={this.props.loggedUser} updates={this.state.updates}
+                    <Updates isImageModalShown={this.state.isImageModalShown}
+                        loggedUser={this.props.loggedUser} updates={this.state.updates}
                         onToggleImageModal={this.onToggleImageModal}
                         uploadImg={this.uploadImg} sendNote={this.sendNote}
                     />

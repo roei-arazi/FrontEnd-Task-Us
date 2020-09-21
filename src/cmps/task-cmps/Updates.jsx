@@ -1,5 +1,6 @@
 import React from 'react'
 import { IoMdSend } from 'react-icons/io'
+import { cloudinaryService } from '../../services/cloudinaryService';
 
 export class Updates extends React.Component {
 
@@ -14,13 +15,11 @@ export class Updates extends React.Component {
         this.setState({ updates: this.props.updates })
     }
 
-
-
     handleChange = (ev) => {
         this.setState({ update: { ...this.state.update, txt: ev.target.value } })
     }
 
-    sendNote = async (ev) => {
+    sendNote = (ev) => {
         ev.preventDefault()
         if (!this.state.update.txt || this.state.update.txt.split('').every(letter => letter === ' ')) return
         const newNote = {
@@ -29,9 +28,19 @@ export class Updates extends React.Component {
         }
         const updates = [newNote, ...this.props.updates]
 
-        await this.setState({ updates, update: { txt: '' } })
+        this.setState({ updates, update: { txt: '' } })
 
         this.props.sendNote(updates)
+    }
+    uploadImg = async (ev) => {
+        const res = await cloudinaryService.uploadImg(ev, this.state)
+        const newImg = {
+            member: this.props.loggedUser.fullName,
+            txt: res.url
+        }
+        const updates = [newImg, ...this.props.updates]
+        this.props.sendNote(updates)
+
     }
 
 
@@ -50,7 +59,10 @@ export class Updates extends React.Component {
                         </form>
                         <div className="image-uploader">
                             <label htmlFor="task-imgs">Upload Image</label>
-                            <input type="file" id="task-imgs" onChange={this.props.uploadImg} hidden />
+                            {console.log('state <!!!!!></!!!!!>', this.state)}
+                            <input type="file" id="task-imgs" onChange={(ev) => {
+                                this.uploadImg(ev)
+                            }} hidden />
                         </div>
                     </div>
                 </div>
