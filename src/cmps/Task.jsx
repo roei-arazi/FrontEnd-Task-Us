@@ -7,7 +7,7 @@ import { RiDeleteBack2Line } from 'react-icons/ri'
 import { BsChatDots } from 'react-icons/bs'
 import "react-datepicker/dist/react-datepicker.css";
 import socketService from '../services/socketService.js'
-
+import moment from 'moment';
 //Material ui
 import { Tooltip, Zoom } from '@material-ui/core';
 
@@ -34,15 +34,14 @@ class _Task extends Component {
     }
 
     componentDidMount() {
-        console.log('this.props.task', this.props.task)
         this.contentEditable = React.createRef();
         socketService.on('updatedBoard', () => {
 
-            this.setState({ ...this.state, ...this.props.task })
+            this.setState({ task: this.props.task })
         })
         this.setState({
             ...this.state,
-            ...this.props.task,
+            task: this.props.task,
             isStatusShown: false,
             isPriorityShown: false,
             isUsersShown: false,
@@ -52,36 +51,36 @@ class _Task extends Component {
     }
 
     handleNameChange = (ev) => {
-        this.setState({ name: ev.target.value });
+        this.setState({task:{...this.state.task, name: ev.target.value} });
     }
 
     handleDateChange = date => {
-        this.setState({ dueDate: date })
-        this.props.onEditTask(this.state)
+        this.setState({task:{...this.state.task, dueDate: moment(date).valueOf()}}, () =>{
+            this.props.onEditTask(this.state.task)
+        })
     }
 
     handleChange = (data, tags) => {
-        console.log('got data:', data);
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-            console.log('changing data');
-            this.setState({ status: data }, () =>{
-                this.props.onEditTask(this.state)
+            this.setState({task: {...this.state.task, status: data} }, () =>{
+                this.props.onEditTask(this.state.task)
             })
         // } else if (data === 'tag') {
         //     console.log('IMHERE, data:', data, 'tag:', tags)
         //     this.setState({ ...this.state, tags })
         //     this.props.onEditTask(this.state, tags)
         } else {
-            this.setState({ priority: data })
-            this.props.onEditTask(this.state)
+            this.setState({task:{...this.state.task, priority: data}}, () =>{
+                this.props.onEditTask(this.state.task)
+            })
         }
 
     }
 
     sendNote = (newUpdates) => {
-        console.log('task state after send note', this.state)
-        this.setState({ updates: [...newUpdates] })
-        this.props.onEditTask(this.state)
+        this.setState({task:{...this.state.task, updates: [...newUpdates]}}, ()=>{
+            this.props.onEditTask(this.state.task)
+        })
     }
 
     openModal = (data) => {
@@ -111,14 +110,16 @@ class _Task extends Component {
     }
 
     onRemoveMemberFromTask = (memberId) => {
-        this.setState({ members: this.state.members.filter(member => member._id !== memberId) })
-        this.props.onEditTask(this.state)
+        this.setState({ task: {...this.state.task, members: this.state.task.members.filter(member => member._id !== memberId)}}, ()=>{
+            this.props.onEditTask(this.state.task)
+        })
     }
 
     onAddUserToTask = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
-        this.setState({ members: [...this.state.members, newUser] })
-        this.props.onEditTask(this.state)
+        this.setState({ task:{...this.state.task, members: [...this.state.task.members, newUser]}}, ()=>{
+            this.props.onEditTask(this.state.task)
+        })
     }
 
     goToUserProfile = (userId) => {
@@ -137,24 +138,23 @@ class _Task extends Component {
     }
 
     render() {
-        if (!this.state.id) return <h1>Loading...</h1>
-        const elTaskName = this.state.name;
+        if (!this.state.task) return <h1>Loading...</h1>
+        const {name, members, status, priority, dueDate, updates, id} = this.state.task;
         const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown } = this.state
-        console.log(this.state);
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
                     <Updates isImageModalShown={this.state.isImageModalShown}
-                        loggedUser={this.props.loggedUser} updates={this.state.updates}
+                        loggedUser={this.props.loggedUser} updates={updates}
                         onToggleImageModal={this.onToggleImageModal}
                         uploadImg={this.uploadImg} sendNote={this.sendNote}
                     />
                 </div>
 
                 {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown || isTagsShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
-                <Draggable draggableId={this.state.id} index={this.props.index}>
+                <Draggable draggableId={id} index={this.props.index}>
                     {(provided, snapshot) => (
-                        <section key={this.props.task.id} className={`task flex space-between align-center ${snapshot.isDragging ? 'drag' : ''}`}
+                        <section key={id} className={`task flex space-between align-center ${snapshot.isDragging ? 'drag' : ''}`}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
@@ -164,7 +164,7 @@ class _Task extends Component {
                                 <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
                                 <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>
                                     <div className='icon-container'>
-                                        <RiDeleteBack2Line className="task-remove-icon" onClick={() => { this.props.onRemoveTask(this.state.id) }} />
+                                        <RiDeleteBack2Line className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id) }} />
                                     </div>
                                 </Tooltip>
                                 <h2>
@@ -172,16 +172,16 @@ class _Task extends Component {
                                         onFocus={this.focusText}
                                         className="cursor-initial content-editable"
                                         innerRef={this.contentEditable}
-                                        html={elTaskName} // innerHTML of the editable div
+                                        html={name} // innerHTML of the editable div
                                         disabled={false}       // use true to disable editing
                                         onChange={this.handleNameChange} // handle innerHTML change
                                         onBlur={() => {
-                                            this.props.onEditTask(this.state)
+                                            this.props.onEditTask(this.state.task)
                                         }}
                                         onKeyDown={(ev) => {
                                             if (ev.key === 'Enter') {
                                                 ev.target.blur()
-                                                this.props.onEditTask(this.state)
+                                                this.props.onEditTask(this.state.task)
                                                 // this.ChangeEditState()
                                             }
                                         }}
@@ -193,17 +193,17 @@ class _Task extends Component {
 
                                 <div>
                                     <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
-                                        {(this.state.updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{this.state.updates.length}</span></div>}
+                                        {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
                                     </div>
                                 </div>
 
-                                <Members members={this.state.members} users={this.props.users} isUsersShown={isUsersShown}
+                                <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
-                                <Status status={this.state.status} isStatusShown={isStatusShown}
+                                <Status status={status} isStatusShown={isStatusShown}
                                     handleChange={this.handleChange} openModal={this.openModal} />
-                                <Date dueDate={this.state.dueDate} handleDateChange={this.handleDateChange} />
-                                <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
+                                <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
+                                <Priority priority={priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                                 {/* <Tags handleChange={this.handleChange} onEditTask={this.props.onEditTask} tags={this.state.tags} isTagsShown={isTagsShown}
                                     openModal={this.openModal} handleChange={this.handleChange} /> */}
