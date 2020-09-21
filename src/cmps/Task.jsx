@@ -145,7 +145,7 @@ class _Task extends Component {
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
                     <Updates isImageModalShown={this.state.isImageModalShown}
-                        loggedUser={this.props.loggedUser} updates={updates}
+                        loggedUser={this.props.loggedUser} updates={updates} 
                         onToggleImageModal={this.onToggleImageModal}
                         uploadImg={this.uploadImg} sendNote={this.sendNote}
                     />
