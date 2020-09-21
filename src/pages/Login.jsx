@@ -17,7 +17,7 @@ class _Login extends Component {
     onLogin = async (values, { resetForm }) => {
         resetForm();
         await this.props.login(values);
-        if (this.props.loggedUser) this.props.history.push('/board/123')
+        if (this.props.loggedUser) this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
 
     onGuestLogin = async () => {
