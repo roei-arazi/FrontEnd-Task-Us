@@ -1,68 +1,107 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+***INSERT LOGO AND LINK TO THE WEBSITE HERE (include hyperlink in image)***
+<a href="http://fvcproductions.com"><img src="https://avatars1.githubusercontent.com/u/4284691?v=3&s=200" title="FVCproductions" alt="FVCproductions"></a>
 
-## Available Scripts
+# Task-Us
 
-In the project directory, you can run:
+> Managing our work together.
 
-### `npm start`
+## About
+- **Working in a large scale company?**
+  - Do you need to keep track of hundreds of tasks?
+  - Need an efficient way to manage your co-workers / employees?
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+***Things you can do in our app***
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Assign people to different tasks for a more productive operation!
 
-### `npm test`
+- Update tasks using images, update posts, set priorities, status and more!
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Editing the boards is now as easy as never before.
 
-### `npm run build`
+- Keep in track with changes concerning you by recieving notifications in real time.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Use more tasking boards for more flexibility.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Enjoy clean, responsive and intuitive UI to keep it simple.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[![Build Status](https://travis-ci.org/doge/wow.svg)](https://travis-ci.org/doge/wow)
+[![Dependency Status](http://img.shields.io/gemnasium/doge/wow.svg)](https://gemnasium.com/doge/wow)
+[![Coverage Status](http://img.shields.io/coveralls/doge/wow.svg)](https://coveralls.io/r/doge/wow)
+[![Code Climate](http://img.shields.io/codeclimate/github/doge/wow.svg)](https://codeclimate.com/github/doge/wow)
+[![Gem Version](http://img.shields.io/gem/v/suchgem.svg)](https://rubygems.org/gems/suchgem)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+[![Badges](http://img.shields.io/:badges-7/7-ff6799.svg)](https://github.com/badges/badgerbadgerbadger)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+*** USE RECORDIT TO UPLOAD DEMO GIFS ***
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Installation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- All the `code` required to get started
+- Images of what it should look like
 
-## Learn More
+### Clone
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Clone this repo to your local machine using `https://github.com/FriZe6/FrontEnd-Task-Us.git`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Setup
 
-### Code Splitting
+- 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+> Update and install packages first
+```
+$ npm i
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Contributing
 
-### Making a Progressive Web App
+> To get started...
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Step 1
 
-### Advanced Configuration
+- **Option 1**
+    - 🍴 Fork this repo!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+- **Option 2**
+    - 👯 Clone this repo to your local machine using `https://github.com/FriZe6/FrontEnd-Task-Us.git`
 
-### Deployment
+### Step 2
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- **HACK AWAY!** 🔨🔨🔨
 
-### `npm run build` fails to minify
+### Step 3
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- 🔃 Create a new pull request using <a href="https://github.com/FriZe6/FrontEnd-Task-Us/pulls/" target="_blank">`https://github.com/FriZe6/FrontEnd-Task-Us/pulls`</a>.
+
+---
+
+## Team
+*** UPLOAD USER IMAGES HERE ***
+| <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> |
+| :---: |:---:| :---:|
+| [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)    | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)  |
+| <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> |
+
+- You can just grab their GitHub profile image URL
+- You should probably resize their picture using `?s=200` at the end of the image URL.
+
+---
+
+## Social
+
+Reach us out at one of the following places!
+
+- Insert social links here.
+
+---
+
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2021 © <a href="http://task-us.herokuapp.com" target="_blank">Task-Us</a>.

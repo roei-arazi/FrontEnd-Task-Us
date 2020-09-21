@@ -130,12 +130,13 @@
     }
 }
 
-.task-label-name{
-    height:100%;
-    width:100%;
-    &:hover{
+.task-label-name {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+
+    &:hover {
         transition: 0.3s;
-        cursor: pointer;
         filter: brightness(0.8);
     }
 }
@@ -147,12 +148,13 @@
     padding: 5px 0;
     cursor: default;
 
-    .label-list{
-        >*:hover{
+    .label-list {
+        >*:hover {
             transition: 0.3s;
             filter: brightness(0.8);
         }
     }
+
     .label-list {
         width: 150px;
         background-color: #eae9d5;
@@ -161,7 +163,7 @@
         padding: 10px;
         border-radius: 1px;
         right: 0;
-    
+
         .label-selector {
             width: 90%;
             text-align: center;
@@ -397,8 +399,11 @@
 .stuck,
 .working,
 .done,
-.low,
 .medium,
 .high {
     color: #f1f1f1;
+}
+
+.low {
+    color: #515243;
 }

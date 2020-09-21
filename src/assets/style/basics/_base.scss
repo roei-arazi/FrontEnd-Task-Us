@@ -66,8 +66,8 @@ input {
 
 }
 
-::selection{
-  background-color: $colorIconsTasksHover ;
+::selection {
+  background-color: $colorIconsTasksHover;
   color: $colorIconsBoardBarsHover;
 }
 
@@ -126,6 +126,25 @@ span.span-user-details {
   color: rgba($colorFontTaskGroup, .85);
 }
 
+//Titles 
+[data-title] {
+  position: relative;
+
+}
+
+[data-title]:hover:after {
+  font: font1;
+  content: attr(data-title);
+  position: absolute;
+  top: 100%;
+  left: -25px;
+  font-size: 18px;
+  padding: 5px 10px;
+  color: #f1f1f1;
+  background-color: $colorIconsTasks;
+  border-radius: 10px;
+  animation: title-animation 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) .2s both;
+}
 
 //Profile pics
 .user-profile-big {

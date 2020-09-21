@@ -162,7 +162,7 @@ class _Task extends Component {
 
                             <div className="task-right flex align-center">
 
-                                <div className="task-label-name">
+                                <div>
                                     <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
                                         {(this.state.updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{this.state.updates.length}</span></div>}
                                     </div>

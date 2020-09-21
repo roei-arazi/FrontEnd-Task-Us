@@ -19,11 +19,12 @@
 @import './components/board-header';
 @import './components/group';
 @import './components/task';
-@import './components/activities';
+
 
 //MODALS
 @import './modals/screen-modal';
 @import './modals/user-modal';
 @import './modals/side-modal';
 @import './modals/filter-modal';
-@import './modals/updates-modal'
+@import './modals/updates-modal';
+@import './modals/activities-modal';

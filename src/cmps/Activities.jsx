@@ -5,6 +5,7 @@ import { Tooltip, Zoom } from '@material-ui/core';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 
+
 export default class Activities extends Component {
 
     state = {
@@ -15,7 +16,6 @@ export default class Activities extends Component {
     componentDidMount() {
         this.setState({ filteredActivities: this.props.activityLog })
     }
-
 
     handleSearch = ({ target }) => {
         const filteredActivities = this.props.activityLog.filter((activitiy) => {
@@ -43,23 +43,23 @@ export default class Activities extends Component {
     render() {
         if (!this.state.filteredActivities) return <h1>Loading...</h1>
         const { isOrderReversed, filteredActivities } = this.state;
-
         return (
             <section className="activities flex column padding-y-15">
+
                 <header className="padding-x-15">
+
                     <AiOutlineClose onClick={this.props.onToggleActivities} />
                     <h1><span>{this.props.boardName}</span> Log</h1>
-                    <div className="filters-container space-between flex align-center">
+
+                    <div className='filters-container space-between flex align-center'>
                         <input onChange={this.handleSearch} type="text" placeholder="Search" />
                         {isOrderReversed ?
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
-                                <div><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
-                            </Tooltip> :
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
-                                <div><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
-                            </Tooltip>
+                            <div data-title="test"><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
+                            :
+                            <div data-title="test"><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
                         }
                     </div>
+
                 </header>
 
 
@@ -69,7 +69,7 @@ export default class Activities extends Component {
                         return (
                             <div key={activity.id} className="activity padding-x-15 space-between flex align-center">
                                 <div className="activity-desc-container flex align-center">
-                                    <div className="user-img-container">
+                                    <div className="user-img-container flex align-center justify-center">
                                         <img src={activity.byUser.imgUrl} alt="" />
                                     </div>
                                     <h2>{activity.byUser.fullName}</h2>
