@@ -98,7 +98,7 @@ class _Board extends Component {
     onAddGroup = async () => {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.addGroup(this.state.boardId, board);
+            await this.props.addGroup(board);
             this.props.clearFilter();
             await this.props.showSnackbar('Added group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
