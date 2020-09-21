@@ -75,7 +75,9 @@ class _Task extends Component {
             member: this.props.loggedUser.fullName,
             txt: res.url
         }
+
         this.setState({ updates: [newImg, ...this.state.updates] })
+        console.log('thisstate', this.state)
         this.props.onEditTask(this.state)
     }
 
@@ -145,7 +147,8 @@ class _Task extends Component {
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates isImageModalShown={this.state.isImageModalShown} loggedUser={this.props.loggedUser} updates={this.state.updates}
+                    <Updates isImageModalShown={this.state.isImageModalShown}
+                        loggedUser={this.props.loggedUser} updates={this.state.updates}
                         onToggleImageModal={this.onToggleImageModal}
                         uploadImg={this.uploadImg} sendNote={this.sendNote}
                     />
