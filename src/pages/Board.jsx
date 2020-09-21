@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import socketService from '../services/socketService';
+// import socketService from '../services/socketService';
 import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
@@ -17,6 +17,7 @@ import {
     clearFilter //FILTER
 }
     from '../store/actions/boardActions'
+import socketService from '../services/socketService';
 
 class _Board extends Component {
 
@@ -29,7 +30,6 @@ class _Board extends Component {
     async componentDidMount() {
         socketService.setup();
         socketService.emit('board', this.props.match.params.id);
-        // socketService.on('chat addMsg', this.addMsg);
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();
@@ -48,7 +48,7 @@ class _Board extends Component {
     }
 
     componentWillUnmount() {
-        socketService.off('chat addMsg', this.addMsg);
+        socketService.off('board', this.addMsg);
         socketService.terminate();
     }
 
@@ -117,8 +117,9 @@ class _Board extends Component {
         this.props.history.push(`/board/${this.state.boardId}`)
     }
     onRemoveGroup = async (groupId) => {
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.removeGroup(groupId)
+            await this.props.removeGroup(groupId, board)
             await this.props.showSnackbar('Removed group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -126,11 +127,12 @@ class _Board extends Component {
         }
     }
     onEditGroup = async (group, changedValue, originalValue) => {
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
 
         if (changedValue === originalValue) return // No changes were made
 
         try {
-            await this.props.editGroup(group)
+            await this.props.editGroup(group, board)
             await this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -141,8 +143,10 @@ class _Board extends Component {
 
     //-----------------TASKS CRUD------------------------
     onRemoveTask = async (taskId) => {
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
+
         try {
-            await this.props.removeTask(taskId)
+            await this.props.removeTask(taskId, board)
             await this.props.showSnackbar('Removed task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -151,8 +155,10 @@ class _Board extends Component {
     }
     onAddTask = async (groupId, taskName) => {
         if (!taskName) taskName = 'New task'
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
+
         try {
-            await this.props.addTask(groupId, taskName)
+            await this.props.addTask(groupId, taskName, board)
             this.props.clearFilter()
             this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -161,8 +167,10 @@ class _Board extends Component {
         }
     }
     onEditTask = async (task) => {
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
+
         try {
-            await this.props.editTask(task)
+            await this.props.editTask(task, board)
             await this.props.showSnackbar('Updated task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -188,6 +196,8 @@ class _Board extends Component {
             board.groups = newGroups
             try {
                 await this.props.updateBoard(board)
+                socketService.emit('drag', board);
+
             } catch (err) {
                 console.log('Error', err);
             }
@@ -211,6 +221,7 @@ class _Board extends Component {
                 board.groups.splice(newIdx, 1, newGroup)
                 try {
                     await this.props.updateBoard(board)
+                    socketService.emit('drag', board);
 
                 } catch (err) {
                     console.log('Error', err);
@@ -237,12 +248,14 @@ class _Board extends Component {
                 board.groups.splice(startIdx, 1, newStartGroup)
                 board.groups.splice(endIdx, 1, newFinishGroup)
                 try {
-                    this.props.updateBoard(board)
+                    await this.props.updateBoard(board)
+                    socketService.emit('drag', board);
                 } catch (err) {
                     console.log('Error', err);
                 }
             }
         }
+
     }
 
     handleSearch = (ev) => {
