@@ -1,8 +1,10 @@
 import { boardService } from '../../services/boardService'
 
 
+
 //------------------BOARD CRUD-----------------
 export function loadBoards() {
+
     return async dispatch => {
         try {
             const boards = await boardService.loadBoards();
@@ -85,7 +87,6 @@ export function editGroup(group, board) {
             throw err;
         }
     }
-    //TODO: save changes made to the group
 }
 //-----------------TASKS CRUD------------------------
 

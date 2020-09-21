@@ -6,8 +6,9 @@ import { HiOutlineCog } from 'react-icons/hi';
 import { BsFilePlus, BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs';
 import { Tooltip, Zoom } from '@material-ui/core';
 
-import { removeBoard, addBoard, toggleBoardbar } from '../store/actions/boardActions.js';
+import { removeBoard, addBoard, toggleBoardbar, updateBoard } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import socketService from '../services/socketService';
 
 class _Boardbar extends Component {
     state = {
@@ -17,7 +18,14 @@ class _Boardbar extends Component {
         isShown: ''
     }
     componentDidMount() {
+        socketService.setup();
+        socketService.emit('board', this.props.match.params.id);
+        socketService.on('updatedBoard', updatedBoard => { this.props.updateBoard(updatedBoard) });
         this.setState({ isShown: this.props.isBoardbarShown })
+    }
+    componentWillUnmount() {
+        socketService.off('updatedBoard');
+        socketService.terminate();
     }
 
     onMoveToBoard(id) {
@@ -120,6 +128,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
+    updateBoard,
     removeBoard,
     addBoard,
     showSnackbar,
