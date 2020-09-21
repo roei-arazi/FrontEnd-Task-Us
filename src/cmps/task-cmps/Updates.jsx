@@ -4,8 +4,6 @@ import { IoMdSend } from 'react-icons/io'
 export class Updates extends React.Component {
 
     state = {
-        isImagesShown: false,
-        isNotesShown: false,
         update: {
             txt: ''
         },
@@ -16,15 +14,7 @@ export class Updates extends React.Component {
         this.setState({ updates: this.props.updates })
     }
 
-    toggleUpdates = (data) => {
-        if (data === 'images') {
-            this.setState({ isImagesShown: true })
-            this.setState({ isNotesShown: false })
-        } else {
-            this.setState({ isImagesShown: false })
-            this.setState({ isNotesShown: true })
-        }
-    }
+
 
     handleChange = (ev) => {
         this.setState({ update: { ...this.state.update, txt: ev.target.value } })
@@ -44,10 +34,11 @@ export class Updates extends React.Component {
         this.props.sendNote(updates)
     }
 
+
     render() {
         if (!this.state.updates) return <h1>Loading...</h1>;
 
-        const { updates } = this.props
+        const { updates, onToggleImageModal, isImageModalShown } = this.props
         return (
             <React.Fragment>
                 <div className="updates-header flex column align-center">
@@ -64,15 +55,24 @@ export class Updates extends React.Component {
                     </div>
                 </div>
 
-                <div className="updates-container flex column">
+                <div onClick={isImageModalShown ? onToggleImageModal : () => { }} className="updates-container  flex column">
 
                     {updates.map((update, idx) => {
 
                         if (update.txt.includes('https://res') || update.txt.includes('http://res')) {
-                            return <div key={idx} className="update-box flex wrap column"><p className="member-name">{update.member}</p> <img src={update.txt} /></div>
-                        } else return <div key={idx} className="update-box"><p className="member-name" key={idx}>{update.member}</p> <p className="update-text">{update.txt}</p></div>
+                            return <div key={idx} className="update-box flex wrap column">
+                                <p className="member-name">{update.member}</p>
+                                <img className="cursor-pointer" onClick={() => {
+                                    onToggleImageModal(update.txt)
+                                }} src={update.txt} />
+                            </div>
+                        } else return <div key={idx} className="update-box"><p className="member-name" key={idx}>{update.member}</p>
+                            <p className="update-text">{update.txt}</p>
+                        </div>
                     })}
+
                 </div>
+
             </React.Fragment>
 
         )

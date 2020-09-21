@@ -28,7 +28,9 @@ class _Task extends Component {
         isPriorityShown: false,
         isUsersShown: false,
         isUpdatesShown: false,
-        isTagsShown: false
+        isTagsShown: false,
+        imgUrl: '',
+        isImageModalShown: false
     }
 
     componentDidMount() {
@@ -105,7 +107,7 @@ class _Task extends Component {
     }
 
     closeModal = () => {
-        this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false, isUpdatesShown: false, isTagsShown: false })
+        this.setState({ isImageModalShown: false, isStatusShown: false, isUsersShown: false, isPriorityShown: false, isUpdatesShown: false, isTagsShown: false })
     }
 
     onRemoveMemberFromTask = async (memberId) => {
@@ -129,6 +131,12 @@ class _Task extends Component {
         }, 0)
     }
 
+    onToggleImageModal = (imgUrl) => {
+        console.log('IMAGE URL', imgUrl)
+        this.setState({ imgUrl, isImageModalShown: !this.state.isImageModalShown })
+
+    }
+
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
@@ -137,8 +145,9 @@ class _Task extends Component {
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates loggedUser={this.props.loggedUser}
-                        updates={this.state.updates} uploadImg={this.uploadImg} sendNote={this.sendNote}
+                    <Updates isImageModalShown={this.state.isImageModalShown} loggedUser={this.props.loggedUser} updates={this.state.updates}
+                        onToggleImageModal={this.onToggleImageModal}
+                        uploadImg={this.uploadImg} sendNote={this.sendNote}
                     />
                 </div>
 
@@ -176,7 +185,7 @@ class _Task extends Component {
                                                 // this.ChangeEditState()
                                             }
                                         }}
-                                        />
+                                    />
                                 </h2>
                             </div>
 
@@ -203,6 +212,10 @@ class _Task extends Component {
 
                     )}
                 </Draggable>
+                {this.state.isImageModalShown &&
+                    <div onClick={this.onToggleImageModal} className="updates-image-modal">
+                        <img src={this.state.imgUrl} />
+                    </div>}
             </React.Fragment>
         )
     }
