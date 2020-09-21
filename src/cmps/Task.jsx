@@ -54,7 +54,6 @@ class _Task extends Component {
 
     handleChange = async (data, tags) => {
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-
             await this.setState({ status: data })
             this.props.onEditTask(this.state)
         } else if (data === 'tag') {
@@ -197,8 +196,8 @@ class _Task extends Component {
                                 <Date dueDate={this.state.dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
-                                <Tags handleChange={this.handleChange} onEditTask={this.props.onEditTask} tags={this.state.tags} isTagsShown={isTagsShown}
-                                    openModal={this.openModal} handleChange={this.handleChange} />
+                                {/* <Tags handleChange={this.handleChange} onEditTask={this.props.onEditTask} tags={this.state.tags} isTagsShown={isTagsShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} /> */}
                             </div>
                         </section>
 
