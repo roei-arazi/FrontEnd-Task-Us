@@ -13,19 +13,6 @@ export function loadUsers() {
     }
 }
 
-export function getUserById(userId) {
-    return async dispatch => {
-        try {
-
-            const user = await userService.getUserById(userId);
-            dispatch({ type: 'SHOW_PROFILE', user })
-        } catch (err) {
-            console.log('userActions: Couldn\'t load user');
-            throw err;
-        }
-    }
-}
-
 export function login(userCred) {
     return async dispatch => {
         try {
@@ -88,13 +75,13 @@ export function removeNotifications(loggedUser) {
 
 }
 
-export function updateProfile(loggedUser) {
+export function updateUser(loggedUser) {
     return async dispatch => {
         try {
-            const user = await userService.updateProfile(loggedUser)
-            dispatch({ type: 'UPDATE_PROFILE', user })
+            userService.updateUser(loggedUser)
+            dispatch({ type: 'SET_USER', user: loggedUser })
         } catch (err) {
-            console.log('userActions: Couldn\'t login as a guest');
+            console.log('userActions: Couldn\'t update user');
             throw err;
         }
     }

@@ -188,7 +188,7 @@ export function boardReducer(state = initialState, action) {
                                 fullName: 'osher',
                                 imgUrl: ''
                             }],
-                            status: 'Donw',
+                            status: 'Done',
                             priority: 'Low',
                             dueDate: Date.now(),
                             updates: [{

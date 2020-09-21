@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 import { Fade } from '@material-ui/core';
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
-import { loadBoards } from '../store/actions/boardActions'
-import { getUserById, updateProfile } from '../store/actions/userActions';
+import { loadBoards } from '../store/actions/boardActions';
+import {userService} from '../services/userService.js';
+import { updateUser } from '../store/actions/userActions';
 import { cloudinaryService } from '../services/cloudinaryService';
 
 class _UserProfile extends Component {
     state = {
         isModalOpen: false,
         user: {
-            _id: this.props.match.params.id,
+            _id: '',
             email: '',
             username: '',
             passowrd: '',
@@ -22,16 +23,9 @@ class _UserProfile extends Component {
     }
 
     async componentDidMount() {
-        this.props.loadBoards()
-        await this.props.getUserById(this.props.match.params.id)
-        this.setState({ user: { ...this.state.user, imgUrl: this.props.userProfile.imgUrl } })
-    }
-
-    async componentDidUpdate(prevProps, prevState) {
-        if (prevProps.match.params.id !== this.props.match.params.id) {
-            await this.setState({ user: { ...this.state.user, id: this.props.match.params.id } })
-            this.props.getUserById(this.props.match.params.id)
-        }
+        if(!this.props.boards.length) this.props.loadBoards()
+        const user = await userService.getUserById(this.props.match.params.id)
+        this.setState({ user: { ...user} })
     }
 
     toggleModal = () => {
@@ -44,7 +38,7 @@ class _UserProfile extends Component {
 
     updateProfile = (ev) => {
         ev.preventDefault()
-        this.props.updateProfile(this.state.user)
+        this.props.updateUser(this.state.user)
         this.toggleModal()
     }
 
@@ -55,9 +49,9 @@ class _UserProfile extends Component {
     }
 
     render() {
-        if (!this.props.userProfile) return <h1>Loading...</h1>
-        const { loggedUser, userProfile } = this.props
-        const { email, fullName, username, imgUrl } = this.props.userProfile
+        const { email, fullName, username, imgUrl, _id } = this.state.user;
+        if (!_id) return <h1>Loading...</h1>
+        const { loggedUser} = this.props
 
         return (
             <section className="user-profile">
@@ -69,7 +63,7 @@ class _UserProfile extends Component {
                     </header>
 
                     <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">
-                        {loggedUser._id === userProfile._id ? <h2 onClick={this.toggleModal}
+                        {loggedUser._id === _id ? <h2 onClick={this.toggleModal}
                             className="clickable-header">Edit Profile</h2> : ''}
                         <div className="user-details-inner-container">
 
@@ -117,15 +111,14 @@ class _UserProfile extends Component {
 const mapStateToProps = state => {
     return {
         modal: state.systemReducer.modal,
-        userProfile: state.userReducer.userProfile,
-        loggedUser: state.userReducer.loggedUser
+        loggedUser: state.userReducer.loggedUser,
+        boards: state.boardReducer.boards
     }
 }
 
 const mapDispatchToProps = {
     loadBoards,
-    getUserById,
-    updateProfile
+    updateUser
 }
 
 export const UserProfile = connect(mapStateToProps, mapDispatchToProps)(_UserProfile);

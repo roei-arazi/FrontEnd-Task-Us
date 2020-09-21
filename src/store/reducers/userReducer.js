@@ -37,12 +37,6 @@ export function userReducer(state = initialState, action) {
                 ...state,
                 loggedUser: action.user
             }
-        case 'UPDATE_PROFILE':
-            return {
-                ...state,
-                loggedUser: action.user,
-                userProfile: action.user
-            }
         default:
             return state
     }
