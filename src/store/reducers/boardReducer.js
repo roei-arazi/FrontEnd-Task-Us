@@ -184,11 +184,11 @@ export function boardReducer(state = initialState, action) {
                             name: 'sneeze',
                             createdAt: 1123124124241,
                             members: [{
-                                _id: 1234,
+                                _id: 'asfasdfqw12412d1',
                                 fullName: 'osher',
                                 imgUrl: ''
                             }],
-                            status: 'Donw',
+                            status: 'Done',
                             priority: 'Low',
                             dueDate: Date.now(),
                             updates: [{
