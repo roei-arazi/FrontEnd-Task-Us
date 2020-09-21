@@ -3,13 +3,15 @@ import httpService from './httpService'
 
 export const boardService = {
     loadBoards,
+    addBoard,
+    removeBoard,
     updateBoard,
     addGroup,
     removeGroup,
+    updateGroup,
     addTask,
     removeTask,
-    removeBoard,
-    addBoard
+    updateTask
 }
 
 let boards = [{
@@ -241,19 +243,19 @@ let boards = [{
 
 async function loadBoards() {
     const boards = await httpService.get(`board`)
-    console.log('BOARD ', boards)
     return boards
 }
 
-async function updateBoard(boardToSave) {
-    return httpService.put(`board/${boardToSave._id}`, boardToSave)
+function updateBoard(boardToSave) {
+    httpService.put(`board/${boardToSave._id}`, boardToSave)
+    return boardToSave
 }
 
-async function removeBoard(boardId) {
+function removeBoard(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
 
-async function addBoard() {
+function addBoard() {
     const board = {
         boardCreator: {
             "fullName": 'Liam Zety',
@@ -282,23 +284,11 @@ async function addBoard() {
                 "id": _makeid(),
                 "name": 'sneeze',
                 "createdAt": 1123124124241,
-                "members": [{
-                    "fullName": 'Roei Arazi',
-                    "imgUrl": 'https://via.placeholder.com/100',
-                }],
+                "members": [],
                 "status": 'Stuck',
                 "priority": 'Low',
                 "dueDate": 1123124124241,
-                "updates": [
-                    {
-                        "txt": 'dont forget about this',
-                        "member": 'Roei Arazi'
-                    },
-                    {
-                        "txt": 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                        "member": 'Liam Zety'
-                    }
-                ],
+                "updates": [],
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
@@ -307,23 +297,11 @@ async function addBoard() {
                 "id": _makeid(),
                 "name": 'sneeze',
                 "createdAt": 1123124124241,
-                "members": [{
-                    "fullName": 'Roei Arazi',
-                    "imgUrl": 'https://via.placeholder.com/100',
-                }],
+                "members": [],
                 "status": 'Working on it',
                 "priority": 'Low',
                 "dueDate": 1123124124241,
-                "updates": [
-                    {
-                        "txt": 'dont forget about this',
-                        "member": 'Roei Arazi'
-                    },
-                    {
-                        "txt": 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                        "member": 'Liam Zety'
-                    }
-                ],
+                "updates": [],
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
@@ -369,10 +347,11 @@ async function addBoard() {
         }
         ]
     }
-    return httpService.post(`board`, board)
+    httpService.post(`board`, board)
+    return board
 }
 
-async function addGroup(board) {
+function addGroup(board) {
     const group = {
         "id": _makeid(),
         "name": 'week1',
@@ -411,65 +390,67 @@ async function addGroup(board) {
     }
     try {
         board.groups.push(group)
-        return updateBoard(board)
+        updateBoard(board)
+        return board
     } catch (err) {
         console.log('boardService: Couldn\'t add group');
         throw err;
     }
 }
 
-async function removeGroup(groupId) {
-    boards = boards.map(board => {
-        board.groups = board.groups.filter(group => group.id !== groupId)
-        return board;
-    })
+function removeGroup(groupId, board) {
+    board.groups= board.groups.filter(group => group.id !== groupId)
+    updateBoard(board)
+    return board
 }
 
-async function removeTask(taskId) {
-    boards = boards.map(board => {
+function updateGroup(updatedGroup, board) {
+    board.groups= board.groups.map(group=> group.id===updatedGroup.id ? updatedGroup : group)
+    updateBoard(board)
+    return board
+}
+
+async function removeTask(taskId, board) {
         board.groups = board.groups.map(group => {
-            group.tasks = group.tasks.filter(task => task.id === taskId)
+            group.tasks = group.tasks.filter(task => task.id !== taskId)
             return group;
         })
+        updateBoard(board)
         return board;
-    })
+
 }
 
-async function addTask(groupId, taskName = 'Change Task Name') {
+async function addTask(groupId, taskName = 'Change Task Name', board) {
     const task = {
         id: _makeid(),
         name: taskName,
         createdAt: 1123124124241,
-        members: [{
-            _id: 1234,
-            name: 'osher',
-            imgUrl: 'www/sfasf'
-        }],
+        members: [],
         status: 'Done',
         priority: 'Low',
-        dueDate: 214124124125,
-        updates: [
-            {
-                txt: 'dont forget about this',
-                member: 'Roei Arazi'
-            },
-            {
-                txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                member: 'Liam Zety'
-            }
-        ],
-        lastUpdated: 'yesterday',
+        dueDate: Date.now(),
+        updates: [],
+        lastUpdated: Date.now(),
         isSelected: false,
         posts: [],
         tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
     }
-    boards = boards.map(board => {
-        board.groups = board.groups.map(group => {
+    board.groups.map(group => {
             if (group.id === groupId) group.tasks.push(task)
             return group;
         })
+        updateBoard(board)
         return board;
+
+}
+
+function updateTask(updatedTask, board){
+    board.groups = board.groups.map(group => {
+        group.tasks = group.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
+        return group;
     })
+    updateBoard(board)
+    return board
 }
 
 function _makeid(length = 7) {
