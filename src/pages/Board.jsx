@@ -18,6 +18,10 @@ import {
 }
     from '../store/actions/boardActions'
 
+// ESM
+import { parse, stringify } from 'flatted';
+
+
 class _Board extends Component {
 
     state = {
@@ -61,12 +65,18 @@ class _Board extends Component {
     }
 
     applyFilter = (board, filterBy) => {
-        const filteredBoard = JSON.parse(JSON.stringify(board))
+
+        const filteredBoard = [{}];
+        filteredBoard[0].filteredBoard = board;
+        filteredBoard.push(filteredBoard);
+
+        stringify(filteredBoard); // [["1","0"],{"a":"0"}]
+        // const filteredBoard = JSON.parse(JSON.stringify(board))
         if (filterBy.groupId) {
-            filteredBoard.groups = filteredBoard.groups.filter(group => group.id === filterBy.groupId)
+            board.groups = board.groups.filter(group => group.id === filterBy.groupId)
         }
         function filterTasks(cb) {
-            filteredBoard.groups = filteredBoard.groups.map(group => {
+            board.groups = board.groups.map(group => {
                 group.tasks = group.tasks.filter(cb)
                 return group;
             })
