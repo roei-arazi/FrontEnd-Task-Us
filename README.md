@@ -7,8 +7,8 @@
 
 ## About
 - **Working in a large scale company?**
-> Do you need to keep track of hundreds of tasks?
-> Need an efficient way to manage your co-workers / employees?
+ Do you need to keep track of hundreds of tasks?
+ Need an efficient way to manage your co-workers / employees?
 
 ***Things you can do in our app***
 
