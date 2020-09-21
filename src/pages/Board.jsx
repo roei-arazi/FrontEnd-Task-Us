@@ -52,7 +52,7 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard =(boardName, boardDescription) => {
+    onEditBoard = (boardName, boardDescription) => {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         if (boardName === board.name && boardDescription === board.description) return;
         this.props.updateBoard({ ...board, name: boardName, description: boardDescription })
