@@ -89,6 +89,7 @@ class _Board extends Component {
 
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
             await this.props.addGroup(this.state.boardId , board);
             this.props.clearFilter();
@@ -100,8 +101,9 @@ class _Board extends Component {
         this.props.history.push(`/board/${this.state.boardId}`)
     }
     onRemoveGroup = async (groupId) => {
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.removeGroup(groupId)
+            await this.props.removeGroup(groupId, board)
             await this.props.showSnackbar('Removed group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -111,9 +113,10 @@ class _Board extends Component {
     onEditGroup = async (group, changedValue, originalValue) => {
 
         if (changedValue === originalValue) return // No changes were made
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
 
         try {
-            await this.props.editGroup(group)
+            await this.props.editGroup(group, board)
             await this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -124,8 +127,9 @@ class _Board extends Component {
 
     //-----------------TASKS CRUD------------------------
     onRemoveTask = async (taskId) => {
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.removeTask(taskId)
+            await this.props.removeTask(taskId, board)
             await this.props.showSnackbar('Removed task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -134,8 +138,9 @@ class _Board extends Component {
     }
     onAddTask = async (groupId, taskName) => {
         if (!taskName) taskName = 'New task'
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.addTask(groupId, taskName)
+            await this.props.addTask(groupId, taskName, board)
             this.props.clearFilter()
             this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -144,8 +149,9 @@ class _Board extends Component {
         }
     }
     onEditTask = async (task) => {
+        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.editTask(task)
+            await this.props.editTask(task, board)
             await this.props.showSnackbar('Updated task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
