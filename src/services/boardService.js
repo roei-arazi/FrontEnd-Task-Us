@@ -21,7 +21,7 @@ async function loadBoards() {
 }
 
 function updateBoard(boardToSave, echo = true) {
-    if(echo) socketService.emit('updateBoard', boardToSave);
+    if (echo) socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
 }
