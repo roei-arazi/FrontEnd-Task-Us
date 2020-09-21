@@ -1,14 +1,13 @@
 .filter-modal {
     z-index: 999;
-    min-width: 500px;
-    height: 400px;
     top: 30px;
     right: 0;
     background-color: $colorBg;
     border-radius: 5px;
     box-shadow: $modalsShadow;
-    padding: 0 15px 10px 0;
+    padding: 0 10px 10px 10px;
     cursor: auto;
+    max-height:400px;
 
     >* {
         max-height: 100%;
