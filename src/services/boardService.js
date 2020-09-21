@@ -64,10 +64,10 @@ async function addBoard() {
                 "priority": 'Low',
                 "dueDate": 1123124124241,
                 "updates": [],
-                lastUpdated: 'yesterday',
-                isSelected: false,
-                posts: [],
-                tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
+                "lastUpdated": 'yesterday',
+                "isSelected": false,
+                "posts": [],
+                "tags": [{ "txt": "uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" }, { "txt": "ux" }]
             }, {
                 "id": _makeid(),
                 "name": 'sneeze',
@@ -77,10 +77,10 @@ async function addBoard() {
                 "priority": 'Low',
                 "dueDate": 1123124124241,
                 "updates": [],
-                lastUpdated: 'yesterday',
-                isSelected: false,
-                posts: [],
-                tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
+                "lastUpdated": 'yesterday',
+                "isSelected": false,
+                "posts": [],
+                "tags": [{ "txt": "uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" }, { "txt": "ux" }]
             }]
         }],
         "activityLog": [{
@@ -100,7 +100,7 @@ async function addBoard() {
             "createdAt": 12412541251,
             "byUser": {
                 "imgUrl": 'www.imgur',
-                fullName: 'shucks mcgee'
+                "fullName": 'shucks mcgee'
             },
             "description": 'changed group name from project2 to project3',
             "group": {
