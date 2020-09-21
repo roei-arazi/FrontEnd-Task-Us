@@ -3,6 +3,7 @@ import Truncate from 'react-truncate'
 
 
 export function Tags(props) {
+
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -11,13 +12,14 @@ export function Tags(props) {
         }
         return color;
     }
+
     return (
         <div className="label-container relative">
             <div onClick={() => props.openModal('tags')} className="tags">
                 <div className="task-label-name">
                     {props.tags.map((tag, idx) => {
                         return (
-                            <p>
+                            <p key={idx}>
                                 <Truncate lines={1} ellipsis={"..."} width={100}>
                                     {idx === props.tags.length - 1 ? tag : tag + ","}
                                 </Truncate>
@@ -31,7 +33,7 @@ export function Tags(props) {
                         <section>
                             {props.tags.map((tag, idx) => {
                                 return (
-                                    <p style={{ color: tag.color }}> {idx === props.tags.length - 1 ? tag : tag + ","}</p>
+                                    <p key={idx} style={{ color: tag.color }}> {idx === props.tags.length - 1 ? tag : tag + ","}</p>
                                 )
                             })}
                         </section>
