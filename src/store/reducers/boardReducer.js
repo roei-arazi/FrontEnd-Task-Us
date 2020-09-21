@@ -22,7 +22,6 @@ export function boardReducer(state = initialState, action) {
                 boards: state.boards.filter(board => board._id !== action.boardId)
             }
         case 'ADD_BOARD':
-            console.log('NEW BOARD?', action.board)
             return {
                 ...state,
                 boards: [...state.boards, action.board]
