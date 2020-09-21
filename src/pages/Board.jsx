@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-
+import socketService from '../services/socketService';
 import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
@@ -25,7 +25,11 @@ class _Board extends Component {
         txt: ''
     }
 
+
     async componentDidMount() {
+        socketService.setup();
+        socketService.emit('board', this.props.match.params.id);
+        // socketService.on('chat addMsg', this.addMsg);
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();
@@ -41,6 +45,11 @@ class _Board extends Component {
             console.log('Error', err)
         }
         this.setState({ boardId: this.props.match.params.id })
+    }
+
+    componentWillUnmount() {
+        socketService.off('chat addMsg', this.addMsg);
+        socketService.terminate();
     }
 
     componentDidUpdate(prevProps, prevState) {
