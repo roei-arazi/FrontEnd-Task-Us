@@ -248,6 +248,7 @@ async function loadBoards() {
 }
 
 function updateBoard(boardToSave) {
+    console.log('BOARD TO SAVE', boardToSave)
     socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
