@@ -141,6 +141,7 @@ export class Group extends Component {
                                 <h3>Status</h3>
                                 <h3>Due-Date</h3>
                                 <h3>Priority</h3>
+                                <h3>Tags</h3>
                             </div>
                         </div>
 

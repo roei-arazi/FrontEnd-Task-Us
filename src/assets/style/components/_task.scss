@@ -147,34 +147,32 @@
     border-radius: 1px;
     padding: 5px 0;
     cursor: default;
-
-    .label-list {
-        >*:hover {
-            transition: 0.3s;
-            filter: brightness(0.8);
-        }
-    }
-
-    .label-list {
-        width: 150px;
-        background-color: #eae9d5;
-        box-shadow: $modalsShadow;
-        z-index: 999;
-        padding: 10px;
-        border-radius: 1px;
-        right: 0;
-
-        .label-selector {
-            width: 90%;
-            text-align: center;
-            padding: 5px 0;
-            margin-bottom: 10px;
-            border-radius: 1px;
-            cursor: pointer;
-        }
-    }
 }
 
+.label-list {
+    width: 150px;
+    background-color: #eae9d5;
+    box-shadow: $modalsShadow;
+    z-index: 999;
+    padding: 10px;
+    border-radius: 1px;
+    right: 0;
+    word-break: break-all;
+
+    >*:hover {
+        transition: 0.3s;
+        filter: brightness(0.8);
+    }
+
+    .label-selector {
+        width: 90%;
+        text-align: center;
+        padding: 5px 0;
+        margin-bottom: 10px;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+}
 
 .drag {
     transition: 0.3s;
@@ -369,6 +367,7 @@
         }
     }
 }
+
 
 // Labels
 .stuck {

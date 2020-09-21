@@ -59,7 +59,7 @@ let boards = [{
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux'],
+            tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux'],
             attachedImgs: []
         }, {
             id: _makeid(),
@@ -86,7 +86,7 @@ let boards = [{
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux']
+            tags: [{ txt: 'uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', color: '#f1f4a5' }, { txt: 'ux', color: '#f1f4a5' }]
         }]
     }],
     activityLog: [{
@@ -180,7 +180,7 @@ let boards = [{
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux']
+            tags: [{ txt: 'uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', color: '#f1f4a5' }, { txt: 'ux', color: '#f1f4a5' }]
         },]
     },],
     activityLog: [{
@@ -331,7 +331,7 @@ async function addBoard() {
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
-                tags: ['ui', 'ux']
+                tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
             }, {
                 id: _makeid(),
                 name: 'sneeze',
@@ -357,7 +357,7 @@ async function addBoard() {
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
-                tags: ['ui', 'ux']
+                tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
             }]
         }],
         activityLog: [{
@@ -448,7 +448,7 @@ async function addGroup(boardId) {
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux']
+            tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
         }]
     }
     try {
@@ -504,7 +504,7 @@ async function addTask(groupId, taskName = 'Change Task Name') {
         lastUpdated: 'yesterday',
         isSelected: false,
         posts: [],
-        tags: ['ui', 'ux']
+        tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
     }
     boards = boards.map(board => {
         board.groups = board.groups.map(group => {
