@@ -64,10 +64,10 @@ export default class Activities extends Component {
 
 
                 <div className="activity-list column flex ">
-                    {filteredActivities.map(activity => {
+                    {filteredActivities.map((activity, idx) => {
 
                         return (
-                            <div key={activity.id} className="activity padding-x-15 space-between flex align-center">
+                            <div key={idx} className="activity padding-x-15 space-between flex align-center">
                                 <div className="activity-desc-container flex align-center">
                                     <div className="user-img-container flex align-center justify-center">
                                         <img src={activity.byUser.imgUrl} alt="" />

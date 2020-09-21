@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import socketService from '../services/socketService';
 import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
@@ -17,9 +16,6 @@ import {
     clearFilter //FILTER
 }
     from '../store/actions/boardActions'
-
-// ESM
-import { parse, stringify } from 'flatted';
 
 
 class _Board extends Component {
@@ -66,12 +62,8 @@ class _Board extends Component {
 
     applyFilter = (board, filterBy) => {
 
-        const filteredBoard = [{}];
-        filteredBoard[0].filteredBoard = board;
-        filteredBoard.push(filteredBoard);
 
-        stringify(filteredBoard); // [["1","0"],{"a":"0"}]
-        // const filteredBoard = JSON.parse(JSON.stringify(board))
+        const filteredBoard = JSON.parse(JSON.stringify(board))
         if (filterBy.groupId) {
             board.groups = board.groups.filter(group => group.id === filterBy.groupId)
         }
@@ -261,6 +253,9 @@ class _Board extends Component {
     handleSearch = (ev) => {
         this.setState({ txt: ev.target.value })
     }
+    handleBoardBarSearch = (val) => {
+        this.setState({ boardBarSearch: val })
+    }
 
     render() {
         if (this.props.boards.length === 0) return <h1>Loading...</h1>
@@ -269,11 +264,12 @@ class _Board extends Component {
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
         const filteredBoard = this.applyFilter(board, filterBy);
+        console.log('FILTERED BORAD', filteredBoard)
         board.members = users
         return (
             <section className="board">
                 <Navbar />
-                <Boardbar />
+                <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                 <div className="board-container">
                     <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} />

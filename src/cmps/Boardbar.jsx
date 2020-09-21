@@ -15,13 +15,14 @@ class _Boardbar extends Component {
         anchorEl: null,
         selectedBoardId: '',
         isSnackbarOpen: false,
-        isShown: ''
-    } 
+        isShown: '',
+        searchVal: ''
+    }
     componentDidMount() {
         socketService.on('updatedBoard', updatedBoard => {
-            console.log('got board:', updatedBoard);
-             this.props.recieveUpdate(updatedBoard)
-            });
+            this.props.recieveUpdate(updatedBoard)
+        });
+
         this.setState({ isShown: this.props.isBoardbarShown })
     }
 
@@ -36,7 +37,7 @@ class _Boardbar extends Component {
     handleMenuClose = () => {
         this.setState({ anchorEl: null })
     }
- 
+
     onBoardRemove = (boardId) => {
         const { boards, match, history, removeBoard } = this.props
         const { id } = match.params;
@@ -58,10 +59,19 @@ class _Boardbar extends Component {
         this.props.toggleBoardbar()
         this.setState({ isShown: !this.state.isShown })
     }
+    handleSearchChange = (ev) => {
+        this.setState({ searchVal: ev.target.value })
+    }
+    handleSearch = () => {
+        const filteredBoards =
+            this.props.boards.filter(board => board.name.toLowerCase().includes(this.state.searchVal.toLowerCase()))
+        return filteredBoards
+    }
 
     render() {
-        const { boards } = this.props
         const { anchorEl, selectedBoardId, isShown } = this.state;
+        const filteredBoards = this.handleSearch()
+
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
                 {
@@ -73,7 +83,6 @@ class _Boardbar extends Component {
                             </div>
                         </Tooltip>
                     )
-
                         : (
                             <Tooltip enterDelay={800} TransitionComponent={Zoom} title="Toggle Board" arrow>
                                 <div className="board-bar-toggle-container">
@@ -88,12 +97,11 @@ class _Boardbar extends Component {
                     <h1>Boards</h1>
                     <BsFilePlus onClick={this.props.addBoard} />
                 </div>}
-                {isShown && <input type="text" placeholder="Search Board" />}
+                {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}
                 <ul>
-                    {isShown && boards.map((board, idx) => {
+                    {isShown && filteredBoards.map((board, idx) => {
                         return <li
                             className="flex align-center"
-
                             key={idx}>
                             <HiOutlineCog onClick={(ev) => this.handleMenuOpen(ev, board._id)} />
 
@@ -111,7 +119,6 @@ class _Boardbar extends Component {
                     <MenuItem onClick={() => this.onBoardRemove(selectedBoardId)}>Delete</MenuItem>
                     <MenuItem onClick={this.handleMenuClose}>Edit</MenuItem>
                 </Menu>
-                {/* <Popup /> */}
             </section>
         )
     }
