@@ -37,7 +37,7 @@ class _Boardbar extends Component {
         this.setState({ anchorEl: null })
     }
  
-    onBoardRemove = async (boardId) => {
+    onBoardRemove = (boardId) => {
         const { boards, match, history, removeBoard } = this.props
         const { id } = match.params;
         this.handleMenuClose()
@@ -45,8 +45,8 @@ class _Boardbar extends Component {
             console.log('you need at least one board!');
             return;
         }
-        await removeBoard(boardId);
-        await this.props.showSnackbar('Removed board.');
+        removeBoard(boardId);
+        this.props.showSnackbar('Removed board.');
         setTimeout(() => this.props.hideSnackbar(), 3000)
         if (id === boardId) {
             const idx = boards.findIndex(board => board._id !== boardId)

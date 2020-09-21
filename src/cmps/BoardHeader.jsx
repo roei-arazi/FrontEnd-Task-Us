@@ -5,7 +5,7 @@ import ContentEditable from 'react-contenteditable';
 import Activities from './Activities';
 import { Filter } from './Filter';
 import { withRouter } from 'react-router-dom';
-
+import socketService from '../services/socketService.js'
 
 export class _BoardHeader extends React.Component {
 
@@ -19,7 +19,9 @@ export class _BoardHeader extends React.Component {
     componentDidMount() {
         this.editableName = React.createRef();
         this.editableDescription = React.createRef();
-
+        socketService.on('updatedBoard', () =>{
+            this.setState({ ...this.props.board })
+        })
         this.setState({ ...this.props.board })
     }
 

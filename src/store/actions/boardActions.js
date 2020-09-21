@@ -31,6 +31,7 @@ export function updateBoard(boardToSave) {
 export function recieveUpdate(boardToSave) {
     return async dispatch => {
         try {
+            console.log('got board:', boardToSave);
             boardService.updateBoard(boardToSave, false);
             dispatch({ type: 'SET_BOARD', board: boardToSave })
         } catch (err) {
