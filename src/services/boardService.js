@@ -1,4 +1,6 @@
+import { makeStyles } from '@material-ui/core'
 import moment from 'moment'
+import httpService from './httpService'
 
 export const boardService = {
     loadBoards,
@@ -12,123 +14,119 @@ export const boardService = {
 }
 
 let boards = [{
-    _id: '123',
-    boardCreator: {
-        _id: 'asfasdw12412d1wd',
-        fullName: 'Liam Zety',
-        imgUrl: 'https://via.placeholder.com/100',
+    "boardCreator": {
+        "fullName": 'Liam Zety',
+        "imgUrl": 'https://via.placeholder.com/100',
     },
-    name: 'Board 1',
-    createdAt: moment().calendar(),
-    description: 'Enter description here',
-    members: [],
-    groups: [{
-        id: _makeid(),
-        name: 'week1',
-        createdAt: 'date',
-        color: '#11ab4f',
-        lastUpdated: 198465168486,
-        isTagsShown: false,
-        tags: [],
-        columns: [{
-            type: 'date',
-            name: 'due date'
+    "name": 'Board 1',
+    "createdAt": 198465168486,
+    "description": 'Enter description here',
+    "members": [],
+    "groups": [{
+        "id": "auyg409578",
+        "name": 'week1',
+        "createdAt": 'date',
+        "color": '#11ab4f',
+        "lastUpdated": 198465168486,
+        "isTagsShown": false,
+        "tags": [],
+        "columns": [{
+            "type": 'date',
+            "name": 'due date'
         }],
-        tasks: [{
-            id: _makeid(),
-            name: 'sneeze',
-            createdAt: 1123124124241,
-            members: [{
-                _id: 'asfasdw12412d1wd',
-                fullName: 'Liam Zety',
-                imgUrl: 'https://via.placeholder.com/100',
+        "tasks": [{
+            "id": "lIWERGFSD",
+            "name": 'sneeze',
+            "createdAt": 1123124124241,
+            "members": [{
+
+                "fullName": 'Liam Zety',
+                "imgUrl": 'https://via.placeholder.com/100',
             }],
-            status: 'Done',
-            priority: 'Low',
-            dueDate: Date.now() + 1000 * 60 * 60 * 24 * 3,
-            updates: [
+            "status": 'Done',
+            "priority": 'Low',
+            "dueDate": 1123124124241,
+            "updates": [
                 {
-                    txt: 'dont forget about this',
-                    member: 'Roei Arazi'
+                    "txt": 'dont forget about this',
+                    "member": 'Roei Arazi'
                 },
                 {
-                    txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                    member: 'Liam Zety'
+                    "txt": 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    "member": 'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux'],
+            tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux'],
             attachedImgs: []
         }, {
-            id: _makeid(),
-            name: 'sneeze',
-            createdAt: 1123124124241,
-            members: [{
-                _id: 'asfasdfq12d1wd',
-                fullName: 'Roei Arazi',
-                imgUrl: 'https://via.placeholder.com/100',
+            "id": "o187345to",
+            "name": 'sneeze',
+            "createdAt": 1123124124241,
+            "members": [{
+
+                "fullName": 'Roei Arazi',
+                "imgUrl": 'https://via.placeholder.com/100',
             }],
-            status: 'Stuck',
-            priority: 'Low',
-            dueDate: Date.now() + 1000 * 60 * 60 * 24 * 2,
-            updates: [
+            "status": 'Stuck',
+            "priority": 'Low',
+            "dueDate": 1123124124241,
+            "updates": [
                 {
-                    txt: 'dont forget about this',
-                    member: 'Roei Arazi'
+                    "txt": 'dont forget about this',
+                    "member": 'Roei Arazi'
                 },
                 {
-                    txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                    member: 'Liam Zety'
+                    "txt": 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                    "member": 'Liam Zety'
                 }
             ],
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux']
+            tags: [{ txt: 'uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', color: '#f1f4a5' }, { txt: 'ux', color: '#f1f4a5' }]
         }]
     }],
-    activityLog: [{
-        createdAt: 124124125124,
-        id: _makeid(),
-        byUser: {
-            _id: 'asfasdw12412d1wd',
-            fullName: 'Liam Zety',
-            imgUrl: 'https://via.placeholder.com/100',
+    "activityLog": [{
+        "createdAt": 124124125124,
+        "id": "alkjfbpc",
+        "byUser": {
+            "fullName": 'Liam Zety',
+            "imgUrl": 'https://via.placeholder.com/100',
         },
-        description: 'removed task "do the dishes"',
-        task: {
-            id: 123,
-            name: 'do the dishes'
+        "description": 'removed task "do the dishes"',
+        "task": {
+            "id": "123",
+            "name": 'do the dishes'
         }
     },
     {
-        createdAt: 12412541251,
-        id: _makeid(),
-        byUser: {
-            _id: 'asfasdw12412d1wd',
-            fullName: 'Liam Zety',
-            imgUrl: 'https://via.placeholder.com/100',
+        "createdAt": 12412541251,
+        "id": "aiknp945az",
+        "byUser": {
+            "fullName": 'Liam Zety',
+            "imgUrl": 'https://via.placeholder.com/100',
         },
-        description: 'changed group name from project2 to project3',
-        group: {
-            id: 142,
-            name: 'project3'
+        "description": 'changed group name from project2 to project3',
+        "group": {
+            "id": "14ytry2",
+            "name": "project3"
         }
     },
     {
-        createdAt: 4514512352135,
-        id: _makeid(),
-        byUser: {
-            _id: 'asfasdw12412d1wd',
-            fullName: 'Liam Zety',
-            imgUrl: 'https://via.placeholder.com/100',
+        "createdAt": 4514512352135,
+        "id": "129834761hsdf",
+        "byUser": {
+            "_id": "asfasdw12412d1wd",
+            "fullName": "Liam Zety",
+            "imgUrl": "https://via.placeholder.com/100",
         },
-        description: 'added group project2',
-        group: {
-            id: 142,
-            name: 'project2'
+        "description": "added group project2",
+        "group": {
+            "id": "142",
+            "name": "project2"
         }
     }
     ]
@@ -180,7 +178,7 @@ let boards = [{
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux']
+            tags: [{ txt: 'uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', color: '#f1f4a5' }, { txt: 'ux', color: '#f1f4a5' }]
         },]
     },],
     activityLog: [{
@@ -243,171 +241,138 @@ let boards = [{
 }]
 
 async function loadBoards() {
-    try {
-        return JSON.parse(JSON.stringify(boards));
-    } catch (err) {
-        console.log('boardService: Coulnd\'t get board');
-        throw err;
-    }
+    return await httpService.get(`board`)
 }
 
 async function updateBoard(boardToSave, filterBy) {
-    const newBoards = JSON.parse(JSON.stringify(boards))
-
     if (filterBy.groupId) {
         boardToSave.groups.filter(group => group.id === filterBy.groupId)
-
     }
+    return httpService.put(`board/${boardToSave._id}`, boardToSave)
 
-    const idx = newBoards.findIndex(board => board._id === boardToSave._id)
-    try {
-        newBoards.splice(idx, 1, boardToSave)
-        return newBoards
-    } catch (err) {
-        console.log('boardService: Couldn\'t update board');
-        throw err;
-    }
 }
 
 async function removeBoard(boardId) {
-    try {
-        boards = boards.filter(board => board._id !== boardId);
-    } catch (err) {
-        console.log('boardService: Couldn\'t remove board');
-        throw err;
-    }
+    return httpService.delete(`board/${boardId}`)
 }
 
 async function addBoard() {
     const board = {
-        _id: _makeid(),
         boardCreator: {
-            _id: 'asfasdw12412d1wd',
-            fullName: 'Liam Zety',
-            imgUrl: 'https://via.placeholder.com/100',
+            "fullName": 'Liam Zety',
+            "imgUrl": 'https://via.placeholder.com/100',
         },
-        name: `board ${boards.length + 1}`,
-        createdAt: moment().calendar(),
-        description: 'Enter description here',
-        members: [{
-            _id: 'asfasdw12412d1wd',
-            fullName: 'Liam Zety',
-            imgUrl: 'https://via.placeholder.com/100',
+        "name": `board ${boards.length + 1}`,
+        "createdAt": 198465168486,
+        "description": 'Enter description here',
+        "members": [{
+            "fullName": 'Liam Zety',
+            "imgUrl": 'https://via.placeholder.com/100',
         }],
-        groups: [{
-            id: _makeid(),
-            name: 'group 1',
-            createdAt: 'date',
-            color: '#22f24',
-            lastUpdated: 198465168486,
-            isTagsShown: false,
-            tags: [],
-            columns: [{
-                type: 'date',
-                name: 'due date'
+        "groups": [{
+            "id": _makeid(),
+            "name": 'group 1',
+            "createdAt": 'date',
+            "color": '#22f24',
+            "lastUpdated": 198465168486,
+            "isTagsShown": false,
+            "tags": [],
+            "columns": [{
+                "type": 'date',
+                "name": 'due date'
             }],
-            tasks: [{
-                id: _makeid(),
-                name: 'sneeze',
-                createdAt: 1123124124241,
-                members: [{
-                    _id: 'asfasdfq12d1wd',
-                    fullName: 'Roei Arazi',
-                    imgUrl: 'https://via.placeholder.com/100',
+            "tasks": [{
+                "id": _makeid(),
+                "name": 'sneeze',
+                "createdAt": 1123124124241,
+                "members": [{
+                    "fullName": 'Roei Arazi',
+                    "imgUrl": 'https://via.placeholder.com/100',
                 }],
-                status: 'Stuck',
-                priority: 'Low',
-                dueDate: Date.now(),
-                updates: [
+                "status": 'Stuck',
+                "priority": 'Low',
+                "dueDate": 1123124124241,
+                "updates": [
                     {
-                        txt: 'dont forget about this',
-                        member: 'Roei Arazi'
+                        "txt": 'dont forget about this',
+                        "member": 'Roei Arazi'
                     },
                     {
-                        txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                        member: 'Liam Zety'
+                        "txt": 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                        "member": 'Liam Zety'
                     }
                 ],
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
-                tags: ['ui', 'ux']
+                tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
             }, {
-                id: _makeid(),
-                name: 'sneeze',
-                createdAt: 1123124124241,
-                members: [{
-                    _id: 'asfasdfq12d1wd',
-                    fullName: 'Roei Arazi',
-                    imgUrl: 'https://via.placeholder.com/100',
+                "id": _makeid(),
+                "name": 'sneeze',
+                "createdAt": 1123124124241,
+                "members": [{
+                    "fullName": 'Roei Arazi',
+                    "imgUrl": 'https://via.placeholder.com/100',
                 }],
-                status: 'Working on it',
-                priority: 'Low',
-                dueDate: Date.now(),
-                updates: [
+                "status": 'Working on it',
+                "priority": 'Low',
+                "dueDate": 1123124124241,
+                "updates": [
                     {
-                        txt: 'dont forget about this',
-                        member: 'Roei Arazi'
+                        "txt": 'dont forget about this',
+                        "member": 'Roei Arazi'
                     },
                     {
-                        txt: 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                        member: 'Liam Zety'
+                        "txt": 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
+                        "member": 'Liam Zety'
                     }
                 ],
                 lastUpdated: 'yesterday',
                 isSelected: false,
                 posts: [],
-                tags: ['ui', 'ux']
+                tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
             }]
         }],
-        activityLog: [{
-            id: _makeid(),
-            createdAt: 124124125124,
-            byUser: {
-                _id: 123,
-                imgUrl: 'www.imgur',
-                fullName: 'shucks mcgee'
+        "activityLog": [{
+            "id": _makeid(),
+            "createdAt": 124124125124,
+            "byUser": {
+                "imgUrl": 'www.imgur',
+                "fullName": 'shucks mcgee'
             },
-            description: 'removed task "do the dishes"',
-            task: {
-                id: 123,
-                name: 'do the dishes'
+            "description": 'removed task "do the dishes"',
+            "task": {
+                "id": _makeid(),
+                "name": 'do the dishes'
             }
         },
         {
-            createdAt: 12412541251,
-            byUser: {
-                _id: 123,
-                imgUrl: 'www.imgur',
+            "createdAt": 12412541251,
+            "byUser": {
+                "imgUrl": 'www.imgur',
                 fullName: 'shucks mcgee'
             },
-            description: 'changed group name from project2 to project3',
-            group: {
-                id: 142,
-                name: 'project3'
+            "description": 'changed group name from project2 to project3',
+            "group": {
+                "id": _makeid(),
+                "name": 'project3'
             }
         },
         {
-            createdAt: 4514512352135,
-            byUser: {
-                _id: 123,
-                imgUrl: 'www.imgur',
-                fullName: 'shucks mcgee'
+            "createdAt": 4514512352135,
+            "byUser": {
+                "imgUrl": 'www.imgur',
+                "fullName": 'shucks mcgee'
             },
-            description: 'added group project2',
-            group: {
-                id: 142,
-                name: 'project2'
+            "description": 'added group project2',
+            "group": {
+                "id": _makeid(),
+                "name": 'project2'
             }
         }
         ]
     }
-    try {
-        boards.push(board);
-    } catch (err) {
-        console.log('boardService: Couldn\'t add board');
-        throw err;
-    }
+    return httpService.post(`board`, board)
 }
 
 async function addGroup(boardId) {
@@ -448,7 +413,7 @@ async function addGroup(boardId) {
             lastUpdated: 'yesterday',
             isSelected: false,
             posts: [],
-            tags: ['ui', 'ux']
+            tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
         }]
     }
     try {
@@ -504,7 +469,7 @@ async function addTask(groupId, taskName = 'Change Task Name') {
         lastUpdated: 'yesterday',
         isSelected: false,
         posts: [],
-        tags: ['ui', 'ux']
+        tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
     }
     boards = boards.map(board => {
         board.groups = board.groups.map(group => {

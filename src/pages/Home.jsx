@@ -2,20 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
+import {loadBoards} from '../store/actions/boardActions'
+
 class _Home extends Component {
 state = {
 
 }
 
 componentDidMount() {
-
+this.props.loadBoards()
 }
 
 render() {
 return (
 <section className="home">
 <h1>Home</h1>
-<NavLink to="/board/123">
+<NavLink to={`/board/${this.props.boards[0]._id}`}>
 <button>Start Here!</button>
 </NavLink>
 <NavLink to="/login">
@@ -24,8 +26,6 @@ return (
 <NavLink to="/signup">
 <button>Sign-up</button>
 </NavLink>
-
-
 </section>
 )
 }
@@ -33,12 +33,12 @@ return (
 
 const mapStateToProps = state => {
 return {
-
+boards: state.boardReducer.boards
 }
 }
 
 const mapDispatchToProps = {
-
+loadBoards
 }
 
 export const Home = connect(mapStateToProps, mapDispatchToProps)(_Home);

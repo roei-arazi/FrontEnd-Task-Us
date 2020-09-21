@@ -17,6 +17,7 @@ import { Status } from './task-cmps/Status'
 import { Date } from './task-cmps/Date';
 import { Priority } from './task-cmps/Priority';
 import { Updates } from './task-cmps/Updates';
+import { Tags } from './task-cmps/Tags';
 
 class _Task extends Component {
 
@@ -25,7 +26,8 @@ class _Task extends Component {
         isStatusShown: false,
         isPriorityShown: false,
         isUsersShown: false,
-        isUpdatesShown: false
+        isUpdatesShown: false,
+        isTagsShown: false
     }
 
     componentDidMount() {
@@ -79,13 +81,16 @@ class _Task extends Component {
             case 'priority':
                 this.setState({ isPriorityShown: !this.state.isPriorityShown })
                 break;
+            case 'tags':
+                this.setState({ isTagsShown: !this.state.isTagsShown })
+                break;
             default:
                 break;
         }
     }
 
     closeModal = () => {
-        this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false, isUpdatesShown: false })
+        this.setState({ isStatusShown: false, isUsersShown: false, isPriorityShown: false, isUpdatesShown: false, isTagsShown: false })
     }
 
     onRemoveMemberFromTask = async (memberId) => {
@@ -112,8 +117,8 @@ class _Task extends Component {
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
-        const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown } = this.state
-
+        const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown } = this.state
+        console.log('TAGS!', this.state.tags)
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
@@ -122,7 +127,7 @@ class _Task extends Component {
                     />
                 </div>
 
-                {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
+                {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown || isTagsShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
                 <Draggable draggableId={this.state.id} index={this.props.index}>
                     {(provided, snapshot) => (
                         <section key={this.props.task.id} className={`task flex space-between align-center ${snapshot.isDragging ? 'drag' : ''}`}
@@ -175,6 +180,8 @@ class _Task extends Component {
                                     handleChange={this.handleChange} openModal={this.openModal} />
                                 <Date dueDate={this.state.dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} />
+                                <Tags tags={this.state.tags} isTagsShown={isTagsShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                             </div>
                         </section>

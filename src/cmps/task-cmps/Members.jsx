@@ -4,14 +4,25 @@ import { AiOutlineMinus } from 'react-icons/ai'
 import { FiPlus } from 'react-icons/fi';
 
 export function Members(props) {
+<<<<<<< HEAD
     console.log('members', props.members)
+=======
+    if (props.members.length === 0) return <h1>Loading...</h1>
+
+>>>>>>> d6e88099cb75d5cc410903adc5225b5f69348a84
     const usersToAdd = props.users.filter(user => !props.members.some(member => member._id === user._id))
     return (
-        <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
 
-            {props.members.length ? props.members[0].imgUrl ? <img alt="profile" src={props.members[0].imgUrl} /> :
+        <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
+            {props.members.length ? props.members[0].imgUrl
+                ?
+                <img alt="profile" src={props.members[0].imgUrl} />
+                :
                 <div className="member-letter">{props.members[0].fullName.charAt(0).toUpperCase()}</div> : <div className="no-members-container"> <CgProfile className="no-members-icon" /> <FiPlus className="no-members-icon-plus" /></div>}
-            {(props.members.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{props.members.length}</span></div>}
+
+            {(props.members.length !== 0) &&
+                <div className="task-number-of-imgs flex justify-center align-center"><span>{props.members.length}</span></div>}
+
             {props.isUsersShown &&
                 <div className="users-modal absolute">
                     <div className="task-users-box">
@@ -25,6 +36,7 @@ export function Members(props) {
                                 <AiOutlineMinus onClick={() => props.onRemoveMemberFromTask(member._id)} />
                             </section>
                         )}
+
                     </div>
                     <div className="board-users-box">
                         <h3>Board Members</h3>

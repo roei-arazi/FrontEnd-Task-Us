@@ -6,10 +6,13 @@ import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
 import { Tooltip, Zoom } from '@material-ui/core';
 import {signup, guestLogin} from '../store/actions/userActions.js'
 
+import {loadBoards} from '../store/actions/boardActions'
+
 class _Signup extends Component {
 
     componentDidMount(){
         // if(this.props.loggedUser)   this.props.history.push('/board/123')
+        this.props.loadBoards()
     }
 
     onSignup = async (values, {resetForm}) => {
@@ -21,7 +24,7 @@ class _Signup extends Component {
 
     onGuestLogin = async () =>{
         await this.props.guestLogin();
-        this.props.history.push('/board/123')
+        this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
 
     render() {
@@ -78,13 +81,15 @@ class _Signup extends Component {
 
 const mapStateToProps = state => {
     return {
-        loggedUser: state.userReducer.loggedUser
+        loggedUser: state.userReducer.loggedUser,
+        boards: state.boardReducer.boards
     }
 }
 
 const mapDispatchToProps = {
     signup,
-    guestLogin
+    guestLogin,
+    loadBoards
 }
 
 export const Signup = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Signup));
