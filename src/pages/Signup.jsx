@@ -49,7 +49,7 @@ class _Signup extends Component {
                     <FaUserCircle />
                     <section>
                         <legend>Username *</legend>
-                        <Field className="sign-login-input"type="text" name="username" />
+                        <Field className="sign-login-input" type="text" name="username" />
                     </section> 
                     <ErrorMessage name="username" component="span" />
                     <section>
