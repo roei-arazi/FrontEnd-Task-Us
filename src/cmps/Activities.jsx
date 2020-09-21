@@ -54,12 +54,9 @@ export default class Activities extends Component {
                     <div className='filters-container space-between flex align-center'>
                         <input onChange={this.handleSearch} type="text" placeholder="Search" />
                         {isOrderReversed ?
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
-                                <div><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
-                            </Tooltip> :
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
-                                <div><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
-                            </Tooltip>
+                            <div data-title="test"><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
+                            :
+                            <div data-title="test"><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
                         }
                     </div>
 
