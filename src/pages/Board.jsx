@@ -76,13 +76,20 @@ class _Board extends Component {
             filterTasks(task => task.priority.toLowerCase() === filterBy.taskPriority.toLowerCase())
         }
         if (filterBy.taskStatus) {
-            filterTasks(task => task.status.toLowerCase() === filterBy.taskStatus.toLowerCase()) 
+            filterTasks(task => task.status.toLowerCase() === filterBy.taskStatus.toLowerCase())
         }
         if (filterBy.dueDate) {
             filterTasks(task => task.dueDate === filterBy.dueDate)
         }
         if (this.state.txt) {
-            filterTasks(task => task.name.toLowerCase().includes(this.state.txt.toLowerCase()))
+            filterTasks(task => {
+                console.log('TASK?', task)
+                return (
+                    task.name.toLowerCase().includes(this.state.txt.toLowerCase()) ||
+                    task.tags.some(tag => tag.txt.toLowerCase().includes(this.state.txt.toLowerCase()))
+                )
+
+            })
         }
         return filteredBoard
     }
@@ -101,9 +108,8 @@ class _Board extends Component {
         this.props.history.push(`/board/${this.state.boardId}`)
     }
     onRemoveGroup = async (groupId) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.removeGroup(groupId, board)
+            await this.props.removeGroup(groupId)
             await this.props.showSnackbar('Removed group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -113,10 +119,9 @@ class _Board extends Component {
     onEditGroup = async (group, changedValue, originalValue) => {
 
         if (changedValue === originalValue) return // No changes were made
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
 
         try {
-            await this.props.editGroup(group, board)
+            await this.props.editGroup(group)
             await this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -127,9 +132,8 @@ class _Board extends Component {
 
     //-----------------TASKS CRUD------------------------
     onRemoveTask = async (taskId) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.removeTask(taskId, board)
+            await this.props.removeTask(taskId)
             await this.props.showSnackbar('Removed task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -138,9 +142,8 @@ class _Board extends Component {
     }
     onAddTask = async (groupId, taskName) => {
         if (!taskName) taskName = 'New task'
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.addTask(groupId, taskName, board)
+            await this.props.addTask(groupId, taskName)
             this.props.clearFilter()
             this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -149,9 +152,8 @@ class _Board extends Component {
         }
     }
     onEditTask = async (task) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
         try {
-            await this.props.editTask(task, board)
+            await this.props.editTask(task)
             await this.props.showSnackbar('Updated task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -239,7 +241,7 @@ class _Board extends Component {
     }
 
     render() {
-        if(this.props.boards.length===0)return <h1>Loading...</h1>
+        if (this.props.boards.length === 0) return <h1>Loading...</h1>
         console.log(this.props.boards);
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         const { users, filterBy } = this.props;

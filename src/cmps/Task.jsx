@@ -44,12 +44,20 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    handleChange = async (data) => {
+    handleChange = async (data, tags) => {
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
 
             await this.setState({ status: data })
-        } else await this.setState({ priority: data })
-        this.props.onEditTask(this.state)
+            this.props.onEditTask(this.state)
+        } else if (data === 'tag') {
+            console.log('IMHERE, data:', data, 'tag:', tags)
+            await this.setState({ ...this.state, tags })
+            this.props.onEditTask(this.state, tags)
+        } else {
+            await this.setState({ priority: data })
+            this.props.onEditTask(this.state)
+        }
+
     }
 
     uploadImg = async (ev, user) => {
@@ -118,7 +126,6 @@ class _Task extends Component {
         if (!this.state.id) return <h1>Loading...</h1>
         const elTaskName = this.state.name;
         const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown } = this.state
-        console.log('TAGS!', this.state.tags)
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
@@ -181,7 +188,7 @@ class _Task extends Component {
                                 <Date dueDate={this.state.dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={this.state.priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
-                                <Tags tags={this.state.tags} isTagsShown={isTagsShown}
+                                <Tags handleChange={this.handleChange} onEditTask={this.props.onEditTask} tags={this.state.tags} isTagsShown={isTagsShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                             </div>
                         </section>
