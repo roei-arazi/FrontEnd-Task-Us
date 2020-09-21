@@ -20,7 +20,7 @@ class _Login extends Component {
 
     onGuestLogin = async () =>{
         await this.props.guestLogin();
-        this.props.history.push('/board/123')
+        this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
 
     render() {
