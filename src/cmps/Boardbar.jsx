@@ -16,13 +16,13 @@ class _Boardbar extends Component {
         selectedBoardId: '',
         isSnackbarOpen: false,
         isShown: ''
-    }
+    } 
     componentDidMount() {
         // socketService.setup();
         socketService.emit('board', this.props.match.params.id);
         socketService.on('updatedBoard', updatedBoard => {
             console.log('got board:', updatedBoard);
-             this.props.recieveUpdate(updatedBoard) 
+             this.props.recieveUpdate(updatedBoard)
             });
         this.setState({ isShown: this.props.isBoardbarShown })
     }
