@@ -61,13 +61,16 @@ class _Task extends Component {
     }
 
     handleChange = (data, tags) => {
+        console.log('got data:', data);
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-            this.setState({ status: data })
-            this.props.onEditTask(this.state)
-        } else if (data === 'tag') {
-            console.log('IMHERE, data:', data, 'tag:', tags)
-            this.setState({ ...this.state, tags })
-            this.props.onEditTask(this.state, tags)
+            console.log('changing data');
+            this.setState({ status: data }, () =>{
+                this.props.onEditTask(this.state)
+            })
+        // } else if (data === 'tag') {
+        //     console.log('IMHERE, data:', data, 'tag:', tags)
+        //     this.setState({ ...this.state, tags })
+        //     this.props.onEditTask(this.state, tags)
         } else {
             this.setState({ priority: data })
             this.props.onEditTask(this.state)
