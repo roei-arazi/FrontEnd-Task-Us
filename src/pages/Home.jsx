@@ -26,8 +26,6 @@ return (
 <NavLink to="/signup">
 <button>Sign-up</button>
 </NavLink>
-
-
 </section>
 )
 }

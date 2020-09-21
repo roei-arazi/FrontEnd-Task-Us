@@ -90,7 +90,7 @@ class _Board extends Component {
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
         try {
-            await this.props.addGroup(this.state.boardId);
+            await this.props.addGroup(this.state.boardId , board);
             this.props.clearFilter();
             await this.props.showSnackbar('Added group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
