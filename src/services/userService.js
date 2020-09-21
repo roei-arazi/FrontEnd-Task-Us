@@ -34,7 +34,7 @@ let users = [{
     "boards": [],
     "notifications": [],
     "birthDay": '2nd August 1997',
-    "company": 'adidas',
+    "company": 'adidas', 
     "phoneNumber": '0224112124'
 }
 ]
