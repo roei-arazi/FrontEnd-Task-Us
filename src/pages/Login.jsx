@@ -11,7 +11,6 @@ import { loadBoards } from '../store/actions/boardActions'
 class _Login extends Component {
 
     componentDidMount() {
-        // if(this.props.loggedUser)   this.props.history.push('/board/123')
         this.props.loadBoards()
     }
 

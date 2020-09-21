@@ -37,6 +37,7 @@ class _Signup extends Component {
                     const errors = {};
                     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     if (!formValues.username) errors.username = 'Required';
+                    if (!formValues.fullName) errors.fullName = 'Required';
                     if (!formValues.password) errors.password = 'Required';
                     if (formValues.confirm !== formValues.password) errors.confirm = 'Doesn\'t match password';
                     if (!re.test(formValues.email.toLowerCase())) errors.email = 'Invalid email address'
@@ -50,6 +51,12 @@ class _Signup extends Component {
                         <legend>Username *</legend>
                         <Field className="sign-login-input"type="text" name="username" />
                     </section> 
+                    <ErrorMessage name="username" component="span" />
+                    <section>
+                        <legend>Full name *</legend>
+                        <Field className="sign-login-input"type="text" name="fullName" />
+                    </section> 
+                    <ErrorMessage name="fullName" component="span" />
                     <section>
                         <legend>Email *</legend>
                         <Field className="sign-login-input" type="text" name="email" />

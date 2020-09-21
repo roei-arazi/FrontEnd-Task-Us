@@ -255,7 +255,7 @@ function removeBoard(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
 
-function addBoard() {
+async function addBoard() {
     const board = {
         boardCreator: {
             "fullName": 'Liam Zety',
@@ -347,8 +347,9 @@ function addBoard() {
         }
         ]
     }
-    httpService.post(`board`, board)
-    return board
+    const newBoard = await httpService.post(`board`, board);
+    console.log('got from database:', newBoard);
+    return newBoard;
 }
 
 function addGroup(board) {

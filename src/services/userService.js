@@ -1,53 +1,43 @@
+import httpService from "./httpService";
+
 let users = [{
-    _id: 'asfasdfq12d1wd',
-    username: 'frize',
-    fullName: 'Roei Arazi',
-    password: '3333',
-    email: 'frize@gmail.com',
-    imgUrl: 'https://via.placeholder.com/250',
-    isAdmin: true,
-    boards: [{ id: '212', name: 'board1' }],
-    notifications: [
-        { isRead: false, content: "notification liam", byUser: { _id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100' } },
-        { isRead: false, content: "notification doll", byUser: { _id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100' } }
-    ],
-    birthDay: '2nd August 1997',
-    company: 'adidas',
-    phoneNumber: '0224132124'
+    "username": 'frize',
+    "fullName": 'Roei Arazi',
+    "password": '3333',
+    "email": 'frize@gmail.com',
+    "imgUrl": 'https://via.placeholder.com/250',
+    "isAdmin": true,
+    "boards": [],
+    "notifications": [],
+    "birthDay": '2nd August 1997',
+    "company": 'adidas',
+    "phoneNumber": '0224132124'
 },
 {
-    _id: 'asfasdfqw12412d1',
-    username: 'anstrio',
-    fullName: 'Osher Kabada',
-    password: '2222',
-    email: 'anstrio@gmail.com',
-    imgUrl: 'https://via.placeholder.com/250',
-    isAdmin: true,
-    boards: [{ id: '212', name: 'board1' }],
-    notifications: [
-        { isRead: false, content: "notification liam", byUser: { _id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100' } },
-        { isRead: false, content: "notification doll", byUser: { _id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100' } }
-    ],
-    birthDay: '2nd August 1997',
-    company: 'adidas',
-    phoneNumber: '0224127124'
+    "username": 'anstrio',
+    "fullName": 'Osher Kabada',
+    "password": '2222',
+    "email": 'anstrio@gmail.com',
+    "imgUrl": 'https://via.placeholder.com/250',
+    "isAdmin": true,
+    "boards": [],
+    "notifications": [],
+    "birthDay": '2nd August 1997',
+    "company": 'adidas',
+    "phoneNumber": '0224127124'
 },
 {
-    _id: 'asfasdw12412d1wd',
-    username: 'smoking',
-    fullName: 'Liam Zety',
-    password: '1111',
-    email: 'smoking@gmail.com',
-    imgUrl: 'https://via.placeholder.com/250',
-    isAdmin: true,
-    boards: [{ id: '212', name: 'board1' }],
-    notifications: [
-        { createdAt: Date.now(), isRead: false, content: "notification liam", byUser: { _id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100' } },
-        { createdAt: Date.now(), isRead: false, content: "notification doll", byUser: { _id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100' } }
-    ],
-    birthDay: '2nd August 1997',
-    company: 'adidas',
-    phoneNumber: '0224112124'
+    "username": 'smoking',
+    "fullName": 'Liam Zety',
+    "password": '1111',
+    "email": 'smoking@gmail.com',
+    "imgUrl": 'https://via.placeholder.com/250',
+    "isAdmin": true,
+    "boards": [],
+    "notifications": [],
+    "birthDay": '2nd August 1997',
+    "company": 'adidas', 
+    "phoneNumber": '0224112124'
 }
 ]
 
@@ -95,7 +85,8 @@ async function getUserById(userId) {
 
 async function login(userCred) {
     try {
-        const user = users.find(user => user.username === userCred.username && user.password === userCred.password);
+        // const user = users.find(user => user.username === userCred.username && user.password === userCred.password);
+        const user = await httpService.post('auth/login', userCred);
         if (!user) throw 'Wrong username or password'
         return user;
     } catch (err) {
@@ -106,18 +97,22 @@ async function login(userCred) {
 
 async function signup(userCred) {
     const user = {
-        _id: _makeid(),
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
-        boards: [{ id: '212', name: 'board1' }],
+        boards: [],
         notifications: [],
         birthDay: '2nd August 1997',
         company: 'adidas',
         phoneNumber: '0224132124',
         ...userCred
     }
-    users.push(user);
-    return user;
+    try{
+        const newUser = await httpService.post('auth/signup', user)
+        return newUser;
+    }catch (err) {
+        console.log('userService: Couldn\'t sign up');
+        throw err;
+    }
 }
 
 async function guestLogin() {
