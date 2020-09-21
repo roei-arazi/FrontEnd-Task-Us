@@ -1,21 +1,18 @@
 const initialState = {
     users: [],
-    loggedUser: {
-        _id: "5f687cfa6be1584574513e59",
-        username: 'frize',
-        fullName: 'Roei Arazi',
-        password: '3333',
-        email: 'frize@gmail.com',
-        imgUrl: 'https://via.placeholder.com/100',
-        isAdmin: true,
-        boards: [{ id: '212', name: 'board1' }],
-        notifications: [
-            { createdAt: Date.now(), isRead: false, content: "notification liam", byUser: { _id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100' } },
-            { createdAt: Date.now(), isRead: false, content: "notification doll", byUser: { _id: 'asfasdfq12d1wd', fullName: 'Roei Arazi', imgUrl: 'https://via.placeholder.com/100' } }
-        ],
-        birthDay: '2nd August 1997',
-        company: 'adidas',
-        phoneNumber: '0224132124'
+    loggedUser: {      
+            "_id" : "5f68936cf878123b2cdce96d",
+            "username" : "frize",
+            "fullName" : "Roei Arazi",
+            "password" : "3333",
+            "email" : "frize@gmail.com",
+            "imgUrl" : "https://via.placeholder.com/250",
+            "isAdmin" : true,
+            "boards" : [],
+            "notifications" : [],
+            "birthDay" : "2nd August 1997",
+            "company" : "adidas",
+            "phoneNumber" : "0224132124"
     },
     userProfile: null
 }
