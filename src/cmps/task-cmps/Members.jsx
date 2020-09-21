@@ -4,8 +4,6 @@ import { AiOutlineMinus } from 'react-icons/ai'
 import { FiPlus } from 'react-icons/fi';
 
 export function Members(props) {
-    if (props.members.length === 0) return <h1>Loading...</h1>
-
     const usersToAdd = props.users.filter(user => !props.members.some(member => member._id === user._id))
     return (
 
