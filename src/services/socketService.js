@@ -14,6 +14,7 @@ export default {
 };
 
 function setup() {
+    console.log('established connection');
     socket = io(BASE_URL);
 }
 
@@ -22,6 +23,7 @@ function terminate() {
 }
 
 function on(eventName, cb) {
+    console.log('socket:', socket);
     socket.on(eventName, cb);
 }
 

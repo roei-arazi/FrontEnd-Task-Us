@@ -53,7 +53,8 @@ export const userService = {
 
 async function loadUsers() {
     try {
-        return JSON.parse(JSON.stringify(users));
+        const users = await httpService.get('user')
+        return users;
     } catch (err) {
         console.log('userService: Coulnd\'t get users');
         throw err;

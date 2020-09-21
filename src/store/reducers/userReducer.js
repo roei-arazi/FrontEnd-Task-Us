@@ -1,7 +1,7 @@
 const initialState = {
     users: [],
     loggedUser: {
-        _id: 'asfasdfq12d1wd',
+        _id: "5f687cfa6be1584574513e59",
         username: 'frize',
         fullName: 'Roei Arazi',
         password: '3333',
