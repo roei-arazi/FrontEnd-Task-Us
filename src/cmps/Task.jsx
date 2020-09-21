@@ -6,6 +6,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import { RiDeleteBack2Line } from 'react-icons/ri'
 import { BsChatDots } from 'react-icons/bs'
 import "react-datepicker/dist/react-datepicker.css";
+import socketService from '../services/socketService.js'
 
 //Material ui
 import { Tooltip, Zoom } from '@material-ui/core';
@@ -35,6 +36,9 @@ class _Task extends Component {
 
     componentDidMount() {
         this.contentEditable = React.createRef();
+        socketService.on('updatedBoard', () =>{
+            this.setState({ ...this.props.task })
+        })
         this.setState({ ...this.props.task })
         this.setState({
             isStatusShown: false,
@@ -54,16 +58,16 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    handleChange = async (data, tags) => {
+    handleChange = (data, tags) => {
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-            await this.setState({ status: data })
+            this.setState({ status: data })
             this.props.onEditTask(this.state)
         } else if (data === 'tag') {
             console.log('IMHERE, data:', data, 'tag:', tags)
-            await this.setState({ ...this.state, tags })
+            this.setState({ ...this.state, tags })
             this.props.onEditTask(this.state, tags)
         } else {
-            await this.setState({ priority: data })
+            this.setState({ priority: data })
             this.props.onEditTask(this.state)
         }
 
@@ -79,8 +83,8 @@ class _Task extends Component {
         this.props.onEditTask(this.state)
     }
 
-    sendNote = async (newUpdates) => {
-        await this.setState({ updates: [...newUpdates] })
+    sendNote = (newUpdates) => {
+        this.setState({ updates: [...newUpdates] })
         this.props.onEditTask(this.state)
     }
 
@@ -110,14 +114,14 @@ class _Task extends Component {
         this.setState({ isImageModalShown: false, isStatusShown: false, isUsersShown: false, isPriorityShown: false, isUpdatesShown: false, isTagsShown: false })
     }
 
-    onRemoveMemberFromTask = async (memberId) => {
-        await this.setState({ members: this.state.members.filter(member => member._id !== memberId) })
+    onRemoveMemberFromTask = (memberId) => {
+        this.setState({ members: this.state.members.filter(member => member._id !== memberId) })
         this.props.onEditTask(this.state)
     }
 
-    onAddUserToTask = async (userId) => {
+    onAddUserToTask = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
-        await this.setState({ members: [...this.state.members, newUser] })
+        this.setState({ members: [...this.state.members, newUser] })
         this.props.onEditTask(this.state)
     }
 
