@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-// import socketService from '../services/socketService';
+import socketService from '../services/socketService';
 import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
@@ -17,7 +17,6 @@ import {
     clearFilter //FILTER
 }
     from '../store/actions/boardActions'
-import socketService from '../services/socketService';
 
 class _Board extends Component {
 
@@ -128,9 +127,7 @@ class _Board extends Component {
     }
     onEditGroup = async (group, changedValue, originalValue) => {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
-
         if (changedValue === originalValue) return // No changes were made
-
         try {
             await this.props.editGroup(group, board)
             await this.props.showSnackbar('Updated group.');
@@ -255,7 +252,6 @@ class _Board extends Component {
                 }
             }
         }
-
     }
 
     handleSearch = (ev) => {
