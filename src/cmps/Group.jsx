@@ -22,7 +22,7 @@ export class Group extends Component {
     componentDidMount() {
         this.elInputAdd = React.createRef();
         this.contentEditable = React.createRef();
-        socketService.on('updatedBoard', () =>{
+        socketService.on('updatedBoard', () => {
             this.setState({ ...this.state, ...this.props.group })
         })
         this.setState({ ...this.state, ...this.props.group })

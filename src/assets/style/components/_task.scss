@@ -103,6 +103,19 @@
         text-align: center;
         color: $inputColor;
 
+        .tags {
+            height: 100%;
+            overflow: overlay;
+
+            .tag-remove-icon {
+                font-size: 1.2rem;
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .icon-container {
+        margin-left: 5px;
     }
 
     .react-datepicker__input-container {

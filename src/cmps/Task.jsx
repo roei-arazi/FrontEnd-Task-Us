@@ -36,7 +36,6 @@ class _Task extends Component {
     componentDidMount() {
         this.contentEditable = React.createRef();
         socketService.on('updatedBoard', () => {
-
             this.setState({ task: this.props.task })
         })
         this.setState({
@@ -48,6 +47,7 @@ class _Task extends Component {
             isUpdatesShown: false,
             isTagsShown: false
         })
+
     }
 
     handleNameChange = (ev) => {
@@ -137,14 +137,24 @@ class _Task extends Component {
 
     }
 
+    onEditTags = (tags) => {
+        this.setState({ ...this.state, task: { ...this.state.task, tags: JSON.parse(JSON.stringify(tags)) } }, () => {
+            this.props.onEditTask(this.state.task)
+        })
+
+    }
+
+
     render() {
+
         if (!this.state.task) return <h1>Loading...</h1>
         const { name, members, status, priority, dueDate, updates, id } = this.state.task;
         const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown } = this.state
+
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates isImageModalShown={this.state.isImageModalShown}
+                    <Updates task={this.state.task} isImageModalShown={this.state.isImageModalShown}
                         loggedUser={this.props.loggedUser} updates={updates}
                         onToggleImageModal={this.onToggleImageModal}
                         uploadImg={this.uploadImg} sendNote={this.sendNote}
@@ -205,8 +215,8 @@ class _Task extends Component {
                                 <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
-                                <Tags handleChange={this.handleChange} onEditTask={this.props.onEditTask}
-                                    tags={this.state.task.tags} isTagsShown={isTagsShown}
+                                <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
+                                    task={this.state.task} isTagsShown={isTagsShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                             </div>
                         </section>

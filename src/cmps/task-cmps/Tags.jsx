@@ -1,29 +1,51 @@
 import React, { Component } from 'react'
-import ContentEditable from 'react-contenteditable';
+import { BsFilePlus } from 'react-icons/bs';
+import { RiDeleteBack2Line } from 'react-icons/ri';
 import Truncate from 'react-truncate'
 
 export class Tags extends Component {
 
     state = {
-        txt: ''
+
     }
 
     componentDidMount() {
+        console.log('HELO?!@#!?@', this.props.task.tags)
+
         this.elTag = React.createRef();
-        console.log('HELO?!@#!?@',)
+
+        this.setState({ tags: JSON.parse(JSON.stringify(this.props.task.tags)) })
     }
 
-    getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
+    handleChange = (ev, id) => {
+        const tags = this.state.tags.map(tag => {
+            if (tag.id === id) {
+                tag.txt = ev.target.value
+            }
+            return tag
+        })
+        this.setState({ tags });
+    }
+
+    onAddTag = () => {
+        const tags = [...this.state.tags]
+        tags.push({ id: this._makeid(), txt: "New tag", color: "coral" })
+        this.setState({ tags });
+        this.props.onEditTags(tags)
+    }
+    onRemoveTag = (id) => {
+        const tags = this.state.tags.filter(tag => tag.id !== id)
+        this.setState({ tags });
+        this.props.onEditTags(tags)
+    }
+    onEditTag = (idx) => {
+        console.log('state:', this.state.tags[idx].txt)
+        console.log('props:', this.props.task.tags[idx].txt)
+        if (this.props.task.tags[idx].txt === this.state.tags[idx].txt) {
+            console.log('WIERD...',)
+            return
         }
-        return color;
-    }
-
-    handleNameChange = (ev) => {
-        this.setState({ txt: ev.target.value });
+        this.props.onEditTags(this.state.tags)
     }
 
     focusText = () => {
@@ -32,56 +54,60 @@ export class Tags extends Component {
         }, 0)
     }
 
+    _makeid(length = 7) {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < length; i++) {
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+
+        return text;
+    }
+
     render() {
+        if (!this.state.tags || this.state.tags === 0) return <h1>no tags</h1>
         return (
-            <div className="label-container relative">
-                <div onClick={() => this.props.openModal('tags')} className="tags">
-                    <div className="task-label-name">
-                        {this.props.tags.map((tag, idx) => {
-                            return (
-                                <p key={idx}>
-                                    <Truncate lines={1} ellipsis={"..."} width={100}>
-                                        {idx === this.props.tags.length - 1 ? tag.txt : tag.txt + ","}
-                                    </Truncate>
-                                </p>
-                            )
-                        })}
-                    </div>
-
-                    {this.props.isTagsShown &&
-                        <div className="label-list tags-modal absolute flex column align-center">
-                            <section>
-                                {this.props.tags.map((tag, idx) => {
-                                    console.log('tag', tag)
-                                    return (
-                                        <React.Fragment>
-                                            <p key={idx} style={{ color: tag.color }}>
-                                                <ContentEditable
-                                                    onFocus={this.focusText}
-                                                    className="content-editable cursor-initial"
-                                                    innerRef={this.elTag}
-                                                    html={idx === this.props.tags.length - 1 ? tag.txt : tag.txt + ","} // innerHTML of the editable div
-                                                    disabled={false}       // use true to disable editing
-                                                    onChange={() => this.props.handleChange('tag', this.state.txt)} // handle innerHTML change
-                                                    onBlur={() => {
-                                                        this.props.onEditTask('tag', this.state.txt)
-                                                    }}
-                                                    onKeyDown={(ev) => {
-                                                        if (ev.key === 'Enter') {
-                                                            ev.target.blur()
-                                                            this.props.onEditTask('tag', this.state.txt)
-                                                        }
-                                                    }}
-                                                />
-                                            </p>
-                                        </React.Fragment>
-                                    )
-                                })}
-                            </section>
-                        </div>
-                    }
-
+            <div onClick={() => this.props.openModal('tags')} className="label-container tags relative">
+                <div className="task-label-name">
+                    {this.state.tags.map((tag, idx) => {
+                        return (
+                            <p style={{ color: tag.color }} key={idx}>
+                                <Truncate lines={1} ellipsis={"..."} width={100}>
+                                    {idx === this.state.tags.length - 1 ? tag.txt : tag.txt + ","}
+                                </Truncate>
+                            </p>
+                        )
+                    })}
                 </div>
+
+                {this.props.isTagsShown &&
+                    <div className="label-list tags-modal absolute flex column align-center">
+                        <section>
+                            {this.state.tags.map((tag, idx) => {
+                                return (
+                                    <div className="tag-container flex justify-center align-center" key={tag.id}>
+                                        <RiDeleteBack2Line className="tag-remove-icon" onClick={() => this.onRemoveTag(tag.id)} />
+                                        <input style={{ color: tag.color }} onBlur={(ev) => {
+                                            ev.target.blur()
+                                            this.onEditTag(idx)
+                                        }}
+                                            onKeyDown={(ev) => {
+                                                if (ev.key === 'Enter') {
+                                                    ev.target.blur()
+                                                    this.onEditTag(idx)
+                                                }
+                                            }}
+
+                                            onChange={(ev) => this.handleChange(ev, tag.id)} value={tag.txt} type="text" />
+                                    </div>
+                                )
+                            })}
+                            <BsFilePlus onClick={this.onAddTag} />
+                        </section>
+                    </div>
+                }
+
             </div>
         )
     }
