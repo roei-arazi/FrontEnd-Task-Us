@@ -2,11 +2,11 @@
     .user-container {
         position: relative;
 
-        .user-profile-big{
+        .user-profile-big {
             align-self: center;
             border-radius: 50%;
-            width:250px;
-            height:250px;
+            width: 250px;
+            height: 250px;
         }
 
         .modal-screen {
@@ -26,7 +26,7 @@
                 display: flex;
                 flex-direction: column;
 
-                .user-profile-big{
+                .user-profile-big {
                     cursor: pointer;
                 }
 

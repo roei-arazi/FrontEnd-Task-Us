@@ -9,7 +9,7 @@ function _UpcomingTasks(props) {
             return moment(date).format('MMM DD')
         }
         return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'
-    }
+    } 
 
     function moveToUserProfile(userId) {
         props.history.push(`/user/${userId}`)
@@ -24,7 +24,7 @@ function _UpcomingTasks(props) {
             className="task-preview space-between align-center">
             <div className="left-column">
                 <p className="task-preview-name">{task.name}</p>
-                <p className="task-location">From: <span onClick={() => props.history.push(`/board/${task.boardId}`)}>{`${task.boardName} > ${task.groupName}`}</span></p>
+                <p className="task-location">At: <span onClick={() => props.history.push(`/board/${task.boardId}`)}>{`${task.boardName} > ${task.groupName}`}</span></p>
             </div>
             <section className="right-column flex align-center space-between">
                 {/* <div className={`label-box flex align-center ${task.status.toLocaleLowerCase()}`}> <p>{task.status}</p></div> */}
@@ -32,8 +32,8 @@ function _UpcomingTasks(props) {
                     {task.members.length !== 0 && (task.members[0].imgUrl ? <img onClick={() => moveToUserProfile(task.members[0]._id)} alt="profile" src={task.members[0].imgUrl} /> :
                         <div onClick={() => moveToUserProfile(task.members[0]._id)} className="member-letter">{task.members[0].fullName.charAt(0).toUpperCase()}</div>)}
                 </div>
-                <div className="deadline-container flex align-center">
-                    <h2>{getDaysFromNow(task.dueDate)}</h2>
+                <div className="deadline-container flex align-center"  onClick={() => props.history.push(`/board/${task.boardId}`)}>
+                    <h2 >{getDaysFromNow(task.dueDate)}</h2>
                 </div>
             </section>
         </div>)}

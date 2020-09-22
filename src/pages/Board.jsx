@@ -159,9 +159,11 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
-    onEditTask = (task) => {
+    onEditTask = (task, changedValue, originalValue) => {
         console.log('TASK FROM BOARD', task)
         const board = this.props.boards.find(board => board._id === this.state.boardId)
+
+        if(changedValue===originalValue) return
 
         try {
             this.props.editTask(task, board)
