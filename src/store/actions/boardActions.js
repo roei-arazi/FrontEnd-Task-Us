@@ -105,9 +105,10 @@ export function editGroup(group, board) {
 //-----------------TASKS CRUD------------------------
 
 export function addTask(groupId, taskName, board) {
-    return dispatch => {
+    return async dispatch => {
         try {
-            const updatedBoard = boardService.addTask(groupId, taskName, board);
+            const updatedBoard = await boardService.addTask(groupId, taskName, board);
+            console.log('got board:', updatedBoard);
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {
             console.log('boardActions: Coulnd\'t add task');

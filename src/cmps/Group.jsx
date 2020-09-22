@@ -23,9 +23,9 @@ export class Group extends Component {
         this.elInputAdd = React.createRef();
         this.contentEditable = React.createRef();
         socketService.on('updatedBoard', () => {
-            this.setState({ ...this.state, ...this.props.group })
+            this.setState({ ...this.state, name: this.props.group.name })
         })
-        this.setState({ ...this.state, ...this.props.group })
+        this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id  })
     }
 
     handleChange = (ev) => {
@@ -67,31 +67,34 @@ export class Group extends Component {
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
 
-        convertToData(key){
-        const {tasks} = this.props.group;
+    convertToData(property) {
+        const { tasks } = this.props.group;
+        const taskCount = this.props.group.tasks.length;
         const percent = tasks.length / 100;
-        const data = tasks.reduce((acc, task) =>{
-            console.log('acc:', acc);
-            console.log('task:', task);
-            if(!acc[task[key]]) acc[task[key]] = 0;
-            acc[task[key]]++;
+        const data = tasks.reduce((acc, task) => {
+            if (!acc[task[property]]) acc[task[property]] = 0;
+            acc[task[property]]++;
             return acc;
         }, {})
-        for(let key in data){
+        for (let key in data) {
             data[key] /= percent;
         }
-        return data;
+        const res = [];
+        for (let key in data) {
+            res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0px' }}
+                data-title={data[key] ? `${taskCount * data[key] / 100}/${taskCount} ${data[key].toFixed(2)}%` : ''}
+                className={`precent-bar ${key.toLowerCase()}`}></div>)
+        }
+        return res;
     }
 
     render() {
-        if (!this.state.id) return <h1>Loading...</h1>
+        if (!this.state.name) return <h1>Loading...</h1>
+        const priority = this.convertToData('priority')
         const { name, ElGroupSettings, elGroupColors } = this.state;
-        const statusData = this.convertToData('status')
-        const priorityData = this.convertToData('priority')
-        console.log('priority data:', priorityData);
-        const taskCount = this.props.group.tasks.length;
-        console.log('tasks',taskCount);
-        return ( 
+        const {group} = this.props;
+        const status = this.convertToData('status')
+        return (
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>
                     <section key={this.props.group.id} className="group padding-y-45"
@@ -147,24 +150,24 @@ export class Group extends Component {
                                         disabled={false}       // use true to disable editing
                                         onChange={this.handleChange} // handle innerHTML change
                                         onBlur={() => {
-                                            this.props.onEditGroup(this.state, this.state.name, name)
+                                            this.props.onEditGroup(group, this.state.name, name)
                                         }}
                                         onKeyDown={(ev) => {
                                             if (ev.key === 'Enter') {
                                                 ev.target.blur()
-                                                this.props.onEditGroup(this.state, this.state.name, name)
+                                                this.props.onEditGroup(group, this.state.name, name)
                                             }
                                         }}
                                     />
                                 </h1>
                             </div>
                             <div className="group-header-right flex">
-                                <h3 style={{color:this.props.group.color}}>Updates</h3>
-                                <h3 style={{color:this.props.group.color}}>Members</h3>
-                                <h3 style={{color:this.props.group.color}}>Status</h3>
-                                <h3 style={{color:this.props.group.color}}>Due-Date</h3>
-                                <h3 style={{color:this.props.group.color}}>Priority</h3>
-                                <h3 style={{color:this.props.group.color}}>Tags</h3>
+                                <h3 style={{ color: this.props.group.color }}>Updates</h3>
+                                <h3 style={{ color: this.props.group.color }}>Members</h3>
+                                <h3 style={{ color: this.props.group.color }}>Status</h3>
+                                <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
+                                <h3 style={{ color: this.props.group.color }}>Priority</h3>
+                                <h3 style={{ color: this.props.group.color }}>Tags</h3>
                             </div>
                         </div>
 
@@ -174,7 +177,7 @@ export class Group extends Component {
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >
-                                    {this.props.group.tasks.map((task, index) => {
+                                    {group.tasks.map((task, index) => {
                                         return <Task onToggleUpdates={this.props.onToggleUpdates}
                                             onEditTask={this.props.onEditTask} index={index}
                                             onRemoveTask={this.props.onRemoveTask} key={task.id}
@@ -186,8 +189,8 @@ export class Group extends Component {
                             }
                         </Droppable>
 
-                        <div className="task task-add"> 
-                            <div className="task-color" style={{backgroundColor:this.props.group.color}}></div>
+                        <div className="task task-add">
+                            <div className="task-color" style={{ backgroundColor: this.props.group.color }}></div>
                             <form onSubmit={(ev) => {
                                 ev.preventDefault()
                                 this.props.onAddTask(this.props.group.id, this.elInputAdd.current.value)
@@ -195,18 +198,14 @@ export class Group extends Component {
                             }} action="">
                                 <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
                             </form>
-                        </div> 
-                        <section className="group-precent-container flex"> 
-                        <div className="group-precent flex">
-                            <div style={{width: statusData['Done'] ? `${statusData['Done']}%` : '0px'}} data-title={`${taskCount * statusData['Done'] / 100}/${taskCount} ${statusData['Done']}%`} className="precent-bar done"></div>
-                            <div style={{width: statusData['Working on it'] ? `${statusData['Working on it']}%` : '0px'}} data-title={`${taskCount * statusData['Working on it'] / 100}/${taskCount} ${statusData['Working on it']}%`} className="precent-bar working"></div>
-                            <div style={{width: statusData['Stuck'] ? `${statusData['Stuck']}%` : '0px'}} data-title={`${taskCount * statusData['Stuck'] / 100}/${taskCount} ${statusData['Stuck']}%`} className="precent-bar stuck"></div>
                         </div>
-                        <div className="group-precent flex">
-                            <div style={{width: priorityData['Low'] ? `${priorityData['Low']}%` : '0px'}} data-title={`${taskCount * priorityData['Low'] / 100}/${taskCount} ${priorityData['Low']}%`} className="precent-bar low"></div>
-                            <div style={{width: priorityData['Medium'] ? `${priorityData['Medium']}%` : '0px'}} data-title={`${taskCount * priorityData['Medium'] / 100}/${taskCount} ${priorityData['Medium']}%`} className="precent-bar medium"></div>
-                            <div style={{width: priorityData['High'] ? `${priorityData['High']}%` : '0px'}} data-title={`${taskCount * priorityData['High'] / 100}/${taskCount} ${priorityData['High']}%`} className="precent-bar high"></div>
-                        </div>
+                        <section className="group-precent-container flex">
+                            <div className="group-precent flex">
+                                {status}
+                            </div>
+                            <div className="group-precent flex">
+                                {priority}
+                            </div>
                         </section>
                     </section>
                 }
