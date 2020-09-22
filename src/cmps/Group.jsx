@@ -67,14 +67,14 @@ export class Group extends Component {
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
 
-    get statusPercentage(){
+        convertToData(key){
         const {tasks} = this.props.group;
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) =>{
             console.log('acc:', acc);
             console.log('task:', task);
-            if(!acc[task.status]) acc[task.status] = 0;
-            acc[task.status]++;
+            if(!acc[task[key]]) acc[task[key]] = 0;
+            acc[task[key]]++;
             return acc;
         }, {})
         for(let key in data){
@@ -86,7 +86,9 @@ export class Group extends Component {
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const { name, ElGroupSettings, elGroupColors } = this.state;
-        const statusData = this.statusPercentage;
+        const statusData = this.convertToData('status')
+        const priorityData = this.convertToData('priority')
+        console.log('priority data:', priorityData);
         const taskCount = this.props.group.tasks.length;
         console.log('tasks',taskCount);
         return ( 
@@ -194,11 +196,18 @@ export class Group extends Component {
                                 <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
                             </form>
                         </div>
-                        <div className="group-status flex">
-                            <div style={{width: `${statusData['Done']}%`}} data-title={`${statusData['Done']}%`} className="status-bar done"></div>
-                            <div style={{width: `${statusData['Working on it']}%`}} data-title={`${statusData['Working on it']}%`} className="status-bar working"></div>
-                            <div style={{width: `${statusData['Stuck']}%`}} data-title={`${statusData['Stuck']}%`} className="status-bar stuck"></div>
+                        <section className="group-precent-container flex">
+                        <div className="group-precent flex">
+                            <div style={{width: statusData['Done'] ? `${statusData['Done']}%` : '0px'}} data-title={`${taskCount * statusData['Done'] / 100}/${taskCount} ${statusData['Done']}%`} className="precent-bar done"></div>
+                            <div style={{width: statusData['Working on it'] ? `${statusData['Working on it']}%` : '0px'}} data-title={`${taskCount * statusData['Working on it'] / 100}/${taskCount} ${statusData['Working on it']}%`} className="precent-bar working"></div>
+                            <div style={{width: statusData['Stuck'] ? `${statusData['Stuck']}%` : '0px'}} data-title={`${taskCount * statusData['Stuck'] / 100}/${taskCount} ${statusData['Stuck']}%`} className="precent-bar stuck"></div>
                         </div>
+                        <div className="group-precent flex">
+                            <div style={{width: priorityData['Low'] ? `${priorityData['Low']}%` : '0px'}} data-title={`${taskCount * priorityData['Low'] / 100}/${taskCount} ${priorityData['Low']}%`} className="precent-bar low"></div>
+                            <div style={{width: priorityData['Medium'] ? `${priorityData['Medium']}%` : '0px'}} data-title={`${taskCount * priorityData['Medium'] / 100}/${taskCount} ${priorityData['Medium']}%`} className="precent-bar medium"></div>
+                            <div style={{width: priorityData['High'] ? `${priorityData['High']}%` : '0px'}} data-title={`${taskCount * priorityData['High'] / 100}/${taskCount} ${priorityData['High']}%`} className="precent-bar high"></div>
+                        </div>
+                        </section>
                     </section>
                 }
             </Draggable>

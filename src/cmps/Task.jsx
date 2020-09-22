@@ -18,7 +18,6 @@ import { Date } from './task-cmps/Date';
 import { Priority } from './task-cmps/Priority';
 import { Updates } from './task-cmps/Updates';
 import { Tags } from './task-cmps/Tags';
-import Truncate from 'react-truncate';
 
 class _Task extends Component {
 
@@ -55,24 +54,30 @@ class _Task extends Component {
     }
 
     handleDateChange = date => {
+        const prevDate = this.state.task.dueDate;
         this.setState({ task: { ...this.state.task, dueDate: moment(date).valueOf() } }, () => {
-            this.props.onEditTask(this.state.task)
+            this.props.onEditTask(this.state.task,moment(date).valueOf(), prevDate )
         })
     }
 
     handleChange = (data, tags) => {
+        console.log('got data:', data);
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
+            const prevData = this.state.task.status;
             this.setState({ task: { ...this.state.task, status: data } }, () => {
-                this.props.onEditTask(this.state.task)
+                console.log('in callback');
+                this.props.onEditTask(this.state.task, data, prevData)
                 this.closeModal()
             })
-        } else if (data === 'tag') {
-            console.log('IMHERE, data:', data, 'tag:', tags)
-            this.setState({ ...this.state, tags })
-            this.props.onEditTask(this.state, tags)
+        // } else if (typeof(data) === 'object') {
+        //     console.log('got to tags');
+        //     console.log('IMHERE, data:', data, 'tag:', tags)
+        //     this.setState({ ...this.state, tags })
+        //     this.props.onEditTask(this.state, tags)
         } else {
+            const prevData = this.state.task.priority;
             this.setState({ task: { ...this.state.task, priority: data } }, () => {
-                this.props.onEditTask(this.state.task)
+                this.props.onEditTask(this.state.task, data, prevData)
                 this.closeModal()
             })
         }
@@ -137,7 +142,7 @@ class _Task extends Component {
 
     onEditTags = (tags) => {
         this.setState({ ...this.state, task: { ...this.state.task, tags: JSON.parse(JSON.stringify(tags)) } }, () => {
-            this.props.onEditTask(this.state.task)
+            this.props.onEditTask(this.state.task,1)
         })
     }
 
