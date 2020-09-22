@@ -21,26 +21,62 @@
                 background-color: $colorBgBoardBars;
             }
 
-            .user-modal-col {
+            .user-modal-header{
+                background-color: $buttonMainBg;
+                height:40vh;
+                
+                .user-profile-big {
+                    cursor: pointer;
+
+                    &:hover{
+                        -webkit-filter: brightness(70%);
+                        -webkit-transition: all .3s ease;
+                        -moz-transition: all .3s ease;
+                        -o-transition: all .3s ease;
+                        -ms-transition: all .3s ease;
+                        transition: all .3s ease;
+                    }
+                }
+            }
+
+            .user-modal-main {
+                height:60vh;
                 font-size: 1.5rem;
                 display: flex;
                 flex-direction: column;
+                background-color: $colorBgBoardBars;
 
-                .user-profile-big {
-                    cursor: pointer;
-                }
 
 
 
                 form {
-                    margin-top: 25px;
+                    margin-top: 40px;
 
                     button {
                         margin-top: 40px;
-                        background-color: transparent;
+                        background-color: $buttonMainBg;
+                        color: $colorBgBoardBars;
 
                         &:hover {
-                            background-color: #373737;
+                            background-color: $buttonMainHover;
+                            -webkit-filter: brightness(80%);
+                            -webkit-transition: all .3s ease;
+                            -moz-transition: all .3s ease;
+                            -o-transition: all .3s ease;
+                            -ms-transition: all .3s ease;
+                            transition: all .3s ease;
+                        }
+                    }
+                    .secondary-btn{
+                        background-color: #9b9b9b;
+                        &:hover{
+                            background-color:#9b9b9b;
+                        -webkit-filter: brightness(80%);
+                        -webkit-transition: all .3s ease;
+                        -moz-transition: all .3s ease;
+                        -o-transition: all .3s ease;
+                        -ms-transition: all .3s ease;
+                        transition: all .3s ease;
                         }
                     }
                 }

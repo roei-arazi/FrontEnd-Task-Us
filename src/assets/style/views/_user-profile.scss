@@ -2,7 +2,7 @@
     display: flex;
 
     span {
-        color: $colorFontUserDetails;
+        color: $mainBlack;
     }
 
     .user-container {
@@ -11,21 +11,22 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: $colorBg;
+        background-color: $colorBgBoardBars;
 
         h1,
         h2,
         h3,
         h4,
         h5 {
-            color: $colorFontTaskGroup;
+            color: $mainBlack;
         }
+
 
         .header-container {
             width: 100%;
-            background-color: $colorBgBoardBars;
+            background-color: $buttonMainBg;
             border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
-
+            height:40vh;
         }
 
         img {
@@ -34,13 +35,18 @@
     }
 
     .user-details-container {
-        height: 400px;
+        height: 60vh;
         width: 100%;
 
         h2 {
             cursor: pointer;
             align-self: flex-start;
             text-decoration: underline;
+
+            &:hover{
+                transition: .3s;
+                color: $buttonMainBg
+            }
         }
 
         .user-details-inner-container {
@@ -53,3 +59,4 @@
     }
 
 }
+

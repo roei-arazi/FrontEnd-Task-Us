@@ -29,18 +29,18 @@ class _Navbar extends Component {
             <section className="navbar flex column space-between align-center padding-y-15">
 
                 <ul className="navbar-links flex column space-around">
-                        <li  className="icon-container">
+                        <li  className="icon-container cursor-pointer">
                     <NavLink to="/">
                         <FaAd />
                     </NavLink>
                         </li>
 
                     {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
-                    <li className="icon-container" onClick={!this.state.isNotificationShown ? this.toggleNotifications : () => { }} >
+                    <li className="icon-container cursor-pointer" onClick={!this.state.isNotificationShown ? this.toggleNotifications : () => { }} >
                         {
                             loggedUser.notifications.filter(notification => !notification.isRead).length === 0
                                 ? ''
-                                : <p className="notifications-counter cursor-pointer">
+                                : <p className="notifications-counter">
                                     {loggedUser.notifications.filter(notification => !notification.isRead).length}
                                 </p>
                         }

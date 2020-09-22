@@ -22,7 +22,7 @@
     }
 
     svg {
-        font-size: 30px;
+        font-size: 25px;
         color: $colorIconsNav;
 
     }
@@ -48,16 +48,15 @@
     .notifications-counter {
         position: absolute;
         right: 16px;
-        font-size: 12px;
-        min-width: 14px;
-        min-height: 14px;
-        color: $colorMainNav;
-        background: $colorBgBoardBars;
+        font-size: 10px;
+        min-width: 12px;
+        min-height: 12px;
+        color: #e8e9ee;
+        background: #f13838;
         justify-content: center;
         display: flex;
         align-items: center;
         border-radius: 50%;
-        font-weight: 700;
-        content: '100';
+        font-weight: 400;
     }
 }

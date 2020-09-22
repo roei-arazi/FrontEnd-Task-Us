@@ -1,25 +1,26 @@
 .notifications {
     position: absolute;
-    width: 600px;
-    top: -15px;
+    width: 500px;
+    top: -3px;
     left: 50px;
-    background-color: $colorTask;
+    background-color: $white;
     z-index: 999;
     box-shadow: 0px 0px 10px 0px #4b4b4bad;
     border-radius: 10px;
+    cursor:auto;
 
     h1,
     h2,
     h3,
     h4,
     h5 {
-        color: $colorFontTaskGroup;
+        color: $mainBlack;
     }
 
 
     header {
         margin-bottom: 20px;
-        width: 95%;
+        width: 100%;
 
         &:before {
             right: 100%;
@@ -30,8 +31,16 @@
             position: absolute;
             pointer-events: none;
             border-color: rgba(194, 225, 245, 0);
-            border-right-color: $colorTask;
+            border-right-color: $white;
             border-width: 10px;
+        }
+
+        svg{
+            color: $buttonMainBg;
+
+            &:hover{
+                color:$buttonMainHover;
+            }
         }
     }
 
@@ -40,13 +49,14 @@
         max-height: 400px;
 
         .notification {
-            width: 95%;
-            margin-bottom: 15px;
-            background-color: $colorBg;
-            border-radius: 1px;
-            padding: 25px;
+            width: 100%;
+            margin-bottom: 5px;
+            background-color:#ededed;
+            border-radius: 5px;
+            padding: 15px;
             line-height: 1.8;
-
+            box-shadow: $modalsShadow;
+           
             .user-img-container {
                 text-align: initial;
 

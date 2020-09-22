@@ -75,9 +75,9 @@ class _UserProfile extends Component {
                     {/* Modal */}
                     <Fade in={this.state.isModalOpen}>
                         <div className="modal-screen flex justify-center align-center">
-                            <div className="modal-container padding-x-15 padding-y-15">
+                            <div className="modal-container">
 
-                                <div className="user-modal-col align-center">
+                                <div className="user-modal-header padding-x-15 padding-y-15 flex justify-center align-center">
 
 
                                     <label> {this.state.user.imgUrl ?
@@ -87,7 +87,7 @@ class _UserProfile extends Component {
                                     </label>
 
                                 </div>
-                                <div className="user-modal-col">
+                                <div className="user-modal-main">
                                     <form className="form-container flex justify-center column  align-center" action="">
                                         <input value={this.state.user.email} onChange={this.handleChange} name="email" placeholder="Email" type="email" />
                                         <input value={this.state.user.username} onChange={this.handleChange} name="username" placeholder="Username" type="text" />
