@@ -17,16 +17,20 @@
     h3,
     h4,
     h5 {
-        color: $colorFontUserDetails;
+        color: $mainBlack;
 
     }
 
 
 
     .activity {
-        background-color: $mainBlack;
+        background-color: $taskBg;
         border-radius: 1px;
         margin-bottom: 5px;
+
+        &:hover{
+            box-shadow: $brightBoxShadow;
+        }
 
         .activity-desc-container {
             >*:not(:first-child) {
@@ -38,6 +42,7 @@
             margin-left: 15px;
             color: $colorFontUserDetails;
         }
+
     }
 
     .user-img-container {
@@ -48,14 +53,10 @@
     }
 
     svg {
-        color: $buttonColorCTA;
-    }
+        color: $buttonMainBg;
 
-    input {
-        border-bottom: 2px solid $buttonColorCTA;
-
-        &::placeholder {
-            color: $buttonColorCTA;
+        &:hover{
+            color:$buttonMainHover;
         }
     }
 

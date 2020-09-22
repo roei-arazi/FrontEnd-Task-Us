@@ -25,8 +25,21 @@
             max-height: 80%;
             overflow: overlay;
             align-self: flex-start;
+            
         li{
             height:35px;
+            border-radius:10px;
+            &:hover{
+                transition:0.3s;
+                background-color: #beb7b766;
+            }
+            
+            h4{
+                height:100%;
+                display: flex;
+                align-items: center;
+                flex-grow: 1;
+            }
 
             svg {
                 font-size:20px;
@@ -34,11 +47,6 @@
                 padding:2px;
                 margin-right: 5px;
                 border-radius: 5px;
-        
-                &:hover {
-                    transition:0.3s;
-                   background-color: #beb7b766;
-                }
             }
         }
     }

@@ -16,8 +16,7 @@
 
             &:hover {
                 transition: 0.3s;
-                background-color: $colorIconsBoardBarsHover;
-                border-radius: 10px;
+                background-color: $navIconHover;
             }
         }
     }
@@ -52,8 +51,8 @@
         font-size: 12px;
         min-width: 14px;
         min-height: 14px;
-        color: #1c1f3b;
-        background: #c63535;
+        color: $colorMainNav;
+        background: $colorBgBoardBars;
         justify-content: center;
         display: flex;
         align-items: center;

@@ -139,7 +139,6 @@ export class Group extends Component {
                                 </h1>
                             </div>
                             <div className="group-header-right flex">
-
                                 <h3 style={{color:this.props.group.color}}>Updates</h3>
                                 <h3 style={{color:this.props.group.color}}>Members</h3>
                                 <h3 style={{color:this.props.group.color}}>Status</h3>

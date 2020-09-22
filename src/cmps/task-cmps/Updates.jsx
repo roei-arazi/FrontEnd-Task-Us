@@ -16,7 +16,6 @@ export class Updates extends React.Component {
     }
 
     handleChange = (ev) => {
-        console.log('show file', ev.target.files[0])
         if (ev.target.name === 'file-img') {
             this.setState({ update: { ...this.state.update, img: ev.target.files[0] } }, () => {
                 this.uploadImg()
