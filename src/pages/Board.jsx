@@ -65,10 +65,10 @@ class _Board extends Component {
 
         const filteredBoard = JSON.parse(JSON.stringify(board))
         if (filterBy.groupId) {
-            board.groups = board.groups.filter(group => group.id === filterBy.groupId)
+            filteredBoard.groups = filteredBoard.groups.filter(group => group.id === filterBy.groupId)
         }
         function filterTasks(cb) {
-            board.groups = board.groups.map(group => {
+            filteredBoard.groups = filteredBoard.groups.map(group => {
                 group.tasks = group.tasks.filter(cb)
                 return group;
             })
