@@ -13,6 +13,10 @@
             margin-right: 5px;
         }
 
+        input {
+            padding-right: 25px;
+        }
+
         .tag-add-container {
             svg {
                 margin-right: 0;
@@ -22,6 +26,7 @@
             border-bottom: 1px solid #e0dcdc;
             z-index: 2;
             width: 150px;
+            top: 0;
             padding: 0 0px;
         }
     }

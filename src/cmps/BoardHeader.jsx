@@ -19,7 +19,9 @@ export class _BoardHeader extends React.Component {
     componentDidMount() {
         this.editableName = React.createRef();
         this.editableDescription = React.createRef();
-        socketService.on('updatedBoard', () =>{
+        this.searchInput = React.createRef();
+
+        socketService.on('updatedBoard', () => {
             this.setState({ ...this.props.board })
         })
         this.setState({ ...this.props.board })
@@ -107,8 +109,8 @@ export class _BoardHeader extends React.Component {
                 </div>
                 <div className="col-right flex align-center">
                     <button onClick={this.props.onAddGroup}>New Group</button>
-                    <div className="search-outer-container flex align-center">
-                        <input placeholder="Search" type='text' onChange={this.props.handleSearch} />
+                    <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
+                        <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />
                         <GoSearch />
                     </div>
                     <div onClick={this.onToggleActivities} className="activities-outer-container flex align-center  cursor-pointer">
