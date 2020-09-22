@@ -87,6 +87,8 @@ export class Group extends Component {
         if (!this.state.id) return <h1>Loading...</h1>
         const { name, ElGroupSettings, elGroupColors } = this.state;
         const statusData = this.statusPercentage;
+        const taskCount = this.props.group.tasks.length;
+        console.log('tasks',taskCount);
         return (
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>
