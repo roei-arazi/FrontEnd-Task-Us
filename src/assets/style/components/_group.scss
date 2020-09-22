@@ -1,13 +1,5 @@
 .group {
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-        color: $colorFontTaskGroup;
-    }
-
     svg {
         font-size: 1.5rem;
 
@@ -90,9 +82,11 @@
             }
             &:hover{
                 border: 1px solid $colorFontTaskGroup;
+                border-left:0;
             }
             &:focus{
                 border: 1px solid $buttonMainBg;
+                border-left:0;
             }
         }
 
@@ -124,6 +118,6 @@
 
 .drag-over {
     transition: 0.3s ease;
-    background-color: rgba($colorMainNav, 0.5)
+    background-color: rgba($mainLightGrey, 0.3)
 }
 

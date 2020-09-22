@@ -140,12 +140,12 @@ export class Group extends Component {
                             </div>
                             <div className="group-header-right flex">
 
-                                <h3 style={{ color: this.props.group.color }}>Updates</h3>
-                                <h3 style={{ color: this.props.group.color }}>Members</h3>
-                                <h3 style={{ color: this.props.group.color }}>Status</h3>
-                                <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
-                                <h3 style={{ color: this.props.group.color }}>Priority</h3>
-                                {/* <h3>Tags</h3> */}
+                                <h3 style={{color:this.props.group.color}}>Updates</h3>
+                                <h3 style={{color:this.props.group.color}}>Members</h3>
+                                <h3 style={{color:this.props.group.color}}>Status</h3>
+                                <h3 style={{color:this.props.group.color}}>Due-Date</h3>
+                                <h3 style={{color:this.props.group.color}}>Priority</h3>
+                                <h3 style={{color:this.props.group.color}}>Tags</h3>
                             </div>
                         </div>
 
@@ -168,6 +168,7 @@ export class Group extends Component {
                         </Droppable>
 
                         <div className="task task-add">
+                            <div className="task-color" style={{backgroundColor:this.props.group.color}}></div>
                             <form onSubmit={(ev) => {
                                 ev.preventDefault()
                                 this.props.onAddTask(this.props.group.id, this.elInputAdd.current.value)

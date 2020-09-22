@@ -10,8 +10,8 @@ export class Tags extends Component {
     }
 
     componentDidMount() {
-        console.log('HELO?!@#!?@', this.props.task.tags)
 
+        this.elTagInput = React.createRef();
         this.elTag = React.createRef();
 
         this.setState({ tags: JSON.parse(JSON.stringify(this.props.task.tags)) })
@@ -29,10 +29,12 @@ export class Tags extends Component {
 
     onAddTag = () => {
         const tags = [...this.state.tags]
-        tags.push({ id: this._makeid(), txt: "New tag", color: "coral" })
+        const tagName = this.elTagInput.current.value ? this.elTagInput.current.value : 'New Tag'
+        tags.push({ id: this._makeid(), txt: tagName, color: _getRandomColor() })
         this.setState({ tags });
         this.props.onEditTags(tags)
     }
+
     onRemoveTag = (id) => {
         const tags = this.state.tags.filter(tag => tag.id !== id)
         this.setState({ tags });
@@ -103,7 +105,10 @@ export class Tags extends Component {
                                     </div>
                                 )
                             })}
-                            <BsFilePlus onClick={this.onAddTag} />
+                            <div className="tag-add-container flex justify-center align-center">
+                                <input ref={this.elTagInput} type="text" />
+                                <BsFilePlus onClick={this.onAddTag} />
+                            </div>
                         </section>
                     </div>
                 }
@@ -113,4 +118,12 @@ export class Tags extends Component {
     }
 }
 
+function _getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 

@@ -16,9 +16,26 @@ export class Updates extends React.Component {
     }
 
     handleChange = (ev) => {
-        this.setState({ update: { ...this.state.update, txt: ev.target.value } })
+        console.log('show file', ev.target.files[0])
+        if (ev.target.name === 'file-img') {
+            this.setState({ update: { ...this.state.update, img: ev.target.files[0] } }, () => {
+                this.uploadImg()
+            })
+        } else {
+            this.setState({ update: { ...this.state.update, txt: ev.target.value } })
+        }
     }
 
+    uploadImg = async () => {
+        const res = await cloudinaryService.uploadImg(this.state.update.img, this.state)
+        const newImg = {
+            member: this.props.loggedUser.fullName,
+            txt: res.url
+        }
+        const updates = [newImg, ...this.props.updates]
+        this.props.sendNote(updates)
+
+    }
     sendNote = (ev) => {
         console.log('TASK FRROM NOTE', this.props.task)
         ev.preventDefault()
@@ -32,18 +49,6 @@ export class Updates extends React.Component {
         this.setState({ updates, update: { txt: '' } })
 
         this.props.sendNote(updates)
-    }
-    uploadImg = async (ev) => {
-        console.log('TASK FRROM IMG', this.props.task)
-
-        const res = await cloudinaryService.uploadImg(ev, this.state)
-        const newImg = {
-            member: this.props.loggedUser.fullName,
-            txt: res.url
-        }
-        const updates = [newImg, ...this.props.updates]
-        this.props.sendNote(updates)
-
     }
 
 
@@ -62,7 +67,7 @@ export class Updates extends React.Component {
                         </form>
                         <div className="image-uploader">
                             <label htmlFor="task-imgs">Upload Image</label>
-                            <input type="file" id="task-imgs" onChange={(this.uploadImg)} hidden />
+                            <input name="file-img" type="file" id="task-imgs" onChange={(this.handleChange)} hidden />
                         </div>
                     </div>
                 </div>

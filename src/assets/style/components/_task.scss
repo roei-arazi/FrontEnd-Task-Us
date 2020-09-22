@@ -1,15 +1,19 @@
 .task {
     display: flex;
-    background-color: #f1f1f1;
+    background-color: $taskBg;
     margin-bottom: 2px;
     height: 40px;
     border-radius: 1px;
 
+    *> {
+        height: 100%;
+    }
+
     .task-left {
+
         h2 {
             margin-left: 15px;
             font-weight: 400;
-            color: #434343;
 
             &:hover {
                 color: $buttonMainBg;
@@ -19,6 +23,12 @@
 
     svg {
         font-size: 2rem;
+        color: $mainLightGrey;
+        transition: .3s;
+
+        &:hover {
+            color: $buttonMainBg
+        }
     }
 
     .task-remove-icon {
@@ -27,17 +37,17 @@
     }
 
     .users-modal {
-        background-color: #eae9d5;
+        background-color: $white;
         z-index: 999;
         padding: 10px;
         width: 250px;
-        border-radius: 1px;
+        border-radius: 5px;
         top: 35px;
         right: 0;
         box-shadow: $modalsShadow;
 
         .task-users-box {
-            border-bottom: 2px solid $colorMainNav;
+            border-bottom: 2px solid $mainLightGrey;
             padding: 10px 0;
             cursor: pointer;
 
@@ -91,18 +101,22 @@
         padding-bottom: 7.5px;
         border-radius: 1px;
         text-align: center;
-        color: #4d4b4b;
+        color:  $inputColor;
+    }
 
-        .tags {
-            height: 100%;
+    .tags {
+        height: 100%;
+
+        .task-label-name {
             overflow: overlay;
+        }
 
-            .tag-remove-icon {
-                font-size: 1.2rem;
-                transform: rotate(180deg);
-            }
+        .tag-remove-icon {
+            font-size: 1.2rem;
+            transform: rotate(180deg);
         }
     }
+
 
     .icon-container {
         margin-left: 5px;
@@ -125,6 +139,18 @@
     }
 }
 
+.label-container {
+    height: 100%;
+}
+
+.label-box {
+    width: 100%;
+    text-align: center;
+    border-radius: 1px;
+    cursor: default;
+    font-size: 0.8rem;
+    height: 100%;
+}
 .task-label-name {
     height: 100%;
     width: 100%;
@@ -132,38 +158,32 @@
 
     &:hover {
         transition: 0.3s;
-        filter: brightness(0.8);
+        box-shadow: $brightBoxShadow;
     }
 }
 
-.label-box {
-    width: 100%;
-    text-align: center;
-    border-radius: 1px;
-    padding: 5px 0;
-    cursor: default;
-}
 
 .label-list {
     width: 150px;
-    background-color: #eae9d5;
+    background-color:$white;
     box-shadow: $modalsShadow;
     z-index: 999;
-    padding: 10px;
     border-radius: 1px;
     right: 0;
     word-break: break-all;
+    padding:5px 5px 0 5px;
+
 
     >*:hover {
         transition: 0.3s;
-        filter: brightness(0.8);
+        box-shadow: $brightBoxShadow;
     }
 
     .label-selector {
-        width: 90%;
+        width: 100%;
         text-align: center;
-        padding: 5px 0;
-        margin-bottom: 10px;
+        height:40px;
+        margin-bottom: 5px;
         border-radius: 1px;
         cursor: pointer;
     }
@@ -171,18 +191,17 @@
 
 .drag {
     transition: 0.3s;
-    border: 2px $colorMainNav solid
+    background-color: #f5f5f585;
 }
 
 .task-left {
     position: relative;
 
-    .task-color {
-        background: red;
-        width: 7px;
-        height: 40px;
-    }
 }
+        .task-color {
+            width: 7px;
+            height: 40px;
+        }
 
 .task-right {
     height: 100%;
@@ -291,7 +310,7 @@
 
 .updates-image-modal {
     animation: scale-in-ver-top .3s;
-    padding: 25px 25px 0;
+    padding: 25px;
     box-shadow: $modalsShadow;
     background-color: $colorTask;
     top: 5vh;
@@ -384,16 +403,15 @@
 
 // Labels
 .stuck {
-    background-color: #b94444;
+    background-color: #e44258;
 }
 
 .working {
-    background-color: #c5b139;
-    font-size: 0.9rem;
+    background-color: #fdab3d;
 }
 
 .done {
-    background-color: #407740;
+    background-color: #00ca72;
 }
 
 .low {
