@@ -33,13 +33,12 @@ class _MyWeek extends Component {
                     task.boardId = board._id;
                     task.boardName = board.name;
                     task.groupName = group.name;
-                    console.log('after', moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days')));
-                    // console.log('before', moment().isBefore(moment(task.dueDate).add(minDaysLeft, 'days')));
-                    const isAfter = minDaysLeft ? moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days')) : true;
+                    const isAfter = minDaysLeft ? moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days').endOf('day')) : true;
                     console.log('isAfter:', isAfter);
-                    return moment(task.dueDate).isBefore(moment().add(maxDaysLeft, 'days'))
-                        && isAfter;
-                    // && task.members.some(member => member._id === loggedUser._id)
+                    console.log('check:', moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days').endOf('day')));
+                    return moment(task.dueDate).isBefore(moment().add(maxDaysLeft, 'days').startOf('day'))
+                        && isAfter
+                        // && task.members.some(member => member._id === loggedUser._id)
                 }));
             })
         })
