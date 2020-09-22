@@ -54,9 +54,9 @@ export default class Activities extends Component {
                     <div className='filters-container space-between flex align-center'>
                         <input onChange={this.handleSearch} type="text" placeholder="Search" />
                         {isOrderReversed ?
-                            <div data-title="test"><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
+                            <div data-title="Sort"><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
                             :
-                            <div data-title="test"><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
+                            <div data-title="Sort"><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
                         }
                     </div>
 

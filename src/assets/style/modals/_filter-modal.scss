@@ -2,12 +2,12 @@
     z-index: 999;
     top: 30px;
     right: 0;
-    background-color: $colorBg;
+    background-color: $white;
     border-radius: 5px;
     box-shadow: $modalsShadow;
     padding: 0 10px 10px 10px;
     cursor: auto;
-    max-height:400px;
+    max-height: 400px;
 
     >* {
         max-height: 100%;
@@ -19,25 +19,25 @@
             overflow-y: overlay;
 
             .remove-filter-btn {
-                background-color: $colorBgBoardBars;
+                background-color: $buttonMainHover;
             }
         }
 
         h3 {
-            color: $colorBgBoardBars;
+            color: $mainBlack;
             margin: 10px 0;
         }
 
         button {
             padding: 5px 10px;
             width: 100%;
-            background-color: $buttonColorSecondary;
-            color: $mainBlack;
+            background-color: $buttonMainBg;
+            color: $colorIconsNav;
             margin-bottom: 5px;
         }
 
         button:hover {
-            background-color: $colorIconsTasksHover;
+            background-color: $buttonMainHover;
         }
     }
 }

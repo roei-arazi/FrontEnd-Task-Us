@@ -57,11 +57,12 @@ input {
   margin: 10px 0;
 
   &::placeholder {
-    color: $mainBlack;
+    color: $mainLightGrey;
   }
 
   &:focus {
     background-color: $colorInputFieldFocus;
+    border-bottom: 2px solid $mainBlack;
   }
 
 }
@@ -79,7 +80,7 @@ button {
   transition: .3s;
 
   &:hover {
-    background-color: rgba($colorIconsBoardBarsHover, .2);
+    background-color: rgba($navIconHover, .2);
   }
 }
 
@@ -116,8 +117,8 @@ span.span-user-details {
 }
 
 .content-editable:focus {
-  border: 2px dotted $colorMainNav;
-  color: rgba($colorFontTaskGroup, .85);
+  border: $dottedBorder;
+  color: $mainLightGrey;
 }
 
 //Titles 
@@ -168,15 +169,17 @@ div[role="menuContainer"]>div>ul>li {
 }
 
 ::-webkit-scrollbar-track {
-  background: $colorBg;
+  background: $white;
   border-radius: 1px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient($mainBlack, $colorMainNav);
+  background: $mainLightGrey;
   border-radius: 1px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient($mainBlack, $colorMainNav)
+  transition: .3s;
+  background: #a0a0a0;
+  border-radius: 1px;
 }

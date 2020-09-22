@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 
 export function Date(props){
     return(
-        <label>
+        <label className="date-picker">
         <DatePicker
             selected={props.dueDate}
             onChange={props.handleDateChange}

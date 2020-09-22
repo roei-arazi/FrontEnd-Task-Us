@@ -182,9 +182,9 @@ class _Task extends Component {
                                         onFocus={this.focusText}
                                         className="cursor-initial content-editable"
                                         innerRef={this.contentEditable}
-                                        html={name} // innerHTML of the editable div
-                                        disabled={false}       // use true to disable editing
-                                        onChange={this.handleNameChange} // handle innerHTML change
+                                        html={name}
+                                        disabled={false}
+                                        onChange={this.handleNameChange}
                                         onBlur={() => {
                                             this.props.onEditTask(this.state.task)
                                         }}
@@ -192,7 +192,6 @@ class _Task extends Component {
                                             if (ev.key === 'Enter') {
                                                 ev.target.blur()
                                                 this.props.onEditTask(this.state.task)
-                                                // this.ChangeEditState()
                                             }
                                         }}
                                     />
@@ -201,11 +200,11 @@ class _Task extends Component {
 
                             <div className="task-right flex align-center">
 
-                                <div>
+                               
                                     <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
                                         {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
                                     </div>
-                                </div>
+                               
 
                                 <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
