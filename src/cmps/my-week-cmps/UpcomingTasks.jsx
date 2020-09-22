@@ -6,7 +6,7 @@ function _UpcomingTasks(props) {
 
     function getDaysFromNow(date) {
         if (moment(date).isAfter(moment().add(1, 'day').endOf('day'))) {
-            return moment(date).format('MMM.DD')
+            return moment(date).format('MMM DD')
         }
         return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'
     }

@@ -30,8 +30,7 @@ class _MyWeek extends Component {
                     const belongsToUser = task.members.some(member => member._id === loggedUser._id)
                     const isAfter = minDaysLeft ? moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days').endOf('day')) : true;
                     return moment(task.dueDate).isBefore(moment().add(maxDaysLeft, 'days').startOf('day'))
-                        && isAfter 
-                        // && belongsToUser
+                        && isAfter && belongsToUser
                 }));
             })
         })
@@ -45,9 +44,6 @@ class _MyWeek extends Component {
     }
 
     applySearch(tasks, searchVal) {
-        console.log('got tasks:', tasks);
-        tasks.forEach(task => console.log(task.name, searchVal))
-        // return tasks.filter(task => task.name.includes(searchVal))
         return tasks.filter(task => task.name.toLowerCase().includes(searchVal.toLowerCase()))
     }
 
@@ -55,13 +51,11 @@ class _MyWeek extends Component {
         let todaysTasks = this.getUpcomingTasks(1);
         let upcomingTasks = this.getUpcomingTasks(7, 1);
         const { searchVal } = this.state;
-        console.log('search value:', searchVal);
         const firstName = this.props.loggedUser.fullName.split(' ')[0]
         const taskCount = todaysTasks.length + upcomingTasks.length;
         if (searchVal) {
             todaysTasks = this.applySearch(todaysTasks, searchVal)
             upcomingTasks = this.applySearch(upcomingTasks, searchVal)
-            console.log('after filter:', todaysTasks);
         }
         return (
             <section className="my-week flex">
@@ -77,7 +71,7 @@ class _MyWeek extends Component {
                         </div>
                     </div>
                     <input className="task-search" onChange={this.handleChange} value={searchVal} type="text" placeholder="search" />
-                    {upcomingTasks.length && todaysTasks.length ?
+                    {taskCount ?
                         <Fragment>
                             <UpcomingTasks header="Today" tasks={todaysTasks} />
                             <UpcomingTasks header="Upcoming" tasks={upcomingTasks} />
