@@ -62,7 +62,7 @@ class _Task extends Component {
 
     handleChange = (data, tags) => {
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-            this.setState({ task: { ...this.state.task, status: data } }, () => { 
+            this.setState({ task: { ...this.state.task, status: data } }, () => {
                 this.props.onEditTask(this.state.task)
             })
         } else if (data === 'tag') {
@@ -186,12 +186,12 @@ class _Task extends Component {
                                         disabled={false}
                                         onChange={this.handleNameChange}
                                         onBlur={() => {
-                                            this.props.onEditTask(this.state.task)
+                                            this.props.onEditTask(this.state.task, this.state.task.name, name)
                                         }}
                                         onKeyDown={(ev) => {
                                             if (ev.key === 'Enter') {
                                                 ev.target.blur()
-                                                this.props.onEditTask(this.state.task)
+                                                this.props.onEditTask(this.state.task, this.state.task.name, name)
                                             }
                                         }}
                                     />
@@ -200,11 +200,11 @@ class _Task extends Component {
 
                             <div className="task-right flex align-center">
 
-                               
-                                    <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
-                                        {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
-                                    </div>
-                               
+
+                                <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
+                                    {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
+                                </div>
+
 
                                 <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}

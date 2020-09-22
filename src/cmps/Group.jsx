@@ -150,7 +150,7 @@ export class Group extends Component {
                                         onKeyDown={(ev) => {
                                             if (ev.key === 'Enter') {
                                                 ev.target.blur()
-                                                this.props.onEditTask(this.state)
+                                                this.props.onEditGroup(this.state, this.state.name, name)
                                             }
                                         }}
                                     />
