@@ -1,35 +1,27 @@
 .my-week {
     position: relative;
-
-
     .search-container {
         width: 95%;
         padding-left: 15px;
         padding-right: 50px;
     }
-
     .my-week-container {
         display: flex;
         flex-direction: column;
         padding: 0px 50px;
         width: 100%;
         background-color: $colorBg;
-
         input {
             font-size: 1.2rem;
             color: $colorInputFieldFocus;
             border-bottom-color: $colorInputFieldDark;
-
             &::placeholder {
                 color: $colorInputFieldDark;
             }
-
             &:focus {
                 background-color: $colorInputFieldFocus;
-
             }
         }
-
         h1,
         h2,
         h3,
@@ -37,23 +29,19 @@
         h5 {
             color: $colorFontUserDetails;
         }
-
         h1 {
             font-size: 1.9rem;
             margin-bottom: 50px;
         }
     }
-
     .my-week-header {
         margin: 5vh 0px;
         height: 15vh;
         width: 500px;
-
         div {
             h1 {
                 margin: auto;
             }
-
             img {
                 height: 100px;
                 width: 110px;
@@ -61,80 +49,68 @@
             }
         }
     }
-
     .task-preview {
         display: flex;
-
-        .user-img-container {
-            width: 80px;
-
-            img,
-            .member-letter {
-                height: 30px;
-                width: 30px;
-            }
-
-            .task-number-of-imgs {
-                right: 15px;
-                height: 20px;
-                width: 20px;
-
+        height: 64px;
+        border-radius: 8px;
+        border: 1px solid #c5c7d0;
+        margin-bottom: 10px;
+        .left-column{
+            margin: 0 16px;
+            .task-preview-name {
+                font-size: 22px;
+                font-weight: 400;
             }
         }
-
-        * {
-            width: 100px;
-            text-align: center;
-        }
-
+        .right-column {
+            height: 100%;
+            width: 196px;
+            .user-img-container {
+                width: 80px;
+                img, 
+                .member-letter {
+                    height: 35px;
+                    width: 35px;
+                }
+                .task-number-of-imgs {
+                    right: 15px;
+                    height: 20px;
+                    width: 20px; 
+                }
+            }
+            .deadline-container{
+                width: 145px;
+                height: 100%; 
+                justify-content: center;
+                background-color: #D7DBD4
+            }
+        } 
         .label-box {
             height: 90%;
             border-radius: 1px;
             width: 100px;
         }
-
         .task-location {
             color: gray;
-
             span {
                 cursor: pointer;
-
                 &:hover {
                     text-decoration: underline;
                 }
             }
         }
     }
-
     .upcoming-tasks-container {
         max-height: 70vh;
         overflow-y: overlay;
     }
-
     .upcoming-tasks {
         width: 95%;
-
-        > :nth-child(even) {
-            background-color: $colorBgBoardBars;
-            border-radius: 1px;
-
-            *:not(.label-box) {
-                color: $colorFontNav;
-            }
-
-            .label-box {
-                p {
-                    color: #f1f1f1;
-                }
-            }
-        }
     }
-
     .greeting-container {
         width: 90%;
         margin-left: 50px;
     }
-
     .no-tasks {
         font-size: 3rem;
         position: absolute;

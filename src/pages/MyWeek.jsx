@@ -99,17 +99,21 @@ class _MyWeek extends Component {
                             <div className="upcoming-tasks">
                                 {upcomingTasks.map(task => <div
                                     key={task.id}
-                                    className="task-preview space-between align-center padding-x-15">
-                                    <div>
-                                        <h2>{task.name}</h2>
+                                    className="task-preview space-between align-center">
+                                    <div className="left-column">
+                                        <p className="task-preview-name">{task.name}</p>
                                         <p className="task-location">Board: <span onClick={() => this.props.history.push(`/board/${task.boardId}`)}>{task.boardName}</span></p>
                                     </div>
-                                    <div className={`label-box ${task.status.toLocaleLowerCase()}`}> <p>{task.status}</p></div>
-                                    <div className="user-img-container flex justify-center align-center">
-                                        {task.members.length !== 0 && (task.members[0].imgUrl ? <img onClick={() => this.moveToUserProfile(task.members[0]._id)} alt="profile" src={task.members[0].imgUrl} />:
-                                        <div onClick={() => this.moveToUserProfile(task.members[0]._id)} className="member-letter">{task.members[0].fullName.charAt(0).toUpperCase()}</div>)}
-                                    </div>
-                                    <h2>{this.getDaysFromNow(task.dueDate)}</h2>
+                                    <section className="right-column flex align-center space-between">
+                                    <div className={`label-box flex align-center ${task.status.toLocaleLowerCase()}`}> <p>{task.status}</p></div>
+                                        <div className="user-img-container flex justify-center align-center">
+                                            {task.members.length !== 0 && (task.members[0].imgUrl ? <img onClick={() => this.moveToUserProfile(task.members[0]._id)} alt="profile" src={task.members[0].imgUrl} /> :
+                                                <div onClick={() => this.moveToUserProfile(task.members[0]._id)} className="member-letter">{task.members[0].fullName.charAt(0).toUpperCase()}</div>)}
+                                        </div>
+                                        <div className="deadline-container flex align-center">
+                                            <h2>{this.getDaysFromNow(task.dueDate)}</h2>
+                                        </div>
+                                    </section>
                                 </div>)}
                             </div>
                         </section> :
