@@ -9,11 +9,15 @@
             position: relative;
         }
 
-        svg:first-child {
-            margin-left: 5px;
+        svg {
+            margin-right: 5px;
         }
 
         .tag-add-container {
+            svg {
+                margin-right: 0;
+            }
+
             background-color: $white;
             border-bottom: 1px solid #e0dcdc;
             z-index: 2;
@@ -45,7 +49,7 @@
             color: $colorPlusCircleFont;
             border-radius: 50%;
             text-align: center;
-            right: -5px;
+            right: 5px;
             bottom: 2px;
             font-weight: bold;
             cursor: pointer;
