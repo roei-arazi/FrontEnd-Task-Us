@@ -5,7 +5,7 @@ import moment from 'moment';
 function _UpcomingTasks(props) {
 
     function getDaysFromNow(date) {
-        if (moment(date).isAfter(moment(Date.now()).add(1, 'day').endOf('day'))) {
+        if (moment(date).isAfter(moment().add(1, 'day').endOf('day'))) {
             return moment(date).format('dddd')
         }
         return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'
@@ -18,7 +18,7 @@ function _UpcomingTasks(props) {
     const { tasks, header } = props;
 
     return <div className="upcoming-tasks">
-        <h2>{`${header}: (${tasks.length})`}</h2>
+        <h2 className="tasks-header">{`${header}: (${tasks.length})`}</h2>
         {tasks.map(task => <div
             key={task.id}
             className="task-preview space-between align-center">

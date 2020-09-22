@@ -62,7 +62,7 @@ class _Task extends Component {
 
     handleChange = (data, tags) => {
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-            this.setState({ task: { ...this.state.task, status: data } }, () => {
+            this.setState({ task: { ...this.state.task, status: data } }, () => { 
                 this.props.onEditTask(this.state.task)
             })
         } else if (data === 'tag') {

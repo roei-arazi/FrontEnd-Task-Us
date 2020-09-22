@@ -23,17 +23,22 @@ class _MyWeek extends Component {
     }
 
     getUpcomingTasks(maxDaysLeft, minDaysLeft = 0) {
+        console.log('maxDaysLeft:', maxDaysLeft);
+        console.log('minDaysLeft:', minDaysLeft);
         const tasks = [];
         const { boards, loggedUser } = this.props;
         boards.forEach(board => {
             board.groups.forEach(group => {
                 tasks.push(...group.tasks.filter(task => {
-                    const now = Date.now();
                     task.boardId = board._id;
                     task.boardName = board.name;
                     task.groupName = group.name;
-                    return moment(task.dueDate).isBefore(moment(now).add(maxDaysLeft, 'days'))
-                        && moment(now).isAfter(moment(task.dueDate).add(minDaysLeft, 'days'))
+                    console.log('after', moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days')));
+                    // console.log('before', moment().isBefore(moment(task.dueDate).add(minDaysLeft, 'days')));
+                    const isAfter = minDaysLeft ? moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days')) : true;
+                    console.log('isAfter:', isAfter);
+                    return moment(task.dueDate).isBefore(moment().add(maxDaysLeft, 'days'))
+                        && isAfter;
                     // && task.members.some(member => member._id === loggedUser._id)
                 }));
             })
@@ -57,12 +62,19 @@ class _MyWeek extends Component {
         this.setState({ isOrderReversed: !this.state.isOrderReversed })
     }
 
+    applySearch(tasks, searchVal){
+        return tasks.filter(task => task.name.toLowerCase().includes(searchVal.toLocaleLowerCase()))
+    }
+
     render() {
         let todaysTasks = this.getUpcomingTasks(1);
         let upcomingTasks = this.getUpcomingTasks(7, 1);
         const { searchVal, isOrderReversed } = this.state;
         const firstName = this.props.loggedUser.fullName.split(' ')[0]
-        if (searchVal) upcomingTasks = upcomingTasks.filter(task => task.name.toLowerCase().includes(searchVal.toLocaleLowerCase()))
+        if (searchVal){
+             todaysTasks = this.applySearch(todaysTasks, searchVal)
+             upcomingTasks = this.applySearch(upcomingTasks, searchVal)
+            }
         return (
             <section className="my-week flex">
                 <Navbar />
