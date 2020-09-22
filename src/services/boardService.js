@@ -66,7 +66,7 @@ async function addBoard() {
                 "lastUpdated": 'yesterday',
                 "isSelected": false,
                 "posts": [],
-                "tags": [{ "txt": "uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" }, { "txt": "ux" }]
+                "tags": []
             }, {
                 "id": _makeid(),
                 "name": 'sneeze',
@@ -79,7 +79,7 @@ async function addBoard() {
                 "lastUpdated": 'yesterday',
                 "isSelected": false,
                 "posts": [],
-                "tags": [{ "txt": "uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" }, { "txt": "ux" }]
+                "tags": []
             }]
         }],
         "activityLog": [{
@@ -159,7 +159,7 @@ function addGroup(board) {
             "lastUpdated": 'yesterday',
             "isSelected": false,
             "posts": [],
-            "tags": ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
+            "tags": []
         }]
     }
     try {
@@ -207,7 +207,7 @@ async function addTask(groupId, taskName = 'Change Task Name', board) {
         lastUpdated: Date.now(),
         isSelected: false,
         posts: [],
-        tags: ['uilorem2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'ux']
+        tags: []
     }
     board.groups.map(group => {
         if (group.id === groupId) group.tasks.push(task)

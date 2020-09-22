@@ -9,10 +9,16 @@
             position: relative;
         }
 
+        svg:first-child {
+            margin-left: 5px;
+        }
+
         .tag-add-container {
-            position: fixed;
-            background-color: red;
+            background-color: $white;
+            border-bottom: 1px solid #e0dcdc;
             z-index: 2;
+            width: 150px;
+            padding: 0 0px;
         }
     }
 
@@ -35,12 +41,12 @@
             justify-content: center;
             align-items: center;
             position: absolute;
-            background-color: #0085ff;
-            color: #f2f1dfb0;
+            background-color: $buttonMainBg;
+            color: $colorPlusCircleFont;
             border-radius: 50%;
             text-align: center;
             right: -5px;
-            top: 6px;
+            bottom: 2px;
             font-weight: bold;
             cursor: pointer;
         }

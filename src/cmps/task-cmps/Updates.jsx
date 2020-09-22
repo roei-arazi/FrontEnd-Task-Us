@@ -66,8 +66,8 @@ export class Updates extends React.Component {
                             <IoMdSend onClick={this.sendNote} />
                         </form>
                         <div className="image-uploader">
-                            <label htmlFor="task-imgs">Upload Image</label>
-                            <input name="file-img" type="file" id="task-imgs" onChange={(this.handleChange)} hidden />
+                            <label htmlFor={this.props.task.id}>Upload Image</label>
+                            <input name="file-img" type="file" id={this.props.task.id} onChange={(this.handleChange)} hidden />
                         </div>
                     </div>
                 </div>
