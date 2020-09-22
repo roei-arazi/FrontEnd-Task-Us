@@ -89,7 +89,7 @@ export class Group extends Component {
         const statusData = this.statusPercentage;
         const taskCount = this.props.group.tasks.length;
         console.log('tasks',taskCount);
-        return (
+        return ( 
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>
                     <section key={this.props.group.id} className="group padding-y-45"
