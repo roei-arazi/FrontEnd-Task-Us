@@ -1,4 +1,5 @@
 .group {
+    position: relative;
     .delete-group-icon,
     .color-group-icon {
         margin-right: 5px;
@@ -90,9 +91,9 @@
     }
     .group-status {
         position: absolute;
-        right: 390px;
-        width: 120px;
-        height: 40px;
+        right: 360px;
+        width: 120px; 
+        height: 25px; 
         .status-bar{ 
             height: 100%;
             

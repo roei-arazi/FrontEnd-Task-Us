@@ -87,7 +87,9 @@ export class Group extends Component {
         if (!this.state.id) return <h1>Loading...</h1>
         const { name, ElGroupSettings, elGroupColors } = this.state;
         const statusData = this.statusPercentage;
-        return (
+        const taskCount = this.props.group.tasks.length;
+        console.log('tasks',taskCount);
+        return ( 
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>
                     <section key={this.props.group.id} className="group padding-y-45"
@@ -182,7 +184,7 @@ export class Group extends Component {
                             }
                         </Droppable>
 
-                        <div className="task task-add">
+                        <div className="task task-add"> 
                             <div className="task-color" style={{backgroundColor:this.props.group.color}}></div>
                             <form onSubmit={(ev) => {
                                 ev.preventDefault()

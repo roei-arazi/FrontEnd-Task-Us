@@ -62,7 +62,7 @@ class _Task extends Component {
 
     handleChange = (data, tags) => {
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-            this.setState({ task: { ...this.state.task, status: data } }, () => { 
+            this.setState({ task: { ...this.state.task, status: data } }, () => {
                 this.props.onEditTask(this.state.task)
                 this.closeModal()
             })
@@ -166,7 +166,6 @@ class _Task extends Component {
                             ref={provided.innerRef}
                         >
 
-                            
                             <div className="task-left flex align-center">
                                 <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
                                 <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>
@@ -197,11 +196,11 @@ class _Task extends Component {
 
                             <div className="task-right flex align-center">
 
-                               
-                                    <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
-                                        {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
-                                    </div>
-                               
+
+                                <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
+                                    {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
+                                </div>
+
 
                                 <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}

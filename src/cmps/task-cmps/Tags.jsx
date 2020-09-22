@@ -76,7 +76,7 @@ export class Tags extends Component {
                         if (idx > 2) return
                         if (idx > 1) return (
                             <div key={tag.id} className="task-number-of-tags">
-                                <span>{this.state.tags.length > 9 ? '+9' : this.state.tags.length - 2}</span>
+                                <span>{this.state.tags.length > 9 ? '+9' : `+${this.state.tags.length - 2}`}</span>
                             </div>
                         )
 
@@ -102,6 +102,7 @@ export class Tags extends Component {
                                     return (
                                         <div className="tag-container flex justify-center align-center" key={idx}>
                                             <RiDeleteBack2Line className="tag-remove-icon" onClick={() => this.onRemoveTag(tag.id)} />
+
                                             <input style={{ color: tag.color }} onBlur={(ev) => {
                                                 ev.target.blur()
                                                 this.onEditTag(idx)
@@ -112,7 +113,6 @@ export class Tags extends Component {
                                                         this.onEditTag(idx)
                                                     }
                                                 }}
-
                                                 onChange={(ev) => this.handleChange(ev, tag.id)} value={tag.txt} type="text" />
                                         </div>
                                     )
