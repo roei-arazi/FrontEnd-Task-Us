@@ -92,17 +92,21 @@
         border-radius: 1px;
         text-align: center;
         color: #4d4b4b;
+    }
 
-        .tags {
-            height: 100%;
+    .tags {
+        height: 100%;
+
+        .task-label-name {
             overflow: overlay;
+        }
 
-            .tag-remove-icon {
-                font-size: 1.2rem;
-                transform: rotate(180deg);
-            }
+        .tag-remove-icon {
+            font-size: 1.2rem;
+            transform: rotate(180deg);
         }
     }
+
 
     .icon-container {
         margin-left: 5px;
@@ -291,7 +295,7 @@
 
 .updates-image-modal {
     animation: scale-in-ver-top .3s;
-    padding: 25px 25px 0;
+    padding: 25px;
     box-shadow: $modalsShadow;
     background-color: $colorTask;
     top: 5vh;
