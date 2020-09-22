@@ -184,7 +184,7 @@ export class Group extends Component {
                             }
                         </Droppable>
 
-                        <div className="task task-add">
+                        <div className="task task-add"> 
                             <div className="task-color" style={{backgroundColor:this.props.group.color}}></div>
                             <form onSubmit={(ev) => {
                                 ev.preventDefault()
