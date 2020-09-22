@@ -67,10 +67,26 @@ export class Group extends Component {
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
 
+    get statusPercentage(){
+        const {tasks} = this.props.group;
+        const percent = tasks.length / 100;
+        const data = tasks.reduce((acc, task) =>{
+            console.log('acc:', acc);
+            console.log('task:', task);
+            if(!acc[task.status]) acc[task.status] = 0;
+            acc[task.status]++;
+            return acc;
+        }, {})
+        for(let key in data){
+            data[key] /= percent;
+        }
+        return data;
+    }
+
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const { name, ElGroupSettings, elGroupColors } = this.state;
-
+        const statusData = this.statusPercentage;
         return (
             <Draggable draggableId={this.props.group.id} index={this.props.index}>
                 {(provided, snapshot) =>
@@ -175,6 +191,11 @@ export class Group extends Component {
                             }} action="">
                                 <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
                             </form>
+                        </div>
+                        <div className="group-status flex">
+                            <div style={{width: `${statusData['Done']}%`}} data-title={`${statusData['Done']}%`} className="status-bar done"></div>
+                            <div style={{width: `${statusData['Working on it']}%`}} data-title={`${statusData['Working on it']}%`} className="status-bar working"></div>
+                            <div style={{width: `${statusData['Stuck']}%`}} data-title={`${statusData['Stuck']}%`} className="status-bar stuck"></div>
                         </div>
                     </section>
                 }

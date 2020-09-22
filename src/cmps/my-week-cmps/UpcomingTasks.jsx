@@ -9,7 +9,7 @@ function _UpcomingTasks(props) {
             return moment(date).format('MMM DD')
         }
         return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'
-    }
+    } 
 
     function moveToUserProfile(userId) {
         props.history.push(`/user/${userId}`)
