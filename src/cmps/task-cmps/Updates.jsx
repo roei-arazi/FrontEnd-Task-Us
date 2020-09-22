@@ -20,6 +20,7 @@ export class Updates extends React.Component {
     }
 
     sendNote = (ev) => {
+        console.log('TASK FRROM NOTE', this.props.task)
         ev.preventDefault()
         if (!this.state.update.txt || this.state.update.txt.split('').every(letter => letter === ' ')) return
         const newNote = {
@@ -33,6 +34,8 @@ export class Updates extends React.Component {
         this.props.sendNote(updates)
     }
     uploadImg = async (ev) => {
+        console.log('TASK FRROM IMG', this.props.task)
+
         const res = await cloudinaryService.uploadImg(ev, this.state)
         const newImg = {
             member: this.props.loggedUser.fullName,
@@ -59,9 +62,7 @@ export class Updates extends React.Component {
                         </form>
                         <div className="image-uploader">
                             <label htmlFor="task-imgs">Upload Image</label>
-                            <input type="file" id="task-imgs" onChange={(ev) => {
-                                this.uploadImg(ev)
-                            }} hidden />
+                            <input type="file" id="task-imgs" onChange={(this.uploadImg)} hidden />
                         </div>
                     </div>
                 </div>

@@ -14,10 +14,10 @@ export class Tags extends Component {
 
         this.elTag = React.createRef();
 
-        this.setState({ tags: this.props.task.tags })
+        this.setState({ tags: JSON.parse(JSON.stringify(this.props.task.tags)) })
     }
 
-    handleNameChange = (ev, id) => {
+    handleChange = (ev, id) => {
         const tags = this.state.tags.map(tag => {
             if (tag.id === id) {
                 tag.txt = ev.target.value
@@ -37,6 +37,15 @@ export class Tags extends Component {
         const tags = this.state.tags.filter(tag => tag.id !== id)
         this.setState({ tags });
         this.props.onEditTags(tags)
+    }
+    onEditTag = (idx) => {
+        console.log('state:', this.state.tags[idx].txt)
+        console.log('props:', this.props.task.tags[idx].txt)
+        if (this.props.task.tags[idx].txt === this.state.tags[idx].txt) {
+            console.log('WIERD...',)
+            return
+        }
+        this.props.onEditTags(this.state.tags)
     }
 
     focusText = () => {
@@ -75,22 +84,22 @@ export class Tags extends Component {
                 {this.props.isTagsShown &&
                     <div className="label-list tags-modal absolute flex column align-center">
                         <section>
-                            {this.state.tags.map((tag) => {
+                            {this.state.tags.map((tag, idx) => {
                                 return (
                                     <div className="tag-container flex justify-center align-center" key={tag.id}>
-                                        <RiDeleteBack2Line onClick={() => this.onRemoveTag(tag.id)} />
+                                        <RiDeleteBack2Line className="tag-remove-icon" onClick={() => this.onRemoveTag(tag.id)} />
                                         <input style={{ color: tag.color }} onBlur={(ev) => {
                                             ev.target.blur()
-                                            this.props.onEditTags(this.state.tags)
+                                            this.onEditTag(idx)
                                         }}
                                             onKeyDown={(ev) => {
                                                 if (ev.key === 'Enter') {
                                                     ev.target.blur()
-                                                    this.props.onEditTags(this.state.tags)
+                                                    this.onEditTag(idx)
                                                 }
                                             }}
 
-                                            onChange={(ev) => this.handleNameChange(ev, tag.id)} value={tag.txt} type="text" />
+                                            onChange={(ev) => this.handleChange(ev, tag.id)} value={tag.txt} type="text" />
                                     </div>
                                 )
                             })}

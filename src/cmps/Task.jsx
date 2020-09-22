@@ -36,7 +36,6 @@ class _Task extends Component {
     componentDidMount() {
         this.contentEditable = React.createRef();
         socketService.on('updatedBoard', () => {
-
             this.setState({ task: this.props.task })
         })
         this.setState({
@@ -139,8 +138,7 @@ class _Task extends Component {
     }
 
     onEditTags = (tags) => {
-        console.log('SHOW ME THE TAGS', tags)
-        this.setState({ ...this.state, task: { ...this.state.task, tags } }, () => {
+        this.setState({ ...this.state, task: { ...this.state.task, tags: JSON.parse(JSON.stringify(tags)) } }, () => {
             this.props.onEditTask(this.state.task)
         })
 
@@ -156,7 +154,7 @@ class _Task extends Component {
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates isImageModalShown={this.state.isImageModalShown}
+                    <Updates task={this.state.task} isImageModalShown={this.state.isImageModalShown}
                         loggedUser={this.props.loggedUser} updates={updates}
                         onToggleImageModal={this.onToggleImageModal}
                         uploadImg={this.uploadImg} sendNote={this.sendNote}

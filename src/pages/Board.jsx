@@ -89,8 +89,8 @@ class _Board extends Component {
             filterTasks(task => {
                 return (
                     task.name.toLowerCase().includes(this.state.txt.toLowerCase())
-                    //  ||
-                    // task.tags.some(tag => tag.txt.toLowerCase().includes(this.state.txt.toLowerCase()))
+                    ||
+                    task.tags.some(tag => tag.txt.toLowerCase().includes(this.state.txt.toLowerCase()))
                 )
 
             })
