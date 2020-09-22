@@ -11,7 +11,7 @@
             font-weight: 400;
             color: #434343;
 
-            &:hover{
+            &:hover {
                 color: $buttonMainBg;
             }
         }
@@ -53,7 +53,7 @@
 
         h3 {
             margin-left: 35px;
-            
+
         }
 
         .user-box {
@@ -81,7 +81,7 @@
         }
     }
 
- 
+
 
     input {
         width: 100%;
@@ -93,28 +93,27 @@
         text-align: center;
         color: #4d4b4b;
 
-<<<<<<< HEAD
-    .tags {
-        height: 100%;
-        overflow: overlay;
+        .tags {
+            height: 100%;
+            overflow: overlay;
 
-        .tag-remove-icon {
-            font-size: 1.2rem;
-            transform: rotate(180deg);
+            .tag-remove-icon {
+                font-size: 1.2rem;
+                transform: rotate(180deg);
+            }
         }
     }
 
     .icon-container {
         margin-left: 5px;
-=======
->>>>>>> 8f9960c0b201f514a17cca090ba10c528c46fed8
     }
 
-    .react-datepicker__input-container{
+    .react-datepicker__input-container {
 
-        input{
+        input {
 
-            &:hover, &:focus{
+            &:hover,
+            &:focus {
                 border: $dottedBorder;
             }
         }
