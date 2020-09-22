@@ -14,27 +14,34 @@ export default class Activities extends Component {
     }
 
     componentDidMount() {
+        //TODO: search is not working as intended, sort as well
         const filteredActivities = this.props.activityLog.filter(activity => activity.isRead)
         const filteredActivitiesNotRead = this.props.activityLog.filter(activity => !activity.isRead)
         this.setState({ filteredActivities, filteredActivitiesNotRead })
     }
 
     handleSearch = ({ target }) => {
-        const filteredActivities = this.props.activityLog.filter((activitiy) => {
-            return activitiy.description.toLowerCase()
-                .includes(target.value.toLocaleLowerCase())
+        const filteredActivities = this.props.activityLog.filter((activity) => {
+            return activity.isRead &&
+                activity.description.toLowerCase().includes(target.value.toLocaleLowerCase())
                 ||
-                activitiy.byUser.fullName.toLowerCase()
-                    .includes(target.value.toLocaleLowerCase())
+                activity.byUser.fullName.toLowerCase().includes(target.value.toLocaleLowerCase())
         })
         this.setState({ filteredActivities })
+        const filteredActivitiesNotRead = this.props.activityLog.filter((activity) => {
+            return !activity.isRead &&
+                activity.description.toLowerCase().includes(target.value.toLocaleLowerCase())
+                ||
+                activity.byUser.fullName.toLowerCase().includes(target.value.toLocaleLowerCase())
+        })
+        this.setState({ filteredActivitiesNotRead })
     }
 
     reverseOrder = () => {
-        const filteredActivities = this.state.filteredActivities.sort((activitiy1, activitiy2) => {
+        const filteredActivities = this.state.filteredActivities.sort((activity1, activity2) => {
             const res = this.state.isOrderReversed ? -1 : 1;
-            if (activitiy1.createdAt < activitiy2.createdAt) return -res;
-            if (activitiy1.createdAt > activitiy2.createdAt) return res;
+            if (activity1.createdAt < activity2.createdAt) return -res;
+            if (activity1.createdAt > activity2.createdAt) return res;
             return 0;
         })
         this.setState({ isOrderReversed: !this.state.isOrderReversed })
