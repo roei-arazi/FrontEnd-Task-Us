@@ -11,6 +11,8 @@
         padding: 0px 50px;
         width: 100%;
         background-color: $colorBg;
+        height: 100vh;
+        overflow-y: overlay;
         input {
             font-size: 1.2rem;
             color: $colorInputFieldFocus;
@@ -41,7 +43,7 @@
         div {
             h1 {
                 margin: auto;
-            }
+            } 
             img {
                 height: 100px;
                 width: 110px;
@@ -49,65 +51,62 @@
             }
         }
     }
-    .task-preview {
-        display: flex;
-        height: 64px;
-        border-radius: 8px;
-        border: 1px solid #c5c7d0;
-        margin-bottom: 10px;
-        .left-column{
-            margin: 0 16px;
-            .task-preview-name {
-                font-size: 18px;
-                font-weight: 700;
-            }
-        }
-        .right-column {
-            height: 100%;
-            width: 196px;
-            .user-img-container {
-                width: 80px;
-                img, 
-                .member-letter {
-                    height: 35px;
-                    width: 35px;
-                }
-                .task-number-of-imgs {
-                    right: 15px;
-                    height: 20px;
-                    width: 20px; 
-                }
-            }
-            .deadline-container{
-                width: 145px;
-                height: 100%; 
-                justify-content: center;
-                background-color: #D7DBD4
-            }
-        } 
-        .label-box {
-            height: 90%;
-            border-radius: 1px;
-            width: 100px;
-        }
-        .task-location {
-            color: gray;
-            span {
-                cursor: pointer;
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
-    .upcoming-tasks-container {
-        max-height: 70vh;
-        overflow-y: overlay;
-    }
     .upcoming-tasks {
-        width: 95%;
-        *{
+        .tasks-header {
+            font-size: 1.875rem;
+            font-weight: 400; 
+            margin-bottom: 15px;
+        }
+        .task-preview {
+            display: flex;
+            height: 64px;
+            border-radius: 8px;
+            border: 1px solid #c5c7d0;
             margin-bottom: 10px;
+            .left-column {
+                margin: 0 16px;
+                .task-preview-name {
+                    font-size: 1.125rem;
+                    font-weight: 700;
+                }
+            }
+            .right-column {
+                height: 100%;
+                width: 196px;
+                .user-img-container {
+                    width: 80px;
+                    img,
+                    .member-letter {
+                        height: 35px;
+                        width: 35px;
+                    }
+                    .task-number-of-imgs {
+                        right: 15px;
+                        height: 20px;
+                        width: 20px;
+                    }
+                }
+                .deadline-container {
+                    width: 145px;
+                    height: 100%;
+                    justify-content: center;
+                    background-color: #D7DBD4
+                }
+            }
+            // .label-box {
+            //     height: 90%;
+            //     border-radius: 1px;
+            //     width: 100px;
+            // }
+            .task-location {
+                color: gray;
+                span {
+                    cursor: pointer;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
         }
     }
     .greeting-container {
