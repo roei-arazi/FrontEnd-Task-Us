@@ -71,12 +71,17 @@ export class Tags extends Component {
         if (!this.state.tags || this.state.tags === 0) return <h1>no tags</h1>
         return (
             <div onClick={() => this.props.openModal('tags')} className="label-container tags relative">
-                <div className="task-label-name">
+                <div className="task-label-name flex justify-center align-center ">
                     {this.state.tags.map((tag, idx) => {
+                        if (idx > 2) return
+                        if (idx > 1) return <div className="task-number-of-tags">
+
+                            <span>{this.state.tags.length > 9 ? '+9' : this.state.tags.length - 2}</span></div>
+
                         return (
                             <p style={{ color: tag.color }} key={idx}>
-                                <Truncate lines={1} ellipsis={"..."} width={100}>
-                                    {idx === this.state.tags.length - 1 ? tag.txt : tag.txt + ","}
+                                <Truncate lines={1} ellipsis={"..."} width={75}>
+                                    {idx === this.state.tags.length - 1 ? tag.txt : (idx === 1 ? tag.txt : tag.txt + ",")}
                                 </Truncate>
                             </p>
                         )
@@ -105,11 +110,11 @@ export class Tags extends Component {
                                     </div>
                                 )
                             })}
-                            <div className="tag-add-container flex justify-center align-center">
-                                <BsFilePlus onClick={this.onAddTag} />
-                                <input placeholder="New tag" ref={this.elTagInput} type="text" />
-                            </div>
                         </section>
+                        <div className="tag-add-container  flex justify-center align-center">
+                            <BsFilePlus onClick={this.onAddTag} />
+                            <input placeholder="New tag" ref={this.elTagInput} type="text" />
+                        </div>
                     </div>
                 }
 

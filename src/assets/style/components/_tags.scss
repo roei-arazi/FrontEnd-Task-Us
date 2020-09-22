@@ -1,0 +1,53 @@
+.tags {
+    height: 100%;
+
+    .tags-modal {
+
+        section {
+            max-height: 300px;
+            overflow: overlay;
+            position: relative;
+        }
+
+        .tag-add-container {
+            position: fixed;
+            background-color: red;
+            z-index: 2;
+        }
+    }
+
+
+
+    .task-label-name {
+        overflow: overlay;
+        flex-wrap: wrap;
+
+        p {
+            width: 100%;
+        }
+
+        .task-number-of-tags {
+            font-family: monospace;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            background-color: #0085ff;
+            color: #f2f1dfb0;
+            border-radius: 50%;
+            text-align: center;
+            right: -5px;
+            top: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+
+    .tag-remove-icon {
+        font-size: 1.2rem;
+        transform: rotate(180deg);
+    }
+}
