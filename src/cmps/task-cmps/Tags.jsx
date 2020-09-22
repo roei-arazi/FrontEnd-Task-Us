@@ -106,8 +106,8 @@ export class Tags extends Component {
                                 )
                             })}
                             <div className="tag-add-container flex justify-center align-center">
-                                <input ref={this.elTagInput} type="text" />
                                 <BsFilePlus onClick={this.onAddTag} />
+                                <input placeholder="New tag" ref={this.elTagInput} type="text" />
                             </div>
                         </section>
                     </div>
