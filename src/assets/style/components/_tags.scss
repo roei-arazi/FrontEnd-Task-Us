@@ -1,0 +1,59 @@
+.tags {
+    height: 100%;
+
+    .tags-modal {
+
+        section {
+            max-height: 300px;
+            overflow: overlay;
+            position: relative;
+        }
+
+        svg:first-child {
+            margin-left: 5px;
+        }
+
+        .tag-add-container {
+            background-color: $white;
+            border-bottom: 1px solid #e0dcdc;
+            z-index: 2;
+            width: 150px;
+            padding: 0 0px;
+        }
+    }
+
+
+
+    .task-label-name {
+        overflow: overlay;
+        flex-wrap: wrap;
+
+        p {
+            width: 100%;
+        }
+
+        .task-number-of-tags {
+            font-family: monospace;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            background-color: $buttonMainBg;
+            color: $colorPlusCircleFont;
+            border-radius: 50%;
+            text-align: center;
+            right: -5px;
+            bottom: 2px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+
+    .tag-remove-icon {
+        font-size: 1.2rem;
+        transform: rotate(180deg);
+    }
+}
