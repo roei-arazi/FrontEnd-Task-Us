@@ -187,12 +187,12 @@ class _Task extends Component {
                                         disabled={false}
                                         onChange={this.handleNameChange}
                                         onBlur={() => {
-                                            this.props.onEditTask(this.state.task)
+                                            this.props.onEditTask(this.state.task, this.state.task.name, name)
                                         }}
                                         onKeyDown={(ev) => {
                                             if (ev.key === 'Enter') {
                                                 ev.target.blur()
-                                                this.props.onEditTask(this.state.task)
+                                                this.props.onEditTask(this.state.task, this.state.task.name, name)
                                             }
                                         }}
                                     />
