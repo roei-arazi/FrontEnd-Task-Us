@@ -58,8 +58,8 @@
         .left-column{
             margin: 0 16px;
             .task-preview-name {
-                font-size: 22px;
-                font-weight: 400;
+                font-size: 18px;
+                font-weight: 700;
             }
         }
         .right-column {
@@ -106,6 +106,9 @@
     }
     .upcoming-tasks {
         width: 95%;
+        *{
+            margin-bottom: 10px;
+        }
     }
     .greeting-container {
         width: 90%;

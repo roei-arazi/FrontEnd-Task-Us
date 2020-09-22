@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Boardbar } from '../cmps/Boardbar';
 import { loadBoards } from '../store/actions/boardActions'
@@ -7,6 +7,7 @@ import moment from 'moment'
 import { withRouter } from 'react-router-dom';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import { Tooltip, Zoom } from '@material-ui/core';
+import { UpcomingTasks } from '../cmps/my-week-cmps/UpcomingTasks';
 
 class _MyWeek extends Component {
     state = {
@@ -21,17 +22,19 @@ class _MyWeek extends Component {
 
     }
 
-    getUpcomingTasks(maxDaysLeft, minDaysLeft = -5) {
+    getUpcomingTasks(maxDaysLeft, minDaysLeft = 0) {
         const tasks = [];
-        const { boards } = this.props;
+        const { boards, loggedUser } = this.props;
         boards.forEach(board => {
             board.groups.forEach(group => {
                 tasks.push(...group.tasks.filter(task => {
                     const now = Date.now();
                     task.boardId = board._id;
                     task.boardName = board.name;
+                    task.groupName = group.name;
                     return moment(task.dueDate).isBefore(moment(now).add(maxDaysLeft, 'days'))
                         && moment(now).isAfter(moment(task.dueDate).add(minDaysLeft, 'days'))
+                    // && task.members.some(member => member._id === loggedUser._id)
                 }));
             })
         })
@@ -44,12 +47,7 @@ class _MyWeek extends Component {
         return tasks;
     }
 
-    getDaysFromNow(date) {
-        if (moment(date).isAfter(moment(Date.now()).add(1, 'day').endOf('day'))) {
-            return moment(date).format('dddd')
-        }
-        return moment(date).isBefore(moment().endOf('day')) ? 'Today' : 'Tomorrow'
-    }
+
 
     handleChange = ({ target }) => {
         this.setState({ searchVal: target.value })
@@ -59,12 +57,9 @@ class _MyWeek extends Component {
         this.setState({ isOrderReversed: !this.state.isOrderReversed })
     }
 
-    moveToUserProfile = (userId) => {
-        this.props.history.push(`/user/${userId}`)
-    }
-
     render() {
-        let upcomingTasks = this.getUpcomingTasks(7);
+        let todaysTasks = this.getUpcomingTasks(1);
+        let upcomingTasks = this.getUpcomingTasks(7, 1);
         const { searchVal, isOrderReversed } = this.state;
         const firstName = this.props.loggedUser.fullName.split(' ')[0]
         if (searchVal) upcomingTasks = upcomingTasks.filter(task => task.name.toLowerCase().includes(searchVal.toLocaleLowerCase()))
@@ -94,35 +89,16 @@ class _MyWeek extends Component {
                         }
                     </div>
                     {upcomingTasks.length ?
-                        <section className="upcoming-tasks-container">
-
-                            <div className="upcoming-tasks">
-                                {upcomingTasks.map(task => <div
-                                    key={task.id}
-                                    className="task-preview space-between align-center">
-                                    <div className="left-column">
-                                        <p className="task-preview-name">{task.name}</p>
-                                        <p className="task-location">Board: <span onClick={() => this.props.history.push(`/board/${task.boardId}`)}>{task.boardName}</span></p>
-                                    </div>
-                                    <section className="right-column flex align-center space-between">
-                                    <div className={`label-box flex align-center ${task.status.toLocaleLowerCase()}`}> <p>{task.status}</p></div>
-                                        <div className="user-img-container flex justify-center align-center">
-                                            {task.members.length !== 0 && (task.members[0].imgUrl ? <img onClick={() => this.moveToUserProfile(task.members[0]._id)} alt="profile" src={task.members[0].imgUrl} /> :
-                                                <div onClick={() => this.moveToUserProfile(task.members[0]._id)} className="member-letter">{task.members[0].fullName.charAt(0).toUpperCase()}</div>)}
-                                        </div>
-                                        <div className="deadline-container flex align-center">
-                                            <h2>{this.getDaysFromNow(task.dueDate)}</h2>
-                                        </div>
-                                    </section>
-                                </div>)}
-                            </div>
-                        </section> :
-                        <h1 className="no-tasks">No tasks left for this week</h1>
+                        <Fragment>
+                            <UpcomingTasks header="Today" tasks={todaysTasks} />
+                            <UpcomingTasks header="Upcoming" tasks={todaysTasks} />
+                        </Fragment>:
+                <h1 className="no-tasks">No tasks left for this week</h1>
                     }
                 </div>
 
 
-            </section>
+            </section >
         )
     }
 }
