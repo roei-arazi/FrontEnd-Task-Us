@@ -64,6 +64,7 @@ class _Task extends Component {
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
             this.setState({ task: { ...this.state.task, status: data } }, () => { 
                 this.props.onEditTask(this.state.task)
+                this.closeModal()
             })
         } else if (data === 'tag') {
             console.log('IMHERE, data:', data, 'tag:', tags)
@@ -72,6 +73,7 @@ class _Task extends Component {
         } else {
             this.setState({ task: { ...this.state.task, priority: data } }, () => {
                 this.props.onEditTask(this.state.task)
+                this.closeModal()
             })
         }
 
@@ -124,6 +126,7 @@ class _Task extends Component {
 
     goToUserProfile = (userId) => {
         this.props.history.push(`/user/${userId}`)
+        this.closeModal()
     }
 
     focusText = () => {
@@ -132,18 +135,11 @@ class _Task extends Component {
         }, 0)
     }
 
-    onToggleImageModal = (imgUrl) => {
-        this.setState({ imgUrl, isImageModalShown: !this.state.isImageModalShown })
-
-    }
-
     onEditTags = (tags) => {
         this.setState({ ...this.state, task: { ...this.state.task, tags: JSON.parse(JSON.stringify(tags)) } }, () => {
             this.props.onEditTask(this.state.task)
         })
-
     }
-
 
     render() {
 

@@ -28,10 +28,10 @@
             
         li{
             height:35px;
-            border-radius:10px;
+            border-radius:5px;
             &:hover{
                 transition:0.3s;
-                background-color: #beb7b766;
+                background-color: #88cded3d;             
             }
             
             h4{
@@ -39,6 +39,10 @@
                 display: flex;
                 align-items: center;
                 flex-grow: 1;
+                &:hover{
+                    transition: .3s;
+                    color:$buttonMainBg;
+                }
             }
 
             svg {
@@ -47,6 +51,10 @@
                 padding:2px;
                 margin-right: 5px;
                 border-radius: 5px;
+                &:hover{
+                    transition: .3s;
+                    color:$buttonMainBg;
+                }
             }
         }
     }
