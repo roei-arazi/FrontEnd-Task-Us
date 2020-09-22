@@ -195,8 +195,8 @@ export class Group extends Component {
                             }} action="">
                                 <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
                             </form>
-                        </div>
-                        <section className="group-precent-container flex">
+                        </div> 
+                        <section className="group-precent-container flex"> 
                         <div className="group-precent flex">
                             <div style={{width: statusData['Done'] ? `${statusData['Done']}%` : '0px'}} data-title={`${taskCount * statusData['Done'] / 100}/${taskCount} ${statusData['Done']}%`} className="precent-bar done"></div>
                             <div style={{width: statusData['Working on it'] ? `${statusData['Working on it']}%` : '0px'}} data-title={`${taskCount * statusData['Working on it'] / 100}/${taskCount} ${statusData['Working on it']}%`} className="precent-bar working"></div>
