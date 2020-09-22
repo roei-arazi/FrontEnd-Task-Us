@@ -170,6 +170,7 @@ class _Task extends Component {
                             ref={provided.innerRef}
                         >
 
+                            
                             <div className="task-left flex align-center">
                                 <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
                                 <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>

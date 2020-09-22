@@ -4,10 +4,12 @@
     margin-bottom: 2px;
     height: 40px;
     border-radius: 1px;
+
     &:hover {
         transition: .3s;
         background-color: #e8e8e8;
     }
+
     .task-color {
         width: 7px;
         margin-right: 1px;
@@ -46,6 +48,7 @@
     *> {
         height: 100%;
     }
+
     .task-left {
         position: relative;
         height: 100%;
@@ -67,13 +70,14 @@
         }
 
     }
+
     .task-right {
         height: 100%;
 
         >* {
             width: 120px;
-            height:100%;
-            display:flex;
+            height: 100%;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -330,6 +334,7 @@
 
     }
 }
+
 .drag {
     background-color: #e8e8e8;
 }
