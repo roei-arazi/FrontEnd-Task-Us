@@ -1,7 +1,7 @@
 .sign-login {
     background-color: $colorBg;
     height: 100vh;
-    color: $colorFontNav;
+    color: $mainBlack;
 }
 
 .go-back{
@@ -36,7 +36,7 @@
     button,
     section {
         width: 90%;
-        color: $colorFontNav;
+        color: $mainBlack;
     }
     svg{
         font-size: 5rem;
