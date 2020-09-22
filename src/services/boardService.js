@@ -218,6 +218,7 @@ async function addTask(groupId, taskName = 'Change Task Name', board) {
 }
 
 function updateTask(updatedTask, board) {
+    console.log('hello from board service', updatedTask, "board", board)
     board.groups = board.groups.map(group => {
         group.tasks = group.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
         return group;

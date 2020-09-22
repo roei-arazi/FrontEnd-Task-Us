@@ -48,6 +48,7 @@ class _Task extends Component {
             isUpdatesShown: false,
             isTagsShown: false
         })
+
     }
 
     handleNameChange = (ev) => {
@@ -137,10 +138,21 @@ class _Task extends Component {
 
     }
 
+    onEditTags = (tags) => {
+        console.log('SHOW ME THE TAGS', tags)
+        this.setState({ ...this.state, task: { ...this.state.task, tags } }, () => {
+            this.props.onEditTask(this.state.task)
+        })
+
+    }
+
+
     render() {
+
         if (!this.state.task) return <h1>Loading...</h1>
         const { name, members, status, priority, dueDate, updates, id } = this.state.task;
         const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown } = this.state
+
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
@@ -205,8 +217,8 @@ class _Task extends Component {
                                 <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
-                                <Tags handleChange={this.handleChange} onEditTask={this.props.onEditTask}
-                                    tags={this.state.task.tags} isTagsShown={isTagsShown}
+                                <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
+                                    task={this.state.task} isTagsShown={isTagsShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
                             </div>
                         </section>
