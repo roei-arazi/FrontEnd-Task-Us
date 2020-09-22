@@ -258,7 +258,6 @@ class _Board extends Component {
 
     render() {
         if (this.props.boards.length === 0) return <h1>Loading...</h1>
-        console.log('got boards:', this.props.boards.length);
         const board = this.props.boards.find(board => board._id === this.state.boardId)
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
