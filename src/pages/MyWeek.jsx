@@ -3,16 +3,12 @@ import { connect } from 'react-redux';
 import { Boardbar } from '../cmps/Boardbar';
 import { loadBoards } from '../store/actions/boardActions'
 import { Navbar } from '../cmps/Navbar';
-import moment from 'moment'
-import { withRouter } from 'react-router-dom';
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-import { Tooltip, Zoom } from '@material-ui/core';
+import moment from 'moment';
 import { UpcomingTasks } from '../cmps/my-week-cmps/UpcomingTasks';
 
 class _MyWeek extends Component {
     state = {
-        searchVal: '',
-        isOrderReversed: false
+        searchVal: ''
     }
 
     componentDidMount() {
@@ -23,8 +19,6 @@ class _MyWeek extends Component {
     }
 
     getUpcomingTasks(maxDaysLeft, minDaysLeft = 0) {
-        console.log('maxDaysLeft:', maxDaysLeft);
-        console.log('minDaysLeft:', minDaysLeft);
         const tasks = [];
         const { boards, loggedUser } = this.props;
         boards.forEach(board => {
@@ -33,20 +27,13 @@ class _MyWeek extends Component {
                     task.boardId = board._id;
                     task.boardName = board.name;
                     task.groupName = group.name;
+                    const belongsToUser = task.members.some(member => member._id === loggedUser._id)
                     const isAfter = minDaysLeft ? moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days').endOf('day')) : true;
-                    console.log('isAfter:', isAfter);
-                    console.log('check:', moment(task.dueDate).isAfter(moment().add(minDaysLeft, 'days').endOf('day')));
                     return moment(task.dueDate).isBefore(moment().add(maxDaysLeft, 'days').startOf('day'))
-                        && isAfter
-                        // && task.members.some(member => member._id === loggedUser._id)
+                        && isAfter 
+                        // && belongsToUser
                 }));
             })
-        })
-        tasks.sort((task1, task2) => {
-            const res = this.state.isOrderReversed ? -1 : 1;
-            if (task1.dueDate < task2.dueDate) return -res;
-            if (task1.dueDate > task2.dueDate) return res;
-            return 0;
         })
         return tasks;
     }
@@ -57,23 +44,25 @@ class _MyWeek extends Component {
         this.setState({ searchVal: target.value })
     }
 
-    reverseOrder = () => {
-        this.setState({ isOrderReversed: !this.state.isOrderReversed })
-    }
-
-    applySearch(tasks, searchVal){
-        return tasks.filter(task => task.name.toLowerCase().includes(searchVal.toLocaleLowerCase()))
+    applySearch(tasks, searchVal) {
+        console.log('got tasks:', tasks);
+        tasks.forEach(task => console.log(task.name, searchVal))
+        // return tasks.filter(task => task.name.includes(searchVal))
+        return tasks.filter(task => task.name.toLowerCase().includes(searchVal.toLowerCase()))
     }
 
     render() {
         let todaysTasks = this.getUpcomingTasks(1);
         let upcomingTasks = this.getUpcomingTasks(7, 1);
-        const { searchVal, isOrderReversed } = this.state;
+        const { searchVal } = this.state;
+        console.log('search value:', searchVal);
         const firstName = this.props.loggedUser.fullName.split(' ')[0]
-        if (searchVal){
-             todaysTasks = this.applySearch(todaysTasks, searchVal)
-             upcomingTasks = this.applySearch(upcomingTasks, searchVal)
-            }
+        const taskCount = todaysTasks.length + upcomingTasks.length;
+        if (searchVal) {
+            todaysTasks = this.applySearch(todaysTasks, searchVal)
+            upcomingTasks = this.applySearch(upcomingTasks, searchVal)
+            console.log('after filter:', todaysTasks);
+        }
         return (
             <section className="my-week flex">
                 <Navbar />
@@ -83,28 +72,17 @@ class _MyWeek extends Component {
                             <img src="my-week-calendar.png" alt="" />
                             <section className="greeting-container">
                                 <h1>{`Hey ${firstName},`}</h1>
-                                <h1>Welcome to My Week</h1>
+                                <h1>{taskCount ? `You have ${taskCount} assignments this week.` : 'You have no assignments this week'}</h1>
                             </section>
                         </div>
                     </div>
-                    <div className="search-container flex space-between align-center">
-                        <h2>Upcoming:</h2>
-                        <input onChange={this.handleChange} value={searchVal} type="text" placeholder="search" />
-                        {isOrderReversed ?
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
-                                <div><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
-                            </Tooltip> :
-                            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Order by date" arrow>
-                                <div><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
-                            </Tooltip>
-                        }
-                    </div>
-                    {upcomingTasks.length ?
+                    <input className="task-search" onChange={this.handleChange} value={searchVal} type="text" placeholder="search" />
+                    {upcomingTasks.length && todaysTasks.length ?
                         <Fragment>
                             <UpcomingTasks header="Today" tasks={todaysTasks} />
-                            <UpcomingTasks header="Upcoming" tasks={todaysTasks} />
-                        </Fragment>:
-                <h1 className="no-tasks">No tasks left for this week</h1>
+                            <UpcomingTasks header="Upcoming" tasks={upcomingTasks} />
+                        </Fragment> :
+                        <h1 className="no-tasks">No tasks left for this week</h1>
                     }
                 </div>
 
@@ -125,4 +103,4 @@ const mapDispatchToProps = {
     loadBoards
 }
 
-export const MyWeek = connect(mapStateToProps, mapDispatchToProps)(withRouter(_MyWeek));
+export const MyWeek = connect(mapStateToProps, mapDispatchToProps)(_MyWeek);
