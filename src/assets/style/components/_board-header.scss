@@ -1,5 +1,5 @@
 .board-header {
-    height: 20vh;
+    height: 15vh;
     background-color: $colorBgBoardBars;
     display: flex;
     justify-content: space-between;
@@ -9,23 +9,23 @@
         margin-bottom: 10px;
     }
 
-    svg {
-        color: $colorIconsBoardBars;
+    h5{
+        font-weight: 400;
+    }
 
-        &:hover {
-            color: $colorIconsBoardBarsHover;
-        }
+    svg {
+        color: $colorFontNav;
     }
 
     button {
-        color: $colorFontTaskGroup;
+        color: $colorBgBoardBars;
         font-weight: 700;
-        background-color: $colorMainNav;
+        background-color: $buttonMainBg;
         font-size: 1rem;
         padding: 12px 8px;
 
         &:hover {
-            background-color: $colorIconsBoardBarsHover;
+            background-color: $buttonMainHover;
         }
     }
 
@@ -37,21 +37,28 @@
         .search-outer-container {
             padding: 10px;
             flex-direction: row-reverse;
+            border-radius: 15px;
+            transition: .3s;
+            cursor: pointer;
+
+            &:hover{
+                background-color: rgba(128, 128, 128, 0.342);
+            }
         }
 
         input {
             width: 50px;
             animation: shorten .4s;
+            padding:0;
+            margin:0;
+            cursor: pointer;
 
             +svg {
-                cursor: initial;
+                cursor: pointer;
                 transition: .4s;
                 transform: translate(0, 0) rotate(0deg);
                 font-size: 1.5rem;
-
-                &:hover {
-                    color: $colorIconsBoardBars;
-                }
+                margin-bottom: 9px;
             }
 
             &:focus {
@@ -83,12 +90,6 @@
 
         &:hover {
             background-color: rgba(128, 128, 128, 0.342);
-        }
-
-        svg {
-            &:hover {
-                color: $colorIconsBoardBars;
-            }
         }
     }
 }

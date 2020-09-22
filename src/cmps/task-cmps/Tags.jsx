@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// import ContentEditable from 'react-contenteditable';
-// import Truncate from 'react-truncate'
+import ContentEditable from 'react-contenteditable';
+import Truncate from 'react-truncate'
 
 export class Tags extends Component {
 
@@ -10,6 +10,7 @@ export class Tags extends Component {
 
     componentDidMount() {
         this.elTag = React.createRef();
+        console.log('HELO?!@#!?@',)
     }
 
     getRandomColor() {
@@ -34,8 +35,7 @@ export class Tags extends Component {
     render() {
         return (
             <div className="label-container relative">
-            <h1>tags</h1>
-                {/* <div onClick={() => this.props.openModal('tags')} className="tags">
+                <div onClick={() => this.props.openModal('tags')} className="tags">
                     <div className="task-label-name">
                         {this.props.tags.map((tag, idx) => {
                             return (
@@ -81,7 +81,7 @@ export class Tags extends Component {
                         </div>
                     }
 
-                </div> */}
+                </div>
             </div>
         )
     }

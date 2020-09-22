@@ -51,26 +51,26 @@ class _Task extends Component {
     }
 
     handleNameChange = (ev) => {
-        this.setState({task:{...this.state.task, name: ev.target.value} });
+        this.setState({ task: { ...this.state.task, name: ev.target.value } });
     }
 
     handleDateChange = date => {
-        this.setState({task:{...this.state.task, dueDate: moment(date).valueOf()}}, () =>{
+        this.setState({ task: { ...this.state.task, dueDate: moment(date).valueOf() } }, () => {
             this.props.onEditTask(this.state.task)
         })
     }
 
     handleChange = (data, tags) => {
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-            this.setState({task: {...this.state.task, status: data} }, () =>{
+            this.setState({ task: { ...this.state.task, status: data } }, () => {
                 this.props.onEditTask(this.state.task)
             })
-        // } else if (data === 'tag') {
-        //     console.log('IMHERE, data:', data, 'tag:', tags)
-        //     this.setState({ ...this.state, tags })
-        //     this.props.onEditTask(this.state, tags)
+        } else if (data === 'tag') {
+            console.log('IMHERE, data:', data, 'tag:', tags)
+            this.setState({ ...this.state, tags })
+            this.props.onEditTask(this.state, tags)
         } else {
-            this.setState({task:{...this.state.task, priority: data}}, () =>{
+            this.setState({ task: { ...this.state.task, priority: data } }, () => {
                 this.props.onEditTask(this.state.task)
             })
         }
@@ -78,7 +78,7 @@ class _Task extends Component {
     }
 
     sendNote = (newUpdates) => {
-        this.setState({task:{...this.state.task, updates: [...newUpdates]}}, ()=>{
+        this.setState({ task: { ...this.state.task, updates: [...newUpdates] } }, () => {
             this.props.onEditTask(this.state.task)
         })
     }
@@ -86,19 +86,19 @@ class _Task extends Component {
     openModal = (data) => {
         switch (data) {
             case 'status':
-                this.setState({ isStatusShown: !this.state.isStatusShown })
+                this.setState({ isStatusShown: true })
                 break;
             case 'users':
-                this.setState({ isUsersShown: !this.state.isUsersShown })
+                this.setState({ isUsersShown: true })
                 break;
             case 'updates':
-                this.setState({ isUpdatesShown: !this.state.isUpdatesShown })
+                this.setState({ isUpdatesShown: true })
                 break;
             case 'priority':
-                this.setState({ isPriorityShown: !this.state.isPriorityShown })
+                this.setState({ isPriorityShown: true })
                 break;
             case 'tags':
-                this.setState({ isTagsShown: !this.state.isTagsShown })
+                this.setState({ isTagsShown: true })
                 break;
             default:
                 break;
@@ -110,14 +110,14 @@ class _Task extends Component {
     }
 
     onRemoveMemberFromTask = (memberId) => {
-        this.setState({ task: {...this.state.task, members: this.state.task.members.filter(member => member._id !== memberId)}}, ()=>{
+        this.setState({ task: { ...this.state.task, members: this.state.task.members.filter(member => member._id !== memberId) } }, () => {
             this.props.onEditTask(this.state.task)
         })
     }
 
     onAddUserToTask = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
-        this.setState({ task:{...this.state.task, members: [...this.state.task.members, newUser]}}, ()=>{
+        this.setState({ task: { ...this.state.task, members: [...this.state.task.members, newUser] } }, () => {
             this.props.onEditTask(this.state.task)
         })
     }
@@ -139,13 +139,13 @@ class _Task extends Component {
 
     render() {
         if (!this.state.task) return <h1>Loading...</h1>
-        const {name, members, status, priority, dueDate, updates, id} = this.state.task;
+        const { name, members, status, priority, dueDate, updates, id } = this.state.task;
         const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown } = this.state
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
                     <Updates isImageModalShown={this.state.isImageModalShown}
-                        loggedUser={this.props.loggedUser} updates={updates} 
+                        loggedUser={this.props.loggedUser} updates={updates}
                         onToggleImageModal={this.onToggleImageModal}
                         uploadImg={this.uploadImg} sendNote={this.sendNote}
                     />
@@ -205,8 +205,9 @@ class _Task extends Component {
                                 <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
-                                {/* <Tags handleChange={this.handleChange} onEditTask={this.props.onEditTask} tags={this.state.tags} isTagsShown={isTagsShown}
-                                    openModal={this.openModal} handleChange={this.handleChange} /> */}
+                                <Tags handleChange={this.handleChange} onEditTask={this.props.onEditTask}
+                                    tags={this.state.task.tags} isTagsShown={isTagsShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} />
                             </div>
                         </section>
 

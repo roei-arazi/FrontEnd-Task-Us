@@ -29,12 +29,14 @@ class _Navbar extends Component {
             <section className="navbar flex column space-between align-center padding-y-15">
 
                 <ul className="navbar-links flex column space-around">
+                        <li  className="icon-container">
                     <NavLink to="/">
                         <FaAd />
                     </NavLink>
+                        </li>
 
                     {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
-                    <div className="icon-container" onClick={!this.state.isNotificationShown ? this.toggleNotifications : () => { }} >
+                    <li className="icon-container" onClick={!this.state.isNotificationShown ? this.toggleNotifications : () => { }} >
                         {
                             loggedUser.notifications.filter(notification => !notification.isRead).length === 0
                                 ? ''
@@ -51,15 +53,15 @@ class _Navbar extends Component {
                         {loggedUser.notifications.some(notification => !notification.isRead)
                             ? <VscBellDot />
                             : <VscBell />}
-                    </div>
+                    </li>
                 </ul>
 
                 <ul className="navbar-links flex column space-around">
                     <NavLink to="/myweek">
-                        <div className="icon-container"><BsCalendar /></div>
+                        <li className="icon-container"><BsCalendar /></li>
                     </NavLink>
                     <NavLink to={loggedUser ? `/user/${loggedUser._id}` : '/login'}>
-                        <li><CgProfile /></li>
+                        <li className="icon-container"><CgProfile /></li>
                     </NavLink>
                 </ul>
             </section>
