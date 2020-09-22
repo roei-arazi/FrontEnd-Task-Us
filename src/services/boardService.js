@@ -85,9 +85,10 @@ async function addBoard() {
         "activityLog": [{
             "id": _makeid(),
             "createdAt": 124124125124,
+            "isRead": false,
             "byUser": {
-                "imgUrl": 'www.imgur',
-                "fullName": 'shucks mcgee'
+                "imgUrl": "https://via.placeholder.com/150",
+                "fullName": 'liam zety'
             },
             "description": 'removed task "do the dishes"',
             "task": {
@@ -96,9 +97,25 @@ async function addBoard() {
             }
         },
         {
+            "id": _makeid(),
             "createdAt": 12412541251,
+            "isRead": false,
             "byUser": {
-                "imgUrl": 'www.imgur',
+                "imgUrl": "https://via.placeholder.com/150",
+                "fullName": 'HAHA'
+            },
+            "description": 'changed group name from project2 to project3',
+            "group": {
+                "id": _makeid(),
+                "name": 'project3'
+            }
+        },
+        {
+            "id": _makeid(),
+            "createdAt": 12412541251,
+            "isRead": true,
+            "byUser": {
+                "imgUrl": "https://via.placeholder.com/150",
                 "fullName": 'shucks mcgee'
             },
             "description": 'changed group name from project2 to project3',
@@ -108,9 +125,25 @@ async function addBoard() {
             }
         },
         {
-            "createdAt": 4514512352135,
+            "id": _makeid(),
+            "createdAt": 12412541251,
+            "isRead": false,
             "byUser": {
-                "imgUrl": 'www.imgur',
+                "imgUrl": "https://via.placeholder.com/150",
+                "fullName": 'falsy mcgee'
+            },
+            "description": 'changed group name from project2 to project3',
+            "group": {
+                "id": _makeid(),
+                "name": 'project3'
+            }
+        },
+        {
+            "id": _makeid(),
+            "createdAt": 4514512352135,
+            "isRead": true,
+            "byUser": {
+                "imgUrl": "https://via.placeholder.com/150",
                 "fullName": 'shucks mcgee'
             },
             "description": 'added group project2',

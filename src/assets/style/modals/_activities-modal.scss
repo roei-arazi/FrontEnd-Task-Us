@@ -1,6 +1,6 @@
 .activities {
     overflow-y: overlay;
-    max-height: 75vh;
+    margin: 0 15px;
 
     header {
         margin-bottom: 25px;
@@ -21,27 +21,41 @@
 
     }
 
+    .activity-list {}
+
+    .activity-list-not-read {
+        background-color: #bbdaf6;
+        margin-bottom: 25px;
+    }
 
 
     .activity {
-        background-color: $taskBg;
         border-radius: 1px;
-        margin-bottom: 5px;
 
-        &:hover{
-            box-shadow: $brightBoxShadow;
+        &:first-child {
+            border-top: 1px solid #a8a8a87d;
         }
 
+        &:not(:last-child) {
+
+            border-bottom: 1px solid #a8a8a87d;
+        }
+
+
         .activity-desc-container {
+            width: 80%;
+
             >*:not(:first-child) {
                 margin-left: 15px;
             }
         }
 
-        .date-created {
+        .date-container {
+            width: 20%;
             margin-left: 15px;
             color: $colorFontUserDetails;
         }
+
 
     }
 
@@ -55,8 +69,8 @@
     svg {
         color: $buttonMainBg;
 
-        &:hover{
-            color:$buttonMainHover;
+        &:hover {
+            color: $buttonMainHover;
         }
     }
 
