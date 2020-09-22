@@ -38,7 +38,7 @@ h4,
 h5,
 h6 {
   font-family: font1;
-  color: $colorFontNav;
+  color: $mainBlack;
 }
 
 p,
@@ -57,7 +57,7 @@ input {
   margin: 10px 0;
 
   &::placeholder {
-    color: $colorFontNav;
+    color: $mainBlack;
   }
 
   &:focus {
@@ -66,15 +66,11 @@ input {
 
 }
 
-::selection {
-  background-color: $colorIconsTasksHover;
-  color: $colorIconsBoardBarsHover;
-}
 
 button {
   font-family: font1;
   padding: 15px;
-  color: $colorFontNav;
+  color: $mainBlack;
   background-color: $buttonColorCTA;
   border: 0;
   cursor: pointer;
@@ -90,7 +86,7 @@ button {
 svg {
   font-size: 1.5rem;
   cursor: pointer;
-  color: $colorFontNav;
+  color: $mainBlack;
 
 }
 
@@ -116,7 +112,7 @@ span.span-user-details {
 }
 
 .content-editable:hover {
-  border: 2px dotted $colorFontNav;
+  border: $dottedBorder;
 }
 
 .content-editable:focus {
@@ -157,8 +153,8 @@ div[role="menuContainer"]>div {
 
 //Menu
 div[role="menuContainer"]>div>ul {
-  background: $colorBg !important;
-  color: $colorFontTaskGroup !important;
+  background: #ffffff !important;
+  color: #454662 !important;
 }
 
 //Menu font
@@ -177,10 +173,10 @@ div[role="menuContainer"]>div>ul>li {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient($colorFontNav, $colorMainNav);
+  background: linear-gradient($mainBlack, $colorMainNav);
   border-radius: 1px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient($colorFontNav, $colorMainNav)
+  background: linear-gradient($mainBlack, $colorMainNav)
 }

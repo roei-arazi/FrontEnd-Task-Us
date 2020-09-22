@@ -8,6 +8,12 @@
     .task-left {
         h2 {
             margin-left: 15px;
+            font-weight: 400;
+            color: #434343;
+
+            &:hover{
+                color: $buttonMainBg;
+            }
         }
     }
 
@@ -37,7 +43,7 @@
 
             svg {
                 font-size: 1.5rem;
-                color: #333333;
+                color: $mainBlack;
             }
 
             .member-name {
@@ -47,6 +53,7 @@
 
         h3 {
             margin-left: 35px;
+            
         }
 
         .user-box {
@@ -69,64 +76,38 @@
 
             svg {
                 font-size: 1.5rem;
-                color: #333333;
+                color: $mainBlack;
             }
         }
     }
 
+ 
+
     input {
         width: 100%;
-        background-color: $colorDatePicker;
+        background-color: transparent;
         border: 0;
         padding-top: 7.5px;
         padding-bottom: 7.5px;
         border-radius: 1px;
         text-align: center;
         color: #4d4b4b;
+
+    }
+
+    .react-datepicker__input-container{
+
+        input{
+
+            &:hover, &:focus{
+                border: $dottedBorder;
+            }
+        }
+
     }
 
     .icon-container {
         margin-left: 5px;
-    }
-
-    .react-datepicker {
-        background-color: #eae9d5;
-        box-shadow: $modalsShadow;
-
-        .react-datepicker__navigation--next {
-            border-left-color: #e1dfbdf5;
-        }
-
-        .react-datepicker__navigation--previous {
-            border-right-color: #e1dfbdf5;
-        }
-
-        .react-datepicker__triangle {
-            border-bottom-color: #484444;
-        }
-
-        .react-datepicker__day:hover {
-            background-color: #e1dfbdf5;
-        }
-
-        .react-datepicker__day--selected {
-            background-color: #484444;
-        }
-
-        .react-datepicker__header {
-            background-color: #484444;
-
-            .react-datepicker__current-month {
-                color: #f2f1dfb0;
-            }
-
-            .react-datepicker__day-names {
-                >* {
-                    color: #f2f1dfb0;
-
-                }
-            }
-        }
     }
 }
 
@@ -330,7 +311,7 @@
     label {
         font-family: font1;
         padding: 15px;
-        color: $colorFontNav;
+        color: $mainBlack;
         background-color: $buttonColorCTA;
         border: 0;
         cursor: pointer;

@@ -13,7 +13,7 @@ function _UpcomingTasks(props) {
 
     function moveToUserProfile(userId) {
         props.history.push(`/user/${userId}`)
-    }
+    } 
 
     const { tasks, header } = props;
 
