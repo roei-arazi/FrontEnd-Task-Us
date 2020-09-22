@@ -4,13 +4,13 @@
     left: 200%;
     height: 100%;
     width: 500px;
-    background-color: $colorTask;
+    background-color: $white;
     z-index: 999;
     transition: .4s;
 
     &:hover+.modal-screen-wrapper {
         transition: .4s;
-        background-color: #1f1d0987;
+        background-color: #090e1f87;
     }
 
     +.modal-screen-wrapper {

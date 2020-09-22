@@ -39,21 +39,20 @@
     .users-modal {
         background-color: $white;
         z-index: 999;
-        padding: 10px;
         width: 250px;
         border-radius: 5px;
         top: 35px;
         right: 0;
+        padding:0 10px;
         box-shadow: $modalsShadow;
 
         .task-users-box {
             border-bottom: 2px solid $mainLightGrey;
-            padding: 10px 0;
-            cursor: pointer;
+            cursor: auto;
 
             svg {
                 font-size: 1.5rem;
-                color: $mainBlack;
+                color: $buttonMainBg;
             }
 
             .member-name {
@@ -62,7 +61,7 @@
         }
 
         h3 {
-            margin-left: 35px;
+            margin: 15px 0;
 
         }
 
@@ -73,12 +72,12 @@
         .user-box-info {
             p {
                 text-align: left;
+                cursor: pointer;
             }
         }
 
         .board-users-box {
-            padding: 10px 0;
-            cursor: pointer;
+            cursor: auto;
 
             .member-name {
                 margin-left: 10px;
@@ -86,7 +85,7 @@
 
             svg {
                 font-size: 1.5rem;
-                color: $mainBlack;
+                color: $buttonMainBg;
             }
         }
     }
@@ -101,7 +100,7 @@
         padding-bottom: 7.5px;
         border-radius: 1px;
         text-align: center;
-        color:  $inputColor;
+        color: $inputColor;
     }
 
     .tags {
@@ -151,6 +150,7 @@
     font-size: 0.8rem;
     height: 100%;
 }
+
 .task-label-name {
     height: 100%;
     width: 100%;
@@ -165,13 +165,13 @@
 
 .label-list {
     width: 150px;
-    background-color:$white;
+    background-color: $white;
     box-shadow: $modalsShadow;
     z-index: 999;
     border-radius: 1px;
     right: 0;
     word-break: break-all;
-    padding:5px 5px 0 5px;
+    padding: 5px 5px 0 5px;
 
 
     >*:hover {
@@ -182,7 +182,7 @@
     .label-selector {
         width: 100%;
         text-align: center;
-        height:40px;
+        height: 40px;
         margin-bottom: 5px;
         border-radius: 1px;
         cursor: pointer;
@@ -198,14 +198,17 @@
     position: relative;
 
 }
-        .task-color {
-            width: 7px;
-            height: 40px;
-        }
+
+.task-color {
+    width: 7px;
+    height: 40px;
+    margin-right: 1px;
+}
 
 .task-right {
     height: 100%;
     margin-right: 10px;
+
 
     >* {
         width: 100px;
@@ -217,17 +220,17 @@
 
         .task-number-of-imgs {
             font-family: monospace;
-            font-size: 15px;
-            width: 20px;
-            height: 20px;
+            font-size: 10px;
+            width: 15px;
+            height: 14px;
             position: absolute;
-            background-color: $colorPlusCircle;
-            color: $colorPlusCircleFont;
+            background-color: #0085ff;
+            color: #f2f1dfb0;
             border-radius: 50%;
             text-align: center;
-            right: 25px;
+            right: 35px;
             font-weight: bold;
-            bottom: 8px;
+            bottom: 2px;
             cursor: pointer;
         }
     }
@@ -253,14 +256,19 @@
         }
 
         .no-members-icon-plus {
+            font-family: monospace;
+            font-size: 15px;
+            width: 17px;
+            height: 17px;
             position: absolute;
-            top: 10px;
-            right: -20px;
-            font-size: 20px;
-            background-color: $colorPlusCircle;
-            color: $colorPlusCircleFont;
+            background-color: #0085ff;
+            color: #f2f1dfb0;
             border-radius: 50%;
-            transform: translate(-50%, -50%);
+            text-align: center;
+            right: -7px;
+            font-weight: bold;
+            bottom: 10px;
+            cursor: pointer;
         }
     }
 
@@ -279,126 +287,20 @@
     .task-number-of-imgs {
         font-family: monospace;
         font-size: 15px;
-        width: 20px;
-        height: 20px;
+        width: 17px;
+        height: 17px;
         position: absolute;
-        background-color: $colorPlusCircle;
-        color: $colorPlusCircleFont;
+        background-color: #0085ff;
+        color: #f2f1dfb0;
         border-radius: 50%;
         text-align: center;
-        right: 25px;
+        right: 30px;
         font-weight: bold;
+        bottom: 15px;
         cursor: pointer;
     }
 }
 
-.task-img-container {
-    height: 100%;
-    position: relative;
-    text-align: center;
-
-    img {
-        cursor: pointer;
-        height: 100%;
-        border-bottom-right-radius: 1px;
-    }
-
-    .no-images {
-        padding-top: 15px;
-    }
-}
-
-.updates-image-modal {
-    animation: scale-in-ver-top .3s;
-    padding: 25px;
-    box-shadow: $modalsShadow;
-    background-color: $colorTask;
-    top: 5vh;
-    left: 5vw;
-    position: absolute;
-    z-index: 999;
-
-    img {
-        box-shadow: $modalsShadow;
-        height: 600px;
-        width: 548px;
-
-    }
-}
-
-.updates-header {
-    margin-bottom: 20px;
-
-    h1 {
-        margin: 15px 0 30px;
-    }
-
-    .updates-header-options {
-        width: 100%;
-
-        >* {
-            margin: 0 auto;
-        }
-    }
-
-    label {
-        font-family: font1;
-        padding: 15px;
-        color: $mainBlack;
-        background-color: $buttonColorCTA;
-        border: 0;
-        cursor: pointer;
-        font-size: 1rem;
-        border-radius: 2px;
-        transition: .3s;
-        margin: 20px 0;
-
-        &:hover {
-            background-color: $colorIconsTasksHover;
-        }
-    }
-
-    input {
-        border-bottom: 2px solid $buttonColorCTA;
-        width: 150px;
-
-        &::placeholder {
-            color: $colorFontUserDetails
-        }
-    }
-}
-
-.updates-container {
-    overflow: overlay;
-    padding: 0 10px;
-    height: 75vh;
-    background-color: #dddfc6;
-    border-bottom: 1px solid #b5ad91;
-    border-top: 1px solid #b5ad91;
-
-    .update-box {
-        padding: 10px;
-        box-shadow: 0px 3px 10px -5px #484444;
-        margin: 10px;
-        background-color: $colorBg;
-        width: fit-content;
-
-        .member-name {
-            font-weight: bold;
-        }
-
-        .update-text {
-            font-weight: initial;
-            display: inline;
-            word-break: break-all;
-        }
-
-        img {
-            height: 200px;
-            width: 200px;
-        }
-    }
-}
 
 
 // Labels
@@ -415,25 +317,22 @@
 }
 
 .low {
-    background-color: #cfcfb4
+    background-color: #7bb0ae;
 }
 
 .medium {
-    background-color: #848569
+    background-color: #a028c7;
 }
 
 .high {
-    background-color: #515243
+    background-color: #e82d2d;
 }
 
 .stuck,
 .working,
 .done,
+.low,
 .medium,
 .high {
     color: #f1f1f1;
-}
-
-.low {
-    color: #515243;
 }
