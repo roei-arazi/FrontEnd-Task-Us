@@ -43,7 +43,7 @@
         border-radius: 5px;
         top: 35px;
         right: 0;
-        padding:0 10px;
+        padding: 0 10px;
         box-shadow: $modalsShadow;
 
         .task-users-box {
@@ -103,18 +103,7 @@
         color: $inputColor;
     }
 
-    .tags {
-        height: 100%;
 
-        .task-label-name {
-            overflow: overlay;
-        }
-
-        .tag-remove-icon {
-            font-size: 1.2rem;
-            transform: rotate(180deg);
-        }
-    }
 
 
     .icon-container {

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { BsFilePlus } from 'react-icons/bs';
+import React, { Component, Fragment } from 'react'
+import { BsBookmarkPlus, BsFilePlus } from 'react-icons/bs';
 import { RiDeleteBack2Line } from 'react-icons/ri';
 import Truncate from 'react-truncate'
 
@@ -71,12 +71,19 @@ export class Tags extends Component {
         if (!this.state.tags || this.state.tags === 0) return <h1>no tags</h1>
         return (
             <div onClick={() => this.props.openModal('tags')} className="label-container tags relative">
-                <div className="task-label-name">
+                <div className="task-label-name flex justify-center align-center ">
                     {this.state.tags.map((tag, idx) => {
+                        if (idx > 2) return
+                        if (idx > 1) return (
+                            <div key={tag.id} className="task-number-of-tags">
+                                <span>{this.state.tags.length > 9 ? '+9' : this.state.tags.length - 2}</span>
+                            </div>
+                        )
+
                         return (
-                            <p style={{ color: tag.color }} key={idx}>
-                                <Truncate lines={1} ellipsis={"..."} width={100}>
-                                    {idx === this.state.tags.length - 1 ? tag.txt : tag.txt + ","}
+                            <p key={idx} style={{ color: tag.color }} key={idx}>
+                                <Truncate lines={1} ellipsis={"..."} width={75}>
+                                    {idx === this.state.tags.length - 1 ? tag.txt : (idx === 1 ? tag.txt : tag.txt + ",")}
                                 </Truncate>
                             </p>
                         )
@@ -84,33 +91,36 @@ export class Tags extends Component {
                 </div>
 
                 {this.props.isTagsShown &&
-                    <div className="label-list tags-modal absolute flex column align-center">
-                        <section>
-                            {this.state.tags.map((tag, idx) => {
-                                return (
-                                    <div className="tag-container flex justify-center align-center" key={tag.id}>
-                                        <RiDeleteBack2Line className="tag-remove-icon" onClick={() => this.onRemoveTag(tag.id)} />
-                                        <input style={{ color: tag.color }} onBlur={(ev) => {
-                                            ev.target.blur()
-                                            this.onEditTag(idx)
-                                        }}
-                                            onKeyDown={(ev) => {
-                                                if (ev.key === 'Enter') {
-                                                    ev.target.blur()
-                                                    this.onEditTag(idx)
-                                                }
-                                            }}
-
-                                            onChange={(ev) => this.handleChange(ev, tag.id)} value={tag.txt} type="text" />
-                                    </div>
-                                )
-                            })}
-                            <div className="tag-add-container flex justify-center align-center">
-                                <BsFilePlus onClick={this.onAddTag} />
+                    <Fragment>
+                        <div className="label-list tags-modal absolute flex column align-center">
+                            <div className="tag-add-container  flex justify-center align-center">
+                                <BsBookmarkPlus onClick={this.onAddTag} />
                                 <input placeholder="New tag" ref={this.elTagInput} type="text" />
                             </div>
-                        </section>
-                    </div>
+                            <section>
+                                {this.state.tags.map((tag, idx) => {
+                                    return (
+                                        <div className="tag-container flex justify-center align-center" key={idx}>
+                                            <RiDeleteBack2Line className="tag-remove-icon" onClick={() => this.onRemoveTag(tag.id)} />
+                                            <input style={{ color: tag.color }} onBlur={(ev) => {
+                                                ev.target.blur()
+                                                this.onEditTag(idx)
+                                            }}
+                                                onKeyDown={(ev) => {
+                                                    if (ev.key === 'Enter') {
+                                                        ev.target.blur()
+                                                        this.onEditTag(idx)
+                                                    }
+                                                }}
+
+                                                onChange={(ev) => this.handleChange(ev, tag.id)} value={tag.txt} type="text" />
+                                        </div>
+                                    )
+                                })}
+                            </section>
+
+                        </div>
+                    </Fragment>
                 }
 
             </div>
