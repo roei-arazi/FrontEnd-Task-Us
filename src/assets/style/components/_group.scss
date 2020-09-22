@@ -42,11 +42,11 @@
     }
 
     .task-list {
-        min-height: 40px;
+        min-height: 35px;
     }
 
     .task-add {
-        border: 1px solid transparent;
+        border: 1px solid rgba(109, 109, 109, 0.35);
 
         form {
             width: 100%;
@@ -59,7 +59,7 @@
             font-family: font1;
             font-size: 1em;
             font-weight: 700;
-            background-color: $colorBg;
+            background-color: #f7f7f7;
 
             &::placeholder {
                 color: $colorFontTaskGroup;

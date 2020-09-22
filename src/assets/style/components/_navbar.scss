@@ -5,13 +5,27 @@
     height: 100vh;
     padding-right: 15px;
 
+    ul {
+        width: 100%;
+        align-items: center;
+
+        .icon-container {
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+
+            &:hover {
+                transition: 0.3s;
+                background-color: $colorIconsBoardBarsHover;
+                border-radius: 10px;
+            }
+        }
+    }
+
     svg {
         font-size: 30px;
         color: $colorIconsNav;
 
-        &:hover {
-            color: $colorIconsTasksHover;
-        }
     }
 
     .icon {
@@ -34,17 +48,17 @@
 
     .notifications-counter {
         position: absolute;
-        right: -3px;
-        top: -3px;
-        font-size: 13px;
-        width: 17px;
-        height: 17px;
-        color: $colorMainNav;
-        background: #b94444;
+        right: 16px;
+        font-size: 12px;
+        min-width: 14px;
+        min-height: 14px;
+        color: #1c1f3b;
+        background: #c63535;
         justify-content: center;
         display: flex;
         align-items: center;
         border-radius: 50%;
         font-weight: 700;
+        content:'100';
     }
 }
