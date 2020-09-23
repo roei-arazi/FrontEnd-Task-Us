@@ -132,7 +132,6 @@ export default class Activities extends Component {
                                         </div>
                                         <img src={activity.byUser.imgUrl} alt="" />
                                         <h2>{activity.byUser.fullName}</h2>
-                                        {/* <p>{activity.desc}</p> */}
                                     </div>
                                     <div className="activity-desc-container flex align-center">
                                         <p>
