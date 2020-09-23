@@ -25,7 +25,7 @@ export class Group extends Component {
         socketService.on('updatedBoard', () => {
             this.setState({ ...this.state, name: this.props.group.name })
         })
-        this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id  })
+        this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id })
     }
 
     handleChange = (ev) => {
@@ -92,7 +92,7 @@ export class Group extends Component {
         if (!this.state.name) return <h1>Loading...</h1>
         const priority = this.convertToData('priority')
         const { name, ElGroupSettings, elGroupColors } = this.state;
-        const {group, index} = this.props;
+        const { group, index } = this.props;
         const status = this.convertToData('status')
         return (
             <Draggable draggableId={group.id} index={index}>
@@ -162,20 +162,11 @@ export class Group extends Component {
                                 </h1>
                             </div>
                             <div className="group-header-right flex">
-<<<<<<< HEAD
                                 <h3 style={{ color: this.props.group.color }}>Members</h3>
                                 <h3 style={{ color: this.props.group.color }}>Status</h3>
                                 <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
                                 <h3 style={{ color: this.props.group.color }}>Priority</h3>
                                 <h3 style={{ color: this.props.group.color }}>Tags</h3>
-=======
-                                <h3 style={{ color: group.color }}>Updates</h3>
-                                <h3 style={{ color: group.color }}>Members</h3>
-                                <h3 style={{ color: group.color }}>Status</h3>
-                                <h3 style={{ color: group.color }}>Due-Date</h3>
-                                <h3 style={{ color: group.color }}>Priority</h3>
-                                <h3 style={{ color: group.color }}>Tags</h3>
->>>>>>> 3196b628b4b550aa6b46af96b63949d69c3805e6
                             </div>
                         </div>
 

@@ -11,7 +11,8 @@ export const boardService = {
     updateGroup,
     addTask,
     removeTask,
-    updateTask
+    updateTask,
+    handleBoardChanges
 }
 
 async function loadBoards() {
@@ -251,7 +252,6 @@ async function addTask(groupId, taskName, board) {
 }
 
 function updateTask(updatedTask, board) {
-    console.log('hello from board service', updatedTask, "board", board)
     board.groups = board.groups.map(group => {
         group.tasks = group.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
         return group;
@@ -259,7 +259,23 @@ function updateTask(updatedTask, board) {
     updateBoard(board)
     return board
 }
+function handleBoardChanges(desc, loggedUser, board) {
+    const changes = {
+        id: _makeid(),
+        changedAt: Date.now(),
+        desc,
+        byUser: {
+            _id: loggedUser._id,
+            fullName: loggedUser.fullName,
+            imgUrl: loggedUser.imgUrl
+        },
+    }
 
+
+    const updatedBoard = { ...board, activityLog: [...board.activityLog, changes] }
+    console.log('UPDATED BOARD', updatedBoard)
+    return updateBoard(updatedBoard)
+}
 function _makeid(length = 7) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

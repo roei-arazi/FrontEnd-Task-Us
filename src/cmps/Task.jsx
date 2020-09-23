@@ -87,7 +87,7 @@ class _Task extends Component {
 
     sendNote = (newUpdates) => {
         this.setState({ task: { ...this.state.task, updates: [...newUpdates] } }, () => {
-            this.props.onEditTask(this.state.task)
+            this.props.onEditTask(this.state.task, '', '', 'sendNote')
         })
     }
 
@@ -173,39 +173,39 @@ class _Task extends Component {
                         >
 
                             <div className="task-left flex align-center">
-                            <div className="task-color-remove">
-                                <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
+                                <div className="task-color-remove">
+                                    <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
                                     <div className='icon-container'>
                                         <MdDelete className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id) }} />
                                     </div>
-                                {/* <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow> */}
-                                {/* </Tooltip> */}
+                                    {/* <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow> */}
+                                    {/* </Tooltip> */}
                                 </div>
-                            <div className="task-title-updates flex align-center space-between grow">   
-                                <h2>
-                                    <ContentEditable
-                                        onFocus={this.focusText}
-                                        className="cursor-initial content-editable"
-                                        innerRef={this.contentEditable}
-                                        html={name}
-                                        disabled={false}
-                                        onChange={this.handleNameChange}
-                                        onBlur={() => {
-                                            this.props.onEditTask(this.state.task, this.state.task.name, name)
-                                        }}
-                                        onKeyDown={(ev) => {
-                                            if (ev.key === 'Enter') {
-                                                ev.target.blur()
+                                <div className="task-title-updates flex align-center space-between grow">
+                                    <h2>
+                                        <ContentEditable
+                                            onFocus={this.focusText}
+                                            className="cursor-initial content-editable"
+                                            innerRef={this.contentEditable}
+                                            html={name}
+                                            disabled={false}
+                                            onChange={this.handleNameChange}
+                                            onBlur={() => {
                                                 this.props.onEditTask(this.state.task, this.state.task.name, name)
-                                            }
-                                        }}
-                                    />
-                                </h2>
-                                
+                                            }}
+                                            onKeyDown={(ev) => {
+                                                if (ev.key === 'Enter') {
+                                                    ev.target.blur()
+                                                    this.props.onEditTask(this.state.task, this.state.task.name, name)
+                                                }
+                                            }}
+                                        />
+                                    </h2>
 
-                                <div onClick={() => this.openModal('updates')} className="notes-container relative grow"><BsChatDots />
-                                    {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
-                                </div>
+
+                                    <div onClick={() => this.openModal('updates')} className="notes-container relative grow"><BsChatDots />
+                                        {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
+                                    </div>
                                 </div>
                             </div>
 
