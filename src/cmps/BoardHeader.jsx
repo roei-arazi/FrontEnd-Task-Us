@@ -36,7 +36,9 @@ export class _BoardHeader extends React.Component {
             this.setState({ board: this.props.board })
         }
     }
-
+    componentWillUnmount() {
+        socketService.off('updatedBoard')
+    }
     handleChangeName = (ev) => {
         this.setState({ board: { ...this.state.board, name: ev.target.value } })
     }
@@ -64,7 +66,7 @@ export class _BoardHeader extends React.Component {
             }
 
         }
-        this.props.onEditBoard(board, this.state.board.name, this.state.board.description, true)
+        this.props.onEditBoard(board, true)
 
     }
 
@@ -86,19 +88,26 @@ export class _BoardHeader extends React.Component {
 
     onRemoveMemberFromBoard = (memberId) => {
         this.setState({ board: { ...this.state.board, members: this.state.board.members.filter(member => member._id !== memberId) } }, () => {
-            this.props.onEditBoard(this.state.board, this.state.board.name, this.state.board.description)
+            this.props.onEditBoard(this.state.board.description)
         })
     }
 
     onAddUserToBoard = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
         this.setState({ board: { ...this.state.board, members: [...this.state.board.members, newUser] } }, () => {
-            this.props.onEditBoard(this.state.board, this.state.board.name, this.state.board.description)
+            this.props.onEditBoard(this.state.board.description)
         })
     }
 
     goToUserProfile = (userId) => {
         this.props.history.push(`/user/${userId}`)
+    }
+    onClearLog = () => {
+        const board = {
+            ...this.props.board,
+            activityLog: this.props.board.activityLog.filter(activity => null)
+        }
+        this.props.onEditBoard(board)
     }
 
     render() {
@@ -108,6 +117,7 @@ export class _BoardHeader extends React.Component {
         const { users } = this.props
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
         const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity.isRead)
+        const activitiesRead = this.props.board.activityLog.filter(activity => activity.isRead)
         return (
             <section className="board-header flex column padding-x-30">
                 <div className="board-header-header flex space-between grow align-center">
@@ -120,12 +130,15 @@ export class _BoardHeader extends React.Component {
                             disabled={false}       // use true to disable editing
                             onChange={this.handleChangeName} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(board, board.name, board.description)
+                                console.log('SHOW ME THE x!', board)
+                                console.log('SHOW ME THE BOARD!', this.state.board)
+
+                                this.props.onEditBoard(this.state.board)
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(board, board.name, board.description)
+                                    this.props.onEditBoard(this.state.board)
                                 }
                             }}
                         />
@@ -142,8 +155,8 @@ export class _BoardHeader extends React.Component {
                             <div className="users-modal absolute">
                                 <div className="board-users-box">
                                     <h3>Board Members</h3>
-                                    {members.map(member =>
-                                        <section key={member._id} className="user-box flex space-between align-center">
+                                    {members.map((member, idx) =>
+                                        <section key={idx} className="user-box flex space-between align-center">
                                             <div className="user-box-info flex align-center" onClick={() => this.goToUserProfile(member._id)}>
                                                 {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
                                                 <p className="member-name">{member.fullName}</p>
@@ -170,7 +183,7 @@ export class _BoardHeader extends React.Component {
                             </div>}
                         <div onClick={this.onToggleActivities} className="activities-outer-container flex align-center  cursor-pointer">
                             {/* <GoRequestChanges /> */}
-                            <h2> Activities <span style={{ color: activitiesNotRead.length !== 0 ? '#0085ff' : '' }}>{activitiesNotRead.length}</span> / {board.activityLog.length}</h2>
+                            <h2> Activities <span style={{ color: activitiesNotRead.length !== 0 ? '#0085ff' : '' }}>{activitiesNotRead.length}</span> / {activitiesRead.length + activitiesNotRead.length}</h2>
                         </div>
                     </div>
 
@@ -185,12 +198,13 @@ export class _BoardHeader extends React.Component {
                             disabled={false}        // use true to disable editing
                             onChange={this.handleChangeDesc} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(board, board.name, board.description)
+                                console.log('SHOW ME THE BOARD!', board)
+                                this.props.onEditBoard(this.state.board)
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(board, board.name, board.description)
+                                    this.props.onEditBoard(this.state.board)
                                 }
                             }}
                         />
@@ -216,7 +230,7 @@ export class _BoardHeader extends React.Component {
 
                     </div>
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
-                        <Activities onToggleActivities={this.onToggleActivities}
+                        <Activities onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
                             boardName={this.props.board.name} activityLog={this.props.board.activityLog} />
                     </div>
                     {
