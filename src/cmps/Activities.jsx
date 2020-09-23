@@ -82,9 +82,9 @@ export default class Activities extends Component {
         activities = this.applyFilter(activities)
         activitiesNotRead = this.applyFilter(activitiesNotRead)
         return (
-            <section className="activities flex column padding-y-15">
+            <section className="activities flex column">
 
-                <header className="padding-x-15">
+                <header className="padding-x-15 padding-y-15">
 
                     <AiOutlineClose onClick={this.props.onToggleActivities} />
                     <h1><span>{this.props.boardName}</span> Log</h1>
@@ -117,8 +117,8 @@ export default class Activities extends Component {
                         </div>
                     </div>
                 </header>
-                <div className="all-activities-container padding-y-15 padding-x-15">
-                    <div className="activity-list-not-read column flex  padding-y-15 padding-x-15">
+                <div className="all-activities-container">
+                    <div className="activity-list-not-read column flex  padding-y-15">
                         <h1>New Activities</h1>
                         {activitiesNotRead.map((activity, idx) => {
 
@@ -135,7 +135,7 @@ export default class Activities extends Component {
                                     </div>
                                     <div className="activity-desc-container flex align-center">
                                         <p>
-                                            <Truncate lines={1} ellipsis={"..."} width={550}>
+                                            <Truncate lines={1} ellipsis={"..."} width={500}>
                                                 {activity.desc}
                                             </Truncate>
                                         </p>
@@ -148,7 +148,7 @@ export default class Activities extends Component {
 
                     </div>
 
-                    <div className="activity-list column flex  padding-y-15 padding-x-15">
+                    <div className="activity-list column flex  padding-y-15">
                         <h1>Activities Read</h1>
                         {activities.map((activity, idx) => {
 
