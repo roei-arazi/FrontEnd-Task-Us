@@ -4,20 +4,44 @@
     color: $mainBlack;
 }
 
-.go-back{
+.go-back {
     position: absolute;
-    top: 20px; 
+    top: 20px;
     left: 20px;
     height: fit-content;
     width: fit-content;
-    
 
-    svg{
+
+    svg {
         color: $buttonMainBg;
-        &:hover{
-            color:$buttonMainHover;
+
+        &:hover {
+            color: $buttonMainHover;
         }
     }
+
+}
+
+[data-title]:hover:after {
+    font-family: font1;
+    content: attr(data-title);
+    position: absolute;
+    top: 175%;
+    left: 25%;
+    font-size: 1rem;
+    width: max-content;
+    padding: 5px 10px;
+    color: $white;
+    background-color: rgba($mainBlack, .65);
+    border-radius: 5px;
+    animation: title-animation 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+}
+
+[data-title]:hover:before {
+    bottom: -76%;
+    left: 85%;
+
 
 }
 
@@ -32,33 +56,38 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
-    button{
+
+    button {
         background-color: $buttonMainBg;
         color: $colorBgBoardBars;
-        width:80%;
+        width: 80%;
         border-radius: 15px;
+
         &:hover {
             background-color: $buttonMainHover;
         }
     }
 
-    .guest-button{
+    .guest-button {
         background-color: #f0284e;
 
-        &:hover{
+        &:hover {
             background-color: #be203e;
         }
     }
-    a:hover{
+
+    a:hover {
         color: $buttonMainBg;
         text-decoration: underline;
     }
+
     .sign-login-input,
     section {
         width: 90%;
         color: $mainBlack;
     }
-    svg{
+
+    svg {
         font-size: 5rem;
         color: $buttonMainBg;
     }
