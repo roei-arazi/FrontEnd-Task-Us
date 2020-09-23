@@ -193,6 +193,7 @@ function handleBoardChanges(desc, loggedUser, board) {
     const changes = {
         id: _makeid(),
         changedAt: Date.now(),
+        isRead: false,
         desc,
         byUser: {
             _id: loggedUser._id,
@@ -202,7 +203,7 @@ function handleBoardChanges(desc, loggedUser, board) {
     }
 
 
-    const updatedBoard = { ...board, activityLog: [...board.activityLog, changes] }
+    const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
     return updateBoard(updatedBoard)
 }
 function _makeid(length = 7) {

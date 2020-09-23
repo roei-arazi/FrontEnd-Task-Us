@@ -93,7 +93,13 @@ export class Tags extends Component {
                         <div className="label-list tags-modal absolute flex column align-center">
                             <div className="tag-add-container  flex justify-center align-center">
                                 <BsBookmarkPlus onClick={this.onAddTag} />
-                                <input placeholder="New tag" ref={this.elTagInput} type="text" />
+                                <input onKeyDown={(ev) => {
+                                    if (ev.key === 'Enter') {
+                                        ev.target.blur()
+                                        ev.target.value = ''
+                                        this.onAddTag()
+                                    }
+                                }} placeholder="New tag" ref={this.elTagInput} type="text" />
                             </div>
                             <section>
                                 {this.state.tags.map((tag, idx) => {
