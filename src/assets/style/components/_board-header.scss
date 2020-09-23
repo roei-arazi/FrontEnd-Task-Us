@@ -9,6 +9,7 @@
         height: 50%;
 
         h1 {
+            align-self: flex-end;
             font-size: 2rem;
         }
 
@@ -136,11 +137,12 @@
         }
 
         button {
+            font-size: 1rem;
+            padding: 0px 8px;
             color: $colorBgBoardBars;
             font-weight: 700;
             background-color: $buttonMainBg;
-            font-size: 1rem;
-            padding: 12px 8px;
+            border-radius: 15px;
 
             &:hover {
                 background-color: $buttonMainHover;

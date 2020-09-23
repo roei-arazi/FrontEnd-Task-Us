@@ -64,6 +64,11 @@ export default class Activities extends Component {
         })
         return res;
     }
+    // onClearLog = () => {
+    //     const activityLog = this.props.activityLog.filter(activity => null)
+    //     console.log('activityLog', activityLog)
+    //     this.props.clearLog(activityLog)
+    // }
 
     render() {
         if (!this.props.activityLog) return <h1>Loading...</h1>
@@ -108,6 +113,7 @@ export default class Activities extends Component {
                             </Fade>}
                         </div>
                     </div>
+                    <button onClick={this.props.onClearLog}>Clear Log</button>
                 </header>
                 <div className="all-activities-container">
                     {activitiesNotRead.length !== 0 && (
@@ -131,8 +137,6 @@ export default class Activities extends Component {
                                                 {activity.desc}
                                             </p>
                                         </div>
-
-
                                     </div>
                                 )
                             })}

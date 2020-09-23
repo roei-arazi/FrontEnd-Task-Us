@@ -55,9 +55,12 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = (board, boardName, boardDescription, isActivitiesRead) => {
-        this.props.updateBoard({ ...board, name: boardName, description: boardDescription })
-        if (!isActivitiesRead) {
+    onEditBoard = (board, userReadActivities = true) => {
+        const board = this._getCurrBoard()
+        this.setState({ ...this.state, boards: [...this.state.boards,] })
+        console.log('IM HERE!', board)
+        if (!userReadActivities) {
+            this.props.groupChanges(`${this.props.loggedUser.fullName} changed the board somehow...`, this.props.loggedUser, board)
             this.props.showSnackbar('Updated board.')
             setTimeout(() => this.props.hideSnackbar(), 3000)
         }
