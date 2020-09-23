@@ -16,6 +16,7 @@ import {
     clearFilter //FILTER
 }
     from '../store/actions/boardActions'
+import { groupChanges } from '../store/actions/changesActions'
 
 
 class _Board extends Component {
@@ -125,7 +126,8 @@ class _Board extends Component {
         if (changedValue === originalValue) return // No changes were made
         group[key] = changedValue;
         try {
-            this.props.editGroup(group, board)
+            this.props.groupChanges(Date.now(), board, originalValue, changedValue, this.props.loggedUser)
+            this.props.editGroup(group, board, originalValue, changedValue)
             this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -162,7 +164,7 @@ class _Board extends Component {
     onEditTask = (task, changedValue = true, originalValue = false) => {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
 
-        if(changedValue===originalValue) return
+        if (changedValue === originalValue) return
 
         try {
             this.props.editTask(task, board)
@@ -301,6 +303,7 @@ const mapStateToProps = state => {
     return {
         boards: state.boardReducer.boards,
         users: state.userReducer.users,
+        loggedUser: state.userReducer.loggedUser,
         filterBy: state.boardReducer.filterBy
     }
 }
@@ -317,7 +320,8 @@ const mapDispatchToProps = {
     showSnackbar,
     hideSnackbar,
     loadUsers,
-    clearFilter
+    clearFilter,
+    groupChanges
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);
