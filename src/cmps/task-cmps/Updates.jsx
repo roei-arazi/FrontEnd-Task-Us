@@ -1,18 +1,41 @@
 import React from 'react'
-import { IoMdSend } from 'react-icons/io'
+import { AiOutlineClose } from 'react-icons/ai'
+import { BiImage } from 'react-icons/bi';
+import { MdDone } from 'react-icons/md';
+
 import { cloudinaryService } from '../../services/cloudinaryService';
+
+
+function _makeid(length = 7) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
+}
 
 export class Updates extends React.Component {
 
     state = {
-        update: {
+        reply: {
             txt: ''
         },
+        update: {
+            id: '',
+            txt: '',
+            imgUrl: '',
+            replies: []
+        },
         updates: [],
+        isLoading: false,
+        imageUploaded: false
     }
 
     componentDidMount() {
-        this.setState({ updates: this.props.updates })
+        this.setState({ updates: this.props.updates, imageUploaded: false })
     }
 
     handleChange = (ev) => {
@@ -20,75 +43,131 @@ export class Updates extends React.Component {
             this.setState({ update: { ...this.state.update, img: ev.target.files[0] } }, () => {
                 this.uploadImg()
             })
-        } else {
+        } else if (ev.target.name === 'txt') {
             this.setState({ update: { ...this.state.update, txt: ev.target.value } })
+        } else {
+            this.setState({ reply: { ...this.state.reply, txt: ev.target.value } })
         }
+    }
+
+    onReply = (newUpdate) => {
+        if (!this.state.reply.txt || this.state.reply.txt.split('').every(letter => letter === ' ')) return
+
+        const newReply = {
+            txt: this.state.reply.txt,
+            member: {
+                fullName: this.props.loggedUser.fullName,
+                username: this.props.loggedUser.userName,
+                _id: this.props.loggedUser.userName,
+                imgUrl: this.props.loggedUser.imgUrl
+            }
+        }
+        this.setState({ update: this.state.updates.find(update => update.id === newUpdate.id) }, () => {
+            this.setState({ update: { ...this.state.update, replies: [...this.state.update.replies, newReply] } }, () => {
+                this.updateNote(this.state.update)
+            })
+        })
+        this.setState({reply: { txt: ''} })
     }
 
     uploadImg = async () => {
+        this.setState({ isLoading: true })
         const res = await cloudinaryService.uploadImg(this.state.update.img, this.state)
-        const newImg = {
-            member: this.props.loggedUser.fullName,
-            txt: res.url
-        }
-        const updates = [newImg, ...this.props.updates]
-        this.props.sendNote(updates)
-
+        this.setState({ update: { ...this.state.update, imgUrl: res.url }, isLoading: false, imageUploaded: true })
     }
+
     sendNote = (ev) => {
-        console.log('TASK FRROM NOTE', this.props.task)
         ev.preventDefault()
-        if (!this.state.update.txt || this.state.update.txt.split('').every(letter => letter === ' ')) return
+        if ((!this.state.update.txt || this.state.update.txt.split('').every(letter => letter === ' ')) && !this.state.update.imgUrl) return
         const newNote = {
+            id: _makeid(),
+            createdAt: Date.now(),
             txt: this.state.update.txt,
-            member: this.props.loggedUser.fullName
+            imgUrl: this.state.update.imgUrl,
+            replies: [],
+            member: {
+                fullName: this.props.loggedUser.fullName,
+                username: this.props.loggedUser.userName,
+                _id: this.props.loggedUser.userName,
+                imgUrl: this.props.loggedUser.imgUrl
+            }
         }
         const updates = [newNote, ...this.props.updates]
-
-        this.setState({ updates, update: { txt: '' } })
-
+        this.setState({ updates, update: { txt: '', imgUrl: '' } })
         this.props.sendNote(updates)
+    }
+
+    updateNote = (newUpdate) => {
+        const newNotes = this.state.updates.map(update => update.id === newUpdate.id ? newUpdate : update)
+        this.props.sendNote(newNotes)
     }
 
 
     render() {
         if (!this.state.updates) return <h1>Loading...</h1>;
-
-        const { updates, onToggleImageModal, isImageModalShown } = this.props
+        console.log(this.state.updates);
+        const { updates } = this.props
         return (
             <React.Fragment>
                 <div className="updates-header flex column">
+                    <AiOutlineClose onClick={this.props.closeModal} />
                     <h1>{this.props.task.name}</h1>
-                    <div className="updates-header-options flex align-center space-between">
-                        <form onSubmit={this.sendNote} className="notes-form flex justify-center align-center">
-                            <input type="text" placeholder="Text Note" value={this.state.update.txt} onChange={this.handleChange} />
-                            <IoMdSend onClick={this.sendNote} />
+                    <div className="updates-header-options flex column">
+                        <form onSubmit={this.sendNote} className="notes-form flex align-center">
+                            <textarea name="txt" value={this.state.update.txt} onChange={this.handleChange} />
+
+
                         </form>
-                        <div className="image-uploader">
-                            <label htmlFor={this.props.task.id}>Upload Image</label>
-                            <input name="file-img" type="file" id={this.props.task.id} onChange={(this.handleChange)} hidden />
+                        <div className="updates-btns flex align-center space-between">
+
+                            <div className="image-uploader flex">
+                                <label htmlFor={this.props.task.id}>{this.state.isLoading ? <div class="loadingio-spinner-spinner-gvjl1rpqs7q"><div class="ldio-subadnemdcd">
+                                    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                                </div></div> : <BiImage />}
+                                </label>
+                                <input name="file-img" type="file" id={this.props.task.id} onChange={(this.handleChange)} hidden />
+                                {this.state.imageUploaded && <div className="image-uploaded flex align-center"><MdDone /><p> Image Ready!</p></div>}
+                            </div>
+                            {this.state.isLoading ? <p>Image is uploading..</p> : <button onClick={this.sendNote}>Upload</button>}
+
                         </div>
                     </div>
                 </div>
 
-                <div onClick={isImageModalShown ? onToggleImageModal : () => { }} className="updates-container  flex column">
+                <div className="updates-container">
 
                     {updates.map((update, idx) => {
-
-                        if (update.txt.includes('https://res') || update.txt.includes('http://res')) {
-                            return <div key={idx} className="update-box flex wrap column">
-                                <p className="member-name">{update.member}</p>
-                                <img className="cursor-pointer" onClick={() => {
-                                    onToggleImageModal(update.txt)
-                                }} src={update.txt} />
+                        return <div key={idx} className="update-box flex wrap column">
+                            <div className="update-box-header flex align-center">
+                                <img src={update.member.imgUrl} alt="" />
+                                <p className="member-name">{update.member.fullName}</p>
                             </div>
-                        } else return <div key={idx} className="update-box"><p className="member-name" key={idx}>{update.member}</p>
-                            <p className="update-text">{update.txt}</p>
+                            <div className="update-box-main flex column">
+                                {update.txt && <p className="update-text">{update.txt}</p>}
+                                {update.imgUrl && <img src={update.imgUrl} alt="" />}
+                            </div>
+                            <div className="update-box-footer flex column">
+
+                                {update.replies &&
+                                    <div className="replies-box flex column">
+                                        {update.replies.map((reply, idx) => {
+                                            return <div key={idx} className="reply-box flex column">
+                                                <div className="reply-header flex align-center">
+                                                    <img src={reply.member.imgUrl} alt="" />
+                                                    <p>{reply.member.fullName}</p>
+                                                </div>
+                                                <p>{reply.txt}</p>
+                                            </div>
+                                        })}</div>
+                                }
+                                <div className="reply-footer flex space-between align-center">
+                                <textarea name="reply" onChange={this.handleChange}></textarea>
+                                <button className="reply-button" onClick={() => this.onReply(update)}>Reply</button>
+                                </div>
+                            </div>
                         </div>
                     })}
-
                 </div>
-
             </React.Fragment>
 
         )

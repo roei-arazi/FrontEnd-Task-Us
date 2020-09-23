@@ -70,8 +70,8 @@ input {
 button {
   font-family: font1;
   padding: 15px;
-  color: $mainBlack;
-  background-color: $buttonColorCTA;
+  color: $colorBgBoardBars;
+  background-color: $buttonMainBg;
   border: 0;
   cursor: pointer;
   font-size: 1rem;
@@ -79,7 +79,7 @@ button {
   transition: .3s;
 
   &:hover {
-    background-color: rgba($navIconHover, .2);
+    background-color: $buttonMainHover;
   }
 }
 

@@ -35,8 +35,8 @@
     button{
         background-color: $buttonMainBg;
         color: $colorBgBoardBars;
-        width:80%;
-        border-radius: 15px;
+        width: 220px;
+        border-radius: 20px;
         &:hover {
             background-color: $buttonMainHover;
         }
@@ -44,10 +44,15 @@
 
     .guest-button{
         background-color: #f0284e;
+        
+            
 
         &:hover{
             background-color: #be203e;
         }
+    }
+    a{
+        margin: 10px 0;
     }
     a:hover{
         color: $buttonMainBg;

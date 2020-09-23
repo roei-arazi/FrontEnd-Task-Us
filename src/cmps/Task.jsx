@@ -158,8 +158,7 @@ class _Task extends Component {
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
                     <Updates task={this.state.task} isImageModalShown={this.state.isImageModalShown}
                         loggedUser={this.props.loggedUser} updates={updates}
-                        onToggleImageModal={this.onToggleImageModal}
-                        uploadImg={this.uploadImg} sendNote={this.sendNote}
+                        uploadImg={this.uploadImg} sendNote={this.sendNote} closeModal={this.closeModal}
                     />
                 </div>
 
