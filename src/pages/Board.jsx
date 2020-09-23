@@ -56,8 +56,11 @@ class _Board extends Component {
     }
 
     onEditBoard = (board, userReadActivities = true) => {
-        const board = this._getCurrBoard()
-        this.setState({ ...this.state, boards: [...this.state.boards,] })
+        const boards = this.state.boards.map(stateBoard => {
+            if (stateBoard._id === board._id) return board
+            return stateBoard
+        })
+        this.setState({ ...this.state, boards })
         console.log('IM HERE!', board)
         if (!userReadActivities) {
             this.props.groupChanges(`${this.props.loggedUser.fullName} changed the board somehow...`, this.props.loggedUser, board)
