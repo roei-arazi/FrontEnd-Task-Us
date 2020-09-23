@@ -32,22 +32,20 @@ export class Tags extends Component {
         const tagName = this.elTagInput.current.value ? this.elTagInput.current.value : 'New Tag'
         tags.push({ id: this._makeid(), txt: tagName, color: _getRandomColor() })
         this.setState({ tags });
-        this.props.onEditTags(tags)
+        this.props.onEditTags(tags, tagName, 'addTag')
     }
 
     onRemoveTag = (id) => {
+        const tagToRemove = this.state.tags.find(tag => tag.id === id)
         const tags = this.state.tags.filter(tag => tag.id !== id)
         this.setState({ tags });
-        this.props.onEditTags(tags)
+        this.props.onEditTags(tags, tagToRemove.txt, 'removeTag')
     }
-    onEditTag = (idx) => {
-        console.log('state:', this.state.tags[idx].txt)
-        console.log('props:', this.props.task.tags[idx].txt)
+    onEditTag = (idx, tagName, type) => {
         if (this.props.task.tags[idx].txt === this.state.tags[idx].txt) {
-            console.log('WIERD...',)
             return
         }
-        this.props.onEditTags(this.state.tags)
+        this.props.onEditTags(this.state.tags, tagName, type)
     }
 
     focusText = () => {

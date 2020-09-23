@@ -20,7 +20,8 @@ async function loadBoards() {
     return boards
 }
 
-function updateBoard(boardToSave) {
+async function updateBoard(boardToSave) {
+    console.log('uhhh.. ', boardToSave)
     socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
