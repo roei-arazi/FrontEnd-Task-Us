@@ -28,7 +28,7 @@ function _Filter(props) {
         }
         return res;
     }
-
+ 
     if (!board) return <h1>Loading...</h1>
     const { groups, members } = board;
     const dates = getBoardDates();

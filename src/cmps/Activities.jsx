@@ -3,63 +3,85 @@ import moment from 'moment'
 import Truncate from 'react-truncate';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
+import { Fade } from '@material-ui/core';
 
 
 export default class Activities extends Component {
 
     state = {
         isOrderReversed: false,
-        activities: '',
-        activitiesNotRead: ''
+        isFilterOpen: false,
+        filterBy: {},
+        searchVal: ''
     }
 
-    componentDidMount() {
-        const activities = this.props.activityLog.filter(activity => activity.isRead)
-        const activitiesNotRead = this.props.activityLog.filter(activity => !activity.isRead)
-        this.setState({ activities, activitiesNotRead })
+    get activities(){
+        const {activityLog} = this.props;
+        return [activityLog.filter(activity => activity.isRead), activityLog.filter(activity => !activity.isRead)]
     }
 
-    handleSearch = ({ target }) => {
-        const activities = this.props.activityLog.filter((activity) => {
-            return activity.isRead && (
-                activity.description.toLowerCase().includes(target.value.toLocaleLowerCase())
-                ||
-                activity.byUser.fullName.toLowerCase().includes(target.value.toLocaleLowerCase())
-            )
+    handleChange = ({target}) =>{
+        this.setState({searchVal: target.value})
+    }
+
+    toggleFilter = () => {
+        this.setState({ isFilterOpen: !this.state.isFilterOpen });
+    }
+
+    onSetFilter(key, value){
+        const filterBy = {...this.state.filterBy}
+        if(filterBy[key] === value) value = '';
+        this.setState({filterBy: {...filterBy, [key]: value}})
+    }
+
+    getActivityDates() {
+        const activities = this.props.activityLog;
+        const dates = activities.reduce((acc, activity) => {
+            const date = moment(activity.createdAt).format('DD MMM');
+            acc[date] = '';
+            return acc;
+        }, {})
+        return Object.keys(dates);
+    }
+
+    getActivityMembers(){
+        const activities = this.props.activityLog;
+        const members = activities.reduce((acc, activity) =>{
+            acc[activity.byUser.fullName] = '';
+            return acc;
+        }, {})
+        return Object.keys(members)
+    }
+
+    getActivityGroups(){
+        const activities = this.props.activityLog;
+        const groups = activities.reduce((acc, activity) =>{
+            acc[activity.group.name] = ''
+        }, {})
+        return Object.keys(groups)
+    }
+ 
+    applyFilter(activities){
+        let res = [...activities];
+        const {filterBy, searchVal} = this.state;
+        if(filterBy.date) res = res.filter(activity => moment(activity.createdAt).format('DD MMM') === filterBy.date);
+        if(filterBy.member) res = res.filter(activity => activity.byUser.fullName === filterBy.member)
+        if(searchVal) res = res.filter(activity => {
+            return activity.description.toLowerCase().includes(searchVal)
+            || activity.byUser.fullName.toLowerCase().includes(searchVal)
         })
-
-        const activitiesNotRead = this.props.activityLog.filter((activity) => {
-            return !activity.isRead && (
-                activity.description.toLowerCase().includes(target.value.toLocaleLowerCase())
-                ||
-                activity.byUser.fullName.toLowerCase().includes(target.value.toLocaleLowerCase())
-            )
-        })
-        this.setState({ activitiesNotRead, activities })
+        return res;
     }
-
-    // reverseOrder = () => {
-    //     const activities = this.state.activities.sort((activity1, activity2) => {
-    //         const res = this.state.isOrderReversed ? -1 : 1;
-    //         if (activity1.createdAt < activity2.createdAt) return -res;
-    //         if (activity1.createdAt > activity2.createdAt) return res;
-    //         return 1;
-    //     })
-    //     const activitiesNotRead = this.state.activitiesNotRead.sort((activity1, activity2) => {
-    //         const res = this.state.isOrderReversed ? -1 : 1;
-    //         if (activity1.createdAt < activity2.createdAt) return -res;
-    //         if (activity1.createdAt > activity2.createdAt) return res;
-    //         return 1;
-    //     })
-    //     this.setState({ isOrderReversed: !this.state.isOrderReversed })
-    //     this.setState({ activities, activitiesNotRead })
-    // }
-
 
     render() {
-        if (!this.state.activities) return <h1>Loading...</h1>
-        const { isOrderReversed, activities, activitiesNotRead } = this.state;
-
+        if (!this.props.activityLog) return <h1>Loading...</h1>
+        const {isFilterOpen, filterBy, searchVal } = this.state;
+        let [activities, activitiesNotRead] = this.activities;
+        const dates = this.getActivityDates();
+        const members = this.getActivityMembers();
+        console.log('activities:', activities, activitiesNotRead);
+        activities = this.applyFilter(activities)
+        activitiesNotRead = this.applyFilter(activitiesNotRead)
         return (
             <section className="activities flex column padding-y-15">
 
@@ -69,14 +91,32 @@ export default class Activities extends Component {
                     <h1><span>{this.props.boardName}</span> Log</h1>
 
                     <div className='filters-container  flex align-center'>
-                        <input onChange={this.handleSearch} type="text" placeholder="Search" />
-                        {/* {isOrderReversed ?
-                            <div data-title="Sort"><FaArrowUp size="1.5rem" onClick={this.reverseOrder} /></div>
-                            :
-                            <div data-title="Sort"><FaArrowDown size="1.5rem" onClick={this.reverseOrder} /></div>
-                        } */}
-                    </div>
+                        <input value={searchVal} onChange={this.handleChange} type="text" placeholder="Search" />
 
+                        <div className="filter-outer-container relative">
+                            <button onClick={this.toggleFilter}>Filter</button>
+                            {isFilterOpen && <Fade in={true}>
+                                <div className="filter-modal flex absolute">
+                                    <section className="activity-member-filter">
+                                        <h3>Member</h3>
+                                        {members.map((member, idx) => <button
+                                                className={filterBy.member === member ? 'remove-filter-btn' : ''}
+                                                key={idx}
+                                                onClick={() => this.onSetFilter('member', member)}>{member}</button>)}
+                                    </section>
+                                    <section className="activity-date-filter">
+                                        <h3>Date</h3>
+                                        <div className="filter-list">
+                                            {dates.map((date, idx) => <button
+                                                className={filterBy.date === date ? 'remove-filter-btn' : ''}
+                                                key={idx}
+                                                onClick={() => this.onSetFilter('date', date)}>{date}</button>)}
+                                        </div>
+                                    </section>
+                                </div>
+                            </Fade>}
+                        </div>
+                    </div>
                 </header>
                 <div className="all-activities-container padding-y-15 padding-x-15">
                     <div className="activity-list-not-read column flex  padding-y-15 padding-x-15">

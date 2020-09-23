@@ -128,7 +128,6 @@ export function removeTask(taskId, board) {
 }
 
 export function editTask(task, board) {
-    console.log('TASK FROM ACTIONS', task)
     return dispatch => {
         try {
             const updatedBoard = boardService.updateTask(task, board);
