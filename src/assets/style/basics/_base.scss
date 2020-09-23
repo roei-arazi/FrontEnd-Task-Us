@@ -127,19 +127,32 @@ span.span-user-details {
 }
 
 [data-title]:hover:after {
-  font: font1;
+  font-family: font1;
   content: attr(data-title);
   position: absolute;
-  top: 100%;
-  left: -25px;
+  top: 150%;
   font-size: 18px;
   padding: 5px 10px;
-  color: #f1f1f1;
-  background-color: $colorIconsTasks;
-  border-radius: 10px;
+  color: $white;
+  background-color: $mainBlack;
+  border-radius: 5px;
+  animation: title-animation 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
-  max-width: 240px;
-  animation: title-animation 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) .2s both;
+}
+
+[data-title]:hover:before {
+  bottom: -55%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: $mainBlack;
+  border-width: 7px;
+  animation: title-animation 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
 }
 
 //Profile pics
