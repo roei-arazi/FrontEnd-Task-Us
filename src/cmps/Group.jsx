@@ -55,12 +55,8 @@ export class Group extends Component {
     }
 
     onChangeGroupColor = (color) => {
-        const newGroup = {
-            ...this.props.group,
-            color
-        }
         try {
-            this.props.onEditGroup(newGroup, color, this.state.color, 'coloe')
+            this.props.onEditGroup(this.props.group.id, color, this.state.color, 'color')
         } catch (err) {
             console.log('Error', err)
         }
