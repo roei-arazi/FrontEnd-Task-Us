@@ -55,12 +55,55 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = (board, userReadActivities = false) => {
+    onEditBoard = async (board, toUpdateChanges = false, type) => {
+        console.log('BOARD WITH UPDATED TITLE', board)
+        await this.props.updateBoard(board)
+        if (toUpdateChanges) {
+            switch (type) {
+                case 'changeBoardTitle':
+                    try {
+                        console.log('CHANGING TITLE',)
 
-        console.log('IM HERE!', board)
-        this.props.updateBoard(board)
-        if (userReadActivities) {
-            this.props.groupChanges(`${this.props.loggedUser.fullName} changed the board somehow...`, this.props.loggedUser, board)
+                        this.props.groupChanges(`${this.props.loggedUser.fullName} Changed the board title to ${board.name}`, this.props.loggedUser, this._getCurrBoard())
+
+                    } catch (err) {
+                        console.log('Error', err)
+                    }
+                    break;
+                case 'changeBoardDesc':
+                    try {
+                        this.props.groupChanges(`${this.props.loggedUser.fullName} Changed ${board.name} description to ${board.description}`, this.props.loggedUser, this._getCurrBoard())
+
+                    } catch (err) {
+                        console.log('Error', err)
+                    }
+
+                    break;
+                case 'addMemberToBoard':
+                    console.log('ADDING MEMBER TO BOARD',)
+                    try {
+                        this.props.groupChanges(`${this.props.loggedUser.fullName} Added a member to the board `, this.props.loggedUser, this._getCurrBoard())
+
+                    } catch (err) {
+                        console.log('Error', err)
+                    }
+
+                    break;
+                case 'removeMemberFromBoard':
+                    try {
+                        this.props.groupChanges(`${this.props.loggedUser.fullName} Removed a member from the board`, this.props.loggedUser, this._getCurrBoard())
+
+                    } catch (err) {
+                        console.log('Error', err)
+                    }
+
+                    break;
+
+                default:
+                    break;
+            }
+            console.log('clearing', board)
+
             this.props.showSnackbar('Updated board.')
             setTimeout(() => this.props.hideSnackbar(), 3000)
         }
