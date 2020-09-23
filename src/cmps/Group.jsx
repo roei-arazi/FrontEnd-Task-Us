@@ -28,6 +28,10 @@ export class Group extends Component {
         this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id })
     }
 
+    componentWillUnmount(){
+        socketService.off('updatedBoard')
+    }
+
     handleChange = (ev) => {
         this.setState({ name: ev.target.value });
     }
