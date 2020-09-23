@@ -25,7 +25,7 @@ export class Group extends Component {
         socketService.on('updatedBoard', () => {
             this.setState({ ...this.state, name: this.props.group.name })
         })
-        this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id  })
+        this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id })
     }
 
     handleChange = (ev) => {
@@ -88,7 +88,7 @@ export class Group extends Component {
         if (!this.state.name) return <h1>Loading...</h1>
         const priority = this.convertToData('priority')
         const { name, ElGroupSettings, elGroupColors } = this.state;
-        const {group, index} = this.props;
+        const { group, index } = this.props;
         const status = this.convertToData('status')
         return (
             <Draggable draggableId={group.id} index={index}>

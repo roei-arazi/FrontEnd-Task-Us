@@ -45,9 +45,7 @@ class _UserProfile extends Component {
 
     uploadImg = async (ev) => {
         const res = await cloudinaryService.uploadImg(ev.target.files[0])
-        this.setState({ user: { ...this.state.user, imgUrl: res.url } },() => {
-            this.updateProfile(this.state.user)
-        })
+        this.setState({ user: { ...this.state.user, imgUrl: res.url } })
     }
 
     render() {

@@ -7,6 +7,8 @@ import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import moment from 'moment';
+
 // Reducers funcs
 import { loadUsers } from '../store/actions/userActions'
 import {
@@ -99,7 +101,7 @@ class _Board extends Component {
 
     //------------------GROUP CRUD-----------------
     onAddGroup = () => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
+        const board = this._getCurrBoard()
         try {
             this.props.addGroup(board);
             this.props.clearFilter();
@@ -111,7 +113,7 @@ class _Board extends Component {
         this.props.history.push(`/board/${this.state.boardId}`)
     }
     onRemoveGroup = (groupId) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
+        const board = this._getCurrBoard()
         try {
             this.props.removeGroup(groupId, board)
             this.props.showSnackbar('Removed group.');
@@ -121,12 +123,12 @@ class _Board extends Component {
         }
     }
     onEditGroup = (groupId, changedValue, originalValue, key) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
+        const board = this._getCurrBoard()
         const group = board.groups.find(group => group.id === groupId)
         if (changedValue === originalValue) return // No changes were made
         group[key] = changedValue;
         try {
-            this.props.groupChanges(Date.now(), board, originalValue, changedValue, this.props.loggedUser)
+            this.props.groupChanges(`${this.props.loggedUser.fullName} Changed board, ${originalValue} title to: ${changedValue}`, this.props.loggedUser, board)
             this.props.editGroup(group, board, originalValue, changedValue)
             this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -138,10 +140,15 @@ class _Board extends Component {
 
     //-----------------TASKS CRUD------------------------
     onRemoveTask = (taskId) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
-
+        const board = this._getCurrBoard()
+        let task = null
+        board.groups.forEach(group => {
+            if (task) return
+            task = group.tasks.find(task => task.id === taskId)
+        })
         try {
             this.props.removeTask(taskId, board)
+            this.props.groupChanges(`${this.props.loggedUser.fullName} Removed task: ${task.name}`, this.props.loggedUser, board)
             this.props.showSnackbar('Removed task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -150,10 +157,10 @@ class _Board extends Component {
     }
     onAddTask = (groupId, taskName) => {
         if (!taskName) taskName = 'New task'
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
-
+        const board = this._getCurrBoard()
         try {
             this.props.addTask(groupId, taskName, board)
+            this.props.groupChanges(`${this.props.loggedUser.fullName} Added a new task: ${taskName}`, this.props.loggedUser, board)
             this.props.clearFilter()
             this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -161,10 +168,35 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
-    onEditTask = (task, changedValue = true, originalValue = false) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
 
+
+
+    onEditTask = (task, changedValue = true, originalValue = false, type) => {
+        const board = this._getCurrBoard()
         if (changedValue === originalValue) return
+
+        switch (type) {
+            case 'name':
+                console.log(`${this.props.loggedUser.fullName} changed ${originalValue} to ${changedValue}`)
+
+                break;
+            case 'sendNote':
+                console.log(`${this.props.loggedUser.fullName} sent an update at ${task.name}`)
+
+                break;
+            case 'priority':
+                console.log(`${this.props.loggedUser.fullName} changed ${task.name} priority from ${originalValue} to ${changedValue}`)
+
+                break;
+            case 'date':
+                console.log(`${this.props.loggedUser.fullName} changed ${task.name} date from ${moment(originalValue).format('DD/MMM/YYYY')} to ${moment(changedValue).format('DD/MMM/YYYY')}`)
+
+                break;
+
+            default:
+                break;
+        }
+        // this.props.groupChanges(`${this.props.loggedUser.fullName} Removed task: ${task.name}`, this.props.loggedUser, board)
 
         try {
             this.props.editTask(task, board)
@@ -183,7 +215,7 @@ class _Board extends Component {
             &&
             destination.index === source.index) return;
 
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
+        const board = this._getCurrBoard()
 
         if (type === 'group') {
             const newGroups = Array.from(board.groups)
@@ -244,6 +276,8 @@ class _Board extends Component {
                 board.groups.splice(startIdx, 1, newStartGroup)
                 board.groups.splice(endIdx, 1, newFinishGroup)
                 try {
+
+                    this.props.groupChanges(`${this.props.loggedUser.fullName} Moved ${newTaskToPaste.name} from ${newStartGroup.name} to ${newFinishGroup.name}`, this.props.loggedUser, board)
                     this.props.updateBoard(board)
 
                 } catch (err) {
@@ -260,9 +294,13 @@ class _Board extends Component {
         this.setState({ boardBarSearch: val })
     }
 
+    _getCurrBoard = () => {
+        return this.props.boards.find(board => board._id === this.state.boardId)
+    }
+
     render() {
         if (this.props.boards.length === 0) return <h1>Loading...</h1>
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
+        const board = this._getCurrBoard()
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
         const filteredBoard = this.applyFilter(board, filterBy);
@@ -272,7 +310,7 @@ class _Board extends Component {
                 <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                 <div className="board-container">
                     <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
-                        handleSearch={this.handleSearch} users={users}/>
+                        handleSearch={this.handleSearch} users={users} />
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
@@ -286,7 +324,7 @@ class _Board extends Component {
                                             return <Group key={group.id} index={index}
                                                 onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                                                 onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup}
-                                                 onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
+                                                onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
                                         })}
                                     </div>
                                 }
@@ -299,6 +337,8 @@ class _Board extends Component {
         )
     }
 }
+
+
 
 const mapStateToProps = state => {
     return {
