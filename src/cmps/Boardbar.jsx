@@ -5,7 +5,8 @@ import { Menu, MenuItem } from '@material-ui/core';
 import { HiOutlineCog } from 'react-icons/hi';
 import { BsFillPlusCircleFill, } from 'react-icons/bs';
 
-import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate } from '../store/actions/boardActions.js';
+import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate, loadBoards } from '../store/actions/boardActions.js';
+import {updateUser} from '../store/actions/userActions.js'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
 import { AiOutlineRight } from 'react-icons/ai';
@@ -19,11 +20,28 @@ class _Boardbar extends Component {
         searchVal: ''
     }
     componentDidMount() {
+        const {loggedUser} = this.props;
         socketService.on('updatedBoard', updatedBoard => {
             this.props.recieveUpdate(updatedBoard)
         });
 
+        socketService.on('add-delete-board', ()=>{
+            this.props.loadBoards()
+        })
+        socketService.on('accept-notif', (notification)=>{
+            console.log('got notification:', notification);
+            this.props.updateUser({...loggedUser, notifications: [...loggedUser.notifications, notification]})
+        })
+
+        socketService.emit('user', loggedUser._id)
+
         this.setState({ isShown: this.props.isBoardbarShown })
+    }
+
+    componentWillUnmount(){
+        socketService.off('updatedBoard')
+        socketService.off('add-delete-board')
+        socketService.off('accept-notif')
     }
 
     onMoveToBoard(id) {
@@ -114,7 +132,8 @@ class _Boardbar extends Component {
 const mapStateToProps = state => {
     return {
         boards: state.boardReducer.boards,
-        isBoardbarShown: state.boardReducer.isBoardbarShown
+        isBoardbarShown: state.boardReducer.isBoardbarShown,
+        loggedUser: state.userReducer.loggedUser
     }
 }
 
@@ -125,7 +144,8 @@ const mapDispatchToProps = {
     showSnackbar,
     hideSnackbar,
     toggleBoardbar,
-    recieveUpdate
+    recieveUpdate,
+    loadBoards
 }
 
 export const Boardbar = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Boardbar));

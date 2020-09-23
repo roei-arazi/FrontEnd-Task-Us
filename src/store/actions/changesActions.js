@@ -1,10 +1,21 @@
 import { boardService } from '../../services/boardService'
-
+import socketService from '../../services/socketService.js'
 
 export function groupChanges(desc, loggedUser, board) {
-    console.log('im here',)
     return async dispatch => {
         try {
+            const notification = {
+                byUser:{
+                    fullName: loggedUser.fullName,
+                    imgUrl: loggedUser.imgUrl
+                },
+                content: desc,
+                createdAt: Date.now()
+            }
+            board.members.forEach(member =>{
+                if(member._id === loggedUser._id) return;
+                socketService.emit('send-notif',{memberId: member._id, notification} )
+            })
             const updatedBoard = await boardService.handleBoardChanges(desc, loggedUser, board)
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {

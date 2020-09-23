@@ -49,6 +49,10 @@ class _Task extends Component {
         })
 
     }
+    
+    componentWillUnmount(){
+        socketService.off('updatedBoard')
+    }
 
     handleNameChange = (ev) => {
         this.setState({ task: { ...this.state.task, name: ev.target.value } });
@@ -70,11 +74,6 @@ class _Task extends Component {
                 this.props.onEditTask(this.state.task, this.props.group, data, prevData, 'status')
                 this.closeModal()
             })
-            // } else if (typeof(data) === 'object') {
-            //     console.log('got to tags');
-            //     console.log('IMHERE, data:', data, 'tag:', tags)
-            //     this.setState({ ...this.state, tags })
-            //     this.props.onEditTask(this.state, tags)
         } else {
             const prevData = this.state.task.priority;
             this.setState({ task: { ...this.state.task, priority: data } }, () => {
