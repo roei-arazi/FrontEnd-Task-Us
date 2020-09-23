@@ -12,6 +12,7 @@ export function groupChanges(desc, loggedUser, board) {
                 content: desc,
                 createdAt: Date.now()
             }
+            console.log('got board:', board);
             board.members.forEach(member =>{
                 if(member._id === loggedUser._id) return;
                 socketService.emit('send-notif',{memberId: member._id, notification} )
