@@ -1,6 +1,5 @@
 .activities {
-    overflow-y: overlay;
-    margin: 0 15px;
+    margin: 0 10px;
 
     header {
         margin-bottom: 25px;
@@ -21,7 +20,10 @@
 
     }
 
-    .activity-list {}
+    .all-activities-container {
+        overflow-y: overlay;
+        max-height: 75vh;
+    }
 
     .activity-list-not-read {
         background-color: #bbdaf6;
@@ -43,16 +45,15 @@
 
 
         .activity-desc-container {
-            width: 80%;
+            width: 60%;
 
             >*:not(:first-child) {
-                margin-left: 15px;
+                margin-right: 15px;
             }
         }
 
         .date-container {
-            width: 20%;
-            margin-left: 15px;
+            min-width: 50px;
             color: $colorFontUserDetails;
         }
 
@@ -60,9 +61,17 @@
     }
 
     .user-img-container {
+        width: 40%;
+        margin-right: 15px;
+
+        >*:not(:first-child) {
+            margin-left: 10px;
+        }
+
         img {
             height: auto;
             width: 40px;
+            border-radius: 50%;
         }
     }
 

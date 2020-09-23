@@ -119,9 +119,11 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
-    onEditGroup = (group, changedValue, originalValue) => {
+    onEditGroup = (groupId, changedValue, originalValue, key) => {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
+        const group = board.groups.find(group => group.id === groupId)
         if (changedValue === originalValue) return // No changes were made
+        group[key] = changedValue;
         try {
             this.props.editGroup(group, board)
             this.props.showSnackbar('Updated group.');
