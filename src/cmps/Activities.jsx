@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import Truncate from 'react-truncate';
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Fade } from '@material-ui/core';
 
@@ -130,9 +128,7 @@ export default class Activities extends Component {
                                         </div>
                                         <div className="activity-desc-container flex align-center">
                                             <p>
-                                                <Truncate lines={2} ellipsis={"..."} width={500}>
-                                                    {activity.desc}
-                                                </Truncate>
+                                                {activity.desc}
                                             </p>
                                         </div>
 
@@ -162,9 +158,7 @@ export default class Activities extends Component {
                                     </div>
                                     <div className="activity-desc-container flex align-center">
                                         <p>
-                                            <Truncate lines={1} ellipsis={"..."} width={550}>
-                                                {activity.desc}
-                                            </Truncate>
+                                            {activity.desc}
                                         </p>
                                     </div>
 

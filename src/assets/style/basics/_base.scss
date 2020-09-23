@@ -54,6 +54,7 @@ input {
   border: 0;
   border-bottom: 2px solid $colorBottomBorder;
   margin: 10px 0;
+  line-height: 2;
 
   &::placeholder {
     color: $mainLightGrey;
@@ -70,8 +71,8 @@ input {
 button {
   font-family: font1;
   padding: 15px;
-  color: $mainBlack;
-  background-color: $buttonColorCTA;
+  color: $colorBgBoardBars;
+  background-color: $buttonMainBg;
   border: 0;
   cursor: pointer;
   font-size: 1rem;
@@ -79,7 +80,7 @@ button {
   transition: .3s;
 
   &:hover {
-    background-color: rgba($navIconHover, .2);
+    background-color: $buttonMainHover;
   }
 }
 
@@ -164,7 +165,7 @@ span.span-user-details {
 
 //Menu container
 div[role="menuContainer"]>div {
-  font-family: monspace;
+  font-family: font1;
   box-shadow: 0px 3px 10px -5px #484444 !important;
 }
 

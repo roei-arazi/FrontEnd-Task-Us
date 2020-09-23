@@ -107,6 +107,7 @@ export class _BoardHeader extends React.Component {
         const { members } = this.state.board
         const { users } = this.props
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
+        const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity.isRead)
         return (
             <section className="board-header flex column padding-x-30">
                 <div className="board-header-header flex space-between grow align-center">
@@ -131,8 +132,8 @@ export class _BoardHeader extends React.Component {
                     </h1>
                     <div className="board-header-right relative flex align-center">
                         <div className="board-users flex justify-center" onClick={this.onToggleUsers}>
-                            {members.map(member => {
-                                return <div key={member._id} className="user-img-container">
+                            {members.map((member, idx) => {
+                                return <div key={idx} className="user-img-container">
                                     <img src={member.imgUrl} />
                                 </div>
                             })}
@@ -168,8 +169,8 @@ export class _BoardHeader extends React.Component {
 
                             </div>}
                         <div onClick={this.onToggleActivities} className="activities-outer-container flex align-center  cursor-pointer">
-                            <GoRequestChanges />
-                            <h2 >Activity Log</h2>
+                            {/* <GoRequestChanges /> */}
+                            <h2> Activities <span style={{ color: activitiesNotRead.length !== 0 ? '#0085ff' : '' }}>{activitiesNotRead.length}</span> / {board.activityLog.length}</h2>
                         </div>
                     </div>
 

@@ -1,6 +1,12 @@
 .updates-header {
-    height:15vh;
+    height: 30vh;
     border-bottom: 1px solid rgba(109, 109, 109, 0.35);
+    padding-top: 15px;
+    padding-left: 15px;
+
+    svg {
+        color: $buttonMainBg;
+    }
 
     h1 {
         margin-top: 10px;
@@ -10,76 +16,286 @@
 
     .updates-header-options {
         width: 100%;
+        margin-left: 10px;
 
-        >* {
-            margin: 0 auto;
-        }
 
-        svg{
-            color: $buttonMainBg;
+        textarea {
+            width: 450px;
+            border-radius: 10px;
+            resize: none;
+            height: 75px;
+            padding: 5px;
 
-            &:hover{
-                color:$buttonMainHover;
+            &:focus {
+                border-color: $buttonMainBg;
             }
         }
-    }
+
+        .updates-btns {
+            padding: 0 5px;
+            width: 450px;
+        }
+
+        .image-uploader {
+            margin-right: 10px;
+
+            label {
+
+                >* {
+                    margin-top: 4px;
+                    border-radius: 5px;
+                }
+
+                svg {
+                    align-self: center;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 5px;
+                    font-size: 25px;
+                    color: $colorBgBoardBars;
+                    background-color: $buttonMainBg;
+                    cursor: pointer;
+                    transition: .3s;
+
+                    &:hover {
+                        background-color: $buttonMainHover;
+                    }
+                }
+            }
+
+            .image-uploaded {
+                margin-left: 5px;
+                padding: 5px;
+                border-radius: 5px;
+                height: 30px;
+                margin-top: 4px;
+                color: #1cdc1c;
+
+                svg {
+                    background-color: inherit;
+                    cursor: auto;
+                    color: #1cdc1c;
+                }
+            }
+        }
 
 
-    label {
-        font-family: font1;
-        padding: 15px;
-        color: $colorBgBoardBars;
-        background-color: $buttonMainBg;
-        border: 0;
-        cursor: pointer;
-        font-size: 1rem;
-        border-radius: 2px;
-        transition: .3s;
-        margin: 20px 0;
+        @keyframes ldio-subadnemdcd {
+            0% {
+                opacity: 1
+            }
 
-        &:hover {
-            background-color: $buttonMainHover;
+            100% {
+                opacity: 0
+            }
+        }
+
+        .ldio-subadnemdcd div {
+            left: 47px;
+            top: 25.5px;
+            position: absolute;
+            animation: ldio-subadnemdcd linear 1s infinite;
+            background: #ffffff;
+            width: 6px;
+            height: 13px;
+            border-radius: 5px;
+            transform-origin: 3px 24.5px;
+        }
+
+        .ldio-subadnemdcd div:nth-child(1) {
+            transform: rotate(0deg);
+            animation-delay: -0.9s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(2) {
+            transform: rotate(36deg);
+            animation-delay: -0.8s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(3) {
+            transform: rotate(72deg);
+            animation-delay: -0.7s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(4) {
+            transform: rotate(108deg);
+            animation-delay: -0.6s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(5) {
+            transform: rotate(144deg);
+            animation-delay: -0.5s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(6) {
+            transform: rotate(180deg);
+            animation-delay: -0.4s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(7) {
+            transform: rotate(216deg);
+            animation-delay: -0.3s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(8) {
+            transform: rotate(252deg);
+            animation-delay: -0.2s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(9) {
+            transform: rotate(288deg);
+            animation-delay: -0.1s;
+            background: #ffffff;
+        }
+
+        .ldio-subadnemdcd div:nth-child(10) {
+            transform: rotate(324deg);
+            animation-delay: 0s;
+            background: #ffffff;
+        }
+
+        .loadingio-spinner-spinner-gvjl1rpqs7q {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            overflow: hidden;
+            background: $buttonMainBg;
+        }
+
+        .ldio-subadnemdcd {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform: translateZ(0) scale(0.3);
+            backface-visibility: hidden;
+            transform-origin: 0 0;
+            /* see note above */
+        }
+
+        .ldio-subadnemdcd div {
+            box-sizing: content-box;
+        }
+
+        button {
+            height: 30px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
         }
     }
 
-    input {
-        width: 150px;
-    }
+
+
 }
 
 .updates-container {
-    
+
     overflow: overlay;
     padding: 0 10px;
-    height: 85vh;
+    height: 70vh;
     background-color: $colorBgBoardBars;
     border-bottom: 1px solid rgba(109, 109, 109, 0.35);
 
 
     .update-box {
-
+        width: 450px;
         padding: 10px;
         box-shadow: 0px 3px 10px -5px #484444;
         margin: 10px;
         background-color: $white;
-        width: fit-content;
-        border-radius:3px;
+        border-radius: 5px;
 
-        .member-name {
-            font-weight: bold;
-            margin-bottom:10px;
+        .update-box-header {
+            border-bottom: 1px solid rgba(109, 109, 109, 0.35);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+
+            .member-name {
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            img {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
         }
 
-        .update-text {
-            font-weight: initial;
-            display: inline;
-            word-break: break-all;
+        .update-box-main {
+            min-height: 100px;
+
+            .update-text {
+                font-weight: initial;
+                display: inline;
+                word-break: break-all;
+            }
+
+            img {
+                height: 200px;
+                width: 200px;
+                object-fit: fill;
+            }
         }
 
-        img {
-            height: 200px;
-            width: 200px;
+        .replies-box {
+            border-top: 1px solid rgba(109, 109, 109, 0.35);
+            padding-top: 5px;
+            margin: 5px 0;
+
+            .reply-box {
+                margin: 5px 0;
+                background-color: $colorBgBoardBars;
+                box-shadow: $modalsShadow;
+                padding: 10px;
+            }
+
+            .reply-header {
+                margin-bottom: 10px;
+            }
+
+            img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+
         }
+
+        .reply-footer{
+
+            border: 1px solid rgba(109, 109, 109, 0.35);
+            border-radius: 12px;
+            textarea {
+                border:0;
+                width: 360px;
+                resize: none;
+                height: 50px;
+                padding: 5px;
+            }
+    
+            .reply-button {
+                height:50px;
+                display: flex;
+                align-items: center;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                width: 70px;
+            }
+        }
+
+
     }
 
 }

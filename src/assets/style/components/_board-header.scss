@@ -12,19 +12,20 @@
             font-size: 2rem;
         }
 
-        .board-header-right{
-            .board-users{
+        .board-header-right {
+            .board-users {
                 cursor: pointer;
-                width:125px;
+                width: 125px;
                 text-align: center;
 
-                img{
+                img {
                     width: 30px;
                     height: 30px;
                     border-radius: 50%;
                     margin-left: -15px;
                 }
             }
+
             .users-modal {
                 background-color: $white;
                 z-index: 999;
@@ -34,77 +35,79 @@
                 right: 0;
                 padding: 0 10px;
                 box-shadow: $modalsShadow;
-    
+
                 .board-users-box {
                     border-bottom: 1px solid #a8a8a87d;
                     cursor: auto;
 
-                    img{
-                        width:35px;
-                        height:35px;
+                    img {
+                        width: 35px;
+                        height: 35px;
                         border-radius: 50%;
                     }
-    
+
                     svg {
                         font-size: 1.5rem;
                         color: $buttonMainBg;
                     }
-    
+
                     .member-name {
                         margin-left: 10px;
                     }
                 }
-    
+
                 h3 {
                     margin: 15px 0;
-    
+
                 }
-    
+
                 .user-box {
                     margin-bottom: 10px;
                 }
-    
+
                 .user-box-info {
                     p {
                         text-align: left;
                         cursor: pointer;
                     }
                 }
-    
+
                 .site-users-box {
                     cursor: auto;
-    
+
                     .member-name {
                         margin-left: 10px;
                     }
-    
+
                     svg {
                         font-size: 1.5rem;
                         color: $buttonMainBg;
                     }
 
-                    img{
-                        width:35px;
-                        height:35px;
+                    img {
+                        width: 35px;
+                        height: 35px;
                         border-radius: 50%;
                     }
                 }
             }
 
         }
-       
-        
 
-        .activities-outer-container { 
+
+
+        .activities-outer-container {
             padding: 10px;
             border-radius: 5px;
             transition: .3s;
             margin-left: 15px;
+            border: 1px solid #d1c9c9;
 
             &:hover {
                 background-color: rgba(218, 218, 218, 0.287);
             }
-            svg{
+
+            svg {
                 margin-right: 5px;
             }
         }
@@ -121,26 +124,29 @@
             }
         }
 
-        
-    h5 {
-        font-weight: 400;
-        align-self: baseline;
-    }
 
-    svg {
-        font-size: 25px;
-    }
-    button {
-        color: $colorBgBoardBars;
-        font-weight: 700;
-        background-color: $buttonMainBg;
-        font-size: 1rem;
-        padding: 12px 8px;
-
-        &:hover {
-            background-color: $buttonMainHover;
+        h5 {
+            font-weight: 400;
+            align-self: baseline;
         }
-    }
+
+        svg {
+            font-size: 25px;
+            margin-right: 5px;
+        }
+
+        button {
+            color: $colorBgBoardBars;
+            font-weight: 700;
+            background-color: $buttonMainBg;
+            font-size: 1rem;
+            padding: 12px 8px;
+
+            &:hover {
+                background-color: $buttonMainHover;
+            }
+        }
+
         .search-outer-container {
             padding: 10px 10px 5px;
             flex-direction: row-reverse;
@@ -156,22 +162,21 @@
                 width: 50px;
                 animation: shorten .4s;
                 padding: 0;
-                margin: 0; 
+                margin: 0;
                 color: $mainLightGrey;
-    
+
                 +svg {
                     cursor: pointer;
                     transition: .4s;
                     transform: translate(0, 0) rotate(0deg);
                     font-size: 1.5rem;
-                    margin-bottom: 9px;
                     color: $mainLightGrey;
                 }
-    
+
                 &:focus {
                     animation: widen .4s;
                     width: 200px;
-    
+
                     +svg {
                         transition: .4s;
                         transform: translate(200px, 0) rotate(90deg);
