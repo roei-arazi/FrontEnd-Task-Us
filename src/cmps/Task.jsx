@@ -33,11 +33,13 @@ class _Task extends Component {
         isImageModalShown: false
     }
 
+    reloadProps = ()=>{
+        this.setState({ task: this.props.task })
+    }
+
     componentDidMount() {
         this.contentEditable = React.createRef();
-        socketService.on('updatedBoard', () => {
-            this.setState({ task: this.props.task })
-        })
+        socketService.on('updatedBoard',this.reloadProps)
         this.setState({
             ...this.state,
             task: this.props.task,
@@ -49,9 +51,9 @@ class _Task extends Component {
         })
 
     }
-    
+
     componentWillUnmount(){
-        socketService.off('updatedBoard')
+        socketService.off('updatedBoard', this.reloadProps)
     }
 
     handleNameChange = (ev) => {

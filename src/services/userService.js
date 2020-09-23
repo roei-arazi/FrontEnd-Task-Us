@@ -142,9 +142,9 @@ async function guestLogin() {
     }
 }
 
-async function updateUser(loggedUser) {
-    httpService.put(`user/${loggedUser._id}`, loggedUser)
-    return loggedUser
+async function updateUser(user) {
+    httpService.put(`user/${user._id}`, user)
+    return user
 }
 
 

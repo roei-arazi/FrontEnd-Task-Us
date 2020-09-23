@@ -145,7 +145,8 @@ const mapDispatchToProps = {
     hideSnackbar,
     toggleBoardbar,
     recieveUpdate,
-    loadBoards
+    loadBoards,
+    updateUser
 }
 
 export const Boardbar = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Boardbar));

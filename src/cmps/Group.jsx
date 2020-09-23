@@ -19,17 +19,19 @@ export class Group extends Component {
         elGroupColors: false,
     }
 
+    reloadProps = () =>{
+        this.setState({ ...this.state, name: this.props.group.name })
+    }
+
     componentDidMount() {
         this.elInputAdd = React.createRef();
         this.contentEditable = React.createRef();
-        socketService.on('updatedBoard', () => {
-            this.setState({ ...this.state, name: this.props.group.name })
-        })
+        socketService.on('updatedBoard', this.reloadProps)
         this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id })
     }
 
     componentWillUnmount(){
-        socketService.off('updatedBoard')
+        socketService.off('updatedBoard', this.reloadProps)
     }
 
     handleChange = (ev) => {

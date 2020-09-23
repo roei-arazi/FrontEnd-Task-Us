@@ -1,9 +1,12 @@
 import { boardService } from '../../services/boardService'
 import socketService from '../../services/socketService.js'
+import {userService} from '../../services/userService.js'
 
 export function groupChanges(desc, loggedUser, board) {
     return async dispatch => {
         try {
+            const users = await userService.loadUsers();
+            console.log('got users', users);
             const notification = {
                 byUser:{
                     fullName: loggedUser.fullName,
@@ -12,10 +15,14 @@ export function groupChanges(desc, loggedUser, board) {
                 content: desc,
                 createdAt: Date.now()
             }
-            console.log('got board:', board);
             board.members.forEach(member =>{
                 if(member._id === loggedUser._id) return;
-                socketService.emit('send-notif',{memberId: member._id, notification} )
+                console.log('member id:', member._id);
+                let userToUpdate = users.find(user => user._id === member._id);
+                console.log('user:', userToUpdate);
+                userToUpdate.notifications.unshift(notification);
+                userService.updateUser(userToUpdate);
+                socketService.emit('send-notif',{memberId: member._id, notification});
             })
             const updatedBoard = await boardService.handleBoardChanges(desc, loggedUser, board)
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
