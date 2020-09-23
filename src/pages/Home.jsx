@@ -16,17 +16,23 @@ class _Home extends Component {
     render() {
         if (!this.props.boards || this.props.boards.length === 0) return <h1>Loading...</h1>
         return (
-            <section className="home">
+            <section className="home flex column">
+                <div className="home-header flex space-between align-center">
                 <h1>Home</h1>
-                <NavLink to={`/board/${this.props.boards[0]._id}`}>
-                    <button>Start Here!</button>
-                </NavLink>
+                <div className="home-header-right flex">
                 <NavLink to="/login">
-                    <button>Login</button>
+                    <button className="home-header-btn">Login</button>
                 </NavLink>
                 <NavLink to="/signup">
-                    <button>Sign-up</button>
+                    <button className="home-header-btn">Sign-up</button>
                 </NavLink>
+                </div>
+                </div>
+                <main className="home-main flex justify-center align-center column">
+                <NavLink to={`/board/${this.props.boards[0]._id}`}>
+                    <button className="guest-button">Start Here!</button>
+                </NavLink>
+                </main>
 
 
             </section>

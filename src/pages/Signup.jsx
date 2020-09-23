@@ -79,7 +79,7 @@ class _Signup extends Component {
                     <ErrorMessage name="confirm" component="span" />
                     <button type="submit">Signup</button>
                     <a href="/#/login">Already have an account? Login here!</a>
-                    <button onClick={this.onGuestLogin}>Or try as a guest!</button>
+                    <button className="guest-button" onClick={this.onGuestLogin}>Or try as a guest!</button>
                 </Form>
             </Formik>
             <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Back to home" arrow>

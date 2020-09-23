@@ -1,0 +1,35 @@
+.home {
+    min-height: 100vh;
+
+    .home-header {
+        height: 10vh;
+        border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
+
+        .home-header-btn {
+            background-color: $buttonMainBg;
+            color: $colorBgBoardBars;
+            margin-right: 15px;
+            width: 100px;
+            border-radius: 30px;
+
+            &:hover {
+                background-color: $buttonMainHover;
+            }
+        }
+    }
+
+    .home-main {
+        height: 90vh;
+
+        .guest-button {
+            background-color: #f0284e;
+            color: $colorBgBoardBars;
+            width: 220px;
+            border-radius: 20px;
+
+            &:hover {
+                background-color: #be203e;
+            }
+        }
+    }
+}

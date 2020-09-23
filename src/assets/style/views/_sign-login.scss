@@ -1,5 +1,5 @@
 .sign-login {
-    background-color: $colorBg;
+    background-color: $colorBgBoardBars;
     height: 100vh;
     color: $mainBlack;
 }
@@ -10,11 +10,20 @@
     left: 20px;
     height: fit-content;
     width: fit-content;
-    color: $colorIconsTasks;
+    
+
+    svg{
+        color: $buttonMainBg;
+        &:hover{
+            color:$buttonMainHover;
+        }
+    }
+
 }
 
 .sign-login-form {
-    background-color: $colorBgBoardBars;
+    background-color: $white;
+    box-shadow: $modalsShadow;
     padding: 20px;
     position: absolute;
     width: 50%;
@@ -24,21 +33,33 @@
     transform: translate(-50%, -50%);
     border-radius: 5px;
     button{
-        background-color: $colorBgBoardBars;
+        background-color: $buttonMainBg;
+        color: $colorBgBoardBars;
+        width:80%;
+        border-radius: 15px;
         &:hover {
-            background-color: #373737;
+            background-color: $buttonMainHover;
+        }
+    }
+
+    .guest-button{
+        background-color: #f0284e;
+
+        &:hover{
+            background-color: #be203e;
         }
     }
     a:hover{
-        background-color: #373737;
+        color: $buttonMainBg;
+        text-decoration: underline;
     }
     .sign-login-input,
-    button,
     section {
         width: 90%;
         color: $mainBlack;
     }
     svg{
         font-size: 5rem;
+        color: $buttonMainBg;
     }
 }
