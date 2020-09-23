@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
-import { Tooltip, Zoom } from '@material-ui/core';
 
 import { login, guestLogin } from '../store/actions/userActions.js'
 import { loadBoards } from '../store/actions/boardActions'
@@ -56,11 +55,9 @@ class _Login extends Component {
                     <button className="guest-button" onClick={this.onGuestLogin}>Or try as a guest!</button>
                 </Form>
             </Formik>
-            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Back to home" arrow>
-                <div className="go-back">
-                    <NavLink to="/"><FaArrowLeft /></NavLink>
-                </div>
-            </Tooltip>
+            <div data-title="Back to home" className="go-back">
+                <NavLink to="/"><FaArrowLeft /></NavLink>
+            </div>
         </div>
     }
 }

@@ -3,31 +3,30 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
-import { Tooltip, Zoom } from '@material-ui/core';
-import {signup, guestLogin} from '../store/actions/userActions.js'
+import { signup, guestLogin } from '../store/actions/userActions.js'
 
-import {loadBoards} from '../store/actions/boardActions'
+import { loadBoards } from '../store/actions/boardActions'
 
 class _Signup extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         // if(this.props.loggedUser)   this.props.history.push('/board/123')
         this.props.loadBoards()
     }
 
-    onSignup = async (values, {resetForm}) => {
+    onSignup = async (values, { resetForm }) => {
         resetForm();
-        const {username, password, email, fullName} = values;
-        try{
-            await this.props.signup({username, password, email, fullName});
+        const { username, password, email, fullName } = values;
+        try {
+            await this.props.signup({ username, password, email, fullName });
             this.props.history.push(`/board/${this.props.boards[0]._id}`)
-        }catch(err){
+        } catch (err) {
             console.log('Signup: Couldn\'t sign up');
             throw err;
         }
     }
 
-    onGuestLogin = async () =>{
+    onGuestLogin = async () => {
         await this.props.guestLogin();
         this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
@@ -55,12 +54,12 @@ class _Signup extends Component {
                     <section>
                         <legend>Username *</legend>
                         <Field autoComplete="something" className="sign-login-input" type="text" name="username" />
-                    </section> 
+                    </section>
                     <ErrorMessage name="username" component="span" />
                     <section>
                         <legend>Full name *</legend>
-                        <Field autoComplete="something" className="sign-login-input"type="text" name="fullName" />
-                    </section> 
+                        <Field autoComplete="something" className="sign-login-input" type="text" name="fullName" />
+                    </section>
                     <ErrorMessage name="fullName" component="span" />
                     <section>
                         <legend>Email *</legend>
@@ -69,12 +68,12 @@ class _Signup extends Component {
                     <ErrorMessage name="email" component="span" />
                     <section>
                         <legend>Password *</legend>
-                    <Field autoComplete="something" className="sign-login-input" type="text" name="password" />
+                        <Field autoComplete="something" className="sign-login-input" type="text" name="password" />
                     </section>
                     <ErrorMessage name="password" component="span" />
                     <section>
                         <legend>Confirm password *</legend>
-                    <Field autoComplete="something" className="sign-login-input" type="text" name="confirm" />
+                        <Field autoComplete="something" className="sign-login-input" type="text" name="confirm" />
                     </section>
                     <ErrorMessage name="confirm" component="span" />
                     <button type="submit">Signup</button>
@@ -82,11 +81,9 @@ class _Signup extends Component {
                     <button className="guest-button" onClick={this.onGuestLogin}>Or try as a guest!</button>
                 </Form>
             </Formik>
-            <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Back to home" arrow>
-                <div className="go-back">
-                    <NavLink to="/"><FaArrowLeft /></NavLink>
-                </div>
-            </Tooltip>
+            <div data-title="Back to home" className="go-back">
+                <NavLink to="/"><FaArrowLeft /></NavLink>
+            </div>
         </div>
     }
 }

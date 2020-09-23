@@ -179,8 +179,7 @@ class _Task extends Component {
                                     <div className='icon-container'>
                                         <MdDelete className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id, this.props.group) }} />
                                     </div>
-                                    {/* <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow> */}
-                                    {/* </Tooltip> */}
+
                                 </div>
                                 <div className="task-title-updates flex align-center space-between grow">
                                     <h2>
