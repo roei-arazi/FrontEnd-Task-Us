@@ -162,20 +162,11 @@ export class Group extends Component {
                                 </h1>
                             </div>
                             <div className="group-header-right flex">
-<<<<<<< HEAD
                                 <h3 style={{ color: this.props.group.color }}>Members</h3>
                                 <h3 style={{ color: this.props.group.color }}>Status</h3>
                                 <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
                                 <h3 style={{ color: this.props.group.color }}>Priority</h3>
                                 <h3 style={{ color: this.props.group.color }}>Tags</h3>
-=======
-                                <h3 style={{ color: group.color }}>Updates</h3>
-                                <h3 style={{ color: group.color }}>Members</h3>
-                                <h3 style={{ color: group.color }}>Status</h3>
-                                <h3 style={{ color: group.color }}>Due-Date</h3>
-                                <h3 style={{ color: group.color }}>Priority</h3>
-                                <h3 style={{ color: group.color }}>Tags</h3>
->>>>>>> 3196b628b4b550aa6b46af96b63949d69c3805e6
                             </div>
                         </div>
 
