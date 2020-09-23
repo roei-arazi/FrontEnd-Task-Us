@@ -64,6 +64,7 @@ export class Group extends Component {
     }
 
     convertToData(property) {
+        console.log('Propery:', property)
         const { tasks } = this.props.group;
         const taskCount = tasks.length;
         const percent = tasks.length / 100;
@@ -78,7 +79,7 @@ export class Group extends Component {
         const res = [];
         for (let key in data) {
             res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0px' }}
-                data-title={data[key] ? `${taskCount * data[key] / 100}/${taskCount} ${data[key].toFixed(2)}%` : ''}
+                data-title={data[key] ? ` ${key} ${taskCount * data[key] / 100}/${taskCount} ${data[key].toFixed(2)}%` : ''}
                 className={`precent-bar ${key.toLowerCase()}`}></div>)
         }
         return res;

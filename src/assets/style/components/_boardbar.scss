@@ -11,40 +11,48 @@
     display: flex;
     align-items: center;
     transition: width .3s;
+
     &.board-bar-shown {
         width: 180px;
         padding: 15px 10px;
         overflow: visible;
     }
+
     ul {
         width: 100%;
         padding: 0;
         max-height: 80%;
         overflow: overlay;
         align-self: flex-start;
+
         li {
             height: 35px;
             border-radius: 5px;
+
             &:hover {
                 transition: 0.3s;
                 background-color: #88cded3d;
             }
+
             h4 {
                 height: 100%;
                 display: flex;
                 align-items: center;
                 flex-grow: 1;
+
                 &:hover {
                     transition: .3s;
                     color: $buttonMainBg;
                 }
             }
+
             svg {
                 font-size: 20px;
                 color: $mainBlack;
                 padding: 2px;
                 margin-right: 5px;
                 border-radius: 5px;
+
                 &:hover {
                     transition: .3s;
                     color: $buttonMainBg;
@@ -52,6 +60,7 @@
             }
         }
     }
+
     .board-bar-toggle-container {
         position: absolute;
         right: 0px;
@@ -66,50 +75,61 @@
         height: 20px;
         width: 20px;
         top: 20px;
-        transition: transform .3s; 
+        transition: transform .3s;
+
         svg {
             font-size: 0.75rem;
             fill: $colorIconsTasks;
-        } 
+        }
+
         &:hover {
             background-color: $buttonMainBg;
             border-color: $colorBgBoardBars;
+
             svg {
                 fill: $colorPlusCircleFont;
             }
         }
     }
+
     .boardbar-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
         margin-bottom: 15px;
+
         button {
             display: flex;
             padding: 5px;
             height: fit-content;
             border-radius: 50%;
         }
+
         svg {
-            margin-left: 3px;
+            margin-left: 5px;
+            margin-right: 10px;
             border-radius: 5px;
             padding: 2px;
             color: $buttonMainBg;
             font-size: 2rem;
+
             &:hover {
                 transition: .3s;
                 color: $buttonMainHover;
             }
         }
     }
+
     li,
     input {
         margin-bottom: 15px;
     }
+
     h4 {
         cursor: pointer;
     }
+
     input {
         width: 90%;
     }
