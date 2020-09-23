@@ -66,7 +66,7 @@ export class _BoardHeader extends React.Component {
             }
 
         }
-        this.props.onEditBoard(board, true)
+        this.props.onEditBoard(board, false)
 
     }
 
@@ -107,7 +107,7 @@ export class _BoardHeader extends React.Component {
             ...this.props.board,
             activityLog: this.props.board.activityLog.filter(activity => null)
         }
-        this.props.onEditBoard(board)
+        this.props.onEditBoard(board, false)
     }
 
     render() {
