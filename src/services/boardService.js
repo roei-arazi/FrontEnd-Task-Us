@@ -19,8 +19,8 @@ async function loadBoards() {
     return boards
 }
 
-function updateBoard(boardToSave, echo = true) {
-    if (echo) socketService.emit('updateBoard', boardToSave);
+function updateBoard(boardToSave) {
+    socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
 }
@@ -36,7 +36,7 @@ async function addBoard() {
             "imgUrl": 'https://via.placeholder.com/100',
         },
         "name": "board",
-        "createdAt": 198465168486,
+        "createdAt": 1600839222,
         "description": 'Enter description here',
         "members": [{
             "fullName": 'Liam Zety',
@@ -47,7 +47,7 @@ async function addBoard() {
             "name": 'group 1',
             "createdAt": 'date',
             "color": '#22f24',
-            "lastUpdated": 198465168486,
+            "lastUpdated": 1590839222,
             "isTagsShown": false,
             "tags": [],
             "columns": [{
@@ -57,7 +57,7 @@ async function addBoard() {
             "tasks": [{
                 "id": _makeid(),
                 "name": 'sneeze',
-                "createdAt": 1123124124241,
+                "createdAt": 1600849222,
                 "members": [],
                 "status": 'Stuck',
                 "priority": 'Low',
@@ -70,7 +70,7 @@ async function addBoard() {
             }, {
                 "id": _makeid(),
                 "name": 'sneeze',
-                "createdAt": 1123124124241,
+                "createdAt": 1600839222,
                 "members": [],
                 "status": 'Working on it',
                 "priority": 'Low',
@@ -84,7 +84,7 @@ async function addBoard() {
         }],
         "activityLog": [{
             "id": _makeid(),
-            "createdAt": 124124125124,
+            "createdAt": Date.now(),
             "isRead": false,
             "byUser": {
                 "imgUrl": "https://via.placeholder.com/150",
@@ -98,7 +98,7 @@ async function addBoard() {
         },
         {
             "id": _makeid(),
-            "createdAt": 12412541251,
+            "createdAt": Date.now(),
             "isRead": false,
             "byUser": {
                 "imgUrl": "https://via.placeholder.com/150",
@@ -112,7 +112,7 @@ async function addBoard() {
         },
         {
             "id": _makeid(),
-            "createdAt": 12412541251,
+            "createdAt": Date.now(),
             "isRead": true,
             "byUser": {
                 "imgUrl": "https://via.placeholder.com/150",
@@ -126,7 +126,7 @@ async function addBoard() {
         },
         {
             "id": _makeid(),
-            "createdAt": 12412541251,
+            "createdAt": 1590239222,
             "isRead": false,
             "byUser": {
                 "imgUrl": "https://via.placeholder.com/150",
@@ -243,8 +243,8 @@ async function addTask(groupId, taskName, board) {
         tags: []
     }
     const newBoard = JSON.parse(JSON.stringify(board))
-    newBoard.groups.forEach(group =>{
-        if(group.id === groupId) group.tasks.push(task);
+    newBoard.groups.forEach(group => {
+        if (group.id === groupId) group.tasks.push(task);
     })
     await updateBoard(newBoard)
     return newBoard;
