@@ -60,7 +60,7 @@ export class Group extends Component {
             color
         }
         try {
-            this.props.onEditGroup(newGroup, color, this.state.color)
+            this.props.onEditGroup(newGroup, color, this.state.color, 'coloe')
         } catch (err) {
             console.log('Error', err)
         }
@@ -69,7 +69,7 @@ export class Group extends Component {
 
     convertToData(property) {
         const { tasks } = this.props.group;
-        const taskCount = this.props.group.tasks.length;
+        const taskCount = tasks.length;
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
             if (!acc[task[property]]) acc[task[property]] = 0;
@@ -92,19 +92,19 @@ export class Group extends Component {
         if (!this.state.name) return <h1>Loading...</h1>
         const priority = this.convertToData('priority')
         const { name, ElGroupSettings, elGroupColors } = this.state;
-        const {group} = this.props;
+        const {group, index} = this.props;
         const status = this.convertToData('status')
         return (
-            <Draggable draggableId={this.props.group.id} index={this.props.index}>
+            <Draggable draggableId={group.id} index={index}>
                 {(provided, snapshot) =>
-                    <section key={this.props.group.id} className="group padding-y-45"
+                    <section key={group.id} className="group padding-y-45"
                         {...provided.draggableProps}
 
                         ref={provided.innerRef}>
                         <div className="group-header-container flex space-between align-center">
                             <div className="group-header-left align-center flex relative">
 
-                                <IoIosArrowDropdownCircle style={{ color: this.props.group.color }}
+                                <IoIosArrowDropdownCircle style={{ color: group.color }}
                                     className="drop-down-menu-icon" onClick={this.handleMenuOpen} />
                                 <Menu
                                     role="menuContainer"
@@ -114,7 +114,7 @@ export class Group extends Component {
                                     onClose={this.handleMenuClose}
                                 >
                                     <MenuItem onClick={() => {
-                                        this.props.onRemoveGroup(this.props.group.id)
+                                        this.props.onRemoveGroup(group.id)
                                     }}>
                                         <AiOutlineDelete className="delete-group-icon" /> Delete Group
                                     </MenuItem>
@@ -141,7 +141,7 @@ export class Group extends Component {
                                     <AiOutlineDrag />
                                 </div>
 
-                                <h1 style={{ color: this.props.group.color }} className="group-title">
+                                <h1 style={{ color: group.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}
                                         className="content-editable cursor-initial"
@@ -150,28 +150,28 @@ export class Group extends Component {
                                         disabled={false}       // use true to disable editing
                                         onChange={this.handleChange} // handle innerHTML change
                                         onBlur={() => {
-                                            this.props.onEditGroup(group, this.state.name, name)
+                                            this.props.onEditGroup(group.id, this.state.name, name, 'name')
                                         }}
                                         onKeyDown={(ev) => {
                                             if (ev.key === 'Enter') {
                                                 ev.target.blur()
-                                                this.props.onEditGroup(group, this.state.name, name)
+                                                this.props.onEditGroup(group.id, this.state.name, name, 'name')
                                             }
                                         }}
                                     />
                                 </h1>
                             </div>
                             <div className="group-header-right flex">
-                                <h3 style={{ color: this.props.group.color }}>Updates</h3>
-                                <h3 style={{ color: this.props.group.color }}>Members</h3>
-                                <h3 style={{ color: this.props.group.color }}>Status</h3>
-                                <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
-                                <h3 style={{ color: this.props.group.color }}>Priority</h3>
-                                <h3 style={{ color: this.props.group.color }}>Tags</h3>
+                                <h3 style={{ color: group.color }}>Updates</h3>
+                                <h3 style={{ color: group.color }}>Members</h3>
+                                <h3 style={{ color: group.color }}>Status</h3>
+                                <h3 style={{ color: group.color }}>Due-Date</h3>
+                                <h3 style={{ color: group.color }}>Priority</h3>
+                                <h3 style={{ color: group.color }}>Tags</h3>
                             </div>
                         </div>
 
-                        <Droppable droppableId={this.props.group.id} type="task">
+                        <Droppable droppableId={group.id} type="task">
                             {(provided, snapshot) =>
                                 <div className={`task-list ${snapshot.isDraggingOver ? 'drag-over' : ''}`}
                                     ref={provided.innerRef}
@@ -181,7 +181,7 @@ export class Group extends Component {
                                         return <Task onToggleUpdates={this.props.onToggleUpdates}
                                             onEditTask={this.props.onEditTask} index={index}
                                             onRemoveTask={this.props.onRemoveTask} key={task.id}
-                                            group={this.props.group} task={task} users={this.props.users} />
+                                            group={group} task={task} users={this.props.users} />
                                     })}
                                     {provided.placeholder}
 
@@ -190,10 +190,10 @@ export class Group extends Component {
                         </Droppable>
 
                         <div className="task task-add">
-                            <div className="task-color" style={{ backgroundColor: this.props.group.color }}></div>
+                            <div className="task-color" style={{ backgroundColor: group.color }}></div>
                             <form onSubmit={(ev) => {
                                 ev.preventDefault()
-                                this.props.onAddTask(this.props.group.id, this.elInputAdd.current.value)
+                                this.props.onAddTask(group.id, this.elInputAdd.current.value)
                                 this.elInputAdd.current.value = ''
                             }} action="">
                                 <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
