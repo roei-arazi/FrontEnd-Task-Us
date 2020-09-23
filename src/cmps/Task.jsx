@@ -57,7 +57,7 @@ class _Task extends Component {
     handleDateChange = date => {
         const prevDate = this.state.task.dueDate;
         this.setState({ task: { ...this.state.task, dueDate: moment(date).valueOf() } }, () => {
-            this.props.onEditTask(this.state.task, moment(date).valueOf(), prevDate)
+            this.props.onEditTask(this.state.task, moment(date).valueOf(), prevDate, 'date')
         })
     }
 
@@ -67,7 +67,7 @@ class _Task extends Component {
             const prevData = this.state.task.status;
             this.setState({ task: { ...this.state.task, status: data } }, () => {
                 console.log('in callback');
-                this.props.onEditTask(this.state.task, data, prevData)
+                this.props.onEditTask(this.state.task, data, prevData, 'priority')
                 this.closeModal()
             })
             // } else if (typeof(data) === 'object') {
@@ -87,7 +87,7 @@ class _Task extends Component {
 
     sendNote = (newUpdates) => {
         this.setState({ task: { ...this.state.task, updates: [...newUpdates] } }, () => {
-            this.props.onEditTask(this.state.task, '', '', 'sendNote')
+            this.props.onEditTask(this.state.task, true, false, 'sendNote')
         })
     }
 
@@ -191,12 +191,12 @@ class _Task extends Component {
                                             disabled={false}
                                             onChange={this.handleNameChange}
                                             onBlur={() => {
-                                                this.props.onEditTask(this.state.task, this.state.task.name, name)
+                                                this.props.onEditTask(this.state.task, this.state.task.name, name, 'name')
                                             }}
                                             onKeyDown={(ev) => {
                                                 if (ev.key === 'Enter') {
                                                     ev.target.blur()
-                                                    this.props.onEditTask(this.state.task, this.state.task.name, name)
+                                                    this.props.onEditTask(this.state.task, this.state.task.name, name, 'name')
                                                 }
                                             }}
                                         />

@@ -7,6 +7,8 @@ import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import moment from 'moment';
+
 // Reducers funcs
 import { loadUsers } from '../store/actions/userActions'
 import {
@@ -171,8 +173,8 @@ class _Board extends Component {
 
     onEditTask = (task, changedValue = true, originalValue = false, type) => {
         const board = this._getCurrBoard()
-
         if (changedValue === originalValue) return
+
         switch (type) {
             case 'name':
                 console.log(`${this.props.loggedUser.fullName} changed ${originalValue} to ${changedValue}`)
@@ -182,11 +184,18 @@ class _Board extends Component {
                 console.log(`${this.props.loggedUser.fullName} sent an update at ${task.name}`)
 
                 break;
+            case 'priority':
+                console.log(`${this.props.loggedUser.fullName} changed ${task.name} priority from ${originalValue} to ${changedValue}`)
+
+                break;
+            case 'date':
+                console.log(`${this.props.loggedUser.fullName} changed ${task.name} date from ${moment(originalValue).format('DD/MMM/YYYY')} to ${moment(changedValue).format('DD/MMM/YYYY')}`)
+
+                break;
 
             default:
                 break;
         }
-        console.log(`${this.props.loggedUser.fullName} changed ${originalValue} to ${changedValue}`,)
         // this.props.groupChanges(`${this.props.loggedUser.fullName} Removed task: ${task.name}`, this.props.loggedUser, board)
 
         try {
@@ -315,7 +324,7 @@ class _Board extends Component {
                                             return <Group key={group.id} index={index}
                                                 onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                                                 onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup}
-                                                 onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
+                                                onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
                                         })}
                                     </div>
                                 }
