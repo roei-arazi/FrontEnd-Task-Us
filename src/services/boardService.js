@@ -37,7 +37,7 @@ async function addBoard() {
             "imgUrl": 'https://via.placeholder.com/100',
         },
         "name": "board",
-        "createdAt": 1600839222,
+        "createdAt": Date.now(),
         "description": 'Enter description here',
         "members": [{
             "fullName": 'Liam Zety',
@@ -46,9 +46,9 @@ async function addBoard() {
         "groups": [{
             "id": _makeid(),
             "name": 'group 1',
-            "createdAt": 'date',
+            "createdAt": Date.now(),
             "color": '#22f24',
-            "lastUpdated": 1590839222,
+            "lastUpdated": Date.now(),
             "isTagsShown": false,
             "tags": [],
             "columns": [{
@@ -58,11 +58,11 @@ async function addBoard() {
             "tasks": [{
                 "id": _makeid(),
                 "name": 'sneeze',
-                "createdAt": 1600849222,
+                "createdAt": Date.now(),
                 "members": [],
                 "status": 'Stuck',
                 "priority": 'Low',
-                "dueDate": 1123124124241,
+                "dueDate": Date.now(),
                 "updates": [],
                 "lastUpdated": 'yesterday',
                 "isSelected": false,
@@ -71,11 +71,11 @@ async function addBoard() {
             }, {
                 "id": _makeid(),
                 "name": 'sneeze',
-                "createdAt": 1600839222,
+                "createdAt": Date.now(),
                 "members": [],
                 "status": 'Working on it',
                 "priority": 'Low',
-                "dueDate": 1123124124241,
+                "dueDate": Date.now(),
                 "updates": [],
                 "lastUpdated": 'yesterday',
                 "isSelected": false,
@@ -95,7 +95,7 @@ function addGroup(board) {
         "name": 'week1',
         "createdAt": 'date',
         "color": '#70ADB5',
-        "lastUpdated": 198465168486,
+        "lastUpdated": Date.now(),
         "isTagsShown": false,
         "tags": [],
         "columns": [{
@@ -105,11 +105,11 @@ function addGroup(board) {
         "tasks": [{
             "id": _makeid(),
             "name": 'sneeze',
-            "createdAt": 1123124124241,
+            "createdAt": Date.now(),
             "members": [],
             "status": 'Working on it',
             "priority": 'Low',
-            "dueDate": 214124124125,
+            "dueDate": Date.now(),
             "updates": [
                 {
                     "txt": 'dont forget about this',
@@ -162,7 +162,7 @@ async function addTask(groupId, taskName, board) {
     const task = {
         id: _makeid(),
         name: taskName,
-        createdAt: 1123124124241,
+        createdAt: Date.now(),
         members: [],
         status: 'Done',
         priority: 'Low',

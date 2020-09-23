@@ -124,6 +124,7 @@
                 height: 100%;
 
                 &:hover {
+                    z-index: 1;
                     transform: scale(1.1);
                     transition: .3s;
                 }
