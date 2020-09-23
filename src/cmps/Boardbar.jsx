@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { HiOutlineCog } from 'react-icons/hi';
-import { BsFilePlus, BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs';
+import { BsFilePlus,BsFillPlusCircleFill, BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs';
 import { Tooltip, Zoom } from '@material-ui/core';
 
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate } from '../store/actions/boardActions.js';
@@ -63,6 +63,7 @@ class _Boardbar extends Component {
         this.setState({ searchVal: ev.target.value })
     }
     handleSearch = () => {
+        console.log(this.props.boards);
         const filteredBoards =
             this.props.boards.filter(board => board.name.toLowerCase().includes(this.state.searchVal.toLowerCase()))
         return filteredBoards
@@ -95,7 +96,8 @@ class _Boardbar extends Component {
 
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
-                    <BsFilePlus onClick={this.props.addBoard} />
+                    <BsFillPlusCircleFill onClick={this.props.addBoard} />
+                    
                 </div>}
                 {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}
                 <ul>

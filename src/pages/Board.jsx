@@ -52,9 +52,7 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = (boardName, boardDescription) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
-        if (boardName === board.name && boardDescription === board.description) return;
+    onEditBoard = (board, boardName, boardDescription) => {
         this.props.updateBoard({ ...board, name: boardName, description: boardDescription })
         this.props.showSnackbar('Updated board.')
         setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -264,14 +262,13 @@ class _Board extends Component {
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
         const filteredBoard = this.applyFilter(board, filterBy);
-        board.members = users
         return (
             <section className="board">
                 <Navbar />
                 <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                 <div className="board-container">
                     <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
-                        handleSearch={this.handleSearch} />
+                        handleSearch={this.handleSearch} users={users}/>
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}

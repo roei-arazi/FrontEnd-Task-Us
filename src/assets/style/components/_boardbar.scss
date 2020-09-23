@@ -96,10 +96,12 @@
                 margin-left:3px;
                 border-radius:5px;
                 padding:2px;
+                color:$buttonMainBg;
+                font-size: 2rem;
               
                 &:hover {
                   transition: .3s;
-                  background-color: #beb7b766;
+                  color: $buttonMainHover;
                 }
             }
     }
