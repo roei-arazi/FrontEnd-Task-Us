@@ -80,9 +80,6 @@ class _Boardbar extends Component {
                                 <AiOutlineRight style={{ color: this.props.location.pathname.includes('/myweek') && '#151515', transform: isShown && 'rotate(180deg)' }}
                                     className="board-bar-toggle" />
                             </div>
-                            {/* <div className="board-bar-toggle">
-                                <AiOutlineLeft />
-                            </div> */}
                         </Tooltip>
 
                 {isShown && <div className="boardbar-header">
