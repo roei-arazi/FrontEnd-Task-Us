@@ -55,7 +55,6 @@ export class _BoardHeader extends React.Component {
         let board = this.props.board
 
         if (this.state.isActivitiesOpen) {
-            console.log('CHANGING TO READ',)
             board = {
                 ...board,
                 activityLog: board.activityLog.map(activity => {
