@@ -60,7 +60,7 @@ export default class Activities extends Component {
         }, {})
         return Object.keys(groups)
     }
-
+ 
     applyFilter(activities){
         let res = [...activities];
         const {filterBy, searchVal} = this.state;
