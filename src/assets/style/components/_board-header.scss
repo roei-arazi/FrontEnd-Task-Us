@@ -152,8 +152,7 @@
                 width: 50px;
                 animation: shorten .4s;
                 padding: 0;
-                margin: 0;
-                cursor: pointer;
+                margin: 0; 
                 color: $mainLightGrey;
     
                 +svg {
@@ -193,17 +192,5 @@
     svg {
         color: $mainBlack;
     }
-
-
-
-    .col-right {
-     
-
-
-
-
-
-    }
-
 
 }
