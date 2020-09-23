@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { HiOutlineCog } from 'react-icons/hi';
-import { BsFilePlus, BsFillPlusCircleFill, BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs';
-import { Tooltip, Zoom } from '@material-ui/core';
+import { BsFillPlusCircleFill, } from 'react-icons/bs';
 
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
-import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { AiOutlineRight } from 'react-icons/ai';
 
 class _Boardbar extends Component {
     state = {
@@ -75,12 +74,10 @@ class _Boardbar extends Component {
 
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
-                        <Tooltip enterDelay={800} TransitionComponent={Zoom} title="Toggle Board" arrow>
-                            <div onClick={this.onToggleShown} className="board-bar-toggle-container">
-                                <AiOutlineRight style={{ color: this.props.location.pathname.includes('/myweek') && '#151515', transform: isShown && 'rotate(180deg)' }}
-                                    className="board-bar-toggle" />
-                            </div>
-                        </Tooltip>
+                <div data-title="Toggle Board" onClick={this.onToggleShown} className="board-bar-toggle-container">
+                    <AiOutlineRight style={{ color: this.props.location.pathname.includes('/myweek') && '#151515', transform: isShown && 'rotate(180deg)' }}
+                        className="board-bar-toggle" />
+                </div>
 
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
