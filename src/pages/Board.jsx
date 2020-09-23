@@ -182,9 +182,6 @@ class _Board extends Component {
             case 'name':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} changed task name from ${originalValue} to ${changedValue} at group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
                 } catch (err) {
                     console.log('Error', err)
                 }
@@ -193,9 +190,6 @@ class _Board extends Component {
             case 'sendNote':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} sent an update at task: ${task.name} at group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
                 } catch (err) {
                     console.log('Error', err)
                 }
@@ -204,9 +198,6 @@ class _Board extends Component {
             case 'status':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} changed task: ${task.name} status from ${originalValue} to ${changedValue} at group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
                 } catch (err) {
                     console.log('Error', err)
                 }
@@ -215,9 +206,6 @@ class _Board extends Component {
             case 'priority':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} changed task: ${task.name} priority from ${originalValue} to ${changedValue} at group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
                 } catch (err) {
                     console.log('Error', err)
                 }
@@ -226,9 +214,6 @@ class _Board extends Component {
             case 'date':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} changed task ${task.name} date from ${moment(originalValue).format('DD/MMM/YYYY')} to ${moment(changedValue).format('DD/MMM/YYYY')} at group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
                 } catch (err) {
                     console.log('Error', err)
                 }
@@ -237,9 +222,6 @@ class _Board extends Component {
             case 'removeFromTask':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} removed ${changedValue.fullName} from ${task.name} at group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
                 } catch (err) {
                     console.log('Error', err)
                 }
@@ -248,10 +230,7 @@ class _Board extends Component {
             case 'addToTask':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} tasked ${changedValue.fullName} to ${task.name} on group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
-                } catch (err) {
+                }catch (err) {
                     console.log('Error', err)
                 }
 
@@ -259,9 +238,6 @@ class _Board extends Component {
             case 'addTag':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} added tag named ${changedValue} to ${task.name} on group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
                 } catch (err) {
                     console.log('Error', err)
                 }
@@ -270,9 +246,6 @@ class _Board extends Component {
             case 'removeTag':
                 try {
                     await this.props.groupChanges(`${this.props.loggedUser.fullName} removed tag named ${changedValue} from ${task.name} on group - ${group.name}`, this.props.loggedUser, board)
-                    this.props.editTask(task, board)
-                    this.props.showSnackbar('Updated task.');
-                    setTimeout(() => this.props.hideSnackbar(), 3000)
                 } catch (err) {
                     console.log('Error', err)
                 }
@@ -281,9 +254,9 @@ class _Board extends Component {
             default:
                 break;
         }
-
-
-
+        this.props.editTask(task, this._getCurrBoard())
+        this.props.showSnackbar('Updated task.');
+        setTimeout(() => this.props.hideSnackbar(), 3000)
 
     }
     //---------------------Draggable----------------------
