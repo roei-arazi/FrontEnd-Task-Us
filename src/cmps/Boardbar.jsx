@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { HiOutlineCog } from 'react-icons/hi';
-import { BsFilePlus,BsFillPlusCircleFill, BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs';
+import { BsFilePlus, BsFillPlusCircleFill, BsArrowsCollapse, BsArrowsExpand } from 'react-icons/bs';
 import { Tooltip, Zoom } from '@material-ui/core';
 
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate } from '../store/actions/boardActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 class _Boardbar extends Component {
     state = {
@@ -74,29 +75,20 @@ class _Boardbar extends Component {
 
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
-                {
-                    isShown ? (
                         <Tooltip enterDelay={800} TransitionComponent={Zoom} title="Toggle Board" arrow>
-                            <div className="board-bar-toggle-container">
-                                <BsArrowsCollapse style={{ color: this.props.location.pathname.includes('/myweek') && '#151515' }}
-                                    onClick={this.onToggleShown} className="board-bar-toggle" />
+                            <div onClick={this.onToggleShown} className="board-bar-toggle-container">
+                                <AiOutlineRight style={{ color: this.props.location.pathname.includes('/myweek') && '#151515', transform: isShown && 'rotate(180deg)' }}
+                                    className="board-bar-toggle" />
                             </div>
+                            {/* <div className="board-bar-toggle">
+                                <AiOutlineLeft />
+                            </div> */}
                         </Tooltip>
-                    )
-                        : (
-                            <Tooltip enterDelay={800} TransitionComponent={Zoom} title="Toggle Board" arrow>
-                                <div className="board-bar-toggle-container">
-                                    <BsArrowsExpand style={{ color: this.props.location.pathname.includes('/myweek') && '#151515' }}
-                                        onClick={this.onToggleShown} className="board-bar-toggle" />
-                                </div>
-                            </Tooltip>
-                        )
-                }
 
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
                     <BsFillPlusCircleFill onClick={this.props.addBoard} />
-                    
+
                 </div>}
                 {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}
                 <ul>
