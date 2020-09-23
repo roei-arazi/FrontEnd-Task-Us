@@ -137,6 +137,8 @@ span.span-user-details {
   color: #f1f1f1;
   background-color: $colorIconsTasks;
   border-radius: 10px;
+
+  max-width: 240px;
   animation: title-animation 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) .2s both;
 }
 
