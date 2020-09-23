@@ -21,8 +21,8 @@ export function Members(props) {
                 <div className="users-modal absolute">
                     <div className="task-users-box">
                         <h3>Task Members</h3>
-                        {props.members.map(member =>
-                            <section key={member._id} className="user-box flex space-between align-center">
+                        {props.members.map((member,idx) =>
+                            <section key={idx} className="user-box flex space-between align-center">
                                 <div className="user-box-info flex align-center" onClick={() => props.goToUserProfile(member._id)}>
                                     {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
                                     <p className="member-name">{member.fullName}</p>
@@ -34,8 +34,8 @@ export function Members(props) {
                     </div>
                     <div className="board-users-box">
                         <h3>Board Members</h3>
-                        {usersToAdd.map(user => {
-                            return <section key={user._id} className="user-box flex space-between align-center">
+                        {usersToAdd.map((user,idx) => {
+                            return <section key={idx} className="user-box flex space-between align-center">
                                 <div className="user-box-info flex  align-center" onClick={() => props.goToUserProfile(user._id)}>
                                     {user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
                                         <div className="member-letter">{user.fullName.charAt(0).toUpperCase()}</div>}

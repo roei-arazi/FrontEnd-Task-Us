@@ -4,6 +4,7 @@ import { BiImage } from 'react-icons/bi';
 import { MdDone } from 'react-icons/md';
 
 import { cloudinaryService } from '../../services/cloudinaryService';
+import { Update } from './Update';
 
 
 function _makeid(length = 7) {
@@ -50,26 +51,6 @@ export class Updates extends React.Component {
         }
     }
 
-    onReply = (newUpdate) => {
-        if (!this.state.reply.txt || this.state.reply.txt.split('').every(letter => letter === ' ')) return
-
-        const newReply = {
-            txt: this.state.reply.txt,
-            member: {
-                fullName: this.props.loggedUser.fullName,
-                username: this.props.loggedUser.userName,
-                _id: this.props.loggedUser.userName,
-                imgUrl: this.props.loggedUser.imgUrl
-            }
-        }
-        this.setState({ update: this.state.updates.find(update => update.id === newUpdate.id) }, () => {
-            this.setState({ update: { ...this.state.update, replies: [...this.state.update.replies, newReply] } }, () => {
-                this.updateNote(this.state.update)
-            })
-        })
-        this.setState({reply: { txt: ''} })
-    }
-
     uploadImg = async () => {
         this.setState({ isLoading: true })
         const res = await cloudinaryService.uploadImg(this.state.update.img, this.state)
@@ -92,8 +73,8 @@ export class Updates extends React.Component {
                 imgUrl: this.props.loggedUser.imgUrl
             }
         }
-        const updates = [newNote, ...this.props.updates]
-        this.setState({ updates, update: { txt: '', imgUrl: '' } })
+        const updates = [newNote, ...this.state.updates]
+        this.setState({ updates, update: { txt: '', imgUrl: '' },imageUploaded: false })
         this.props.sendNote(updates)
     }
 
@@ -105,8 +86,7 @@ export class Updates extends React.Component {
 
     render() {
         if (!this.state.updates) return <h1>Loading...</h1>;
-        console.log(this.state.updates);
-        const { updates } = this.props
+        const { updates } = this.state
         return (
             <React.Fragment>
                 <div className="updates-header flex column">
@@ -135,38 +115,8 @@ export class Updates extends React.Component {
                 </div>
 
                 <div className="updates-container">
-
-                    {updates.map((update, idx) => {
-                        return <div key={idx} className="update-box flex wrap column">
-                            <div className="update-box-header flex align-center">
-                                <img src={update.member.imgUrl} alt="" />
-                                <p className="member-name">{update.member.fullName}</p>
-                            </div>
-                            <div className="update-box-main flex column">
-                                {update.txt && <p className="update-text">{update.txt}</p>}
-                                {update.imgUrl && <img src={update.imgUrl} alt="" />}
-                            </div>
-                            <div className="update-box-footer flex column">
-
-                                {update.replies &&
-                                    <div className="replies-box flex column">
-                                        {update.replies.map((reply, idx) => {
-                                            return <div key={idx} className="reply-box flex column">
-                                                <div className="reply-header flex align-center">
-                                                    <img src={reply.member.imgUrl} alt="" />
-                                                    <p>{reply.member.fullName}</p>
-                                                </div>
-                                                <p>{reply.txt}</p>
-                                            </div>
-                                        })}</div>
-                                }
-                                <div className="reply-footer flex space-between align-center">
-                                <textarea name="reply" onChange={this.handleChange}></textarea>
-                                <button className="reply-button" onClick={() => this.onReply(update)}>Reply</button>
-                                </div>
-                            </div>
-                        </div>
-                    })}
+                    {updates.map((update, idx) => <Update update={update} key={idx} idx={idx} 
+                    updates={updates} loggedUser={this.props.loggedUser} updateNote={this.updateNote}/>)}             
                 </div>
             </React.Fragment>
 
