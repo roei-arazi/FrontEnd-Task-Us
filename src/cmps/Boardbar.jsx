@@ -20,7 +20,6 @@ class _Boardbar extends Component {
         searchVal: ''
     }
     componentDidMount() {
-        const {loggedUser} = this.props;
         socketService.on('updatedBoard', updatedBoard => {
             this.props.recieveUpdate(updatedBoard)
         });
@@ -29,11 +28,10 @@ class _Boardbar extends Component {
             this.props.loadBoards()
         })
         socketService.on('accept-notif', (notification)=>{
-            console.log('got notification:', notification);
-            this.props.updateUser({...loggedUser, notifications: [...loggedUser.notifications, notification]})
+            this.props.updateUser({...this.props.loggedUser, notifications: [...this.props.loggedUser.notifications, notification]})
         })
 
-        socketService.emit('user', loggedUser._id)
+        socketService.emit('user', this.props.loggedUser._id)
 
         this.setState({ isShown: this.props.isBoardbarShown })
     }

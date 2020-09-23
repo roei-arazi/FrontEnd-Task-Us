@@ -9,7 +9,6 @@ export function groupChanges(desc, loggedUser, board) {
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
 
             const users = await userService.loadUsers();
-            console.log('got users', users);
             const notification = {
                 byUser: {
                     fullName: loggedUser.fullName,
