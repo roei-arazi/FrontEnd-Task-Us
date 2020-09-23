@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd'
 import { RiDeleteBack2Line } from 'react-icons/ri'
 import { BsChatDots } from 'react-icons/bs'
+import { MdDelete } from 'react-icons/md'
 import "react-datepicker/dist/react-datepicker.css";
 import socketService from '../services/socketService.js'
 import moment from 'moment';
@@ -56,7 +57,7 @@ class _Task extends Component {
     handleDateChange = date => {
         const prevDate = this.state.task.dueDate;
         this.setState({ task: { ...this.state.task, dueDate: moment(date).valueOf() } }, () => {
-            this.props.onEditTask(this.state.task,moment(date).valueOf(), prevDate )
+            this.props.onEditTask(this.state.task, moment(date).valueOf(), prevDate)
         })
     }
 
@@ -69,11 +70,11 @@ class _Task extends Component {
                 this.props.onEditTask(this.state.task, data, prevData)
                 this.closeModal()
             })
-        // } else if (typeof(data) === 'object') {
-        //     console.log('got to tags');
-        //     console.log('IMHERE, data:', data, 'tag:', tags)
-        //     this.setState({ ...this.state, tags })
-        //     this.props.onEditTask(this.state, tags)
+            // } else if (typeof(data) === 'object') {
+            //     console.log('got to tags');
+            //     console.log('IMHERE, data:', data, 'tag:', tags)
+            //     this.setState({ ...this.state, tags })
+            //     this.props.onEditTask(this.state, tags)
         } else {
             const prevData = this.state.task.priority;
             this.setState({ task: { ...this.state.task, priority: data } }, () => {
@@ -142,7 +143,7 @@ class _Task extends Component {
 
     onEditTags = (tags) => {
         this.setState({ ...this.state, task: { ...this.state.task, tags: JSON.parse(JSON.stringify(tags)) } }, () => {
-            this.props.onEditTask(this.state.task,1)
+            this.props.onEditTask(this.state.task, 1)
         })
     }
 
@@ -172,12 +173,15 @@ class _Task extends Component {
                         >
 
                             <div className="task-left flex align-center">
+                            <div className="task-color-remove">
                                 <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
-                                <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow>
                                     <div className='icon-container'>
-                                        <RiDeleteBack2Line className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id) }} />
+                                        <MdDelete className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id) }} />
                                     </div>
-                                </Tooltip>
+                                {/* <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow> */}
+                                {/* </Tooltip> */}
+                                </div>
+                            <div className="task-title-updates flex align-center space-between grow">   
                                 <h2>
                                     <ContentEditable
                                         onFocus={this.focusText}
@@ -197,16 +201,15 @@ class _Task extends Component {
                                         }}
                                     />
                                 </h2>
+                                
+
+                                <div onClick={() => this.openModal('updates')} className="notes-container relative grow"><BsChatDots />
+                                    {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
+                                </div>
+                                </div>
                             </div>
 
                             <div className="task-right flex align-center">
-
-
-                                <div onClick={() => this.openModal('updates')} className="notes-container relative"><BsChatDots />
-                                    {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
-                                </div>
-
-
                                 <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />

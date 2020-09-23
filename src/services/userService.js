@@ -143,14 +143,8 @@ async function guestLogin() {
 }
 
 async function updateUser(loggedUser) {
-    const userIdx = users.findIndex(user => user._id === loggedUser._id)
-
-    try {
-        users[userIdx] = { ...loggedUser }
-    } catch (err) {
-        console.log('ERROR, couldnt update user', err);
-    }
-
+const user=await httpService.put('user', loggedUser)
+return user
 }
 
 

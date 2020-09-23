@@ -10,10 +10,6 @@
         background-color: #e8e8e8;
     }
 
-    .task-color {
-        width: 7px;
-        margin-right: 1px;
-    }
 
     svg {
         font-size: 2rem;
@@ -38,7 +34,6 @@
 
     .task-remove-icon {
         font-size: 1.2rem;
-        transform: rotate(180deg);
     }
 
     .icon-container {
@@ -52,6 +47,19 @@
     .task-left {
         position: relative;
         height: 100%;
+        flex-grow: 1;
+
+        &:hover {
+            h2 {
+                color: $buttonMainBg;
+            }
+
+            .notes-container {
+                svg {
+                    color: $buttonMainBg;
+                }
+            }
+        }
 
         >* {
             height: 100%;
@@ -60,14 +68,46 @@
         }
 
 
-        h2 {
-            margin-left: 15px;
-            font-weight: 400;
-
-            &:hover {
-                color: $buttonMainBg;
-            }
+        .task-color {
+            width: 7px;
+            margin-right: 1px;
+            height: 100%;
         }
+
+        .task-title-updates {
+            cursor: pointer;
+
+            h2 {
+                margin-left: 15px;
+                font-weight: 400;
+
+                &:hover {
+                    color: $buttonMainBg;
+                }
+            }
+
+            .notes-container {
+                text-align: end;
+
+                .task-number-of-imgs {
+                    font-family: monospace;
+                    font-size: 10px;
+                    width: 15px;
+                    height: 14px;
+                    position: absolute;
+                    background-color: #0085ff;
+                    color: #f2f1dfb0;
+                    border-radius: 50%;
+                    text-align: center;
+                    right: -3px;
+                    font-weight: bold;
+                    bottom: 4px;
+                    cursor: pointer;
+                }
+            }
+
+        }
+
 
     }
 
@@ -82,25 +122,7 @@
             justify-content: center;
         }
 
-        .notes-container {
-            text-align: center;
 
-            .task-number-of-imgs {
-                font-family: monospace;
-                font-size: 10px;
-                width: 15px;
-                height: 14px;
-                position: absolute;
-                background-color: #0085ff;
-                color: #f2f1dfb0;
-                border-radius: 50%;
-                text-align: center;
-                right: 42px;
-                font-weight: bold;
-                bottom: 16px;
-                cursor: pointer;
-            }
-        }
 
         .user-img-container {
             position: relative;

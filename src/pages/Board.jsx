@@ -16,6 +16,7 @@ import {
     clearFilter //FILTER
 }
     from '../store/actions/boardActions'
+import { groupChanges } from '../store/actions/changesActions'
 
 
 class _Board extends Component {
@@ -52,9 +53,7 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = (boardName, boardDescription) => {
-        const board = this.props.boards.find(board => board._id === this.state.boardId)
-        if (boardName === board.name && boardDescription === board.description) return;
+    onEditBoard = (board, boardName, boardDescription) => {
         this.props.updateBoard({ ...board, name: boardName, description: boardDescription })
         this.props.showSnackbar('Updated board.')
         setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -127,7 +126,8 @@ class _Board extends Component {
         if (changedValue === originalValue) return // No changes were made
         group[key] = changedValue;
         try {
-            this.props.editGroup(group, board)
+            this.props.groupChanges(Date.now(), board, originalValue, changedValue, this.props.loggedUser)
+            this.props.editGroup(group, board, originalValue, changedValue)
             this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -164,7 +164,7 @@ class _Board extends Component {
     onEditTask = (task, changedValue = true, originalValue = false) => {
         const board = this.props.boards.find(board => board._id === this.state.boardId)
 
-        if(changedValue===originalValue) return
+        if (changedValue === originalValue) return
 
         try {
             this.props.editTask(task, board)
@@ -266,14 +266,13 @@ class _Board extends Component {
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
         const filteredBoard = this.applyFilter(board, filterBy);
-        board.members = users
         return (
             <section className="board">
                 <Navbar />
                 <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                 <div className="board-container">
                     <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
-                        handleSearch={this.handleSearch} />
+                        handleSearch={this.handleSearch} users={users}/>
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
@@ -286,7 +285,8 @@ class _Board extends Component {
                                         {filteredBoard.groups.map((group, index) => {
                                             return <Group key={group.id} index={index}
                                                 onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
-                                                onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} onChangeGroupColor={this.onChangeGroupColor} group={group} users={users} />
+                                                onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup}
+                                                 onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
                                         })}
                                     </div>
                                 }
@@ -304,6 +304,7 @@ const mapStateToProps = state => {
     return {
         boards: state.boardReducer.boards,
         users: state.userReducer.users,
+        loggedUser: state.userReducer.loggedUser,
         filterBy: state.boardReducer.filterBy
     }
 }
@@ -320,7 +321,8 @@ const mapDispatchToProps = {
     showSnackbar,
     hideSnackbar,
     loadUsers,
-    clearFilter
+    clearFilter,
+    groupChanges
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);

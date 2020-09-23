@@ -44,8 +44,10 @@ class _UserProfile extends Component {
 
 
     uploadImg = async (ev) => {
-        const res = await cloudinaryService.uploadImg(ev)
-        this.setState({ user: { ...this.state.user, imgUrl: res.url } })
+        const res = await cloudinaryService.uploadImg(ev.target.files[0])
+        this.setState({ user: { ...this.state.user, imgUrl: res.url } },() => {
+            this.updateProfile(this.state.user)
+        })
     }
 
     render() {
@@ -88,7 +90,7 @@ class _UserProfile extends Component {
 
                                 </div>
                                 <div className="user-modal-main">
-                                    <form className="form-container flex justify-center column  align-center" action="">
+                                    <form className="form-container flex justify-center column  align-center" onSubmit={this.updateProfile}>
                                         <input value={this.state.user.email} onChange={this.handleChange} name="email" placeholder="Email" type="email" />
                                         <input value={this.state.user.username} onChange={this.handleChange} name="username" placeholder="Username" type="text" />
                                         <input value={this.state.user.password} onChange={this.handleChange} name="password" placeholder="Password" type="password" />
