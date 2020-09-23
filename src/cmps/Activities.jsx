@@ -53,13 +53,13 @@ export default class Activities extends Component {
         return Object.keys(members)
     }
 
-    getActivityGroups(){
-        const activities = this.props.activityLog;
-        const groups = activities.reduce((acc, activity) =>{
-            acc[activity.group.name] = ''
-        }, {})
-        return Object.keys(groups)
-    }
+    // getActivityGroups(){
+    //     const activities = this.props.activityLog;
+    //     const groups = activities.reduce((acc, activity) =>{
+    //         acc[activity.group.name] = ''
+    //     }, {})
+    //     return Object.keys(groups)
+    // }
  
     applyFilter(activities){
         let res = [...activities];
@@ -79,7 +79,6 @@ export default class Activities extends Component {
         let [activities, activitiesNotRead] = this.activities;
         const dates = this.getActivityDates();
         const members = this.getActivityMembers();
-        console.log('activities:', activities, activitiesNotRead);
         activities = this.applyFilter(activities)
         activitiesNotRead = this.applyFilter(activitiesNotRead)
         return (
