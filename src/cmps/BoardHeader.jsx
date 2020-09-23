@@ -116,7 +116,7 @@ export class _BoardHeader extends React.Component {
                         />
                     </h1>
                     <div className="board-header-right relative flex align-center">
-                        <div className="board-users flex" onClick={this.onToggleUsers}>
+                        <div className="board-users flex justify-center" onClick={this.onToggleUsers}>
                             {members.map(member => {
                                 return <div key={member._id} className="user-img-container">
                                     <img src={member.imgUrl} />

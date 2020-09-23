@@ -314,7 +314,8 @@ class _Board extends Component {
                                         {filteredBoard.groups.map((group, index) => {
                                             return <Group key={group.id} index={index}
                                                 onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
-                                                onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup} onChangeGroupColor={this.onChangeGroupColor} group={group} users={users} />
+                                                onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup}
+                                                 onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
                                         })}
                                     </div>
                                 }
