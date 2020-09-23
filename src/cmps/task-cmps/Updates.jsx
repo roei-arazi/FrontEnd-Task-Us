@@ -57,8 +57,8 @@ export class Updates extends React.Component {
         const { updates, onToggleImageModal, isImageModalShown } = this.props
         return (
             <React.Fragment>
-                <div className="updates-header flex column align-center">
-                    <h1>Updates</h1>
+                <div className="updates-header flex column">
+                    <h1>{this.props.task.name}</h1>
                     <div className="updates-header-options flex align-center space-between">
                         <form onSubmit={this.sendNote} className="notes-form flex justify-center align-center">
                             <input type="text" placeholder="Text Note" value={this.state.update.txt} onChange={this.handleChange} />
