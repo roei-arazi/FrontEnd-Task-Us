@@ -20,7 +20,7 @@ async function loadBoards() {
     return boards
 }
 
-function updateBoard(boardToSave) {
+async function updateBoard(boardToSave) {
     socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
@@ -37,7 +37,7 @@ async function addBoard() {
             "imgUrl": 'https://via.placeholder.com/100',
         },
         "name": "board",
-        "createdAt": 1600839222,
+        "createdAt": Date.now(),
         "description": 'Enter description here',
         "members": [{
             "fullName": 'Liam Zety',
@@ -46,9 +46,9 @@ async function addBoard() {
         "groups": [{
             "id": _makeid(),
             "name": 'group 1',
-            "createdAt": 'date',
+            "createdAt": Date.now(),
             "color": '#22f24',
-            "lastUpdated": 1590839222,
+            "lastUpdated": Date.now(),
             "isTagsShown": false,
             "tags": [],
             "columns": [{
@@ -58,11 +58,11 @@ async function addBoard() {
             "tasks": [{
                 "id": _makeid(),
                 "name": 'sneeze',
-                "createdAt": 1600849222,
+                "createdAt": Date.now(),
                 "members": [],
                 "status": 'Stuck',
                 "priority": 'Low',
-                "dueDate": 1123124124241,
+                "dueDate": Date.now(),
                 "updates": [],
                 "lastUpdated": 'yesterday',
                 "isSelected": false,
@@ -71,11 +71,11 @@ async function addBoard() {
             }, {
                 "id": _makeid(),
                 "name": 'sneeze',
-                "createdAt": 1600839222,
+                "createdAt": Date.now(),
                 "members": [],
                 "status": 'Working on it',
                 "priority": 'Low',
-                "dueDate": 1123124124241,
+                "dueDate": Date.now(),
                 "updates": [],
                 "lastUpdated": 'yesterday',
                 "isSelected": false,
@@ -83,77 +83,7 @@ async function addBoard() {
                 "tags": []
             }]
         }],
-        "activityLog": [{
-            "id": _makeid(),
-            "createdAt": Date.now(),
-            "isRead": false,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'liam zety'
-            },
-            "description": 'removed task "do the dishes"',
-            "task": {
-                "id": _makeid(),
-                "name": 'do the dishes'
-            }
-        },
-        {
-            "id": _makeid(),
-            "createdAt": Date.now(),
-            "isRead": false,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'HAHA'
-            },
-            "description": 'changed group name from project2 to project3',
-            "group": {
-                "id": _makeid(),
-                "name": 'project3'
-            }
-        },
-        {
-            "id": _makeid(),
-            "createdAt": Date.now(),
-            "isRead": true,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'shucks mcgee'
-            },
-            "description": 'changed group name from project2 to project3',
-            "group": {
-                "id": _makeid(),
-                "name": 'project3'
-            }
-        },
-        {
-            "id": _makeid(),
-            "createdAt": 1590239222,
-            "isRead": false,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'falsy mcgee'
-            },
-            "description": 'changed group name from project2 to project3',
-            "group": {
-                "id": _makeid(),
-                "name": 'project3'
-            }
-        },
-        {
-            "id": _makeid(),
-            "createdAt": 4514512352135,
-            "isRead": true,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'shucks mcgee'
-            },
-            "description": 'added group project2',
-            "group": {
-                "id": _makeid(),
-                "name": 'project2'
-            }
-        }
-        ]
+        "activityLog": []
     }
     const newBoard = await httpService.post(`board`, board);
     return newBoard;
@@ -165,7 +95,7 @@ function addGroup(board) {
         "name": 'week1',
         "createdAt": 'date',
         "color": '#70ADB5',
-        "lastUpdated": 198465168486,
+        "lastUpdated": Date.now(),
         "isTagsShown": false,
         "tags": [],
         "columns": [{
@@ -175,11 +105,11 @@ function addGroup(board) {
         "tasks": [{
             "id": _makeid(),
             "name": 'sneeze',
-            "createdAt": 1123124124241,
+            "createdAt": Date.now(),
             "members": [],
             "status": 'Working on it',
             "priority": 'Low',
-            "dueDate": 214124124125,
+            "dueDate": Date.now(),
             "updates": [
                 {
                     "txt": 'dont forget about this',
@@ -232,7 +162,7 @@ async function addTask(groupId, taskName, board) {
     const task = {
         id: _makeid(),
         name: taskName,
-        createdAt: 1123124124241,
+        createdAt: Date.now(),
         members: [],
         status: 'Done',
         priority: 'Low',
@@ -263,6 +193,7 @@ function handleBoardChanges(desc, loggedUser, board) {
     const changes = {
         id: _makeid(),
         changedAt: Date.now(),
+        isRead: false,
         desc,
         byUser: {
             _id: loggedUser._id,
@@ -272,8 +203,7 @@ function handleBoardChanges(desc, loggedUser, board) {
     }
 
 
-    const updatedBoard = { ...board, activityLog: [...board.activityLog, changes] }
-    console.log('UPDATED BOARD', updatedBoard)
+    const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
     return updateBoard(updatedBoard)
 }
 function _makeid(length = 7) {

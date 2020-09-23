@@ -95,7 +95,7 @@
        
         
 
-        .activities-outer-container {
+        .activities-outer-container { 
             padding: 10px;
             border-radius: 5px;
             transition: .3s;
@@ -103,6 +103,9 @@
 
             &:hover {
                 background-color: rgba(218, 218, 218, 0.287);
+            }
+            svg{
+                margin-right: 5px;
             }
         }
     }

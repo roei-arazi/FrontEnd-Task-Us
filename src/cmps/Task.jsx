@@ -57,7 +57,7 @@ class _Task extends Component {
     handleDateChange = date => {
         const prevDate = this.state.task.dueDate;
         this.setState({ task: { ...this.state.task, dueDate: moment(date).valueOf() } }, () => {
-            this.props.onEditTask(this.state.task, moment(date).valueOf(), prevDate, 'date')
+            this.props.onEditTask(this.state.task, this.props.group, moment(date).valueOf(), prevDate, 'date')
         })
     }
 
@@ -67,7 +67,7 @@ class _Task extends Component {
             const prevData = this.state.task.status;
             this.setState({ task: { ...this.state.task, status: data } }, () => {
                 console.log('in callback');
-                this.props.onEditTask(this.state.task, data, prevData, 'priority')
+                this.props.onEditTask(this.state.task, this.props.group, data, prevData, 'status')
                 this.closeModal()
             })
             // } else if (typeof(data) === 'object') {
@@ -78,7 +78,7 @@ class _Task extends Component {
         } else {
             const prevData = this.state.task.priority;
             this.setState({ task: { ...this.state.task, priority: data } }, () => {
-                this.props.onEditTask(this.state.task, data, prevData)
+                this.props.onEditTask(this.state.task, this.props.group, data, prevData, 'priority')
                 this.closeModal()
             })
         }
@@ -87,7 +87,7 @@ class _Task extends Component {
 
     sendNote = (newUpdates) => {
         this.setState({ task: { ...this.state.task, updates: [...newUpdates] } }, () => {
-            this.props.onEditTask(this.state.task, true, false, 'sendNote')
+            this.props.onEditTask(this.state.task, this.props.group, true, false, 'sendNote')
         })
     }
 
@@ -118,15 +118,16 @@ class _Task extends Component {
     }
 
     onRemoveMemberFromTask = (memberId) => {
+        const removedMember = this.state.task.members.find(member => member._id === memberId)
         this.setState({ task: { ...this.state.task, members: this.state.task.members.filter(member => member._id !== memberId) } }, () => {
-            this.props.onEditTask(this.state.task)
+            this.props.onEditTask(this.state.task, this.props.group, removedMember, false, 'removeFromTask')
         })
     }
 
     onAddUserToTask = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
         this.setState({ task: { ...this.state.task, members: [...this.state.task.members, newUser] } }, () => {
-            this.props.onEditTask(this.state.task)
+            this.props.onEditTask(this.state.task, this.props.group, newUser, false, 'addToTask')
         })
     }
 
@@ -141,9 +142,9 @@ class _Task extends Component {
         }, 0)
     }
 
-    onEditTags = (tags) => {
+    onEditTags = (tags, tagName, type) => {
         this.setState({ ...this.state, task: { ...this.state.task, tags: JSON.parse(JSON.stringify(tags)) } }, () => {
-            this.props.onEditTask(this.state.task, 1)
+            this.props.onEditTask(this.state.task, this.props.group, tagName, false, type)
         })
     }
 
@@ -175,10 +176,9 @@ class _Task extends Component {
                                 <div className="task-color-remove">
                                     <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
                                     <div className='icon-container'>
-                                        <MdDelete className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id) }} />
+                                        <MdDelete className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id, this.props.group) }} />
                                     </div>
-                                    {/* <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow> */}
-                                    {/* </Tooltip> */}
+
                                 </div>
                                 <div className="task-title-updates flex align-center space-between grow">
                                     <h2>
@@ -190,12 +190,12 @@ class _Task extends Component {
                                             disabled={false}
                                             onChange={this.handleNameChange}
                                             onBlur={() => {
-                                                this.props.onEditTask(this.state.task, this.state.task.name, name, 'name')
+                                                this.props.onEditTask(this.state.task, this.props.group, this.state.task.name, name, 'name')
                                             }}
                                             onKeyDown={(ev) => {
                                                 if (ev.key === 'Enter') {
                                                     ev.target.blur()
-                                                    this.props.onEditTask(this.state.task, this.state.task.name, name, 'name')
+                                                    this.props.onEditTask(this.state.task, this.props.group, this.state.task.name, name, 'name')
                                                 }
                                             }}
                                         />

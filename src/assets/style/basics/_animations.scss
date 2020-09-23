@@ -33,13 +33,16 @@
 }
 
 @keyframes title-animation {
+
     0% {
-        transform: translateZ(-1400px);
+        transform: translateY(50px);
         opacity: 0;
     }
 
     100% {
-        transform: translateZ(0);
+        transform: translateY(0);
         opacity: 1;
     }
+
+
 }

@@ -68,17 +68,16 @@ export class Group extends Component {
         const taskCount = tasks.length;
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
-            if (!acc[task[property]]) acc[task[property]] = 0;
-            acc[task[property]]++;
+            const value = task[property]
+            if (!acc[value]) acc[value] = 0;
+            acc[value]++;
             return acc;
         }, {})
-        for (let key in data) {
-            data[key] /= percent;
-        }
         const res = [];
         for (let key in data) {
+            data[key] /= percent;
             res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0px' }}
-                data-title={data[key] ? `${taskCount * data[key] / 100}/${taskCount} ${data[key].toFixed(2)}%` : ''}
+                data-title={data[key] ? ` ${key} ${taskCount * data[key] / 100}/${taskCount} ${data[key].toFixed(1)}%` : ''}
                 className={`precent-bar ${key.toLowerCase()}`}></div>)
         }
         return res;
@@ -87,9 +86,9 @@ export class Group extends Component {
     render() {
         if (!this.state.name) return <h1>Loading...</h1>
         const priority = this.convertToData('priority')
+        const status = this.convertToData('status')
         const { name, ElGroupSettings, elGroupColors } = this.state;
         const { group, index } = this.props;
-        const status = this.convertToData('status')
         return (
             <Draggable draggableId={group.id} index={index}>
                 {(provided, snapshot) =>

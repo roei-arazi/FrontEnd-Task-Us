@@ -12,71 +12,85 @@
     align-items: center;
     transition: width .3s;
 
-
     &.board-bar-shown {
         width: 180px;
         padding: 15px 10px;
         overflow: visible;
     }
 
-    ul{
-        width:100%;
-            padding: 0;
-            max-height: 80%;
-            overflow: overlay;
-            align-self: flex-start;
-            
-        li{
-            height:35px;
-            border-radius:5px;
-            &:hover{
-                transition:0.3s;
-                background-color: #88cded3d;             
+    ul {
+        width: 100%;
+        padding: 0;
+        max-height: 80%;
+        overflow: overlay;
+        align-self: flex-start;
+
+        li {
+            height: 35px;
+            border-radius: 5px;
+
+            &:hover {
+                transition: 0.3s;
+                background-color: #88cded3d;
             }
-            
-            h4{
-                height:100%;
+
+            h4 {
+                height: 100%;
                 display: flex;
                 align-items: center;
                 flex-grow: 1;
-                &:hover{
+
+                &:hover {
                     transition: .3s;
-                    color:$buttonMainBg;
+                    color: $buttonMainBg;
                 }
             }
 
             svg {
-                font-size:20px;
-                color:$mainBlack;
-                padding:2px;
+                font-size: 20px;
+                color: $mainBlack;
+                padding: 2px;
                 margin-right: 5px;
                 border-radius: 5px;
-                &:hover{
+
+                &:hover {
                     transition: .3s;
-                    color:$buttonMainBg;
+                    color: $buttonMainBg;
                 }
             }
         }
     }
-
 
     .board-bar-toggle-container {
         position: absolute;
         right: 0px;
         transform: translate(50%, 0);
+        background-color: $colorBgBoardBars;
+        border-radius: 50%;
+        border: 1px solid $colorPlusCircle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1px;
+        height: 20px;
+        width: 20px;
+        top: 20px;
+        transition: transform .3s;
 
         svg {
-            font-size: 20px;
-            transform: rotate(90deg);
-            transition: transform .3s;
+            font-size: 0.75rem;
+            fill: $colorIconsTasks;
         }
 
-        &:hover svg {
-            transform: rotate(270deg);
+        &:hover {
+            background-color: $buttonMainBg;
+            border-color: $colorBgBoardBars;
+
+            svg {
+                fill: $colorPlusCircleFont;
+            }
         }
     }
-
-
 
     .boardbar-header {
         display: flex;
@@ -92,18 +106,19 @@
             border-radius: 50%;
         }
 
-            svg{
-                margin-left:3px;
-                border-radius:5px;
-                padding:2px;
-                color:$buttonMainBg;
-                font-size: 2rem;
-              
-                &:hover {
-                  transition: .3s;
-                  color: $buttonMainHover;
-                }
+        svg {
+            margin-left: 5px;
+            margin-right: 10px;
+            border-radius: 5px;
+            padding: 2px;
+            color: $buttonMainBg;
+            font-size: 2rem;
+
+            &:hover {
+                transition: .3s;
+                color: $buttonMainHover;
             }
+        }
     }
 
     li,
@@ -113,10 +128,9 @@
 
     h4 {
         cursor: pointer;
-
     }
 
     input {
         width: 90%;
-    } 
+    }
 }
