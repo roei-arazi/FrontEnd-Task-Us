@@ -16,7 +16,7 @@ export class _BoardHeader extends React.Component {
         _id: '',
         isActivitiesOpen: false,
         isFiltersOpen: false,
-        isUsersOpen:false,
+        isUsersOpen: false,
         elSetting: null
     }
 
@@ -26,23 +26,23 @@ export class _BoardHeader extends React.Component {
         this.searchInput = React.createRef();
 
         socketService.on('updatedBoard', () => {
-            this.setState({ board:this.props.board })
+            this.setState({ board: this.props.board })
         })
-        this.setState({ board: this.props.board , _id: this.props.board._id})
+        this.setState({ board: this.props.board, _id: this.props.board._id })
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.board._id !== this.props.board._id) {
-            this.setState({board: this.props.board })
+            this.setState({ board: this.props.board })
         }
     }
 
     handleChangeName = (ev) => {
-        this.setState({ board:{...this.state.board,name: ev.target.value }})
+        this.setState({ board: { ...this.state.board, name: ev.target.value } })
     }
 
     handleChangeDesc = (ev) => {
-        this.setState({ board:{...this.state.board,description: ev.target.value }})
+        this.setState({ board: { ...this.state.board, description: ev.target.value } })
     }
 
     focusText = () => {
@@ -52,6 +52,21 @@ export class _BoardHeader extends React.Component {
     }
     onToggleActivities = () => {
         this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
+        let board = this.props.board
+
+        if (this.state.isActivitiesOpen) {
+            console.log('CHANGING TO READ',)
+            board = {
+                ...board,
+                activityLog: board.activityLog.map(activity => {
+                    activity.isRead = true
+                    return activity
+                })
+            }
+
+        }
+        this.props.onEditBoard(board, this.state.board.name, this.state.board.description, true)
+
     }
 
     onToggleFilters = () => {
@@ -66,20 +81,20 @@ export class _BoardHeader extends React.Component {
         this.setState({ elSetting: null })
     }
 
-    onToggleUsers=()=>{
-        this.setState({isUsersOpen: !this.state.isUsersOpen})
+    onToggleUsers = () => {
+        this.setState({ isUsersOpen: !this.state.isUsersOpen })
     }
 
     onRemoveMemberFromBoard = (memberId) => {
-        this.setState({ board:{...this.state.board, members: this.state.board.members.filter(member => member._id !== memberId) } }, () => {
-            this.props.onEditBoard(this.state.board,this.state.board.name, this.state.board.description)
+        this.setState({ board: { ...this.state.board, members: this.state.board.members.filter(member => member._id !== memberId) } }, () => {
+            this.props.onEditBoard(this.state.board, this.state.board.name, this.state.board.description)
         })
     }
 
     onAddUserToBoard = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
-        this.setState({ board:{...this.state.board, members: [...this.state.board.members, newUser]}}, () => {
-            this.props.onEditBoard(this.state.board ,this.state.board.name, this.state.board.description)
+        this.setState({ board: { ...this.state.board, members: [...this.state.board.members, newUser] } }, () => {
+            this.props.onEditBoard(this.state.board, this.state.board.name, this.state.board.description)
         })
     }
 
@@ -89,9 +104,9 @@ export class _BoardHeader extends React.Component {
 
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
-        const {board}=this.state
-        const {members} = this.state.board
-        const{users}=this.props
+        const { board } = this.state
+        const { members } = this.state.board
+        const { users } = this.props
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
         return (
             <section className="board-header flex column padding-x-30">
@@ -105,12 +120,12 @@ export class _BoardHeader extends React.Component {
                             disabled={false}       // use true to disable editing
                             onChange={this.handleChangeName} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(board,board.name, board.description)
+                                this.props.onEditBoard(board, board.name, board.description)
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(board,board.name, board.description)
+                                    this.props.onEditBoard(board, board.name, board.description)
                                 }
                             }}
                         />
@@ -124,35 +139,35 @@ export class _BoardHeader extends React.Component {
                             })}
                         </div>
                         {this.state.isUsersOpen &&
-                <div className="users-modal absolute">
-                    <div className="board-users-box">
-                        <h3>Board Members</h3>
-                        {members.map(member =>
-                            <section key={member._id} className="user-box flex space-between align-center">
-                                <div className="user-box-info flex align-center" onClick={() => this.goToUserProfile(member._id)}>
-                                    {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
-                                    <p className="member-name">{member.fullName}</p>
-                                </div>
-                                <AiOutlineMinus onClick={() => this.onRemoveMemberFromBoard(member._id)} />
-                            </section>
-                        )}
+                            <div className="users-modal absolute">
+                                <div className="board-users-box">
+                                    <h3>Board Members</h3>
+                                    {members.map(member =>
+                                        <section key={member._id} className="user-box flex space-between align-center">
+                                            <div className="user-box-info flex align-center" onClick={() => this.goToUserProfile(member._id)}>
+                                                {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
+                                                <p className="member-name">{member.fullName}</p>
+                                            </div>
+                                            <AiOutlineMinus onClick={() => this.onRemoveMemberFromBoard(member._id)} />
+                                        </section>
+                                    )}
 
-                    </div>
-                    <div className="site-users-box">
-                        <h3>Site Users</h3>
-                        {usersToAdd.map(user => {
-                            return <section key={user._id} className="user-box flex space-between align-center">
-                                <div className="user-box-info flex  align-center" onClick={() => this.goToUserProfile(user._id)}>
-                                    {user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
-                                        <div className="member-letter">{user.fullName.charAt(0).toUpperCase()}</div>}
-                                    <p className="member-name">{user.fullName}</p>
                                 </div>
-                                <FiPlus onClick={() => this.onAddUserToBoard(user._id)} />
-                            </section>
-                        })}
-                    </div>
+                                <div className="site-users-box">
+                                    <h3>Site Users</h3>
+                                    {usersToAdd.map(user => {
+                                        return <section key={user._id} className="user-box flex space-between align-center">
+                                            <div className="user-box-info flex  align-center" onClick={() => this.goToUserProfile(user._id)}>
+                                                {user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
+                                                    <div className="member-letter">{user.fullName.charAt(0).toUpperCase()}</div>}
+                                                <p className="member-name">{user.fullName}</p>
+                                            </div>
+                                            <FiPlus onClick={() => this.onAddUserToBoard(user._id)} />
+                                        </section>
+                                    })}
+                                </div>
 
-                </div>}
+                            </div>}
                         <div onClick={this.onToggleActivities} className="activities-outer-container flex align-center  cursor-pointer">
                             <GoRequestChanges />
                             <h2 >Activity Log</h2>

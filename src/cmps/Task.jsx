@@ -177,7 +177,7 @@ class _Task extends Component {
                                 <div className="task-color-remove">
                                     <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
                                     <div className='icon-container'>
-                                        <MdDelete className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id) }} />
+                                        <MdDelete className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id, this.props.group) }} />
                                     </div>
                                     {/* <Tooltip enterDelay={200} TransitionComponent={Zoom} title="Delete Task" arrow> */}
                                     {/* </Tooltip> */}
