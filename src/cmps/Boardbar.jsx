@@ -63,7 +63,6 @@ class _Boardbar extends Component {
         this.setState({ searchVal: ev.target.value })
     }
     handleSearch = () => {
-        console.log(this.props.boards);
         const filteredBoards =
             this.props.boards.filter(board => board.name.toLowerCase().includes(this.state.searchVal.toLowerCase()))
         return filteredBoards

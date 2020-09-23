@@ -21,7 +21,6 @@ async function loadBoards() {
 }
 
 async function updateBoard(boardToSave) {
-    console.log('uhhh.. ', boardToSave)
     socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
@@ -84,77 +83,7 @@ async function addBoard() {
                 "tags": []
             }]
         }],
-        "activityLog": [{
-            "id": _makeid(),
-            "createdAt": Date.now(),
-            "isRead": false,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'liam zety'
-            },
-            "description": 'removed task "do the dishes"',
-            "task": {
-                "id": _makeid(),
-                "name": 'do the dishes'
-            }
-        },
-        {
-            "id": _makeid(),
-            "createdAt": Date.now(),
-            "isRead": false,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'HAHA'
-            },
-            "description": 'changed group name from project2 to project3',
-            "group": {
-                "id": _makeid(),
-                "name": 'project3'
-            }
-        },
-        {
-            "id": _makeid(),
-            "createdAt": Date.now(),
-            "isRead": true,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'shucks mcgee'
-            },
-            "description": 'changed group name from project2 to project3',
-            "group": {
-                "id": _makeid(),
-                "name": 'project3'
-            }
-        },
-        {
-            "id": _makeid(),
-            "createdAt": 1590239222,
-            "isRead": false,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'falsy mcgee'
-            },
-            "description": 'changed group name from project2 to project3',
-            "group": {
-                "id": _makeid(),
-                "name": 'project3'
-            }
-        },
-        {
-            "id": _makeid(),
-            "createdAt": 4514512352135,
-            "isRead": true,
-            "byUser": {
-                "imgUrl": "https://via.placeholder.com/150",
-                "fullName": 'shucks mcgee'
-            },
-            "description": 'added group project2',
-            "group": {
-                "id": _makeid(),
-                "name": 'project2'
-            }
-        }
-        ]
+        "activityLog": []
     }
     const newBoard = await httpService.post(`board`, board);
     return newBoard;
@@ -274,7 +203,6 @@ function handleBoardChanges(desc, loggedUser, board) {
 
 
     const updatedBoard = { ...board, activityLog: [...board.activityLog, changes] }
-    console.log('UPDATED BOARD', updatedBoard)
     return updateBoard(updatedBoard)
 }
 function _makeid(length = 7) {

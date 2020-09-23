@@ -1,86 +1,71 @@
 .activities {
-    margin: 0 10px;
-
+    margin: 0 30px;
+    header {
+        height: 15vh;
+    }
     header {
         margin-bottom: 25px;
-
         h1 {
             margin-top: 25px;
         }
-
-
     }
-
     h1,
     h2,
     h3,
     h4,
     h5 {
         color: $mainBlack;
-
     }
-
     .all-activities-container {
         overflow-y: overlay;
-        max-height: 75vh;
+        max-height: 85vh;
     }
-
     .activity-list-not-read {
         background-color: #bbdaf6;
         margin-bottom: 25px;
     }
-
-
+    .activity-list-not-read,
+    .activity-list {
+        >* {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
     .activity {
         border-radius: 1px;
-
         &:first-child {
             border-top: 1px solid #a8a8a87d;
         }
-
         &:not(:last-child) {
-
             border-bottom: 1px solid #a8a8a87d;
         }
-
-
         .activity-desc-container {
             width: 60%;
-
             >*:not(:first-child) {
                 margin-right: 15px;
             }
         }
-
         .date-container {
             min-width: 50px;
             color: $colorFontUserDetails;
         }
-
-
     }
-
     .user-img-container {
         width: 40%;
         margin-right: 15px;
-
         >*:not(:first-child) {
             margin-left: 10px;
         }
-
         img {
             height: auto;
             width: 40px;
             border-radius: 50%;
         }
     }
-
     svg {
         color: $buttonMainBg;
-
         &:hover {
             color: $buttonMainHover;
         }
     }
-
 }
