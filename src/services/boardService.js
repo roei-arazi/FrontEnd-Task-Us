@@ -31,18 +31,21 @@ function removeBoard(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
 
-async function addBoard() {
+async function addBoard(loggedUser) {
+    console.log('logged user:', loggedUser)
     const board = {
         boardCreator: {
-            "fullName": 'Liam Zety',
-            "imgUrl": 'https://via.placeholder.com/100',
+            "id": loggedUser.id,
+            "fullName": loggedUser.fullName,
+            "imgUrl": loggedUser.imgUrl,
         },
         "name": "board",
         "createdAt": Date.now(),
         "description": 'Enter description here',
         "members": [{
-            "fullName": 'Liam Zety',
-            "imgUrl": 'https://via.placeholder.com/100',
+            "id": loggedUser.id,
+            "fullName": loggedUser.fullName,
+            "imgUrl": loggedUser.imgUrl,
         }],
         "groups": [{
             "id": _makeid(),
