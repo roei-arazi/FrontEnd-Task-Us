@@ -55,16 +55,26 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = async (board, toUpdateChanges = false, type) => {
-        console.log('BOARD WITH UPDATED TITLE', board)
-        await this.props.updateBoard(board)
+    onEditBoard = async (boardName, boardDescription, toUpdateChanges = false, type, members, activityLog) => {
+        const currBoard = this._getCurrBoard()
+        console.log('SHOW activityLog', activityLog)
+
+        const newBoard = {
+            ...currBoard,
+            name: boardName,
+            desc: boardDescription,
+            members: members ? members : currBoard.members,
+            activityLog: activityLog ? activityLog : currBoard.activityLog
+        }
+        console.log('SHOW NEW BOARRD', newBoard)
+
         if (toUpdateChanges) {
             switch (type) {
                 case 'changeBoardTitle':
                     try {
                         console.log('CHANGING TITLE',)
 
-                        this.props.groupChanges(`${this.props.loggedUser.fullName} Changed the board title to ${board.name}`, this.props.loggedUser, this._getCurrBoard())
+                        this.props.groupChanges(`${this.props.loggedUser.fullName} Changed the board title from ${currBoard.name} to ${boardName}`, this.props.loggedUser, newBoard)
 
                     } catch (err) {
                         console.log('Error', err)
@@ -72,7 +82,7 @@ class _Board extends Component {
                     break;
                 case 'changeBoardDesc':
                     try {
-                        this.props.groupChanges(`${this.props.loggedUser.fullName} Changed ${board.name} description to ${board.description}`, this.props.loggedUser, this._getCurrBoard())
+                        this.props.groupChanges(`${this.props.loggedUser.fullName} Changed ${currBoard.name} description to ${boardDescription}`, this.props.loggedUser, newBoard)
 
                     } catch (err) {
                         console.log('Error', err)
@@ -82,7 +92,7 @@ class _Board extends Component {
                 case 'addMemberToBoard':
                     console.log('ADDING MEMBER TO BOARD',)
                     try {
-                        this.props.groupChanges(`${this.props.loggedUser.fullName} Added a member to the board `, this.props.loggedUser, this._getCurrBoard())
+                        this.props.groupChanges(`${this.props.loggedUser.fullName} Invited a member to the board `, this.props.loggedUser, newBoard)
 
                     } catch (err) {
                         console.log('Error', err)
@@ -91,22 +101,18 @@ class _Board extends Component {
                     break;
                 case 'removeMemberFromBoard':
                     try {
-                        this.props.groupChanges(`${this.props.loggedUser.fullName} Removed a member from the board`, this.props.loggedUser, this._getCurrBoard())
+                        this.props.groupChanges(`${this.props.loggedUser.fullName} Removed a member from the board`, this.props.loggedUser, newBoard)
 
                     } catch (err) {
                         console.log('Error', err)
                     }
 
                     break;
-
-                default:
-                    break;
             }
-            console.log('clearing', board)
-
-            this.props.showSnackbar('Updated board.')
-            setTimeout(() => this.props.hideSnackbar(), 3000)
         }
+        this.props.updateBoard(newBoard)
+        this.props.showSnackbar('Updated board.')
+        setTimeout(() => this.props.hideSnackbar(), 3000)
     }
 
     applyFilter = (board, filterBy) => {
