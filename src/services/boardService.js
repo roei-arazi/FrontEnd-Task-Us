@@ -20,18 +20,11 @@ async function loadBoards() {
     return boards
 }
 
-async function updateBoard(boardToSave) {
-    socketService.emit('updateBoard', boardToSave);
-    httpService.put(`board/${boardToSave._id}`, boardToSave)
-    return boardToSave
-}
-
 function removeBoard(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
 
 async function addBoard(loggedUser) {
-    console.log('LOGGED USER', loggedUser)
     const board = {
         boardCreator: {
             "_id": loggedUser._id,
@@ -92,7 +85,7 @@ async function addBoard(loggedUser) {
     return newBoard;
 }
 
-function addGroup(board) {
+function addGroup(board, loggedUser) {
     const group = {
         "id": _makeid(),
         "name": 'week1',
@@ -122,37 +115,43 @@ function addGroup(board) {
     }
     try {
         board.groups.push(group)
-        updateBoard(board)
-        return board
+        const desc = `${loggedUser.fullName} Added a new group.`
+        return handleBoardChanges(desc, loggedUser, board)
     } catch (err) {
         console.log('boardService: Couldn\'t add group');
         throw err;
     }
 }
 
-function removeGroup(groupId, board) {
-    board.groups = board.groups.filter(group => group.id !== groupId)
-    updateBoard(board)
-    return board
-}
-
-function updateGroup(updatedGroup, board) {
-    board.groups = board.groups.map(group => group.id === updatedGroup.id ? updatedGroup : group)
-    updateBoard(board)
-    return board
-}
-
-async function removeTask(taskId, board) {
-    board.groups = board.groups.map(group => {
-        group.tasks = group.tasks.filter(task => task.id !== taskId)
-        return group;
+function removeGroup(groupId, board, loggedUser) {
+    let group = null;
+    board.groups = board.groups.filter(currGroup => {
+        const isGroup = currGroup.id === groupId;
+        if (isGroup) group = currGroup;
+        return !isGroup;
     })
-    updateBoard(board)
-    return board;
-
+    const desc = `${loggedUser.fullName} Removed group: ${group.name}`
+    return handleBoardChanges(desc, loggedUser, board)
 }
 
-function addTask(groupId, taskName, board) {
+function updateGroup(updatedGroup, board, desc, loggedUser) {
+    board.groups = board.groups.map(group => group.id === updatedGroup.id ? updatedGroup : group)
+    return handleBoardChanges(desc, loggedUser, board)
+}
+
+function removeTask(taskId, board, group, loggedUser) {
+    let task = null
+    const groupIdx = board.groups.findIndex(currGroup => currGroup.id === group.id)
+    board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(currTask => {
+        const isTask = currTask.id === taskId
+        if (isTask) task = currTask;
+        return !isTask;
+    })
+    const desc = `${loggedUser.fullName} Removed task: ${task.name} from group ${group.name}`;
+    return handleBoardChanges(desc, loggedUser, board)
+}
+
+function addTask(groupId, taskName, board, loggedUser) {
     const task = {
         id: _makeid(),
         name: taskName,
@@ -167,22 +166,20 @@ function addTask(groupId, taskName, board) {
         posts: [],
         tags: []
     }
-    const newBoard = JSON.parse(JSON.stringify(board))
-    newBoard.groups.forEach(group => {
-        if (group.id === groupId) group.tasks.push(task);
-    })
-    updateBoard(newBoard)
-    return newBoard;
+    const groupIdx = board.groups.findIndex(group => group.id === groupId)
+    const desc = `${loggedUser.fullName} Added a new task: ${taskName} to group ${board.groups[groupIdx].name}`
+    board.groups[groupIdx].tasks.push(task)
+    return handleBoardChanges(desc, loggedUser, board)
 }
 
-function updateTask(updatedTask, board) {
+function updateTask(updatedTask, board, desc, loggedUser) {
     board.groups = board.groups.map(group => {
         group.tasks = group.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
         return group;
     })
-    updateBoard(board)
-    return board
+    return handleBoardChanges(desc, loggedUser, board)
 }
+
 function handleBoardChanges(desc, loggedUser, board) {
     const changes = {
         id: _makeid(),
@@ -195,9 +192,18 @@ function handleBoardChanges(desc, loggedUser, board) {
             imgUrl: loggedUser.imgUrl
         },
     }
-    const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
+    const updatedBoard = {...board, activityLog: [changes, ...board.activityLog, ] }
     return updateBoard(updatedBoard)
 }
+
+
+function updateBoard(boardToSave) {
+    socketService.emit('updateBoard', boardToSave);
+    httpService.put(`board/${boardToSave._id}`, boardToSave)
+    return boardToSave
+}
+
+
 function _makeid(length = 7) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

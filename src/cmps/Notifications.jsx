@@ -43,7 +43,7 @@ export class Notifications extends Component {
                                             <div className="user-img-container">
                                                 <img src={notification.byUser.imgUrl} alt="profile" />
                                             </div>
-                                            <div className="notification-msg flex align-center column">
+                                            <div className="notification-msg flex column">
                                                 <h2>
                                                         {notification.byUser.fullName}
                                                 </h2>

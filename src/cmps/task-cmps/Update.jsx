@@ -110,7 +110,7 @@ export class Update extends React.Component {
                     {update.replies &&
                         <div className="replies-box flex column" style={{ borderTop: `${update.replies.length && '1px solid rgba(109, 109, 109, 0.35)'}` }}>
                             {update.replies.map((reply, idx) =>
-                                <Reply reply={reply} idx={idx} update={this.props.update}
+                                <Reply key={idx} reply={reply} idx={idx} update={this.props.update}
                                     updateNote={this.props.updateNote} />
                             )}</div>
                     }

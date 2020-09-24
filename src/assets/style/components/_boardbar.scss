@@ -75,7 +75,7 @@
         height: 20px;
         width: 20px;
         top: 20px;
-        transition: transform .3s;
+        transition: .3s;
 
         svg {
             font-size: 0.75rem;
@@ -84,7 +84,7 @@
 
         &:hover {
             background-color: $buttonMainBg;
-            border-color: $colorBgBoardBars;
+            border: 0;
 
             svg {
                 fill: $colorPlusCircleFont;

@@ -35,7 +35,6 @@ export class _BoardHeader extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.board._id !== this.props.board._id) {
-            console.log('COMP DID UPDATE',)
             this.setState({ board: this.props.board })
         }
     }
@@ -43,11 +42,11 @@ export class _BoardHeader extends React.Component {
         socketService.off('updatedBoard')
     }
     handleChangeName = (ev) => {
-        this.setState({ board: { ...this.state.board, name: ev.target.value } }, console.log('change name! ', this.state.board))
+        this.setState({ board: { ...this.state.board, name: ev.target.value } })
     }
 
     handleChangeDesc = (ev) => {
-        this.setState({ board: { ...this.state.board, description: ev.target.value } })
+        this.setState({ board: { ...this.state.board, desc: ev.target.value } })
     }
 
     focusText = () => {
@@ -69,7 +68,7 @@ export class _BoardHeader extends React.Component {
             }
 
         }
-        this.props.onEditBoard(board.name, board.description, false, 'openModal', board.members, board.activityLog)
+        this.props.onEditBoard(board.name, board.desc, false, 'openModal', board.members, board.activityLog)
 
     }
 
@@ -111,7 +110,7 @@ export class _BoardHeader extends React.Component {
             activityLog: []
         }
         this.setState({ board }, () => {
-            this.props.onEditBoard(board.name, board.description, false, 'clearLog', board.members, board.activityLog)
+            this.props.onEditBoard(board.name, board.desc, false, 'clearLog', board.members, board.activityLog)
         })
 
 
@@ -136,12 +135,12 @@ export class _BoardHeader extends React.Component {
                             disabled={false}       // use true to disable editing
                             onChange={this.handleChangeName} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board.name, this.state.board.description, true, 'changeBoardTitle')
+                                this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardTitle')
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(this.state.board.name, this.state.board.description, true, 'changeBoardTitle')
+                                    this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardTitle')
                                 }
                             }}
                         />
@@ -198,16 +197,16 @@ export class _BoardHeader extends React.Component {
                             onFocus={this.focusText}
                             className="content-editable cursor-initial"
                             innerRef={this.editableDescription}
-                            html={this.state.board.description} // innerHTML of the editable div
+                            html={this.state.board.desc} // innerHTML of the editable div
                             disabled={false}        // use true to disable editing
                             onChange={this.handleChangeDesc} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board.name, this.state.board.description, true, 'changeBoardDesc')
+                                this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardDesc')
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(this.state.board.name, this.state.board.description, true, 'changeBoardDesc')
+                                    this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardDesc')
                                 }
                             }}
                         />
