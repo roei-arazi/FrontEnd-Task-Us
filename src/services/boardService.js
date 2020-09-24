@@ -21,6 +21,7 @@ async function loadBoards() {
 }
 
 async function updateBoard(boardToSave) {
+    console.log('SHOW ME BOARD TO SAVE:', boardToSave)
     socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
@@ -30,18 +31,21 @@ function removeBoard(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
 
-async function addBoard() {
+async function addBoard(loggedUser) {
+    console.log('logged user:', loggedUser)
     const board = {
         boardCreator: {
-            "fullName": 'Liam Zety',
-            "imgUrl": 'https://via.placeholder.com/100',
+            "id": loggedUser.id,
+            "fullName": loggedUser.fullName,
+            "imgUrl": loggedUser.imgUrl,
         },
         "name": "board",
         "createdAt": Date.now(),
         "description": 'Enter description here',
         "members": [{
-            "fullName": 'Liam Zety',
-            "imgUrl": 'https://via.placeholder.com/100',
+            "id": loggedUser.id,
+            "fullName": loggedUser.fullName,
+            "imgUrl": loggedUser.imgUrl,
         }],
         "groups": [{
             "id": _makeid(),
@@ -201,9 +205,9 @@ function handleBoardChanges(desc, loggedUser, board) {
             imgUrl: loggedUser.imgUrl
         },
     }
-
-
+    console.log('SHOW ME THE ACTIVITY LOG', board.activityLog)
     const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
+    console.log('updatedBoard:', updatedBoard)
     return updateBoard(updatedBoard)
 }
 function _makeid(length = 7) {

@@ -5,6 +5,9 @@ import { userService } from '../../services/userService.js'
 export function groupChanges(desc, loggedUser, board) {
     return async dispatch => {
         try {
+            const updatedBoard = await boardService.handleBoardChanges(desc, loggedUser, board)
+            dispatch({ type: 'SET_BOARD', board: updatedBoard })
+
             const users = await userService.loadUsers();
             const notification = {
                 byUser: {
@@ -21,10 +24,9 @@ export function groupChanges(desc, loggedUser, board) {
                 userService.updateUser(userToUpdate);
                 socketService.emit('send-notif', { memberId: member._id, notification });
             })
-            const updatedBoard = await boardService.handleBoardChanges(desc, loggedUser, board)
-            dispatch({ type: 'SET_BOARD', board: updatedBoard })
+
         } catch (err) {
-            console.log('boardActions: Couldn\'t add group');
+            console.log('boardActions: Couldn\'t send activities/notif');
             throw err;
         }
     }

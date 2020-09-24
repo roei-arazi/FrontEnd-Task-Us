@@ -51,10 +51,10 @@ export function removeBoard(boardId) {
     }
 }
 
-export function addBoard() {
+export function addBoard(loggedUser) {
     return async dispatch => {
         try {
-            const board = await boardService.addBoard();
+            const board = await boardService.addBoard(loggedUser);
 
             dispatch({ type: 'ADD_BOARD', board })
         } catch (err) {
