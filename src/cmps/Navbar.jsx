@@ -34,11 +34,10 @@ class _Navbar extends Component {
             <section className="navbar flex column space-between align-center padding-y-15">
 
                 <ul className="navbar-links flex column space-around">
-                    <li className="icon-container cursor-pointer">
-                        <NavLink to="/">
-                            <FaAd />
-                        </NavLink>
-                    </li>
+                    <NavLink to="/">
+                        <img className="logo-navbar" src="taskus-nav.png" alt="" />
+                    </NavLink>
+
 
                     {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
                     <li className="icon-container cursor-pointer" onClick={!this.state.isNotificationShown ? this.toggleNotifications : () => { }} >

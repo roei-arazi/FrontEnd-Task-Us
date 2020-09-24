@@ -9,14 +9,25 @@
     cursor: auto;
     max-height: 400px;
 
+    section {
+        button {
+            padding: 5px;
+            border-radius: 0;
+
+        }
+    }
+
     >* {
         max-height: 100%;
         width: 100px;
         margin: 0 10px;
 
         .filter-list {
-            max-height: 100%;
-            overflow-y: overlay;
+            button {
+                padding: 5px;
+                border-radius: 0;
+
+            }
 
             .remove-filter-btn {
                 background-color: $buttonMainHover;

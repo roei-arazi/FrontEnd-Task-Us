@@ -3,6 +3,7 @@ import moment from 'moment'
 import { AiOutlineClose } from 'react-icons/ai';
 import { Fade } from '@material-ui/core';
 import { VscListFilter } from 'react-icons/vsc';
+import { IoIosArrowDropdown } from 'react-icons/io';
 
 
 export default class Activities extends Component {
@@ -12,8 +13,8 @@ export default class Activities extends Component {
         isFilterOpen: false,
         filterBy: {},
         searchVal: '',
-        isActivities: true,
-        isActivitiesNotRead: true
+        isActivitiesShown: true,
+        isActivitiesNotReadShown: true
     }
 
     get activities() {
@@ -54,8 +55,6 @@ export default class Activities extends Component {
         return Object.keys(members)
     }
 
-
-
     applyFilter(activities) {
         let res = [...activities];
         const { filterBy, searchVal } = this.state;
@@ -68,11 +67,11 @@ export default class Activities extends Component {
         return res;
     }
     toggleActivities = () => {
-        this.setState({ isActivities: !this.state.isActivities })
+        this.setState({ isActivitiesShown: !this.state.isActivitiesShown })
 
     }
     toggleActivitiesNotRead = () => {
-        this.setState({ isActivitiesNotRead: !this.state.isActivitiesNotRead })
+        this.setState({ isActivitiesNotReadShown: !this.state.isActivitiesNotReadShown })
     }
 
     render() {
@@ -109,7 +108,7 @@ export default class Activities extends Component {
                                             </section>
                                             <section className="activity-date-filter">
                                                 <h3>Date</h3>
-                                                <div className="filter-list">
+                                                <div className="filter-list flex justify-center align-center column">
                                                     {dates.map((date, idx) => <button
                                                         className={filterBy.date === date ? 'remove-filter-btn' : ''}
                                                         key={idx}
@@ -125,9 +124,13 @@ export default class Activities extends Component {
                     </div>
                 </header>
                 <div className="all-activities-container">
+                    {/* Activities which are not read: */}
                     <div className="activity-list-not-read column flex  padding-y-15">
-                        <h1 onClick={this.toggleActivitiesNotRead}>New Activities ({activitiesNotRead.length})</h1>
-                        {this.state.isActivitiesNotRead && activitiesNotRead.length !== 0 && activitiesNotRead.map((activity, idx) => {
+                        <h1 className="flex space-between">
+                            New Activities ({activitiesNotRead.length})
+                         <IoIosArrowDropdown className={this.state.isActivitiesNotReadShown ? "rotate0" : "rotate90"} onClick={this.toggleActivitiesNotRead} />
+                        </h1>
+                        {this.state.isActivitiesNotReadShown && activitiesNotRead.length !== 0 && activitiesNotRead.map((activity, idx) => {
                             return (
                                 <div key={idx} className="activity flex align-center padding-y-15 ">
                                     <div className="user-img-container flex align-center">
@@ -151,15 +154,14 @@ export default class Activities extends Component {
                             <h3 className="padding-x-15">No new board activities!</h3>
                         }
                     </div>
-
-
-
-
+                    {/* Activities which are already read */}
                     <div className="activity-list column flex  padding-y-15">
-                        <h1 onClick={this.toggleActivities}>Activities Read ({activities.length})</h1>
-
+                        <h1 className="flex space-between">
+                            Activities Read ({activities.length})
+                        <IoIosArrowDropdown onClick={this.toggleActivities} className={this.state.isActivitiesShown ? "rotate0" : "rotate90"} />
+                        </h1>
                         {
-                            this.state.isActivities && activities.length !== 0 && activities.map((activity, idx) => {
+                            this.state.isActivitiesShown && activities.length !== 0 && activities.map((activity, idx) => {
                                 return (
                                     <div key={idx} className="activity  space-between flex align-center padding-y-15 ">
                                         <div className="user-img-container flex align-center">

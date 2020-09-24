@@ -27,8 +27,9 @@
     }
 
     .filter-outer-container {
-        button {
+        >button {
             padding: 4px 8px;
+            border-radius: 15px;
 
             &:first-of-type {
                 margin-right: 15px;

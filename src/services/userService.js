@@ -157,8 +157,8 @@ async function logout() {
     sessionStorage.clear();
 }
 
-async function notifyUsers(content, members, loggedUser){
-    console.log('got user:'. loggedUser);
+async function notifyUsers(content, members, loggedUser) {
+    console.log('got user:', loggedUser.fullName)
     const users = await loadUsers();
     const notification = {
         byUser: {

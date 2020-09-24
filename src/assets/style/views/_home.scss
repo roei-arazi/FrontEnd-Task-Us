@@ -1,35 +1,86 @@
 .home {
     min-height: 100vh;
 
+    video {
+        margin-top: -80px;
+    }
+
     .home-header {
         height: 10vh;
         border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
 
+
         .home-header-btn {
             background-color: $buttonMainBg;
-            color: $colorBgBoardBars;
-            margin-right: 15px;
+            color: $white;
             width: 100px;
             border-radius: 30px;
 
             &:hover {
                 background-color: $buttonMainHover;
             }
+
+
+
+        }
+
+        .home-header-right {
+            a:first-child {
+                margin-right: 15px;
+
+            }
+
+            button {
+                padding: 8px;
+                background-color: #ee7b91;
+                width: fit-content;
+
+                &:hover {
+                    background-color: #f0284e;
+                }
+
+            }
         }
     }
 
     .home-main {
         height: 90vh;
+        justify-content: space-evenly;
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 3.5;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+
+        }
 
         .guest-button {
+            margin-top: 25px;
             background-color: #f0284e;
             color: $colorBgBoardBars;
-            width: 220px;
+            width: 180px;
             border-radius: 20px;
+            font-size: 1.8rem;
+            padding: 10px;
 
             &:hover {
                 background-color: #be203e;
             }
+        }
+
+        .col-right {
+            line-height: 5;
+            height: 90vh;
+            color: #f1f1f1;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, #cdeefac2 75%);
+            width: 50%;
+        }
+
+        .col-left {
+            width: 50%;
         }
     }
 }

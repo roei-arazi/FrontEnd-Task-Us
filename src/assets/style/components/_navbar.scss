@@ -1,5 +1,5 @@
 .navbar {
-    min-width: 100px;
+    min-width: 120px;
     width: 100px;
     background-color: $colorMainNav;
     height: 100vh;
@@ -25,6 +25,12 @@
         font-size: 25px;
         color: $colorIconsNav;
 
+    }
+
+    .logo-navbar {
+        width: 100%;
+        transform: translateY(-25px);
+        animation: logo-navbar-animation .5s;
     }
 
     .icon {

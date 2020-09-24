@@ -8,7 +8,7 @@ import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import moment from 'moment';
-import {userService} from '../services/userService.js';
+import { userService } from '../services/userService.js';
 
 // Reducers funcs
 import { loadUsers } from '../store/actions/userActions'
@@ -58,7 +58,7 @@ class _Board extends Component {
 
     onEditBoard = async (boardName, boardDescription, toUpdateChanges = false, type, members, activityLog) => {
         const currBoard = this._getCurrBoard()
-        const {loggedUser} = this.props;
+        const { loggedUser } = this.props;
 
         const newBoard = {
             ...currBoard,
@@ -73,16 +73,16 @@ class _Board extends Component {
         if (toUpdateChanges) {
             switch (type) {
                 case 'changeBoardTitle':
-                        desc = `${loggedUser.fullName} Changed the board title from ${currBoard.name} to ${boardName}`
+                    desc = `${loggedUser.fullName} Changed the board title from ${currBoard.name} to ${boardName}`
                     break;
                 case 'changeBoardDesc':
-                        desc = `${loggedUser.fullName} Changed ${currBoard.name} description to ${boardDescription}`
+                    desc = `${loggedUser.fullName} Changed ${currBoard.name} description to ${boardDescription}`
                     break;
                 case 'addMemberToBoard':
-                        desc = `${loggedUser.fullName} Invited a member to the board `
+                    desc = `${loggedUser.fullName} Invited a member to the board `
                     break;
                 case 'removeMemberFromBoard':
-                        desc = `${loggedUser.fullName} Removed a member from the board`
+                    desc = `${loggedUser.fullName} Removed a member from the board`
                     break;
             }
         }
@@ -185,7 +185,7 @@ class _Board extends Component {
     onAddTask = async (groupId, taskName) => {
         if (!taskName) taskName = 'New task'
 
-        const {loggedUser} = this.props;
+        const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         const notif = `${loggedUser.fullName} Added a task to board ${board.name}`;
         try {
@@ -210,7 +210,6 @@ class _Board extends Component {
         switch (type) {
             case 'name':
                 desc = `${loggedUser.fullName} changed task name from ${originalValue} to ${changedValue} at group - ${group.name}`
-
                 break;
             case 'sendNote':
                 desc = `${loggedUser.fullName} sent an update at task: ${task.name} at group - ${group.name}`
@@ -318,7 +317,7 @@ class _Board extends Component {
                 board.groups.splice(startIdx, 1, newStartGroup)
                 board.groups.splice(endIdx, 1, newFinishGroup)
                 try {
-                    const {loggedUser} = this.props;
+                    const { loggedUser } = this.props;
                     const desc = `${loggedUser.fullName} Moved ${newTaskToPaste.name} from ${newStartGroup.name} to ${newFinishGroup.name}`
                     this.props.updateBoard(this._getCurrBoard(), desc, loggedUser)
 

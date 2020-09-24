@@ -212,7 +212,7 @@ export class _BoardHeader extends React.Component {
                         />
                     </h5>
                     <div className="header-options flex">
-                        <button onClick={this.props.onAddGroup}>New Group</button>
+                        <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
                         <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
                             <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />
                             <GoSearch />
