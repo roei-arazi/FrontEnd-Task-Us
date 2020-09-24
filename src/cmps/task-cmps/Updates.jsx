@@ -73,7 +73,7 @@ export class Updates extends React.Component {
             }
         }
         const updates = [newNote, ...this.props.updates]
-        this.setState({ update: { txt: '', imgUrl: '' },imageUploaded: false })
+        this.setState({ update: { txt: '', imgUrl: '' }, imageUploaded: false })
         this.props.sendNote(updates)
     }
 
@@ -94,29 +94,27 @@ export class Updates extends React.Component {
                     <div className="updates-header-options flex column">
                         <form onSubmit={this.sendNote} className="notes-form flex align-center">
                             <textarea name="txt" value={this.state.update.txt} onChange={this.handleChange} />
-
-
                         </form>
-                        <div className="updates-btns flex align-center space-between">
 
+                        <div className="updates-btns flex align-center space-between">
                             <div className="image-uploader flex">
-                                <label htmlFor={this.props.task.id}>{this.state.isLoading ? <div class="loadingio-spinner-spinner-gvjl1rpqs7q"><div class="ldio-subadnemdcd">
+                                <label data-title="Upload Image" htmlFor={this.props.task.id}>{this.state.isLoading ? <div class="loadingio-spinner-spinner-gvjl1rpqs7q"><div class="ldio-subadnemdcd">
                                     <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
                                 </div></div> : <BiImage />}
                                 </label>
                                 <input name="file-img" type="file" id={this.props.task.id} onChange={(this.handleChange)} hidden />
                                 {this.state.imageUploaded && <div className="image-uploaded flex align-center"><MdDone /><p> Image Ready!</p></div>}
                             </div>
-                            {this.state.isLoading ? <p>Image is uploading..</p> : <button onClick={this.sendNote}>Upload</button>}
+                            {this.state.isLoading ? <p>Image is uploading..</p> : <button onClick={this.sendNote}>Send</button>}
 
                         </div>
                     </div>
                 </div>
                 <div className="updates-container">
-                    {updates.map((update, idx) => <Update update={update} key={idx} idx={idx} 
-                    updates={updates} loggedUser={this.props.loggedUser}
-                    sendNote={this.props.sendNote}
-                     updateNote={this.updateNote} makeid={makeid}/>)}             
+                    {updates.map((update, idx) => <Update update={update} key={idx} idx={idx}
+                        updates={updates} loggedUser={this.props.loggedUser}
+                        sendNote={this.props.sendNote}
+                        updateNote={this.updateNote} makeid={makeid} />)}
                 </div>
             </React.Fragment>
 

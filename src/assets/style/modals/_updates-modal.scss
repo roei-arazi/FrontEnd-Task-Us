@@ -4,8 +4,14 @@
     padding-top: 15px;
     padding-left: 15px;
 
+
     svg {
         color: $buttonMainBg;
+
+        &:hover {
+
+            color: $buttonMainHover;
+        }
     }
 
     h1 {
@@ -194,9 +200,34 @@
     height: 70vh;
     background-color: $colorBgBoardBars;
 
+    .update-options-modal {
+
+        background-color: #ffffff;
+        position: fixed;
+        z-index: 999;
+        width: 180px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        box-shadow: 0px 3px 10px -5px #484444;
+
+        p:not(:first-child) {
+            margin-top: 15px;
+        }
+
+        p {
+            padding: 15px;
+            transition: .3s;
+
+            &:hover {
+                background-color: rgba(218, 218, 218, 0.287);
+            }
+        }
+
+    }
 
     img {
-        margin-top: 10px;
         max-height: 200px;
         max-width: fit-content;
         object-fit: fill;
@@ -212,6 +243,13 @@
         border-radius: 5px;
         overflow: hidden;
 
+        .update-options-modal {
+            align-self: flex-end;
+        }
+
+        svg {
+            align-self: flex-end;
+        }
 
         .remove-update-btn {
             padding: 0;
@@ -294,50 +332,44 @@
                 overflow: hidden;
 
                 &:hover {
-                    .remove-reply-btn {
+                    .options-reply-btn {
                         transition: .3s;
-                        transform: translateY(15px);
-                    }
+                        transform: translate(0, 1px);
 
-                    .edit-reply-btn {
-                        transition: .3s;
-                        transform: translateY(12.5px);
+                        &:hover {
+                            color: $buttonMainHover;
+                        }
+
                     }
                 }
+
+
             }
+
+            .options-reply-btn {
+                transform: translate(0, -15px);
+                transition: .3s;
+                align-self: flex-end;
+                position: absolute;
+                top: 0;
+            }
+
 
             img {
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
                 margin-right: 5px;
-                margin-top: 5px;
             }
 
             .reply-name {
                 font-weight: bold;
-                align-self: flex-end;
             }
 
             .reply-text {
                 margin-left: 15px;
                 word-break: break-all;
                 align-self: flex-end;
-            }
-
-            .remove-reply-btn {
-                position: absolute;
-                right: 5px;
-                top: -10px;
-                background-color: inherit;
-                color: #7e7e7e;
-                padding: 0;
-                transform: translateY(-10px);
-
-                &:hover {
-                    color: #4a4747;
-                }
-
             }
 
             .update-reply-btn {
@@ -353,24 +385,11 @@
                 height: 24px;
             }
 
-            .edit-reply-btn {
-                color: #7e7e7e;
-                width: fit-content;
-                transform: translateY(35px);
-
-                &:hover {
-                    text-decoration: underline;
-                    cursor: pointer;
-                    color: #4a4747
-                }
-            }
-
         }
 
         .reply-footer {
-
             border: 1px solid rgba(109, 109, 109, 0.35);
-            border-radius: 12px;
+            border-radius: 5px;
             overflow: hidden;
             position: relative;
 
@@ -378,18 +397,11 @@
                 border: 0;
                 width: 360px;
                 resize: none;
-                height: 30px;
+                height: 35px;
                 padding: 5px;
             }
 
-            .reply-button {
-                position: absolute;
-                right: 0;
-                height: 30px;
-                display: flex;
-                align-items: center;
-                width: 70px;
-            }
+
         }
 
 

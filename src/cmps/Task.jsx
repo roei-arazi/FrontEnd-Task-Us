@@ -33,13 +33,13 @@ class _Task extends Component {
         isImageModalShown: false
     }
 
-    reloadProps = ()=>{
+    reloadProps = () => {
         this.setState({ task: this.props.task })
     }
 
     componentDidMount() {
         this.contentEditable = React.createRef();
-        socketService.on('updatedBoard',this.reloadProps)
+        socketService.on('updatedBoard', this.reloadProps)
         this.setState({
             ...this.state,
             task: this.props.task,
@@ -52,7 +52,7 @@ class _Task extends Component {
 
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         socketService.off('updatedBoard', this.reloadProps)
     }
 
@@ -158,7 +158,7 @@ class _Task extends Component {
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates task={this.state.task} isImageModalShown={this.state.isImageModalShown}
+                    <Updates closeModal={this.closeModal} task={this.state.task} isImageModalShown={this.state.isImageModalShown}
                         loggedUser={this.props.loggedUser} updates={updates}
                         uploadImg={this.uploadImg} sendNote={this.sendNote} closeModal={this.closeModal}
                     />

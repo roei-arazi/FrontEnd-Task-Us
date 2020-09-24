@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { AiOutlineSend } from 'react-icons/ai';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { Reply } from './Reply';
 
 export class Update extends React.Component {
 
     state = {
         txt: '',
-        isEditMode: false
+        isEditMode: false,
+        isOptionsModal: false
     }
 
 
@@ -54,7 +56,9 @@ export class Update extends React.Component {
         this.setState({ [target.name]: target.value })
     }
 
-
+    toggleOptionsModal = () => {
+        this.setState({ isOptionsModal: !this.state.isOptionsModal })
+    }
 
 
     render() {
@@ -62,7 +66,26 @@ export class Update extends React.Component {
 
         return (
             <div key={idx} className="update-box flex wrap column relative">
-                <button className="remove-update-btn" onClick={()=>this.removeUpdate(update.id)}>X</button>
+                <HiOutlineDotsHorizontal className="options-reply-btn cursor-pointer" onClick={this.toggleOptionsModal} />
+                {this.state.isOptionsModal &&
+                    <Fragment>
+                        <div onClick={() => {
+                            this.toggleOptionsModal()
+                        }} className="modal-screen-wrapper"></div>
+
+                        <div className="update-options-modal">
+                            <p className="remove-reply-btn  cursor-pointer" onClick={() => {
+                                this.toggleOptionsModal()
+                                this.removeUpdate(update.id)
+                            }}>Delete Post</p>
+                            <p className="edit-reply-btn cursor-pointer" onClick={() => {
+                                this.toggleOptionsModal()
+                                this.onToggleEditUpdate()
+                            }}>Edit Post</p>
+                        </div>
+                    </Fragment>
+                }
+                {/* <button className="remove-update-btn" onClick={() => this.removeUpdate(update.id)}>X</button> */}
                 <div className="update-box-header flex align-center">
                     <img src={update.member.imgUrl} alt="" />
                     <p className="member-name">{update.member.fullName}</p>
@@ -72,7 +95,7 @@ export class Update extends React.Component {
                 {this.state.isEditMode ?
                     <div className="update-box-edit flex column relative">
                         <textarea value={this.state.txt} name="txt" onChange={this.handleChange}></textarea>
-                        <AiOutlineSend className="submit-edit-btn absolute" onClick={()=>this.editUpdate(update)} />
+                        <AiOutlineSend className="submit-edit-btn absolute" onClick={() => this.editUpdate(update)} />
                         {update.imgUrl && <img src={update.imgUrl} alt="" />}
                     </div>
                     :
@@ -81,11 +104,11 @@ export class Update extends React.Component {
                         {update.imgUrl && <img src={update.imgUrl} alt="" />}
                     </div>
                 }
-                <p className="edit-update-btn" onClick={this.onToggleEditUpdate}>Edit</p>
+                {/* <p className="edit-update-btn" onClick={this.onToggleEditUpdate}>Edit</p> */}
                 <div className="update-box-footer flex column">
 
                     {update.replies &&
-                        <div className="replies-box flex column"  style={{borderTop: `${update.replies.length && '1px solid rgba(109, 109, 109, 0.35)'}`}}>
+                        <div className="replies-box flex column" style={{ borderTop: `${update.replies.length && '1px solid rgba(109, 109, 109, 0.35)'}` }}>
                             {update.replies.map((reply, idx) =>
                                 <Reply reply={reply} idx={idx} update={this.props.update}
                                     updateNote={this.props.updateNote} />
