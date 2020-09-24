@@ -78,7 +78,6 @@ export default class Activities extends Component {
         const members = this.getActivityMembers();
         activities = this.applyFilter(activities)
         activitiesNotRead = this.applyFilter(activitiesNotRead)
-        console.log('ACTIVITIES READ AND NOT READ@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', activities, activitiesNotRead)
         return (
             <section className="activities flex column">
 

@@ -69,13 +69,26 @@ export class Group extends Component {
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
     convertToData(property) {
         const { tasks } = this.props.group;
         const taskCount = tasks.length;
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
             const value = task[property]
-            acc[value] = acc[value] ? acc[value] + 1 : 0;
+            if(!acc[value]) acc[value] = 0;
+            acc[value]++
             return acc;
         }, {})
         const res = [];
@@ -88,8 +101,21 @@ export class Group extends Component {
         return res;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     render() {
-        if (!this.state.name) return <h1>Loading...</h1>
+        if (!this.state.name) return <h1>Loading...</h1> 
         const priority = this.convertToData('priority')
         const status = this.convertToData('status')
         const { name, ElGroupSettings, elGroupColors } = this.state;
