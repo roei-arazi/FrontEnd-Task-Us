@@ -15,10 +15,12 @@
 
         .board-header-right {
             .board-users {
+
                 cursor: pointer;
                 width: 125px;
                 text-align: center;
 
+                svg,
                 img {
                     width: 30px;
                     height: 30px;

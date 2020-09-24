@@ -8,8 +8,9 @@ import { Filter } from './Filter';
 import { withRouter } from 'react-router-dom';
 import socketService from '../services/socketService.js'
 import { FiPlus } from 'react-icons/fi';
-import { AiOutlineMinus } from 'react-icons/ai';
+import { AiOutlineMinus, AiOutlineUserAdd } from 'react-icons/ai';
 import { lightGreen } from '@material-ui/core/colors';
+import { CgProfile } from 'react-icons/cg';
 
 export class _BoardHeader extends React.Component {
 
@@ -147,7 +148,8 @@ export class _BoardHeader extends React.Component {
                     </h1>
                     <div className="board-header-right relative flex align-center">
                         <div className="board-users flex justify-center" onClick={this.onToggleUsers}>
-                            {members.map((member, idx) => {
+                            {members.length === 0 && <div className="user-img-container"> <CgProfile /></div>}
+                            {members.length !== 0 && members.map((member, idx) => {
                                 return <div key={idx} className="user-img-container">
                                     <img src={member.imgUrl} />
                                 </div>

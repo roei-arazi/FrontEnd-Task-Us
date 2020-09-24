@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { FaAd } from 'react-icons/fa'
+import { FaAd, FaRegUser } from 'react-icons/fa'
 import { VscBell, VscBellDot } from 'react-icons/vsc'
 import { BsCalendar } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
-import {BiLogOut} from 'react-icons/bi'
+import { BiLogOut } from 'react-icons/bi'
 import { Notifications } from './Notifications';
 import { markAsRead, removeNotifications, logout } from '../store/actions/userActions'
 class _Navbar extends Component {
@@ -22,7 +22,7 @@ class _Navbar extends Component {
         this.props.markAsRead(this.props.loggedUser)
     }
 
-    onLogout = () =>{
+    onLogout = () => {
         this.props.logout()
         this.props.history.push('/login')
     }
@@ -34,11 +34,11 @@ class _Navbar extends Component {
             <section className="navbar flex column space-between align-center padding-y-15">
 
                 <ul className="navbar-links flex column space-around">
-                        <li  className="icon-container cursor-pointer">
-                    <NavLink to="/">
-                        <FaAd />
-                    </NavLink>
-                        </li>
+                    <li className="icon-container cursor-pointer">
+                        <NavLink to="/">
+                            <FaAd />
+                        </NavLink>
+                    </li>
 
                     {isNotificationShown && <div className="modal-screen-wrapper" onClick={this.toggleNotifications} />}
                     <li className="icon-container cursor-pointer" onClick={!this.state.isNotificationShown ? this.toggleNotifications : () => { }} >
@@ -66,7 +66,7 @@ class _Navbar extends Component {
                         <li className="icon-container"><BsCalendar /></li>
                     </NavLink>
                     <NavLink to={loggedUser ? `/user/${loggedUser._id}` : '/login'}>
-                        <li className="icon-container"><CgProfile /></li>
+                        <li className="icon-container"><FaRegUser /></li>
                     </NavLink>
                     <li className="icon-container" ><BiLogOut onClick={this.onLogout} /></li>
                 </ul>
