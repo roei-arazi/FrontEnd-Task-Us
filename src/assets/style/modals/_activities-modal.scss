@@ -2,11 +2,8 @@
     margin: 0 30px;
 
     header {
-        height: 15vh;
-    }
-
-    header {
         margin-bottom: 25px;
+        height: 15vh;
 
         h1 {
             margin-top: 25px;
@@ -24,6 +21,13 @@
     .all-activities-container {
         overflow-y: overlay;
         max-height: 82vh;
+    }
+
+    .filter-outer-container {
+        button {
+
+            padding: 4px 8px;
+        }
     }
 
     .activity-list-not-read {

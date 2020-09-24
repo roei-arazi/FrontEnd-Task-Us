@@ -15,10 +15,14 @@
 
         .board-header-right {
             .board-users {
-
                 cursor: pointer;
-                width: 125px;
                 text-align: center;
+
+                &:hover {
+                    img {
+                        opacity: initial;
+                    }
+                }
 
                 svg,
                 img {
@@ -26,6 +30,12 @@
                     height: 30px;
                     border-radius: 50%;
                     margin-left: -15px;
+                }
+
+
+
+                img {
+                    opacity: 70%;
                 }
 
                 svg {

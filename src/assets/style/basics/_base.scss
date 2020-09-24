@@ -143,6 +143,7 @@ span.span-user-details {
   background-color: rgba($mainBlack, .65);
   border-radius: 5px;
   animation: title-animation 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  z-index: 999;
 
 }
 
