@@ -26,7 +26,7 @@ export function updateBoard(boardToSave, desc, loggedUser) {
             throw err;
         }
     }
-}
+}  
 
 export function recieveUpdate(boardToSave) {
     return dispatch => {
