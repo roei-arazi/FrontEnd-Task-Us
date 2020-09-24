@@ -92,7 +92,6 @@ export class Group extends Component {
             return acc;
         }, {})
         const res = [];
-        console.log('got data:', data);
         for (let key in data) {
             data[key] /= percent;
             res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0' }}
