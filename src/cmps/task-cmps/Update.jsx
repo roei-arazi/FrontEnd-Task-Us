@@ -1,17 +1,24 @@
 import React from 'react'
+import { AiOutlineSend } from 'react-icons/ai';
+import { Reply } from './Reply';
 
 export class Update extends React.Component {
 
     state = {
-        txt: ''
+        txt: '',
+        isEditMode: false
+    }
+
+    componentDidMount() {
+
     }
 
     onReply = (newUpdate) => {
         if (!this.state.txt || this.state.txt.split('').every(letter => letter === ' ')) return
-        console.log(this.props);
         const newReply = {
             txt: this.state.txt,
             createdAt: Date.now(),
+            id: this.props.makeid(),
             member: {
                 fullName: this.props.loggedUser.fullName,
                 username: this.props.loggedUser.userName,
@@ -26,38 +33,75 @@ export class Update extends React.Component {
         this.setState({ txt: '' })
     }
 
-    handleChange = ({ target }) => {
-        this.setState({ txt: target.value })
+    removeUpdate = (updateId) => {
+        const idx = this.props.updates.findIndex(update => update.id === updateId)
+        const updates = [...this.props.updates]
+        updates.splice(idx, 1)
+
+        this.props.sendNote(updates)
     }
+
+    onToggleEditUpdate = () => {
+        this.setState({ isEditMode: !this.state.isEditMode })
+    }
+
+    editUpdate = (newUpdate) => {
+        if (newUpdate.txt === this.state.txt) return this.setState({ isEditMode: false })
+        newUpdate.txt = this.state.txt
+        const newUpdates = this.props.updates.map(update => {
+            return update.id === newUpdate.id ? newUpdate : update
+        })
+
+        this.props.sendNote(newUpdates)
+        this.setState({ isEditMode: false, txt: '' })
+    }
+
+    handleChange = ({ target }) => {
+        this.setState({ [target.name]: target.value })
+    }
+
+
+
 
     render() {
         const { update, idx } = this.props
         return (
-            <div key={idx} className="update-box flex wrap column">
+            <div key={idx} className="update-box flex wrap column relative">
+                <button className="remove-update-btn" onClick={this.removeUpdate}>X</button>
                 <div className="update-box-header flex align-center">
                     <img src={update.member.imgUrl} alt="" />
                     <p className="member-name">{update.member.fullName}</p>
                 </div>
-                <div className="update-box-main flex column">
-                    {update.txt && <p className="update-text">{update.txt}</p>}
-                    {update.imgUrl && <img src={update.imgUrl} alt="" />}
-                </div>
+
+
+                {this.state.isEditMode ?
+                    <div className="update-box-edit flex column relative">
+                        <textarea value={this.state.txt} name="txt" onChange={this.handleChange}></textarea>
+                        <AiOutlineSend className="submit-edit-btn absolute" onClick={()=>this.editUpdate(update)} />
+                        {update.imgUrl && <img src={update.imgUrl} alt="" />}
+                    </div>
+                    :
+                    <div className="update-box-main flex column">
+                        {update.txt && <p className="update-text">{update.txt}</p>}
+                        {update.imgUrl && <img src={update.imgUrl} alt="" />}
+                    </div>
+                }
+                <p className="edit-update-btn" onClick={this.onToggleEditUpdate}>Edit</p>
                 <div className="update-box-footer flex column">
 
                     {update.replies &&
                         <div className="replies-box flex column">
-                            {update.replies.map((reply, idx) => {
-                                return <div key={idx} className="reply-box flex align-center">
-                                    <img src={reply.member.imgUrl} alt="" />
-                                    <p className="reply-name">{reply.member.fullName}</p>
-                                    <p className="reply-text">{reply.txt}</p>
-                                </div>
-                            })}</div>
+                            {update.replies.map((reply, idx) =>
+                                <Reply reply={reply} idx={idx} update={this.props.update}
+                                    updateNote={this.props.updateNote} />
+                            )}</div>
                     }
-                    <div className="reply-footer flex space-between align-center">
-                        <textarea value={this.state.txt} onChange={this.handleChange}></textarea>
-                        <button className="reply-button" onClick={() => this.onReply(update)}>Reply</button>
-                    </div>
+                    {!this.state.isEditMode &&
+                        <div className="reply-footer flex space-between align-center">
+                            <textarea value={this.state.txt} name="txt" onChange={this.handleChange}></textarea>
+                            <button className="reply-button" onClick={() => this.onReply(update)}>Reply</button>
+                        </div>
+                    }
                 </div>
             </div>
         )
