@@ -9,9 +9,6 @@ export class Update extends React.Component {
         isEditMode: false
     }
 
-    componentDidMount() {
-
-    }
 
     onReply = (newUpdate) => {
         if (!this.state.txt || this.state.txt.split('').every(letter => letter === ' ')) return
@@ -34,10 +31,7 @@ export class Update extends React.Component {
     }
 
     removeUpdate = (updateId) => {
-        const idx = this.props.updates.findIndex(update => update.id === updateId)
-        const updates = [...this.props.updates]
-        updates.splice(idx, 1)
-
+        const updates = this.props.updates.filter(update => update.id !== updateId)
         this.props.sendNote(updates)
     }
 
@@ -65,9 +59,10 @@ export class Update extends React.Component {
 
     render() {
         const { update, idx } = this.props
+
         return (
             <div key={idx} className="update-box flex wrap column relative">
-                <button className="remove-update-btn" onClick={this.removeUpdate}>X</button>
+                <button className="remove-update-btn" onClick={()=>this.removeUpdate(update.id)}>X</button>
                 <div className="update-box-header flex align-center">
                     <img src={update.member.imgUrl} alt="" />
                     <p className="member-name">{update.member.fullName}</p>
@@ -90,9 +85,9 @@ export class Update extends React.Component {
                 <div className="update-box-footer flex column">
 
                     {update.replies &&
-                        <div className="replies-box flex column">
+                        <div className="replies-box flex column"  style={{borderTop: `${update.replies.length && '1px solid rgba(109, 109, 109, 0.35)'}`}}>
                             {update.replies.map((reply, idx) =>
-                                <Reply reply={reply} idx={idx} update={this.props.update}
+                                <Reply key={idx} reply={reply} idx={idx} update={this.props.update}
                                     updateNote={this.props.updateNote} />
                             )}</div>
                     }

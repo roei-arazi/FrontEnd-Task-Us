@@ -4,6 +4,17 @@
     margin-bottom: 2px;
     height: 40px;
     border-radius: 1px;
+    box-shadow: 0px 3px 4px -5px #484444;
+
+    .content-editable{
+       
+        max-width: 35ch;
+
+        &:focus{
+            max-width: 100%;
+        }
+
+    }
 
     &:hover {
         transition: .3s;
@@ -20,7 +31,7 @@
             color: $buttonMainBg
         }
     }
-
+     
     input {
         width: 100%;
         background-color: transparent;
@@ -30,6 +41,8 @@
         border-radius: 1px;
         text-align: center;
         color: $inputColor;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .task-remove-icon {
@@ -80,6 +93,7 @@
             h2 {
                 margin-left: 15px;
                 font-weight: 400;
+                width: 100%;
 
                 &:hover {
                     color: $buttonMainBg;
@@ -126,13 +140,36 @@
 
         .user-img-container {
             position: relative;
-            text-align: center;
 
             img {
                 cursor: pointer;
                 border-radius: 50%;
                 width: 30px;
-                height:30px;
+                height: 30px;
+
+            }
+
+            .member-img-container {
+
+                >:not(:first-child).member-img {
+                    margin-left: -15px;
+                }
+            }
+
+            .no-members-icon-plus {
+                font-family: monospace;
+                font-size: 15px;
+                width: 17px;
+                height: 17px;
+                position: absolute;
+                background-color: #0085ff;
+                color: #f2f1dfb0;
+                border-radius: 50%;
+                text-align: center;
+                right: -5px;
+                font-weight: bold;
+                bottom: 10px;
+                cursor: pointer;
             }
 
             .no-members-container {
@@ -143,21 +180,6 @@
                     width: 30px;
                 }
 
-                .no-members-icon-plus {
-                    font-family: monospace;
-                    font-size: 15px;
-                    width: 17px;
-                    height: 17px;
-                    position: absolute;
-                    background-color: #0085ff;
-                    color: #f2f1dfb0;
-                    border-radius: 50%;
-                    text-align: center;
-                    right: -3px;
-                    font-weight: bold;
-                    bottom: 10px;
-                    cursor: pointer;
-                }
             }
 
             .member-letter {

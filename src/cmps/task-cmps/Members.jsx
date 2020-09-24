@@ -10,12 +10,15 @@ export function Members(props) {
         <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
             {props.members.length ? props.members[0].imgUrl
                 ?
-                <img alt="profile" src={props.members[0].imgUrl} />
+                <div className="member-img-container relative">
+                {props.members.map(member=> <img className="member-img" src={member.imgUrl} alt="" />)}
+                <FiPlus className="no-members-icon-plus absolute" />
+                </div>
                 :
-                <div className="member-letter">{props.members[0].fullName.charAt(0).toUpperCase()}</div> : <div className="no-members-container"> <CgProfile className="no-members-icon" /> <FiPlus className="no-members-icon-plus" /></div>}
+                <div className="member-letter">{props.members[0].fullName.charAt(0).toUpperCase()}</div> 
+                :
+                 <div className="no-members-container"> <CgProfile className="no-members-icon" /> <FiPlus className="no-members-icon-plus" /></div>}
 
-            {(props.members.length !== 0) &&
-                <div className="task-number-of-imgs flex justify-center align-center"><span>{props.members.length}</span></div>}
 
             {props.isUsersShown &&
                 <div className="users-modal absolute">
