@@ -1,45 +1,46 @@
-import httpService from "./httpService";
+import httpService from './httpService';
+import socketService from './socketService'
 
-let users = [{
-    "username": 'frize',
-    "fullName": 'Roei Arazi',
-    "password": '3333',
-    "email": 'frize@gmail.com',
-    "imgUrl": 'https://via.placeholder.com/250',
-    "isAdmin": true,
-    "boards": [],
-    "notifications": [],
-    "birthDay": '2nd August 1997',
-    "company": 'adidas',
-    "phoneNumber": '0224132124'
-},
-{
-    "username": 'anstrio',
-    "fullName": 'Osher Kabada',
-    "password": '2222',
-    "email": 'anstrio@gmail.com',
-    "imgUrl": 'https://via.placeholder.com/250',
-    "isAdmin": true,
-    "boards": [],
-    "notifications": [],
-    "birthDay": '2nd August 1997',
-    "company": 'adidas',
-    "phoneNumber": '0224127124'
-},
-{
-    "username": 'smoking',
-    "fullName": 'Liam Zety',
-    "password": '1111',
-    "email": 'smoking@gmail.com',
-    "imgUrl": 'https://via.placeholder.com/250',
-    "isAdmin": true,
-    "boards": [],
-    "notifications": [],
-    "birthDay": '2nd August 1997',
-    "company": 'adidas',
-    "phoneNumber": '0224112124'
-}
-]
+// let users = [{
+//     "username": 'frize',
+//     "fullName": 'Roei Arazi',
+//     "password": '3333',
+//     "email": 'frize@gmail.com',
+//     "imgUrl": 'https://via.placeholder.com/250',
+//     "isAdmin": true,
+//     "boards": [],
+//     "notifications": [],
+//     "birthDay": '2nd August 1997',
+//     "company": 'adidas',
+//     "phoneNumber": '0224132124'
+// },
+// {
+//     "username": 'anstrio',
+//     "fullName": 'Osher Kabada',
+//     "password": '2222',
+//     "email": 'anstrio@gmail.com',
+//     "imgUrl": 'https://via.placeholder.com/250',
+//     "isAdmin": true,
+//     "boards": [],
+//     "notifications": [],
+//     "birthDay": '2nd August 1997',
+//     "company": 'adidas',
+//     "phoneNumber": '0224127124'
+// },
+// {
+//     "username": 'smoking',
+//     "fullName": 'Liam Zety',
+//     "password": '1111',
+//     "email": 'smoking@gmail.com',
+//     "imgUrl": 'https://via.placeholder.com/250',
+//     "isAdmin": true,
+//     "boards": [],
+//     "notifications": [],
+//     "birthDay": '2nd August 1997',
+//     "company": 'adidas',
+//     "phoneNumber": '0224112124'
+// }
+// ]
 
 export const userService = {
     loadUsers,
@@ -49,7 +50,8 @@ export const userService = {
     guestLogin,
     markAsRead,
     updateUser,
-    logout
+    logout,
+    notifyUsers
 }
 
 async function loadUsers() {
@@ -136,7 +138,7 @@ async function guestLogin() {
 
     }
     try {
-        users.push(user);
+        // users.push(user);
         return user
     } catch (err) {
         console.log('userService: Couldn\'t login as guest');
@@ -153,6 +155,26 @@ async function updateUser(user) {
 async function logout() {
     await httpService.post('auth/logout');
     sessionStorage.clear();
+}
+
+async function notifyUsers(content, members, loggedUser){
+    console.log('got user:'. loggedUser);
+    const users = await loadUsers();
+    const notification = {
+        byUser: {
+            fullName: loggedUser.fullName,
+            imgUrl: loggedUser.imgUrl
+        },
+        content,
+        createdAt: Date.now()
+    }
+    members.forEach(member => {
+        if (member._id === loggedUser._id) return;
+        let userToUpdate = users.find(user => user._id === member._id);
+        userToUpdate.notifications.unshift(notification);
+        userService.updateUser(userToUpdate);
+        socketService.emit('send-notif', { userId: member._id, notification });
+    })
 }
 
 function _handleLogin(user) {

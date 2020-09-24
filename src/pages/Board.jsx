@@ -8,6 +8,7 @@ import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import moment from 'moment';
+import {userService} from '../services/userService.js';
 
 // Reducers funcs
 import { loadUsers } from '../store/actions/userActions'
@@ -184,9 +185,13 @@ class _Board extends Component {
     onAddTask = async (groupId, taskName) => {
         if (!taskName) taskName = 'New task'
 
+        const {loggedUser} = this.props;
         const board = this._getCurrBoard()
+        const notif = `${loggedUser.fullName} Added a task to board ${board.name}`;
         try {
-            this.props.addTask(groupId, taskName, board, this.props.loggedUser)
+            this.props.addTask(groupId, taskName, board, loggedUser)
+            userService.notifyUsers(notif, board.members, loggedUser)
+            userService.notifyUsers()
             this.props.clearFilter()
             this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -201,7 +206,7 @@ class _Board extends Component {
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
         if (changedValue === originalValue) return
-        let desc = ''
+        let desc = '';
         switch (type) {
             case 'name':
                 desc = `${loggedUser.fullName} changed task name from ${originalValue} to ${changedValue} at group - ${group.name}`
