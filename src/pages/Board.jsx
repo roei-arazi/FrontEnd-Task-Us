@@ -157,8 +157,8 @@ class _Board extends Component {
     onAddGroup = async () => {
         const board = this._getCurrBoard()
         try {
-            await this.props.groupChanges(`${this.props.loggedUser.fullName} Added a new group`, this.props.loggedUser, board)
-            this.props.addGroup(this._getCurrBoard());
+            // await this.props.groupChanges(`${this.props.loggedUser.fullName} Added a new group`)
+            this.props.addGroup(board, this.props.loggedUser);
             this.props.clearFilter();
             this.props.showSnackbar('Added group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -169,24 +169,25 @@ class _Board extends Component {
     }
     onRemoveGroup = async (groupId) => {
         const board = this._getCurrBoard()
-        const group = board.groups.find(group => group.id === groupId)
         try {
-            await this.props.groupChanges(`${this.props.loggedUser.fullName} Removed group: ${group.name}`, this.props.loggedUser, board)
-            this.props.removeGroup(groupId, this._getCurrBoard())
+            this.props.removeGroup(groupId, board, this.props.loggedUser)
             this.props.showSnackbar('Removed group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
             console.log('Error', err)
         }
     }
-    onEditGroup = async (groupId, changedValue, originalValue, key) => {
+    onEditGroup = async (groupId, changedValue, key) => {
+        const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         const group = board.groups.find(group => group.id === groupId)
-        if (changedValue === originalValue) return // No changes were made
+        if (group[key] === changedValue) return;
+        const originalValue = group[key];
         group[key] = changedValue;
         try {
-            await this.props.groupChanges(`${this.props.loggedUser.fullName} Changed ${originalValue} title to ${changedValue}`, this.props.loggedUser, board)
-            this.props.editGroup(group, this._getCurrBoard(), originalValue, changedValue)
+            const desc = `${group.name}: ${loggedUser.fullName} Changed ${originalValue} title to ${changedValue}`
+            // await this.props.groupChanges(`${this.props.loggedUser.fullName} Changed ${originalValue} title to ${changedValue}`, this.props.loggedUser, board)
+            this.props.editGroup(group, board, desc, loggedUser)
             this.props.showSnackbar('Updated group.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -198,16 +199,9 @@ class _Board extends Component {
     //-----------------TASKS CRUD------------------------
     onRemoveTask = async (taskId, group) => {
         const board = this._getCurrBoard()
-
-        let task = null
-        board.groups.forEach(group => {
-            if (task) return
-            task = group.tasks.find(task => task.id === taskId)
-        })
         try {
 
-            await this.props.groupChanges(`${this.props.loggedUser.fullName} Removed task: ${task.name} from group ${group.name}`, this.props.loggedUser, board)
-            this.props.removeTask(taskId, this._getCurrBoard())
+            this.props.removeTask(taskId, board, group, this.props.loggedUser)
             this.props.showSnackbar('Removed task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
         } catch (err) {
@@ -218,10 +212,8 @@ class _Board extends Component {
         if (!taskName) taskName = 'New task'
 
         const board = this._getCurrBoard()
-        const group = board.groups.find(group => group.id === groupId)
         try {
-            const desc = `${this.props.loggedUser.fullName} Added a new task: ${taskName} to group ${group.name}`
-            this.props.addTask(groupId, taskName, board, desc, this.props.loggedUser)
+            this.props.addTask(groupId, taskName, board, this.props.loggedUser)
             this.props.clearFilter()
             this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)
@@ -234,84 +226,46 @@ class _Board extends Component {
 
     onEditTask = async (task, group, changedValue = true, originalValue = false, type) => {
         const board = this._getCurrBoard()
+        const { loggedUser } = this.props;
         if (changedValue === originalValue) return
+        let desc = ''
         switch (type) {
             case 'name':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} changed task name from ${originalValue} to ${changedValue} at group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
+                desc = `${loggedUser.fullName} changed task name from ${originalValue} to ${changedValue} at group - ${group.name}`
 
                 break;
             case 'sendNote':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} sent an update at task: ${task.name} at group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
-
+                desc = `${loggedUser.fullName} sent an update at task: ${task.name} at group - ${group.name}`
                 break;
             case 'status':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} changed task: ${task.name} status from ${originalValue} to ${changedValue} at group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
-
+                desc = `${loggedUser.fullName} changed task: ${task.name} status from ${originalValue} to ${changedValue} at group - ${group.name}`
                 break;
             case 'priority':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} changed task: ${task.name} priority from ${originalValue} to ${changedValue} at group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
-
+                desc = `${loggedUser.fullName} changed task: ${task.name} priority from ${originalValue} to ${changedValue} at group - ${group.name}`
                 break;
             case 'date':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} changed task ${task.name} date from ${moment(originalValue).format('DD/MMM/YYYY')} to ${moment(changedValue).format('DD/MMM/YYYY')} at group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
+                desc = `${loggedUser.fullName} changed task ${task.name} date from ${moment(originalValue).format('DD/MMM/YYYY')} to ${moment(changedValue).format('DD/MMM/YYYY')} at group - ${group.name}`
 
                 break;
             case 'removeFromTask':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} removed ${changedValue.fullName} from ${task.name} at group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
+                desc = `${loggedUser.fullName} removed ${changedValue.fullName} from ${task.name} at group - ${group.name}`
 
                 break;
             case 'addToTask':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} tasked ${changedValue.fullName} to ${task.name} on group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
+                desc = `${loggedUser.fullName} tasked ${changedValue.fullName} to ${task.name} on group - ${group.name}`
 
                 break;
             case 'addTag':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} added tag named ${changedValue} to ${task.name} on group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
-
+                desc = `${loggedUser.fullName} added tag named ${changedValue} to ${task.name} on group - ${group.name}`
                 break;
             case 'removeTag':
-                try {
-                    await this.props.groupChanges(`${this.props.loggedUser.fullName} removed tag named ${changedValue} from ${task.name} on group - ${group.name}`, this.props.loggedUser, board)
-                } catch (err) {
-                    console.log('Error', err)
-                }
+                desc = `${loggedUser.fullName} removed tag named ${changedValue} from ${task.name} on group - ${group.name}`
                 break;
 
             default:
                 break;
         }
-        this.props.editTask(task, this._getCurrBoard())
+        this.props.editTask(task, board, desc, loggedUser)
         this.props.showSnackbar('Updated task.');
         setTimeout(() => this.props.hideSnackbar(), 3000)
 

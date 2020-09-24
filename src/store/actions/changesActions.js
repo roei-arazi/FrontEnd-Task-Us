@@ -19,7 +19,6 @@ export function groupChanges(desc, loggedUser, board) {
             }
             board.members.forEach(member => {
                 if (member._id === loggedUser._id) return;
-                console.log('got member:', member);
                 let userToUpdate = users.find(user => user._id === member._id);
                 userToUpdate.notifications.unshift(notification);
                 userService.updateUser(userToUpdate);

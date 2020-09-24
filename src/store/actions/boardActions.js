@@ -66,10 +66,10 @@ export function addBoard(loggedUser) {
 }
 //------------------GROUP CRUD-----------------
 
-export function removeGroup(groupId, board) {
+export function removeGroup(groupId, board, loggedUser) {
     return dispatch => {
         try {
-            const updatedBoard = boardService.removeGroup(groupId, board)
+            const updatedBoard = boardService.removeGroup(groupId, board, loggedUser)
             dispatch({ type: 'SET_BOARD', board: updatedBoard });
         } catch (err) {
             console.log('boardActions: Couldn\'t remove group');
@@ -79,10 +79,10 @@ export function removeGroup(groupId, board) {
 }
 
 
-export function addGroup(boardId, board) {
+export function addGroup(board, loggedUser) {
     return dispatch => {
         try {
-            const updatedBoard = boardService.addGroup(boardId, board);
+            const updatedBoard = boardService.addGroup(board, loggedUser);
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {
             console.log('boardActions: Couldn\'t add group');
@@ -90,10 +90,10 @@ export function addGroup(boardId, board) {
         }
     }
 }
-export function editGroup(group, board) {
+export function editGroup(group, board, desc, loggedUser) {
     return dispatch => {
         try {
-            const updatedBoard = boardService.updateGroup(group, board)
+            const updatedBoard = boardService.updateGroup(group, board, desc, loggedUser)
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {
             console.log('boardActions: Coulnd\'t edit group');
@@ -103,11 +103,10 @@ export function editGroup(group, board) {
 }
 //-----------------TASKS CRUD------------------------
 
-export function addTask(groupId, taskName, board, desc, loggedUser) {
+export function addTask(groupId, taskName, board, loggedUser) {
     return dispatch => {
         try {
-            const updatedBoard = boardService.addTask(groupId, taskName, board, desc, loggedUser);
-            console.log('got board:', updatedBoard);
+            const updatedBoard = boardService.addTask(groupId, taskName, board, loggedUser);
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {
             console.log('boardActions: Coulnd\'t add task');
@@ -116,10 +115,10 @@ export function addTask(groupId, taskName, board, desc, loggedUser) {
     }
 }
 
-export function removeTask(taskId, board) {
+export function removeTask(taskId, board, group, loggedUser) {
     return dispatch => {
         try {
-            const updatedBoard = boardService.removeTask(taskId, board);
+            const updatedBoard = boardService.removeTask(taskId, board, group, loggedUser);
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {
             console.log('boardActions: Coulnd\'t add task');
@@ -128,10 +127,10 @@ export function removeTask(taskId, board) {
     }
 }
 
-export function editTask(task, board) {
+export function editTask(task, board, desc, loggedUser) {
     return dispatch => {
         try {
-            const updatedBoard = boardService.updateTask(task, board);
+            const updatedBoard = boardService.updateTask(task, board, desc, loggedUser);
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {
             console.log('boardActions: Coulnd\'t edit task');
