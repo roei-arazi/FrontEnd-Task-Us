@@ -110,6 +110,10 @@ span.span-user-details {
 .content-editable {
   padding: 0 4px;
   border: 2px dotted transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+    white-space: nowrap;
+
 }
 
 .content-editable:hover {
