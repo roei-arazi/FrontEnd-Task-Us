@@ -68,7 +68,7 @@ export class _BoardHeader extends React.Component {
             }
 
         }
-        this.props.onEditBoard(board, false)
+        this.props.onEditBoard(board.name, board.description, false, 'openModal', board.members, board.activityLog)
 
     }
 
@@ -90,14 +90,14 @@ export class _BoardHeader extends React.Component {
 
     onRemoveMemberFromBoard = (memberId) => {
         this.setState({ board: { ...this.state.board, members: this.state.board.members.filter(member => member._id !== memberId) } }, () => {
-            this.props.onEditBoard(this.state.board, true, 'removeMemberFromBoard')
+            this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'removeMemberFromBoard', this.state.board.members)
         })
     }
 
     onAddUserToBoard = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
         this.setState({ board: { ...this.state.board, members: [...this.state.board.members, newUser] } }, () => {
-            this.props.onEditBoard(this.state.board, true, 'addMemberToBoard')
+            this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'addMemberToBoard', this.state.board.members)
         })
     }
 
@@ -110,7 +110,7 @@ export class _BoardHeader extends React.Component {
             activityLog: []
         }
         this.setState({ board }, () => {
-            this.props.onEditBoard(board, true)
+            this.props.onEditBoard(board.name, board.description, false, 'clearLog', board.members, board.activityLog)
         })
 
 
@@ -118,7 +118,6 @@ export class _BoardHeader extends React.Component {
 
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
-        const { board } = this.props.board
         const { members } = this.state.board
         const { users } = this.props
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
@@ -136,12 +135,12 @@ export class _BoardHeader extends React.Component {
                             disabled={false}       // use true to disable editing
                             onChange={this.handleChangeName} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board, true, 'changeBoardTitle')
+                                this.props.onEditBoard(this.state.board.name, this.state.board.description, true, 'changeBoardTitle')
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(this.state.board, true, 'changeBoardTitle')
+                                    this.props.onEditBoard(this.state.board.name, this.state.board.description, true, 'changeBoardTitle')
                                 }
                             }}
                         />
@@ -201,12 +200,12 @@ export class _BoardHeader extends React.Component {
                             disabled={false}        // use true to disable editing
                             onChange={this.handleChangeDesc} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board, true, 'changeBoardDesc')
+                                this.props.onEditBoard(this.state.board.name, this.state.board.description, true, 'changeBoardDesc')
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(this.state.board, true, 'changeBoardDesc')
+                                    this.props.onEditBoard(this.state.board.name, this.state.board.description, true, 'changeBoardDesc')
                                 }
                             }}
                         />
@@ -233,7 +232,7 @@ export class _BoardHeader extends React.Component {
                     </div>
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
                         <Activities onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
-                            boardName={this.state.board.name} activityLog={this.state.board.activityLog} />
+                            boardName={this.state.board.name} activityLog={this.props.board.activityLog} />
                     </div>
                     {
                         this.state.isFiltersOpen && <div onClick={this.onToggleFilters} className='modal-screen-wrapper'></div>

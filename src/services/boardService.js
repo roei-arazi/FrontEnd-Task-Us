@@ -31,6 +31,7 @@ function removeBoard(boardId) {
 }
 
 async function addBoard(loggedUser) {
+    console.log('LOGGED USER', loggedUser)
     const board = {
         boardCreator: {
             "_id": loggedUser._id,
@@ -151,7 +152,7 @@ async function removeTask(taskId, board) {
 
 }
 
-async function addTask(groupId, taskName, board) {
+function addTask(groupId, taskName, board) {
     const task = {
         id: _makeid(),
         name: taskName,
@@ -170,7 +171,7 @@ async function addTask(groupId, taskName, board) {
     newBoard.groups.forEach(group => {
         if (group.id === groupId) group.tasks.push(task);
     })
-    await updateBoard(newBoard)
+    updateBoard(newBoard)
     return newBoard;
 }
 

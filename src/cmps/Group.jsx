@@ -75,14 +75,13 @@ export class Group extends Component {
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
             const value = task[property]
-            if (!acc[value]) acc[value] = 0;
-            acc[value]++;
+            acc[value] = acc[value] ? acc[value] + 1 : 0;
             return acc;
         }, {})
         const res = [];
         for (let key in data) {
             data[key] /= percent;
-            res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0px' }}
+            res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0' }}
                 data-title={data[key] ? ` ${key} ${taskCount * data[key] / 100}/${taskCount} ${data[key].toFixed(1)}%` : ''}
                 className={`precent-bar ${key.toLowerCase()}`}></div>)
         }
