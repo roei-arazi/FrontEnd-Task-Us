@@ -21,7 +21,6 @@ async function loadBoards() {
 }
 
 async function updateBoard(boardToSave) {
-    console.log('SHOW ME BOARD TO SAVE:', boardToSave)
     socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
@@ -32,10 +31,9 @@ function removeBoard(boardId) {
 }
 
 async function addBoard(loggedUser) {
-    console.log('logged user:', loggedUser)
     const board = {
         boardCreator: {
-            "id": loggedUser.id,
+            "_id": loggedUser._id,
             "fullName": loggedUser.fullName,
             "imgUrl": loggedUser.imgUrl,
         },
@@ -43,7 +41,7 @@ async function addBoard(loggedUser) {
         "createdAt": Date.now(),
         "description": 'Enter description here',
         "members": [{
-            "id": loggedUser.id,
+            "_id": loggedUser._id,
             "fullName": loggedUser.fullName,
             "imgUrl": loggedUser.imgUrl,
         }],
@@ -205,9 +203,7 @@ function handleBoardChanges(desc, loggedUser, board) {
             imgUrl: loggedUser.imgUrl
         },
     }
-    console.log('SHOW ME THE ACTIVITY LOG', board.activityLog)
     const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
-    console.log('updatedBoard:', updatedBoard)
     return updateBoard(updatedBoard)
 }
 function _makeid(length = 7) {

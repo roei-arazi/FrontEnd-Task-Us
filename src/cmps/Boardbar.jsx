@@ -54,6 +54,11 @@ class _Boardbar extends Component {
         this.setState({ anchorEl: null })
     }
 
+    onAddBoard = () =>{
+        socketService.emit('add-delete-board')
+        this.props.addBoard(this.props.loggedUser)
+    }
+
     onBoardRemove = (boardId) => {
         const { boards, match, history, removeBoard } = this.props
         const { id } = match.params;
@@ -63,6 +68,7 @@ class _Boardbar extends Component {
             return;
         }
         removeBoard(boardId);
+        socketService.emit('add-delete-board')
         this.props.showSnackbar('Removed board.');
         setTimeout(() => this.props.hideSnackbar(), 3000)
         if (id === boardId) {
@@ -97,10 +103,7 @@ class _Boardbar extends Component {
 
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
-                    <BsFillPlusCircleFill onClick={() => {
-                        console.log('user:', this.props.loggedUser)
-                        this.props.addBoard(this.props.loggedUser)
-                    }} />
+                    <BsFillPlusCircleFill onClick={this.onAddBoard} />
 
                 </div>}
                 {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}

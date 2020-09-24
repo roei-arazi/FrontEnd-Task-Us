@@ -87,3 +87,15 @@ export function updateUser(loggedUser) {
         }
     }
 }
+
+export function logout(){
+    return dispatch => {
+        try{
+            userService.logout();
+            dispatch({type: 'SET_USER', user: null})
+        }catch(err){
+        console.log('userActions: Couldn\'t logout');
+        throw err;
+    }
+    }
+}
