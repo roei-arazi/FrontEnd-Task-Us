@@ -206,6 +206,14 @@
     border-bottom: 1px solid rgba(109, 109, 109, 0.35);
 
 
+    img {
+        margin-top: 10px;
+        height: 200px;
+        width: 200px;
+        object-fit: fill;
+    }
+
+
     .update-box {
         width: 450px;
         padding: 10px;
@@ -213,6 +221,22 @@
         margin: 10px;
         background-color: $white;
         border-radius: 5px;
+        overflow: hidden;
+
+
+        .remove-update-btn {
+            padding: 0;
+            background-color: inherit;
+            color: #7e7e7e;
+            position: absolute;
+            right: 7px;
+            top: 3px;
+            font-size: 1.2rem;
+
+            &:hover {
+                color: #4a4747;
+            }
+        }
 
         .update-box-header {
             border-bottom: 1px solid rgba(109, 109, 109, 0.35);
@@ -221,10 +245,10 @@
 
             .member-name {
                 font-weight: bold;
-                margin-bottom: 10px;
             }
 
             img {
+                margin-top:0;
                 width: 35px;
                 height: 35px;
                 border-radius: 50%;
@@ -241,17 +265,36 @@
                 word-break: break-all;
             }
 
-            img {
-                margin-top: 10px;
-                height: 200px;
-                width: 200px;
-                object-fit: fill;
+        }
+
+        .update-box-edit {
+            textarea {
+                resize: none;
+                border-radius: 10px;
+                width: 93%;
+                height: 60px;
+                padding: 5px;
             }
+        }
+
+        .submit-edit-btn {
+            align-self: flex-end;
+            top: 17px;
+        }
+
+        .edit-update-btn {      
+            margin:5px 0;     
+                color: #7e7e7e;
+                width: fit-content;
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                    color: #4a4747
+                }
         }
 
         .replies-box {
             border-top: 1px solid rgba(109, 109, 109, 0.35);
-            margin: 10px 0 0;
 
             .reply-box {
                 background-color: #e1e1e1;
@@ -259,7 +302,20 @@
                 padding: 5px;
                 max-width: fit-content;
                 border-radius: 12px;
-                margin:5px 0;
+                margin: 5px 0;
+                overflow: hidden;
+
+                &:hover {
+                    .remove-reply-btn {
+                        transition: .3s;
+                        transform: translateY(5px);
+                    }
+
+                    .edit-reply-btn {
+                        transition: .3s;
+                        transform: translateY(1px);
+                    }
+                }
             }
 
             img {
@@ -267,15 +323,58 @@
                 height: 30px;
                 border-radius: 50%;
                 margin-right: 5px;
+                margin-top: 5px;
             }
 
             .reply-name {
                 font-weight: bold;
+                align-self: flex-end;
             }
 
             .reply-text {
                 margin-left: 15px;
                 word-break: break-all;
+                align-self: flex-end;
+            }
+
+            .remove-reply-btn {
+                position: absolute;
+                right: 5px;
+                top: -5px;
+                background-color: inherit;
+                color: #7e7e7e;
+                padding: 0;
+                transform: translateY(-10px);
+
+                &:hover {
+                    color: #4a4747;
+                }
+
+            }
+
+            .update-reply-btn {
+                padding: 0;
+                align-self: flex-end;
+            }
+
+            textarea {
+                resize: none;
+                border-radius: 7px;
+                margin-top: 6px;
+                width: 290px;
+                height: 24px;
+            }
+
+            .edit-reply-btn {
+                color: #7e7e7e;
+                width: fit-content;
+                transform: translateY(20px);
+
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                    color: #4a4747
+                }
             }
 
         }

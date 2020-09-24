@@ -7,7 +7,7 @@ import { cloudinaryService } from '../../services/cloudinaryService';
 import { Update } from './Update';
 
 
-function _makeid(length = 7) {
+function makeid(length = 7) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -61,7 +61,7 @@ export class Updates extends React.Component {
         ev.preventDefault()
         if ((!this.state.update.txt || this.state.update.txt.split('').every(letter => letter === ' ')) && !this.state.update.imgUrl) return
         const newNote = {
-            id: _makeid(),
+            id: makeid(),
             createdAt: Date.now(),
             txt: this.state.update.txt,
             imgUrl: this.state.update.imgUrl,
@@ -116,7 +116,9 @@ export class Updates extends React.Component {
 
                 <div className="updates-container">
                     {updates.map((update, idx) => <Update update={update} key={idx} idx={idx} 
-                    updates={updates} loggedUser={this.props.loggedUser} updateNote={this.updateNote}/>)}             
+                    updates={updates} loggedUser={this.props.loggedUser}
+                    sendNote={this.props.sendNote}
+                     updateNote={this.updateNote} makeid={makeid}/>)}             
                 </div>
             </React.Fragment>
 
