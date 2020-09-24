@@ -220,8 +220,8 @@ class _Board extends Component {
         const board = this._getCurrBoard()
         const group = board.groups.find(group => group.id === groupId)
         try {
-            await this.props.groupChanges(`${this.props.loggedUser.fullName} Added a new task: ${taskName} to group ${group.name}`, this.props.loggedUser, board)
-            this.props.addTask(groupId, taskName, this._getCurrBoard())
+            const desc = `${this.props.loggedUser.fullName} Added a new task: ${taskName} to group ${group.name}`
+            this.props.addTask(groupId, taskName, board, desc, this.props.loggedUser)
             this.props.clearFilter()
             this.props.showSnackbar('Added task.');
             setTimeout(() => this.props.hideSnackbar(), 3000)

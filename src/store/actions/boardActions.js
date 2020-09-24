@@ -30,7 +30,7 @@ export function updateBoard(boardToSave) {
 }
 
 export function recieveUpdate(boardToSave) {
-    return async dispatch => {
+    return dispatch => {
         try {
             dispatch({ type: 'SET_BOARD', board: boardToSave })
         } catch (err) {
@@ -41,9 +41,9 @@ export function recieveUpdate(boardToSave) {
 }
 
 export function removeBoard(boardId) {
-    return async dispatch => {
+    return dispatch => {
         try {
-            await boardService.removeBoard(boardId);
+            boardService.removeBoard(boardId);
             dispatch({ type: 'REMOVE_BOARD', boardId })
         } catch (err) {
             console.log('boardActions: Couldn\'t remove board');
@@ -103,10 +103,10 @@ export function editGroup(group, board) {
 }
 //-----------------TASKS CRUD------------------------
 
-export function addTask(groupId, taskName, board) {
-    return async dispatch => {
+export function addTask(groupId, taskName, board, desc, loggedUser) {
+    return dispatch => {
         try {
-            const updatedBoard = await boardService.addTask(groupId, taskName, board);
+            const updatedBoard = boardService.addTask(groupId, taskName, board, desc, loggedUser);
             console.log('got board:', updatedBoard);
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
         } catch (err) {

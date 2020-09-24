@@ -20,7 +20,7 @@ async function loadBoards() {
     return boards
 }
 
-async function updateBoard(boardToSave) {
+function updateBoard(boardToSave) {
     socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
@@ -31,7 +31,6 @@ function removeBoard(boardId) {
 }
 
 async function addBoard(loggedUser) {
-    console.log('LOGGED USER', loggedUser)
     const board = {
         boardCreator: {
             "_id": loggedUser._id,
@@ -141,14 +140,12 @@ function addGroup(board) {
 
 function removeGroup(groupId, board) {
     board.groups = board.groups.filter(group => group.id !== groupId)
-    updateBoard(board)
-    return board
+    return updateBoard(board)
 }
 
 function updateGroup(updatedGroup, board) {
     board.groups = board.groups.map(group => group.id === updatedGroup.id ? updatedGroup : group)
-    updateBoard(board)
-    return board
+    return updateBoard(board)
 }
 
 async function removeTask(taskId, board) {
@@ -156,12 +153,11 @@ async function removeTask(taskId, board) {
         group.tasks = group.tasks.filter(task => task.id !== taskId)
         return group;
     })
-    updateBoard(board)
-    return board;
+    return updateBoard(board)
 
 }
 
-function addTask(groupId, taskName, board) {
+function addTask(groupId, taskName, board, desc, loggedUser) {
     const task = {
         id: _makeid(),
         name: taskName,
@@ -180,8 +176,7 @@ function addTask(groupId, taskName, board) {
     newBoard.groups.forEach(group => {
         if (group.id === groupId) group.tasks.push(task);
     })
-    updateBoard(newBoard)
-    return newBoard;
+    return handleBoardChanges(desc, loggedUser, newBoard)
 }
 
 function updateTask(updatedTask, board) {
@@ -189,8 +184,7 @@ function updateTask(updatedTask, board) {
         group.tasks = group.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
         return group;
     })
-    updateBoard(board)
-    return board
+    return updateBoard(board)
 }
 function handleBoardChanges(desc, loggedUser, board) {
     const changes = {
@@ -204,7 +198,9 @@ function handleBoardChanges(desc, loggedUser, board) {
             imgUrl: loggedUser.imgUrl
         },
     }
+    console.log('updating board in service:', board);
     const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
+    console.log('updated log:', updatedBoard);
     return updateBoard(updatedBoard)
 }
 function _makeid(length = 7) {
