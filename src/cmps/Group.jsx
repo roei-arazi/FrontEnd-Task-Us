@@ -69,16 +69,30 @@ export class Group extends Component {
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
     convertToData(property) {
         const { tasks } = this.props.group;
         const taskCount = tasks.length;
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
             const value = task[property]
-            acc[value] = acc[value] ? acc[value] + 1 : 0;
+            if(!acc[value]) acc[value] = 0;
+            acc[value]++
             return acc;
         }, {})
         const res = [];
+        console.log('got data:', data);
         for (let key in data) {
             data[key] /= percent;
             res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0' }}
@@ -87,6 +101,19 @@ export class Group extends Component {
         }
         return res;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     render() {
         if (!this.state.name) return <h1>Loading...</h1> 
