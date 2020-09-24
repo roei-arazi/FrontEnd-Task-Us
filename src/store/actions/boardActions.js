@@ -16,12 +16,11 @@ export function loadBoards() {
     }
 }
 
-export function updateBoard(boardToSave) {
-    console.log('show board to save', boardToSave)
+export function updateBoard(boardToSave, desc, loggedUser) {
     return async dispatch => {
         try {
-            boardService.updateBoard(boardToSave);
-            dispatch({ type: 'SET_BOARD', board: boardToSave })
+            const board = boardService.handleBoardChanges(desc, loggedUser, boardToSave);
+            dispatch({ type: 'SET_BOARD', board })
         } catch (err) {
             console.log('boardActions: Couldn\'t update board');
             throw err;
