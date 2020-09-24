@@ -31,13 +31,8 @@ export class Update extends React.Component {
     }
 
     removeUpdate = (updateId) => {
-        console.log(updateId);
-        console.log(this.props.updates);
-        const idx = this.props.updates.findIndex(update => update.id === updateId)
-        const updates = [...this.props.updates]
-        const newUpdates= updates.splice(idx, 1)
-
-        this.props.sendNote(newUpdates)
+        const updates = this.props.updates.filter(update => update.id !== updateId)
+        this.props.sendNote(updates)
     }
 
     onToggleEditUpdate = () => {
@@ -64,6 +59,7 @@ export class Update extends React.Component {
 
     render() {
         const { update, idx } = this.props
+
         return (
             <div key={idx} className="update-box flex wrap column relative">
                 <button className="remove-update-btn" onClick={()=>this.removeUpdate(update.id)}>X</button>
@@ -89,7 +85,7 @@ export class Update extends React.Component {
                 <div className="update-box-footer flex column">
 
                     {update.replies &&
-                        <div className="replies-box flex column">
+                        <div className="replies-box flex column"  style={{borderTop: `${update.replies.length && '1px solid rgba(109, 109, 109, 0.35)'}`}}>
                             {update.replies.map((reply, idx) =>
                                 <Reply reply={reply} idx={idx} update={this.props.update}
                                     updateNote={this.props.updateNote} />

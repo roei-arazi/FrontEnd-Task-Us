@@ -112,7 +112,6 @@ export class Updates extends React.Component {
                         </div>
                     </div>
                 </div>
-
                 <div className="updates-container">
                     {updates.map((update, idx) => <Update update={update} key={idx} idx={idx} 
                     updates={updates} loggedUser={this.props.loggedUser}
