@@ -67,6 +67,7 @@ export function removeNotifications(loggedUser) {
 
     return async dispatch => {
         try {
+            userService.updateUser(loggedUser)
             dispatch({ type: 'UPDATE_PROFILE', user })
         } catch (err) {
             console.log('ERROR, couldnt remove notifications', err);

@@ -48,7 +48,8 @@ export const userService = {
     signup,
     guestLogin,
     markAsRead,
-    updateUser
+    updateUser,
+    logout
 }
 
 async function loadUsers() {
@@ -65,6 +66,7 @@ async function markAsRead(loggedUser) {
     loggedUser.notifications.forEach(notification => {
         notification.isRead = true
     })
+    updateUser(loggedUser)
     try {
         return loggedUser
 
@@ -91,7 +93,7 @@ async function login(userCred) {
         // const user = users.find(user => user.username === userCred.username && user.password === userCred.password);
         const user = await httpService.post('auth/login', userCred);
         if (!user) throw 'Wrong username or password'
-        return user;
+        return _handleLogin(user)
     } catch (err) {
         console.log('userService: Wrong username or password');
         throw err;
@@ -111,7 +113,7 @@ async function signup(userCred) {
     }
     try {
         const newUser = await httpService.post('auth/signup', user)
-        return newUser;
+        return _handleLogin(newUser)
     } catch (err) {
         console.log('userService: Couldn\'t sign up');
         throw err;
@@ -122,7 +124,7 @@ async function guestLogin() {
     const user = {
         _id: _makeid(),
         username: 'guest',
-        fullName: 'guest mcgee',
+        fullName: 'guest',
         password: 'none',
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
@@ -142,11 +144,21 @@ async function guestLogin() {
     }
 }
 
+
 async function updateUser(user) {
     httpService.put(`user/${user._id}`, user)
     return user
 }
 
+async function logout() {
+    await httpService.post('auth/logout');
+    sessionStorage.clear();
+}
+
+function _handleLogin(user) {
+    sessionStorage.setItem('user', JSON.stringify(user))
+    return user;
+}
 
 function _makeid(length = 7) {
     var text = "";
