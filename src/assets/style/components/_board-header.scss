@@ -26,15 +26,11 @@
 
                 svg,
                 img {
+                    transition: .3s;
                     width: 30px;
                     height: 30px;
                     border-radius: 50%;
                     margin-left: -15px;
-                }
-
-
-
-                img {
                     opacity: 70%;
                 }
 
@@ -136,15 +132,6 @@
     .board-header-footer {
         height: 50%;
 
-        >*:not(h5) {
-            margin-left: 30px;
-
-            >*:not(svg) {
-                margin-left: 10px;
-            }
-        }
-
-
         h5 {
             font-weight: 400;
             align-self: baseline;
@@ -165,6 +152,16 @@
 
             &:hover {
                 background-color: $buttonMainHover;
+            }
+        }
+
+        .header-options {
+            >*:not(button) {
+                margin-left: 30px;
+
+                >*:not(svg) {
+                    margin-left: 10px;
+                }
             }
         }
 

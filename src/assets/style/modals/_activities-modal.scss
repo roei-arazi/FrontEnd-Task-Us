@@ -1,9 +1,8 @@
 .activities {
-    margin: 0 30px;
+    margin: 0;
 
     header {
-        margin-bottom: 25px;
-        height: 15vh;
+        height: 25vh;
 
         h1 {
             margin-top: 25px;
@@ -18,20 +17,31 @@
         color: $mainBlack;
     }
 
+    input {
+        width: 50%;
+    }
+
     .all-activities-container {
         overflow-y: overlay;
-        max-height: 82vh;
+        max-height: 75vh;
     }
 
     .filter-outer-container {
         button {
-
             padding: 4px 8px;
+
+            &:first-of-type {
+                margin-right: 15px;
+            }
+
+            svg {
+                color: $white;
+            }
         }
     }
 
     .activity-list-not-read {
-        background-color: #bbdaf6;
+        background-color: #deeffe;
         margin-bottom: 25px;
     }
 

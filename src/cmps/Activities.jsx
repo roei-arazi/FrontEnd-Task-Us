@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import moment from 'moment'
 import { AiOutlineClose } from 'react-icons/ai';
 import { Fade } from '@material-ui/core';
+import { VscListFilter } from 'react-icons/vsc';
 
 
 export default class Activities extends Component {
@@ -11,6 +12,8 @@ export default class Activities extends Component {
         isFilterOpen: false,
         filterBy: {},
         searchVal: '',
+        isActivities: true,
+        isActivitiesNotRead: true
     }
 
     get activities() {
@@ -64,11 +67,13 @@ export default class Activities extends Component {
         })
         return res;
     }
-    // onClearLog = () => {
-    //     const activityLog = this.props.activityLog.filter(activity => null)
-    //     console.log('activityLog', activityLog)
-    //     this.props.clearLog(activityLog)
-    // }
+    toggleActivities = () => {
+        this.setState({ isActivities: !this.state.isActivities })
+
+    }
+    toggleActivitiesNotRead = () => {
+        this.setState({ isActivitiesNotRead: !this.state.isActivitiesNotRead })
+    }
 
     render() {
         if (!this.props.activityLog) return <h1>Loading...</h1>
@@ -80,7 +85,6 @@ export default class Activities extends Component {
         activitiesNotRead = this.applyFilter(activitiesNotRead)
         return (
             <section className="activities flex column">
-
                 <header className="padding-x-15 padding-y-15">
 
                     <AiOutlineClose onClick={this.props.onToggleActivities} />
@@ -89,8 +93,8 @@ export default class Activities extends Component {
                     <div className='filters-container space-between flex align-center'>
                         <input value={searchVal} onChange={this.handleChange} type="text" placeholder="Search" />
 
-                        <div className="filter-outer-container relative">
-                            <button onClick={this.toggleFilter}>Filter</button>
+                        <div className="filter-outer-container flex relative">
+                            <button className="flex align-center" onClick={this.toggleFilter}><VscListFilter /> Filter</button>
                             {isFilterOpen &&
                                 <Fragment>
                                     <div className="modal-screen-wrapper" onClick={this.toggleFilter}></div>
@@ -121,13 +125,43 @@ export default class Activities extends Component {
                     </div>
                 </header>
                 <div className="all-activities-container">
-                    {activitiesNotRead.length !== 0 && (
-                        <div className="activity-list-not-read column flex  padding-y-15">
-                            <h1>New Activities</h1>
-                            {activitiesNotRead.map((activity, idx) => {
+                    <div className="activity-list-not-read column flex  padding-y-15">
+                        <h1 onClick={this.toggleActivitiesNotRead}>New Activities ({activitiesNotRead.length})</h1>
+                        {this.state.isActivitiesNotRead && activitiesNotRead.length !== 0 && activitiesNotRead.map((activity, idx) => {
+                            return (
+                                <div key={idx} className="activity flex align-center padding-y-15 ">
+                                    <div className="user-img-container flex align-center">
+                                        <div className="date-container">
+                                            <p className="date-created">
+                                                {moment(activity.createdAt).format("DD MMM")}
+                                            </p>
+                                        </div>
+                                        <img src={activity.byUser.imgUrl} alt="" />
+                                        <h2>{activity.byUser.fullName}</h2>
+                                    </div>
+                                    <div className="activity-desc-container flex align-center">
+                                        <p>
+                                            {activity.desc}
+                                        </p>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                        {activitiesNotRead.length === 0 &&
+                            <h3 className="padding-x-15">No new board activities!</h3>
+                        }
+                    </div>
 
+
+
+
+                    <div className="activity-list column flex  padding-y-15">
+                        <h1 onClick={this.toggleActivities}>Activities Read ({activities.length})</h1>
+
+                        {
+                            this.state.isActivities && activities.length !== 0 && activities.map((activity, idx) => {
                                 return (
-                                    <div key={idx} className="activity flex align-center padding-y-15 ">
+                                    <div key={idx} className="activity  space-between flex align-center padding-y-15 ">
                                         <div className="user-img-container flex align-center">
                                             <div className="date-container">
                                                 <p className="date-created">
@@ -144,46 +178,13 @@ export default class Activities extends Component {
                                         </div>
                                     </div>
                                 )
-                            })}
-
-                        </div>
-
-                    )}
-
-                    {activities.length !== 0 &&
-                        <Fragment>
-
-                            <div className="activity-list column flex  padding-y-15">
-                                <h1>Activities Read</h1>
-
-                                {activities.map((activity, idx) => {
-                                    return (
-                                        <div key={idx} className="activity  space-between flex align-center padding-y-15 ">
-                                            <div className="user-img-container flex align-center">
-                                                <div className="date-container">
-                                                    <p className="date-created">
-                                                        {moment(activity.createdAt).format("DD MMM")}
-                                                    </p>
-                                                </div>
-                                                <img src={activity.byUser.imgUrl} alt="" />
-                                                <h2>{activity.byUser.fullName}</h2>
-                                            </div>
-                                            <div className="activity-desc-container flex align-center">
-                                                <p>
-                                                    {activity.desc}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                                }
-
-                            </div>
-                        </Fragment>
-                    }
-
+                            })
+                        }
+                        {activities.length === 0 &&
+                            <h3 className="padding-x-15">No read board activities!</h3>
+                        }
+                    </div>
                 </div>
-                {activities.length === 0 && <h1 className="padding-x-15">No recent board activities!</h1>}
 
 
             </section>

@@ -217,7 +217,8 @@ export class _BoardHeader extends React.Component {
                             <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />
                             <GoSearch />
                         </div>
-                        <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }} className="filters-outer-container relative flex align-center cursor-pointer"  >
+                        <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}
+                            className="filters-outer-container relative flex align-center cursor-pointer"  >
                             <VscListFilter />
                             <h2>Filter</h2>
                             {

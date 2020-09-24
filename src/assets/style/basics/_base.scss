@@ -105,6 +105,9 @@ span.span-user-details {
 .icon-container {
   width: fit-content;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .content-editable {
@@ -112,7 +115,7 @@ span.span-user-details {
   border: 2px dotted transparent;
   overflow: hidden;
   text-overflow: ellipsis;
-    white-space: nowrap;
+  white-space: nowrap;
 
 }
 
