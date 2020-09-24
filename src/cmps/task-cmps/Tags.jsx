@@ -95,9 +95,9 @@ export class Tags extends Component {
                                 <BsBookmarkPlus onClick={this.onAddTag} />
                                 <input onKeyDown={(ev) => {
                                     if (ev.key === 'Enter') {
+                                        this.onAddTag()
                                         ev.target.blur()
                                         ev.target.value = ''
-                                        this.onAddTag()
                                     }
                                 }} placeholder="New tag" ref={this.elTagInput} type="text" />
                             </div>

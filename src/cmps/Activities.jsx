@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import moment from 'moment'
 import { AiOutlineClose } from 'react-icons/ai';
 import { Fade } from '@material-ui/core';
@@ -10,7 +10,7 @@ export default class Activities extends Component {
         isOrderReversed: false,
         isFilterOpen: false,
         filterBy: {},
-        searchVal: ''
+        searchVal: '',
     }
 
     get activities() {
@@ -78,6 +78,7 @@ export default class Activities extends Component {
         const members = this.getActivityMembers();
         activities = this.applyFilter(activities)
         activitiesNotRead = this.applyFilter(activitiesNotRead)
+        console.log('ACTIVITIES READ AND NOT READ@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', activities, activitiesNotRead)
         return (
             <section className="activities flex column">
 
@@ -86,34 +87,39 @@ export default class Activities extends Component {
                     <AiOutlineClose onClick={this.props.onToggleActivities} />
                     <h1><span>{this.props.boardName}</span> Log</h1>
 
-                    <div className='filters-container  flex align-center'>
+                    <div className='filters-container space-between flex align-center'>
                         <input value={searchVal} onChange={this.handleChange} type="text" placeholder="Search" />
 
                         <div className="filter-outer-container relative">
                             <button onClick={this.toggleFilter}>Filter</button>
-                            {isFilterOpen && <Fade in={true}>
-                                <div className="filter-modal flex absolute">
-                                    <section className="activity-member-filter">
-                                        <h3>Member</h3>
-                                        {members.map((member, idx) => <button
-                                            className={filterBy.member === member ? 'remove-filter-btn' : ''}
-                                            key={idx}
-                                            onClick={() => this.onSetFilter('member', member)}>{member}</button>)}
-                                    </section>
-                                    <section className="activity-date-filter">
-                                        <h3>Date</h3>
-                                        <div className="filter-list">
-                                            {dates.map((date, idx) => <button
-                                                className={filterBy.date === date ? 'remove-filter-btn' : ''}
-                                                key={idx}
-                                                onClick={() => this.onSetFilter('date', date)}>{date}</button>)}
+                            {isFilterOpen &&
+                                <Fragment>
+                                    <div className="modal-screen-wrapper" onClick={this.toggleFilter}></div>
+                                    <Fade in={true}>
+                                        <div className="filter-modal flex absolute">
+                                            <section className="activity-member-filter">
+                                                <h3>Member</h3>
+                                                {members.map((member, idx) => <button
+                                                    className={filterBy.member === member ? 'remove-filter-btn' : ''}
+                                                    key={idx}
+                                                    onClick={() => this.onSetFilter('member', member)}>{member}</button>)}
+                                            </section>
+                                            <section className="activity-date-filter">
+                                                <h3>Date</h3>
+                                                <div className="filter-list">
+                                                    {dates.map((date, idx) => <button
+                                                        className={filterBy.date === date ? 'remove-filter-btn' : ''}
+                                                        key={idx}
+                                                        onClick={() => this.onSetFilter('date', date)}>{date}</button>)}
+                                                </div>
+                                            </section>
                                         </div>
-                                    </section>
-                                </div>
-                            </Fade>}
+                                    </Fade>
+                                </Fragment>
+                            }
+                            <button onClick={this.props.onClearLog}>Clear Log</button>
                         </div>
                     </div>
-                    <button onClick={this.props.onClearLog}>Clear Log</button>
                 </header>
                 <div className="all-activities-container">
                     {activitiesNotRead.length !== 0 && (
@@ -145,35 +151,41 @@ export default class Activities extends Component {
 
                     )}
 
-                    <div className="activity-list column flex  padding-y-15">
-                        <h1>Activities Read</h1>
-                        {activities.map((activity, idx) => {
+                    {activities.length !== 0 &&
+                        <Fragment>
 
-                            return (
-                                <div key={idx} className="activity  space-between flex align-center padding-y-15 ">
-                                    <div className="user-img-container flex align-center">
-                                        <div className="date-container">
-                                            <p className="date-created">
-                                                {moment(activity.createdAt).format("DD MMM")}
-                                            </p>
+                            <div className="activity-list column flex  padding-y-15">
+                                <h1>Activities Read</h1>
+
+                                {activities.map((activity, idx) => {
+                                    return (
+                                        <div key={idx} className="activity  space-between flex align-center padding-y-15 ">
+                                            <div className="user-img-container flex align-center">
+                                                <div className="date-container">
+                                                    <p className="date-created">
+                                                        {moment(activity.createdAt).format("DD MMM")}
+                                                    </p>
+                                                </div>
+                                                <img src={activity.byUser.imgUrl} alt="" />
+                                                <h2>{activity.byUser.fullName}</h2>
+                                            </div>
+                                            <div className="activity-desc-container flex align-center">
+                                                <p>
+                                                    {activity.desc}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <img src={activity.byUser.imgUrl} alt="" />
-                                        <h2>{activity.byUser.fullName}</h2>
-                                    </div>
-                                    <div className="activity-desc-container flex align-center">
-                                        <p>
-                                            {activity.desc}
-                                        </p>
-                                    </div>
+                                    )
+                                })
+                                }
 
-
-                                </div>
-                            )
-                        })}
-
-                    </div>
+                            </div>
+                        </Fragment>
+                    }
 
                 </div>
+                {activities.length === 0 && <h1 className="padding-x-15">No recent board activities!</h1>}
+
 
             </section>
         )

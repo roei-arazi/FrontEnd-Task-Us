@@ -31,6 +31,7 @@ function removeBoard(boardId) {
 }
 
 async function addBoard(loggedUser) {
+    console.log('LOGGED USER', loggedUser)
     const board = {
         boardCreator: {
             "_id": loggedUser._id,

@@ -17,6 +17,7 @@ export function loadBoards() {
 }
 
 export function updateBoard(boardToSave) {
+    console.log('show board to save', boardToSave)
     return async dispatch => {
         try {
             boardService.updateBoard(boardToSave);
