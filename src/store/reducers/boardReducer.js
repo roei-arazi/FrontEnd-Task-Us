@@ -12,7 +12,6 @@ export function boardReducer(state = initialState, action) {
                 boards: action.boards
             }
         case 'SET_BOARD':
-            console.log('got to reducer, board:', action.board);
             return {
                 ...state,
                 boards: state.boards.map(board => board._id === action.board._id ? action.board : board)

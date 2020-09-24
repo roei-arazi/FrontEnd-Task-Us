@@ -89,7 +89,7 @@ export class Group extends Component {
     }
 
     render() {
-        if (!this.state.name) return <h1>Loading...</h1>
+        if (!this.state.name) return <h1>Loading...</h1> 
         const priority = this.convertToData('priority')
         const status = this.convertToData('status')
         const { name, ElGroupSettings, elGroupColors } = this.state;
