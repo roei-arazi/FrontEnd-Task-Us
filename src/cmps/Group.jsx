@@ -82,7 +82,7 @@ export class Group extends Component {
         const res = [];
         for (let key in data) {
             data[key] /= percent;
-            res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0px' }}
+            res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0' }}
                 data-title={data[key] ? ` ${key} ${taskCount * data[key] / 100}/${taskCount} ${data[key].toFixed(1)}%` : ''}
                 className={`precent-bar ${key.toLowerCase()}`}></div>)
         }
