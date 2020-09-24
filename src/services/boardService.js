@@ -112,16 +112,7 @@ function addGroup(board) {
             "status": 'Working on it',
             "priority": 'Low',
             "dueDate": Date.now(),
-            "updates": [
-                {
-                    "txt": 'dont forget about this',
-                    "member": 'Roei Arazi'
-                },
-                {
-                    "txt": 'https://res.cloudinary.com/dtg7n0zye/image/upload/v1600008729/i70mbqxvm0qh1yeznsnf.jpg',
-                    "member": 'Liam Zety'
-                }
-            ],
+            "updates": [],
             "lastUpdated": 'yesterday',
             "isSelected": false,
             "posts": [],

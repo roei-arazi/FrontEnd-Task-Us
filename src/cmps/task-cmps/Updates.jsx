@@ -30,13 +30,12 @@ export class Updates extends React.Component {
             imgUrl: '',
             replies: []
         },
-        updates: [],
         isLoading: false,
         imageUploaded: false
     }
 
     componentDidMount() {
-        this.setState({ updates: this.props.updates, imageUploaded: false })
+        this.setState({ imageUploaded: false })
     }
 
     handleChange = (ev) => {
@@ -73,20 +72,20 @@ export class Updates extends React.Component {
                 imgUrl: this.props.loggedUser.imgUrl
             }
         }
-        const updates = [newNote, ...this.state.updates]
-        this.setState({ updates, update: { txt: '', imgUrl: '' },imageUploaded: false })
+        const updates = [newNote, ...this.props.updates]
+        this.setState({ update: { txt: '', imgUrl: '' },imageUploaded: false })
         this.props.sendNote(updates)
     }
 
     updateNote = (newUpdate) => {
-        const newNotes = this.state.updates.map(update => update.id === newUpdate.id ? newUpdate : update)
+        const newNotes = [...this.props.updates].map(update => update.id === newUpdate.id ? newUpdate : update)
         this.props.sendNote(newNotes)
     }
 
 
     render() {
-        if (!this.state.updates) return <h1>Loading...</h1>;
-        const { updates } = this.state
+        if (!this.props.updates) return <h1>Loading...</h1>;
+        const { updates } = this.props
         return (
             <React.Fragment>
                 <div className="updates-header flex column">

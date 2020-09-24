@@ -9,9 +9,6 @@ export class Update extends React.Component {
         isEditMode: false
     }
 
-    componentDidMount() {
-
-    }
 
     onReply = (newUpdate) => {
         if (!this.state.txt || this.state.txt.split('').every(letter => letter === ' ')) return
@@ -34,11 +31,13 @@ export class Update extends React.Component {
     }
 
     removeUpdate = (updateId) => {
+        console.log(updateId);
+        console.log(this.props.updates);
         const idx = this.props.updates.findIndex(update => update.id === updateId)
         const updates = [...this.props.updates]
-        updates.splice(idx, 1)
+        const newUpdates= updates.splice(idx, 1)
 
-        this.props.sendNote(updates)
+        this.props.sendNote(newUpdates)
     }
 
     onToggleEditUpdate = () => {
@@ -67,7 +66,7 @@ export class Update extends React.Component {
         const { update, idx } = this.props
         return (
             <div key={idx} className="update-box flex wrap column relative">
-                <button className="remove-update-btn" onClick={this.removeUpdate}>X</button>
+                <button className="remove-update-btn" onClick={()=>this.removeUpdate(update.id)}>X</button>
                 <div className="update-box-header flex align-center">
                     <img src={update.member.imgUrl} alt="" />
                     <p className="member-name">{update.member.fullName}</p>
