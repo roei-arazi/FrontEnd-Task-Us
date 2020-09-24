@@ -57,7 +57,6 @@ class _Board extends Component {
 
     onEditBoard = async (boardName, boardDescription, toUpdateChanges = false, type, members, activityLog) => {
         const currBoard = this._getCurrBoard()
-        console.log('SHOW activityLog', activityLog)
 
         const newBoard = {
             ...currBoard,
@@ -66,16 +65,12 @@ class _Board extends Component {
             members: members ? members : currBoard.members,
             activityLog: activityLog ? activityLog : currBoard.activityLog
         }
-        console.log('SHOW NEW BOARRD', newBoard)
 
         if (toUpdateChanges) {
             switch (type) {
                 case 'changeBoardTitle':
                     try {
-                        console.log('CHANGING TITLE',)
-
                         this.props.groupChanges(`${this.props.loggedUser.fullName} Changed the board title from ${currBoard.name} to ${boardName}`, this.props.loggedUser, newBoard)
-
                     } catch (err) {
                         console.log('Error', err)
                     }
@@ -83,30 +78,23 @@ class _Board extends Component {
                 case 'changeBoardDesc':
                     try {
                         this.props.groupChanges(`${this.props.loggedUser.fullName} Changed ${currBoard.name} description to ${boardDescription}`, this.props.loggedUser, newBoard)
-
                     } catch (err) {
                         console.log('Error', err)
                     }
-
                     break;
                 case 'addMemberToBoard':
-                    console.log('ADDING MEMBER TO BOARD',)
                     try {
                         this.props.groupChanges(`${this.props.loggedUser.fullName} Invited a member to the board `, this.props.loggedUser, newBoard)
-
                     } catch (err) {
                         console.log('Error', err)
                     }
-
                     break;
                 case 'removeMemberFromBoard':
                     try {
                         this.props.groupChanges(`${this.props.loggedUser.fullName} Removed a member from the board`, this.props.loggedUser, newBoard)
-
                     } catch (err) {
                         console.log('Error', err)
                     }
-
                     break;
             }
         }

@@ -51,18 +51,24 @@
         .notification {
             width: 100%;
             margin-bottom: 5px;
-            background-color:#ededed;
-            border-radius: 5px;
+            border-radius: 8px;
             padding: 15px;
             line-height: 1.8;
-            box-shadow: $modalsShadow;
+            background-color: #f9f9f9;
+            word-break: break-word;
+            text-align: start;
+
+            &:hover{
+                background-color: #3493c529;
+            }
            
             .user-img-container {
                 text-align: initial;
 
                 img {
-                    height: auto;
+                    height: 80px;
                     width: 80px;
+                    border-radius: 50%;
                 }
             }
 

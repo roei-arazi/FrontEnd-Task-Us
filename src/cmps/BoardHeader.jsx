@@ -35,7 +35,6 @@ export class _BoardHeader extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.board._id !== this.props.board._id) {
-            console.log('COMP DID UPDATE',)
             this.setState({ board: this.props.board })
         }
     }
@@ -43,7 +42,7 @@ export class _BoardHeader extends React.Component {
         socketService.off('updatedBoard')
     }
     handleChangeName = (ev) => {
-        this.setState({ board: { ...this.state.board, name: ev.target.value } }, console.log('change name! ', this.state.board))
+        this.setState({ board: { ...this.state.board, name: ev.target.value } })
     }
 
     handleChangeDesc = (ev) => {
@@ -198,7 +197,7 @@ export class _BoardHeader extends React.Component {
                             onFocus={this.focusText}
                             className="content-editable cursor-initial"
                             innerRef={this.editableDescription}
-                            html={this.state.board.description} // innerHTML of the editable div
+                            html={this.state.board.desc} // innerHTML of the editable div
                             disabled={false}        // use true to disable editing
                             onChange={this.handleChangeDesc} // handle innerHTML change
                             onBlur={() => {
