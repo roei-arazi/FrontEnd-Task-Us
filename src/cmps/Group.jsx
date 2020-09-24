@@ -75,8 +75,7 @@ export class Group extends Component {
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
             const value = task[property]
-            if (!acc[value]) acc[value] = 0;
-            acc[value]++;
+            acc[value] = acc[value] ? acc[value] + 1 : 0;
             return acc;
         }, {})
         const res = [];
