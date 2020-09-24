@@ -287,7 +287,7 @@
 
             .reply-box {
                 background-color: #e1e1e1;
-                padding: 10px;
+                padding: 15px;
                 max-width: fit-content;
                 border-radius: 8px;
                 margin: 5px 0;
@@ -296,12 +296,12 @@
                 &:hover {
                     .remove-reply-btn {
                         transition: .3s;
-                        transform: translateY(5px);
+                        transform: translateY(15px);
                     }
 
                     .edit-reply-btn {
                         transition: .3s;
-                        transform: translateY(1px);
+                        transform: translateY(12.5px);
                     }
                 }
             }
@@ -356,7 +356,7 @@
             .edit-reply-btn {
                 color: #7e7e7e;
                 width: fit-content;
-                transform: translateY(20px);
+                transform: translateY(35px);
 
                 &:hover {
                     text-decoration: underline;
