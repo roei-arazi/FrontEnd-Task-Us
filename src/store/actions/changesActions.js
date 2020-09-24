@@ -14,11 +14,12 @@ export function groupChanges(desc, loggedUser, board) {
                     fullName: loggedUser.fullName,
                     imgUrl: loggedUser.imgUrl
                 },
-                content: desc,
+                content: `${board.name}: ${desc}`,
                 createdAt: Date.now()
             }
             board.members.forEach(member => {
                 if (member._id === loggedUser._id) return;
+                console.log('got member:', member);
                 let userToUpdate = users.find(user => user._id === member._id);
                 userToUpdate.notifications.unshift(notification);
                 userService.updateUser(userToUpdate);
@@ -31,4 +32,3 @@ export function groupChanges(desc, loggedUser, board) {
         }
     }
 }
-

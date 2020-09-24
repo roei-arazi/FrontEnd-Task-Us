@@ -25,14 +25,12 @@ export default {
 }
 
 async function ajax(endpoint, method = 'get', data = null) {
-    console.log(data);
     try {
         const res = await axios({
             url: `${BASE_URL}${endpoint}`,
             method,
             data
         })
-        console.log(data);
         return res.data;
     } catch (err) {
         console.log(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: ${data}`);

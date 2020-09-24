@@ -67,6 +67,7 @@ export function removeNotifications(loggedUser) {
 
     return async dispatch => {
         try {
+            userService.updateUser(loggedUser)
             dispatch({ type: 'UPDATE_PROFILE', user })
         } catch (err) {
             console.log('ERROR, couldnt remove notifications', err);
@@ -84,5 +85,17 @@ export function updateUser(loggedUser) {
             console.log('userActions: Couldn\'t update user');
             throw err;
         }
+    }
+}
+
+export function logout(){
+    return dispatch => {
+        try{
+            userService.logout();
+            dispatch({type: 'SET_USER', user: null})
+        }catch(err){
+        console.log('userActions: Couldn\'t logout');
+        throw err;
+    }
     }
 }

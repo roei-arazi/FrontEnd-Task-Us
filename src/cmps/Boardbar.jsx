@@ -6,7 +6,7 @@ import { HiOutlineCog } from 'react-icons/hi';
 import { BsFillPlusCircleFill, } from 'react-icons/bs';
 
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate, loadBoards } from '../store/actions/boardActions.js';
-import {updateUser} from '../store/actions/userActions.js'
+import { updateUser } from '../store/actions/userActions.js'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
 import { AiOutlineRight } from 'react-icons/ai';
@@ -24,11 +24,11 @@ class _Boardbar extends Component {
             this.props.recieveUpdate(updatedBoard)
         });
 
-        socketService.on('add-delete-board', ()=>{
+        socketService.on('add-delete-board', () => {
             this.props.loadBoards()
         })
-        socketService.on('accept-notif', (notification)=>{
-            this.props.updateUser({...this.props.loggedUser, notifications: [...this.props.loggedUser.notifications, notification]})
+        socketService.on('accept-notif', (notification) => {
+            this.props.updateUser({ ...this.props.loggedUser, notifications: [...this.props.loggedUser.notifications, notification] })
         })
 
         socketService.emit('user', this.props.loggedUser._id)
@@ -36,7 +36,7 @@ class _Boardbar extends Component {
         this.setState({ isShown: this.props.isBoardbarShown })
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         socketService.off('updatedBoard')
         socketService.off('add-delete-board')
         socketService.off('accept-notif')
@@ -54,6 +54,11 @@ class _Boardbar extends Component {
         this.setState({ anchorEl: null })
     }
 
+    onAddBoard = () =>{
+        socketService.emit('add-delete-board')
+        this.props.addBoard(this.props.loggedUser)
+    }
+
     onBoardRemove = (boardId) => {
         const { boards, match, history, removeBoard } = this.props
         const { id } = match.params;
@@ -63,6 +68,7 @@ class _Boardbar extends Component {
             return;
         }
         removeBoard(boardId);
+        socketService.emit('add-delete-board')
         this.props.showSnackbar('Removed board.');
         setTimeout(() => this.props.hideSnackbar(), 3000)
         if (id === boardId) {
@@ -97,7 +103,7 @@ class _Boardbar extends Component {
 
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
-                    <BsFillPlusCircleFill onClick={this.props.addBoard} />
+                    <BsFillPlusCircleFill onClick={this.onAddBoard} />
 
                 </div>}
                 {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}
