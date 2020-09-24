@@ -27,6 +27,10 @@
                     border-radius: 50%;
                     margin-left: -15px;
                 }
+
+                svg {
+                    color: $mainLightGrey;
+                }
             }
 
             .users-modal {
@@ -105,6 +109,9 @@
             transition: .3s;
             margin-left: 15px;
             border: 1px solid #d1c9c9;
+            min-width: 130px;
+            display: flex;
+            justify-content: center;
 
             &:hover {
                 background-color: rgba(218, 218, 218, 0.287);
