@@ -45,14 +45,10 @@ export class Notifications extends Component {
                                             </div>
                                             <div className="notification-msg flex align-center column">
                                                 <h2>
-                                                    <Truncate lines={1} ellipsis={"..."} width={350}>
                                                         {notification.byUser.fullName}
-                                                    </Truncate>
                                                 </h2>
                                                 <p>
-                                                    <Truncate lines={1} ellipsis={"..."} width={350}>
                                                         {notification.content}
-                                                    </Truncate>
                                                 </p>
                                                 <div>
                                                     <p>{moment(notification.createdAt).fromNow()}</p>
