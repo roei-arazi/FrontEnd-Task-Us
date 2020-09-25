@@ -158,7 +158,6 @@ async function logout() {
 }
 
 async function notifyUsers(content, members, loggedUser) {
-    console.log('got user:', loggedUser.fullName)
     const users = await loadUsers();
     const notification = {
         byUser: {
@@ -170,6 +169,7 @@ async function notifyUsers(content, members, loggedUser) {
     }
     members.forEach(member => {
         if (member._id === loggedUser._id) return;
+        console.log('emitting to:', member._id);
         let userToUpdate = users.find(user => user._id === member._id);
         userToUpdate.notifications.unshift(notification);
         userService.updateUser(userToUpdate);

@@ -12,6 +12,7 @@ export function doneLoading() {
 export function showSnackbar(msg){
   return dispath => {
     dispath({type: 'SHOW_SNACKBAR', msg})
+    // setTimeout(dispatch =>{
   }
 }
 
