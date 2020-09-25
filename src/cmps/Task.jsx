@@ -98,7 +98,13 @@ class _Task extends Component {
     }
 
     sendNote = (newUpdates) => {
+        let desc = ''
+
         this.setState({ task: { ...this.state.task, updates: [...newUpdates] } }, () => {
+
+            desc =
+                `${this.props.loggedUser.fullName} sent an update at task: ${this.props.task.name} at group - ${this.props.group.name}`
+
             this.props.onEditTask(this.state.task, this.props.group, true, false, 'sendNote')
         })
     }
