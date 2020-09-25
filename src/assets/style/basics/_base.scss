@@ -188,6 +188,13 @@ div[role="menuContainer"]>div>ul>li {
   font-family: font1;
 }
 
+//Loader 
+.loader-container {
+  width: 100vh;
+  height: 100vh;
+
+}
+
 //Scrollbar
 ::-webkit-scrollbar {
   width: 10px;

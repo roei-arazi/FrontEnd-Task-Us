@@ -345,7 +345,12 @@ class _Board extends Component {
     }
 
     render() {
-        if (this.props.boards.length === 0) return <h1>Loading...</h1>
+        if (this.props.boards.length === 0) return (
+            <div className="loader-container flex justify-center align-center">
+                <h1>Loading...</h1>
+            </div>
+        )
+
         const board = this._getCurrBoard()
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
