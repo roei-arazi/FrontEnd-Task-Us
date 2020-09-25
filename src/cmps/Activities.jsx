@@ -61,7 +61,7 @@ export default class Activities extends Component {
         if (filterBy.date) res = res.filter(activity => moment(activity.createdAt).format('DD MMM') === filterBy.date);
         if (filterBy.member) res = res.filter(activity => activity.byUser.fullName === filterBy.member)
         if (searchVal) res = res.filter(activity => {
-            return activity.description.toLowerCase().includes(searchVal)
+            return activity.desc.toLowerCase().includes(searchVal)
                 || activity.byUser.fullName.toLowerCase().includes(searchVal)
         })
         return res;

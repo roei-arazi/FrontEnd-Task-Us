@@ -33,7 +33,7 @@ async function addBoard(loggedUser) {
         },
         "name": "board",
         "createdAt": Date.now(),
-        "description": 'Enter description here',
+        "desc": 'Enter description here',
         "members": [{
             "_id": loggedUser._id,
             "fullName": loggedUser.fullName,
