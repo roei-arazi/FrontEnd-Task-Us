@@ -9,7 +9,7 @@ import { Popup } from '../cmps/Popup'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import moment from 'moment';
 import { userService } from '../services/userService.js';
-
+import lodash from 'lodash'
 // Reducers funcs
 import { loadUsers } from '../store/actions/userActions'
 import {
@@ -34,16 +34,19 @@ class _Board extends Component {
 
     async componentDidMount() {
         try {
-            if (!this.props.boards || !this.props.boards.length) {
-                await this.props.loadBoards();
-                try {
-                    if (!this.props.users || !this.props.users.length) {
-                        await this.props.loadUsers();
+            setTimeout(async () => {
+                if (!this.props.boards || !this.props.boards.length) {
+                    await this.props.loadBoards();
+                    try {
+                        if (!this.props.users || !this.props.users.length) {
+                            await this.props.loadUsers();
+                        }
+                    } catch (err) {
+                        console.log('Error', err)
                     }
-                } catch (err) {
-                    console.log('Error', err)
                 }
-            }
+            }, 2000);
+
         } catch (err) {
             console.log('Error', err)
         }
@@ -63,36 +66,25 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = async (boardName, boardDescription, toUpdateChanges = false, type, members, activityLog) => {
-        const currBoard = this._getCurrBoard()
+    onEditBoard = async (newBoard, prevBoard, type) => {
         const { loggedUser } = this.props;
 
-        const newBoard = {
-            ...currBoard,
-            name: boardName,
-            desc: boardDescription,
-            members: members ? members : currBoard.members,
-            activityLog: activityLog ? activityLog : currBoard.activityLog
-        }
-
         let desc = ''
-
-        if (toUpdateChanges) {
-            switch (type) {
-                case 'changeBoardTitle':
-                    desc = `${loggedUser.fullName} Changed the board title from ${currBoard.name} to ${boardName}`
-                    break;
-                case 'changeBoardDesc':
-                    desc = `${loggedUser.fullName} Changed ${currBoard.name} description to ${boardDescription}`
-                    break;
-                case 'addMemberToBoard':
-                    desc = `${loggedUser.fullName} Invited a member to the board `
-                    break;
-                case 'removeMemberFromBoard':
-                    desc = `${loggedUser.fullName} Removed a member from the board`
-                    break;
-            }
+        switch (type) {
+            case 'changeBoardTitle':
+                desc = `${loggedUser.fullName} Changed the board title from ${prevBoard.name} to ${newBoard.name}`
+                break;
+            case 'changeBoardDesc':
+                desc = `${loggedUser.fullName} Changed ${prevBoard.name} description to ${newBoard.desc}`
+                break;
+            case 'addMemberToBoard':
+                desc = `${loggedUser.fullName} Invited a member to the board `
+                break;
+            case 'removeMemberFromBoard':
+                desc = `${loggedUser.fullName} Removed a member from the board`
+                break;
         }
+
         this.props.updateBoard(newBoard, desc, loggedUser)
         userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
         this.displayPopup('Updated board.')
@@ -222,46 +214,41 @@ class _Board extends Component {
 
 
 
-    onEditTask = async (task, group, changedValue = true, originalValue = false, type) => {
+    onEditTask = async (task, prevTask, desc) => {
+        console.log('task:', task)
+        console.log('prevTask:', prevTask)
+        console.log('desc:', desc)
+
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
-        if (changedValue === originalValue) return
-        let desc = '';
-        switch (type) {
-            case 'name':
-                desc = `${loggedUser.fullName} changed task name from ${originalValue} to ${changedValue} at group - ${group.name}`
-                break;
-            case 'sendNote':
-                desc = `${loggedUser.fullName} sent an update at task: ${task.name} at group - ${group.name}`
-                break;
-            case 'status':
-                desc = `${loggedUser.fullName} changed task: ${task.name} status from ${originalValue} to ${changedValue} at group - ${group.name}`
-                break;
-            case 'priority':
-                desc = `${loggedUser.fullName} changed task: ${task.name} priority from ${originalValue} to ${changedValue} at group - ${group.name}`
-                break;
-            case 'date':
-                desc = `${loggedUser.fullName} changed task ${task.name} date from ${moment(originalValue).format('DD/MMM/YYYY')} to ${moment(changedValue).format('DD/MMM/YYYY')} at group - ${group.name}`
 
-                break;
-            case 'removeFromTask':
-                desc = `${loggedUser.fullName} removed ${changedValue.fullName} from ${task.name} at group - ${group.name}`
+        if (lodash.isEqual(task, prevTask)) return console.log('same');
 
-                break;
-            case 'addToTask':
-                desc = `${loggedUser.fullName} tasked ${changedValue.fullName} to ${task.name} on group - ${group.name}`
+        // case 'name':
+        //     desc = `${loggedUser.fullName} changed task name from ${originalValue} to ${changedValue} at group - ${group.name}`
+        //     break;
+        // case 'sendNote':
+        //     desc = `${loggedUser.fullName} sent an update at task: ${task.name} at group - ${group.name}`
+        //     break;
 
-                break;
-            case 'addTag':
-                desc = `${loggedUser.fullName} added tag named ${changedValue} to ${task.name} on group - ${group.name}`
-                break;
-            case 'removeTag':
-                desc = `${loggedUser.fullName} removed tag named ${changedValue} from ${task.name} on group - ${group.name}`
-                break;
+        // case 'removeFromTask':
+        //     desc = `${loggedUser.fullName} removed ${changedValue.fullName} from ${task.name} at group - ${group.name}`
 
-            default:
-                break;
-        }
+        //     break;
+        // case 'addToTask':
+        //     desc = `${loggedUser.fullName} tasked ${changedValue.fullName} to ${task.name} on group - ${group.name}`
+
+        //     break;
+        // case 'addTag':
+        //     desc = `${loggedUser.fullName} added tag named ${changedValue} to ${task.name} on group - ${group.name}`
+        //     break;
+        // case 'removeTag':
+        //     desc = `${loggedUser.fullName} removed tag named ${changedValue} from ${task.name} on group - ${group.name}`
+        //     break;
+
+        // default:
+        //     break;
+
         this.props.editTask(task, board, desc, loggedUser)
         userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
         this.displayPopup('Updated task.')
@@ -358,7 +345,9 @@ class _Board extends Component {
     }
 
     _getCurrBoard = () => {
+
         return this.props.boards.find(board => board._id === this.state.boardId)
+
     }
 
 

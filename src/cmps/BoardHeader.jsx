@@ -66,7 +66,7 @@ export class _BoardHeader extends React.Component {
             }
 
         }
-        this.props.onEditBoard(board.name, board.desc, false, 'openModal', board.members, board.activityLog)
+        this.props.onEditBoard(this.state.board, this.props.board,)
 
     }
 
@@ -88,17 +88,15 @@ export class _BoardHeader extends React.Component {
 
     onRemoveMemberFromBoard = (memberId) => {
         this.setState({ board: { ...this.state.board, members: this.state.board.members.filter(member => member._id !== memberId) } }, () => {
-            this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'removeMemberFromBoard', this.state.board.members)
+            this.props.onEditBoard(this.state.board, this.props.board, 'removeMemberFromBoard')
         })
     }
-
     onAddUserToBoard = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
         this.setState({ board: { ...this.state.board, members: [...this.state.board.members, newUser] } }, () => {
-            this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'addMemberToBoard', this.state.board.members)
+            this.props.onEditBoard(this.state.board, this.props.board, 'addMemberToBoard')
         })
     }
-
     goToUserProfile = (userId) => {
         this.props.history.push(`/user/${userId}`)
     }
@@ -108,7 +106,7 @@ export class _BoardHeader extends React.Component {
             activityLog: []
         }
         this.setState({ board }, () => {
-            this.props.onEditBoard(board.name, board.desc, false, 'clearLog', board.members, board.activityLog)
+            this.props.onEditBoard(board, this.props.board, 'clearLog')
         })
 
 
@@ -138,7 +136,7 @@ export class _BoardHeader extends React.Component {
                             disabled={false}       // use true to disable editing
                             onChange={this.handleChangeName} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardTitle')
+                                this.props.onEditBoard(this.state.board, this.props.board, 'changeBoardTitle')
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
@@ -218,7 +216,7 @@ export class _BoardHeader extends React.Component {
                             disabled={false}        // use true to disable editing
                             onChange={this.handleChangeDesc} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardDesc')
+                                this.props.onEditBoard(this.state.board, this.props.board, 'changeBoardDesc')
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
