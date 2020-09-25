@@ -14,7 +14,6 @@ export default {
 };
 
 function setup() {
-    console.log('established connection');
     socket = io(BASE_URL);
 }
 

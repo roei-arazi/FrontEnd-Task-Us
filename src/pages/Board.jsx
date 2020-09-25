@@ -6,7 +6,7 @@ import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
-import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import { showSnackbar, hideSnackbar} from '../store/actions/systemActions.js';
 import moment from 'moment';
 import { userService } from '../services/userService.js';
 
@@ -48,6 +48,11 @@ class _Board extends Component {
         this.setState({ boardId: this.props.match.params.id })
     }
 
+    displayPopup(msg){
+        console.log('showing popup:', msg);
+        this.props.showSnackbar(msg)
+        setTimeout(this.props.hideSnackbar, 3000)
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
@@ -87,8 +92,7 @@ class _Board extends Component {
             }
         }
         this.props.updateBoard(newBoard, desc, loggedUser)
-        this.props.showSnackbar('Updated board.')
-        setTimeout(() => this.props.hideSnackbar(), 3000)
+        this.displayPopup('Updated board.')
     }
 
     applyFilter = (board, filterBy) => {
@@ -135,8 +139,7 @@ class _Board extends Component {
         try {
             this.props.addGroup(board, this.props.loggedUser);
             this.props.clearFilter();
-            this.props.showSnackbar('Added group.');
-            setTimeout(() => this.props.hideSnackbar(), 3000)
+            this.displayPopup('Added group.')
         } catch (err) {
             console.log('Error', err)
         }
@@ -146,8 +149,7 @@ class _Board extends Component {
         const board = this._getCurrBoard()
         try {
             this.props.removeGroup(groupId, board, this.props.loggedUser)
-            this.props.showSnackbar('Removed group.');
-            setTimeout(() => this.props.hideSnackbar(), 3000)
+            this.displayPopup('Removed group.')
         } catch (err) {
             console.log('Error', err)
         }
@@ -162,8 +164,7 @@ class _Board extends Component {
         try {
             const desc = `${group.name}: ${loggedUser.fullName} Changed ${originalValue} title to ${changedValue}`;
             this.props.editGroup(group, board, desc, loggedUser)
-            this.props.showSnackbar('Updated group.');
-            setTimeout(() => this.props.hideSnackbar(), 3000)
+            this.displayPopup('Updated group.')
         } catch (err) {
             console.log('Error', err)
         }
@@ -176,8 +177,7 @@ class _Board extends Component {
         try {
 
             this.props.removeTask(taskId, board, group, this.props.loggedUser)
-            this.props.showSnackbar('Removed task.');
-            setTimeout(() => this.props.hideSnackbar(), 3000)
+            this.displayPopup('Removed task.')
         } catch (err) {
             console.log('Error', err)
         }
@@ -191,10 +191,8 @@ class _Board extends Component {
         try {
             this.props.addTask(groupId, taskName, board, loggedUser)
             userService.notifyUsers(notif, board.members, loggedUser)
-            userService.notifyUsers()
             this.props.clearFilter()
-            this.props.showSnackbar('Added task.');
-            setTimeout(() => this.props.hideSnackbar(), 3000)
+            this.displayPopup('Added task.')
         } catch (err) {
             console.log('Error', err)
         }
@@ -243,8 +241,7 @@ class _Board extends Component {
                 break;
         }
         this.props.editTask(task, board, desc, loggedUser)
-        this.props.showSnackbar('Updated task.');
-        setTimeout(() => this.props.hideSnackbar(), 3000)
+        this.displayPopup('Updated task.')
 
     }
     //---------------------Draggable----------------------
