@@ -5,7 +5,8 @@ import { Fade } from '@material-ui/core';
 import { VscListFilter } from 'react-icons/vsc';
 import { IoIosArrowDropdown } from 'react-icons/io';
 import { connect } from 'react-redux';
-import { loadBoards } from '../store/actions/boardActions'
+import { loadBoards, updateBoard } from '../store/actions/boardActions'
+import { NavLink } from 'react-router-dom';
 
 export class _mobActivities extends Component {
 
@@ -74,7 +75,6 @@ export class _mobActivities extends Component {
 
     applyFilter(activities) {
         let res = [...activities];
-        console.log('activities:', res)
         const { filterBy, searchVal } = this.state;
         if (filterBy.date) res = res.filter(activity => moment(activity.createdAt).format('DD MMM') === filterBy.date);
         if (filterBy.member) res = res.filter(activity => activity.byUser.fullName === filterBy.member)
@@ -92,6 +92,17 @@ export class _mobActivities extends Component {
         this.setState({ isActivitiesNotReadShown: !this.state.isActivitiesNotReadShown })
     }
 
+    onClearLog = () => {
+        const board = {
+            ...this.state.board,
+            activityLog: []
+        }
+        this.setState({ board }, () => {
+            this.props.updateBoard(board)
+        })
+
+    }
+
     render() {
         if (!this.state.board) return <h1>Loading...</h1>
         const { isFilterOpen, filterBy, searchVal } = this.state;
@@ -104,7 +115,10 @@ export class _mobActivities extends Component {
             <section className="activities flex column">
                 <header className="padding-x-15 padding-y-15">
 
-                    <AiOutlineClose onClick={this.props.onToggleActivities} />
+                    <NavLink to={`/board/${this.props.match.params.id}`}>
+                        <AiOutlineClose />
+                    </NavLink>
+
                     <h1><span>{this.props.boardName}</span> Log</h1>
 
                     <div className='filters-container space-between flex align-center'>
@@ -137,7 +151,7 @@ export class _mobActivities extends Component {
                                     </Fade>
                                 </Fragment>
                             }
-                            <button onClick={this.props.onClearLog}>Clear Log</button>
+                            <button onClick={this.onClearLog}>Clear Log</button>
                         </div>
                     </div>
                 </header>
@@ -219,6 +233,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loadBoards,
+    updateBoard
 }
 
 export const mobActivities = connect(mapStateToProps, mapDispatchToProps)(_mobActivities);

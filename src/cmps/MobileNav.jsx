@@ -30,7 +30,7 @@ export class MobileNav extends React.Component {
                     <NavLink to="/">
                         <h3>Home</h3>
                     </NavLink>
-                    <NavLink to="boards">
+                    <NavLink to="/boards">
                         <h3>Boards List</h3>
                     </NavLink>
                     <NavLink to={`/activities/${this.props.params.id}`}>
