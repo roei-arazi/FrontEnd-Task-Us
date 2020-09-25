@@ -27,9 +27,7 @@ class _Board extends Component {
 
     state = {
         boardId: '',
-        txt: '',
-        gif: 'loading.gif',
-        loaded: 'loading.gif'
+        txt: ''
     }
 
 
@@ -347,23 +345,14 @@ class _Board extends Component {
         return this.props.boards.find(board => board._id === this.state.boardId)
     }
 
-    reloadGif = () => {
-        this.setState({ loaded: '' })
-        setTimeout(() => {
-            this.setState({ loaded: this.state.gif })
-        }, 0)
-    }
 
     render() {
         const board = this._getCurrBoard()
         const { users, filterBy } = this.props;
         if (!board) {
-            setTimeout(() => {
-                this.reloadGif()
-            }, 5000);
             return (
                 <div className="loader-container flex justify-center align-center">
-                    <img src={this.state.loaded} />
+                    <img src="loading.gif" />
                 </div>
             )
         }
@@ -383,7 +372,7 @@ class _Board extends Component {
                 <div className="board-container">
                     {window.innerWidth > 450 && <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} users={users} />}
-                    <div className="groups-container padding-x-30" style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
+                    <div className={`groups-container ${window.innerwidth>450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
                         >

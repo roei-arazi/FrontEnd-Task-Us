@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Fade } from '@material-ui/core';
 import { Boardbar } from '../cmps/Boardbar';
@@ -19,8 +19,6 @@ class _UserProfile extends Component {
             passowrd: '',
             fullName: '',
             imgUrl: '',
-            gif: 'loading.gif',
-            loaded: 'loading.gif'
         }
     }
 
@@ -49,24 +47,19 @@ class _UserProfile extends Component {
         const res = await cloudinaryService.uploadImg(ev.target.files[0])
         this.setState({ user: { ...this.state.user, imgUrl: res.url } })
     }
-    reloadGif = () => {
-        this.setState({ loaded: '' })
-        setTimeout(() => {
-            this.setState({ loaded: this.state.gif })
-        }, 1000)
-    }
 
     render() {
-        const { email, fullName, username, imgUrl, _id } = this.state.user;
+        let { email, fullName, username, imgUrl, _id } = this.state.user;
+
         if (!_id) {
             return (
                 <div className="loader-container flex justify-center align-center">
-                    <img src={this.state.loaded} />
+                    <img src='loading.gif' />
                 </div>
             )
         }
-        const { loggedUser } = this.props
 
+        const { loggedUser } = this.props
         return (
             <section className="user-profile">
                 <Navbar />

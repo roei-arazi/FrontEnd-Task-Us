@@ -26,7 +26,7 @@
 
 
         textarea {
-            width: 450px;
+            width: 90%;
             border-radius: 10px;
             resize: none;
             height: 75px;
@@ -39,7 +39,7 @@
 
         .updates-btns {
             padding: 0 5px;
-            width: 450px;
+            width: 90%;
         }
 
         .image-uploader {
@@ -235,7 +235,7 @@
 
 
     .update-box {
-        width: 450px;
+        width: 93%;
         padding: 10px;
         box-shadow: 0px 3px 10px -5px #484444;
         margin: 10px;
@@ -269,6 +269,7 @@
             border-bottom: 1px solid rgba(109, 109, 109, 0.35);
             padding-bottom: 10px;
             margin-bottom: 10px;
+            width: 100%;
 
             .member-name {
                 font-weight: bold;
@@ -285,6 +286,7 @@
 
         .update-box-main {
             min-height: 100px;
+            width: 100%;
 
             .update-text {
                 font-weight: initial;
@@ -295,6 +297,7 @@
         }
 
         .update-box-edit {
+            width: 100%;
             textarea {
                 resize: none;
                 border-radius: 10px;

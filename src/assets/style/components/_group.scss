@@ -1,6 +1,10 @@
 .group {
     position: relative;
 
+    @media(max-width:450px){
+        padding: 5px;
+    }
+
     .delete-group-icon,
     .color-group-icon {
         margin-right: 5px;
@@ -31,6 +35,13 @@
                 >*{
                     width:70px;
                 }
+            }
+        }
+
+        @media (max-width: 450px){
+
+            .group-header-left{
+                margin-left: 28px;
             }
         }
 
