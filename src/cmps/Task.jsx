@@ -215,12 +215,18 @@ class _Task extends Component {
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
                                 <Status status={status} isStatusShown={isStatusShown}
                                     handleChange={this.handleChange} openModal={this.openModal} />
-                                <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
-                                <Priority priority={priority} isPriorityShown={isPriorityShown}
-                                    openModal={this.openModal} handleChange={this.handleChange} />
-                                <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
-                                    task={this.state.task} isTagsShown={isTagsShown}
-                                    openModal={this.openModal} handleChange={this.handleChange} />
+                                    {window.innerWidth > 450 && 
+                                    <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />}
+                                    {window.innerWidth > 450 && 
+                                    <Priority priority={priority} isPriorityShown={isPriorityShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} />}
+                                    {window.innerWidth > 450 && 
+                                      <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
+                                      task={this.state.task} isTagsShown={isTagsShown}
+                                      openModal={this.openModal} handleChange={this.handleChange} />}
+                                
+                                
+                              
                             </div>
                         </section>
 

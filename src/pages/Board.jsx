@@ -382,7 +382,7 @@ class _Board extends Component {
                 <div className="board-container">
                     {window.innerWidth > 450 && <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} users={users} />}
-                    <div className="groups-container padding-x-30" style={{ height: `${window.innerWidth < 450 && 95 + 'vh'}` }}>
+                    <div className="groups-container padding-x-30" style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
                         >
