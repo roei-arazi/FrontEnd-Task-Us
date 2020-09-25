@@ -17,6 +17,7 @@ export function loadBoards() {
 }
 
 export function updateBoard(boardToSave, desc, loggedUser) {
+
     return async dispatch => {
         try {
             const board = boardService.handleBoardChanges(desc, loggedUser, boardToSave);
@@ -26,7 +27,7 @@ export function updateBoard(boardToSave, desc, loggedUser) {
             throw err;
         }
     }
-}  
+}
 
 export function recieveUpdate(boardToSave) {
     return dispatch => {
@@ -40,9 +41,9 @@ export function recieveUpdate(boardToSave) {
 }
 
 export function removeBoard(boardId) {
-    return dispatch => {
+    return async dispatch => {
         try {
-            boardService.removeBoard(boardId);
+            await boardService.removeBoard(boardId);
             dispatch({ type: 'REMOVE_BOARD', boardId })
         } catch (err) {
             console.log('boardActions: Couldn\'t remove board');
@@ -55,7 +56,6 @@ export function addBoard(loggedUser) {
     return async dispatch => {
         try {
             const board = await boardService.addBoard(loggedUser);
-
             dispatch({ type: 'ADD_BOARD', board })
         } catch (err) {
             console.log('boardActions: Couldn\'t add board');

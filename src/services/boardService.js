@@ -33,7 +33,7 @@ async function addBoard(loggedUser) {
         },
         "name": "board",
         "createdAt": Date.now(),
-        "description": 'Enter description here',
+        "desc": 'Enter description here',
         "members": [{
             "_id": loggedUser._id,
             "fullName": loggedUser.fullName,
@@ -181,6 +181,7 @@ function updateTask(updatedTask, board, desc, loggedUser) {
 }
 
 function handleBoardChanges(desc, loggedUser, board) {
+    if (!desc) return updateBoard(board)
     const changes = {
         id: _makeid(),
         changedAt: Date.now(),
@@ -192,7 +193,7 @@ function handleBoardChanges(desc, loggedUser, board) {
             imgUrl: loggedUser.imgUrl
         },
     }
-    const updatedBoard = {...board, activityLog: [changes, ...board.activityLog, ] }
+    const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
     return updateBoard(updatedBoard)
 }
 

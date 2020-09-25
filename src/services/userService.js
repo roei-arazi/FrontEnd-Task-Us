@@ -169,7 +169,6 @@ async function notifyUsers(content, members, loggedUser) {
     }
     members.forEach(member => {
         if (member._id === loggedUser._id) return;
-        console.log('emitting to:', member._id);
         let userToUpdate = users.find(user => user._id === member._id);
         userToUpdate.notifications.unshift(notification);
         userService.updateUser(userToUpdate);

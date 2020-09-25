@@ -21,6 +21,7 @@ import {
     from '../store/actions/boardActions'
 import { groupChanges } from '../store/actions/changesActions'
 import { MobileNav } from '../cmps/MobileNav';
+import { withRouter } from 'react-router-dom';
 
 
 class _Board extends Component {
@@ -48,6 +49,7 @@ class _Board extends Component {
         }
         this.setState({ boardId: this.props.match.params.id })
     }
+
     displayPopup(msg) {
         console.log('showing popup:', msg);
         this.props.showSnackbar(msg)
@@ -92,6 +94,7 @@ class _Board extends Component {
             }
         }
         this.props.updateBoard(newBoard, desc, loggedUser)
+        userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
         this.displayPopup('Updated board.')
 
     }
@@ -136,9 +139,11 @@ class _Board extends Component {
 
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
+        const {loggedUser} = this.props;
         const board = this._getCurrBoard()
         try {
             this.props.addGroup(board, this.props.loggedUser);
+            userService.notifyUsers(`${board.name}: ${loggedUser.fullName} added a group.`, board.members, loggedUser)
             this.props.clearFilter();
             this.displayPopup('Added group.')
 
@@ -177,11 +182,14 @@ class _Board extends Component {
 
     //-----------------TASKS CRUD------------------------
     onRemoveTask = async (taskId, group) => {
+        const {loggedUser} = this.props;
         const board = this._getCurrBoard()
         try {
-
-            this.props.removeTask(taskId, board, group, this.props.loggedUser)
-            this.displayPopup('Removed task.')
+            const task = group.tasks.find(task => task.id === taskId);
+            const notif =  `${loggedUser.fullName} Removed the task ${task.name} from ${group.name}`;
+            this.props.removeTask(taskId, board, group, loggedUser);
+            userService.notifyUsers(notif, board.members, loggedUser);
+            this.displayPopup('Removed task.');
 
         } catch (err) {
             console.log('Error', err)
@@ -192,7 +200,8 @@ class _Board extends Component {
 
         const { loggedUser } = this.props;
         const board = this._getCurrBoard()
-        const notif = `${loggedUser.fullName} Added a task to board ${board.name}`;
+        const group = board.groups.find(group => group.id === groupId)
+        const notif = ` ${board.name}: ${loggedUser.fullName} Added a task to ${group.name}`;
         try {
             this.props.addTask(groupId, taskName, board, loggedUser)
             userService.notifyUsers(notif, board.members, loggedUser)
@@ -248,6 +257,7 @@ class _Board extends Component {
                 break;
         }
         this.props.editTask(task, board, desc, loggedUser)
+        userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
         this.displayPopup('Updated task.')
 
 
@@ -325,6 +335,7 @@ class _Board extends Component {
                     const { loggedUser } = this.props;
                     const desc = `${loggedUser.fullName} Moved ${newTaskToPaste.name} from ${newStartGroup.name} to ${newFinishGroup.name}`
                     this.props.updateBoard(this._getCurrBoard(), desc, loggedUser)
+                    userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
 
                 } catch (err) {
                     console.log('Error', err);
@@ -366,12 +377,12 @@ class _Board extends Component {
                         <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                     </React.Fragment>
                     :
-                    <MobileNav loggedUser={this.props.loggedUser} />
+                    <MobileNav params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
                     {window.innerWidth > 450 && <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} users={users} />}
-                    <div className={`groups-container ${window.innerwidth>450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
+                    <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
                         >

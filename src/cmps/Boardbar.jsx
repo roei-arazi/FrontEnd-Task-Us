@@ -20,16 +20,15 @@ class _Boardbar extends Component {
         searchVal: ''
     }
     componentDidMount() {
-        console.log(this.props.loggedUser._id);
         socketService.on('updatedBoard', updatedBoard => {
             this.props.recieveUpdate(updatedBoard)
         });
 
-        socketService.on('add-delete-board', () => {
+        socketService.on('reloadBoards', () => {
+            console.log('reloading...');
             this.props.loadBoards()
         })
         socketService.on('accept-notif', (notification) => {
-            console.log('got notification:', notification);
             this.props.updateUser({ ...this.props.loggedUser, notifications: [ notification, ...this.props.loggedUser.notifications] })
         })
 
@@ -40,7 +39,7 @@ class _Boardbar extends Component {
 
     componentWillUnmount() {
         socketService.off('updatedBoard')
-        socketService.off('add-delete-board')
+        socketService.off('reloadBoards')
         socketService.off('accept-notif')
     }
 
@@ -61,12 +60,12 @@ class _Boardbar extends Component {
         this.setState({ anchorEl: null })
     }
 
-    onAddBoard = () =>{
+    onAddBoard = async () =>{
+        await this.props.addBoard(this.props.loggedUser)
         socketService.emit('add-delete-board')
-        this.props.addBoard(this.props.loggedUser)
     }
 
-    onBoardRemove = (boardId) => {
+    onBoardRemove = async (boardId) => {
         const { boards, match, history, removeBoard } = this.props
         const { id } = match.params;
         this.handleMenuClose()
@@ -74,9 +73,9 @@ class _Boardbar extends Component {
             console.log('you need at least one board!');
             return;
         }
-        removeBoard(boardId);
+        await removeBoard(boardId);
         socketService.emit('add-delete-board')
-        this.props.displayPopup('Removed board.');
+        this.displayPopup('Removed board.');
         if (id === boardId) {
             const idx = boards.findIndex(board => board._id !== boardId)
             history.push(`/board/${boards[idx]._id}`)

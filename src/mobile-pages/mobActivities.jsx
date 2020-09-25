@@ -4,9 +4,11 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { Fade } from '@material-ui/core';
 import { VscListFilter } from 'react-icons/vsc';
 import { IoIosArrowDropdown } from 'react-icons/io';
+import { connect } from 'react-redux';
+import { loadBoards, updateBoard } from '../store/actions/boardActions'
+import { NavLink } from 'react-router-dom';
 
-
-export default class Activities extends Component {
+export class _mobActivities extends Component {
 
     state = {
         isOrderReversed: false,
@@ -17,12 +19,28 @@ export default class Activities extends Component {
         isActivitiesNotReadShown: true
     }
 
+    async componentDidMount() {
+        try {
+            if (!this.props.boards || !this.props.boards.length) {
+                await this.props.loadBoards();
+            }
+        } catch (err) {
+            console.log('Error', err)
+        }
+        this.getBoardById(this.props.match.params.id)
+    }
+
+    getBoardById = (id) => {
+        const board = this.props.boards.find(board => board._id === id)
+        this.setState({ ...this.state, board })
+    }
     get activities() {
-        const { activityLog } = this.props;
+        const { activityLog } = this.state.board;
         return [activityLog.filter(activity => activity.isRead), activityLog.filter(activity => !activity.isRead)]
     }
 
     handleChange = ({ target }) => {
+        console.log('Handling change',)
         this.setState({ searchVal: target.value })
     }
 
@@ -37,7 +55,7 @@ export default class Activities extends Component {
     }
 
     getActivityDates() {
-        const activities = this.props.activityLog;
+        const activities = this.state.board.activityLog;
         const dates = activities.reduce((acc, activity) => {
             const date = moment(activity.createdAt).format('DD MMM');
             acc[date] = '';
@@ -47,7 +65,7 @@ export default class Activities extends Component {
     }
 
     getActivityMembers() {
-        const activities = this.props.activityLog;
+        const activities = this.state.board.activityLog;
         const members = activities.reduce((acc, activity) => {
             acc[activity.byUser.fullName] = '';
             return acc;
@@ -74,8 +92,19 @@ export default class Activities extends Component {
         this.setState({ isActivitiesNotReadShown: !this.state.isActivitiesNotReadShown })
     }
 
+    onClearLog = () => {
+        const board = {
+            ...this.state.board,
+            activityLog: []
+        }
+        this.setState({ board }, () => {
+            this.props.updateBoard(board)
+        })
+
+    }
+
     render() {
-        if (!this.props.activityLog) return <h1>Loading...</h1>
+        if (!this.state.board) return <h1>Loading...</h1>
         const { isFilterOpen, filterBy, searchVal } = this.state;
         let [activities, activitiesNotRead] = this.activities;
         const dates = this.getActivityDates();
@@ -86,7 +115,10 @@ export default class Activities extends Component {
             <section className="activities flex column">
                 <header className="padding-x-15 padding-y-15">
 
-                    <AiOutlineClose onClick={this.props.onToggleActivities} />
+                    <NavLink to={`/board/${this.props.match.params.id}`}>
+                        <AiOutlineClose />
+                    </NavLink>
+
                     <h1><span>{this.props.boardName}</span> Log</h1>
 
                     <div className='filters-container space-between flex align-center'>
@@ -119,7 +151,7 @@ export default class Activities extends Component {
                                     </Fade>
                                 </Fragment>
                             }
-                            <button onClick={this.props.onClearLog}>Clear Log</button>
+                            <button onClick={this.onClearLog}>Clear Log</button>
                         </div>
                     </div>
                 </header>
@@ -193,3 +225,15 @@ export default class Activities extends Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return {
+        boards: state.boardReducer.boards,
+    }
+}
+
+const mapDispatchToProps = {
+    loadBoards,
+    updateBoard
+}
+
+export const mobActivities = connect(mapStateToProps, mapDispatchToProps)(_mobActivities);
