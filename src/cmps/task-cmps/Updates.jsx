@@ -46,7 +46,7 @@ export class Updates extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ imageUploaded: false , task:this.props.task})
+        this.setState({ imageUploaded: false, task: this.props.task })
     }
 
     handleChange = (ev) => {
@@ -201,29 +201,29 @@ export class Updates extends React.Component {
 
                     </div>
                     <div className="title-column">
-                    <p>Title: {this.state.task.name}</p>
+                        <p>Title: {this.state.task.name}</p>
                     </div>
                     <div className="title-column">
-                    <p>Members:</p><Members members={this.props.members} users={this.props.users} isUsersShown={this.state.isUsersShown}
-                        openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
-                        onRemoveMemberFromTask={this.onRemoveMemberFromTask}/>
+                        <p>Members:</p><Members members={this.props.members} users={this.props.users} isUsersShown={this.state.isUsersShown}
+                            openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
+                            onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
                     </div>
                     <div className="title-column">
-                    <p>Status:</p> <Status status={this.props.status} isStatusShown={this.state.isStatusShown}
-                        handleChange={this.props.handleChange} openModal={this.openModal} />
+                        <p>Status:</p> <Status status={this.props.status} isStatusShown={this.state.isStatusShown}
+                            handleChange={this.props.handleChange} openModal={this.openModal} />
                     </div>
                     <div className="title-column">
-                    <p>Due-Date:</p> <Date dueDate={this.props.dueDate} handleDateChange={this.props.handleDateChange} />
+                        <p>Due-Date:</p> <Date dueDate={this.props.dueDate} handleDateChange={this.props.handleDateChange} />
                     </div>
                     <div className="title-column">
-                    <p>Priority:</p><Priority priority={this.props.priority} isPriorityShown={this.state.isPriorityShown}
-                        openModal={this.openModal} handleChange={this.props.handleChange} />
+                        <p>Priority:</p><Priority priority={this.props.priority} isPriorityShown={this.state.isPriorityShown}
+                            openModal={this.openModal} handleChange={this.props.handleChange} />
                     </div>
                     <div className="tags-column">
-                    <p>Tags:</p> <Tags handleChange={this.props.handleChange} onEditTags={this.onEditTags}
-                        task={this.props.task} isTagsShown={this.state.isTagsShown}
-                        openModal={this.openModal} handleChange={this.props.handleChange} />
-                    </div>   
+                        <p>Tags:</p> <Tags handleChange={this.props.handleChange} onEditTags={this.onEditTags}
+                            task={this.props.task} isTagsShown={this.state.isTagsShown}
+                            openModal={this.openModal} handleChange={this.props.handleChange} />
+                    </div>
                 </div>}
 
 
