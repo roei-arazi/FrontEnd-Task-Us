@@ -5,11 +5,9 @@ nav {
     background-color: $colorBgBoardBars;
 
     .hamburger {
-        height: 100%;
-        width: 50px;
 
-        svg{
-            color:$colorMainNav;
+        svg {
+            color: $colorMainNav;
         }
     }
 
@@ -34,17 +32,18 @@ nav {
     }
 
 }
-        .modal-screen-wrapper{
-            background-color: #090e1f87;
-            transition: .3s;
-        }
 
-        .animate-menu-modal {
-            box-shadow: $modalsShadow;
-            transition: .3s;
-            right: 100%;
-            transform: translate(100%, 0);
-        }
+.modal-screen-wrapper {
+    background-color: #090e1f87;
+    transition: .3s;
+}
+
+.animate-menu-modal {
+    box-shadow: $modalsShadow;
+    transition: .3s;
+    right: 100%;
+    transform: translate(100%, 0);
+}
 
 .boards-list {
     background-color: $colorBgBoardBars;
@@ -55,7 +54,7 @@ nav {
         width: 35px;
         height: 35px;
         color: $buttonMainBg;
-        position:fixed;
+        position: fixed;
     }
 
     .board-details {
@@ -71,7 +70,7 @@ nav {
             background-color: #3493c529;
         }
 
-    
+
 
 
         .board-details-header {

@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { GoRequestChanges, GoSearch } from 'react-icons/go'
+import { GoSearch } from 'react-icons/go'
 import { VscListFilter } from 'react-icons/vsc'
 import ContentEditable from 'react-contenteditable';
 import Activities from './Activities';
@@ -8,8 +7,7 @@ import { Filter } from './Filter';
 import { withRouter } from 'react-router-dom';
 import socketService from '../services/socketService.js'
 import { FiPlus } from 'react-icons/fi';
-import { AiOutlineMinus, AiOutlineUserAdd } from 'react-icons/ai';
-import { lightGreen } from '@material-ui/core/colors';
+import { AiOutlineMinus } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 
 export class _BoardHeader extends React.Component {
@@ -140,7 +138,6 @@ export class _BoardHeader extends React.Component {
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardTitle')
                                 }
                             }}
                         />
@@ -206,7 +203,6 @@ export class _BoardHeader extends React.Component {
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.target.blur()
-                                    this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardDesc')
                                 }
                             }}
                         />

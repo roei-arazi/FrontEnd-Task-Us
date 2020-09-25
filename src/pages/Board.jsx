@@ -139,7 +139,8 @@ class _Board extends Component {
 
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
-        const {loggedUser} = this.props;
+        console.log('ADDING GROUP',)
+        const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         try {
             this.props.addGroup(board, this.props.loggedUser);
@@ -187,11 +188,11 @@ class _Board extends Component {
 
     //-----------------TASKS CRUD------------------------
     onRemoveTask = async (taskId, group) => {
-        const {loggedUser} = this.props;
+        const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         try {
             const task = group.tasks.find(task => task.id === taskId);
-            const notif =  `${loggedUser.fullName} Removed the task ${task.name} from ${group.name}`;
+            const notif = `${loggedUser.fullName} Removed the task ${task.name} from ${group.name}`;
             this.props.removeTask(taskId, board, group, loggedUser);
             userService.notifyUsers(notif, board.members, loggedUser);
             this.displayPopup('Removed task.');
@@ -382,7 +383,7 @@ class _Board extends Component {
                         <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                     </React.Fragment>
                     :
-                    <MobileNav params={this.props.match.params} loggedUser={this.props.loggedUser} />
+                    <MobileNav onAddGroup={this.onAddGroup} params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
                     {window.innerWidth > 450 && <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
