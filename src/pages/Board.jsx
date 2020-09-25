@@ -20,6 +20,7 @@ import {
 }
     from '../store/actions/boardActions'
 import { groupChanges } from '../store/actions/changesActions'
+import { MobileNav } from '../cmps/MobileNav';
 
 
 class _Board extends Component {
@@ -340,18 +341,25 @@ class _Board extends Component {
     }
 
     render() {
+        console.log(window.innerWidth);
         if (this.props.boards.length === 0) return <h1>Loading...</h1>
         const board = this._getCurrBoard()
         const { users, filterBy } = this.props;
         if (!board) return <h1>Loading..</h1>
         const filteredBoard = this.applyFilter(board, filterBy);
         return (
-            <section className="board">
-                <Navbar />
-                <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
-                <div className="board-container">
-                    <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
-                        handleSearch={this.handleSearch} users={users} />
+            <section className={`board ${window.innerWidth>450 ? 'flex' : 'flex column'}`}>
+                {window.innerWidth > 450 ? 
+                <div>
+                    <Navbar />
+                    <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
+                </div>
+                :
+                <MobileNav loggedUser={this.props.loggedUser}/>
+                }
+                <div className="board-container" style={{height:`${window.innerWidth<450 && 95+'vh'}`}}>
+                    {window.innerWidth>450 && <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
+                        handleSearch={this.handleSearch} users={users} />}
                     <div className="groups-container padding-x-30">
                         <DragDropContext
                             onDragEnd={this.onDragEnd}

@@ -1,26 +1,12 @@
 const initialState = {
     users: [],
     loggedUser: {      
-            "_id" : "5f68936cf878123b2cdce96d",
-            "username" : "frize",
-            "fullName" : "Roei Arazi",
-            "password" : "3333",
-            "email" : "frize@gmail.com",
-            "imgUrl" : "https://via.placeholder.com/250",
-            "isAdmin" : true,
-            "boards" : [],
-            "notifications" : [ 
-                {
-                byUser: 
-                {
-                    fullName: "Liam Zety","imgUrl" : "https://via.placeholder.com/250" 
-                },
-                content:"just uploaded the logo!",
-                createdAt:Date.now()
-            }],
-            "birthDay" : "2nd August 1997",
-            "company" : "adidas",
-            "phoneNumber" : "0224132124"
+            "_id" : "5f68936cf878123b2cd354436ce96d",
+            "username" : "guest",
+            "fullName" : "guest",
+            "password" : "",
+            "email" : "guest@gmail.com",
+            "notifications" : [ ],
     },
     userProfile: null
 }

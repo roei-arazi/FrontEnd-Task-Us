@@ -11,7 +11,7 @@ export function Members(props) {
             {props.members.length ? props.members[0].imgUrl
                 ?
                 <div className="member-img-container relative">
-                {props.members.map(member=> <img className="member-img" src={member.imgUrl} alt="" />)}
+                {props.members.map(member=> <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}
                 <FiPlus className="no-members-icon-plus absolute" />
                 </div>
                 :
