@@ -20,13 +20,16 @@ import {
 }
     from '../store/actions/boardActions'
 import { groupChanges } from '../store/actions/changesActions'
+import { MobileNav } from '../cmps/MobileNav';
 
 
 class _Board extends Component {
 
     state = {
         boardId: '',
-        txt: ''
+        txt: '',
+        gif: 'loading.gif',
+        loaded: 'loading.gif'
     }
 
 
@@ -47,7 +50,7 @@ class _Board extends Component {
         }
         this.setState({ boardId: this.props.match.params.id })
     }
-
+    
     displayPopup(msg) {
         console.log('showing popup:', msg);
         this.props.showSnackbar(msg)
@@ -93,6 +96,7 @@ class _Board extends Component {
         }
         this.props.updateBoard(newBoard, desc, loggedUser)
         this.displayPopup('Updated board.')
+
     }
 
     applyFilter = (board, filterBy) => {
@@ -140,6 +144,7 @@ class _Board extends Component {
             this.props.addGroup(board, this.props.loggedUser);
             this.props.clearFilter();
             this.displayPopup('Added group.')
+
         } catch (err) {
             console.log('Error', err)
         }
@@ -150,6 +155,7 @@ class _Board extends Component {
         try {
             this.props.removeGroup(groupId, board, this.props.loggedUser)
             this.displayPopup('Removed group.')
+
         } catch (err) {
             console.log('Error', err)
         }
@@ -165,6 +171,7 @@ class _Board extends Component {
             const desc = `${group.name}: ${loggedUser.fullName} Changed ${originalValue} title to ${changedValue}`;
             this.props.editGroup(group, board, desc, loggedUser)
             this.displayPopup('Updated group.')
+
         } catch (err) {
             console.log('Error', err)
         }
@@ -178,6 +185,7 @@ class _Board extends Component {
 
             this.props.removeTask(taskId, board, group, this.props.loggedUser)
             this.displayPopup('Removed task.')
+
         } catch (err) {
             console.log('Error', err)
         }
@@ -191,8 +199,10 @@ class _Board extends Component {
         try {
             this.props.addTask(groupId, taskName, board, loggedUser)
             userService.notifyUsers(notif, board.members, loggedUser)
+            userService.notifyUsers()
             this.props.clearFilter()
             this.displayPopup('Added task.')
+
         } catch (err) {
             console.log('Error', err)
         }
@@ -242,6 +252,7 @@ class _Board extends Component {
         }
         this.props.editTask(task, board, desc, loggedUser)
         this.displayPopup('Updated task.')
+
 
     }
     //---------------------Draggable----------------------
@@ -336,20 +347,43 @@ class _Board extends Component {
         return this.props.boards.find(board => board._id === this.state.boardId)
     }
 
+    reloadGif = () => {
+        this.setState({ loaded: '' })
+        setTimeout(() => {
+            this.setState({ loaded: this.state.gif })
+        }, 0)
+    }
+
     render() {
-        if (this.props.boards.length === 0) return <h1>Loading...</h1>
         const board = this._getCurrBoard()
         const { users, filterBy } = this.props;
-        if (!board) return <h1>Loading..</h1>
+        if (!board) {
+            setTimeout(() => {
+                this.reloadGif()
+            }, 5000);
+            return (
+                <div className="loader-container flex justify-center align-center">
+                    <img src={this.state.loaded} />
+                </div>
+            )
+        }
+
+
         const filteredBoard = this.applyFilter(board, filterBy);
         return (
-            <section className="board">
-                <Navbar />
-                <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
+            <section className={`board ${window.innerWidth > 450 ? 'flex' : 'flex column'}`}>
+                {window.innerWidth > 450 ?
+                    <React.Fragment>
+                        <Navbar />
+                        <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
+                    </React.Fragment>
+                    :
+                    <MobileNav loggedUser={this.props.loggedUser} />
+                }
                 <div className="board-container">
-                    <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
-                        handleSearch={this.handleSearch} users={users} />
-                    <div className="groups-container padding-x-30">
+                    {window.innerWidth > 450 && <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
+                        handleSearch={this.handleSearch} users={users} />}
+                    <div className="groups-container padding-x-30" style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
                         >

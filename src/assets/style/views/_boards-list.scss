@@ -1,0 +1,97 @@
+nav {
+    height: 6vh;
+    border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
+    width: 100%;
+    background-color: $colorBgBoardBars;
+
+    .hamburger {
+        height: 100%;
+        width: 50px;
+
+        svg{
+            color:$colorMainNav;
+        }
+    }
+
+}
+
+.menu-modal {
+    width: 50%;
+    height: 100vh;
+    position: fixed;
+    right: 200%;
+    top: 0;
+    background-color: $colorBgBoardBars;
+    z-index: 999;
+    transition: .4s;
+
+    >* {
+        width: 90%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #0e567259;
+    }
+
+}
+        .modal-screen-wrapper{
+            background-color: #090e1f87;
+            transition: .3s;
+        }
+
+        .animate-menu-modal {
+            box-shadow: $modalsShadow;
+            transition: .3s;
+            right: 100%;
+            transform: translate(100%, 0);
+        }
+
+.boards-list {
+    background-color: $colorBgBoardBars;
+
+    svg {
+        bottom: 30px;
+        right: 20px;
+        width: 35px;
+        height: 35px;
+        color: $buttonMainBg;
+        position:fixed;
+    }
+
+    .board-details {
+        padding: 10px;
+        border: 1px solid rgba($colorFontTaskGroup, .35);
+        box-shadow: $modalsShadow;
+        border-radius: 8px;
+        margin: 10px;
+        width: 90%;
+        max-height: 150px;
+
+        &:focus {
+            background-color: #3493c529;
+        }
+
+    
+
+
+        .board-details-header {
+
+            .board-members-imgs {
+                >:not(:first-child).member-img {
+                    margin-left: -10px;
+                }
+
+            }
+
+            .member-img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+        }
+
+        .board-details-main {}
+    }
+
+
+}
