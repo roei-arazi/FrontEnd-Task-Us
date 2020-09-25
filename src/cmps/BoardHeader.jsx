@@ -137,7 +137,7 @@ export class _BoardHeader extends React.Component {
                             disabled={false}       // use true to disable editing
                             onChange={this.handleChangeName} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board, this.props.board, `${loggedUser.fullName} Changed the board title from ${prevBoard.name} to ${newBoard.name}`)                
+                                this.props.onEditBoard(this.state.board, this.props.board, `${loggedUser.fullName} Changed the board title from ${this.props.board.name} to ${this.state.board.name}`)
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
@@ -217,7 +217,7 @@ export class _BoardHeader extends React.Component {
                             disabled={false}        // use true to disable editing
                             onChange={this.handleChangeDesc} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board, this.props.board, `${loggedUser.fullName} Changed ${prevBoard.name} description to ${newBoard.desc}`)
+                                this.props.onEditBoard(this.state.board, this.props.board, `${loggedUser.fullName} Changed ${this.state.board.name} description to ${this.state.board.desc}`)
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
