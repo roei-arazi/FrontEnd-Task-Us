@@ -159,6 +159,7 @@ export class Updates extends React.Component {
 
     render() {
         if (!this.props.updates || !this.state.task) return <h1>Loading...</h1>;
+        const { isUsersShown, isStatusShown, isPriorityShown, isTagsShown } = this.state
         const { updates } = this.props
         return (
             <React.Fragment>
@@ -195,13 +196,13 @@ export class Updates extends React.Component {
                         sendNote={this.props.sendNote}
                         updateNote={this.updateNote} makeid={makeid} />)}
                 </div>}
+                {(isUsersShown || isStatusShown || isPriorityShown || isTagsShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
 
                 {this.state.isColumnsShown && <div className="columns-container">
                     <div className="title-column">
-
                     </div>
                     <div className="title-column">
-                        <p>Title: {this.state.task.name}</p>
+                    <p>Title: {this.state.task.name}</p><p></p>
                     </div>
                     <div className="title-column">
                         <p>Members:</p><Members members={this.props.members} users={this.props.users} isUsersShown={this.state.isUsersShown}

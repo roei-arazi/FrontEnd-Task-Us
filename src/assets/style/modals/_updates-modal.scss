@@ -444,6 +444,7 @@
 
         >*{
             margin-left:5px;
+            width: 100px;
         }
     }
     .user-img-container {
@@ -522,12 +523,13 @@
     .users-modal {
         background-color: $white;
         z-index: 999;
-        width: 250px;
         border-radius: 5px;
         top: 35px;
-        right: 0;
+        left: 0;
         padding: 0 10px;
         box-shadow: $modalsShadow;
+        width: max-content;
+
 
         .task-users-box {
             border-bottom: 1px solid #a8a8a87d;
@@ -599,15 +601,19 @@
 
 
         .label-list {
-            width: 150px;
+            width: 110px;
             background-color: $white;
             box-shadow: $modalsShadow;
             z-index: 999;
             border-radius: 1px;
-            right: 0;
-            top: 0;
+            left: 0;
+            top:30px;
             word-break: break-all;
             padding: 5px 5px 0 5px;
+
+            .tag-add-container{
+                width:100%;
+            }
 
 
             >*:hover {
