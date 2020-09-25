@@ -6,9 +6,10 @@ import { HiOutlineCog } from 'react-icons/hi';
 import { BsFillPlusCircleFill, } from 'react-icons/bs';
 
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate, loadBoards } from '../store/actions/boardActions.js';
-import { updateUser } from '../store/actions/userActions.js'
+import { updateUser } from '../store/actions/userActions.js';
 import { showSnackbar, hideSnackbar} from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
+import {userService} from '../services/userService.js';
 import { AiOutlineRight } from 'react-icons/ai';
 
 class _Boardbar extends Component {
@@ -61,12 +62,18 @@ class _Boardbar extends Component {
     }
 
     onAddBoard = async () =>{
+        const {loggedUser} = this.props;
         await this.props.addBoard(this.props.loggedUser)
+        const notif = `${loggedUser.fullName} added a new board`
+        userService.notifyUsers(notif,'add', loggedUser)
         socketService.emit('add-delete-board')
     }
 
     onBoardRemove = async (boardId) => {
-        const { boards, match, history, removeBoard } = this.props
+        const { boards, match, history, removeBoard, loggedUser } = this.props
+        const board = boards.find(board => board._id === boardId);
+        const notif = `${loggedUser.fullName} deleted ${board.name}`;
+        userService.notifyUsers(notif, board.members, loggedUser)
         const { id } = match.params;
         this.handleMenuClose()
         if (boards.length === 1) {

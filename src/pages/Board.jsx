@@ -153,9 +153,13 @@ class _Board extends Component {
         this.props.history.push(`/board/${this.state.boardId}`)
     }
     onRemoveGroup = async (groupId) => {
+        const {loggedUser} = this.props;
         const board = this._getCurrBoard()
+        const group = board.groups.find(group => group.id === groupId);
+        const notif = `${board.name}: ${loggedUser.fullName} removed group ${group.name}`;
         try {
             this.props.removeGroup(groupId, board, this.props.loggedUser)
+            userService.notifyUsers(notif, board.members, loggedUser);
             this.displayPopup('Removed group.')
 
         } catch (err) {
@@ -170,8 +174,9 @@ class _Board extends Component {
         const originalValue = group[key];
         group[key] = changedValue;
         try {
-            const desc = `${group.name}: ${loggedUser.fullName} Changed ${originalValue} title to ${changedValue}`;
+            const desc = `${group.name}: ${loggedUser.fullName} Changed ${key} from ${originalValue} to ${changedValue}`;
             this.props.editGroup(group, board, desc, loggedUser)
+            userService.notifyUsers(desc, board.members, loggedUser);
             this.displayPopup('Updated group.')
 
         } catch (err) {
@@ -206,7 +211,6 @@ class _Board extends Component {
         try {
             this.props.addTask(groupId, taskName, board, loggedUser)
             userService.notifyUsers(notif, board.members, loggedUser)
-            userService.notifyUsers()
             this.props.clearFilter()
             this.displayPopup('Added task.')
 

@@ -160,6 +160,7 @@ async function logout() {
 async function notifyUsers(content, members, loggedUser) {
     console.log('got user in service:', loggedUser);
     const users = await loadUsers();
+    if(members === 'add') members = [...users]
     const notification = {
         byUser: {
             fullName: loggedUser.fullName,
@@ -171,6 +172,10 @@ async function notifyUsers(content, members, loggedUser) {
     members.forEach(member => {
         if (member._id === loggedUser._id) return;
         let userToUpdate = users.find(user => user._id === member._id);
+        if(!userToUpdate){
+            console.log('can\'t updated user:', userToUpdate);
+            return;
+        }
         userToUpdate.notifications.unshift(notification);
         userService.updateUser(userToUpdate);
         socketService.emit('send-notif', { userId: member._id, notification });
