@@ -22,8 +22,9 @@ export class MobileNav extends React.Component {
         return (
             <React.Fragment>
                 <nav>
-                    <div className="hamburger flex align-center justify-center" onClick={this.toggleMenuModal} >
+                    <div className="hamburger flex align-center space-between" onClick={this.toggleMenuModal} >
                         <GiHamburgerMenu />
+                        <button>New Group</button>
                     </div>
                 </nav>
                 <section className={`${this.state.isMenuShown && 'animate-menu-modal'} menu-modal flex column align-center`}>
