@@ -160,6 +160,7 @@ export class Updates extends React.Component {
     render() {
         if (!this.props.updates || !this.state.task) return <h1>Loading...</h1>;
         const { isUsersShown, isStatusShown, isPriorityShown, isTagsShown } = this.state
+        console.log('props:', this.props);
         const { updates } = this.props
         return (
             <React.Fragment>
