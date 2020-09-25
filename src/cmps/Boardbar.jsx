@@ -11,6 +11,7 @@ import { showSnackbar, hideSnackbar} from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
 import {userService} from '../services/userService.js';
 import { AiOutlineRight } from 'react-icons/ai';
+import {Dashboard} from './Dashboard'
 
 class _Boardbar extends Component {
     state = {
@@ -20,6 +21,7 @@ class _Boardbar extends Component {
         isShown: '',
         searchVal: ''
     }
+    
     componentDidMount() {
         socketService.on('updatedBoard', updatedBoard => {
             this.props.recieveUpdate(updatedBoard)
@@ -34,7 +36,6 @@ class _Boardbar extends Component {
         })
 
         socketService.emit('user', this.props.loggedUser._id)
-
         this.setState({ isShown: this.props.isBoardbarShown })
     }
 
@@ -130,6 +131,7 @@ class _Boardbar extends Component {
                         </li>
                     })}
                 </ul>
+                <Dashboard />
                 <Menu
                     role="menuContainer"
                     anchorEl={anchorEl}
