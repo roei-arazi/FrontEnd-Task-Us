@@ -17,6 +17,7 @@ export function loadBoards() {
 }
 
 export function updateBoard(boardToSave, desc, loggedUser) {
+
     return async dispatch => {
         try {
             const board = boardService.handleBoardChanges(desc, loggedUser, boardToSave);
@@ -26,7 +27,7 @@ export function updateBoard(boardToSave, desc, loggedUser) {
             throw err;
         }
     }
-}  
+}
 
 export function recieveUpdate(boardToSave) {
     return dispatch => {
