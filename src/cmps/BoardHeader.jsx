@@ -7,7 +7,7 @@ import { Filter } from './Filter';
 import { withRouter } from 'react-router-dom';
 import socketService from '../services/socketService.js'
 import { FiPlus } from 'react-icons/fi';
-import { AiOutlineMinus } from 'react-icons/ai';
+import { FiMinus } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
 
 export class _BoardHeader extends React.Component {
@@ -121,6 +121,11 @@ export class _BoardHeader extends React.Component {
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
         const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity.isRead)
         const activitiesRead = this.props.board.activityLog.filter(activity => activity.isRead)
+
+        console.log("board creator", this.state.board.boardCreator)
+        console.log("loggedf user", this.props.loggedUser)
+        console.log('true?', this.props.loggedUser._id === "5f68936cf878123b2cd354436ce96d")
+
         return (
             <section className="board-header flex column padding-x-30">
                 <div className="board-header-header flex space-between grow align-center">
@@ -158,10 +163,16 @@ export class _BoardHeader extends React.Component {
                                     {members.map((member, idx) =>
                                         <section key={idx} className="user-box flex space-between align-center">
                                             <div className="user-box-info flex align-center" onClick={() => this.goToUserProfile(member._id)}>
-                                                {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
+                                                {member.imgUrl ? <img src={member.imgUrl} alt="profile" />
+                                                    :
+                                                    <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
                                                 <p className="member-name">{member.fullName}</p>
                                             </div>
-                                            <AiOutlineMinus onClick={() => this.onRemoveMemberFromBoard(member._id)} />
+                                            {
+                                                (this.props.loggedUser._id === "5f68936cf878123b2cd354436ce96d" ||
+                                                    this.state.board.boardCreator._id === this.props.loggedUser._id) &&
+                                                <FiMinus onClick={() => this.onRemoveMemberFromBoard(member._id)} />
+                                            }
                                         </section>
                                     )}
 
@@ -175,15 +186,24 @@ export class _BoardHeader extends React.Component {
                                                     <div className="member-letter">{user.fullName.charAt(0).toUpperCase()}</div>}
                                                 <p className="member-name">{user.fullName}</p>
                                             </div>
-                                            <FiPlus onClick={() => this.onAddUserToBoard(user._id)} />
+                                            {
+                                                (this.props.loggedUser._id === "5f68936cf878123b2cd354436ce96d" ||
+                                                    this.state.board.boardCreator._id === this.props.loggedUser._id) &&
+                                                <FiPlus onClick={() => this.onAddUserToBoard(user._id)} />
+                                            }
                                         </section>
                                     })}
                                 </div>
 
                             </div>}
                         <div onClick={this.onToggleActivities} className="activities-outer-container flex align-center  cursor-pointer">
-                            {/* <GoRequestChanges /> */}
-                            <h2> Activities <span style={{ color: activitiesNotRead.length !== 0 ? '#0085ff' : '' }}>{activitiesNotRead.length}</span> / {activitiesRead.length + activitiesNotRead.length}</h2>
+                            <h2>
+                                Activities {" "}
+                                <span style={{ color: activitiesNotRead.length !== 0 ? '#0085ff' : '' }}>
+                                    {activitiesNotRead.length}
+                                </span>
+                              / {activitiesRead.length + activitiesNotRead.length}
+                            </h2>
                         </div>
                     </div>
 

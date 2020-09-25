@@ -14,7 +14,11 @@ class _Home extends Component {
     }
 
     render() {
-        if (!this.props.boards || this.props.boards.length === 0) return <h1>Loading...</h1>
+        if (!this.props.boards || this.props.boards.length === 0) return (
+            <div className="loader-container flex justify-center align-center">
+                <img src="loading.gif" />
+            </div>
+        )
         return (
             <section className="home flex column">
                 <main className="home-main flex align-center  ">
@@ -32,11 +36,15 @@ class _Home extends Component {
                     </div>
                     <div className="col-right flex align-center justify-center padding-x-30  column">
                         <h1>Working in a large scale company?</h1>
-                        <h2>Do you need to keep track of hundreds of tasks?</h2>
-                        <h2>Need an efficient way to manage your co-workers / employees?</h2>
-                        <h2>Then this is the app for you.</h2>
+                        <ul>
+                            <li><h2>Do you need to keep track of hundreds of tasks?</h2></li>
+                            <li>  <h2>Need an efficient way to manage your co-workers / employees?</h2></li>
+                            <li> <h2>Then this is the app for you.</h2></li>
+                        </ul>
+
+
                         <NavLink to={`/board/${this.props.boards[0]._id}`}>
-                            <button className="guest-button absolute">Try As a Guest!</button>
+                            <button className="guest-button ">Try As a Guest!</button>
                         </NavLink>
 
                     </div>

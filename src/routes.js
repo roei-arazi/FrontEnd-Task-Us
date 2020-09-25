@@ -38,7 +38,7 @@ export default [
         component: MyWeek
     },
     {
-        path: '/activities/:id',
+        path: '/mob-activities/:id',
         component: mobActivities
     }
 ]

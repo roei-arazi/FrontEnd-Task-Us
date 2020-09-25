@@ -138,9 +138,9 @@ export class Group extends Component {
                                         <div onClick={() => this.onChangeGroupColor('#1d2d50')} className="color-pick" style={{ backgroundColor: '#1d2d50' }}></div>
                                     </div>
                                 }
-                                {window.innerWidth > 450 && <div className="drag-icon" {...provided.dragHandleProps}>
+                                <div className="drag-icon" {...provided.dragHandleProps}>
                                     <AiOutlineDrag />
-                                </div>}
+                                </div>
 
 
                                 <h1 style={{ color: group.color }} className="group-title">

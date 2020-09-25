@@ -154,7 +154,7 @@ class _Board extends Component {
         this.props.history.push(`/board/${this.state.boardId}`)
     }
     onRemoveGroup = async (groupId) => {
-        const {loggedUser} = this.props;
+        const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         const group = board.groups.find(group => group.id === groupId);
         const notif = `${board.name}: ${loggedUser.fullName} removed group ${group.name}`;
@@ -373,7 +373,7 @@ class _Board extends Component {
             )
         }
 
-
+        console.log('SHOW ME PARAMS FROM BOARD', this.props.match.params)
         const filteredBoard = this.applyFilter(board, filterBy);
         return (
             <section className={`board ${window.innerWidth > 450 ? 'flex' : 'flex column'}`}>
@@ -383,10 +383,10 @@ class _Board extends Component {
                         <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                     </React.Fragment>
                     :
-                    <MobileNav onAddGroup={this.onAddGroup} params={this.props.match.params} loggedUser={this.props.loggedUser} />
+                    <MobileNav boardName={board.name} onAddGroup={this.onAddGroup} params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
-                    {window.innerWidth > 450 && <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
+                    {window.innerWidth > 450 && <BoardHeader loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} users={users} />}
                     <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                         <DragDropContext

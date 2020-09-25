@@ -18,10 +18,13 @@ export class MobileNav extends React.Component {
     }
 
     render() {
+        console.log('props id:', this.props.params)
+        const { params, loggedUser } = this.props
         return (
             <React.Fragment>
-                <nav className=" flex align-center space-between padding-x-15">
+                <nav className=" flex align-center space-between">
                     <GiHamburgerMenu onClick={this.toggleMenuModal} />
+                    <h1>{this.props.boardName}</h1>
                     <button onClick={this.props.onAddGroup}>New Group</button>
                 </nav>
                 <section className={`${this.state.isMenuShown && 'animate-menu-modal'} menu-modal flex column align-center`}>
@@ -31,13 +34,13 @@ export class MobileNav extends React.Component {
                     <NavLink to="/boards">
                         <h3>Boards List</h3>
                     </NavLink>
-                    <NavLink to={`/activities/${this.props.params.id}`}>
+                    <NavLink to={`/mob-activities/${params.id}`}>
                         <h3>Activities</h3>
                     </NavLink>
                     <NavLink to="/myweek">
                         <h3>My Week</h3>
                     </NavLink>
-                    <NavLink to={`/user/${this.props.loggedUser._id}`}>
+                    <NavLink to={`/user/${loggedUser._id}`}>
                         <h3>My Profile</h3>
                     </NavLink>
                     <NavLink to="/login">
