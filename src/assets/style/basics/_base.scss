@@ -191,9 +191,15 @@ div[role="menuContainer"]>div>ul>li {
 
 //Loader 
 .loader-container {
-
   height: 100vh;
+}
 
+@media (max-width: 450px) {
+  .loader-container {
+    img {
+      width: 85vw;
+    }
+  }
 }
 
 //Scrollbar
@@ -217,7 +223,7 @@ div[role="menuContainer"]>div>ul>li {
   border-radius: 1px;
 }
 
-@media(max-width: 450px){
+@media(max-width: 450px) {
 
   ::-webkit-scrollbar {
     display: none;

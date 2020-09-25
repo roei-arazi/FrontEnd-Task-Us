@@ -5,10 +5,18 @@
         width: 100%;
         overflow: hidden;
 
+
         .groups-container {
             height: 80vh;
             overflow-y: overlay;
             background-color: $colorBgBoardBars;
+        }
+    }
+
+    @media (max-width:450px) {
+        .board-container {
+
+            height: 92vh;
         }
     }
 

@@ -11,7 +11,6 @@
     height: fit-content;
     width: fit-content;
 
-
     svg {
         color: $buttonMainBg;
 
@@ -68,10 +67,13 @@
         }
     }
 
+    @media (max-width:500px) {
+        width: 100%;
+        padding: 15px 0;
+    }
+
     .guest-button {
         background-color: #f0284e;
-
-
 
         &:hover {
             background-color: #be203e;
