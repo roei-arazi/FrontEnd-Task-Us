@@ -61,25 +61,36 @@ class _Task extends Component {
     }
 
     handleDateChange = date => {
-        const prevDate = this.state.task.dueDate;
+        const prevDate = moment(this.state.task.dueDate).format('DD/MMM/YYYY')
+        const changedDate = moment(date).format('DD/MMM/YYYY')
+        if (prevDate === changedDate) return
+
         this.setState({ task: { ...this.state.task, dueDate: moment(date).valueOf() } }, () => {
-            this.props.onEditTask(this.state.task, this.props.group, moment(date).valueOf(), prevDate, 'date')
+            const desc = `${this.props.loggedUser.fullName} changed task ${this.state.task.name} date from ${moment(this.props.task.dueDate).format('DD/MMM/YYYY')} to ${moment(this.state.task.dueDate).format('DD/MMM/YYYY')} at group -${this.props.group.name}`
+
+            this.props.onEditTask(this.state.task, this.props.task, desc)
         })
     }
 
     handleChange = (data, tags) => {
-        console.log('got data:', data);
+
+        let desc = ''
+
         if (data === 'Stuck' || data === 'Working on it' || data === 'Done') {
-            const prevData = this.state.task.status;
             this.setState({ task: { ...this.state.task, status: data } }, () => {
-                console.log('in callback');
-                this.props.onEditTask(this.state.task, this.props.group, data, prevData, 'status')
-                if(!this.state.isUpdatesShown) this.closeModal()
+
+                desc = `${this.props.loggedUser.fullName} changed task: ${this.state.task.name} status from ${this.props.task.status} to ${this.state.task.status} at group - ${this.props.group.name}`
+
+                this.props.onEditTask(this.state.task, this.props.task, desc)
+                if (!this.state.isUpdatesShown) this.closeModal()
             })
         } else {
-            const prevData = this.state.task.priority;
             this.setState({ task: { ...this.state.task, priority: data } }, () => {
-                this.props.onEditTask(this.state.task, this.props.group, data, prevData, 'priority')
+
+                desc = `${this.props.loggedUser.fullName} changed task: ${this.state.task.name} priority from ${this.props.task.priority} to ${this.state.task.priority} at group - ${this.props.group.name}`
+
+                this.props.onEditTask(this.state.task, this.props.task, desc)
+
                 this.closeModal()
             })
         }
@@ -87,7 +98,13 @@ class _Task extends Component {
     }
 
     sendNote = (newUpdates) => {
+        let desc = ''
+
         this.setState({ task: { ...this.state.task, updates: [...newUpdates] } }, () => {
+
+            desc =
+                `${this.props.loggedUser.fullName} sent an update at task: ${this.props.task.name} at group - ${this.props.group.name}`
+
             this.props.onEditTask(this.state.task, this.props.group, true, false, 'sendNote')
         })
     }
@@ -157,16 +174,16 @@ class _Task extends Component {
 
         return (
             <React.Fragment>
-                {isUpdatesShown && 
+                {isUpdatesShown &&
                     <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates task={this.state.task} updates={updates} members={members}  priority={priority} status={status} dueDate={dueDate}
-                        loggedUser={this.props.loggedUser} users={this.props.users}
-                        sendNote={this.sendNote} handleChange={this.handleChange} handleDateChange={this.handleDateChange} onEditTags={this.onEditTags}
-                        onEditTask={this.props.onEditTask} closeModal={this.closeModal}
-                    />
-                </div>
+                        <Updates task={this.state.task} updates={updates} members={members} priority={priority} status={status} dueDate={dueDate}
+                            loggedUser={this.props.loggedUser} users={this.props.users}
+                            sendNote={this.sendNote} handleChange={this.handleChange} handleDateChange={this.handleDateChange} onEditTags={this.onEditTags}
+                            onEditTask={this.props.onEditTask} closeModal={this.closeModal}
+                        />
+                    </div>
                 }
-            
+
 
                 {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown || isTagsShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
                 <Draggable draggableId={id} index={this.props.index}>
@@ -213,24 +230,24 @@ class _Task extends Component {
                             </div>
 
                             <div className="task-right flex align-center">
-                                {window.innerWidth > 380 &&  <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
+                                {window.innerWidth > 380 && <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask} />}
-                               
+
                                 <Status status={status} isStatusShown={isStatusShown}
                                     handleChange={this.handleChange} openModal={this.openModal} />
-                                    {window.innerWidth > 450 && 
+                                {window.innerWidth > 450 &&
                                     <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />}
-                                    {window.innerWidth > 450 && 
+                                {window.innerWidth > 450 &&
                                     <Priority priority={priority} isPriorityShown={isPriorityShown}
-                                    openModal={this.openModal} handleChange={this.handleChange} />}
-                                    {window.innerWidth > 450 && 
-                                      <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
-                                      task={this.state.task} isTagsShown={isTagsShown}
-                                      openModal={this.openModal} handleChange={this.handleChange} />}
-                                
-                                
-                              
+                                        openModal={this.openModal} handleChange={this.handleChange} />}
+                                {window.innerWidth > 450 &&
+                                    <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
+                                        task={this.state.task} isTagsShown={isTagsShown}
+                                        openModal={this.openModal} handleChange={this.handleChange} />}
+
+
+
                             </div>
                         </section>
 
