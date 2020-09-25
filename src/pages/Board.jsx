@@ -199,6 +199,7 @@ class _Board extends Component {
         if (!taskName) taskName = 'New task'
 
         const { loggedUser } = this.props;
+        console.log('user:', loggedUser);
         const board = this._getCurrBoard()
         const group = board.groups.find(group => group.id === groupId)
         const notif = ` ${board.name}: ${loggedUser.fullName} Added a task to ${group.name}`;

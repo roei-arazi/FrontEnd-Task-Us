@@ -158,6 +158,7 @@ async function logout() {
 }
 
 async function notifyUsers(content, members, loggedUser) {
+    console.log('got user in service:', loggedUser);
     const users = await loadUsers();
     const notification = {
         byUser: {
