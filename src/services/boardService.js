@@ -181,6 +181,7 @@ function updateTask(updatedTask, board, desc, loggedUser) {
 }
 
 function handleBoardChanges(desc, loggedUser, board) {
+    if(!desc) return updateBoard(board)
     const changes = {
         id: _makeid(),
         changedAt: Date.now(),

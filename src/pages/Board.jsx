@@ -6,7 +6,7 @@ import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
-import { showSnackbar, hideSnackbar} from '../store/actions/systemActions.js';
+import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import moment from 'moment';
 import { userService } from '../services/userService.js';
 
@@ -48,7 +48,7 @@ class _Board extends Component {
         this.setState({ boardId: this.props.match.params.id })
     }
 
-    displayPopup(msg){
+    displayPopup(msg) {
         console.log('showing popup:', msg);
         this.props.showSnackbar(msg)
         setTimeout(this.props.hideSnackbar, 3000)

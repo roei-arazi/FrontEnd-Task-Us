@@ -8,6 +8,7 @@ export function loadBoards() {
     return async dispatch => {
         try {
             const boards = await boardService.loadBoards();
+            console.log('got boards in actions:', boards);
             dispatch({ type: 'SET_BOARDS', boards })
         } catch (err) {
             console.log('boardActions: Couldn\'t load boards');
@@ -40,9 +41,9 @@ export function recieveUpdate(boardToSave) {
 }
 
 export function removeBoard(boardId) {
-    return dispatch => {
+    return async dispatch => {
         try {
-            boardService.removeBoard(boardId);
+            await boardService.removeBoard(boardId);
             dispatch({ type: 'REMOVE_BOARD', boardId })
         } catch (err) {
             console.log('boardActions: Couldn\'t remove board');
