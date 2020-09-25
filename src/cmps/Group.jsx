@@ -19,7 +19,7 @@ export class Group extends Component {
         elGroupColors: false,
     }
 
-    reloadProps = () =>{
+    reloadProps = () => {
         this.setState({ ...this.state, name: this.props.group.name })
     }
 
@@ -30,7 +30,7 @@ export class Group extends Component {
         this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id })
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         socketService.off('updatedBoard', this.reloadProps)
     }
 
@@ -75,7 +75,7 @@ export class Group extends Component {
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
             const value = task[property]
-            if(!acc[value]) acc[value] = 0;
+            if (!acc[value]) acc[value] = 0;
             acc[value]++;
             return acc;
         }, {})
@@ -90,7 +90,7 @@ export class Group extends Component {
     }
 
     render() {
-        if (!this.state.id) return <h1>Loading...</h1> 
+        if (!this.state.id) return <h1>Loading...</h1>
         const priority = this.convertToData('priority')
         const status = this.convertToData('status')
         const { name, ElGroupSettings, elGroupColors } = this.state;
@@ -98,7 +98,7 @@ export class Group extends Component {
         return (
             <Draggable draggableId={group.id} index={index}>
                 {(provided, snapshot) =>
-                    <section key={group.id} className={`group ${window.innerWidth>450 ? 'padding-y-45 padding-x-30' : 'padding-y-15'}`}
+                    <section key={group.id} className={`group ${window.innerWidth > 450 ? 'padding-y-45 padding-x-30' : 'padding-y-15'}`}
                         {...provided.draggableProps}
 
                         ref={provided.innerRef}>
@@ -138,10 +138,10 @@ export class Group extends Component {
                                         <div onClick={() => this.onChangeGroupColor('#1d2d50')} className="color-pick" style={{ backgroundColor: '#1d2d50' }}></div>
                                     </div>
                                 }
-                                {window.innerWidth>450 &&  <div className="drag-icon" {...provided.dragHandleProps}>
+                                {window.innerWidth > 450 && <div className="drag-icon" {...provided.dragHandleProps}>
                                     <AiOutlineDrag />
                                 </div>}
-                               
+
 
                                 <h1 style={{ color: group.color }} className="group-title">
                                     <ContentEditable
@@ -163,19 +163,19 @@ export class Group extends Component {
                                 </h1>
                             </div>
                             <div className="group-header-right flex"  {...provided.dragHandleProps}>
-                                {window.innerWidth > 380 && 
-                                <h3 style={{ color: this.props.group.color }}>Members</h3>}
-                                
+                                {window.innerWidth > 380 &&
+                                    <h3 style={{ color: this.props.group.color }}>Members</h3>}
+
                                 <h3 style={{ color: this.props.group.color }}>Status</h3>
                                 {window.innerWidth > 450 &&
-                                <h3 style={{ color: this.props.group.color }}>Due-Date</h3>}
+                                    <h3 style={{ color: this.props.group.color }}>Due-Date</h3>}
                                 {window.innerWidth > 450 &&
-                                <h3 style={{ color: this.props.group.color }}>Priority</h3>}
+                                    <h3 style={{ color: this.props.group.color }}>Priority</h3>}
                                 {window.innerWidth > 450 &&
-                                <h3 style={{ color: this.props.group.color }}>Tags</h3>}
-                                
-                                
-                                
+                                    <h3 style={{ color: this.props.group.color }}>Tags</h3>}
+
+
+
                             </div>
                         </div>
 
@@ -207,17 +207,17 @@ export class Group extends Component {
                                 <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
                             </form>
                         </div>
-                        {window.innerWidth > 450 && 
-                       <section className="group-precent-container flex">
-                       <div className="group-precent flex">
-                           {status}
-                       </div>
-                       <div className="group-precent flex">
-                           {priority}
-                       </div>
-                   </section>
-                    }
-                        
+                        {window.innerWidth > 450 &&
+                            <section className="group-precent-container flex">
+                                <div className="group-precent flex">
+                                    {status}
+                                </div>
+                                <div className="group-precent flex">
+                                    {priority}
+                                </div>
+                            </section>
+                        }
+
                     </section>
                 }
             </Draggable>
