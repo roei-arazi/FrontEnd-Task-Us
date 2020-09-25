@@ -21,6 +21,7 @@ import {
     from '../store/actions/boardActions'
 import { groupChanges } from '../store/actions/changesActions'
 import { MobileNav } from '../cmps/MobileNav';
+import { withRouter } from 'react-router-dom';
 
 
 class _Board extends Component {
@@ -48,12 +49,12 @@ class _Board extends Component {
         }
         this.setState({ boardId: this.props.match.params.id })
     }
-    
+
     displayPopup(msg) {
         console.log('showing popup:', msg);
         this.props.showSnackbar(msg)
         setTimeout(this.props.hideSnackbar, 3000)
-    } 
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
@@ -367,12 +368,12 @@ class _Board extends Component {
                         <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                     </React.Fragment>
                     :
-                    <MobileNav loggedUser={this.props.loggedUser} />
+                    <MobileNav params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
                     {window.innerWidth > 450 && <BoardHeader board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} users={users} />}
-                    <div className={`groups-container ${window.innerwidth>450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
+                    <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                         <DragDropContext
                             onDragEnd={this.onDragEnd}
                         >
