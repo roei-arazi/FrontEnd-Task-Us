@@ -74,7 +74,7 @@ class _Task extends Component {
             this.setState({ task: { ...this.state.task, status: data } }, () => {
                 console.log('in callback');
                 this.props.onEditTask(this.state.task, this.props.group, data, prevData, 'status')
-                this.closeModal()
+                if(!this.state.isUpdatesShown) this.closeModal()
             })
         } else {
             const prevData = this.state.task.priority;
