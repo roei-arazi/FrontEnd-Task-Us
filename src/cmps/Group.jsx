@@ -98,7 +98,7 @@ export class Group extends Component {
         return (
             <Draggable draggableId={group.id} index={index}>
                 {(provided, snapshot) =>
-                    <section key={group.id} className={`group ${window.innerWidth>450 ? 'padding-y-45' : 'padding-y-15'}`}
+                    <section key={group.id} className={`group ${window.innerWidth>450 ? 'padding-y-45 padding-x-30' : 'padding-y-15'}`}
                         {...provided.draggableProps}
 
                         ref={provided.innerRef}>

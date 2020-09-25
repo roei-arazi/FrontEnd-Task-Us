@@ -209,15 +209,15 @@
         border-radius: 5px;
         display: flex;
         flex-direction: column;
-        padding: 15px;
         box-shadow: 0px 3px 10px -5px #484444;
+        padding: 10px;
+        left:0;
 
         p:not(:first-child) {
             margin-top: 15px;
         }
 
         p {
-            padding: 15px;
             transition: .3s;
 
             &:hover {
@@ -296,8 +296,10 @@
 
         }
 
+
         .update-box-edit {
             width: 100%;
+
             textarea {
                 resize: none;
                 border-radius: 10px;
@@ -322,6 +324,10 @@
                 cursor: pointer;
                 color: #4a4747
             }
+        }
+
+        .update-box-footer {
+            width: 100%;
         }
 
         .replies-box {
@@ -355,6 +361,10 @@
                 align-self: flex-end;
                 position: absolute;
                 top: 0;
+
+                @media (max-width:450px){
+                    transform: translate(0, 0);
+                }
             }
 
 
@@ -384,7 +394,8 @@
                 resize: none;
                 border-radius: 7px;
                 margin-top: 6px;
-                width: 290px;
+                width: 100%;
+                margin-left: 5px;
                 height: 24px;
             }
 
@@ -410,6 +421,274 @@
 
     }
 
+}
+
+.columns-container{
+    padding-left:5px;
+    img{
+        width:30px;
+        height:30px;
+        border-radius: 50%;
+    }
+
+    input{
+        width:100%;
+        text-align: center;
+    }
+
+    >*{
+        display:flex;
+        height:40px;
+        width:90%;
+        align-items: center;
+
+        >*{
+            margin-left:5px;
+        }
+    }
+    .user-img-container {
+        position: relative;
+
+        img {
+            cursor: pointer;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+
+        }
+
+        .member-img-container {
+
+            >:not(:first-child).member-img {
+                margin-left: -15px;
+            }
+        }
+
+        .no-members-icon-plus {
+            font-family: monospace;
+            font-size: 15px;
+            width: 17px;
+            height: 17px;
+            position: absolute;
+            background-color: #0085ff;
+            color: #f2f1dfb0;
+            border-radius: 50%;
+            text-align: center;
+            right: -5px;
+            font-weight: bold;
+            bottom: 10px;
+            cursor: pointer;
+        }
+
+        .no-members-container {
+            position: relative;
+
+            .no-members-icon {
+                height: 30px;
+                width: 30px;
+            }
+
+        }
+
+        .member-letter {
+            height: 100%;
+            width: 50%;
+            margin: 0 auto;
+            font-size: 2rem;
+            border-radius: 50%;
+            background-color: $colorIconsTasks;
+            color: $colorTask;
+            padding-top: 6px;
+            cursor: pointer;
+        }
+
+        .task-number-of-imgs {
+            font-family: monospace;
+            font-size: 15px;
+            width: 17px;
+            height: 17px;
+            position: absolute;
+            background-color: #0085ff;
+            color: #f2f1dfb0;
+            border-radius: 50%;
+            text-align: center;
+            right: 42px;
+            font-weight: bold;
+            bottom: 16px;
+            cursor: pointer;
+        }
+    }
+
+    .users-modal {
+        background-color: $white;
+        z-index: 999;
+        width: 250px;
+        border-radius: 5px;
+        top: 35px;
+        right: 0;
+        padding: 0 10px;
+        box-shadow: $modalsShadow;
+
+        .task-users-box {
+            border-bottom: 1px solid #a8a8a87d;
+            cursor: auto;
+
+            svg {
+                font-size: 1.5rem;
+                color: $buttonMainBg;
+            }
+
+            .member-name {
+                margin-left: 10px;
+            }
+        }
+
+        h3 {
+            margin: 15px 0;
+
+        }
+
+        .user-box {
+            margin-bottom: 10px;
+        }
+
+        .user-box-info {
+            p {
+                text-align: left;
+                cursor: pointer;
+            }
+        }
+
+        .board-users-box {
+            cursor: auto;
+
+            .member-name {
+                margin-left: 10px;
+            }
+
+            svg {
+                font-size: 1.5rem;
+                color: $buttonMainBg;
+            }
+        }
+    }
+
+    .label-container {
+        height: 100%;
+
+
+        .label-box {
+            width: 100%;
+            text-align: center;
+            border-radius: 1px;
+            cursor: default;
+            font-size: 0.8rem;
+            height: 100%;
+        }
+
+        .task-label-name {
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+
+            &:hover {
+                transition: 0.3s;
+                box-shadow: $brightBoxShadow;
+            }
+        }
+
+
+        .label-list {
+            width: 150px;
+            background-color: $white;
+            box-shadow: $modalsShadow;
+            z-index: 999;
+            border-radius: 1px;
+            right: 0;
+            top: 0;
+            word-break: break-all;
+            padding: 5px 5px 0 5px;
+
+
+            >*:hover {
+                transition: 0.3s;
+                box-shadow: $brightBoxShadow;
+            }
+
+            .label-selector {
+                width: 100%;
+                text-align: center;
+                height: 40px;
+                margin-bottom: 5px;
+                border-radius: 1px;
+                cursor: pointer;
+            }
+        }
+
+        .stuck {
+            background-color: #e44258;
+        }
+
+        .working {
+            background-color: #fdab3d;
+        }
+
+        .done {
+            background-color: #00ca72;
+        }
+
+        .low {
+            background-color: #7bb0ae;
+        }
+
+        .medium {
+            background-color: #a028c7;
+        }
+
+        .high {
+            background-color: #e82d2d;
+        }
+
+        .stuck,
+        .working,
+        .done,
+        .low,
+        .medium,
+        .high {
+            color: #f1f1f1;
+        }
+    }
+
+    .react-datepicker__input-container {
+
+        input {
+
+            &:hover,
+            &:focus {
+                border: $dottedBorder;
+            }
+        }
+
+    }
+
+    .tags {
+        height: 100%;
+        padding-left: 5px;
+
+        .task-label-name {
+            overflow: overlay;
+        }
+
+        .tag-remove-icon {
+            font-size: 1.2rem;
+            transform: rotate(180deg);
+        }
+    }
+    
+}
+
+.modal-screen-wrapper{
+    z-index: 998;
 }
 
 .updates-image-modal {

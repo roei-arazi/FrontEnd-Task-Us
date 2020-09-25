@@ -158,10 +158,12 @@ class _Task extends Component {
         return (
             <React.Fragment>
                 <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates closeModal={this.closeModal} task={this.state.task} isImageModalShown={this.state.isImageModalShown}
-                        loggedUser={this.props.loggedUser} updates={updates}
-                        uploadImg={this.uploadImg} sendNote={this.sendNote} closeModal={this.closeModal}
+                    <Updates task={this.state.task} updates={updates} members={members}  priority={priority} status={status} dueDate={dueDate}
+                        loggedUser={this.props.loggedUser} users={this.props.users}
+                        sendNote={this.sendNote} handleChange={this.handleChange} handleDateChange={this.handleDateChange} onEditTags={this.onEditTags}
+                        onEditTask={this.props.onEditTask}
                     />
+
                 </div>
 
                 {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown || isTagsShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
