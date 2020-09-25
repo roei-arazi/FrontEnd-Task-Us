@@ -5,7 +5,7 @@ import { Fade } from '@material-ui/core';
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
 import { loadBoards } from '../store/actions/boardActions';
-import {userService} from '../services/userService.js';
+import { userService } from '../services/userService.js';
 import { updateUser } from '../store/actions/userActions';
 import { cloudinaryService } from '../services/cloudinaryService';
 
@@ -18,14 +18,16 @@ class _UserProfile extends Component {
             username: '',
             passowrd: '',
             fullName: '',
-            imgUrl: ''
+            imgUrl: '',
+            gif: 'loading.gif',
+            loaded: 'loading.gif'
         }
     }
 
-    async componentDidMount() { 
+    async componentDidMount() {
         this.props.loadBoards();
         const user = await userService.getUserById(this.props.match.params.id)
-        this.setState({ user: { ...user} })
+        this.setState({ user: { ...user } })
     }
 
     toggleModal = () => {
@@ -47,11 +49,23 @@ class _UserProfile extends Component {
         const res = await cloudinaryService.uploadImg(ev.target.files[0])
         this.setState({ user: { ...this.state.user, imgUrl: res.url } })
     }
+    reloadGif = () => {
+        this.setState({ loaded: '' })
+        setTimeout(() => {
+            this.setState({ loaded: this.state.gif })
+        }, 1000)
+    }
 
     render() {
         const { email, fullName, username, imgUrl, _id } = this.state.user;
-        if (!_id) return <h1>Loading...</h1>
-        const { loggedUser} = this.props
+        if (!_id) {
+            return (
+                <div className="loader-container flex justify-center align-center">
+                    <img src={this.state.loaded} />
+                </div>
+            )
+        }
+        const { loggedUser } = this.props
 
         return (
             <section className="user-profile">
