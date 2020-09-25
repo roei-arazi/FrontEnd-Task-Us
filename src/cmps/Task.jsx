@@ -210,9 +210,10 @@ class _Task extends Component {
                             </div>
 
                             <div className="task-right flex align-center">
-                                <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
+                                {window.innerWidth > 380 &&  <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
-                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
+                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask} />}
+                               
                                 <Status status={status} isStatusShown={isStatusShown}
                                     handleChange={this.handleChange} openModal={this.openModal} />
                                     {window.innerWidth > 450 && 

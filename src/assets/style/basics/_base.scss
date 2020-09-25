@@ -9,6 +9,7 @@ html {
   font-size: 14px;
 }
 
+
 ul {
   list-style: none;
   padding: 0;
@@ -214,4 +215,11 @@ div[role="menuContainer"]>div>ul>li {
   transition: .3s;
   background: #a0a0a0;
   border-radius: 1px;
+}
+
+@media(max-width: 450px){
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
