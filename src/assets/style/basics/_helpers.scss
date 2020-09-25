@@ -74,6 +74,14 @@
     transition: .2s;
 }
 
+.toggle-btn {
+    color: $buttonColorCTA;
+
+    &:hover {
+        color: $buttonMainHover;
+    }
+}
+
 .clickable-header:hover {
     transition: color .3s;
     color: rgba($colorIconsTasksHover, .75);
