@@ -7,7 +7,7 @@ import { BsFillPlusCircleFill, } from 'react-icons/bs';
 
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate, loadBoards } from '../store/actions/boardActions.js';
 import { updateUser } from '../store/actions/userActions.js'
-import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import { showSnackbar, hideSnackbar} from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
 import { AiOutlineRight } from 'react-icons/ai';
 
@@ -20,6 +20,7 @@ class _Boardbar extends Component {
         searchVal: ''
     }
     componentDidMount() {
+        console.log(this.props.loggedUser._id);
         socketService.on('updatedBoard', updatedBoard => {
             this.props.recieveUpdate(updatedBoard)
         });
@@ -28,7 +29,8 @@ class _Boardbar extends Component {
             this.props.loadBoards()
         })
         socketService.on('accept-notif', (notification) => {
-            this.props.updateUser({ ...this.props.loggedUser, notifications: [...this.props.loggedUser.notifications, notification] })
+            console.log('got notification:', notification);
+            this.props.updateUser({ ...this.props.loggedUser, notifications: [ notification, ...this.props.loggedUser.notifications] })
         })
 
         socketService.emit('user', this.props.loggedUser._id)
@@ -40,6 +42,11 @@ class _Boardbar extends Component {
         socketService.off('updatedBoard')
         socketService.off('add-delete-board')
         socketService.off('accept-notif')
+    }
+
+    displayPopup(msg){
+        this.props.showSnackbar(msg)
+        setTimeout(this.props.hideSnackbar, 3000)
     }
 
     onMoveToBoard(id) {
@@ -69,8 +76,7 @@ class _Boardbar extends Component {
         }
         removeBoard(boardId);
         socketService.emit('add-delete-board')
-        this.props.showSnackbar('Removed board.');
-        setTimeout(() => this.props.hideSnackbar(), 3000)
+        this.props.displayPopup('Removed board.');
         if (id === boardId) {
             const idx = boards.findIndex(board => board._id !== boardId)
             history.push(`/board/${boards[idx]._id}`)
