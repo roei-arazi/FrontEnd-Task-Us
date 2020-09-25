@@ -53,7 +53,7 @@ class _Board extends Component {
         console.log('showing popup:', msg);
         this.props.showSnackbar(msg)
         setTimeout(this.props.hideSnackbar, 3000)
-    }
+    } 
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
