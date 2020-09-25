@@ -61,11 +61,13 @@ class _Task extends Component {
     }
 
     handleDateChange = date => {
+
         const prevDate = moment(this.state.task.dueDate).format('DD/MMM/YYYY')
         const changedDate = moment(date).format('DD/MMM/YYYY')
         if (prevDate === changedDate) return
 
         this.setState({ task: { ...this.state.task, dueDate: moment(date).valueOf() } }, () => {
+
             const desc = `${this.props.loggedUser.fullName} changed task ${this.state.task.name} date from ${moment(this.props.task.dueDate).format('DD/MMM/YYYY')} to ${moment(this.state.task.dueDate).format('DD/MMM/YYYY')} at group -${this.props.group.name}`
 
             this.props.onEditTask(this.state.task, this.props.task, desc)
@@ -102,10 +104,9 @@ class _Task extends Component {
 
         this.setState({ task: { ...this.state.task, updates: [...newUpdates] } }, () => {
 
-            desc =
-                `${this.props.loggedUser.fullName} sent an update at task: ${this.props.task.name} at group - ${this.props.group.name}`
+            desc = `${this.props.loggedUser.fullName} sent an update at task: ${this.props.task.name} at group - ${this.props.group.name}`
 
-            this.props.onEditTask(this.state.task, this.props.group, true, false, 'sendNote')
+            this.props.onEditTask(this.state.task, this.props.task, desc)
         })
     }
 
@@ -136,16 +137,24 @@ class _Task extends Component {
     }
 
     onRemoveMemberFromTask = (memberId) => {
+        let desc = ''
         const removedMember = this.state.task.members.find(member => member._id === memberId)
         this.setState({ task: { ...this.state.task, members: this.state.task.members.filter(member => member._id !== memberId) } }, () => {
-            this.props.onEditTask(this.state.task, this.props.group, removedMember, false, 'removeFromTask')
+            desc = `${this.props.loggedUser.fullName} removed ${removedMember.fullName} from ${this.state.task.name} at group - ${this.props.group.name}`
+
+            this.props.onEditTask(this.state.task, this.props.task, desc)
         })
     }
 
     onAddUserToTask = (userId) => {
+        let desc = ''
+
         const newUser = this.props.users.find(user => user._id === userId)
         this.setState({ task: { ...this.state.task, members: [...this.state.task.members, newUser] } }, () => {
-            this.props.onEditTask(this.state.task, this.props.group, newUser, false, 'addToTask')
+
+            desc = `${this.props.loggedUser.fullName} tasked ${newUser.fullName} to ${this.state.task.name} on group - ${this.props.group.name}`
+
+            this.props.onEditTask(this.state.task, this.props.task, desc)
         })
     }
 
@@ -161,8 +170,16 @@ class _Task extends Component {
     }
 
     onEditTags = (tags, tagName, type) => {
+        let desc = ''
+        console.log('type:', type)
         this.setState({ ...this.state, task: { ...this.state.task, tags: JSON.parse(JSON.stringify(tags)) } }, () => {
-            this.props.onEditTask(this.state.task, this.props.group, tagName, false, type)
+            if (type === 'addTag') {
+                desc = `${this.props.loggedUser.fullName} added tag named ${tagName} to ${this.state.task.name} on group - ${this.props.group.name}`
+            }
+            else if (type === 'removeTag') {
+                desc = `${this.props.loggedUser.fullName} removed tag named ${tagName} from ${this.state.task.name} on group - ${this.props.group.name}`
+            }
+            this.props.onEditTask(this.state.task, this.props.task, desc)
         })
     }
 
@@ -212,7 +229,9 @@ class _Task extends Component {
                                             disabled={false}
                                             onChange={this.handleNameChange}
                                             onBlur={() => {
-                                                this.props.onEditTask(this.state.task, this.props.group, this.state.task.name, name, 'name')
+                                                const desc = `${this.props.loggedUser.fullName} changed task name from ${this.state.task.name} to ${name} at group - ${this.props.group.name}`
+
+                                                this.props.onEditTask(this.state.task, this.props.task, desc)
                                             }}
                                             onKeyDown={(ev) => {
                                                 if (ev.key === 'Enter') {

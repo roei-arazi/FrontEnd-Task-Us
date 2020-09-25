@@ -66,24 +66,23 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = async (newBoard, prevBoard, type) => {
+    onEditBoard = async (newBoard, prevBoard, desc) => {
         const { loggedUser } = this.props;
 
-        let desc = ''
-        switch (type) {
-            case 'changeBoardTitle':
-                desc = `${loggedUser.fullName} Changed the board title from ${prevBoard.name} to ${newBoard.name}`
-                break;
-            case 'changeBoardDesc':
-                desc = `${loggedUser.fullName} Changed ${prevBoard.name} description to ${newBoard.desc}`
-                break;
-            case 'addMemberToBoard':
-                desc = `${loggedUser.fullName} Invited a member to the board `
-                break;
-            case 'removeMemberFromBoard':
-                desc = `${loggedUser.fullName} Removed a member from the board`
-                break;
-        }
+        // switch (type) {
+        //     case 'changeBoardTitle':
+        //         desc = `${loggedUser.fullName} Changed the board title from ${prevBoard.name} to ${newBoard.name}`
+        //         break;
+        //     case 'changeBoardDesc':
+        //         desc = `${loggedUser.fullName} Changed ${prevBoard.name} description to ${newBoard.desc}`
+        //         break;
+        //     case 'addMemberToBoard':
+        //         desc = `${loggedUser.fullName} Invited a member to the board `
+        //         break;
+        //     case 'removeMemberFromBoard':
+        //         desc = `${loggedUser.fullName} Removed a member from the board`
+        //         break;
+        // }
 
         this.props.updateBoard(newBoard, desc, loggedUser)
         userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
@@ -215,41 +214,12 @@ class _Board extends Component {
 
 
     onEditTask = async (task, prevTask, desc) => {
-        console.log('task:', task)
-        console.log('prevTask:', prevTask)
-        console.log('desc:', desc)
+        if (lodash.isEqual(task, prevTask)) return console.log('same');
 
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
 
-        if (lodash.isEqual(task, prevTask)) return console.log('same');
-
-        // case 'name':
-        //     desc = `${loggedUser.fullName} changed task name from ${originalValue} to ${changedValue} at group - ${group.name}`
-        //     break;
-        // case 'sendNote':
-        //     desc = `${loggedUser.fullName} sent an update at task: ${task.name} at group - ${group.name}`
-        //     break;
-
-        // case 'removeFromTask':
-        //     desc = `${loggedUser.fullName} removed ${changedValue.fullName} from ${task.name} at group - ${group.name}`
-
-        //     break;
-        // case 'addToTask':
-        //     desc = `${loggedUser.fullName} tasked ${changedValue.fullName} to ${task.name} on group - ${group.name}`
-
-        //     break;
-        // case 'addTag':
-        //     desc = `${loggedUser.fullName} added tag named ${changedValue} to ${task.name} on group - ${group.name}`
-        //     break;
-        // case 'removeTag':
-        //     desc = `${loggedUser.fullName} removed tag named ${changedValue} from ${task.name} on group - ${group.name}`
-        //     break;
-
-        // default:
-        //     break;
-
-        this.props.editTask(task, board, desc, loggedUser)
+        this.props.editTask(task, board, desc, this.props.loggedUser)
         userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
         this.displayPopup('Updated task.')
 
