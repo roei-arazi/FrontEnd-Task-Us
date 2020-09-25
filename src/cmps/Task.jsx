@@ -157,16 +157,12 @@ class _Task extends Component {
 
         return (
             <React.Fragment>
-                {isUpdatesShown && 
-                    <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
-                    <Updates task={this.state.task} updates={updates} members={members}  priority={priority} status={status} dueDate={dueDate}
-                        loggedUser={this.props.loggedUser} users={this.props.users}
-                        sendNote={this.sendNote} handleChange={this.handleChange} handleDateChange={this.handleDateChange} onEditTags={this.onEditTags}
-                        onEditTask={this.props.onEditTask} closeModal={this.closeModal}
+                <div className={`${isUpdatesShown && 'animate-side-modal'} side-modal`}>
+                    <Updates closeModal={this.closeModal} task={this.state.task} isImageModalShown={this.state.isImageModalShown}
+                        loggedUser={this.props.loggedUser} updates={updates}
+                        uploadImg={this.uploadImg} sendNote={this.sendNote} closeModal={this.closeModal}
                     />
                 </div>
-                }
-            
 
                 {(isUsersShown || isStatusShown || isPriorityShown || isUpdatesShown || isTagsShown) && <div className="modal-screen-wrapper" onClick={this.closeModal}></div>}
                 <Draggable draggableId={id} index={this.props.index}>
@@ -200,6 +196,7 @@ class _Task extends Component {
                                             onKeyDown={(ev) => {
                                                 if (ev.key === 'Enter') {
                                                     ev.target.blur()
+                                                    this.props.onEditTask(this.state.task, this.props.group, this.state.task.name, name, 'name')
                                                 }
                                             }}
                                         />
@@ -213,24 +210,17 @@ class _Task extends Component {
                             </div>
 
                             <div className="task-right flex align-center">
-                                {window.innerWidth > 380 &&  <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
+                                <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
-                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask} />}
-                               
+                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
                                 <Status status={status} isStatusShown={isStatusShown}
                                     handleChange={this.handleChange} openModal={this.openModal} />
-                                    {window.innerWidth > 450 && 
-                                    <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />}
-                                    {window.innerWidth > 450 && 
-                                    <Priority priority={priority} isPriorityShown={isPriorityShown}
-                                    openModal={this.openModal} handleChange={this.handleChange} />}
-                                    {window.innerWidth > 450 && 
-                                      <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
-                                      task={this.state.task} isTagsShown={isTagsShown}
-                                      openModal={this.openModal} handleChange={this.handleChange} />}
-                                
-                                
-                              
+                                <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
+                                <Priority priority={priority} isPriorityShown={isPriorityShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} />
+                                <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
+                                    task={this.state.task} isTagsShown={isTagsShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} />
                             </div>
                         </section>
 

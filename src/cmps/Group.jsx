@@ -163,16 +163,16 @@ export class Group extends Component {
                                 </h1>
                             </div>
                             <div className="group-header-right flex"  {...provided.dragHandleProps}>
-                                {window.innerWidth > 380 &&
-                                    <h3 style={{ color: this.props.group.color }}>Members</h3>}
+                             
+                                    <h3 style={{ color: this.props.group.color }}>Members</h3>
 
                                 <h3 style={{ color: this.props.group.color }}>Status</h3>
-                                {window.innerWidth > 450 &&
-                                    <h3 style={{ color: this.props.group.color }}>Due-Date</h3>}
-                                {window.innerWidth > 450 &&
-                                    <h3 style={{ color: this.props.group.color }}>Priority</h3>}
-                                {window.innerWidth > 450 &&
-                                    <h3 style={{ color: this.props.group.color }}>Tags</h3>}
+                              
+                                    <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
+                               
+                                    <h3 style={{ color: this.props.group.color }}>Priority</h3>
+                                
+                                    <h3 style={{ color: this.props.group.color }}>Tags</h3>
 
 
 
