@@ -26,6 +26,12 @@
                 justify-content: center;
                 align-items: center;
             }
+
+            @media( max-width: 450px){
+                >*{
+                    width:70px;
+                }
+            }
         }
 
         .color-picker {
@@ -56,9 +62,15 @@
             }
         }
     }
+    @media (max-width: 450px) {
+        font-size: 0.9rem;
+    }
 
     .task-list {
         min-height: 35px;
+    }
+    @media (max-width: 450px) {
+        min-height: 30px;
     }
 
     .task-add {
