@@ -128,7 +128,7 @@ export default class Activities extends Component {
                     <div className="activity-list-not-read column flex  padding-y-15">
                         <h1 className="flex space-between">
                             New Activities ({activitiesNotRead.length})
-                         <IoIosArrowDropdown className={this.state.isActivitiesNotReadShown ? "rotate0" : "rotate90"} onClick={this.toggleActivitiesNotRead} />
+                         <IoIosArrowDropdown className={this.state.isActivitiesNotReadShown ? " toggle-btn rotate0" : " toggle-btn rotate90"} onClick={this.toggleActivitiesNotRead} />
                         </h1>
                         {this.state.isActivitiesNotReadShown && activitiesNotRead.length !== 0 && activitiesNotRead.map((activity, idx) => {
                             return (
@@ -158,7 +158,7 @@ export default class Activities extends Component {
                     <div className="activity-list column flex  padding-y-15">
                         <h1 className="flex space-between">
                             Activities Read ({activities.length})
-                        <IoIosArrowDropdown onClick={this.toggleActivities} className={this.state.isActivitiesShown ? "rotate0" : "rotate90"} />
+                        <IoIosArrowDropdown onClick={this.toggleActivities} className={this.state.isActivitiesShown ? "toggle-btn rotate0" : "toggle-btn rotate90"} />
                         </h1>
                         {
                             this.state.isActivitiesShown && activities.length !== 0 && activities.map((activity, idx) => {

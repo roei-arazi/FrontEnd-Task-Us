@@ -27,7 +27,9 @@ class _Board extends Component {
 
     state = {
         boardId: '',
-        txt: ''
+        txt: '',
+        gif: 'loading.gif',
+        loaded: 'loading.gif'
     }
 
 
@@ -344,11 +346,28 @@ class _Board extends Component {
         return this.props.boards.find(board => board._id === this.state.boardId)
     }
 
+    reloadGif = () => {
+        this.setState({ loaded: '' })
+        setTimeout(() => {
+            this.setState({ loaded: this.state.gif })
+        }, 0)
+    }
+
     render() {
-        if (this.props.boards.length === 0) return <h1>Loading...</h1>
         const board = this._getCurrBoard()
         const { users, filterBy } = this.props;
-        if (!board) return <h1>Loading..</h1>
+        if (!board) {
+            setTimeout(() => {
+                this.reloadGif()
+            }, 5000);
+            return (
+                <div className="loader-container flex justify-center align-center">
+                    <img src={this.state.loaded} />
+                </div>
+            )
+        }
+
+
         const filteredBoard = this.applyFilter(board, filterBy);
         return (
             <section className={`board ${window.innerWidth > 450 ? 'flex' : 'flex column'}`}>

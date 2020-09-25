@@ -17,7 +17,7 @@ class _Home extends Component {
         if (!this.props.boards || this.props.boards.length === 0) return <h1>Loading...</h1>
         return (
             <section className="home flex column">
-                <main className="home-main flex space-between align-center  ">
+                <main className="home-main flex align-center  ">
                     <div className="home-login-sign-cta absolute">
                         <NavLink to="/login">
                             <button>Login</button>
@@ -36,7 +36,7 @@ class _Home extends Component {
                         <h2>Need an efficient way to manage your co-workers / employees?</h2>
                         <h2>Then this is the app for you.</h2>
                         <NavLink to={`/board/${this.props.boards[0]._id}`}>
-                            <button className="guest-button">Try it <span>Here!</span></button>
+                            <button className="guest-button absolute">Try As a Guest!</button>
                         </NavLink>
 
                     </div>
