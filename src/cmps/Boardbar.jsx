@@ -60,8 +60,8 @@ class _Boardbar extends Component {
         this.setState({ anchorEl: null })
     }
 
-    onAddBoard = () =>{
-        this.props.addBoard(this.props.loggedUser)
+    onAddBoard = async () =>{
+        await this.props.addBoard(this.props.loggedUser)
         socketService.emit('add-delete-board')
     }
 

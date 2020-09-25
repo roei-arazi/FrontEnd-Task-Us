@@ -8,7 +8,6 @@ export function loadBoards() {
     return async dispatch => {
         try {
             const boards = await boardService.loadBoards();
-            console.log('got boards in actions:', boards);
             dispatch({ type: 'SET_BOARDS', boards })
         } catch (err) {
             console.log('boardActions: Couldn\'t load boards');
@@ -56,7 +55,6 @@ export function addBoard(loggedUser) {
     return async dispatch => {
         try {
             const board = await boardService.addBoard(loggedUser);
-
             dispatch({ type: 'ADD_BOARD', board })
         } catch (err) {
             console.log('boardActions: Couldn\'t add board');

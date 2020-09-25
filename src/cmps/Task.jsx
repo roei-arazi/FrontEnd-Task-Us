@@ -196,7 +196,6 @@ class _Task extends Component {
                                             onKeyDown={(ev) => {
                                                 if (ev.key === 'Enter') {
                                                     ev.target.blur()
-                                                    this.props.onEditTask(this.state.task, this.props.group, this.state.task.name, name, 'name')
                                                 }
                                             }}
                                         />
