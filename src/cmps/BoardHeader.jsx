@@ -7,8 +7,8 @@ import { Filter } from './Filter';
 import { withRouter } from 'react-router-dom';
 import socketService from '../services/socketService.js'
 import { FiMinus } from 'react-icons/fi';
-import { CgProfile } from 'react-icons/cg';
 import { FiPlus } from 'react-icons/fi';
+import { Fade } from '@material-ui/core';
 
 
 export class _BoardHeader extends React.Component {
@@ -284,12 +284,8 @@ export class _BoardHeader extends React.Component {
                             {isFiltering && <div className="filter-active-indicator"></div>}
                             <VscListFilter className={isFiltering ? 'filter-active' : ''} />
                             <h2 className={isFiltering ? 'filter-active' : ''}>Filter</h2>
-                            {
-                                this.state.isFiltersOpen &&
 
-                                <Filter board={this.props.board} />
-
-                            }
+                            <Filter isFiltersOpen={this.state.isFiltersOpen} board={this.props.board} />
                         </div>
 
 

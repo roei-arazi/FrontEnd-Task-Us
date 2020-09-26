@@ -1,12 +1,12 @@
 .group {
     position: relative;
-
+    min-width: 1080px;
 
     @media(max-width:450px) {
         padding: 5px;
         width: 100%;
         overflow: overlay;
-        height:auto;
+        height: auto;
     }
 
     .delete-group-icon,
@@ -142,6 +142,7 @@
 
     .group-precent-container {
         margin-right: 30px;
+
         [data-title]:hover:after {
             font-size: 1rem;
             width: max-content;

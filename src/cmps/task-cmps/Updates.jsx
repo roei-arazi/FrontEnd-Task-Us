@@ -110,11 +110,17 @@ export class Updates extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="updates-container">
-                    {updates.map((update, idx) => <Update update={update} key={idx} idx={idx}
-                        updates={updates} loggedUser={this.props.loggedUser}
-                        sendNote={this.props.sendNote}
-                        updateNote={this.updateNote} makeid={makeid} />)}
+                <div className={`updates-container  ${!updates.length ? "flex justify-center align-center" : ""} `}>
+                    {
+                        !updates.length ? <h1>There are no posts to show.</h1> :
+
+                            updates.map((update, idx) => <Update update={update} key={idx} idx={idx}
+                                updates={updates} loggedUser={this.props.loggedUser}
+                                sendNote={this.props.sendNote}
+                                updateNote={this.updateNote} makeid={makeid} />)
+
+                    }
+
                 </div>
             </React.Fragment>
 

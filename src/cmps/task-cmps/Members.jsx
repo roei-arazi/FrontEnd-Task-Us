@@ -1,5 +1,5 @@
+import { Fade } from '@material-ui/core';
 import React from 'react'
-import { CgProfile } from 'react-icons/cg'
 import { FiMinus } from 'react-icons/fi'
 import { FiPlus } from 'react-icons/fi';
 
@@ -47,8 +47,7 @@ export function Members(props) {
                     <FiPlus className="no-members-icon-plus" />
                 </div>}
 
-
-            {props.isUsersShown &&
+            <Fade in={props.isUsersShown} >
                 <div className="users-modal modal-fade-in absolute">
                     <div className="task-users-box">
                         <h3>Task Members</h3>
@@ -80,7 +79,9 @@ export function Members(props) {
                         })}
                     </div>
 
-                </div>}
+                </div>
+            </Fade>
+
         </div>
     )
 }

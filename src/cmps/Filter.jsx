@@ -28,12 +28,13 @@ function _Filter(props) {
         }
         return res;
     }
- 
+
     if (!board) return <h1>Loading...</h1>
     const { groups, members } = board;
     const dates = getBoardDates();
     return (
-        <Fade in={true}>
+        <Fade in={props.isFiltersOpen}>
+
             <div className="filter-modal flex absolute">
                 <section className="group-name-filter flex column align-center">
                     <h3>Groups</h3>
@@ -47,7 +48,7 @@ function _Filter(props) {
                 <section className="task-member-filter flex column align-center">
                     <h3>Member</h3>
                     <div className="filter-list">
-                        {members.map((member,idx) => <button
+                        {members.map((member, idx) => <button
                             className={filterBy.memberId === member._id ? 'remove-filter-btn' : ''}
                             key={idx}
                             onClick={() => onSetFilter('memberId', member._id)}>{member.fullName}</button>)}
