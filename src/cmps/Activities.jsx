@@ -101,10 +101,12 @@ export default class Activities extends Component {
                                         <div className="filter-modal flex absolute">
                                             <section className="activity-member-filter">
                                                 <h3>Member</h3>
+                                                <div className="filter-list flex justify-center align-center column">
                                                 {members.map((member, idx) => <button
                                                     className={filterBy.member === member ? 'remove-filter-btn' : ''}
                                                     key={idx}
                                                     onClick={() => this.onSetFilter('member', member)}>{member}</button>)}
+                                                    </div>
                                             </section>
                                             <section className="activity-date-filter">
                                                 <h3>Date</h3>
