@@ -6,9 +6,10 @@ import Activities from './Activities';
 import { Filter } from './Filter';
 import { withRouter } from 'react-router-dom';
 import socketService from '../services/socketService.js'
-import { FiPlus } from 'react-icons/fi';
 import { FiMinus } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
+import { FiPlus } from 'react-icons/fi';
+
 
 export class _BoardHeader extends React.Component {
 
@@ -168,13 +169,19 @@ export class _BoardHeader extends React.Component {
                     </h1>
                     <div className="board-header-right relative flex align-center">
                         <div className="board-users flex justify-center" onClick={this.onToggleUsers}>
-                            {members.length === 0 && <div className="user-img-container"> <CgProfile /></div>}
+                            {members.length === 0 && <div className="no-members-container relative">
+                                <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" />
+                                <FiPlus className="no-members-icon-plus" />
+                            </div>}
                             {members.length !== 0 && members.map((member, idx) => {
                                 return <div key={idx} className="user-img-container">
                                     {
                                         member.imgUrl ? <img src={member.imgUrl} />
                                             :
-                                            <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" />
+                                            <div className="member-letter">
+                                                {this._getMemeberInitials(member)[0]}
+                                                {this._getMemeberInitials(member)[1]}
+                                            </div>
 
                                     }
                                 </div>
@@ -209,8 +216,13 @@ export class _BoardHeader extends React.Component {
                                     {usersToAdd.map(user => {
                                         return <section key={user._id} className="user-box flex space-between align-center">
                                             <div className="user-box-info flex  align-center" onClick={() => this.goToUserProfile(user._id)}>
-                                                {user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
-                                                    <div className="member-letter">{user.fullName.charAt(0).toUpperCase()}</div>}
+                                                {
+                                                    user.imgUrl ? <img src={user.imgUrl} alt="profile" />
+                                                        : <div className="member-letter">
+                                                            {this._getMemeberInitials(user)[0]}
+                                                            {this._getMemeberInitials(user)[1]}
+                                                        </div>
+                                                }
                                                 <p className="member-name">{user.fullName}</p>
                                             </div>
                                             {
@@ -270,7 +282,7 @@ export class _BoardHeader extends React.Component {
                         <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}
 
                             className="filters-outer-container relative flex align-center cursor-pointer"  >
-                                {isFiltering && <div className="filter-active-indicator"></div>}
+                            {isFiltering && <div className="filter-active-indicator"></div>}
                             <VscListFilter className={isFiltering ? 'filter-active' : ''} />
                             <h2 className={isFiltering ? 'filter-active' : ''}>Filter</h2>
                             {

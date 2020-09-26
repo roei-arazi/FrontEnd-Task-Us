@@ -33,7 +33,10 @@ export function Members(props) {
                     {props.members[0].fullName.charAt(0).toUpperCase()}
                 </div>
                 :
-                <div className="no-members-container"> <CgProfile className="no-members-icon" /> <FiPlus className="no-members-icon-plus" /></div>}
+                <div className="no-members-container">
+                    <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" className="no-members-icon" />
+                    <FiPlus className="no-members-icon-plus" />
+                </div>}
 
 
             {props.isUsersShown &&
