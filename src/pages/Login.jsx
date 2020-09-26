@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
 import FacebookLogin from 'react-facebook-login'
 
-import { login, guestLogin } from '../store/actions/userActions.js'
+import { login, guestLogin, signup } from '../store/actions/userActions.js'
 import { loadBoards } from '../store/actions/boardActions'
 
 class _Login extends Component {
@@ -25,8 +25,16 @@ class _Login extends Component {
         this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
 
-    responseFacebook = (response) => {
-        console.log(response);
+    responseFacebook = async(response) => {
+        const user={
+            username: response.name,
+            email: response.email,
+            imgUrl: response.picture.data.url,
+            facebookId: response.userID
+        }
+        // await this.props.signup(user, 'facebook')
+        await this.props.login(user)
+        if (this.props.loggedUser) this.props.history.push(`/board/${this.props.boards[0]._id}`)
       }
 
     render() {
@@ -57,7 +65,7 @@ class _Login extends Component {
                     <ErrorMessage name="password" component="span" />
                     <button type="submit">Login</button>
                     <FacebookLogin
-                        appId="1088597931155576"
+                        appId="632288707652598"
                         size="small"
                         fields="name,email,picture"
                         // onClick={this.onLogin}
@@ -84,7 +92,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     login,
     guestLogin,
-    loadBoards
+    loadBoards,
+    signup
 }
 
 export const Login = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Login));
