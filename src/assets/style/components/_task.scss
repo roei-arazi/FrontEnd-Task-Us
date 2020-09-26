@@ -172,7 +172,7 @@
 
             .member-img-container {
 
-                >:not(:first-child).member-img {
+                >*:not(:first-child) {
                     margin-left: -15px;
                 }
             }
@@ -217,6 +217,7 @@
                 font-weight: 700;
                 width: 30px;
                 height: 30px;
+
             }
 
             .task-number-of-imgs {

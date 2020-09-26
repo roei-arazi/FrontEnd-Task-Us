@@ -76,6 +76,7 @@
                 box-shadow: $modalsShadow;
                 max-height: 400px;
                 overflow: overlay;
+                transition: .3s;
 
                 .board-users-box {
                     border-bottom: 1px solid #a8a8a87d;
