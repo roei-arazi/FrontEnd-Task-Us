@@ -34,18 +34,16 @@ class _Board extends Component {
 
     async componentDidMount() {
         try {
-            setTimeout(async () => {
-                if (!this.props.boards || !this.props.boards.length) {
-                    await this.props.loadBoards();
-                    try {
-                        if (!this.props.users || !this.props.users.length) {
-                            await this.props.loadUsers();
-                        }
-                    } catch (err) {
-                        console.log('Error', err)
+            if (!this.props.boards || !this.props.boards.length) {
+                await this.props.loadBoards();
+                try {
+                    if (!this.props.users || !this.props.users.length) {
+                        await this.props.loadUsers();
                     }
+                } catch (err) {
+                    console.log('Error', err)
                 }
-            }, 2000);
+            }
 
         } catch (err) {
             console.log('Error', err)
@@ -66,27 +64,12 @@ class _Board extends Component {
         }
     }
 
-    onEditBoard = async (newBoard, prevBoard, desc) => {
+    onEditBoard = async (newBoard, desc) => {
         const { loggedUser } = this.props;
-
-        // switch (type) {
-        //     case 'changeBoardTitle':
-        //         desc = `${loggedUser.fullName} Changed the board title from ${prevBoard.name} to ${newBoard.name}`
-        //         break;
-        //     case 'changeBoardDesc':
-        //         desc = `${loggedUser.fullName} Changed ${prevBoard.name} description to ${newBoard.desc}`
-        //         break;
-        //     case 'addMemberToBoard':
-        //         desc = `${loggedUser.fullName} Invited a member to the board `
-        //         break;
-        //     case 'removeMemberFromBoard':
-        //         desc = `${loggedUser.fullName} Removed a member from the board`
-        //         break;
-        // }
 
         this.props.updateBoard(newBoard, desc, loggedUser)
         userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
-        this.displayPopup('Updated board.')
+        if (desc) this.displayPopup('Updated board.')
 
     }
 

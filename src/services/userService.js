@@ -126,7 +126,7 @@ async function guestLogin() {
     const user = {
         _id: _makeid(),
         username: 'guest',
-        fullName: 'guest',
+        fullName: 'Guest User',
         password: 'none',
         imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
@@ -160,7 +160,7 @@ async function logout() {
 async function notifyUsers(content, members, loggedUser) {
     console.log('got user in service:', loggedUser);
     const users = await loadUsers();
-    if(members === 'add') members = [...users]
+    if (members === 'add') members = [...users]
     const notification = {
         byUser: {
             fullName: loggedUser.fullName,
@@ -172,7 +172,7 @@ async function notifyUsers(content, members, loggedUser) {
     members.forEach(member => {
         if (member._id === loggedUser._id) return;
         let userToUpdate = users.find(user => user._id === member._id);
-        if(!userToUpdate){
+        if (!userToUpdate) {
             console.log('can\'t updated user:', userToUpdate);
             return;
         }

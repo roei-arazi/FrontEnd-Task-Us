@@ -1,12 +1,25 @@
 const initialState = {
     users: [],
-    loggedUser: {      
-            "_id" : "5f68936cf878123b2cd354436ce96d",
-            "username" : "guest",
-            "fullName" : "guest",
-            "password" : "",
-            "email" : "guest@gmail.com",
-            "notifications" : [ ],
+    loggedUser: {
+        "_id": "5f68936cf878123b2cd354436ce96d",
+        "username": "guest",
+        "fullName": "Guest User",
+        "password": "",
+        "email": "guest@gmail.com",
+        "notifications": [{
+            "byUser": {
+                "fullName": "Liam Zety"
+            },
+            "content": "board: Liam Zety Removed a you from the board",
+            "createdAt": Date.now() - 1000 * 60 * 2
+        },
+        {
+            "byUser": {
+                "fullName": "Sharon Obama"
+            },
+            "content": "board: Sharon Added you to the board - Caljul20",
+            "createdAt": Date.now() - 1000 * 60 * 3
+        }],
     },
     userProfile: null
 }

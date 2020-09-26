@@ -36,11 +36,12 @@ class _Home extends Component {
                     </div>
                     <div className="col-right flex align-center justify-center padding-x-30  column">
                         <h1>Working in a large scale company?</h1>
-                        <ul>
-                            <li><h2>Do you need to keep track of hundreds of tasks?</h2></li>
-                            <li>  <h2>Need an efficient way to manage your co-workers / employees?</h2></li>
-                            <li> <h2>Then this is the app for you.</h2></li>
-                        </ul>
+
+                        <p>Do you need to keep track of hundreds of tasks? <br />
+                            Need an efficient way to manage your co-workers / employees? <br />
+                            Then this is the app for you.
+                             </p>
+
 
 
                         <NavLink to={`/board/${this.props.boards[0]._id}`}>
