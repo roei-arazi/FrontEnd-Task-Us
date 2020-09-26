@@ -17,14 +17,6 @@
 
         }
 
-
-
-        .task-label-name {
-            overflow: hidden;
-        }
-
-
-
         .tag-add-container {
 
             background-color: $white;
@@ -56,7 +48,6 @@
 
 
     .task-label-name {
-        overflow: overlay;
         flex-wrap: wrap;
 
         p {
