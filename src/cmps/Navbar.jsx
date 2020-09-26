@@ -37,7 +37,7 @@ class _Navbar extends Component {
         return (
             <section className="navbar flex column space-between align-center padding-y-15">
 
-                <ul className="navbar-links flex column space-around">
+                <ul className="navbar-links flex column space-around"> 
                     <NavLink to="/">
                         <img className="logo-navbar" src="taskus-nav.png" alt="" />
                     </NavLink>
