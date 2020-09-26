@@ -85,6 +85,10 @@
             font-size: 1.5rem;
             background-color: $pink;
             color: $colorBgBoardBars;
+                cursor: pointer;
+        }
+        h2{
+            cursor: pointer; 
         }
     } 
 }

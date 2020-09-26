@@ -4,9 +4,10 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { Fade } from '@material-ui/core';
 import { VscListFilter } from 'react-icons/vsc';
 import { IoIosArrowDropdown } from 'react-icons/io';
+import { withRouter } from 'react-router-dom';
 
 
-export default class Activities extends Component {
+class _Activities extends Component {
 
     state = {
         isOrderReversed: false,
@@ -41,6 +42,10 @@ export default class Activities extends Component {
         const filterBy = { ...this.state.filterBy }
         if (filterBy[key] === value) value = '';
         this.setState({ filterBy: { ...filterBy, [key]: value } })
+    }
+
+    moveToProfile = (userId) =>{
+        this.props.history.push(`/user/${userId}`)
     }
 
     getActivityDates() {
@@ -148,9 +153,9 @@ export default class Activities extends Component {
                                                 {moment(activity.createdAt).format("DD MMM")}
                                             </p>
                                         </div>
-                                        {activity.byUser.imgUrl ? <img src={activity.byUser.imgUrl} alt="" />:
-                                        <div className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
-                                        <h2>{activity.byUser.fullName}</h2>
+                                        {activity.byUser.imgUrl ? <img onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" />:
+                                        <div onClick={() => this.moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
+                                        <h2 onClick={() => this.moveToProfile(activity.byUser._id)}>{activity.byUser.fullName}</h2>
                                     </div>
                                     <div className="activity-desc-container flex align-center">
                                         <p>
@@ -180,8 +185,9 @@ export default class Activities extends Component {
                                                     {moment(activity.createdAt).format("DD MMM")}
                                                 </p>
                                             </div>
-                                            <img src={activity.byUser.imgUrl} alt="" />
-                                            <h2>{activity.byUser.fullName}</h2>
+                                            {activity.byUser.imgUrl ? <img onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" />:
+                                        <div onClick={() => this.moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
+                                            <h2 onClick={() => this.moveToProfile(activity.byUser._id)}>{activity.byUser.fullName}</h2>
                                         </div>
                                         <div className="activity-desc-container flex align-center">
                                             <p>
@@ -203,3 +209,5 @@ export default class Activities extends Component {
         )
     }
 }
+
+export default withRouter(_Activities)

@@ -9,7 +9,9 @@
             color: $colorBgBoardBars; 
             font-size: 12rem;
             border: 5px solid $colorBgBoardBars;
-            background-color: $pink;
+            &.initials{
+                background-color: $pink;
+            }
         }
         .modal-screen {
             width: 100%;
@@ -20,7 +22,7 @@
                 height: 100%;
                 position: absolute;
                 background-color: $colorBgBoardBars;
-            }
+            } 
             .user-modal-header {
                 background-color: $buttonMainBg;
                 height: 40vh;
