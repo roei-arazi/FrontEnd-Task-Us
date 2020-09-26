@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { loadBoards } from '../store/actions/boardActions'
+import { guestLogin } from '../store/actions/userActions'
 
 class _Home extends Component {
 
@@ -35,17 +36,15 @@ class _Home extends Component {
                         <video onClick={() => this.video.current.play()} ref={this.video} autoPlay muted src="taskus-home-video.mp4"></video>
                     </div>
                     <div className="col-right flex align-center justify-center padding-x-30  column">
-                        <h1>Working in a large scale company?</h1>
+                        <h1>The next step in multi-planning and productivity!</h1>
 
-                        <p>Do you need to keep track of hundreds of tasks? <br />
-                            Need an efficient way to manage your co-workers / employees? <br />
-                            Then this is the app for you.
-                             </p>
-
-
+                        <p><span>Task-us </span> will help you keep track of hundreds of tasks. <br />
+                            An efficient way to manage your co-workers / employees. <br />
+                            Half the hassle and twice the fun.
+                        </p>
 
                         <NavLink to={`/board/${this.props.boards[0]._id}`}>
-                            <button className="guest-button ">Try As a Guest!</button>
+                            <button onClick={this.props.guestLogin} className="guest-button ">Try As a Guest!</button>
                         </NavLink>
 
                     </div>
@@ -64,7 +63,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    loadBoards
+    loadBoards,
+    guestLogin
 }
 
 export const Home = connect(mapStateToProps, mapDispatchToProps)(_Home);

@@ -38,15 +38,16 @@
 
     h1 {
         font-size: 2.5em;
+        margin-bottom: 60px;
     }
 
     p {
         font-size: 1.5em;
+        margin-bottom: 60px;
 
     }
 
     .guest-button {
-        margin-top: 25px;
         background-color: #f0284e;
         color: $colorBgBoardBars;
         border-radius: 20px;
@@ -62,16 +63,20 @@
     }
 
     .col-right {
-        text-align: center;
-        line-height: 4;
+        text-align: left;
         height: 100vh;
         color: #f1f1f1;
         background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, #cdeefac2 75%);
         width: 50%;
+        line-height: 2.5;
 
-        a {
-            position: relative;
-            width: 200px;
+        h1 {
+            line-height: 2;
+        }
+
+        span {
+            color: $mainBlack;
+            font-weight: 700;
         }
     }
 
@@ -85,6 +90,7 @@
 @media (max-width:1000px) {
     .home-main {
         flex-wrap: wrap;
+        height: 83vh;
 
         .col-left {
             position: absolute;
@@ -92,6 +98,7 @@
         }
 
         .col-right {
+            text-align: center;
             margin-top: 140px;
             background: linear-gradient(0deg, rgba(199, 229, 241, 1) 0%, #ffffff00 68%);
             width: 100%;
