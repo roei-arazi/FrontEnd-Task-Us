@@ -26,8 +26,9 @@
         align-self: flex-start;
 
         li {
-            height: 35px;
             border-radius: 5px;
+            word-break: break-word;
+            margin-right: 15px;
 
             &:hover {
                 transition: 0.3s;
@@ -51,7 +52,6 @@
                 color: $mainBlack;
                 padding: 2px;
                 margin-right: 5px;
-                border-radius: 5px;
 
                 &:hover {
                     transition: .3s;
