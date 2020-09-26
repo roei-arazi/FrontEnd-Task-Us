@@ -128,7 +128,7 @@ async function guestLogin() {
         username: 'guest',
         fullName: 'guest',
         password: 'none',
-        imgUrl: 'https://via.placeholder.com/100',
+        imgUrl: 'https://www.shareicon.net/data/2015/08/15/85434_guest_512x512.png',
         isAdmin: true,
         boards: [{ id: '212', name: 'board1' }],
         notifications: [],

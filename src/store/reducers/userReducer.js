@@ -7,6 +7,7 @@ const initialState = {
             "password" : "",
             "email" : "guest@gmail.com",
             "notifications" : [ ],
+            "imgUrl": "https://www.shareicon.net/data/2015/08/15/85434_guest_512x512.png"
     },
     userProfile: null
 }
