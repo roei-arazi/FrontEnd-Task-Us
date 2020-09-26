@@ -6,7 +6,7 @@
         padding-left: 15px;
         padding-right: 50px;
 
-       
+
     }
 
     .my-week-container {
@@ -18,7 +18,7 @@
         height: 100vh;
         overflow-y: overlay;
 
-        @media (max-width: 450px){
+        @media (max-width: 450px) {
             padding: 0 15px;
         }
 
@@ -49,9 +49,9 @@
             font-size: 1.9rem;
 
 
-        @media(max-width: 450px){
-            font-size:1.4rem;
-        }
+            @media(max-width: 450px) {
+                font-size: 1.4rem;
+            }
         }
     }
 
@@ -60,7 +60,7 @@
         height: 15vh;
         width: 500px;
 
-        @media(max-width: 450px){
+        @media(max-width: 450px) {
 
             width: auto;
         }
@@ -95,7 +95,7 @@
             border: 1px solid #c5c7d0;
             margin-bottom: 10px;
 
-            @media(max-width:450px){
+            @media(max-width:450px) {
                 height: 50px;
             }
 
@@ -106,7 +106,7 @@
             .left-column {
                 margin: 0 16px;
 
-                @media(max-width:450px){
+                @media(max-width:450px) {
                     margin: 0 5px;
                 }
 
@@ -136,23 +136,18 @@
                 border-bottom-right-radius: 8px;
                 border-top-right-radius: 8px;
 
-                @media (max-width: 450px){
+                @media (max-width: 450px) {
                     width: auto;
                 }
-                
+
 
                 .user-img-container {
 
                     img,
                     .member-letter {
-<<<<<<< HEAD
                         height: 35px;
                         width: 35px;
-                        margin-right:5px;
-=======
-                        width: 30px;
-                        height: 30px;
->>>>>>> dbc1e058d8f48b2c7f6498455effe9ba3daea8e0
+                        margin-right: 5px;
                     }
 
                     img {
@@ -180,7 +175,7 @@
                     border-top-right-radius: 8px;
                     cursor: pointer;
 
-                    @media (max-width: 450px){
+                    @media (max-width: 450px) {
                         width: 70px;
                     }
 

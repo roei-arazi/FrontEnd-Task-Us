@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { HiOutlineCog } from 'react-icons/hi';
 import { BsFillPlusCircleFill, } from 'react-icons/bs';
-
+import { MdDelete } from 'react-icons/md'
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate, loadBoards } from '../store/actions/boardActions.js';
 import { updateUser } from '../store/actions/userActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
@@ -15,7 +15,6 @@ import { Dashboard } from './Dashboard'
 
 class _Boardbar extends Component {
     state = {
-        anchorEl: null,
         selectedBoardId: '',
         isSnackbarOpen: false,
         isShown: '',
@@ -54,14 +53,6 @@ class _Boardbar extends Component {
         this.props.history.push(`/board/${id}`)
     }
 
-    handleMenuOpen = (ev, boardId) => {
-        this.setState({ anchorEl: ev.currentTarget, selectedBoardId: boardId })
-    }
-
-    handleMenuClose = () => {
-        this.setState({ anchorEl: null })
-    }
-
     onAddBoard = async () => {
         const { loggedUser } = this.props;
         await this.props.addBoard(this.props.loggedUser)
@@ -76,7 +67,6 @@ class _Boardbar extends Component {
         const notif = `${loggedUser.fullName} deleted ${board.name}`;
         userService.notifyUsers(notif, board.members, loggedUser)
         const { id } = match.params;
-        this.handleMenuClose()
         if (boards.length === 1) {
             console.log('you need at least one board!');
             return;
@@ -123,25 +113,29 @@ class _Boardbar extends Component {
                 <ul>
                     {isShown && filteredBoards.map((board, idx) => {
                         return <li
-                            className="flex align-center"
-                            key={idx}>
-                            <HiOutlineCog onClick={(ev) => this.handleMenuOpen(ev, board._id)} />
+                            style={{ paddingLeft: this.props.loggedUser._id === board.boardCreator._id ? '' : '25px' }}
+                            className="flex align-center cursor-pointer"
+                            key={idx}
+                            onClick={() => this.onMoveToBoard(board._id)}
+                        >
+                            {
+                                this.props.loggedUser._id === board.boardCreator._id &&
+                                <MdDelete onClick={ev => {
+                                    ev.stopPropagation()
+                                    this.onBoardRemove(board._id)
+                                }
+                                } />
 
-                            <h4 onClick={() => this.onMoveToBoard(board._id)}>{board.name}</h4>
+                            }
+
+                            <h5 style={{ color: this.props.loggedUser._id === board.boardCreator._id ? "#0085ff" : "#333333" }}>
+                                {board.name}
+                            </h5>
                         </li>
                     })}
                 </ul>
                 <Dashboard />
-                <Menu
-                    role="menuContainer"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={this.handleMenuClose}
-                >
-                    <MenuItem onClick={() => this.onBoardRemove(selectedBoardId)}>Delete</MenuItem>
-                    <MenuItem onClick={this.handleMenuClose}>Edit</MenuItem>
-                </Menu>
+
             </section>
         )
     }

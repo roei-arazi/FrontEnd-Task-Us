@@ -19,16 +19,15 @@
     }
 
     ul {
-        width: 100%;
-        padding: 0;
-        max-height: 80%;
-        overflow: overlay;
-        align-self: flex-start;
+        overflow-y: overlay;
+        overflow-x: hidden;
 
         li {
             border-radius: 5px;
             word-break: break-word;
             margin-right: 15px;
+            display: flex;
+            min-height: 25px;
 
             &:hover {
                 transition: 0.3s;
@@ -52,6 +51,7 @@
                 color: $mainBlack;
                 padding: 2px;
                 margin-right: 5px;
+                flex-shrink: 0;
 
                 &:hover {
                     transition: .3s;
@@ -120,9 +120,12 @@
         }
     }
 
-    li,
+    li {
+        margin-bottom: 10px;
+    }
+
     input {
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
 
     h4 {
