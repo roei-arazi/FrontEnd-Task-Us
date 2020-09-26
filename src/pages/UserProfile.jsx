@@ -52,7 +52,7 @@ class _UserProfile extends Component {
 
     render() {
         let { email, fullName, username, imgUrl, _id } = this.state.user;
-
+        const guestId = '5f6efc73805dbf6054d58794';
         if (!_id) {
             return (
                 <div className="loader-container flex justify-center align-center">
@@ -62,6 +62,8 @@ class _UserProfile extends Component {
         }
 
         const { loggedUser } = this.props
+        console.log('loggedUser id:', loggedUser._id);
+        console.log('guest id:', guestId);
         return (
             <section className="user-profile">
                 <Navbar />
@@ -72,7 +74,7 @@ class _UserProfile extends Component {
                     </header>
 
                     <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">
-                        {loggedUser._id === _id ? <h2 onClick={this.toggleModal}
+                        {(loggedUser._id === _id && loggedUser._id !== guestId) ? <h2 onClick={this.toggleModal}
                             className="clickable-header">Edit Profile</h2> : ''}
                         <div className="user-details-inner-container">
 

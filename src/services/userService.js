@@ -104,7 +104,6 @@ async function login(userCred) {
 
 async function signup(userCred) {
     const user = {
-        imgUrl: 'https://via.placeholder.com/100',
         isAdmin: true,
         boards: [],
         notifications: [],
