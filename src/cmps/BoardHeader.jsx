@@ -131,7 +131,8 @@ export class _BoardHeader extends React.Component {
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members } = this.state.board
-        const { users, loggedUser } = this.props
+        const { users, loggedUser, filterBy } = this.props;
+        const filterStyle = Object.values(filterBy).some(value => value) ? 'filter-active' : '';
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
         const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity.isRead)
         const activitiesRead = this.props.board.activityLog.filter(activity => activity.isRead)
@@ -267,9 +268,10 @@ export class _BoardHeader extends React.Component {
                             <GoSearch />
                         </div>
                         <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}
+                            
                             className="filters-outer-container relative flex align-center cursor-pointer"  >
-                            <VscListFilter />
-                            <h2>Filter</h2>
+                            <VscListFilter className={filterStyle} />
+                            <h2 className={filterStyle}>Filter</h2>
                             {
                                 this.state.isFiltersOpen &&
 
