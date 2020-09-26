@@ -24,8 +24,10 @@ class _UserProfile extends Component {
 
     async componentDidMount() {
         this.props.loadBoards();
-        const user = await userService.getUserById(this.props.match.params.id)
-        this.setState({ user: { ...user } })
+        setTimeout(async () => {
+            const user = await userService.getUserById(this.props.match.params.id)
+            this.setState({ user: { ...user } })
+        }, 2000);
     }
 
     toggleModal = () => {

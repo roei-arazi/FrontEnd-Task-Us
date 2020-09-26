@@ -66,7 +66,7 @@ export class _BoardHeader extends React.Component {
             }
 
         }
-        this.props.onEditBoard(board.name, board.desc, false, 'openModal', board.members, board.activityLog)
+        this.props.onEditBoard(this.state.board, this.props.board,)
 
     }
 
@@ -87,18 +87,17 @@ export class _BoardHeader extends React.Component {
     }
 
     onRemoveMemberFromBoard = (memberId) => {
+        const user = this.state.board.members.find(member => member._id === memberId)
         this.setState({ board: { ...this.state.board, members: this.state.board.members.filter(member => member._id !== memberId) } }, () => {
-            this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'removeMemberFromBoard', this.state.board.members)
+            this.props.onEditBoard(this.state.board, this.props.board, `${this.props.loggedUser.fullName} removed ${user.fullName} from ${this.state.board.name}`)
         })
     }
-
     onAddUserToBoard = (userId) => {
         const newUser = this.props.users.find(user => user._id === userId)
         this.setState({ board: { ...this.state.board, members: [...this.state.board.members, newUser] } }, () => {
-            this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'addMemberToBoard', this.state.board.members)
+            this.props.onEditBoard(this.state.board, this.props.board, `${this.props.loggedUser.fullName} invited ${newUser.fullName} to ${this.state.board.name}`)
         })
     }
-
     goToUserProfile = (userId) => {
         this.props.history.push(`/user/${userId}`)
     }
@@ -108,7 +107,7 @@ export class _BoardHeader extends React.Component {
             activityLog: []
         }
         this.setState({ board }, () => {
-            this.props.onEditBoard(board.name, board.desc, false, 'clearLog', board.members, board.activityLog)
+            this.props.onEditBoard(board, this.props.board, 'clearLog')
         })
 
 
@@ -117,14 +116,14 @@ export class _BoardHeader extends React.Component {
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members } = this.state.board
-        const { users } = this.props
+        const { users, loggedUser } = this.props
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
         const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity.isRead)
         const activitiesRead = this.props.board.activityLog.filter(activity => activity.isRead)
 
         console.log("board creator", this.state.board.boardCreator)
-        console.log("loggedf user", this.props.loggedUser)
-        console.log('true?', this.props.loggedUser._id === "5f68936cf878123b2cd354436ce96d")
+        console.log("loggedf user", loggedUser)
+        console.log('true?', loggedUser._id === "5f68936cf878123b2cd354436ce96d")
 
         return (
             <section className="board-header flex column padding-x-30">
@@ -138,7 +137,7 @@ export class _BoardHeader extends React.Component {
                             disabled={false}       // use true to disable editing
                             onChange={this.handleChangeName} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardTitle')
+                                this.props.onEditBoard(this.state.board, this.props.board, `${loggedUser.fullName} Changed the board title from ${this.props.board.name} to ${this.state.board.name}`)
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {
@@ -169,8 +168,8 @@ export class _BoardHeader extends React.Component {
                                                 <p className="member-name">{member.fullName}</p>
                                             </div>
                                             {
-                                                (this.props.loggedUser._id === "5f68936cf878123b2cd354436ce96d" ||
-                                                    this.state.board.boardCreator._id === this.props.loggedUser._id) &&
+                                                (loggedUser._id === "5f68936cf878123b2cd354436ce96d" ||
+                                                    this.state.board.boardCreator._id === loggedUser._id) &&
                                                 <FiMinus onClick={() => this.onRemoveMemberFromBoard(member._id)} />
                                             }
                                         </section>
@@ -187,8 +186,8 @@ export class _BoardHeader extends React.Component {
                                                 <p className="member-name">{user.fullName}</p>
                                             </div>
                                             {
-                                                (this.props.loggedUser._id === "5f68936cf878123b2cd354436ce96d" ||
-                                                    this.state.board.boardCreator._id === this.props.loggedUser._id) &&
+                                                (loggedUser._id === "5f68936cf878123b2cd354436ce96d" ||
+                                                    this.state.board.boardCreator._id === loggedUser._id) &&
                                                 <FiPlus onClick={() => this.onAddUserToBoard(user._id)} />
                                             }
                                         </section>
@@ -218,7 +217,7 @@ export class _BoardHeader extends React.Component {
                             disabled={false}        // use true to disable editing
                             onChange={this.handleChangeDesc} // handle innerHTML change
                             onBlur={() => {
-                                this.props.onEditBoard(this.state.board.name, this.state.board.desc, true, 'changeBoardDesc')
+                                this.props.onEditBoard(this.state.board, this.props.board, `${loggedUser.fullName} Changed ${this.state.board.name} description to ${this.state.board.desc}`)
                             }}
                             onKeyDown={(ev) => {
                                 if (ev.key === 'Enter') {

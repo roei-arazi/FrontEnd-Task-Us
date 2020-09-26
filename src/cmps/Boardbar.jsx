@@ -7,11 +7,11 @@ import { BsFillPlusCircleFill, } from 'react-icons/bs';
 
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate, loadBoards } from '../store/actions/boardActions.js';
 import { updateUser } from '../store/actions/userActions.js';
-import { showSnackbar, hideSnackbar} from '../store/actions/systemActions.js';
+import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
-import {userService} from '../services/userService.js';
+import { userService } from '../services/userService.js';
 import { AiOutlineRight } from 'react-icons/ai';
-import {Dashboard} from './Dashboard'
+import { Dashboard } from './Dashboard'
 
 class _Boardbar extends Component {
     state = {
@@ -21,7 +21,7 @@ class _Boardbar extends Component {
         isShown: '',
         searchVal: ''
     }
-    
+
     componentDidMount() {
         socketService.on('updatedBoard', updatedBoard => {
             this.props.recieveUpdate(updatedBoard)
@@ -32,7 +32,7 @@ class _Boardbar extends Component {
             this.props.loadBoards()
         })
         socketService.on('accept-notif', (notification) => {
-            this.props.updateUser({ ...this.props.loggedUser, notifications: [ notification, ...this.props.loggedUser.notifications] })
+            this.props.updateUser({ ...this.props.loggedUser, notifications: [notification, ...this.props.loggedUser.notifications] })
         })
 
         socketService.emit('user', this.props.loggedUser._id)
@@ -45,7 +45,7 @@ class _Boardbar extends Component {
         socketService.off('accept-notif')
     }
 
-    displayPopup(msg){
+    displayPopup(msg) {
         this.props.showSnackbar(msg)
         setTimeout(this.props.hideSnackbar, 3000)
     }
@@ -62,11 +62,11 @@ class _Boardbar extends Component {
         this.setState({ anchorEl: null })
     }
 
-    onAddBoard = async () =>{
-        const {loggedUser} = this.props;
+    onAddBoard = async () => {
+        const { loggedUser } = this.props;
         await this.props.addBoard(this.props.loggedUser)
         const notif = `${loggedUser.fullName} added a new board`
-        userService.notifyUsers(notif,'add', loggedUser)
+        userService.notifyUsers(notif, 'add', loggedUser)
         socketService.emit('add-delete-board')
     }
 
@@ -109,7 +109,7 @@ class _Boardbar extends Component {
 
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
-                <div data-title="Toggle Board" onClick={this.onToggleShown} className="board-bar-toggle-container">
+                <div onClick={this.onToggleShown} className="board-bar-toggle-container">
                     <AiOutlineRight style={{ color: this.props.location.pathname.includes('/myweek') && '#151515', transform: isShown && 'rotate(180deg)' }}
                         className="board-bar-toggle" />
                 </div>
