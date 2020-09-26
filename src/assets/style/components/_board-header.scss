@@ -48,10 +48,13 @@
                 right: 0;
                 padding: 0 10px;
                 box-shadow: $modalsShadow;
+                max-height: 400px;
+                overflow: overlay;
 
                 .board-users-box {
                     border-bottom: 1px solid #a8a8a87d;
                     cursor: auto;
+                    line-height: 3;
 
                     img {
                         width: 35px;
@@ -67,12 +70,21 @@
                     .member-name {
                         margin-left: 10px;
                     }
+
+                    .member-letter {
+                        cursor: default;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        background: #e6e6e6;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-family: font1;
+                        font-size: 18px;
+                    }
                 }
 
-                h3 {
-                    margin: 15px 0;
-
-                }
 
                 .user-box {
                     margin-bottom: 10px;
@@ -87,6 +99,7 @@
 
                 .site-users-box {
                     cursor: auto;
+                    line-height: 3;
 
                     .member-name {
                         margin-left: 10px;

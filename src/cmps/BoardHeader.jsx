@@ -118,6 +118,16 @@ export class _BoardHeader extends React.Component {
 
     }
 
+    getMemeberInitials(member) {
+        let [firstName, lastName] = member.fullName.split(" ")
+        let firstNameChar = ''
+        let lastNameChar = ''
+
+        if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
+        if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
+        return [firstNameChar, lastNameChar]
+    }
+
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members } = this.state.board
@@ -176,9 +186,12 @@ export class _BoardHeader extends React.Component {
                                     {members.map((member, idx) =>
                                         <section key={idx} className="user-box flex space-between align-center">
                                             <div className="user-box-info flex align-center" onClick={() => this.goToUserProfile(member._id)}>
-                                                {member.imgUrl ? <img src={member.imgUrl} alt="profile" />
-                                                    :
-                                                    <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
+                                                {member.imgUrl
+                                                    ? <img src={member.imgUrl} alt="profile" />
+                                                    : <div className="member-letter">
+                                                        {this.getMemeberInitials(member)[0]}
+                                                        {this.getMemeberInitials(member)[1]}
+                                                    </div>}
                                                 <p className="member-name">{member.fullName}</p>
                                             </div>
                                             {
