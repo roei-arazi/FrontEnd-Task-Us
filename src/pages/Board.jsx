@@ -302,6 +302,7 @@ class _Board extends Component {
     render() {
         const board = this._getCurrBoard()
         const { users, filterBy } = this.props;
+
         if (!board) {
             return (
                 <div className="loader-container flex justify-center align-center">
