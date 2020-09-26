@@ -70,6 +70,24 @@
                     width: 80px;
                     border-radius: 50%;
                 }
+
+                .member-letter {
+                    cursor: default;
+                    border-radius: 50%;
+                    background: #e6e6e6;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: font1;
+                    font-weight: 700;
+                    font-size: 12px;
+                    width: 24px;
+                    height: 24px;
+                    margin-top: 2px;
+                    color: $colorBgBoardBars;
+                    background-color: $pink;
+
+                }
             }
 
             .notification-msg {
