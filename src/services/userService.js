@@ -131,7 +131,7 @@ async function guestLogin() {
     //     imgUrl: 'https://www.shareicon.net/data/2015/08/15/85434_guest_512x512.png',
     //     isAdmin: true,
     //     boards: [{ id: '212', name: 'board1' }],
-    //     notifications: [],
+    //     notifications: [], 
     //     birthDay: '2nd August 1997',
     //     company: 'adidas',
     //     phoneNumber: '0224132124',
