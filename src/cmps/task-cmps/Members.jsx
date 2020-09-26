@@ -23,7 +23,7 @@ export function Members(props) {
     return (
 
         <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
-            {props.members.length ? <div className="member-img-container flex relative">
+            {props.members.length ? <div className="member-img-container flex relative ">
                 {props.members.map(member => {
                     {
                         return member.imgUrl ? (
@@ -49,7 +49,7 @@ export function Members(props) {
 
 
             {props.isUsersShown &&
-                <div className="users-modal absolute">
+                <div className="users-modal modal-fade-in absolute">
                     <div className="task-users-box">
                         <h3>Task Members</h3>
                         {props.members.map((member, idx) =>
