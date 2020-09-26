@@ -5,7 +5,8 @@
     @media(max-width:450px) {
         padding: 5px;
         width: 100%;
-        overflow-x: overlay;
+        overflow: overlay;
+        height:auto;
     }
 
     .delete-group-icon,
