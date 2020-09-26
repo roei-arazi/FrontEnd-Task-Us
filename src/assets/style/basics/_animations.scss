@@ -71,36 +71,3 @@
 
 
 }
-
-.modal-fade-in {
-    animation: modal-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-
-@keyframes modal-fade-in {
-    0% {
-        transform: translateZ(-80px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateZ(0);
-        opacity: 1;
-    }
-}
-
-.modal-fade-out {
-    animation: modal-fade-out 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-
-@keyframes modal-fade-out {
-    0% {
-
-        transform: translateZ(0);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateZ(-80px);
-        opacity: 0;
-    }
-}
