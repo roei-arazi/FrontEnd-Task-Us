@@ -1,3 +1,4 @@
+import { Fade } from '@material-ui/core'
 import React from 'react'
 
 export function Priority(props) {
@@ -7,7 +8,7 @@ export function Priority(props) {
                 <div className="task-label-name flex align-center justify-center">
                     <p>{props.priority}</p>
                 </div>
-                {props.isPriorityShown &&
+                <Fade in={props.isPriorityShown} >
                     <div className="label-list absolute flex column align-center modal-fade-in">
                         <section className="label-selector flex align-center justify-center low" onClick={() => props.handleChange("Low")}>
                             <p>Low</p>
@@ -19,7 +20,7 @@ export function Priority(props) {
                             <p>High</p>
                         </section>
                     </div>
-                }
+                </Fade>
 
             </div>
         </div>

@@ -1,3 +1,4 @@
+import { Fade } from '@material-ui/core'
 import React from 'react'
 
 export function Status(props) {
@@ -10,7 +11,7 @@ export function Status(props) {
                 <div className="task-label-name flex align-center justify-center">
                     <p>{props.status}</p>
                 </div>
-                {props.isStatusShown &&
+                <Fade in={props.isStatusShown} >
                     <div className="label-list absolute flex column align-center modal-fade-in">
                         <section className="label-selector flex align-center justify-center stuck" onClick={() => props.handleChange("Stuck")}>
                             <p>Stuck</p>
@@ -22,8 +23,7 @@ export function Status(props) {
                             <p>Done</p>
                         </section>
                     </div>
-                }
-
+                </Fade>
             </div>
         </div>
     )
