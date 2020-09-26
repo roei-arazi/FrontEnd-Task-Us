@@ -91,6 +91,7 @@ async function getUserById(userId) {
 }
 
 async function login(userCred) {
+    console.log(userCred);
     try {
         // const user = users.find(user => user.username === userCred.username && user.password === userCred.password);
         const user = await httpService.post('auth/login', userCred);
