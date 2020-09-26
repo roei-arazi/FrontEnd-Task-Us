@@ -1,34 +1,32 @@
 .user-profile {
     .user-container {
         position: relative;
-
         .user-profile-big {
             align-self: center;
             border-radius: 50%;
             width: 250px;
             height: 250px;
+            color: $colorBgBoardBars; 
+            font-size: 12rem;
+            border: 5px solid $colorBgBoardBars;
+            background-color: $pink;
         }
-
         .modal-screen {
             width: 100%;
             height: 100vh;
             position: absolute;
-
             .modal-container {
                 width: 100%;
                 height: 100%;
                 position: absolute;
                 background-color: $colorBgBoardBars;
             }
-
-            .user-modal-header{
+            .user-modal-header {
                 background-color: $buttonMainBg;
-                height:40vh;
-                
+                height: 40vh;
                 .user-profile-big {
                     cursor: pointer;
-
-                    &:hover{
+                    &:hover {
                         -webkit-filter: brightness(70%);
                         -webkit-transition: all .3s ease;
                         -moz-transition: all .3s ease;
@@ -38,25 +36,18 @@
                     }
                 }
             }
-
             .user-modal-main {
-                height:60vh;
+                height: 60vh;
                 font-size: 1.5rem;
                 display: flex;
                 flex-direction: column;
                 background-color: $colorBgBoardBars;
-
-
-
-
                 form {
                     margin-top: 40px;
-
                     button {
                         margin-top: 40px;
                         background-color: $buttonMainBg;
                         color: $colorBgBoardBars;
-
                         &:hover {
                             background-color: $buttonMainHover;
                             -webkit-filter: brightness(80%);
@@ -67,23 +58,20 @@
                             transition: all .3s ease;
                         }
                     }
-                    .secondary-btn{
+                    .secondary-btn {
                         background-color: #9b9b9b;
-                        &:hover{
-                            background-color:#9b9b9b;
-                        -webkit-filter: brightness(80%);
-                        -webkit-transition: all .3s ease;
-                        -moz-transition: all .3s ease;
-                        -o-transition: all .3s ease;
-                        -ms-transition: all .3s ease;
-                        transition: all .3s ease;
+                        &:hover {
+                            background-color: #9b9b9b;
+                            -webkit-filter: brightness(80%);
+                            -webkit-transition: all .3s ease;
+                            -moz-transition: all .3s ease;
+                            -o-transition: all .3s ease;
+                            -ms-transition: all .3s ease;
+                            transition: all .3s ease;
                         }
                     }
                 }
-
             }
         }
     }
-
-
 }
