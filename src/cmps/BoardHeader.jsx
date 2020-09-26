@@ -160,7 +160,12 @@ export class _BoardHeader extends React.Component {
                             {members.length === 0 && <div className="user-img-container"> <CgProfile /></div>}
                             {members.length !== 0 && members.map((member, idx) => {
                                 return <div key={idx} className="user-img-container">
-                                    <img src={member.imgUrl} />
+                                    {
+                                        member.imgUrl ? <img src={member.imgUrl} />
+                                            :
+                                            <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" />
+
+                                    }
                                 </div>
                             })}
                         </div>

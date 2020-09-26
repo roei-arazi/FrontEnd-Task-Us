@@ -50,9 +50,9 @@
     .guest-button {
         background-color: #f0284e;
         color: $colorBgBoardBars;
-        border-radius: 20px;
-        font-size: 1.6em;
-        padding: 12px;
+        border-radius: 30px;
+        font-size: 1.5em;
+        padding: 18px;
         transition: .3s;
         left: 0;
 
@@ -63,16 +63,12 @@
     }
 
     .col-right {
-        text-align: left;
+        align-items: flex-start;
         height: 100vh;
         color: #f1f1f1;
         background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, #cdeefac2 75%);
         width: 50%;
         line-height: 2.5;
-
-        h1 {
-            line-height: 2;
-        }
 
         span {
             color: $mainBlack;
@@ -98,8 +94,10 @@
         }
 
         .col-right {
+            align-items: center;
             text-align: center;
-            margin-top: 140px;
+
+            padding-top: 230px;
             background: linear-gradient(0deg, rgba(199, 229, 241, 1) 0%, #ffffff00 68%);
             width: 100%;
         }
@@ -115,9 +113,7 @@
 
 @media (max-width:500px) {
     .home-main {
-
         .col-left {
-            position: initial;
             margin-top: 60px;
 
             video {
@@ -126,15 +122,9 @@
         }
 
         .col-right {
-            line-height: 2.2;
-            margin-top: -250px;
-            padding: 45px 15px;
+            line-height: 1.7;
+            padding: 145px 15px 0;
             box-sizing: content-box;
-
-            h1 {
-                line-height: 2;
-                margin: 25px 0;
-            }
         }
     }
 }

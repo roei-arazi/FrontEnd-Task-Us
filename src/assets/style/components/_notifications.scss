@@ -46,6 +46,7 @@
     .notifications-container {
         overflow-y: overlay;
         max-height: 400px;
+        width: max-content;
 
         .notification {
             width: 100%;

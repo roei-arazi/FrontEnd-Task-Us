@@ -9,6 +9,7 @@ const initialState = {
         "imgUrl": "https://www.shareicon.net/data/2015/08/15/85434_guest_512x512.png",
         "notifications": [{
             "byUser": {
+                "imgUrl": "",
                 "fullName": "Liam Zety"
             },
             "content": "board: Liam Zety Removed a you from the board",
@@ -16,6 +17,7 @@ const initialState = {
         },
         {
             "byUser": {
+                "imgUrl": "",
                 "fullName": "Sharon Obama"
             },
             "content": "board: Sharon Added you to the board - Caljul20",

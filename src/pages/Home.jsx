@@ -36,9 +36,10 @@ class _Home extends Component {
                         <video onClick={() => this.video.current.play()} ref={this.video} autoPlay muted src="taskus-home-video.mp4"></video>
                     </div>
                     <div className="col-right flex align-center justify-center padding-x-30  column">
-                        <h1>The next step in multi-planning and productivity!</h1>
+                        <h1>Join the future.</h1>
 
-                        <p><span>Task-us </span> will help you keep track of hundreds of tasks. <br />
+                        <p>The next step in multi-planning and productivity! <br />
+                            <span>Task-us </span> will help you keep track of hundreds of tasks. <br />
                             An efficient way to manage your co-workers / employees. <br />
                             Half the hassle and twice the fun.
                         </p>
