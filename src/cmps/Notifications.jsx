@@ -28,7 +28,7 @@ export class Notifications extends Component {
                         {loggedUser.notifications.length !== 0
                             ? (
                                 <React.Fragment>
-                                    <h1>Notifications</h1>,
+                                    <h1>Notifications</h1>
                                     <AiOutlineDelete onClick={this.onRemoveNotifications} />
                                 </React.Fragment>
                             )
@@ -41,14 +41,19 @@ export class Notifications extends Component {
                                     return (
                                         <div key={idx} className="notification flex ">
                                             <div className="user-img-container">
-                                                <img src={notification.byUser.imgUrl} alt="profile" />
+                                                {
+                                                    notification.byUser.imgUrl ?
+                                                        <img src={notification.byUser.imgUrl} alt="profile" />
+                                                        :
+                                                        <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="profile" />
+                                                }
                                             </div>
                                             <div className="notification-msg flex column">
                                                 <h2>
-                                                        {notification.byUser.fullName}
+                                                    {notification.byUser.fullName}
                                                 </h2>
                                                 <p>
-                                                        {notification.content}
+                                                    {notification.content}
                                                 </p>
                                                 <div>
                                                     <p>{moment(notification.createdAt).fromNow()}</p>
