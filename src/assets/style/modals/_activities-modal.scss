@@ -1,14 +1,11 @@
 .activities {
     margin: 0;
-
     header {
         height: 25vh;
-
         h1 {
             margin-top: 25px;
         }
     }
-
     h1,
     h2,
     h3,
@@ -16,36 +13,29 @@
     h5 {
         color: $mainBlack;
     }
-
     input {
         width: 50%;
     }
-
     .all-activities-container {
         overflow-y: overlay;
         max-height: 75vh;
     }
-
     .filter-outer-container {
         >button {
             padding: 4px 8px;
             border-radius: 15px;
-
             &:first-of-type {
                 margin-right: 15px;
             }
-
             svg {
                 color: $white;
             }
         }
     }
-
     .activity-list-not-read {
         background-color: #deeffe;
         margin-bottom: 25px;
     }
-
     .activity-list-not-read,
     .activity-list {
         >* {
@@ -53,48 +43,48 @@
             padding-right: 15px;
         }
     }
-
     .activity {
         border-radius: 1px;
         min-height: 110px;
         line-height: 1.5;
-
         &:first-child {
             border-top: 1px solid #a8a8a87d;
         }
-
         &:not(:last-child) {
             border-bottom: 1px solid #a8a8a87d;
         }
-
         .activity-desc-container {
             width: 60%;
-
             >*:not(:first-child) {
                 margin-right: 15px;
             }
         }
-
         .date-container {
             min-width: 50px;
             color: $colorFontUserDetails;
         }
     }
-
     .user-img-container {
         width: 40%;
         margin-right: 15px;
-
         >*:not(:first-child) {
             margin-left: 10px;
         }
-
         img {
             height: auto;
             width: 40px;
             border-radius: 50%;
         }
-    }
-
-
+        .member-letter {
+            height: 40px; 
+            width: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            font-size: 1.5rem;
+            background-color: $pink;
+            color: $colorBgBoardBars;
+        }
+    } 
 }

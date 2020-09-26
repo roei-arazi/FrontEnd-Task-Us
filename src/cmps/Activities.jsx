@@ -22,6 +22,13 @@ export default class Activities extends Component {
         return [activityLog.filter(activity => activity.isRead), activityLog.filter(activity => !activity.isRead)]
     }
 
+    getInitials(fullName){
+        const [firstName, lastName] = fullName.split(' ');
+        let initials = firstName.charAt(0).toUpperCase();
+        if(lastName) initials += lastName.charAt(0).toUpperCase();
+        return initials;
+    }
+
     handleChange = ({ target }) => {
         this.setState({ searchVal: target.value })
     }
@@ -101,10 +108,12 @@ export default class Activities extends Component {
                                         <div className="filter-modal flex absolute">
                                             <section className="activity-member-filter">
                                                 <h3>Member</h3>
+                                                <div className="filter-list flex justify-center align-center column">
                                                 {members.map((member, idx) => <button
                                                     className={filterBy.member === member ? 'remove-filter-btn' : ''}
                                                     key={idx}
                                                     onClick={() => this.onSetFilter('member', member)}>{member}</button>)}
+                                                    </div>
                                             </section>
                                             <section className="activity-date-filter">
                                                 <h3>Date</h3>
@@ -139,7 +148,8 @@ export default class Activities extends Component {
                                                 {moment(activity.createdAt).format("DD MMM")}
                                             </p>
                                         </div>
-                                        <img src={activity.byUser.imgUrl} alt="" />
+                                        {activity.byUser.imgUrl ? <img src={activity.byUser.imgUrl} alt="" />:
+                                        <div className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
                                         <h2>{activity.byUser.fullName}</h2>
                                     </div>
                                     <div className="activity-desc-container flex align-center">

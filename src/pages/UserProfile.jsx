@@ -25,11 +25,26 @@ class _UserProfile extends Component {
 
     async componentDidMount() {
         this.props.loadBoards();
-        setTimeout(async () => {
+        setTimeout(async () => { //for loading extravaganza
             const user = await userService.getUserById(this.props.match.params.id)
             this.setState({ user: { ...user } })
         }, 2000);
     }
+
+    async componentDidUpdate(prevProps) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            console.log('IM HERE',)
+
+            this.setState({ user: {} }, () => {
+                setTimeout(async () => { //for loading extravaganza
+                    const user = await userService.getUserById(this.props.match.params.id)
+                    this.setState({ user: { ...user } })
+
+                }, 2000)
+            });
+        }
+    }
+
 
     toggleModal = () => {
         this.setState({ isModalOpen: !this.state.isModalOpen })
@@ -53,10 +68,13 @@ class _UserProfile extends Component {
 
     render() {
         let { email, fullName, username, imgUrl, _id } = this.state.user;
+<<<<<<< HEAD
         const [firstName, lastName] = fullName.split(' ');
         let initials = firstName.charAt(0).toUpperCase();
         if (lastName) initials += lastName.charAt(0).toUpperCase()
         const guestId = '5f6efc73805dbf6054d58794';
+=======
+>>>>>>> dbc1e058d8f48b2c7f6498455effe9ba3daea8e0
         if (!_id) {
             return (
                 <div className="loader-container flex justify-center align-center">
@@ -64,11 +82,43 @@ class _UserProfile extends Component {
                 </div>
             )
         }
+        const [firstName, lastName] = fullName.split(' ');
+        let initials = firstName.charAt(0).toUpperCase();
+        if (lastName) initials += lastName.charAt(0).toUpperCase()
+        const guestId = '5f6efc73805dbf6054d58794';
 
         const { loggedUser } = this.props
         console.log('loggedUser id:', loggedUser._id);
         console.log('guest id:', guestId);
         return (
+<<<<<<< HEAD
+=======
+            <section className="user-profile">
+                <Navbar />
+                <Boardbar />
+                <div className="user-container">
+                    <header className="header-container padding-x-15 padding-y-15 flex justify-center  align-center">
+                        {imgUrl ? <img className="user-profile-big" src={imgUrl} alt="" /> :
+                            <div className="user-profile-big flex align-center justify-center">{initials}</div>}
+                    </header>
+
+                    <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">
+                        {(loggedUser._id === _id && loggedUser._id !== guestId) ? <h2 onClick={this.toggleModal}
+                            className="clickable-header">Edit Profile</h2> : ''}
+                        <div className="user-details-inner-container">
+
+                            <h3>Email: <span className="span-user-details">{email}</span></h3>
+                            <h3>Full Name: <span className="span-user-details">{fullName}</span></h3>
+                            <h3>Username: <span className="span-user-details">{username}</span> </h3>
+                        </div>
+                    </div>
+                    {/* Modal */}
+                    <Fade in={this.state.isModalOpen}>
+                        <div className="modal-screen flex justify-center align-center">
+                            <div className="modal-container">
+
+                                <div className="user-modal-header padding-x-15 padding-y-15 flex justify-center align-center">
+>>>>>>> dbc1e058d8f48b2c7f6498455effe9ba3daea8e0
 
                 <section className={`user-profile flex ${window.innerWidth<450 && 'column'}`}>
                 {window.innerWidth > 450 ?

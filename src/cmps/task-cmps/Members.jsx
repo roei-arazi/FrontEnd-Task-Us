@@ -4,6 +4,20 @@ import { FiMinus } from 'react-icons/fi'
 import { FiPlus } from 'react-icons/fi';
 
 export function Members(props) {
+
+
+    function _getMemeberInitials(member) {
+        let [firstName, lastName] = member.fullName.split(" ")
+        let firstNameChar = ''
+        let lastNameChar = ''
+
+        if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
+        if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
+        return [firstNameChar, lastNameChar]
+
+
+    }
+
     const usersToAdd = props.users.filter(user => !props.members.some(member => member._id === user._id))
     return (
 
@@ -15,9 +29,14 @@ export function Members(props) {
                     <FiPlus className="no-members-icon-plus absolute" />
                 </div>
                 :
-                <div className="member-letter">{props.members[0].fullName.charAt(0).toUpperCase()}</div>
+                <div className="member-letter">
+                    {props.members[0].fullName.charAt(0).toUpperCase()}
+                </div>
                 :
-                <div className="no-members-container"> <CgProfile className="no-members-icon" /> <FiPlus className="no-members-icon-plus" /></div>}
+                <div className="no-members-container">
+                    <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" className="no-members-icon" />
+                    <FiPlus className="no-members-icon-plus" />
+                </div>}
 
 
             {props.isUsersShown &&
@@ -41,7 +60,10 @@ export function Members(props) {
                             return <section key={idx} className="user-box flex space-between align-center">
                                 <div className="user-box-info flex  align-center" onClick={() => props.goToUserProfile(user._id)}>
                                     {user.imgUrl ? <img src={user.imgUrl} alt="profile" /> :
-                                        <div className="member-letter">{user.fullName.charAt(0).toUpperCase()}</div>}
+                                        <div className="member-letter">
+                                            {_getMemeberInitials(user)[0]}
+                                            {_getMemeberInitials(user)[1]}
+                                        </div>}
                                     <p className="member-name">{user.fullName}</p>
                                 </div>
                                 <FiPlus onClick={() => props.onAddUserToTask(user._id)} />

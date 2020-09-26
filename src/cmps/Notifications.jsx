@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { Fade } from '@material-ui/core';
-import Truncate from 'react-truncate';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 export class Notifications extends Component {
@@ -17,6 +16,18 @@ export class Notifications extends Component {
         this.props.removeNotifications(this.props.loggedUser)
         this.setState({ isModalOpen: true })
     }
+
+    _getMemeberInitials(member) {
+        console.log('member:', member)
+        let [firstName, lastName] = member.fullName.split(" ")
+        let firstNameChar = ''
+        let lastNameChar = ''
+
+        if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
+        if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
+        return [firstNameChar, lastNameChar]
+    }
+
 
     render() {
         const { loggedUser } = this.props;
@@ -40,12 +51,15 @@ export class Notifications extends Component {
                                 loggedUser.notifications.map((notification, idx) => {
                                     return (
                                         <div key={idx} className="notification flex ">
-                                            <div className="user-img-container">
+                                            <div onClick={() => this.props.goToUserProfile(notification.byUser._id)} className="user-img-container">
                                                 {
                                                     notification.byUser.imgUrl ?
-                                                        <img src={notification.byUser.imgUrl} alt="profile" />
+                                                        <img className="cursor-pointer" src={notification.byUser.imgUrl} alt="profile" />
                                                         :
-                                                        <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="profile" />
+                                                        <div className="member-letter cursor-pointer">
+                                                            {this._getMemeberInitials(notification.byUser)[0]}
+                                                            {this._getMemeberInitials(notification.byUser)[1]}
+                                                        </div>
                                                 }
                                             </div>
                                             <div className="notification-msg flex column">
