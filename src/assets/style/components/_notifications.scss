@@ -64,15 +64,15 @@
 
             .user-img-container {
                 text-align: initial;
+                height: fit-content;
 
                 img {
-                    height: 80px;
-                    width: 80px;
                     border-radius: 50%;
+                    width: 24px;
+                    height: 24px;
                 }
 
                 .member-letter {
-                    cursor: default;
                     border-radius: 50%;
                     background: #e6e6e6;
                     display: flex;

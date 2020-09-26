@@ -240,8 +240,7 @@ export class _BoardHeader extends React.Component {
                                 Activities {" "}
                                 <span style={{ color: activitiesNotRead.length !== 0 ? '#0085ff' : '' }}>
                                     {activitiesNotRead.length}
-                                </span>
-                              / {activitiesRead.length + activitiesNotRead.length}
+                                </span> {" "} / {activitiesRead.length + activitiesNotRead.length}
                             </h2>
                         </div>
                     </div>

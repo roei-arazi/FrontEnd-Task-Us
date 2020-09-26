@@ -26,6 +26,10 @@ class _Navbar extends Component {
         this.props.logout()
         this.props.history.push('/login')
     }
+    goToUserProfile = (id) => {
+        this.props.history.push(`/user/${id}`)
+
+    }
 
     render() {
         const { isNotificationShown } = this.state
@@ -50,7 +54,7 @@ class _Navbar extends Component {
                         }
                         {
                             isNotificationShown &&
-                            <Notifications removeNotifications={removeNotifications} loggedUser={loggedUser} />
+                            <Notifications goToUserProfile={this.goToUserProfile} removeNotifications={removeNotifications} loggedUser={loggedUser} />
 
                         }
 

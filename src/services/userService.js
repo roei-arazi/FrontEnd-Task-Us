@@ -138,7 +138,7 @@ async function guestLogin() {
     // }
     try {
         // users.push(user);
-        const user = login({username: 'guest', password: '123456'})
+        const user = login({ username: 'guest', password: '123456' })
         return user
     } catch (err) {
         console.log('userService: Couldn\'t login as guest');
@@ -162,6 +162,7 @@ async function notifyUsers(content, members, loggedUser) {
     if (members === 'add') members = [...users]
     const notification = {
         byUser: {
+            _id: loggedUser._id,
             fullName: loggedUser.fullName,
             imgUrl: loggedUser.imgUrl
         },

@@ -51,12 +51,12 @@ export class Notifications extends Component {
                                 loggedUser.notifications.map((notification, idx) => {
                                     return (
                                         <div key={idx} className="notification flex ">
-                                            <div className="user-img-container">
+                                            <div onClick={() => this.props.goToUserProfile(notification.byUser._id)} className="user-img-container">
                                                 {
                                                     notification.byUser.imgUrl ?
-                                                        <img src={notification.byUser.imgUrl} alt="profile" />
+                                                        <img className="cursor-pointer" src={notification.byUser.imgUrl} alt="profile" />
                                                         :
-                                                        <div className="member-letter">
+                                                        <div className="member-letter cursor-pointer">
                                                             {this._getMemeberInitials(notification.byUser)[0]}
                                                             {this._getMemeberInitials(notification.byUser)[1]}
                                                         </div>

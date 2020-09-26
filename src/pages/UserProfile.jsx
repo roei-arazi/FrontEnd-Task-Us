@@ -24,11 +24,26 @@ class _UserProfile extends Component {
 
     async componentDidMount() {
         this.props.loadBoards();
-        setTimeout(async () => {
+        setTimeout(async () => { //for loading extravaganza
             const user = await userService.getUserById(this.props.match.params.id)
             this.setState({ user: { ...user } })
         }, 2000);
     }
+
+    async componentDidUpdate(prevProps) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            console.log('IM HERE',)
+
+            this.setState({ user: {} }, () => {
+                setTimeout(async () => { //for loading extravaganza
+                    const user = await userService.getUserById(this.props.match.params.id)
+                    this.setState({ user: { ...user } })
+
+                }, 2000)
+            });
+        }
+    }
+
 
     toggleModal = () => {
         this.setState({ isModalOpen: !this.state.isModalOpen })
@@ -52,10 +67,6 @@ class _UserProfile extends Component {
 
     render() {
         let { email, fullName, username, imgUrl, _id } = this.state.user;
-        const [firstName, lastName] = fullName.split(' ');
-        let initials = firstName.charAt(0).toUpperCase();
-        if(lastName) initials += lastName.charAt(0).toUpperCase()
-        const guestId = '5f6efc73805dbf6054d58794';
         if (!_id) {
             return (
                 <div className="loader-container flex justify-center align-center">
@@ -63,6 +74,10 @@ class _UserProfile extends Component {
                 </div>
             )
         }
+        const [firstName, lastName] = fullName.split(' ');
+        let initials = firstName.charAt(0).toUpperCase();
+        if (lastName) initials += lastName.charAt(0).toUpperCase()
+        const guestId = '5f6efc73805dbf6054d58794';
 
         const { loggedUser } = this.props
         console.log('loggedUser id:', loggedUser._id);
@@ -73,8 +88,8 @@ class _UserProfile extends Component {
                 <Boardbar />
                 <div className="user-container">
                     <header className="header-container padding-x-15 padding-y-15 flex justify-center  align-center">
-                        {imgUrl ? <img className="user-profile-big" src={imgUrl} alt="" />:
-                        <div className="user-profile-big flex align-center justify-center">{initials}</div>}
+                        {imgUrl ? <img className="user-profile-big" src={imgUrl} alt="" /> :
+                            <div className="user-profile-big flex align-center justify-center">{initials}</div>}
                     </header>
 
                     <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">
