@@ -68,12 +68,12 @@ class _Signup extends Component {
                     <ErrorMessage name="email" component="span" />
                     <section>
                         <legend>Password *</legend>
-                        <Field autoComplete="something" className="sign-login-input" type="text" name="password" />
+                        <Field autoComplete="something" className="sign-login-input" type="password" name="password" />
                     </section>
                     <ErrorMessage name="password" component="span" />
                     <section>
                         <legend>Confirm password *</legend>
-                        <Field autoComplete="something" className="sign-login-input" type="text" name="confirm" />
+                        <Field autoComplete="something" className="sign-login-input" type="password" name="confirm" />
                     </section>
                     <ErrorMessage name="confirm" component="span" />
                     <button type="submit">Signup</button>
