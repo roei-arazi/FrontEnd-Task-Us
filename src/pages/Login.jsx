@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
+import { FaArrowLeft, FaFacebookF, FaUserCircle } from 'react-icons/fa';
 import FacebookLogin from 'react-facebook-login'
 
 import { login, guestLogin, signup } from '../store/actions/userActions.js'
@@ -63,13 +63,16 @@ class _Login extends Component {
                         <Field className="sign-login-input" type="password" name="password" />
                     </section>
                     <ErrorMessage name="password" component="span" />
-                    <button type="submit">Login</button>
+                    <button type="submit flex">Login</button>
+                    <button className="facebook-btn-container">        
+                    <FaFacebookF />
                     <FacebookLogin
                         appId="632288707652598"
                         size="small"
                         fields="name,email,picture"
-                        // onClick={this.onLogin}
+                        cssClass="facebook-btn"
                         callback={this.responseFacebook} />
+                         </button>
                     <a href="/#/signup">Don't have an account? sign up here.</a>
                     <button className="guest-button" onClick={this.onGuestLogin}>Or try as a guest!</button>
                 </Form>
