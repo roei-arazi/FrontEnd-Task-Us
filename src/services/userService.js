@@ -1,46 +1,6 @@
 import httpService from './httpService';
 import socketService from './socketService'
 
-// let users = [{
-//     "username": 'frize',
-//     "fullName": 'Roei Arazi',
-//     "password": '3333',
-//     "email": 'frize@gmail.com',
-//     "imgUrl": 'https://via.placeholder.com/250',
-//     "isAdmin": true,
-//     "boards": [],
-//     "notifications": [],
-//     "birthDay": '2nd August 1997',
-//     "company": 'adidas',
-//     "phoneNumber": '0224132124'
-// },
-// {
-//     "username": 'anstrio',
-//     "fullName": 'Osher Kabada',
-//     "password": '2222',
-//     "email": 'anstrio@gmail.com',
-//     "imgUrl": 'https://via.placeholder.com/250',
-//     "isAdmin": true,
-//     "boards": [],
-//     "notifications": [],
-//     "birthDay": '2nd August 1997',
-//     "company": 'adidas',
-//     "phoneNumber": '0224127124'
-// },
-// {
-//     "username": 'smoking',
-//     "fullName": 'Liam Zety',
-//     "password": '1111',
-//     "email": 'smoking@gmail.com',
-//     "imgUrl": 'https://via.placeholder.com/250',
-//     "isAdmin": true,
-//     "boards": [],
-//     "notifications": [],
-//     "birthDay": '2nd August 1997',
-//     "company": 'adidas',
-//     "phoneNumber": '0224112124'
-// }
-// ]
 
 export const userService = {
     loadUsers,
@@ -51,7 +11,8 @@ export const userService = {
     markAsRead,
     updateUser,
     logout,
-    notifyUsers
+    notifyUsers,
+    getCurrUser
 }
 
 async function loadUsers() {
@@ -93,7 +54,6 @@ async function getUserById(userId) {
 async function login(userCred) {
     console.log(userCred);
     try {
-        // const user = users.find(user => user.username === userCred.username && user.password === userCred.password);
         const user = await httpService.post('auth/login', userCred);
         if (!user) throw 'Wrong username or password'
         return _handleLogin(user)
@@ -123,23 +83,36 @@ async function signup(userCred) {
 }
 
 async function guestLogin() {
-    // const user = {
-    //     _id: _makeid(), 
-    //     username: 'guest',
-    //     fullName: 'Guest User',
-    //     password: 'none',
-    //     imgUrl: 'https://www.shareicon.net/data/2015/08/15/85434_guest_512x512.png',
-    //     isAdmin: true,
-    //     boards: [{ id: '212', name: 'board1' }],
-    //     notifications: [], 
-    //     birthDay: '2nd August 1997',
-    //     company: 'adidas',
-    //     phoneNumber: '0224132124',
-
-    // }
     try {
-        // users.push(user);
-        const user = login({ username: 'guest', password: '123456' })
+        const user = await login({ username: 'guest', password: '123456' });
+        user.notifications = [{
+            byUser: {
+                _id: '5f6c5f7e27ed4400175ce1ac',
+                imgUrl: 'http://res.cloudinary.com/dtg7n0zye/image/upload/v1600938007/ybmioy3x7smnwhptho3x.jpg',
+                fullName: 'Liam Zety'
+            },
+            content: 'Liam Zety Removed a you from the board Caljul20',
+            createdAt: Date.now() - 1000 * 60 * 2
+        },
+        {
+            byUser: {
+                _id: '5f6c5ef927ed4400175ce1a7',
+                imgUrl:'http://res.cloudinary.com/dtg7n0zye/image/upload/v1600937821/pd8tx7oddwp2wghsp9qt.jpg',
+                fullName: 'Osher Kabeda'
+            },
+            content: 'board: Osher Kabeda Tasked you to task - Learn the ropes',
+            createdAt: Date.now() - 1000 * 60 * 3
+        },
+        {
+            byUser: {
+                _id: '5f6c5f0227ed4400175ce1aa',
+                imgUrl: 'http://res.cloudinary.com/dtg7n0zye/image/upload/v1600937750/ztfvuok0olgwarb9kabo.jpg',
+                fullName: 'Roei Arazi'
+            },
+            content: 'board: Roei Arazi Added you to the board - Caljul20',
+            createdAt: Date.now() - 1000 * 60 * 4
+        }
+        ]
         return user
     } catch (err) {
         console.log('userService: Couldn\'t login as guest');
@@ -156,6 +129,11 @@ async function updateUser(user) {
 async function logout() {
     await httpService.post('auth/logout');
     sessionStorage.clear();
+}
+
+function getCurrUser(){
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    return user;
 }
 
 async function notifyUsers(content, members, loggedUser) {
@@ -187,13 +165,3 @@ function _handleLogin(user) {
     sessionStorage.setItem('user', JSON.stringify(user))
     return user;
 }
-
-// function _makeid(length = 7) {
-//     var text = "";
-//     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-//     for (var i = 0; i < length; i++) {
-//         text += possible.charAt(Math.floor(Math.random() * possible.length));
-//     }
-//     return text;
-// }
