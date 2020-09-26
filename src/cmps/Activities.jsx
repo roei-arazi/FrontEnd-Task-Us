@@ -20,7 +20,8 @@ class _Activities extends Component {
 
     get activities() {
         const { activityLog } = this.props;
-        return [activityLog.filter(activity => activity.isRead), activityLog.filter(activity => !activity.isRead)]
+        const {_id} = this.props.loggedUser;
+        return [activityLog.filter(activity => activity[_id]), activityLog.filter(activity => !activity[_id])]
     }
 
     getInitials(fullName) {

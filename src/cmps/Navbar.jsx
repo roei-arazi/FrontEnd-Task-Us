@@ -28,7 +28,6 @@ class _Navbar extends Component {
 
     goToUserProfile = (id) => {
         this.props.history.push(`/user/${id}`)
-
     }
 
     render() {
@@ -68,7 +67,7 @@ class _Navbar extends Component {
                 </ul>
 
                 <ul className="navbar-links flex column space-around">
-                    <NavLink to="/myweek">
+                    <NavLink to={loggedUser ? "/myweek" : '/login'}>
                         <li className="icon-container"><BsCalendar /></li>
                     </NavLink>
                     <NavLink to={loggedUser ? `/user/${loggedUser._id}` : '/login'}>

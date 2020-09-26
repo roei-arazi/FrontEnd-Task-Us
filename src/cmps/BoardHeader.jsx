@@ -54,13 +54,14 @@ export class _BoardHeader extends React.Component {
         }, 0)
     }
     onToggleActivities = () => {
-        let board = this.props.board
+        let board = this.props.board;
+        const{_id} = this.props.loggedUser;
 
         if (this.state.isActivitiesOpen) {
             board = {
                 ...board,
                 activityLog: board.activityLog.map(activity => {
-                    activity.isRead = true
+                    activity[_id] = true
                     return activity
                 })
             }
@@ -135,8 +136,8 @@ export class _BoardHeader extends React.Component {
         const { users, loggedUser, filterBy } = this.props;
         const isFiltering = Object.values(filterBy).some(value => value)
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
-        const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity.isRead)
-        const activitiesRead = this.props.board.activityLog.filter(activity => activity.isRead)
+        const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity[loggedUser._id])
+        const activitiesRead = this.props.board.activityLog.filter(activity => activity[loggedUser._id])
 
 
         return (
@@ -292,7 +293,7 @@ export class _BoardHeader extends React.Component {
 
                     </div>
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
-                        <Activities onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
+                        <Activities loggedUser={loggedUser} onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
                             boardName={this.state.board.name} activityLog={this.props.board.activityLog} />
                     </div>
                     {
