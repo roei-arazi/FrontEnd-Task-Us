@@ -157,8 +157,6 @@
             }
         }
 
-
-
         .user-img-container {
             position: relative;
 
@@ -246,6 +244,11 @@
             right: 0;
             padding: 0 10px;
             box-shadow: $modalsShadow;
+
+            @media(max-width:450px){
+                position: fixed;
+                top: auto;
+            }
 
             .task-users-box {
                 border-bottom: 1px solid #a8a8a87d;
