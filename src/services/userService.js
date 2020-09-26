@@ -123,7 +123,7 @@ async function signup(userCred) {
 
 async function guestLogin() {
     // const user = {
-    //     _id: _makeid(),
+    //     _id: _makeid(), 
     //     username: 'guest',
     //     fullName: 'Guest User',
     //     password: 'none',
