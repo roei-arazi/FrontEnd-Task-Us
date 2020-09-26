@@ -59,13 +59,40 @@
     button {
         background-color: $buttonMainBg;
         color: $colorBgBoardBars;
-        width: 220px;
-        border-radius: 20px;
+        width: 190px;
+        border-radius: 10px;
 
         &:hover {
             background-color: $buttonMainHover;
         }
     }
+
+    .facebook-btn-container{
+        position: relative;
+        background: #3A5A97;
+        padding:0;
+        svg{
+            font-size: 1rem;
+            color:#fff;
+        }
+        &:hover{
+            background: #27406e;
+        }
+        .facebook-btn {
+            position: absolute;
+            display: inline-block;
+            font-size: 13px;
+            background: inherit;
+            color: #fff;
+            text-shadow: 0 -1px 0 rgba(0, 0, 20, .4);
+            text-decoration: none;
+            line-height: 1;
+            position: relative;
+            width:auto;
+    
+        }
+    }
+
 
     @media (max-width:500px) {
         width: 100%;

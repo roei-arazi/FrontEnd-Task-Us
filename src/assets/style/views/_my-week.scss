@@ -1,12 +1,14 @@
 .my-week {
     position: relative;
 
+    @media (max-width: 450px) {
+        flex-direction: column;
+    }
+ 
     .search-container {
         width: 95%;
         padding-left: 15px;
         padding-right: 50px;
-
-
     }
 
     .my-week-container {

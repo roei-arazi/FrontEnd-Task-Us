@@ -59,17 +59,17 @@ class _MyWeek extends Component {
             upcomingTasks = this.applySearch(upcomingTasks, searchVal)
         }
         return (
-            <React.Fragment>
-                {window.innerWidth > 450 ?
-                    <React.Fragment>
-                        <Navbar />
-                        <Boardbar />
-                    </React.Fragment> 
-                :
-                <MobileNav loggedUser={this.props.loggedUser} />
-            }
+            // <React.Fragment>
             <section className="my-week flex">
 
+            {window.innerWidth > 450 ?
+                <React.Fragment>
+                    <Navbar />
+                    <Boardbar />
+                </React.Fragment> 
+            :
+            <MobileNav loggedUser={this.props.loggedUser} />
+        }
 
                 <div className="my-week-container flex column space around">
                     <div className="my-week-header flex column space-around">
@@ -93,7 +93,7 @@ class _MyWeek extends Component {
 
 
             </section >
-            </React.Fragment>
+            // </React.Fragment>
         )
     }
 }

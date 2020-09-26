@@ -35,15 +35,11 @@ class _Board extends Component {
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();
-                try {
-                    if (!this.props.users || !this.props.users.length) {
-                        await this.props.loadUsers();
-                    }
-                } catch (err) {
-                    console.log('Error', err)
-                }
             }
 
+            if (!this.props.users || !this.props.users.length) {
+                await this.props.loadUsers();
+            }
         } catch (err) {
             console.log('Error', err)
         }
@@ -348,10 +344,10 @@ class _Board extends Component {
                                 }
                             </Droppable>
                         </DragDropContext>
-                        {window.innerWidth < 450 && 
-                        <BsFillPlusCircleFill className="group-add-btn" onClick={this.onAddGroup} />
+                        {window.innerWidth < 450 &&
+                            <BsFillPlusCircleFill className="group-add-btn" onClick={this.onAddGroup} />
                         }
-                        
+
                     </div>
                 </div>
                 <Popup />
