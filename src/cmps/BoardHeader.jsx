@@ -118,7 +118,7 @@ export class _BoardHeader extends React.Component {
 
     }
 
-    getMemeberInitials(member) {
+    _getMemeberInitials(member) {
         let [firstName, lastName] = member.fullName.split(" ")
         let firstNameChar = ''
         let lastNameChar = ''
@@ -189,8 +189,8 @@ export class _BoardHeader extends React.Component {
                                                 {member.imgUrl
                                                     ? <img src={member.imgUrl} alt="profile" />
                                                     : <div className="member-letter">
-                                                        {this.getMemeberInitials(member)[0]}
-                                                        {this.getMemeberInitials(member)[1]}
+                                                        {this._getMemeberInitials(member)[0]}
+                                                        {this._getMemeberInitials(member)[1]}
                                                     </div>}
                                                 <p className="member-name">{member.fullName}</p>
                                             </div>
