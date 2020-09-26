@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Boardbar } from '../cmps/Boardbar';
 import { loadBoards } from '../store/actions/boardActions'
 import { Navbar } from '../cmps/Navbar';
+import { MobileNav } from '../mobile-pages/MobileNav';
 import moment from 'moment';
 import { UpcomingTasks } from '../cmps/my-week-cmps/UpcomingTasks';
 
@@ -58,15 +59,25 @@ class _MyWeek extends Component {
             upcomingTasks = this.applySearch(upcomingTasks, searchVal)
         }
         return (
+            <React.Fragment>
+                {window.innerWidth > 450 ?
+                    <React.Fragment>
+                        <Navbar />
+                        <Boardbar />
+                    </React.Fragment> 
+                :
+                <MobileNav loggedUser={this.props.loggedUser} />
+            }
             <section className="my-week flex">
-                <Navbar />
-                <Boardbar /><div className="my-week-container flex column space around">
+
+
+                <div className="my-week-container flex column space around">
                     <div className="my-week-header flex column space-around">
                         <div className="flex align-center space-around">
                             <img src="my-week-calendar.png" alt="" />
                             <section className="greeting-container">
-                                <h1>{`Hey ${firstName},`}</h1>
-                                <h1>{taskCount ? `You have ${taskCount} assignments this week.` : 'You have no assignments this week'}</h1>
+                                <h1>{`Hey ${firstName},`}
+                                {taskCount ? `You have ${taskCount} assignments this week.` : 'You have no assignments this week'}</h1>
                             </section>
                         </div>
                     </div>
@@ -82,6 +93,7 @@ class _MyWeek extends Component {
 
 
             </section >
+            </React.Fragment>
         )
     }
 }

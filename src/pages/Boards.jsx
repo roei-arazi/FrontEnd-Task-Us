@@ -5,9 +5,7 @@ import { BsFillPlusCircleFill, } from 'react-icons/bs';
 
 import { loadUsers } from '../store/actions/userActions';
 import { addBoard, loadBoards } from '../store/actions/boardActions.js';
-import { MobileNav } from '../cmps/MobileNav';
-import { withRouter } from 'react-router-dom';
-
+import { MobileNav } from '../mobile-pages/MobileNav';
 
 class _Boards extends Component {
 

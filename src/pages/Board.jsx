@@ -7,7 +7,6 @@ import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
-import moment from 'moment';
 import { userService } from '../services/userService.js';
 import lodash from 'lodash'
 // Reducers funcs
@@ -20,8 +19,8 @@ import {
 }
     from '../store/actions/boardActions'
 import { groupChanges } from '../store/actions/changesActions'
-import { MobileNav } from '../cmps/MobileNav';
-import { withRouter } from 'react-router-dom';
+import { MobileNav } from '../mobile-pages/MobileNav';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 
 
 class _Board extends Component {
@@ -325,7 +324,7 @@ class _Board extends Component {
                         <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
                     </React.Fragment>
                     :
-                    <MobileNav boardName={board.name} onAddGroup={this.onAddGroup} params={this.props.match.params} loggedUser={this.props.loggedUser} />
+                    <MobileNav boardName={board.name} members={board.members} params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
                     {window.innerWidth > 450 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
@@ -349,6 +348,7 @@ class _Board extends Component {
                                 }
                             </Droppable>
                         </DragDropContext>
+                        <BsFillPlusCircleFill className="group-add-btn" onClick={this.onAddGroup} />
                     </div>
                 </div>
                 <Popup />

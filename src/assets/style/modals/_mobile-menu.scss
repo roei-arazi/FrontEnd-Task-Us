@@ -1,0 +1,31 @@
+.menu-modal {
+    width: 50%;
+    height: 100vh;
+    position: fixed;
+    right: 200%;
+    top: 0;
+    background-color: $colorBgBoardBars;
+    z-index: 999;
+    transition: .4s;
+
+    >* {
+        width: 90%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #0e567259;
+
+        h3{
+            margin-left:10px;
+        }
+    }
+
+}
+
+
+.animate-menu-modal {
+    box-shadow: $modalsShadow;
+    transition: .3s;
+    right: 100%;
+    transform: translate(100%, 0);
+}
