@@ -348,7 +348,10 @@ class _Board extends Component {
                                 }
                             </Droppable>
                         </DragDropContext>
+                        {window.innerWidth < 450 && 
                         <BsFillPlusCircleFill className="group-add-btn" onClick={this.onAddGroup} />
+                        }
+                        
                     </div>
                 </div>
                 <Popup />

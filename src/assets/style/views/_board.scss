@@ -22,7 +22,8 @@
             font-size: 3rem;
             background: white;
             border-radius: 50%;
-            color: $buttonMainBg
+            color: $buttonMainBg;
+            box-shadow: $modalsShadow;
         }
 
         .board-container {
