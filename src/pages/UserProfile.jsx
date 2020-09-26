@@ -52,6 +52,9 @@ class _UserProfile extends Component {
 
     render() {
         let { email, fullName, username, imgUrl, _id } = this.state.user;
+        const [firstName, lastName] = fullName.split(' ');
+        let initials = firstName.charAt(0).toUpperCase();
+        if(lastName) initials += lastName.charAt(0).toUpperCase()
         const guestId = '5f6efc73805dbf6054d58794';
         if (!_id) {
             return (
@@ -70,7 +73,8 @@ class _UserProfile extends Component {
                 <Boardbar />
                 <div className="user-container">
                     <header className="header-container padding-x-15 padding-y-15 flex justify-center  align-center">
-                        <img className="user-profile-big" src={imgUrl} alt="" />
+                        {imgUrl ? <img className="user-profile-big" src={imgUrl} alt="" />:
+                        <div className="user-profile-big flex align-center justify-center">{initials}</div>}
                     </header>
 
                     <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">

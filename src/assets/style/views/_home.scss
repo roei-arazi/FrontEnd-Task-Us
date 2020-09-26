@@ -25,30 +25,29 @@
             border-radius: 20px;
 
             &:hover {
-                background-color: #f0284e;
-            }
-
+                background-color: $pink;
+            } 
         }
     }
 }
-
+ 
 .home-main {
     height: 100vh;
     justify-content: space-evenly;
-
+ 
     h1 {
-        font-size: 2.5em;
+        font-size: 2.5em; 
         margin-bottom: 60px;
     }
 
     p {
         font-size: 1.5em;
-        margin-bottom: 60px;
+        margin-bottom: 60px; 
 
     }
 
     .guest-button {
-        background-color: #f0284e;
+        background-color: $pink;
         color: $colorBgBoardBars;
         border-radius: 30px;
         font-size: 1.5em;
