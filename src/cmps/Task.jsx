@@ -249,21 +249,21 @@ class _Task extends Component {
                             </div>
 
                             <div className="task-right flex align-center">
-                                {window.innerWidth > 380 && <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
+                                <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
-                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask} />}
+                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
 
                                 <Status status={status} isStatusShown={isStatusShown}
                                     handleChange={this.handleChange} openModal={this.openModal} />
-                                {window.innerWidth > 450 &&
-                                    <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />}
-                                {window.innerWidth > 450 &&
-                                    <Priority priority={priority} isPriorityShown={isPriorityShown}
-                                        openModal={this.openModal} handleChange={this.handleChange} />}
-                                {window.innerWidth > 450 &&
-                                    <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
-                                        task={this.state.task} isTagsShown={isTagsShown}
-                                        openModal={this.openModal} handleChange={this.handleChange} />}
+
+                                <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
+
+                                <Priority priority={priority} isPriorityShown={isPriorityShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} />
+
+                                <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
+                                    task={this.state.task} isTagsShown={isTagsShown}
+                                    openModal={this.openModal} handleChange={this.handleChange} />
 
 
 

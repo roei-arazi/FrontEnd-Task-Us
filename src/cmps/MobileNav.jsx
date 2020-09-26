@@ -25,7 +25,8 @@ export class MobileNav extends React.Component {
                 <nav className=" flex align-center space-between">
                     <GiHamburgerMenu onClick={this.toggleMenuModal} />
                     <h1>{this.props.boardName}</h1>
-                    <button onClick={onAddGroup}>New Group</button>
+                    {params && <button onClick={onAddGroup}>New Group</button>}
+                    
                 </nav>
                 <section className={`${this.state.isMenuShown && 'animate-menu-modal'} menu-modal flex column align-center`}>
                     <NavLink to="/">

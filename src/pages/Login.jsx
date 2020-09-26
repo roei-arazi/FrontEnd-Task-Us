@@ -47,7 +47,7 @@ class _Login extends Component {
                     <ErrorMessage name="email" component="span" />
                     <section>
                         <legend>Password *</legend>
-                        <Field className="sign-login-input" type="text" name="password" />
+                        <Field className="sign-login-input" type="password" name="password" />
                     </section>
                     <ErrorMessage name="password" component="span" />
                     <button type="submit">Login</button>
