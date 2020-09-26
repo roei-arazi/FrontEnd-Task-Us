@@ -328,7 +328,7 @@ class _Board extends Component {
                     <MobileNav boardName={board.name} onAddGroup={this.onAddGroup} params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
-                    {window.innerWidth > 450 && <BoardHeader loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
+                    {window.innerWidth > 450 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} users={users} />}
                     <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                         <DragDropContext
