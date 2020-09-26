@@ -92,11 +92,14 @@ export class Tags extends Component {
                     <Fragment>
                         <div className="label-list tags-modal absolute flex column align-center">
                             <div className="tag-add-container  flex justify-center align-center">
-                                <BsBookmarkPlus onClick={this.onAddTag} />
+                                <BsBookmarkPlus onClick={(ev) => {
+                                    this.elTagInput.current.value = ''
+                                    this.onAddTag()
+                                }} />
                                 <input onKeyDown={(ev) => {
                                     if (ev.key === 'Enter') {
-                                        this.onAddTag()
                                         ev.target.blur()
+                                        this.onAddTag()
                                         ev.target.value = ''
                                     }
                                 }} placeholder="New tag" ref={this.elTagInput} type="text" />
@@ -114,7 +117,6 @@ export class Tags extends Component {
                                                 onKeyDown={(ev) => {
                                                     if (ev.key === 'Enter') {
                                                         ev.target.blur()
-                                                        this.onEditTag(idx)
                                                     }
                                                 }}
                                                 onChange={(ev) => this.handleChange(ev, tag.id)} value={tag.txt} type="text" />
