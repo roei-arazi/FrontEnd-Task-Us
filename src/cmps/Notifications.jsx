@@ -18,7 +18,6 @@ export class Notifications extends Component {
     }
 
     _getMemeberInitials(member) {
-        console.log('member:', member)
         let [firstName, lastName] = member.fullName.split(" ")
         let firstNameChar = ''
         let lastNameChar = ''
@@ -51,19 +50,19 @@ export class Notifications extends Component {
                                 loggedUser.notifications.map((notification, idx) => {
                                     return (
                                         <div key={idx} className="notification flex ">
-                                            <div onClick={() => this.props.goToUserProfile(notification.byUser._id)} className="user-img-container">
+                                            <div onClick={() => this.props.goToUserProfile(notification.byUser._id)} className="user-img-container cursor-pointer">
                                                 {
                                                     notification.byUser.imgUrl ?
-                                                        <img className="cursor-pointer" src={notification.byUser.imgUrl} alt="profile" />
+                                                        <img src={notification.byUser.imgUrl} alt="profile" />
                                                         :
-                                                        <div className="member-letter cursor-pointer">
+                                                        <div className="member-letter" >
                                                             {this._getMemeberInitials(notification.byUser)[0]}
                                                             {this._getMemeberInitials(notification.byUser)[1]}
                                                         </div>
                                                 }
                                             </div>
                                             <div className="notification-msg flex column">
-                                                <h2>
+                                                <h2 className="cursor-pointer" onClick={() => this.props.goToUserProfile(notification.byUser._id)}>
                                                     {notification.byUser.fullName}
                                                 </h2>
                                                 <p>
