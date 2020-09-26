@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { FaAd, FaRegUser } from 'react-icons/fa'
+import { FaRegUser } from 'react-icons/fa'
 import { VscBell, VscBellDot } from 'react-icons/vsc'
 import { BsCalendar } from 'react-icons/bs'
-import { CgProfile } from 'react-icons/cg'
 import { BiLogOut } from 'react-icons/bi'
 import { Notifications } from './Notifications';
 import { markAsRead, removeNotifications, logout } from '../store/actions/userActions'
@@ -26,6 +25,7 @@ class _Navbar extends Component {
         this.props.logout()
         this.props.history.push('/login')
     }
+
     goToUserProfile = (id) => {
         this.props.history.push(`/user/${id}`)
 
@@ -48,9 +48,12 @@ class _Navbar extends Component {
                         {
                             loggedUser.notifications.filter(notification => !notification.isRead).length === 0
                                 ? ''
-                                : <p className="notifications-counter">
-                                    {loggedUser.notifications.filter(notification => !notification.isRead).length}
-                                </p>
+                                : <div className="notifications-counter">
+                                    <p >
+                                        {loggedUser.notifications.filter(notification => !notification.isRead).length}
+                                    </p>
+                                </div>
+
                         }
                         {
                             isNotificationShown &&
