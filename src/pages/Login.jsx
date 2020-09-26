@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
+import FacebookLogin from 'react-facebook-login'
 
 import { login, guestLogin } from '../store/actions/userActions.js'
 import { loadBoards } from '../store/actions/boardActions'
@@ -23,6 +24,10 @@ class _Login extends Component {
         await this.props.guestLogin();
         this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
+
+    responseFacebook = (response) => {
+        console.log(response);
+      }
 
     render() {
         const initialValues = { username: '', password: '' }
@@ -51,10 +56,17 @@ class _Login extends Component {
                     </section>
                     <ErrorMessage name="password" component="span" />
                     <button type="submit">Login</button>
+                    <FacebookLogin
+                        appId="1088597931155576"
+                        size="small"
+                        fields="name,email,picture"
+                        // onClick={this.onLogin}
+                        callback={this.responseFacebook} />
                     <a href="/#/signup">Don't have an account? sign up here.</a>
                     <button className="guest-button" onClick={this.onGuestLogin}>Or try as a guest!</button>
                 </Form>
             </Formik>
+            
             <div data-title="Back to home" className="go-back">
                 <NavLink to="/"><FaArrowLeft /></NavLink>
             </div>

@@ -2,7 +2,8 @@
     margin: 0;
 
     header {
-        height: 25vh;
+        height: 22vh;
+        border-bottom: 1px solid rgba(109, 109, 109, 0.35);
 
         h1 {
             margin-top: 25px;
@@ -23,7 +24,7 @@
 
     .all-activities-container {
         overflow-y: overlay;
-        max-height: 75vh;
+        max-height: 78vh;
 
         svg {
             margin-right: 0;

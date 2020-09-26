@@ -247,7 +247,7 @@ export class _BoardHeader extends React.Component {
 
                 </div>
                 <div className="board-header-footer flex align-center space-between">
-                    <h5>
+                    <h3>
                         <ContentEditable
                             onFocus={this.focusText}
                             className="content-editable cursor-initial"
@@ -271,7 +271,7 @@ export class _BoardHeader extends React.Component {
                                 }
                             }}
                         />
-                    </h5>
+                    </h3>
                     <div className="header-options flex">
                         <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
                         <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">

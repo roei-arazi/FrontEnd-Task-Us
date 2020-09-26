@@ -321,8 +321,8 @@
                 box-shadow: $modalsShadow;
                 z-index: 999;
                 border-radius: 1px;
-                right: 0;
-                top: 0;
+                right: 50px;
+                top: 20px;
                 word-break: break-all;
                 padding: 5px 5px 0 5px;
 
@@ -392,8 +392,12 @@
             height: 100%;
             padding-left: 5px;
 
+            input {
+                margin: 0;
+            }
+
             .task-label-name {
-                overflow: overlay;
+                overflow: hidden;
             }
 
             .tag-remove-icon {

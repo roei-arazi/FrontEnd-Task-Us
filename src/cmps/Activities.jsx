@@ -22,10 +22,10 @@ export default class Activities extends Component {
         return [activityLog.filter(activity => activity.isRead), activityLog.filter(activity => !activity.isRead)]
     }
 
-    getInitials(fullName){
+    getInitials(fullName) {
         const [firstName, lastName] = fullName.split(' ');
         let initials = firstName.charAt(0).toUpperCase();
-        if(lastName) initials += lastName.charAt(0).toUpperCase();
+        if (lastName) initials += lastName.charAt(0).toUpperCase();
         return initials;
     }
 
@@ -98,7 +98,6 @@ export default class Activities extends Component {
 
                     <div className='filters-container space-between flex align-center'>
                         <input value={searchVal} onChange={this.handleChange} type="text" placeholder="Search" />
-
                         <div className="filter-outer-container flex relative">
                             <button className="flex align-center" onClick={this.toggleFilter}><VscListFilter /> Filter</button>
                             {isFilterOpen &&
@@ -109,11 +108,11 @@ export default class Activities extends Component {
                                             <section className="activity-member-filter">
                                                 <h3>Member</h3>
                                                 <div className="filter-list flex justify-center align-center column">
-                                                {members.map((member, idx) => <button
-                                                    className={filterBy.member === member ? 'remove-filter-btn' : ''}
-                                                    key={idx}
-                                                    onClick={() => this.onSetFilter('member', member)}>{member}</button>)}
-                                                    </div>
+                                                    {members.map((member, idx) => <button
+                                                        className={filterBy.member === member ? 'remove-filter-btn' : ''}
+                                                        key={idx}
+                                                        onClick={() => this.onSetFilter('member', member)}>{member}</button>)}
+                                                </div>
                                             </section>
                                             <section className="activity-date-filter">
                                                 <h3>Date</h3>
@@ -132,6 +131,7 @@ export default class Activities extends Component {
                         </div>
                     </div>
                 </header>
+
                 <div className="all-activities-container">
                     {/* Activities which are not read: */}
                     <div className="activity-list-not-read column flex  padding-y-15">
@@ -148,8 +148,8 @@ export default class Activities extends Component {
                                                 {moment(activity.createdAt).format("DD MMM")}
                                             </p>
                                         </div>
-                                        {activity.byUser.imgUrl ? <img src={activity.byUser.imgUrl} alt="" />:
-                                        <div className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
+                                        {activity.byUser.imgUrl ? <img src={activity.byUser.imgUrl} alt="" /> :
+                                            <div className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
                                         <h2>{activity.byUser.fullName}</h2>
                                     </div>
                                     <div className="activity-desc-container flex align-center">

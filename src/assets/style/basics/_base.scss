@@ -40,12 +40,18 @@ h5,
 h6 {
   font-family: font1;
   color: $mainBlack;
+  line-height: 1.5;
+}
+
+h5 {
+  font-size: 1rem;
 }
 
 p,
 label,
 ::placeholder {
   font-family: font1;
+  line-height: 1.5;
 }
 
 
