@@ -1,0 +1,33 @@
+nav {
+    height: 8vh;
+    border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
+    width: 100%;
+    background-color: $colorBgBoardBars;
+    padding: 0 10px;
+
+    h1{
+        margin-left:15px;
+    }
+
+    .board-users-container {
+
+        >:not(:first-child).user-img-container {
+            margin-left: -15px;
+        }
+    }
+
+    img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+
+    .hamburger {
+
+        svg {
+            color: $colorMainNav;
+        }
+    }
+
+}

@@ -1,57 +1,15 @@
-nav {
-    height: 8vh;
-    border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
-    width: 100%;
-    background-color: $colorBgBoardBars;
-    padding-left: 15px;
-
-    .hamburger {
-
-        svg {
-            color: $colorMainNav;
-        }
-    }
-
-}
-
-.menu-modal {
-    width: 50%;
-    height: 100vh;
-    position: fixed;
-    right: 200%;
-    top: 0;
-    background-color: $colorBgBoardBars;
-    z-index: 999;
-    transition: .4s;
-
-    >* {
-        width: 90%;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #0e567259;
-    }
-
-}
-
-
-.animate-menu-modal {
-    box-shadow: $modalsShadow;
-    transition: .3s;
-    right: 100%;
-    transform: translate(100%, 0);
-}
-
 .boards-list {
     background-color: $colorBgBoardBars;
 
     svg {
-        bottom: 30px;
-        right: 20px;
-        width: 35px;
-        height: 35px;
-        color: $buttonMainBg;
         position: fixed;
+        bottom: 10px;
+        right: 15px;
+        font-size: 3rem;
+        background: white;
+        box-shadow: $modalsShadow;
+        border-radius: 50%;
+        color: $buttonMainBg
     }
 
     .board-details {

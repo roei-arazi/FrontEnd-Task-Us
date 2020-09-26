@@ -1,6 +1,10 @@
 .my-week {
     position: relative;
 
+    @media (max-width: 450px) {
+        flex-direction: column;
+    }
+ 
     .search-container {
         width: 95%;
         padding-left: 15px;
@@ -10,11 +14,15 @@
     .my-week-container {
         display: flex;
         flex-direction: column;
-        padding: 0px 50px;
+        padding: 0 50px;
         width: 100%;
         background-color: $colorBgBoardBars;
         height: 100vh;
         overflow-y: overlay;
+
+        @media (max-width: 450px){
+            padding: 0 15px;
+        }
 
         input {
             font-size: 1.2rem;
@@ -41,7 +49,11 @@
 
         h1 {
             font-size: 1.9rem;
-            margin-bottom: 50px;
+
+
+        @media(max-width: 450px){
+            font-size:1.4rem;
+        }
         }
     }
 
@@ -49,6 +61,11 @@
         margin: 5vh 0px;
         height: 15vh;
         width: 500px;
+
+        @media(max-width: 450px){
+
+            width: auto;
+        }
 
         h1 {
             margin: auto;
@@ -80,12 +97,20 @@
             border: 1px solid #c5c7d0;
             margin-bottom: 10px;
 
+            @media(max-width:450px){
+                height: 50px;
+            }
+
             .task-preview-name {
                 margin-bottom: 5px;
             }
 
             .left-column {
                 margin: 0 16px;
+
+                @media(max-width:450px){
+                    margin: 0 5px;
+                }
 
                 .task-location {
                     color: $mainLightGrey;
@@ -113,14 +138,18 @@
                 border-bottom-right-radius: 8px;
                 border-top-right-radius: 8px;
 
-
+                @media (max-width: 450px){
+                    width: auto;
+                }
+                
 
                 .user-img-container {
 
                     img,
                     .member-letter {
-                        width: 30px;
-                        height: 30px;
+                        height: 35px;
+                        width: 35px;
+                        margin-right:5px;
                     }
 
                     img {
@@ -147,6 +176,10 @@
                     border-bottom-right-radius: 8px;
                     border-top-right-radius: 8px;
                     cursor: pointer;
+
+                    @media (max-width: 450px){
+                        width: 70px;
+                    }
 
                     h2 {
                         color: $colorBgBoardBars;
