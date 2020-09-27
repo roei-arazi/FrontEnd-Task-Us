@@ -1,10 +1,6 @@
 .user-profile {
     display: flex;
 
-    span {
-        color: $mainBlack;
-    }
-
     .user-container {
 
         width: 100%;
@@ -26,7 +22,7 @@
             width: 100%;
             background-color: $buttonMainBg;
             border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
-            height:40vh;
+            height: 40vh;
         }
 
         img {
@@ -38,8 +34,8 @@
         height: 60vh;
         width: 100%;
 
-        @media (max-width: 450px){
-            height:52vh;
+        @media (max-width: 450px) {
+            height: 52vh;
         }
 
         h2 {
@@ -47,7 +43,7 @@
             align-self: flex-start;
             text-decoration: underline;
 
-            &:hover{
+            &:hover {
                 transition: .3s;
                 color: $buttonMainBg
             }
@@ -55,14 +51,56 @@
 
         .user-details-inner-container {
             margin-top: 100px;
-            height: 35%;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            width: 100%;
 
-         
+            li {
+                cursor: pointer;
+                color: $buttonMainBg;
+                text-indent: 10%;
+                line-height: 2;
+
+                &:hover {
+                    color: $buttonMainHover;
+                }
+            }
+
+            >:not(:first-child) {
+                margin-left: 100px;
+
+            }
+
+            .col-left {
+                >h3:not(:first-child) {
+                    margin-top: 50px;
+                }
+            }
+
+            .col-mid {
+                >h3:not(:first-child) {
+                    margin-top: 50px;
+                }
+            }
+
+            .col-right {
+                p {
+                    margin-top: 50px;
+                }
+
+                span {
+                    cursor: pointer;
+                    color: $buttonMainBg;
+
+                    &:hover {
+                        color: $buttonMainHover;
+                    }
+                }
+
+                >h3:not(:first-child) {
+                    margin-top: 50px;
+                }
+            }
         }
     }
 
 }
-

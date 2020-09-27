@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Framgnet } from 'react';
 import { connect } from 'react-redux';
-import { Fade } from '@material-ui/core';
+import { Fade, Tooltip } from '@material-ui/core';
 // Inside imports
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
@@ -19,8 +19,9 @@ class _UserProfile extends Component {
             username: '',
             passowrd: '',
             fullName: '',
-            imgUrl: '',
+            imgUrl: ''
         }
+
     }
     async componentDidMount() {
         this.props.loadBoards();
@@ -54,6 +55,11 @@ class _UserProfile extends Component {
         const res = await cloudinaryService.uploadImg(ev.target.files[0])
         this.setState({ user: { ...this.state.user, imgUrl: res.url } })
     }
+
+    onMoveToBoard(id) {
+        this.props.history.push(`/board/${id}`)
+    }
+
     render() {
         let { email, fullName, username, imgUrl, _id } = this.state.user;
         if (!_id) {
@@ -70,6 +76,18 @@ class _UserProfile extends Component {
         const { loggedUser } = this.props
         const userCreatedBoards = this.props.boards.filter(board => board.boardCreator._id === this.state.user._id)
 
+        let numOfUserTasks = 0
+        this.props.boards.forEach(board => {
+            board.groups.forEach(group => {
+                group.tasks.forEach(task => {
+                    task.members.forEach(member => {
+                        if (member && member._id === this.state.user._id) {
+                            numOfUserTasks++
+                        }
+                    })
+                })
+            })
+        })
         return (
             <section className={`user-profile flex ${window.innerWidth < 450 && 'column'}`}>
                 {window.innerWidth > 450 ?
@@ -88,20 +106,31 @@ class _UserProfile extends Component {
                         {(loggedUser._id === _id && loggedUser._id !== guestId) ? <h2 onClick={this.toggleModal}
                             className="clickable-header">Edit Profile</h2> : ''}
                         <div className="user-details-inner-container">
+                            <div className="col-left">
+                                <h1>Details</h1>
+                                <h3>Email: {email}</h3>
+                                <h3>Full Name: {fullName}</h3>
+                            </div>
+                            <div className="col-mid">
+                                <h1>Boards</h1>
+                                {
+                                    !userCreatedBoards.length
+                                        ? <h3>No boards created.</h3>
+                                        : <h3> Boards created by {loggedUser._id === this.props.match.params.id ? 'you' : 'this user:'}  <br />  {
+                                            userCreatedBoards.map((board, idx) => {
+                                                return <li onClick={() => this.onMoveToBoard(board._id)} key={idx}>{board.name}</li>
+                                            })
+                                        }
+                                        </h3>
 
-                            <h3>Email: <span className="span-user-details">{email}</span></h3>
-                            <h3>Full Name: <span className="span-user-details">{fullName}</span></h3>
-                            <h3>
-                                {!userCreatedBoards.length
-                                    ? "No boards created."
-                                    : "Boards created by this user:"  {
-                                    userCreatedBoards.map(board => {
-                                        return board.name
-                                    })
                                 }
-                                }
+                            </div>
+                            <div className="col-right">
+                                <h1>Tasks</h1>
+                                <h3>Number of tasks assigned to this user: {numOfUserTasks}</h3>
+                                <p>See more info <span>here</span></p>
+                            </div>
 
-                            </h3>
 
                         </div>
                     </div>
