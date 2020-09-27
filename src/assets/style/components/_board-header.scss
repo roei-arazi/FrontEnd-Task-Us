@@ -1,5 +1,5 @@
 .board-header {
-    height: 20vh;
+    height: 18.5vh;
     background-color: $colorBgBoardBars;
     display: flex;
     justify-content: space-between;
@@ -13,7 +13,10 @@
             font-size: 2rem;
         }
 
+    
+
         .board-header-right {
+            align-self: flex-end;
             .board-users {
                 cursor: pointer;
                 text-align: center;
@@ -184,6 +187,22 @@
 
     .board-header-footer {
         height: 50%;
+
+        .board-header-footer-left{
+            height:100%;
+
+            .created-by{
+                padding-left:7px;
+                color: $mainBlack;
+                a{
+                    margin-left:5px;
+                    &:hover{
+                        text-decoration: underline;
+                        color: $buttonMainBg;
+                    }
+                }
+            }
+        }
 
         h3 {
             font-weight: 400;
