@@ -90,6 +90,7 @@ class _Boardbar extends Component {
     }
     render() {
         const { isShown } = this.state;
+        const {loggedUser} = this.props;
         const filteredBoards = this.handleSearch()
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
@@ -106,19 +107,19 @@ class _Boardbar extends Component {
                 <ul>
                     {isShown && filteredBoards.map((board, idx) => {
                         return <li
-                            style={{ paddingLeft: this.props.loggedUser._id === board.boardCreator._id ? '' : '25px' }}
+                            style={{ paddingLeft: (loggedUser._id === board.boardCreator._id || loggedUser.isAdmin) ? '' : '25px' }}
                             className="flex align-center cursor-pointer"
                             key={idx}
                             onClick={() => this.onMoveToBoard(board._id)} >
                             {
-                                this.props.loggedUser._id === board.boardCreator._id &&
+                                (loggedUser._id === board.boardCreator._id || loggedUser.isAdmin) &&
                                 <MdDelete onClick={ev => {
                                     ev.stopPropagation()
                                     this.onBoardRemove(board._id)
                                 }
                                 } />
                             }
-                            <h5 style={{ color: this.props.loggedUser._id === board.boardCreator._id ? "#0085ff" : "#333333" }}>
+                            <h5 style={{ color: (loggedUser._id === board.boardCreator._id || loggedUser.isAdmin) ? "#0085ff" : "#333333" }}>
                                 {board.name}
                             </h5>
                         </li>

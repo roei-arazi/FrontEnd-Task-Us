@@ -11,16 +11,16 @@ export function Status(props) {
                 </div>
                 <Fade in={props.isStatusShown} >
                     <div className="label-list absolute flex column align-center modal-fade-in">
-                        <section className="label-selector flex align-center justify-center stuck" onClick={() => props.handleChange("Stuck")}>
+                        <section className="label-selector flex align-center justify-center stuck" onClick={() => props.handleChange('Stuck', 'status')}>
                             <p>Stuck</p>
                         </section>
-                        <section className="label-selector flex align-center justify-center working" onClick={() => props.handleChange("Working on it")}>
+                        <section className="label-selector flex align-center justify-center working" onClick={() => props.handleChange('Working on it', 'status')}>
                             <p>Working on it</p>
                         </section>
-                        <section className="label-selector flex align-center justify-center done" onClick={() => props.handleChange("Done")}>
+                        <section className="label-selector flex align-center justify-center done" onClick={() => props.handleChange('Done', 'status')}>
                             <p>Done</p>
                         </section>
-                        <section className="label-selector flex align-center justify-center empty" onClick={() => props.handleChange("empty")}>
+                        <section className="label-selector flex align-center justify-center empty" onClick={() => props.handleChange('', 'status')}>
                             <p> </p>
                         </section>
                     </div>

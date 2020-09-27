@@ -2,7 +2,7 @@ import React from 'react';
 import { GoSearch } from 'react-icons/go'
 import { VscListFilter } from 'react-icons/vsc'
 import ContentEditable from 'react-contenteditable';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 // inside imports
@@ -112,7 +112,7 @@ export class _BoardHeader extends React.Component {
     }
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
-        const { members } = this.state.board
+        const { members, boardCreator } = this.state.board
         const { users, loggedUser, filterBy } = this.props;
         const isFiltering = Object.values(filterBy).some(value => value)
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
@@ -218,6 +218,7 @@ export class _BoardHeader extends React.Component {
                     </div>
                 </div>
                 <div className="board-header-footer flex align-center space-between">
+                    <div className="board-header-footer-left flex column space-between">
                     <h3>
                         <ContentEditable
                             onFocus={this.focusText}
@@ -241,6 +242,12 @@ export class _BoardHeader extends React.Component {
                             }}
                         />
                     </h3>
+                        <p className="created-by">Created By:  
+                            <NavLink to={`/user/${boardCreator._id}`}>
+                            {boardCreator.fullName}
+                            </NavLink>
+                            </p>
+                    </div>
                     <div className="header-options flex">
                         <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
                         <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">

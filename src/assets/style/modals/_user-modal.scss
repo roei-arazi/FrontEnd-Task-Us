@@ -7,7 +7,7 @@
             width: 250px;
             height: 250px;
             color: $colorBgBoardBars; 
-            font-size: 12rem;
+            font-size: 10rem;
             border: 5px solid $colorBgBoardBars;
             &.initials{
                 background-color: $pink;
@@ -33,6 +33,7 @@
                 .user-profile-big {
                     cursor: pointer;
                     &:hover {
+                        filter: brightness(70%);
                         -webkit-filter: brightness(70%);
                         -webkit-transition: all .3s ease;
                         -moz-transition: all .3s ease;
@@ -69,6 +70,7 @@
                         &:hover {
                             background-color: $buttonMainHover;
                             -webkit-filter: brightness(80%);
+                            filter: brightness(80%);
                             -webkit-transition: all .3s ease;
                             -moz-transition: all .3s ease;
                             -o-transition: all .3s ease;
@@ -84,6 +86,7 @@
                         &:hover {
                             background-color: #9b9b9b;
                             -webkit-filter: brightness(80%);
+                            filter: brightness(80%);
                             -webkit-transition: all .3s ease;
                             -moz-transition: all .3s ease;
                             -o-transition: all .3s ease;
