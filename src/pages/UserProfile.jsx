@@ -28,7 +28,7 @@ class _UserProfile extends Component {
         setTimeout(async () => {
             const user = await userService.getUserById(this.props.match.params.id)
             this.setState({ user: { ...user } })
-        }, 2000);
+        }, 500);
     }
     async componentDidUpdate(prevProps) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
@@ -36,7 +36,7 @@ class _UserProfile extends Component {
                 setTimeout(async () => {
                     const user = await userService.getUserById(this.props.match.params.id)
                     this.setState({ user: { ...user } })
-                }, 2000)
+                }, 500)
             });
         }
     }
@@ -58,6 +58,9 @@ class _UserProfile extends Component {
 
     onMoveToBoard(id) {
         this.props.history.push(`/board/${id}`)
+    }
+    onMoveToDashboard = (ev) => {
+        this.props.history.push(`/dashboard`)
     }
 
     render() {
@@ -128,9 +131,8 @@ class _UserProfile extends Component {
                             <div className="col-right">
                                 <h1>Tasks</h1>
                                 <h3>Number of tasks assigned to this user: {numOfUserTasks}</h3>
-                                <p>See more info <span>here</span></p>
+                                <p>See more info <span onClick={this.onMoveToDashboard}>here</span></p>
                             </div>
-
 
                         </div>
                     </div>

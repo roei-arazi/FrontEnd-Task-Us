@@ -8,15 +8,20 @@ import { signup, guestLogin } from '../store/actions/userActions.js'
 import { loadBoards } from '../store/actions/boardActions'
 
 class _Signup extends Component {
+    state = {
+        isLoading: false
+    }
     componentDidMount() {
         // if(this.props.loggedUser)   this.props.history.push('/board/123')
-        this.props.loadBoards()
     }
     onSignup = async (values, { resetForm }) => {
         resetForm();
         const { username, password, email, fullName } = values;
         try {
             await this.props.signup({ username, password, email, fullName });
+            this.setState({ isLoading: true })
+            await this.props.loadBoards()
+            this.setState({ isLoading: false })
             this.props.history.push(`/board/${this.props.boards[0]._id}`)
         } catch (err) {
             console.log('Signup: Couldn\'t sign up');
@@ -29,6 +34,11 @@ class _Signup extends Component {
     }
     render() {
         const initialValues = { username: '', password: '', confirm: '', email: '', fullName: '' }
+        if (this.state.isLoading) return (
+            <div className="loader-container flex justify-center align-center">
+                <img src="loading.gif" alt="" />
+            </div>
+        )
         return <div className="sign-login">
             <Formik
                 initialValues={initialValues}

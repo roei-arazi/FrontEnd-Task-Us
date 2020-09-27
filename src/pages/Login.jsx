@@ -9,12 +9,17 @@ import { login, guestLogin, signup } from '../store/actions/userActions.js'
 import { loadBoards } from '../store/actions/boardActions'
 
 class _Login extends Component {
+    state = {
+        isLoading: false
+    }
     componentDidMount() {
-        this.props.loadBoards()
     }
     onLogin = async (values, { resetForm }) => {
         resetForm();
         await this.props.login(values);
+        this.setState({ isLoading: true })
+        await this.props.loadBoards()
+        this.setState({ isLoading: false })
         if (this.props.loggedUser) this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
     onGuestLogin = async () => {
@@ -33,6 +38,11 @@ class _Login extends Component {
     }
     render() {
         const initialValues = { username: '', password: '' }
+        if (this.state.isLoading) return (
+            <div className="loader-container flex justify-center align-center">
+                <img src="loading.gif" alt="" />
+            </div>
+        )
         return <div className="sign-login">
             <Formik
                 initialValues={initialValues}
