@@ -7,9 +7,9 @@ import { MobileNav } from '../mobile-pages/MobileNav';
 
 export function Dashboard(props) {
 
-    const {board} = props;
+    const { board } = props;
     const boardMembers = board.members.map(member => {
-        const user = {...member};
+        const user = { ...member };
         user.done = 0;
         user['working on it'] = 0;
         user.stuck = 0;
