@@ -5,6 +5,7 @@
     height: 40px;
     border-radius: 1px;
     box-shadow: 0px 3px 4px -5px #484444;
+    transition: 0.3s;
 
     @media(max-width:450px) {
         width: 635px;
@@ -24,7 +25,6 @@
     }
 
     &:hover {
-        transition: .3s;
         background-color: #e8e8e8;
     }
 
@@ -67,6 +67,7 @@
         position: relative;
         height: 100%;
         flex-grow: 1;
+        transition: 0.3s;
 
         @media (max-width: 380px) {
             margin-right: 5px;
@@ -103,6 +104,7 @@
             h2 {
                 margin-left: 15px;
                 font-weight: 400;
+                transition: 0.3s;
 
                 @media(max-width:450px) {
                     margin-left: 0;
@@ -238,7 +240,7 @@
             padding: 0 10px;
             box-shadow: $modalsShadow;
 
-            @media(max-width:450px){
+            @media(max-width:450px) {
                 position: fixed;
                 top: auto;
             }
@@ -304,9 +306,9 @@
                 height: 100%;
                 width: 100%;
                 cursor: pointer;
+                transition: 0.3s;
 
                 &:hover {
-                    transition: 0.3s;
                     box-shadow: $brightBoxShadow;
                 }
             }
@@ -321,15 +323,15 @@
                 top: 20px;
                 word-break: break-all;
                 padding: 5px 5px 0 5px;
+                transition: 0.3s;
 
-                @media(max-width:450px){
+                @media(max-width:450px) {
                     position: fixed;
-                    top:auto;
+                    top: auto;
                 }
 
 
                 >*:hover {
-                    transition: 0.3s;
                     box-shadow: $brightBoxShadow;
                 }
 
@@ -372,6 +374,7 @@
 
         .react-datepicker__input-container {
             input {
+                transition: 0.3s;
 
                 &:hover,
                 &:focus {

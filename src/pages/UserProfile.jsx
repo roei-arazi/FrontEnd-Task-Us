@@ -9,6 +9,7 @@ import { userService } from '../services/userService.js';
 import { updateUser } from '../store/actions/userActions';
 import { cloudinaryService } from '../services/cloudinaryService';
 import { MobileNav } from '../mobile-pages/MobileNav';
+import { FaArrowLeft } from 'react-icons/fa';
 
 class _UserProfile extends Component {
     state = {
@@ -88,6 +89,7 @@ class _UserProfile extends Component {
                 })
             })
         })
+        console.log('props', this.props)
         return (
             <section className={`user-profile flex ${window.innerWidth < 450 && 'column'}`}>
                 {window.innerWidth > 450 ?
@@ -103,6 +105,7 @@ class _UserProfile extends Component {
                             <div className="user-profile-big initials flex align-center justify-center">{initials}</div>}
                     </header>
                     <div className="user-details-container padding-x-30 padding-y-45 align-center  flex  column">
+                        <FaArrowLeft className="go-back-arrow" onClick={() => this.props.history.goBack()} />
                         {(loggedUser._id === _id && loggedUser._id !== guestId) ? <h2 onClick={this.toggleModal}
                             className="clickable-header">Edit Profile</h2> : ''}
                         <div className="user-details-inner-container flex justify-center">

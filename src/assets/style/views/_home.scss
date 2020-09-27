@@ -23,6 +23,7 @@
             background-color: #ee7b91;
             width: fit-content;
             border-radius: 20px;
+            transition: .3s;
 
             &:hover {
                 background-color: $pink;
@@ -53,8 +54,8 @@
         border-radius: 30px;
         font-size: 1.5em;
         padding: 18px;
-        transition: .3s;
         left: 0;
+        transition: .3s;
 
         &:hover {
             background-color: #be203e;

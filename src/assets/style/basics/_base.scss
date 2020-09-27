@@ -93,15 +93,21 @@ svg {
   color: $mainBlack;
 }
 
+span.span-user-details {
+  letter-spacing: 0.5px;
+  color: $colorFontTaskGroup;
+}
+
+// :hover {
+//   transition: .3s;
+//   color: $buttonMainHover;
+// }
+
 .drop-down-menu-icon {
   position: absolute;
   left: -20px;
 }
 
-span.span-user-details {
-  letter-spacing: 0.5px;
-  color: $colorFontTaskGroup;
-}
 
 .icon-container {
   width: fit-content;
@@ -118,7 +124,7 @@ span.span-user-details {
   border: 2px solid #e5f4ff;
 }
 
-.member-letter{
+.member-letter {
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -130,15 +136,17 @@ span.span-user-details {
   height: 30px;
   color: $colorBgBoardBars;
   background-color: $pink;
-}        
+}
 
 >:not(:first-child).user-img-container {
-    margin-left: -15px;
+  margin-left: -15px;
 }
 
-.hidden{
-  display:none;
+.hidden {
+  display: none;
 }
+
+
 
 .content-editable {
   padding: 0 4px;
@@ -190,6 +198,7 @@ span.span-user-details {
 }
 
 .user-profile-big {
+  cursor: default;
   width: 250px;
 }
 
@@ -229,7 +238,6 @@ div[role="menuContainer"]>div>ul {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  transition: .3s;
   background: #a0a0a0;
   border-radius: 1px;
 }

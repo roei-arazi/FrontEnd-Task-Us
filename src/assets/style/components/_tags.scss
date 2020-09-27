@@ -37,6 +37,7 @@
         .tag-container {
             input {
                 border: 2px dotted transparent;
+                transition: 0.3s;
 
                 &:hover {
                     border: 2px dotted #a0a0a0;

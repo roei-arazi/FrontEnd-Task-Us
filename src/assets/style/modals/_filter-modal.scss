@@ -8,36 +8,58 @@
     padding: 0 10px 10px 10px;
     cursor: auto;
     max-height: 400px;
+
     section {
         button {
             padding: 5px;
             border-radius: 0;
         }
     }
+
     >* {
         max-height: 100%;
         width: 100px;
         margin: 0 10px;
+
         .filter-list {
             button {
                 padding: 5px;
                 border-radius: 10px;
+                width: 100%;
+                background-color: $buttonMainBg;
+                color: #e5f4ff;
+                margin-bottom: 5px;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: $buttonMainHover;
+                }
             }
+
             .remove-filter-btn {
-                background-color: $buttonMainHover;
+                background-color: #e88d34;
+
+                &:hover {
+                    background-color: #b16d2a;
+                }
             }
         }
+
         h3 {
             color: $mainBlack;
             margin: 10px 0;
         }
+
         button {
             padding: 5px 10px;
             width: 100%;
             background-color: $buttonMainBg;
             color: $colorIconsNav;
             margin-bottom: 5px;
+            transition: 0.3s;
+
         }
+
         button:hover {
             background-color: $buttonMainHover;
         }

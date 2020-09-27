@@ -4,7 +4,7 @@
     @media (max-width: 450px) {
         flex-direction: column;
     }
- 
+
     .search-container {
         width: 95%;
         padding-left: 15px;
@@ -22,7 +22,7 @@
 
         @media (max-width: 450px) {
             padding: 50px 15px 0;
-            height:92vh;
+            height: 92vh;
         }
 
         input {
@@ -118,9 +118,9 @@
 
                     span {
                         cursor: pointer;
+                        transition: .3s;
 
                         &:hover {
-                            transition: .3s;
                             text-decoration: underline;
                             color: #4999c8;
                         }
@@ -156,6 +156,7 @@
                     img {
                         border-radius: 50%;
                         cursor: pointer;
+                        transition: .3s;
 
                         &:hover {
                             box-shadow: $brightBoxShadow;
@@ -177,6 +178,7 @@
                     border-bottom-right-radius: 8px;
                     border-top-right-radius: 8px;
                     cursor: pointer;
+                    transition: .3s;
 
                     @media (max-width: 450px) {
                         width: 70px;
@@ -187,7 +189,6 @@
                     }
 
                     &:hover {
-                        transition: .3s;
                         background-color: #3179a3;
                     }
                 }

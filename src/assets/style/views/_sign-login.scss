@@ -14,6 +14,7 @@
 
     svg {
         color: $buttonMainBg;
+        transition: .3s;
 
         &:hover {
             color: $buttonMainHover;
@@ -62,6 +63,7 @@
         color: $colorBgBoardBars;
         width: 190px;
         border-radius: 10px;
+        transition: .3s;
 
         &:hover {
             background-color: $buttonMainHover;
@@ -109,6 +111,7 @@
 
     .guest-button {
         background-color: #f0284e;
+        transition: .3s;
 
         &:hover {
             background-color: #be203e;
@@ -117,6 +120,8 @@
 
     a {
         margin: 10px 0;
+        transition: .3s;
+
     }
 
     a:hover {

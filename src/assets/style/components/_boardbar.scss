@@ -17,7 +17,7 @@
         padding: 15px 0;
         overflow: visible;
     }
-  
+
     .boardbar-header {
         display: flex;
         align-items: center;
@@ -38,9 +38,9 @@
             margin-left: 5px;
             color: $buttonMainBg;
             font-size: 2rem;
+            transition: .3s;
 
             &:hover {
-                transition: .3s;
                 color: $buttonMainHover;
             }
         }
@@ -49,17 +49,17 @@
     ul {
         overflow-y: overlay;
         overflow-x: hidden;
-        width:100%;
+        width: 100%;
+        padding: 0 10px;
 
         li {
             border-radius: 5px;
             word-break: break-word;
-            margin-right: 15px;
             display: flex;
             min-height: 25px;
+            transition: .3s;
 
             &:hover {
-                transition: 0.3s;
                 background-color: #88cded3d;
             }
 
@@ -68,9 +68,9 @@
                 display: flex;
                 align-items: center;
                 flex-grow: 1;
+                transition: .3s;
 
                 &:hover {
-                    transition: .3s;
                     color: $buttonMainBg;
                 }
             }
@@ -81,9 +81,9 @@
                 padding: 2px;
                 margin-right: 5px;
                 flex-shrink: 0;
+                transition: .3s;
 
                 &:hover {
-                    transition: .3s;
                     color: $buttonMainBg;
                 }
             }

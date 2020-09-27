@@ -4,17 +4,18 @@
     padding-top: 15px;
     padding-left: 15px;
 
-    @media(max-width:450px){
+    @media(max-width:450px) {
         padding-top: 30px;
     }
 
     svg {
         color: $buttonMainBg;
+        transition: .3s;
 
-        @media(max-width:450px){
+        @media(max-width:450px) {
             position: absolute;
             top: 10px;
-            left:10px;
+            left: 10px;
         }
 
         &:hover {
@@ -27,8 +28,8 @@
         margin-bottom: 20px;
         margin-left: 15px;
 
-        @media(max-width:450px){
-            margin-bottom:5px;
+        @media(max-width:450px) {
+            margin-bottom: 5px;
             font-size: 1.2rem;
         }
     }
@@ -79,10 +80,10 @@
                         background-color: $buttonMainHover;
                     }
 
-                    @media(max-width:450px){
+                    @media(max-width:450px) {
                         position: relative;
                         top: auto;
-                        left:auto;
+                        left: auto;
                     }
                 }
             }
@@ -273,6 +274,7 @@
             right: 7px;
             top: 3px;
             font-size: 1.2rem;
+            transition: .3s;
 
             &:hover {
                 color: #4a4747;
@@ -332,6 +334,7 @@
             margin: 5px 0;
             color: #7e7e7e;
             width: fit-content;
+            transition: .3s;
 
             &:hover {
                 text-decoration: underline;
@@ -353,6 +356,7 @@
                 border-radius: 8px;
                 margin: 5px 0;
                 overflow: hidden;
+                transition: .3s;
 
                 &:hover {
                     .options-reply-btn {

@@ -6,14 +6,13 @@
     width: 500px;
     background-color: $white;
     z-index: 999;
-    transition: .4s;
+    transition: .3s;
 
-    @media (max-width: 450px){
-        width:100%;
+    @media (max-width: 450px) {
+        width: 100%;
     }
 
     &:hover+.modal-screen-wrapper {
-        transition: .4s;
         background-color: #090e1f87;
     }
 
