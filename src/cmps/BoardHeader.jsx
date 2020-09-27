@@ -189,7 +189,7 @@ export class _BoardHeader extends React.Component {
                                     <h3>Site Users</h3>
                                     {usersToAdd.map(user => {
                                         return <section key={user._id} className="user-box flex space-between align-center">
-                                            <div className="user-box-info flex  align-center" onClick={() => this.goToUserProfile(user._id)}>
+                                            <div className="user-box-info flex align-center" onClick={() => this.goToUserProfile(user._id)}>
                                                 {
                                                     user.imgUrl ? <img src={user.imgUrl} alt="profile" />
                                                         : <div className="member-letter">

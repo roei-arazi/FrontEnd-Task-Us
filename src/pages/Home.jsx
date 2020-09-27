@@ -6,19 +6,26 @@ import { loadBoards } from '../store/actions/boardActions'
 import { guestLogin } from '../store/actions/userActions'
 
 class _Home extends Component {
+    state = {
+        isLoading: false
+    }
     componentDidMount() {
         this.video = React.createRef();
-        this.props.loadBoards()
     }
 
     guestLogin = async () => {
+        this.setState({ isLoading: true })
+
         await this.props.guestLogin()
-        console.log('loggedUser', this.props.loggedUser)
+        await this.props.loadBoards()
+
+        this.setState({ isLoading: false })
+
         this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
 
     render() {
-        if (!this.props.boards || this.props.boards.length === 0) return (
+        if (this.state.isLoading) return (
             <div className="loader-container flex justify-center align-center">
                 <img src="loading.gif" alt="" />
             </div>

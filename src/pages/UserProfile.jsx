@@ -28,7 +28,7 @@ class _UserProfile extends Component {
         setTimeout(async () => {
             const user = await userService.getUserById(this.props.match.params.id)
             this.setState({ user: { ...user } })
-        }, 2000);
+        }, 500);
     }
     async componentDidUpdate(prevProps) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
@@ -36,7 +36,7 @@ class _UserProfile extends Component {
                 setTimeout(async () => {
                     const user = await userService.getUserById(this.props.match.params.id)
                     this.setState({ user: { ...user } })
-                }, 2000)
+                }, 500)
             });
         }
     }
@@ -58,6 +58,9 @@ class _UserProfile extends Component {
 
     onMoveToBoard(id) {
         this.props.history.push(`/board/${id}`)
+    }
+    onMoveToDashboard = (ev) => {
+        this.props.history.push(`/dashboard`)
     }
 
     render() {
@@ -128,10 +131,8 @@ class _UserProfile extends Component {
                             <div className="col-right">
                                 <h1>Tasks</h1>
                                 <h3>Number of tasks assigned to this user: {numOfUserTasks}</h3>
-                                <p>See more info <span>here</span></p>
+                                <p>See more info <span onClick={this.onMoveToDashboard}>here</span></p>
                             </div>
-
-
                         </div>
                     </div>
                     <Fade in={this.state.isModalOpen}>
@@ -140,7 +141,8 @@ class _UserProfile extends Component {
                                 <div className="user-modal-header padding-x-15 padding-y-15 flex justify-center align-center">
                                     <label> {this.state.user.imgUrl ?
                                         <img className="user-profile-big" src={this.state.user.imgUrl} alt="profile-img" />
-                                        : <div>{this.props.loggedUser.fullName}</div>}
+                                        :
+                                        <div className="user-profile-big initials flex align-center justify-center">{initials}</div>}
                                         <input type="file" onChange={this.uploadImg} hidden />
                                     </label>
                                 </div>
@@ -148,7 +150,8 @@ class _UserProfile extends Component {
                                     <form className="form-container flex justify-center column  align-center" onSubmit={this.updateProfile}>
                                         <input value={this.state.user.email} autoComplete="current-email" onChange={this.handleChange} name="email" placeholder="Email" type="email" />
                                         <input value={this.state.user.username} autoComplete="current-username" onChange={this.handleChange} name="username" placeholder="Username" type="text" />
-                                        <input value={this.state.user.password} autoComplete="current-password" onChange={this.handleChange} name="password" placeholder="Password" type="password" />
+                                        <input autoComplete="current-password" name="password" placeholder="Old password" type="password" />
+                                        <input autoComplete="current-password" onChange={this.handleChange} name="password" placeholder="New Password" type="password" />
                                         <input value={this.state.user.fullName} autoComplete="current-fullname" onChange={this.handleChange} name="fullName" placeholder="Full Name" type="text" />
                                         <button onClick={this.updateProfile}>Save Changes</button>
                                         <button type="button" className="secondary-btn" onClick={this.toggleModal}>Cancel</button>

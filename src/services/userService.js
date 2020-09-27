@@ -108,8 +108,9 @@ async function guestLogin() {
     }
 }
 async function updateUser(user) {
-    httpService.put(`user/${user._id}`, user)
-    return user
+    const updatedUser = await httpService.put(`auth/update/${user._id}`, user)
+    console.log('updated user:', updatedUser)
+    return updatedUser
 }
 async function logout() {
     await httpService.post('auth/logout');
