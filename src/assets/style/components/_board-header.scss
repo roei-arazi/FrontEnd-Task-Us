@@ -229,6 +229,18 @@
         }
         button{
             cursor: pointer;
+            color: $mainBlack;
+            background-color: inherit;
+            border-radius: 8px;
+            padding:8px;
+
+            &:hover {
+                background-color: rgba(218, 218, 218, 0.287);
+            }
+
+            svg{
+                margin-left: 10px;
+            }
         }
         .options-modal{
             z-index: 999;
