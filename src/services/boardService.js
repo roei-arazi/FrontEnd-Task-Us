@@ -14,16 +14,13 @@ export const boardService = {
     updateTask,
     handleBoardChanges
 }
-
 async function loadBoards() {
     const boards = await httpService.get(`board`)
     return boards
 }
-
 function removeBoard(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
-
 async function addBoard(loggedUser) {
     const board = {
         boardCreator: {
@@ -53,7 +50,7 @@ async function addBoard(loggedUser) {
             }],
             "tasks": [{
                 "id": _makeid(),
-                "name": 'sneeze',
+                "name": 'Click me!',
                 "createdAt": Date.now(),
                 "members": [],
                 "status": 'Stuck',
@@ -66,11 +63,11 @@ async function addBoard(loggedUser) {
                 "tags": []
             }, {
                 "id": _makeid(),
-                "name": 'sneeze',
+                "name": 'Rename here!',
                 "createdAt": Date.now(),
                 "members": [],
                 "status": 'Working on it',
-                "priority": 'Low',
+                "priority": 'Medium',
                 "dueDate": Date.now(),
                 "updates": [],
                 "lastUpdated": 'yesterday',
@@ -84,7 +81,6 @@ async function addBoard(loggedUser) {
     const newBoard = await httpService.post(`board`, board);
     return newBoard;
 }
-
 function addGroup(board, loggedUser) {
     const group = {
         "id": _makeid(),
@@ -100,11 +96,11 @@ function addGroup(board, loggedUser) {
         }],
         "tasks": [{
             "id": _makeid(),
-            "name": 'sneeze',
+            "name": 'Click here!',
             "createdAt": Date.now(),
             "members": [],
             "status": 'Working on it',
-            "priority": 'Low',
+            "priority": 'High',
             "dueDate": Date.now(),
             "updates": [],
             "lastUpdated": 'yesterday',
@@ -122,7 +118,6 @@ function addGroup(board, loggedUser) {
         throw err;
     }
 }
-
 function removeGroup(groupId, board, loggedUser) {
     let group = null;
     board.groups = board.groups.filter(currGroup => {
@@ -133,12 +128,10 @@ function removeGroup(groupId, board, loggedUser) {
     const desc = `${loggedUser.fullName} Removed group: ${group.name}`
     return handleBoardChanges(desc, loggedUser, board)
 }
-
 function updateGroup(updatedGroup, board, desc, loggedUser) {
     board.groups = board.groups.map(group => group.id === updatedGroup.id ? updatedGroup : group)
     return handleBoardChanges(desc, loggedUser, board)
 }
-
 function removeTask(taskId, board, group, loggedUser) {
     let task = null
     const groupIdx = board.groups.findIndex(currGroup => currGroup.id === group.id)
@@ -150,7 +143,6 @@ function removeTask(taskId, board, group, loggedUser) {
     const desc = `${loggedUser.fullName} Removed task: ${task.name} from group ${group.name}`;
     return handleBoardChanges(desc, loggedUser, board)
 }
-
 function addTask(groupId, taskName, board, loggedUser) {
     const task = {
         id: _makeid(),
@@ -171,7 +163,6 @@ function addTask(groupId, taskName, board, loggedUser) {
     board.groups[groupIdx].tasks.push(task)
     return handleBoardChanges(desc, loggedUser, board)
 }
-
 function updateTask(updatedTask, board, desc, loggedUser) {
     board.groups = board.groups.map(group => {
         group.tasks = group.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
@@ -179,7 +170,6 @@ function updateTask(updatedTask, board, desc, loggedUser) {
     })
     return handleBoardChanges(desc, loggedUser, board)
 }
-
 function handleBoardChanges(desc, loggedUser, board) {
     if (!desc) return updateBoard(board)
     const changes = {
@@ -196,22 +186,16 @@ function handleBoardChanges(desc, loggedUser, board) {
     const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
     return updateBoard(updatedBoard)
 }
-
-
 function updateBoard(boardToSave) {
     socketService.emit('updateBoard', boardToSave);
     httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
 }
-
-
 function _makeid(length = 7) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
     for (var i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-
     return text;
 }

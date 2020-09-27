@@ -1,7 +1,6 @@
 import httpService from './httpService';
 import socketService from './socketService'
 
-
 export const userService = {
     loadUsers,
     getUserById,
@@ -14,7 +13,6 @@ export const userService = {
     notifyUsers,
     getCurrUser
 }
-
 async function loadUsers() {
     try {
         const users = await httpService.get('user')
@@ -24,7 +22,6 @@ async function loadUsers() {
         throw err;
     }
 }
-
 async function markAsRead(loggedUser) {
     loggedUser.notifications.forEach(notification => {
         notification.isRead = true
@@ -32,13 +29,11 @@ async function markAsRead(loggedUser) {
     updateUser(loggedUser)
     try {
         return loggedUser
-
     } catch (err) {
         console.log('userService: Something went wrong');
         throw err;
     }
 }
-
 async function getUserById(userId) {
     try {
         const user = await httpService.get(`user/${userId}`);
@@ -48,7 +43,6 @@ async function getUserById(userId) {
         throw err;
     }
 }
-
 async function login(userCred) {
     try {
         const user = await httpService.post('auth/login', userCred);
@@ -58,7 +52,6 @@ async function login(userCred) {
         throw err;
     }
 }
-
 async function signup(userCred) {
     const user = {
         isAdmin: true,
@@ -77,7 +70,6 @@ async function signup(userCred) {
         throw err;
     }
 }
-
 async function guestLogin() {
     try {
         const user = await login({ username: 'guest', password: '123456' });
@@ -93,7 +85,7 @@ async function guestLogin() {
         {
             byUser: {
                 _id: '5f6c5ef927ed4400175ce1a7',
-                imgUrl:'http://res.cloudinary.com/dtg7n0zye/image/upload/v1600937821/pd8tx7oddwp2wghsp9qt.jpg',
+                imgUrl: 'http://res.cloudinary.com/dtg7n0zye/image/upload/v1600937821/pd8tx7oddwp2wghsp9qt.jpg',
                 fullName: 'Osher Kabeda'
             },
             content: 'board: Osher Kabeda Tasked you to task - Learn the ropes',
@@ -115,23 +107,18 @@ async function guestLogin() {
         throw err;
     }
 }
-
-
 async function updateUser(user) {
     httpService.put(`user/${user._id}`, user)
     return user
 }
-
 async function logout() {
     await httpService.post('auth/logout');
     sessionStorage.clear();
 }
-
-function getCurrUser(){
+function getCurrUser() {
     const user = JSON.parse(sessionStorage.getItem('user'));
     return user;
 }
-
 async function notifyUsers(content, members, loggedUser) {
     const users = await loadUsers();
     if (members === 'add') members = [...users]
@@ -156,7 +143,6 @@ async function notifyUsers(content, members, loggedUser) {
         socketService.emit('send-notif', { userId: member._id, notification });
     })
 }
-
 function _handleLogin(user) {
     sessionStorage.setItem('user', JSON.stringify(user))
     return user;

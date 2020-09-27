@@ -7,7 +7,6 @@ import { UserProfile } from './pages/UserProfile.jsx';
 import { MyWeek } from './pages/MyWeek.jsx';
 import { mobActivities } from './mobile-pages/mobActivities.jsx';
 
-
 export default [
     {
         path: '/',

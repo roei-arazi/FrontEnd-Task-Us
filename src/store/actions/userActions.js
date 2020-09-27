@@ -11,7 +11,6 @@ export function loadUsers() {
         }
     }
 }
-
 export function login(userCred) {
     return async dispatch => {
         try {
@@ -23,7 +22,6 @@ export function login(userCred) {
         }
     }
 }
-
 export function signup(userCred) {
     return async dispatch => {
         try {
@@ -35,7 +33,6 @@ export function signup(userCred) {
         }
     }
 }
-
 export function guestLogin() {
     return async dispatch => {
         try {
@@ -47,7 +44,6 @@ export function guestLogin() {
         }
     }
 }
-
 export function markAsRead(loggedUser) {
     return async dispatch => {
         try {
@@ -59,7 +55,6 @@ export function markAsRead(loggedUser) {
         }
     }
 }
-
 export function removeNotifications(loggedUser) {
     const user = loggedUser
     user.notifications = []
@@ -74,7 +69,6 @@ export function removeNotifications(loggedUser) {
     }
 
 }
-
 export function updateUser(loggedUser) {
     return async dispatch => {
         try {
@@ -86,7 +80,6 @@ export function updateUser(loggedUser) {
         }
     }
 }
-
 export function logout() {
     return dispatch => {
         try {
