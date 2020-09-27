@@ -5,7 +5,6 @@ import { Login } from './pages/Login.jsx';
 import { Signup } from './pages/Signup.jsx';
 import { UserProfile } from './pages/UserProfile.jsx';
 import { MyWeek } from './pages/MyWeek.jsx';
-import { Dashboard } from './pages/Dashboard.jsx';
 import { mobActivities } from './mobile-pages/mobActivities.jsx';
 
 export default [
@@ -36,10 +35,6 @@ export default [
     {
         path: '/myweek',
         component: MyWeek
-    },
-    {
-        path: '/dashboard',
-        component: Dashboard
     },
     {
         path: '/mob-activities/:id',

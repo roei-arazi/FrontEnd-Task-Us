@@ -1,9 +1,5 @@
-import React, { Fragment as Fag } from 'react';
+import React from 'react';
 import Chart from 'react-apexcharts';
-
-import { Navbar } from '../cmps/Navbar';
-import { Boardbar } from '../cmps/Boardbar';
-import { MobileNav } from '../mobile-pages/MobileNav';
 
 export function Dashboard(props) {
     const { board } = props;

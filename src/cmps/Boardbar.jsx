@@ -19,7 +19,9 @@ class _Boardbar extends Component {
         selectedBoardId: '',
         isSnackbarOpen: false,
         isShown: '',
-        searchVal: ''
+        searchVal: '',
+        isModalShown: false,
+        selectedBoardName: ''
     }
     componentDidMount() {
         socketService.on('updatedBoard', updatedBoard => {
@@ -45,10 +47,6 @@ class _Boardbar extends Component {
     }
     onMoveToBoard(id) {
         this.props.history.push(`/board/${id}`)
-    }
-    onMoveToDashboard = (ev) => {
-        this.props.history.push(`/dashboard`)
-
     }
     onAddBoard = async () => {
         const { loggedUser } = this.props;
@@ -83,13 +81,17 @@ class _Boardbar extends Component {
         this.setState({ isShown: !this.state.isShown })
     }
 
+    onToggleModal(){
+        this.setState({isModalShown: !this.state.isModalShown})
+    }
+
     handleSearch = () => {
         const filteredBoards =
             this.props.boards.filter(board => board.name.toLowerCase().includes(this.state.searchVal.toLowerCase()))
         return filteredBoards
     }
     render() {
-        const { isShown } = this.state;
+        const { isShown, isModalShown, selectedBoardName} = this.state;
         const {loggedUser} = this.props;
         const filteredBoards = this.handleSearch()
         return (
@@ -100,7 +102,6 @@ class _Boardbar extends Component {
                 </div>
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
-                    <button onClick={this.onMoveToDashboard}>DASHBOARD WIP</button>
                     <BsFillPlusCircleFill onClick={this.onAddBoard} />
                 </div>}
                 {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}
@@ -115,7 +116,9 @@ class _Boardbar extends Component {
                                 (loggedUser._id === board.boardCreator._id || loggedUser.isAdmin) &&
                                 <MdDelete onClick={ev => {
                                     ev.stopPropagation()
-                                    this.onBoardRemove(board._id)
+                                    // this.onBoardRemove(board._id)
+                                    this.setState({selectedBoardId: board._id, selectedBoardName: board.name});
+                                    this.onToggleModal()
                                 }
                                 } />
                             }
@@ -125,7 +128,15 @@ class _Boardbar extends Component {
                         </li>
                     })}
                 </ul>
-
+                {isModalShown && <div className="modal-screen-wrapper" onClick={this.onToggleModal}>
+                    <div className="confirm-board-delete">
+                        <h2>Are you sure you want to delete {selectedBoardName}</h2>
+                        <section>
+                            <button className="delete-button" onClick={this.onBoardRemove}>Delete</button>
+                            <button className="cancel-button" onClick={this.onToggleModal}>Cancel</button>
+                        </section>
+                    </div>
+                </div>}
             </section>
         )
     }

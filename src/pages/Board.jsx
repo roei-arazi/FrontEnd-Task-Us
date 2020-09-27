@@ -21,7 +21,7 @@ import {
     from '../store/actions/boardActions'
 import { groupChanges } from '../store/actions/changesActions'
 import { MobileNav } from '../mobile-pages/MobileNav';
-import { Dashboard } from './Dashboard.jsx';
+import { Dashboard } from '../cmps/Dashboard.jsx';
 
 class _Board extends Component {
     state = {
