@@ -71,9 +71,8 @@ class _Navbar extends Component {
                     </NavLink>
                     <NavLink to={loggedUser ? `/user/${loggedUser._id}` : '/login'}>
                         <li className="icon-container cursor-pointer"> {loggedUser.imgUrl ?
-                            loggedUser.username === 'guest' ? <FaRegUser />
-                                :
-                                <img className="small-profile-img" src={loggedUser.imgUrl} alt="" />
+
+                            <img className="small-profile-img" src={loggedUser.imgUrl} alt="" />
                             :
                             <div className="member-letter small-profile-img">
                                 {this._getMemeberInitials(loggedUser)[0]}

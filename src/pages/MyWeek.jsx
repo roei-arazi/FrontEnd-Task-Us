@@ -10,7 +10,8 @@ import { UpcomingTasks } from '../cmps/my-week-cmps/UpcomingTasks';
 
 class _MyWeek extends Component {
     state = {
-        searchVal: ''
+        searchVal: '',
+
     }
     componentDidMount() {
         if (!this.props.boards || !this.props.boards.length) {
@@ -40,6 +41,13 @@ class _MyWeek extends Component {
     }
     applySearch(tasks, searchVal) {
         return tasks.filter(task => task.name.toLowerCase().includes(searchVal.toLowerCase()))
+    }
+    toggleTodayTasks = () => {
+        this.setState({ isTodayTasksShown: !this.state.isTodayTasksShown })
+
+    }
+    toggleUpcomingTasks = () => {
+        this.setState({ isUpcomingTasksShown: !this.state.isUpcomingTasksShown })
     }
     render() {
         let todaysTasks = this.getUpcomingTasks(1);

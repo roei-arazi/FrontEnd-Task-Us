@@ -28,7 +28,7 @@ async function addBoard(loggedUser) {
             "fullName": loggedUser.fullName,
             "imgUrl": loggedUser.imgUrl,
         },
-        "name": "board",
+        "name": "Board",
         "createdAt": Date.now(),
         "desc": 'Enter description here',
         "members": [{
@@ -36,7 +36,7 @@ async function addBoard(loggedUser) {
             "fullName": loggedUser.fullName,
             "imgUrl": loggedUser.imgUrl,
         }],
-        "groups": [{ 
+        "groups": [{
             "id": _makeid(),
             "name": 'group 1',
             "createdAt": Date.now(),

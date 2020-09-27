@@ -77,10 +77,7 @@ class _Boardbar extends Component {
         this.props.toggleBoardbar()
         this.setState({ isShown: !this.state.isShown })
     }
-    onToggleShown = () => {
-        this.props.toggleBoardbar()
-        this.setState({ isShown: !this.state.isShown })
-    }
+
 
     onToggleModal = () => {
         this.setState({isModalShown: !this.state.isModalShown})
