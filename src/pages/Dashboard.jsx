@@ -1,4 +1,4 @@
-import React, {Fragment as Fag} from 'react';
+import React, { Fragment as Fag } from 'react';
 import Chart from 'react-apexcharts';
 
 import { Navbar } from '../cmps/Navbar';
@@ -92,15 +92,5 @@ export function Dashboard(props) {
             data: other
         }
     ]
-    return <section className="flex" ref={this.ref}>
-        {window.innerWidth > 450 ?
-            <Fag>
-                <Navbar />
-                <Boardbar />
-            </Fag>
-            : <MobileNav loggedUser={this.props.loggedUser} />
-        }
-        <Chart options={options} series={series} type="bar" width={'90%'} height={'90%'} />
-
-    </section>
+    return <Chart options={options} series={series} type="bar" width={'90%'} height={'75%'} />
 }
