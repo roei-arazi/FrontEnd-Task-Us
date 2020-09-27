@@ -17,7 +17,6 @@
             color: $mainBlack;
         }
 
-
         .header-container {
             width: 100%;
             background-color: $buttonMainBg;
@@ -27,6 +26,7 @@
 
         img {
             border-radius: 50px;
+            object-fit: fill;
         }
     }
 
