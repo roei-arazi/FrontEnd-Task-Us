@@ -203,8 +203,7 @@ export class _BoardHeader extends React.Component {
                                                 <p className="member-name">{member.fullName}</p>
                                             </div>
                                             {
-                                                (loggedUser._id === "5f68936cf878123b2cd354436ce96d" ||
-                                                    this.state.board.boardCreator._id === loggedUser._id) &&
+                                                (loggedUser.isAdmin || this.state.board.boardCreator._id === loggedUser._id) &&
                                                 <FiMinus onClick={() => this.onRemoveMemberFromBoard(member._id)} />
                                             }
                                         </section>
@@ -226,8 +225,7 @@ export class _BoardHeader extends React.Component {
                                                 <p className="member-name">{user.fullName}</p>
                                             </div>
                                             {
-                                                (loggedUser._id === "5f68936cf878123b2cd354436ce96d" ||
-                                                    this.state.board.boardCreator._id === loggedUser._id) &&
+                                                (loggedUser.isAdmin || this.state.board.boardCreator._id === loggedUser._id) &&
                                                 <FiPlus onClick={() => this.onAddUserToBoard(user._id)} />
                                             }
                                         </section>

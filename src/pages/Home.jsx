@@ -14,6 +14,12 @@ class _Home extends Component {
         this.props.loadBoards()
     }
 
+    guestLogin = async () => {
+        await this.props.guestLogin()
+        console.log('loggedUser', this.props.loggedUser)
+        this.props.history.push(`/board/${this.props.boards[0]._id}`)
+    }
+
     render() {
         if (!this.props.boards || this.props.boards.length === 0) return (
             <div className="loader-container flex justify-center align-center">
@@ -44,9 +50,7 @@ class _Home extends Component {
                             Half the hassle and twice the fun.
                         </p>
 
-                        <NavLink to={`/board/${this.props.boards[0]._id}`}>
-                            <button onClick={this.props.guestLogin} className="guest-button ">Try As a Guest!</button>
-                        </NavLink>
+                        <button onClick={this.guestLogin} className="guest-button ">Try As a Guest!</button>
 
                     </div>
                 </main>
@@ -59,7 +63,8 @@ class _Home extends Component {
 
 const mapStateToProps = state => {
     return {
-        boards: state.boardReducer.boards
+        boards: state.boardReducer.boards,
+        loggedUser: state.userReducer.loggedUser
     }
 }
 

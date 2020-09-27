@@ -83,7 +83,7 @@ export class Tags extends Component {
                         return (
                             <p key={idx} style={{ color: tag.color }} key={idx}>
                                 <Truncate lines={1} ellipsis={"..."} width={75}>
-                                    {idx === this.state.tags.length - 1 ? tag.txt : (idx === 1 ? tag.txt : tag.txt + ",")}
+                                    #{idx === this.state.tags.length - 1 ? tag.txt : (idx === 1 ? tag.txt : tag.txt + ",")}
                                 </Truncate>
                             </p>
                         )

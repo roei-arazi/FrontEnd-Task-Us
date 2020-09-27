@@ -65,7 +65,7 @@ async function login(userCred) {
 
 async function signup(userCred) {
     const user = {
-        isAdmin: true,
+        isAdmin: false,
         boards: [],
         notifications: [],
         birthDay: '2nd August 1997',
@@ -97,7 +97,7 @@ async function guestLogin() {
         {
             byUser: {
                 _id: '5f6c5ef927ed4400175ce1a7',
-                imgUrl:'http://res.cloudinary.com/dtg7n0zye/image/upload/v1600937821/pd8tx7oddwp2wghsp9qt.jpg',
+                imgUrl: 'http://res.cloudinary.com/dtg7n0zye/image/upload/v1600937821/pd8tx7oddwp2wghsp9qt.jpg',
                 fullName: 'Osher Kabeda'
             },
             content: 'board: Osher Kabeda Tasked you to task - Learn the ropes',
@@ -131,7 +131,7 @@ async function logout() {
     sessionStorage.clear();
 }
 
-function getCurrUser(){
+function getCurrUser() {
     const user = JSON.parse(sessionStorage.getItem('user'));
     return user;
 }

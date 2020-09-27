@@ -32,6 +32,7 @@ class _Board extends Component {
 
 
     async componentDidMount() {
+        if (!this.props.loggedUser) this.props.history.push("/")
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();

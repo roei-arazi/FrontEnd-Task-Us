@@ -75,7 +75,7 @@ export class Group extends Component {
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
             const value = task[property]
-            acc[value] = acc[value] ? ++acc[value] : 1; 
+            acc[value] = acc[value] ? ++acc[value] : 1;
             return acc;
         }, {})
         const res = [];
@@ -142,7 +142,7 @@ export class Group extends Component {
                                 </div>
 
 
-                                <h1 style={{ color: group.color }} className="group-title">
+                                <h3 style={{ color: group.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}
                                         className="content-editable cursor-initial"
@@ -159,19 +159,19 @@ export class Group extends Component {
                                             }
                                         }}
                                     />
-                                </h1>
+                                </h3>
                             </div>
                             <div className="group-header-right flex"  {...provided.dragHandleProps}>
-                             
-                                    <h3 style={{ color: this.props.group.color }}>Members</h3>
+
+                                <h3 style={{ color: this.props.group.color }}>Members</h3>
 
                                 <h3 style={{ color: this.props.group.color }}>Status</h3>
-                              
-                                    <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
-                               
-                                    <h3 style={{ color: this.props.group.color }}>Priority</h3>
-                                
-                                    <h3 style={{ color: this.props.group.color }}>Tags</h3>
+
+                                <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
+
+                                <h3 style={{ color: this.props.group.color }}>Priority</h3>
+
+                                <h3 style={{ color: this.props.group.color }}>Tags</h3>
 
 
 
