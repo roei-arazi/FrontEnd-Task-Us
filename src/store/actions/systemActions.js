@@ -8,16 +8,13 @@ export function doneLoading() {
     dispatch({ type: 'LOADING_DONE' })
   }
 }
-
-export function showSnackbar(msg){
+export function showSnackbar(msg) {
   return dispath => {
-    dispath({type: 'SHOW_SNACKBAR', msg})
-    // setTimeout(dispatch =>{
+    dispath({ type: 'SHOW_SNACKBAR', msg })
   }
 }
-
-export function hideSnackbar(){
+export function hideSnackbar() {
   return dispatch => {
-    dispatch({type: 'HIDE_SNACKBAR'})
+    dispatch({ type: 'HIDE_SNACKBAR' })
   }
 }

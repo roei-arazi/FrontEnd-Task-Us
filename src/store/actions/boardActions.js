@@ -1,10 +1,6 @@
 import { boardService } from '../../services/boardService'
-
-
-
 //------------------BOARD CRUD-----------------
 export function loadBoards() {
-
     return async dispatch => {
         try {
             const boards = await boardService.loadBoards();
@@ -15,9 +11,7 @@ export function loadBoards() {
         }
     }
 }
-
 export function updateBoard(boardToSave, desc, loggedUser) {
-
     return async dispatch => {
         try {
             const board = boardService.handleBoardChanges(desc, loggedUser, boardToSave);
@@ -28,7 +22,6 @@ export function updateBoard(boardToSave, desc, loggedUser) {
         }
     }
 }
-
 export function recieveUpdate(boardToSave) {
     return dispatch => {
         try {
@@ -39,7 +32,6 @@ export function recieveUpdate(boardToSave) {
         }
     }
 }
-
 export function removeBoard(boardId) {
     return async dispatch => {
         try {
@@ -51,7 +43,6 @@ export function removeBoard(boardId) {
         }
     }
 }
-
 export function addBoard(loggedUser) {
     return async dispatch => {
         try {
@@ -64,7 +55,6 @@ export function addBoard(loggedUser) {
     }
 }
 //------------------GROUP CRUD-----------------
-
 export function removeGroup(groupId, board, loggedUser) {
     return dispatch => {
         try {
@@ -76,8 +66,6 @@ export function removeGroup(groupId, board, loggedUser) {
         }
     }
 }
-
-
 export function addGroup(board, loggedUser) {
     return dispatch => {
         try {
@@ -101,7 +89,6 @@ export function editGroup(group, board, desc, loggedUser) {
     }
 }
 //-----------------TASKS CRUD------------------------
-
 export function addTask(groupId, taskName, board, loggedUser) {
     return dispatch => {
         try {
@@ -113,7 +100,6 @@ export function addTask(groupId, taskName, board, loggedUser) {
         }
     }
 }
-
 export function removeTask(taskId, board, group, loggedUser) {
     return dispatch => {
         try {
@@ -125,7 +111,6 @@ export function removeTask(taskId, board, group, loggedUser) {
         }
     }
 }
-
 export function editTask(task, board, desc, loggedUser) {
     return dispatch => {
         try {
@@ -137,23 +122,18 @@ export function editTask(task, board, desc, loggedUser) {
         }
     }
 }
-
 //-----------------FILTER ACTIONS------------------------
-
 export function setFilter(filter) {
     return dispatch => {
         dispatch({ type: 'SET_FILTER', filter })
     }
 }
-
 export function clearFilter() {
     return dispatch => {
         dispatch({ type: 'SET_FILTER', filter: {} })
     }
 }
 //---------------------BOARD BAR--------------------
-
-
 export function toggleBoardbar() {
     return dispatch => {
         dispatch({ type: 'TOGGLE_BOARDBAR' })

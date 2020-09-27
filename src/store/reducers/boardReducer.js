@@ -3,7 +3,6 @@ const initialState = {
     filterBy: {},
     isBoardbarShown: true
 }
-
 export function boardReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_BOARDS':
@@ -11,7 +10,7 @@ export function boardReducer(state = initialState, action) {
                 ...state,
                 boards: action.boards
             }
-        case 'SET_BOARD': 
+        case 'SET_BOARD':
             return {
                 ...state,
                 boards: state.boards.map(board => board._id === action.board._id ? action.board : board)
