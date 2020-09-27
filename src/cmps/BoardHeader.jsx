@@ -111,9 +111,7 @@ export class _BoardHeader extends React.Component {
         if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
         return [firstNameChar, lastNameChar]
     }
-    openModal=()=>{
-        this.setState({isModalShown: !this.state.isModalShown})
-    }
+  
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members, boardCreator } = this.state.board
@@ -253,8 +251,9 @@ export class _BoardHeader extends React.Component {
                             </p>
                     </div>
                     <div className="relative">
-                    <button onClick={this.openModal}>Table</button>
-                            <div className={`options-modal absolute ${!this.state.isModalShown && 'hidden'}`}>
+                    {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
+                    <button onClick={this.props.toggleModal}>Table</button>
+                            <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
                                 <p onClick={this.props.showBoard}>Board</p>
                                 <p onClick={this.props.showDashboard}>Dashboard</p>
                             </div>

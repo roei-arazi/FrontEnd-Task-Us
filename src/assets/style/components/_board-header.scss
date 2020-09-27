@@ -227,6 +227,23 @@
                 background-color: $buttonMainHover;
             }
         }
+        button{
+            cursor: pointer;
+        }
+        .options-modal{
+            z-index: 999;
+            background-color: #fff;
+            padding:5px;
+            border-radius: 8px;
+            >*{
+                width:100%;
+                padding:10px;
+                &:hover{
+                    cursor: pointer;
+                    background-color: $mainLightGrey;
+                }
+            }
+        }
 
         .header-options {
             >*:not(button) {

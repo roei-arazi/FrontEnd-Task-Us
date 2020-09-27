@@ -28,7 +28,8 @@ class _Board extends Component {
         boardId: '',
         txt: '',
         isBoardShown: true,
-        isDashboardShown: false
+        isDashboardShown: false,
+        isModalShown: false
     }
     async componentDidMount() {
         if (!this.props.loggedUser) this.props.history.push("/")
@@ -258,12 +259,13 @@ class _Board extends Component {
         return this.props.boards.find(board => board._id === this.state.boardId)
     }
     showBoard=()=>{
-        this.setState({isBoardShown: true})
-        this.setState({isDashboardShown: false})    
+        this.setState({isBoardShown: true, isDashboardShown: false, isModalShown:false })  
     }
     showDashboard=()=>{
-        this.setState({isDashboardShown: true})
-        this.setState({isBoardShown: false})
+        this.setState({isDashboardShown: true, isBoardShown: false, isModalShown: false})
+    }
+    toggleModal=()=>{
+        this.setState({isModalShown: !this.state.isModalShown})
     }
     render() {
         const board = this._getCurrBoard()
@@ -288,7 +290,8 @@ class _Board extends Component {
                 }
                 <div className="board-container">
                 {window.innerWidth > 450 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
-                    handleSearch={this.handleSearch} users={users} showBoard={this.showBoard} showDashboard={this.showDashboard} />}
+                    handleSearch={this.handleSearch} users={users} showBoard={this.showBoard} 
+                    showDashboard={this.showDashboard} toggleModal={this.toggleModal} isModalShown={this.state.isModalShown} />}
                     {this.state.isBoardShown ? 
                 <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                     <DragDropContext
@@ -316,8 +319,7 @@ class _Board extends Component {
                 :
                 <Dashboard board={board} />
                 }
-            </div>
-                
+            </div> 
                 <Popup />
             </section>
         )
