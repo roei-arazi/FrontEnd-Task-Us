@@ -1,7 +1,6 @@
 import httpService from './httpService';
 import socketService from './socketService'
 
-
 export const userService = {
     loadUsers,
     getUserById,
@@ -14,7 +13,6 @@ export const userService = {
     notifyUsers,
     getCurrUser
 }
-
 async function loadUsers() {
     try {
         const users = await httpService.get('user')
@@ -24,7 +22,6 @@ async function loadUsers() {
         throw err;
     }
 }
-
 async function markAsRead(loggedUser) {
     loggedUser.notifications.forEach(notification => {
         notification.isRead = true
@@ -32,37 +29,29 @@ async function markAsRead(loggedUser) {
     updateUser(loggedUser)
     try {
         return loggedUser
-
     } catch (err) {
         console.log('userService: Something went wrong');
         throw err;
     }
 }
-
 async function getUserById(userId) {
-    console.log('got to user service', userId);
     try {
         const user = await httpService.get(`user/${userId}`);
-        console.log('got from service:', user);
         return user
     } catch (err) {
         console.log('userService: Coulnd\'t get user');
         throw err;
     }
 }
-
 async function login(userCred) {
-    console.log(userCred);
     try {
         const user = await httpService.post('auth/login', userCred);
-        if (!user) throw 'Wrong username or password'
         return _handleLogin(user)
     } catch (err) {
         console.log('userService: Wrong username or password');
         throw err;
     }
 }
-
 async function signup(userCred) {
     const user = {
         isAdmin: false,
@@ -81,7 +70,6 @@ async function signup(userCred) {
         throw err;
     }
 }
-
 async function guestLogin() {
     try {
         const user = await login({ username: 'guest', password: '123456' });
@@ -119,23 +107,18 @@ async function guestLogin() {
         throw err;
     }
 }
-
-
 async function updateUser(user) {
     httpService.put(`user/${user._id}`, user)
     return user
 }
-
 async function logout() {
     await httpService.post('auth/logout');
     sessionStorage.clear();
 }
-
 function getCurrUser() {
     const user = JSON.parse(sessionStorage.getItem('user'));
     return user;
 }
-
 async function notifyUsers(content, members, loggedUser) {
     const users = await loadUsers();
     if (members === 'add') members = [...users]
@@ -160,7 +143,6 @@ async function notifyUsers(content, members, loggedUser) {
         socketService.emit('send-notif', { userId: member._id, notification });
     })
 }
-
 function _handleLogin(user) {
     sessionStorage.setItem('user', JSON.stringify(user))
     return user;

@@ -7,7 +7,6 @@ export function groupChanges(desc, loggedUser, board) {
         try {
             const updatedBoard = boardService.handleBoardChanges(desc, loggedUser, board)
             dispatch({ type: 'SET_BOARD', board: updatedBoard })
-
             const users = await userService.loadUsers();
             const notification = {
                 byUser: {
@@ -24,7 +23,6 @@ export function groupChanges(desc, loggedUser, board) {
                 userService.updateUser(userToUpdate);
                 socketService.emit('send-notif', { memberId: member._id, notification });
             })
-
         } catch (err) {
             console.log('boardActions: Couldn\'t send activities/notif');
             throw err;

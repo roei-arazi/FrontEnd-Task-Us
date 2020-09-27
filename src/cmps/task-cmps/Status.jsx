@@ -1,15 +1,13 @@
-import { Fade } from '@material-ui/core'
 import React from 'react'
+import { Fade } from '@material-ui/core'
 
 export function Status(props) {
-
     return (
-
         <div className="label-container relative flex align-center ">
 
             <div className={`label-box ${props.status.split(" ")[0].toLowerCase()}`} onClick={() => props.openModal('status')}>
                 <div className="task-label-name flex align-center justify-center">
-                    <p>{props.status}</p>
+                    <p>{props.status === 'empty' ? ' ' : props.status}</p>
                 </div>
                 <Fade in={props.isStatusShown} >
                     <div className="label-list absolute flex column align-center modal-fade-in">
@@ -21,6 +19,9 @@ export function Status(props) {
                         </section>
                         <section className="label-selector flex align-center justify-center done" onClick={() => props.handleChange("Done")}>
                             <p>Done</p>
+                        </section>
+                        <section className="label-selector flex align-center justify-center empty" onClick={() => props.handleChange("empty")}>
+                            <p> </p>
                         </section>
                     </div>
                 </Fade>

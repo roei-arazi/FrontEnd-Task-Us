@@ -3,7 +3,6 @@ const initialState = {
   isSnackbarShown: false,
   snackbarTxt: ''
 }
-
 export function systemReducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'LOADING_START':
@@ -11,17 +10,17 @@ export function systemReducer(state = initialState, action = {}) {
     case 'LOADING_DONE':
       return { ...state, isLoading: false };
     case 'SHOW_SNACKBAR':
-      return{
+      return {
         ...state,
         isSnackbarShown: true,
         snackbarTxt: action.msg
       }
     case 'HIDE_SNACKBAR':
-        return {
-          ...state,
-          isSnackbarShown: false,
-          snackbarTxt: ''
-        }
+      return {
+        ...state,
+        isSnackbarShown: false,
+        snackbarTxt: ''
+      }
     default: return state;
   }
 }

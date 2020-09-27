@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Menu, MenuItem } from '@material-ui/core';
-import { HiOutlineCog } from 'react-icons/hi';
 import { BsFillPlusCircleFill, } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md'
-import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate, loadBoards } from '../store/actions/boardActions.js';
+import { AiOutlineRight } from 'react-icons/ai';
+// inside imports
+import { Dashboard } from './Dashboard'
 import { updateUser } from '../store/actions/userActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
 import { userService } from '../services/userService.js';
-import { AiOutlineRight } from 'react-icons/ai';
-import { Dashboard } from './Dashboard'
+import {
+    removeBoard, addBoard, toggleBoardbar,
+    updateBoard, recieveUpdate, loadBoards
+} from '../store/actions/boardActions.js';
 
 class _Boardbar extends Component {
     state = {
@@ -20,39 +22,31 @@ class _Boardbar extends Component {
         isShown: '',
         searchVal: ''
     }
-
     componentDidMount() {
         socketService.on('updatedBoard', updatedBoard => {
             this.props.recieveUpdate(updatedBoard)
         });
-
         socketService.on('reloadBoards', () => {
-            console.log('reloading...');
             this.props.loadBoards()
         })
         socketService.on('accept-notif', (notification) => {
             this.props.updateUser({ ...this.props.loggedUser, notifications: [notification, ...this.props.loggedUser.notifications] })
         })
-
         socketService.emit('user', this.props.loggedUser._id)
         this.setState({ isShown: this.props.isBoardbarShown })
     }
-
     componentWillUnmount() {
         socketService.off('updatedBoard')
         socketService.off('reloadBoards')
         socketService.off('accept-notif')
     }
-
     displayPopup(msg) {
         this.props.showSnackbar(msg)
         setTimeout(this.props.hideSnackbar, 3000)
     }
-
     onMoveToBoard(id) {
         this.props.history.push(`/board/${id}`)
     }
-
     onAddBoard = async () => {
         const { loggedUser } = this.props;
         await this.props.addBoard(this.props.loggedUser)
@@ -60,7 +54,6 @@ class _Boardbar extends Component {
         userService.notifyUsers(notif, 'add', loggedUser)
         socketService.emit('add-delete-board')
     }
-
     onBoardRemove = async (boardId) => {
         const { boards, match, history, removeBoard, loggedUser } = this.props
         const board = boards.find(board => board._id === boardId);
@@ -68,7 +61,6 @@ class _Boardbar extends Component {
         userService.notifyUsers(notif, board.members, loggedUser)
         const { id } = match.params;
         if (boards.length === 1) {
-            console.log('you need at least one board!');
             return;
         }
         await removeBoard(boardId);
@@ -79,7 +71,6 @@ class _Boardbar extends Component {
             history.push(`/board/${boards[idx]._id}`)
         }
     }
-
     onToggleShown = () => {
         this.props.toggleBoardbar()
         this.setState({ isShown: !this.state.isShown })
@@ -92,22 +83,18 @@ class _Boardbar extends Component {
             this.props.boards.filter(board => board.name.toLowerCase().includes(this.state.searchVal.toLowerCase()))
         return filteredBoards
     }
-
     render() {
-        const { anchorEl, selectedBoardId, isShown } = this.state;
+        const { isShown } = this.state;
         const filteredBoards = this.handleSearch()
-
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
                 <div onClick={this.onToggleShown} className="board-bar-toggle-container">
                     <AiOutlineRight style={{ color: this.props.location.pathname.includes('/myweek') && '#151515', transform: isShown && 'rotate(180deg)' }}
                         className="board-bar-toggle" />
                 </div>
-
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
                     <BsFillPlusCircleFill onClick={this.onAddBoard} />
-
                 </div>}
                 {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}
                 <ul>
@@ -116,8 +103,7 @@ class _Boardbar extends Component {
                             style={{ paddingLeft: this.props.loggedUser._id === board.boardCreator._id ? '' : '25px' }}
                             className="flex align-center cursor-pointer"
                             key={idx}
-                            onClick={() => this.onMoveToBoard(board._id)}
-                        >
+                            onClick={() => this.onMoveToBoard(board._id)} >
                             {
                                 this.props.loggedUser._id === board.boardCreator._id &&
                                 <MdDelete onClick={ev => {
@@ -125,9 +111,7 @@ class _Boardbar extends Component {
                                     this.onBoardRemove(board._id)
                                 }
                                 } />
-
                             }
-
                             <h5 style={{ color: this.props.loggedUser._id === board.boardCreator._id ? "#0085ff" : "#333333" }}>
                                 {board.name}
                             </h5>
@@ -135,12 +119,10 @@ class _Boardbar extends Component {
                     })}
                 </ul>
                 <Dashboard />
-
             </section>
         )
     }
 }
-
 const mapStateToProps = state => {
     return {
         boards: state.boardReducer.boards,
@@ -148,7 +130,6 @@ const mapStateToProps = state => {
         loggedUser: state.userReducer.loggedUser
     }
 }
-
 const mapDispatchToProps = {
     updateBoard,
     removeBoard,
@@ -160,5 +141,4 @@ const mapDispatchToProps = {
     loadBoards,
     updateUser
 }
-
 export const Boardbar = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Boardbar));

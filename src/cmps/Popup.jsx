@@ -1,7 +1,7 @@
-import { Snackbar, Button } from '@material-ui/core';
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { Snackbar, Button } from '@material-ui/core';
+// inside imports
 import { hideSnackbar } from '../store/actions/systemActions.js';
 
 function _Popup(props){
@@ -17,16 +17,13 @@ function _Popup(props){
     action={<Button style={{color: '#f2f1dfb0'}} onClick={props.hideSnackbar}>Close</Button>}
 />
 }
-
 const mapStateToProps = state => {
     return {
         isSnackbarShown: state.systemReducer.isSnackbarShown,
         snackbarShown: state.systemReducer.snackbarTxt
     }
 }
-
 const mapDispatchToProps = {
     hideSnackbar
 }
-
 export const Popup = connect(mapStateToProps, mapDispatchToProps)(_Popup)

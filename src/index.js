@@ -6,13 +6,10 @@ import * as serviceWorker from './services/serviceWorker';
 import { store } from './store/store';
 import './assets/style/main.scss';
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')
 );
-
-
 serviceWorker.unregister();

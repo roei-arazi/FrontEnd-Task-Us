@@ -2,64 +2,51 @@ import React, { Component } from 'react';
 import { Task } from './Task'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { Menu, MenuItem } from '@material-ui/core';
-//Material ui
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
 import { AiOutlineDelete, AiOutlineDrag } from 'react-icons/ai'
-
 import ContentEditable from 'react-contenteditable';
 import { CgColorPicker } from 'react-icons/cg';
+// Inside imports
 import socketService from '../services/socketService.js'
 
-
 export class Group extends Component {
-
     state = {
         id: '',
         ElGroupSettings: null,
         elGroupColors: false,
     }
-
     reloadProps = () => {
         this.setState({ ...this.state, name: this.props.group.name })
     }
-
     componentDidMount() {
         this.elInputAdd = React.createRef();
         this.contentEditable = React.createRef();
         socketService.on('updatedBoard', this.reloadProps)
         this.setState({ ...this.state, name: this.props.group.name, id: this.props.group.id })
     }
-
     componentWillUnmount() {
         socketService.off('updatedBoard', this.reloadProps)
     }
-
     handleChange = (ev) => {
         this.setState({ name: ev.target.value });
     }
-
     focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
         }, 0)
     }
-
     handleMenuOpen = (ev) => {
         this.setState({ ElGroupSettings: ev.currentTarget })
     }
-
     handleMenuClose = () => {
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
-
     handleColorsOpen = (ev) => {
         this.setState({ elGroupColors: ev.currentTarget })
     }
-
     handleColorsToggle = () => {
         this.setState({ elGroupColors: !this.state.elGroupColors })
     }
-
     onChangeGroupColor = (color) => {
         try {
             this.props.onEditGroup(this.props.group.id, color, 'color')
@@ -68,16 +55,15 @@ export class Group extends Component {
         }
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
-
     convertToBar(property) {
         const { tasks } = this.props.group;
         const taskCount = tasks.length;
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
-            const value = task[property]
-            acc[value] = acc[value] ? ++acc[value] : 1;
+            const value = task[property];
+            if (value && value !== 'empty') acc[value] = acc[value] ? ++acc[value] : 1;
             return acc;
-        }, {})
+        }, {});
         const res = [];
         for (let key in data) {
             data[key] /= percent;
@@ -87,7 +73,6 @@ export class Group extends Component {
         }
         return res;
     }
-
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const priority = this.convertToBar('priority')
@@ -99,11 +84,9 @@ export class Group extends Component {
                 {(provided, snapshot) =>
                     <section key={group.id} className={`group ${window.innerWidth > 450 ? 'padding-y-45 padding-x-30' : 'padding-y-15'}`}
                         {...provided.draggableProps}
-
                         ref={provided.innerRef}>
                         <div className="group-header-container flex space-between align-center">
                             <div className="group-header-left align-center flex relative">
-
                                 <IoIosArrowDropdownCircle style={{ color: group.color }}
                                     className="drop-down-menu-icon" onClick={this.handleMenuOpen} />
                                 <Menu
@@ -111,8 +94,7 @@ export class Group extends Component {
                                     anchorEl={ElGroupSettings}
                                     keepMounted
                                     open={Boolean(ElGroupSettings)}
-                                    onClose={this.handleMenuClose}
-                                >
+                                    onClose={this.handleMenuClose}>
                                     <MenuItem onClick={() => {
                                         this.props.onRemoveGroup(group.id)
                                     }}>
@@ -120,9 +102,7 @@ export class Group extends Component {
                                     </MenuItem>
                                     <MenuItem onClick={this.handleColorsToggle}>
                                         <CgColorPicker className="color-group-icon" /> Change Color
-
                                     </MenuItem>
-
                                 </Menu>
                                 {elGroupColors &&
                                     <div className="color-picker absolute flex wrap justify-center align-center">
@@ -140,9 +120,7 @@ export class Group extends Component {
                                 <div className="drag-icon" {...provided.dragHandleProps}>
                                     <AiOutlineDrag />
                                 </div>
-
-
-                                <h3 style={{ color: group.color }} className="group-title">
+                                <h1 style={{ color: group.color }} className="group-title">
                                     <ContentEditable
                                         onFocus={this.focusText}
                                         className="content-editable cursor-initial"
@@ -159,31 +137,21 @@ export class Group extends Component {
                                             }
                                         }}
                                     />
-                                </h3>
+                                </h1>
                             </div>
                             <div className="group-header-right flex"  {...provided.dragHandleProps}>
-
                                 <h3 style={{ color: this.props.group.color }}>Members</h3>
-
                                 <h3 style={{ color: this.props.group.color }}>Status</h3>
-
                                 <h3 style={{ color: this.props.group.color }}>Due-Date</h3>
-
                                 <h3 style={{ color: this.props.group.color }}>Priority</h3>
-
                                 <h3 style={{ color: this.props.group.color }}>Tags</h3>
-
-
-
                             </div>
                         </div>
-
                         <Droppable droppableId={group.id} type="task">
                             {(provided, snapshot) =>
                                 <div className={`task-list ${snapshot.isDraggingOver ? 'drag-over' : ''}`}
                                     ref={provided.innerRef}
-                                    {...provided.droppableProps}
-                                >
+                                    {...provided.droppableProps}>
                                     {group.tasks.map((task, index) => {
                                         return <Task onToggleUpdates={this.props.onToggleUpdates}
                                             onEditTask={this.props.onEditTask} index={index}
@@ -191,11 +159,9 @@ export class Group extends Component {
                                             group={group} task={task} users={this.props.users} />
                                     })}
                                     {provided.placeholder}
-
                                 </div>
                             }
                         </Droppable>
-
                         <div className="task task-add">
                             <div className="task-color" style={{ backgroundColor: group.color }}></div>
                             <form onSubmit={(ev) => {
@@ -216,11 +182,9 @@ export class Group extends Component {
                                 </div>
                             </section>
                         }
-
                     </section>
                 }
             </Draggable>
         )
     }
-
 } 

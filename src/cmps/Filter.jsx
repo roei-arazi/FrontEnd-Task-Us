@@ -1,19 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setFilter } from '../store/actions/boardActions';
 import { Fade } from '@material-ui/core';
-
 import moment from 'moment';
+// inside imports
+import { setFilter } from '../store/actions/boardActions';
 
 function _Filter(props) {
     const { board, filterBy, setFilter } = props;
-
     function onSetFilter(filterKey, filterValue) {
         if (filterBy[filterKey] === filterValue) filterValue = '';
         setFilter({ ...filterBy, [filterKey]: filterValue })
     }
-
     function getBoardDates() {
         const dates = {};
         board.groups.forEach(group => {
@@ -28,13 +26,11 @@ function _Filter(props) {
         }
         return res;
     }
-
     if (!board) return <h1>Loading...</h1>
     const { groups, members } = board;
     const dates = getBoardDates();
     return (
         <Fade in={props.isFiltersOpen}>
-
             <div className="filter-modal flex absolute">
                 <section className="group-name-filter flex column align-center">
                     <h3>Groups</h3>
@@ -83,16 +79,12 @@ function _Filter(props) {
         </Fade>
     )
 }
-
-
 const mapStateToProps = state => {
     return {
         filterBy: state.boardReducer.filterBy
     }
 }
-
 const mapDispatchToProps = {
     setFilter
 }
-
 export const Filter = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Filter));

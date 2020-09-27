@@ -305,6 +305,8 @@
                 cursor: default;
                 font-size: 0.8rem;
                 height: 100%;
+                background-color: #a8a8a8;
+                color: #f1f1f1;
             }
 
             .task-label-name {
@@ -343,41 +345,36 @@
                     margin-bottom: 5px;
                     border-radius: 1px;
                     cursor: pointer;
+                    background-color: $emptyStatusBg;
+                    color: #f1f1f1;
+
                 }
             }
 
             .stuck {
-                background-color: #e44258;
+                background-color: #e44258 !important;
             }
 
             .working {
-                background-color: #fdab3d;
+                background-color: #fdab3d !important;
             }
 
             .done {
-                background-color: #00ca72;
+                background-color: #00ca72 !important;
             }
 
             .low {
-                background-color: #7bb0ae;
+                background-color: #7bb0ae !important;
             }
 
             .medium {
-                background-color: #a028c7;
+                background-color: #a028c7 !important;
             }
 
             .high {
-                background-color: #e82d2d;
+                background-color: #e82d2d !important;
             }
 
-            .stuck,
-            .working,
-            .done,
-            .low,
-            .medium,
-            .high {
-                color: #f1f1f1;
-            }
         }
 
         .react-datepicker__input-container {

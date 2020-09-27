@@ -3,12 +3,9 @@ import Axios from 'axios';
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
     : '//localhost:3030/api/'
-
-
 var axios = Axios.create({
     withCredentials: true
 });
-
 export default {
     get(endpoint, data) {
         return ajax(endpoint, 'GET', data)
@@ -23,7 +20,6 @@ export default {
         return ajax(endpoint, 'DELETE', data)
     }
 }
-
 async function ajax(endpoint, method = 'get', data = null) {
     try {
         const res = await axios({

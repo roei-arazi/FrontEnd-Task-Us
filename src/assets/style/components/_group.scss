@@ -142,7 +142,6 @@
 
     .group-precent-container {
         margin-right: 30px;
-
         [data-title]:hover:after {
             font-size: 1rem;
             width: max-content;
@@ -155,6 +154,7 @@
         .group-precent {
             margin-right: 120px;
             width: 120px;
+            background-color: $emptyStatusBg;
 
             .precent-bar {
                 height: 100%;
