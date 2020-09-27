@@ -40,7 +40,6 @@ export class _mobActivities extends Component {
     }
 
     handleChange = ({ target }) => {
-        console.log('Handling change',)
         this.setState({ searchVal: target.value })
     }
 

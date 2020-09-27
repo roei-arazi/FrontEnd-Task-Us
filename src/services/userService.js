@@ -40,10 +40,8 @@ async function markAsRead(loggedUser) {
 }
 
 async function getUserById(userId) {
-    console.log('got to user service', userId);
     try {
         const user = await httpService.get(`user/${userId}`);
-        console.log('got from service:', user);
         return user
     } catch (err) {
         console.log('userService: Coulnd\'t get user');
@@ -52,10 +50,8 @@ async function getUserById(userId) {
 }
 
 async function login(userCred) {
-    console.log(userCred);
     try {
         const user = await httpService.post('auth/login', userCred);
-        if (!user) throw 'Wrong username or password'
         return _handleLogin(user)
     } catch (err) {
         console.log('userService: Wrong username or password');

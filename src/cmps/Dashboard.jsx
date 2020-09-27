@@ -8,7 +8,6 @@ export class Dashboard extends Component{
         d3.select(this.ref.current)
         .append('p')
         .text('I\'m here!')
-        console.log(this.ref);
     }
 
     render(){

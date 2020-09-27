@@ -8,7 +8,6 @@ import { withRouter } from 'react-router-dom';
 import socketService from '../services/socketService.js'
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
-import { Fade } from '@material-ui/core';
 
 
 export class _BoardHeader extends React.Component {
@@ -67,7 +66,6 @@ export class _BoardHeader extends React.Component {
             }
 
         }
-        console.log('new board:!!', board)
 
         this.props.onEditBoard(board)
         this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
@@ -153,7 +151,6 @@ export class _BoardHeader extends React.Component {
                             onChange={this.handleChangeName}
                             onBlur={() => {
                                 const desc = `${loggedUser.fullName} Changed the board title from ${this.props.board.name} to ${this.state.board.name}`
-                                console.log('state name:', this.state.board)
                                 const board = {
                                     ...this.props.board,
                                     name: this.state.board.name
@@ -171,13 +168,13 @@ export class _BoardHeader extends React.Component {
                     <div className="board-header-right relative flex align-center">
                         <div className="board-users flex justify-center" onClick={this.onToggleUsers}>
                             {members.length === 0 && <div className="no-members-container relative">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" />
+                                <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="" />
                                 <FiPlus className="no-members-icon-plus" />
                             </div>}
                             {members.length !== 0 && members.map((member, idx) => {
                                 return <div key={idx} className="user-img-container">
                                     {
-                                        member.imgUrl ? <img src={member.imgUrl} />
+                                        member.imgUrl ? <img src={member.imgUrl} alt="" />
                                             :
                                             <div className="member-letter">
                                                 {this._getMemeberInitials(member)[0]}

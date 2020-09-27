@@ -55,24 +55,23 @@ class _Login extends Component {
                     <FaUserCircle />
                     <section>
                         <legend>Username *</legend>
-                        <Field className="sign-login-input" type="text" name="username" />
+                        <Field className="sign-login-input" type="text" autoComplete="curren-username" name="username" />
                     </section>
                     <ErrorMessage name="email" component="span" />
                     <section>
                         <legend>Password *</legend>
-                        <Field className="sign-login-input" type="password" name="password" />
+                        <Field className="sign-login-input" type="password" autoComplete="current-password" name="password" />
                     </section>
                     <ErrorMessage name="password" component="span" />
                     <button type="submit flex">Login</button>
-                    <button className="facebook-btn-container">        
+                    <div type="button" className="facebook-btn-container">        
                     <FaFacebookF />
                     <FacebookLogin
                         appId="632288707652598"
-                        size="small"
                         fields="name,email,picture"
                         cssClass="facebook-btn"
                         callback={this.responseFacebook} />
-                         </button>
+                         </div>
                     <a href="/#/signup">Don't have an account? sign up here.</a>
                     <button className="guest-button" onClick={this.onGuestLogin}>Or try as a guest!</button>
                 </Form>

@@ -7,7 +7,6 @@ export function Members(props) {
 
 
     function _getMemeberInitials(member) {
-        console.log('MEMBER:', member)
         let [firstName, lastName] = member.fullName.split(" ")
         let firstNameChar = ''
         let lastNameChar = ''
@@ -24,26 +23,22 @@ export function Members(props) {
 
         <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
             {props.members.length ? <div className="member-img-container flex relative ">
-                {props.members.map(member => {
-                    {
-                        return member.imgUrl ? (
-                            <img key={member._id} className="member-img" src={member.imgUrl} alt="" />
+                {props.members.map(member => member.imgUrl ?
+                    <img key={member._id} className="member-img" src={member.imgUrl} alt="" />
+                    :
+                    <div key={member._id} className="member-letter ">
+                        {_getMemeberInitials(member)[0]}
+                        {_getMemeberInitials(member)[1]}
+                    </div>
 
-                        )
-                            : <div key={member._id} className="member-letter ">
-                                {_getMemeberInitials(member)[0]}
-                                {_getMemeberInitials(member)[1]}
 
-                            </div>
-                    }
-
-                })
+                )
                 }
                 <FiPlus className="no-members-icon-plus absolute" />
             </div>
                 :
                 <div className="no-members-container">
-                    <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" className="no-members-icon" />
+                    <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="" className="no-members-icon" />
                     <FiPlus className="no-members-icon-plus" />
                 </div>}
 

@@ -1,5 +1,5 @@
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Fade } from '@material-ui/core';
 import { Boardbar } from '../cmps/Boardbar';
@@ -33,8 +33,6 @@ class _UserProfile extends Component {
 
     async componentDidUpdate(prevProps) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
-            console.log('IM HERE',)
-
             this.setState({ user: {} }, () => {
                 setTimeout(async () => { //for loading extravaganza
                     const user = await userService.getUserById(this.props.match.params.id)
@@ -71,7 +69,7 @@ class _UserProfile extends Component {
         if (!_id) {
             return (
                 <div className="loader-container flex justify-center align-center">
-                    <img src='loading.gif' />
+                    <img src='loading.gif' alt="" />
                 </div>
             )
         }
@@ -79,10 +77,7 @@ class _UserProfile extends Component {
         let initials = firstName.charAt(0).toUpperCase();
         if (lastName) initials += lastName.charAt(0).toUpperCase()
         const guestId = '5f6efc73805dbf6054d58794';
-
         const { loggedUser } = this.props
-        console.log('loggedUser id:', loggedUser._id);
-        console.log('guest id:', guestId);
         return (
 
             <section className={`user-profile flex ${window.innerWidth < 450 && 'column'}`}>
@@ -126,10 +121,10 @@ class _UserProfile extends Component {
                                 </div>
                                 <div className="user-modal-main">
                                     <form className="form-container flex justify-center column  align-center" onSubmit={this.updateProfile}>
-                                        <input value={this.state.user.email} onChange={this.handleChange} name="email" placeholder="Email" type="email" />
-                                        <input value={this.state.user.username} onChange={this.handleChange} name="username" placeholder="Username" type="text" />
-                                        <input value={this.state.user.password} onChange={this.handleChange} name="password" placeholder="Password" type="password" />
-                                        <input value={this.state.user.fullName} onChange={this.handleChange} name="fullName" placeholder="Full Name" type="text" />
+                                        <input value={this.state.user.email} autoComplete="current-email" onChange={this.handleChange} name="email" placeholder="Email" type="email" />
+                                        <input value={this.state.user.username} autoComplete="current-username" onChange={this.handleChange} name="username" placeholder="Username" type="text" />
+                                        <input value={this.state.user.password} autoComplete="current-password" onChange={this.handleChange} name="password" placeholder="Password" type="password" />
+                                        <input value={this.state.user.fullName} autoComplete="current-fullname" onChange={this.handleChange} name="fullName" placeholder="Full Name" type="text" />
                                         <button onClick={this.updateProfile}>Save Changes</button>
                                         <button type="button" className="secondary-btn" onClick={this.toggleModal}>Cancel</button>
                                     </form>

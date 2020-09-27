@@ -73,7 +73,7 @@ export class Tags extends Component {
 
                 <div className="task-label-name flex justify-center align-center ">
                     {this.state.tags.map((tag, idx) => {
-                        if (idx > 2) return
+                        if (idx > 2) return []
                         if (idx > 1) return (
                             <div key={tag.id} className="task-number-of-tags">
                                 <span>{this.state.tags.length > 9 ? '+9' : `+${this.state.tags.length - 2}`}</span>
@@ -81,7 +81,7 @@ export class Tags extends Component {
                         )
 
                         return (
-                            <p key={idx} style={{ color: tag.color }} key={idx}>
+                            <p key={idx} style={{ color: tag.color }}>
                                 <Truncate lines={1} ellipsis={"..."} width={75}>
                                     {idx === this.state.tags.length - 1 ? tag.txt : (idx === 1 ? tag.txt : tag.txt + ",")}
                                 </Truncate>

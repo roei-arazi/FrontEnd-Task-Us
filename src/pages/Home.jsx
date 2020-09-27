@@ -17,7 +17,7 @@ class _Home extends Component {
     render() {
         if (!this.props.boards || this.props.boards.length === 0) return (
             <div className="loader-container flex justify-center align-center">
-                <img src="loading.gif" />
+                <img src="loading.gif" alt="" />
             </div>
         )
         return (

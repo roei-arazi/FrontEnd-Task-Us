@@ -47,7 +47,6 @@ class _Board extends Component {
     }
 
     displayPopup(msg) {
-        console.log('showing popup:', msg);
         this.props.showSnackbar(msg)
         setTimeout(this.props.hideSnackbar, 3000)
     }
@@ -108,7 +107,6 @@ class _Board extends Component {
 
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
-        console.log('ADDING GROUP',)
         const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         try {
@@ -174,7 +172,6 @@ class _Board extends Component {
         if (!taskName) taskName = 'New task'
 
         const { loggedUser } = this.props;
-        console.log('user:', loggedUser);
         const board = this._getCurrBoard()
         const group = board.groups.find(group => group.id === groupId)
         const notif = ` ${board.name}: ${loggedUser.fullName} Added a task to ${group.name}`;
@@ -192,7 +189,7 @@ class _Board extends Component {
 
 
     onEditTask = async (task, prevTask, desc) => {
-        if (lodash.isEqual(task, prevTask)) return console.log('same');
+        if (lodash.isEqual(task, prevTask)) return;
 
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
@@ -306,12 +303,11 @@ class _Board extends Component {
         if (!board) {
             return (
                 <div className="loader-container flex justify-center align-center">
-                    <img src="loading.gif" />
+                    <img src="loading.gif" alt="" />
                 </div>
             )
         }
 
-        console.log('SHOW ME PARAMS FROM BOARD', this.props.match.params)
         const filteredBoard = this.applyFilter(board, filterBy);
         return (
             <section className={`board ${window.innerWidth > 450 ? 'flex' : 'flex column'}`}>
@@ -334,13 +330,15 @@ class _Board extends Component {
                                 {(provided, snapshot) =>
                                     <div className={`group-list`}
                                         ref={provided.innerRef}
-                                        {...provided.droppableProps}>
+                                        {...provided.droppableProps}
+                                        >
                                         {filteredBoard.groups.map((group, index) => {
                                             return <Group key={group.id} index={index}
                                                 onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                                                 onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup}
                                                 onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
                                         })}
+                                        {provided.placeholder}
                                     </div>
                                 }
                             </Droppable>

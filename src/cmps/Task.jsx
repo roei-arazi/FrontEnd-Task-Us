@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import ContentEditable from 'react-contenteditable'
 import { withRouter } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd'
-import { RiDeleteBack2Line } from 'react-icons/ri'
 import { BsChatDots } from 'react-icons/bs'
 import { MdDelete } from 'react-icons/md'
 import "react-datepicker/dist/react-datepicker.css";
 import socketService from '../services/socketService.js'
 import moment from 'moment';
 //Material ui
-import { Tooltip, Zoom } from '@material-ui/core';
 
 // Inside Imports
 import { Members } from './task-cmps/Members';
@@ -171,7 +169,6 @@ class _Task extends Component {
 
     onEditTags = (tags, tagName, type) => {
         let desc = ''
-        console.log('type:', type)
         this.setState({ ...this.state, task: { ...this.state.task, tags: JSON.parse(JSON.stringify(tags)) } }, () => {
             if (type === 'addTag') {
                 desc = `${this.props.loggedUser.fullName} added tag named ${tagName} to ${this.state.task.name} on group - ${this.props.group.name}`
@@ -263,7 +260,7 @@ class _Task extends Component {
                                 <Priority priority={priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
 
-                                <Tags handleChange={this.handleChange} onEditTags={this.onEditTags}
+                                <Tags onEditTags={this.onEditTags}
                                     task={this.state.task} isTagsShown={isTagsShown}
                                     openModal={this.openModal} handleChange={this.handleChange} />
 
@@ -276,7 +273,7 @@ class _Task extends Component {
                 </Draggable>
                 {this.state.isImageModalShown &&
                     <div onClick={this.onToggleImageModal} className="updates-image-modal">
-                        <img src={this.state.imgUrl} />
+                        <img src={this.state.imgUrl} alt="" />
                     </div>}
             </React.Fragment>
         )

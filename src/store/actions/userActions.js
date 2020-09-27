@@ -1,6 +1,4 @@
 import { userService } from "../../services/userService";
-import socketService from '../../services/socketService.js';
-
 
 export function loadUsers() {
     return async dispatch => {

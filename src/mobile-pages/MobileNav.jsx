@@ -24,7 +24,6 @@ export class MobileNav extends React.Component {
     }
 
     render() {
-        console.log('props id:', this.props)
         const { loggedUser, params, members, boardName } = this.props
         return (
             <React.Fragment>
@@ -44,7 +43,7 @@ export class MobileNav extends React.Component {
                                     {
                                         member.imgUrl ? <img className="member-img" src={member.imgUrl} alt="" />
                                             :
-                                            <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" />
+                                            <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="" />
 
                                     }
                                 </div>

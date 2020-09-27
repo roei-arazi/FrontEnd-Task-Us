@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Menu, MenuItem } from '@material-ui/core';
-import { HiOutlineCog } from 'react-icons/hi';
 import { BsFillPlusCircleFill, } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md'
 import { removeBoard, addBoard, toggleBoardbar, updateBoard, recieveUpdate, loadBoards } from '../store/actions/boardActions.js';
@@ -27,7 +25,6 @@ class _Boardbar extends Component {
         });
 
         socketService.on('reloadBoards', () => {
-            console.log('reloading...');
             this.props.loadBoards()
         })
         socketService.on('accept-notif', (notification) => {
@@ -68,7 +65,6 @@ class _Boardbar extends Component {
         userService.notifyUsers(notif, board.members, loggedUser)
         const { id } = match.params;
         if (boards.length === 1) {
-            console.log('you need at least one board!');
             return;
         }
         await removeBoard(boardId);
@@ -94,7 +90,7 @@ class _Boardbar extends Component {
     }
 
     render() {
-        const { anchorEl, selectedBoardId, isShown } = this.state;
+        const { isShown } = this.state;
         const filteredBoards = this.handleSearch()
 
         return (
