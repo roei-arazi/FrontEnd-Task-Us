@@ -6,9 +6,7 @@ import { VscListFilter } from 'react-icons/vsc';
 import { IoIosArrowDropdown } from 'react-icons/io';
 import { withRouter } from 'react-router-dom';
 
-
 class _Activities extends Component {
-
     state = {
         isOrderReversed: false,
         isFilterOpen: false,
@@ -17,38 +15,31 @@ class _Activities extends Component {
         isActivitiesShown: true,
         isActivitiesNotReadShown: true
     }
-
     get activities() {
         const { activityLog } = this.props;
-        const {_id} = this.props.loggedUser;
+        const { _id } = this.props.loggedUser;
         return [activityLog.filter(activity => activity[_id]), activityLog.filter(activity => !activity[_id])]
     }
-
     getInitials(fullName) {
         const [firstName, lastName] = fullName.split(' ');
         let initials = firstName.charAt(0).toUpperCase();
         if (lastName) initials += lastName.charAt(0).toUpperCase();
         return initials;
     }
-
     handleChange = ({ target }) => {
         this.setState({ searchVal: target.value })
     }
-
     toggleFilter = () => {
         this.setState({ isFilterOpen: !this.state.isFilterOpen });
     }
-
     onSetFilter(key, value) {
         const filterBy = { ...this.state.filterBy }
         if (filterBy[key] === value) value = '';
         this.setState({ filterBy: { ...filterBy, [key]: value } })
     }
-
-    moveToProfile = (userId) =>{
+    moveToProfile = (userId) => {
         this.props.history.push(`/user/${userId}`)
     }
-
     getActivityDates() {
         const activities = this.props.activityLog;
         const dates = activities.reduce((acc, activity) => {
@@ -58,7 +49,6 @@ class _Activities extends Component {
         }, {})
         return Object.keys(dates);
     }
-
     getActivityMembers() {
         const activities = this.props.activityLog;
         const members = activities.reduce((acc, activity) => {
@@ -67,7 +57,6 @@ class _Activities extends Component {
         }, {})
         return Object.keys(members)
     }
-
     applyFilter(activities) {
         let res = [...activities];
         const { filterBy, searchVal } = this.state;
@@ -86,7 +75,6 @@ class _Activities extends Component {
     toggleActivitiesNotRead = () => {
         this.setState({ isActivitiesNotReadShown: !this.state.isActivitiesNotReadShown })
     }
-
     render() {
         if (!this.props.activityLog) return <h1>Loading...</h1>
         const { isFilterOpen, filterBy, searchVal } = this.state;
@@ -98,10 +86,8 @@ class _Activities extends Component {
         return (
             <section className="activities flex column">
                 <header className="padding-x-15 padding-y-15">
-
                     <AiOutlineClose onClick={this.props.onToggleActivities} />
                     <h1><span>{this.props.boardName}</span> Log</h1>
-
                     <div className='filters-container space-between flex align-center'>
                         <input value={searchVal} onChange={this.handleChange} type="text" placeholder="Search" />
                         <div className="filter-outer-container flex relative">
@@ -137,7 +123,6 @@ class _Activities extends Component {
                         </div>
                     </div>
                 </header>
-
                 <div className="all-activities-container">
                     {/* Activities which are not read: */}
                     <div className="activity-list-not-read column flex  padding-y-15">
@@ -154,8 +139,8 @@ class _Activities extends Component {
                                                 {moment(activity.createdAt).format("DD MMM")}
                                             </p>
                                         </div>
-                                        {activity.byUser.imgUrl ? <img onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" />:
-                                        <div onClick={() => this.moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
+                                        {activity.byUser.imgUrl ? <img onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" /> :
+                                            <div onClick={() => this.moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
                                         <h2 onClick={() => this.moveToProfile(activity.byUser._id)}>{activity.byUser.fullName}</h2>
                                     </div>
                                     <div className="activity-desc-container flex align-center">
@@ -186,8 +171,8 @@ class _Activities extends Component {
                                                     {moment(activity.createdAt).format("DD MMM")}
                                                 </p>
                                             </div>
-                                            {activity.byUser.imgUrl ? <img onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" />:
-                                        <div onClick={() => this.moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
+                                            {activity.byUser.imgUrl ? <img onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" /> :
+                                                <div onClick={() => this.moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
                                             <h2 onClick={() => this.moveToProfile(activity.byUser._id)}>{activity.byUser.fullName}</h2>
                                         </div>
                                         <div className="activity-desc-container flex align-center">
@@ -204,11 +189,8 @@ class _Activities extends Component {
                         }
                     </div>
                 </div>
-
-
             </section>
         )
     }
 }
-
 export default withRouter(_Activities)

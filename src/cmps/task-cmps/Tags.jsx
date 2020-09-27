@@ -5,19 +5,12 @@ import Truncate from 'react-truncate'
 import { Fade } from '@material-ui/core';
 
 export class Tags extends Component {
-
-    state = {
-
-    }
-
+    state = {}
     componentDidMount() {
-
         this.elTagInput = React.createRef();
         this.elTag = React.createRef();
-
         this.setState({ tags: JSON.parse(JSON.stringify(this.props.task.tags)) })
     }
-
     handleChange = (ev, id) => {
         const tags = this.state.tags.map(tag => {
             if (tag.id === id) {
@@ -27,7 +20,6 @@ export class Tags extends Component {
         })
         this.setState({ tags });
     }
-
     onAddTag = () => {
         const tags = [...this.state.tags]
         const tagName = this.elTagInput.current.value ? this.elTagInput.current.value : 'New Tag'
@@ -35,7 +27,6 @@ export class Tags extends Component {
         this.setState({ tags });
         this.props.onEditTags(tags, tagName, 'addTag')
     }
-
     onRemoveTag = (id) => {
         const tagToRemove = this.state.tags.find(tag => tag.id === id)
         const tags = this.state.tags.filter(tag => tag.id !== id)
@@ -43,50 +34,39 @@ export class Tags extends Component {
         this.props.onEditTags(tags, tagToRemove.txt, 'removeTag')
     }
     onEditTag = (idx, tagName, type) => {
-        if (this.props.task.tags[idx].txt === this.state.tags[idx].txt) {
-            return
-        }
+        if (this.props.task.tags[idx].txt === this.state.tags[idx].txt) return
         this.props.onEditTags(this.state.tags, tagName, type)
     }
-
     focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
         }, 0)
     }
-
     _makeid(length = 7) {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
         for (var i = 0; i < length; i++) {
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         }
-
         return text;
     }
-
     render() {
         if (!this.state.tags || this.state.tags === 0) return <h1>no tags</h1>
         return (
             <div onClick={() => this.props.openModal('tags')} className="label-container tags relative">
-
                 <div className="task-label-name flex justify-center align-center ">
                     {this.state.tags.map((tag, idx) => {
                         if (idx > 2) return []
                         if (idx > 1) return (
                             <div key={tag.id} className="task-number-of-tags">
                                 <span>{this.state.tags.length > 9 ? '+9' : `+${this.state.tags.length - 2}`}</span>
-                            </div>
-                        )
-
+                            </div>)
                         return (
                             <p key={idx} style={{ color: tag.color }}>
                                 <Truncate lines={1} ellipsis={"..."} width={75}>
                                     {idx === this.state.tags.length - 1 ? tag.txt : (idx === 1 ? tag.txt : tag.txt + ",")}
                                 </Truncate>
-                            </p>
-                        )
+                            </p>)
                     })}
                 </div>
                 <Fade in={this.props.isTagsShown}>
@@ -109,7 +89,6 @@ export class Tags extends Component {
                                 return (
                                     <div className="tag-container flex justify-center align-center" key={idx}>
                                         <RiDeleteBack2Line className="tag-remove-icon" onClick={() => this.onRemoveTag(tag.id)} />
-
                                         <input style={{ color: tag.color }} onBlur={(ev) => {
                                             ev.target.blur()
                                             this.onEditTag(idx)
@@ -130,7 +109,6 @@ export class Tags extends Component {
         )
     }
 }
-
 function _getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';

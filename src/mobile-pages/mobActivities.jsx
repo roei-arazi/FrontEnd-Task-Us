@@ -5,11 +5,12 @@ import { Fade } from '@material-ui/core';
 import { VscListFilter } from 'react-icons/vsc';
 import { IoIosArrowDropdown } from 'react-icons/io';
 import { connect } from 'react-redux';
+// inside imports
 import { loadBoards, updateBoard } from '../store/actions/boardActions'
 import { NavLink } from 'react-router-dom';
 
-export class _mobActivities extends Component {
 
+export class _mobActivities extends Component {
     state = {
         isOrderReversed: false,
         isFilterOpen: false,
@@ -18,7 +19,6 @@ export class _mobActivities extends Component {
         isActivitiesShown: true,
         isActivitiesNotReadShown: true
     }
-
     async componentDidMount() {
         try {
             if (!this.props.boards || !this.props.boards.length) {
@@ -29,7 +29,6 @@ export class _mobActivities extends Component {
         }
         this.getBoardById(this.props.match.params.id)
     }
-
     getBoardById = (id) => {
         const board = this.props.boards.find(board => board._id === id)
         this.setState({ ...this.state, board })
@@ -38,21 +37,17 @@ export class _mobActivities extends Component {
         const { activityLog } = this.state.board;
         return [activityLog.filter(activity => activity.isRead), activityLog.filter(activity => !activity.isRead)]
     }
-
     handleChange = ({ target }) => {
         this.setState({ searchVal: target.value })
     }
-
     toggleFilter = () => {
         this.setState({ isFilterOpen: !this.state.isFilterOpen });
     }
-
     onSetFilter(key, value) {
         const filterBy = { ...this.state.filterBy }
         if (filterBy[key] === value) value = '';
         this.setState({ filterBy: { ...filterBy, [key]: value } })
     }
-
     getActivityDates() {
         const activities = this.state.board.activityLog;
         const dates = activities.reduce((acc, activity) => {
@@ -62,7 +57,6 @@ export class _mobActivities extends Component {
         }, {})
         return Object.keys(dates);
     }
-
     getActivityMembers() {
         const activities = this.state.board.activityLog;
         const members = activities.reduce((acc, activity) => {
@@ -71,7 +65,6 @@ export class _mobActivities extends Component {
         }, {})
         return Object.keys(members)
     }
-
     applyFilter(activities) {
         let res = [...activities];
         const { filterBy, searchVal } = this.state;
@@ -85,12 +78,10 @@ export class _mobActivities extends Component {
     }
     toggleActivities = () => {
         this.setState({ isActivitiesShown: !this.state.isActivitiesShown })
-
     }
     toggleActivitiesNotRead = () => {
         this.setState({ isActivitiesNotReadShown: !this.state.isActivitiesNotReadShown })
     }
-
     onClearLog = () => {
         const board = {
             ...this.state.board,
@@ -99,9 +90,7 @@ export class _mobActivities extends Component {
         this.setState({ board }, () => {
             this.props.updateBoard(board)
         })
-
     }
-
     render() {
         if (!this.state.board) return <h1>Loading...</h1>
         const { isFilterOpen, filterBy, searchVal } = this.state;
@@ -113,16 +102,12 @@ export class _mobActivities extends Component {
         return (
             <section className="activities flex column">
                 <header className="padding-x-15 padding-y-15">
-
                     <NavLink to={`/board/${this.props.match.params.id}`}>
                         <AiOutlineClose />
                     </NavLink>
-
                     <h1><span>{this.props.boardName}</span> Log</h1>
-
                     <div className='filters-container space-between flex align-center'>
                         <input value={searchVal} onChange={this.handleChange} type="text" placeholder="Search" />
-
                         <div className="filter-outer-container flex relative">
                             <button className="flex align-center" onClick={this.toggleFilter}><VscListFilter /> Filter</button>
                             {isFilterOpen &&
@@ -155,7 +140,6 @@ export class _mobActivities extends Component {
                     </div>
                 </header>
                 <div className="all-activities-container">
-                    {/* Activities which are not read: */}
                     <div className="activity-list-not-read column flex  padding-y-15">
                         <h1 className="flex space-between">
                             New Activities ({activitiesNotRead.length})
@@ -185,7 +169,6 @@ export class _mobActivities extends Component {
                             <h3 className="padding-x-15">No new board activities!</h3>
                         }
                     </div>
-                    {/* Activities which are already read */}
                     <div className="activity-list column flex  padding-y-15">
                         <h1 className="flex space-between">
                             Activities Read ({activities.length})
@@ -218,8 +201,6 @@ export class _mobActivities extends Component {
                         }
                     </div>
                 </div>
-
-
             </section>
         )
     }
@@ -229,10 +210,8 @@ const mapStateToProps = state => {
         boards: state.boardReducer.boards,
     }
 }
-
 const mapDispatchToProps = {
     loadBoards,
     updateBoard
 }
-
 export const mobActivities = connect(mapStateToProps, mapDispatchToProps)(_mobActivities);

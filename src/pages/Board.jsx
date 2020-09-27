@@ -1,36 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import lodash from 'lodash'
+// Inside imports
+import { userService } from '../services/userService.js';
 import { Boardbar } from '../cmps/Boardbar';
 import { BoardHeader } from '../cmps/BoardHeader';
 import { Navbar } from '../cmps/Navbar';
 import { Group } from '../cmps/Group';
 import { Popup } from '../cmps/Popup'
-import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
-import { userService } from '../services/userService.js';
-import lodash from 'lodash'
-// Reducers funcs
 import { loadUsers } from '../store/actions/userActions'
 import {
-    updateBoard, loadBoards,   //BOARD
-    addGroup, editGroup, removeGroup, //GROUP
-    addTask, removeTask, editTask,  //TASK
-    clearFilter //FILTER
+    updateBoard, loadBoards,
+    addGroup, editGroup, removeGroup,
+    addTask, removeTask, editTask,
+    clearFilter
 }
     from '../store/actions/boardActions'
 import { groupChanges } from '../store/actions/changesActions'
 import { MobileNav } from '../mobile-pages/MobileNav';
-import { BsFillPlusCircleFill } from 'react-icons/bs';
-
 
 class _Board extends Component {
-
     state = {
         boardId: '',
         txt: ''
     }
-
-
     async componentDidMount() {
         try {
             if (!this.props.boards || !this.props.boards.length) {
@@ -45,31 +41,24 @@ class _Board extends Component {
         }
         this.setState({ boardId: this.props.match.params.id })
     }
-
     displayPopup(msg) {
         this.props.showSnackbar(msg)
         setTimeout(this.props.hideSnackbar, 3000)
     }
-
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
             this.props.clearFilter();
             this.setState({ boardId: this.props.match.params.id })
         }
     }
-
     onEditBoard = async (newBoard, desc) => {
         const { loggedUser } = this.props;
 
         this.props.updateBoard(newBoard, desc, loggedUser)
         userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
         if (desc) this.displayPopup('Updated board.')
-
     }
-
     applyFilter = (board, filterBy) => {
-
-
         const filteredBoard = JSON.parse(JSON.stringify(board))
         if (filterBy.groupId) {
             filteredBoard.groups = filteredBoard.groups.filter(group => group.id === filterBy.groupId)
@@ -99,12 +88,10 @@ class _Board extends Component {
                     ||
                     task.tags.some(tag => tag.txt.toLowerCase().includes(this.state.txt.toLowerCase()))
                 )
-
             })
         }
         return filteredBoard
     }
-
     //------------------GROUP CRUD-----------------
     onAddGroup = async () => {
         const { loggedUser } = this.props;
@@ -129,7 +116,6 @@ class _Board extends Component {
             this.props.removeGroup(groupId, board, this.props.loggedUser)
             userService.notifyUsers(notif, board.members, loggedUser);
             this.displayPopup('Removed group.')
-
         } catch (err) {
             console.log('Error', err)
         }
@@ -146,7 +132,6 @@ class _Board extends Component {
             this.props.editGroup(group, board, desc, loggedUser)
             userService.notifyUsers(desc, board.members, loggedUser);
             this.displayPopup('Updated group.')
-
         } catch (err) {
             console.log('Error', err)
         }
@@ -163,14 +148,12 @@ class _Board extends Component {
             this.props.removeTask(taskId, board, group, loggedUser);
             userService.notifyUsers(notif, board.members, loggedUser);
             this.displayPopup('Removed task.');
-
         } catch (err) {
             console.log('Error', err)
         }
     }
     onAddTask = async (groupId, taskName) => {
         if (!taskName) taskName = 'New task'
-
         const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         const group = board.groups.find(group => group.id === groupId)
@@ -185,32 +168,22 @@ class _Board extends Component {
             console.log('Error', err)
         }
     }
-
-
-
     onEditTask = async (task, prevTask, desc) => {
         if (lodash.isEqual(task, prevTask)) return;
-
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
-
         this.props.editTask(task, board, desc, this.props.loggedUser)
         userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
         this.displayPopup('Updated task.')
-
-
     }
     //---------------------Draggable----------------------
-
     onDragEnd = async result => {
         const { destination, source, draggableId, type } = result
         if (!destination) return;
         if (destination.droppableId === source.droppableId
             &&
             destination.index === source.index) return;
-
         const board = this._getCurrBoard()
-
         if (type === 'group') {
             const newGroups = Array.from(board.groups)
             const draggedGroup = newGroups.find(group => group.id === draggableId)
@@ -226,15 +199,11 @@ class _Board extends Component {
         } else {
             const groupStart = board.groups.find(group => group.id === source.droppableId)
             const groupEnd = board.groups.find(group => group.id === destination.droppableId)
-
             if (groupStart.id === groupEnd.id) {
-
                 const newTasks = Array.from(groupStart.tasks)
                 const newTask = groupStart.tasks.find(task => task.id === draggableId)
-
                 newTasks.splice(source.index, 1)
                 newTasks.splice(destination.index, 0, newTask)
-
                 const newGroup = {
                     ...groupStart,
                     tasks: newTasks
@@ -243,13 +212,10 @@ class _Board extends Component {
                 board.groups.splice(newIdx, 1, newGroup)
                 try {
                     this.props.updateBoard(board)
-
-
                 } catch (err) {
                     console.log('Error', err);
                 }
             } else {
-
                 const startTasks = Array.from(groupStart.tasks)
                 startTasks.splice(source.index, 1)
                 const newStartGroup = {
@@ -263,10 +229,8 @@ class _Board extends Component {
                     ...groupEnd,
                     tasks: endTasks
                 }
-
                 const startIdx = board.groups.findIndex(group => group.id === newStartGroup.id)
                 const endIdx = board.groups.findIndex(group => group.id === newFinishGroup.id)
-
                 board.groups.splice(startIdx, 1, newStartGroup)
                 board.groups.splice(endIdx, 1, newFinishGroup)
                 try {
@@ -274,32 +238,24 @@ class _Board extends Component {
                     const desc = `${loggedUser.fullName} Moved ${newTaskToPaste.name} from ${newStartGroup.name} to ${newFinishGroup.name}`
                     this.props.updateBoard(this._getCurrBoard(), desc, loggedUser)
                     userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
-
                 } catch (err) {
                     console.log('Error', err);
                 }
             }
         }
     }
-
     handleSearch = (ev) => {
         this.setState({ txt: ev.target.value })
     }
     handleBoardBarSearch = (val) => {
         this.setState({ boardBarSearch: val })
     }
-
     _getCurrBoard = () => {
-
         return this.props.boards.find(board => board._id === this.state.boardId)
-
     }
-
-
     render() {
         const board = this._getCurrBoard()
         const { users, filterBy } = this.props;
-
         if (!board) {
             return (
                 <div className="loader-container flex justify-center align-center">
@@ -307,7 +263,6 @@ class _Board extends Component {
                 </div>
             )
         }
-
         const filteredBoard = this.applyFilter(board, filterBy);
         return (
             <section className={`board ${window.innerWidth > 450 ? 'flex' : 'flex column'}`}>
@@ -324,14 +279,12 @@ class _Board extends Component {
                         handleSearch={this.handleSearch} users={users} />}
                     <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                         <DragDropContext
-                            onDragEnd={this.onDragEnd}
-                        >
+                            onDragEnd={this.onDragEnd}>
                             <Droppable droppableId={board._id} type="group">
                                 {(provided, snapshot) =>
                                     <div className={`group-list`}
                                         ref={provided.innerRef}
-                                        {...provided.droppableProps}
-                                        >
+                                        {...provided.droppableProps} >
                                         {filteredBoard.groups.map((group, index) => {
                                             return <Group key={group.id} index={index}
                                                 onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
@@ -346,7 +299,6 @@ class _Board extends Component {
                         {window.innerWidth < 450 &&
                             <BsFillPlusCircleFill className="group-add-btn" onClick={this.onAddGroup} />
                         }
-
                     </div>
                 </div>
                 <Popup />
@@ -354,9 +306,6 @@ class _Board extends Component {
         )
     }
 }
-
-
-
 const mapStateToProps = state => {
     return {
         boards: state.boardReducer.boards,
@@ -365,7 +314,6 @@ const mapStateToProps = state => {
         filterBy: state.boardReducer.filterBy
     }
 }
-
 const mapDispatchToProps = {
     loadBoards,
     addGroup,
@@ -381,5 +329,4 @@ const mapDispatchToProps = {
     clearFilter,
     groupChanges
 }
-
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board);
