@@ -68,6 +68,8 @@ class _UserProfile extends Component {
         if (lastName) initials += lastName.charAt(0).toUpperCase()
         const guestId = '5f6efc73805dbf6054d58794';
         const { loggedUser } = this.props
+        const userCreatedBoards = this.props.boards.filter(board => board.boardCreator._id === this.state.user._id)
+
         return (
             <section className={`user-profile flex ${window.innerWidth < 450 && 'column'}`}>
                 {window.innerWidth > 450 ?
@@ -89,7 +91,15 @@ class _UserProfile extends Component {
 
                             <h3>Email: <span className="span-user-details">{email}</span></h3>
                             <h3>Full Name: <span className="span-user-details">{fullName}</span></h3>
-                            <h3>Username: <span className="span-user-details">{username}</span> </h3>
+                            <h3>
+                                {!userCreatedBoards.length ? "No boards created." : "ok"}
+                                Boards created by this user:  {
+                                    userCreatedBoards.map(board => {
+                                        return board.name
+                                    })
+                                }
+                            </h3>
+
                         </div>
                     </div>
                     <Fade in={this.state.isModalOpen}>

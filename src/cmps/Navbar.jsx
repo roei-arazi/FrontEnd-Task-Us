@@ -43,17 +43,19 @@ class _Navbar extends Component {
                                 ? ''
                                 : <div className="notifications-counter">
                                     <p >
-                                        {loggedUser.notifications.filter(notification => !notification.isRead).length}
+                                        {loggedUser.notifications.filter(notification => !notification.isRead).length > 10
+                                            ? '+9'
+                                            : loggedUser.notifications.filter(notification => !notification.isRead).length
+                                        }
                                     </p>
                                 </div>
                         }
+                        <VscBell />
                         {
                             isNotificationShown &&
                             <Notifications goToUserProfile={this.goToUserProfile} removeNotifications={removeNotifications} loggedUser={loggedUser} />
                         }
-                        {loggedUser.notifications.some(notification => !notification.isRead)
-                            ? <VscBellDot />
-                            : <VscBell />}
+
                     </li>
                 </ul>
                 <ul className="navbar-links flex column space-around">
