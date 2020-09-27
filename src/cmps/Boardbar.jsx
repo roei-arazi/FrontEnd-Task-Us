@@ -90,7 +90,7 @@ class _Boardbar extends Component {
     }
     render() {
         const { isShown } = this.state;
-        const {loggedUser} = this.props;
+        const { loggedUser } = this.props;
         const filteredBoards = this.handleSearch()
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
@@ -100,7 +100,6 @@ class _Boardbar extends Component {
                 </div>
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
-                    <button onClick={this.onMoveToDashboard}>DASHBOARD WIP</button>
                     <BsFillPlusCircleFill onClick={this.onAddBoard} />
                 </div>}
                 {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}

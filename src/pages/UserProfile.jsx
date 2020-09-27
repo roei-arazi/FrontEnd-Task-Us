@@ -59,9 +59,6 @@ class _UserProfile extends Component {
     onMoveToBoard(id) {
         this.props.history.push(`/board/${id}`)
     }
-    onMoveToDashboard = (ev) => {
-        this.props.history.push(`/dashboard`)
-    }
 
     render() {
         let { email, fullName, username, imgUrl, _id } = this.state.user;
@@ -105,10 +102,10 @@ class _UserProfile extends Component {
                         {imgUrl ? <img className="user-profile-big" src={imgUrl} alt="" /> :
                             <div className="user-profile-big initials flex align-center justify-center">{initials}</div>}
                     </header>
-                    <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">
+                    <div className="user-details-container padding-x-30 padding-y-45 align-center  flex  column">
                         {(loggedUser._id === _id && loggedUser._id !== guestId) ? <h2 onClick={this.toggleModal}
                             className="clickable-header">Edit Profile</h2> : ''}
-                        <div className="user-details-inner-container">
+                        <div className="user-details-inner-container flex justify-center">
                             <div className="col-left">
                                 <h1>Details</h1>
                                 <h3>Email: {email}</h3>
@@ -131,7 +128,6 @@ class _UserProfile extends Component {
                             <div className="col-right">
                                 <h1>Tasks</h1>
                                 <h3>Number of tasks assigned to this user: {numOfUserTasks}</h3>
-                                <p>See more info <span onClick={this.onMoveToDashboard}>here</span></p>
                             </div>
                         </div>
                     </div>
