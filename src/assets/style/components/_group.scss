@@ -142,7 +142,7 @@
 
     .group-precent-container {
         margin-right: 30px;
-
+        background-color: $emptyStatusBg;
         [data-title]:hover:after {
             font-size: 1rem;
             width: max-content;
