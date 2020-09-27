@@ -130,8 +130,6 @@ class _UserProfile extends Component {
                                 <h3>Number of tasks assigned to this user: {numOfUserTasks}</h3>
                                 <p>See more info <span>here</span></p>
                             </div>
-
-
                         </div>
                     </div>
                     <Fade in={this.state.isModalOpen}>
@@ -140,7 +138,8 @@ class _UserProfile extends Component {
                                 <div className="user-modal-header padding-x-15 padding-y-15 flex justify-center align-center">
                                     <label> {this.state.user.imgUrl ?
                                         <img className="user-profile-big" src={this.state.user.imgUrl} alt="profile-img" />
-                                        : <div>{this.props.loggedUser.fullName}</div>}
+                                        : 
+                                        <div className="user-profile-big initials flex align-center justify-center">{initials}</div>}
                                         <input type="file" onChange={this.uploadImg} hidden />
                                     </label>
                                 </div>
