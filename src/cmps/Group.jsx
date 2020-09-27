@@ -74,10 +74,10 @@ export class Group extends Component {
         const taskCount = tasks.length;
         const percent = tasks.length / 100;
         const data = tasks.reduce((acc, task) => {
-            const value = task[property]
-            acc[value] = acc[value] ? ++acc[value] : 1; 
+            const value = task[property];
+            if(value && value !== 'empty') acc[value] = acc[value] ? ++acc[value] : 1; 
             return acc;
-        }, {})
+        }, {});
         const res = [];
         for (let key in data) {
             data[key] /= percent;
