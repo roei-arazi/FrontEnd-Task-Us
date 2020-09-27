@@ -8,13 +8,10 @@
         overflow-x: overlay;
         overflow-y: hidden;
         height: auto;
-        min-width:auto;
+        min-width: auto;
     }
 
-    .delete-group-icon,
-    .color-group-icon {
-        margin-right: 5px;
-    }
+
 
     svg {
         font-size: 1.5rem;
@@ -199,4 +196,9 @@
 .drag-over {
     transition: 0.3s ease;
     background-color: rgba($mainLightGrey, 0.3)
+}
+
+.delete-group-icon,
+.color-group-icon {
+    margin-right: 8px;
 }

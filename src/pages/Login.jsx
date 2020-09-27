@@ -26,6 +26,10 @@ class _Login extends Component {
         }
         catch (err) {
             this.setState({ isErrLogin: true })
+            setTimeout(() => {
+
+                this.setState({ isErrLogin: false })
+            }, 2000);
         }
 
     }
@@ -46,6 +50,7 @@ class _Login extends Component {
         await this.props.login(user)
         if (this.props.loggedUser) this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
+
     render() {
         const initialValues = { username: '', password: '' }
         if (this.state.isLoading) return (
@@ -75,18 +80,17 @@ class _Login extends Component {
                         <Field className="sign-login-input" type="password" autoComplete="current-password" name="password" />
                     </section>
                     <ErrorMessage name="password" component="span" />
-                    <button type="submit flex">Login</button>
-                    {this.state.isErrLogin && <div className="login-err-modal">
-                        X
-                    <h2>Wrong password / username</h2>
-                    </div>}
-                    <div type="button" className="facebook-btn-container">
-                        <FaFacebookF />
-                        <FacebookLogin
-                            appId="632288707652598"
-                            fields="name,email,picture"
-                            cssClass="facebook-btn"
-                            callback={this.responseFacebook} />
+                    <div>
+
+                        <button type="submit flex">Login</button>
+                        <div type="button" className="facebook-btn-container">
+                            <FaFacebookF />
+                            <FacebookLogin
+                                appId="632288707652598"
+                                fields="name,email,picture"
+                                cssClass="facebook-btn"
+                                callback={this.responseFacebook} />
+                        </div>
                     </div>
                     <a href="/#/signup">Don't have an account? sign up here.</a>
                     <button className="guest-button" onClick={this.onGuestLogin}>Or try as a guest!</button>
@@ -95,7 +99,11 @@ class _Login extends Component {
             <div data-title="Back to home" className="go-back">
                 <NavLink to="/"><FaArrowLeft /></NavLink>
             </div>
+            <div className={`login-err-modal flex justify-center align-center ${this.state.isErrLogin && "animate-login-err-modal"}`}>
+                <h2>Wrong password / username</h2>
+            </div>
         </div>
+
     }
 }
 const mapStateToProps = state => {

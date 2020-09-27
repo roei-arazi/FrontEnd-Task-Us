@@ -1,4 +1,4 @@
-.confirm-board-delete{
+.confirm-board-delete {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -7,24 +7,28 @@
     height: 250px;
     width: 450px;
     background-color: $colorBgBoardBars;
-    // text-align: center;
+    z-index: 999;
     border-radius: 10px;
-    section{
+
+    section {
         flex-direction: row-reverse;
     }
-    p{
+
+    p {
         color: $mainLightGrey;
     }
-    button{
+
+    button {
         border-radius: 5px;
         margin-left: 20px;
         font-size: 1.2rem;
     }
-    .delete-button{
+
+    .delete-button {
         background-color: #dd4444;
     }
 }
 
-.boardbar .modal-screen-wrapper{
-    background-color: rgba(50,50,50,0.5);
+.boardbar .modal-screen-wrapper {
+    background-color: rgba(50, 50, 50, 0.5);
 }

@@ -253,16 +253,16 @@ export class _BoardHeader extends React.Component {
                     </div>
                     <div className="header-options flex">
                         <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
-                    <div className="relative">
-                        {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
-                        <button className="flex align-center" onClick={this.props.toggleModal}>
-                            <p>{this.props.isBoardShown ? 'Board' : 'Dashboard'}</p> <IoMdArrowDropdown />
+                        <div className="relative">
+                            {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
+                            <button className="flex align-center" onClick={this.props.toggleModal}>
+                                <h3>{this.props.isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
                             </button>
-                        <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
-                            <p onClick={this.props.showBoard}>Board</p>
-                            <p onClick={this.props.showDashboard}>Dashboard</p>
+                            <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
+                                <p onClick={this.props.showBoard}>Board</p>
+                                <p onClick={this.props.showDashboard}>Dashboard</p>
+                            </div>
                         </div>
-                    </div>
                         <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
                             <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />
                             <GoSearch />

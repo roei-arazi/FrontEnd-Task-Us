@@ -132,6 +132,9 @@ function removeTask(taskId, board, group, loggedUser) {
         if (isTask) task = currTask;
         return !isTask;
     })
+    if (board.groups[groupIdx].tasks.length === 0) {
+        board.groups.splice(groupIdx, 1)
+    }
     const desc = `${loggedUser.fullName} Removed task: ${task.name} from group ${group.name}`;
     return handleBoardChanges(desc, loggedUser, board)
 }

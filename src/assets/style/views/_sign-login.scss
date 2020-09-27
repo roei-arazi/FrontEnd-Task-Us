@@ -2,6 +2,7 @@
     background-color: $colorBgBoardBars;
     height: 100vh;
     color: $mainBlack;
+    overflow: hidden;
 }
 
 .go-back {
@@ -137,7 +138,24 @@
 
 .login-err-modal {
     position: fixed;
-    top: 0;
-    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 30px;
+    transform: translate(300px, 0);
+    background-color: $colorBgBoardBars;
+    z-index: 999;
+    box-shadow: $modalsShadow;
+    border-radius: 10px;
+    transition: .3s;
+
+    h2 {
+        color: #dd4444;
+    }
+
+}
+
+.animate-login-err-modal {
+    transform: translate(0, 0);
+    transition: .3s;
 
 }

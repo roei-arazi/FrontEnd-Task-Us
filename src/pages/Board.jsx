@@ -258,14 +258,14 @@ class _Board extends Component {
     _getCurrBoard = () => {
         return this.props.boards.find(board => board._id === this.state.boardId)
     }
-    showBoard=()=>{
-        this.setState({isBoardShown: true, isDashboardShown: false, isModalShown:false })  
+    showBoard = () => {
+        this.setState({ isBoardShown: true, isDashboardShown: false, isModalShown: false })
     }
-    showDashboard=()=>{
-        this.setState({isDashboardShown: true, isBoardShown: false, isModalShown: false})
+    showDashboard = () => {
+        this.setState({ isDashboardShown: true, isBoardShown: false, isModalShown: false })
     }
-    toggleModal=()=>{
-        this.setState({isModalShown: !this.state.isModalShown})
+    toggleModal = () => {
+        this.setState({ isModalShown: !this.state.isModalShown })
     }
     render() {
         const board = this._getCurrBoard()
@@ -289,38 +289,38 @@ class _Board extends Component {
                     <MobileNav boardName={board.name} members={board.members} params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
-                {window.innerWidth > 450 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
-                    handleSearch={this.handleSearch} users={users} showBoard={this.showBoard} 
-                    showDashboard={this.showDashboard} toggleModal={this.toggleModal} isModalShown={this.state.isModalShown}
-                    isBoardShown={this.state.isBoardShown} />}
-                    {this.state.isBoardShown ? 
-                <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
-                    <DragDropContext
-                        onDragEnd={this.onDragEnd}>
-                        <Droppable droppableId={board._id} type="group">
-                            {(provided, snapshot) =>
-                                <div className={`group-list`}
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps} >
-                                    {filteredBoard.groups.map((group, index) => {
-                                        return <Group key={group.id} index={index}
-                                            onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
-                                            onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup}
-                                            onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
-                                    })}
-                                    {provided.placeholder}
-                                </div>
+                    {window.innerWidth > 450 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
+                        handleSearch={this.handleSearch} users={users} showBoard={this.showBoard}
+                        showDashboard={this.showDashboard} toggleModal={this.toggleModal} isModalShown={this.state.isModalShown}
+                        isBoardShown={this.state.isBoardShown} />}
+                    {this.state.isBoardShown ?
+                        <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
+                            <DragDropContext
+                                onDragEnd={this.onDragEnd}>
+                                <Droppable droppableId={board._id} type="group">
+                                    {(provided, snapshot) =>
+                                        <div className={`group-list`}
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps} >
+                                            {filteredBoard.groups.map((group, index) => {
+                                                return <Group key={group.id} index={index}
+                                                    onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
+                                                    onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup}
+                                                    onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
+                                            })}
+                                            {provided.placeholder}
+                                        </div>
+                                    }
+                                </Droppable>
+                            </DragDropContext>
+                            {window.innerWidth < 450 &&
+                                <BsFillPlusCircleFill className="group-add-btn" onClick={this.onAddGroup} />
                             }
-                        </Droppable>
-                    </DragDropContext>
-                    {window.innerWidth < 450 &&
-                        <BsFillPlusCircleFill className="group-add-btn" onClick={this.onAddGroup} />
+                        </div>
+                        :
+                        <Dashboard board={board} />
                     }
                 </div>
-                :
-                <Dashboard board={board} />
-                }
-            </div> 
                 <Popup />
             </section>
         )
