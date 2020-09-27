@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, {Fragment as Fag} from 'react';
 import Chart from 'react-apexcharts';
 
 import { Navbar } from '../cmps/Navbar';
@@ -6,7 +6,6 @@ import { Boardbar } from '../cmps/Boardbar';
 import { MobileNav } from '../mobile-pages/MobileNav';
 
 export function Dashboard(props) {
-
     const { board } = props;
     const boardMembers = board.members.map(member => {
         const user = { ...member };
@@ -95,10 +94,10 @@ export function Dashboard(props) {
     ]
     return <section className="flex" ref={this.ref}>
         {window.innerWidth > 450 ?
-            <Fragment>
+            <Fag>
                 <Navbar />
                 <Boardbar />
-            </Fragment>
+            </Fag>
             : <MobileNav loggedUser={this.props.loggedUser} />
         }
         <Chart options={options} series={series} type="bar" width={'90%'} height={'90%'} />
