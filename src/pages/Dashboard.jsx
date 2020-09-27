@@ -40,7 +40,7 @@ export class _Dashboard extends Component {
             }],
             xaxis: {
                 categories: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2',
-                    '2012 Q3', '2012 Q4'
+                    '2012 Q3', '2012 Q4' 
                 ],
             },
             fill: {
