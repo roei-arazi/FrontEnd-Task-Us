@@ -92,12 +92,15 @@ class _UserProfile extends Component {
                             <h3>Email: <span className="span-user-details">{email}</span></h3>
                             <h3>Full Name: <span className="span-user-details">{fullName}</span></h3>
                             <h3>
-                                {!userCreatedBoards.length ? "No boards created." : "ok"}
-                                Boards created by this user:  {
+                                {!userCreatedBoards.length
+                                    ? "No boards created."
+                                    : "Boards created by this user:"  {
                                     userCreatedBoards.map(board => {
                                         return board.name
                                     })
                                 }
+                                }
+
                             </h3>
 
                         </div>
