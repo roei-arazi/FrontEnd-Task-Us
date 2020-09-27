@@ -11,9 +11,7 @@ class _Signup extends Component {
     state = {
         isLoading: false
     }
-    componentDidMount() {
-        // if(this.props.loggedUser)   this.props.history.push('/board/123')
-    }
+
     onSignup = async (values, { resetForm }) => {
         resetForm();
         const { username, password, email, fullName } = values;

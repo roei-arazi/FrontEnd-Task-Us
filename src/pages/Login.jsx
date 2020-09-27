@@ -10,17 +10,24 @@ import { loadBoards } from '../store/actions/boardActions'
 
 class _Login extends Component {
     state = {
-        isLoading: false
+        isLoading: false,
+        isErrLogin: false
     }
     componentDidMount() {
     }
     onLogin = async (values, { resetForm }) => {
-        resetForm();
-        await this.props.login(values);
-        this.setState({ isLoading: true })
-        await this.props.loadBoards()
-        this.setState({ isLoading: false })
-        if (this.props.loggedUser) this.props.history.push(`/board/${this.props.boards[0]._id}`)
+        try {
+            resetForm();
+            await this.props.login(values);
+            this.setState({ isLoading: true })
+            await this.props.loadBoards()
+            this.setState({ isLoading: false })
+            if (this.props.loggedUser) this.props.history.push(`/board/${this.props.boards[0]._id}`)
+        }
+        catch (err) {
+            this.setState({ isErrLogin: true })
+        }
+
     }
     onGuestLogin = async () => {
         await this.props.guestLogin();
@@ -66,6 +73,10 @@ class _Login extends Component {
                     </section>
                     <ErrorMessage name="password" component="span" />
                     <button type="submit flex">Login</button>
+                    {this.state.isErrLogin && <div className="login-err-modal">
+                        X
+                    <h2>Wrong password / username</h2>
+                    </div>}
                     <div type="button" className="facebook-btn-container">
                         <FaFacebookF />
                         <FacebookLogin

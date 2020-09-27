@@ -44,6 +44,7 @@ async function getUserById(userId) {
     }
 }
 async function login(userCred) {
+    console.log('USEr?', userCred)
     try {
         const user = await httpService.post('auth/login', userCred);
         return _handleLogin(user)
@@ -72,7 +73,7 @@ async function signup(userCred) {
 }
 async function guestLogin() {
     try {
-        const user = await login({ username: 'guest', password: '123456' });
+        const user = await login({ username: 'guest', password: '12345' });
         user.notifications = [{
             byUser: {
                 _id: '5f6c5f7e27ed4400175ce1ac',
