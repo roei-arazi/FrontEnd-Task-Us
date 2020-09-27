@@ -20,11 +20,21 @@
             }
         }
     }
+    .member-letter {
+        cursor: pointer;
+        background: #e6e6e6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: font1;
+        color: $colorBgBoardBars;
+        background-color: $pink;
+        font-weight: 700;
+    }
 
     svg {
         font-size: 25px;
         color: $colorIconsNav;
-
     }
 
     .logo-navbar {

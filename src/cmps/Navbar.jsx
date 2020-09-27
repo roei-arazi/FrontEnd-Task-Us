@@ -27,6 +27,14 @@ class _Navbar extends Component {
     goToUserProfile = (id) => {
         this.props.history.push(`/user/${id}`)
     }
+    _getMemeberInitials(member) {
+        let [firstName, lastName] = member.fullName.split(" ")
+        let firstNameChar = ''
+        let lastNameChar = ''
+        if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
+        if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
+        return [firstNameChar, lastNameChar]
+    }
     render() {
         const { isNotificationShown } = this.state
         const { loggedUser, removeNotifications } = this.props
@@ -55,7 +63,6 @@ class _Navbar extends Component {
                             isNotificationShown &&
                             <Notifications goToUserProfile={this.goToUserProfile} removeNotifications={removeNotifications} loggedUser={loggedUser} />
                         }
-
                     </li>
                 </ul>
                 <ul className="navbar-links flex column space-around">
@@ -63,10 +70,15 @@ class _Navbar extends Component {
                         <li className="icon-container"><BsCalendar /></li>
                     </NavLink>
                     <NavLink to={loggedUser ? `/user/${loggedUser._id}` : '/login'}>
-                        <li className="icon-container"> {loggedUser.imgUrl ?
-                            <img className="small-profile-img" src={loggedUser.imgUrl} alt="" />
+                        <li className="icon-container cursor-pointer"> {loggedUser.imgUrl ?
+                            loggedUser.username === 'guest' ? <FaRegUser />
+                                :
+                                <img className="small-profile-img" src={loggedUser.imgUrl} alt="" />
                             :
-                            <FaRegUser />}</li>
+                            <div className="member-letter small-profile-img">
+                                {this._getMemeberInitials(loggedUser)[0]}
+                                {this._getMemeberInitials(loggedUser)[1]}
+                            </div>}</li>
                     </NavLink>
                     <li className="icon-container" ><BiLogOut onClick={this.onLogout} /></li>
                 </ul>
