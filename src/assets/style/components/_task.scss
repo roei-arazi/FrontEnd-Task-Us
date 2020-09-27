@@ -21,14 +21,12 @@
         @media (max-width: 450px) {
             max-width: 20ch;
         }
-
     }
 
     &:hover {
         transition: .3s;
         background-color: #e8e8e8;
     }
-
 
     svg {
         font-size: 2rem;
@@ -136,8 +134,6 @@
             }
 
         }
-
-
     }
 
     .task-right {
@@ -297,7 +293,6 @@
         .label-container {
             height: 100%;
 
-
             .label-box {
                 width: 100%;
                 text-align: center;
@@ -320,7 +315,6 @@
                 }
             }
 
-
             .label-list {
                 width: 150px;
                 background-color: $white;
@@ -331,6 +325,11 @@
                 top: 20px;
                 word-break: break-all;
                 padding: 5px 5px 0 5px;
+
+                @media(max-width:450px){
+                    position: fixed;
+                    top:auto;
+                }
 
 
                 >*:hover {
@@ -374,11 +373,9 @@
             .high {
                 background-color: #e82d2d !important;
             }
-
         }
 
         .react-datepicker__input-container {
-
             input {
 
                 &:hover,
@@ -386,11 +383,7 @@
                     border: $dottedBorder;
                 }
             }
-
         }
-
-
-
     }
 }
 
