@@ -10,16 +10,16 @@ export function Priority(props) {
                 </div>
                 <Fade in={props.isPriorityShown} >
                     <div className="label-list absolute flex column align-center modal-fade-in">
-                        <section className="label-selector flex align-center justify-center low" onClick={() => props.handleChange("Low")}>
+                        <section className="label-selector flex align-center justify-center low" onClick={() => props.handleChange('Low', 'priority')}>
                             <p>Low</p>
                         </section>
-                        <section className="label-selector flex align-center justify-center medium" onClick={() => props.handleChange("Medium")}>
+                        <section className="label-selector flex align-center justify-center medium" onClick={() => props.handleChange('Medium', 'priority')}>
                             <p>Medium</p>
                         </section>
-                        <section className="label-selector flex align-center justify-center high" onClick={() => props.handleChange("High")}>
+                        <section className="label-selector flex align-center justify-center high" onClick={() => props.handleChange('High', 'priority')}>
                             <p>High</p>
                         </section>
-                        <section className="label-selector flex align-center justify-center empty-priority" onClick={() => props.handleChange("")}>
+                        <section className="label-selector flex align-center justify-center empty-priority" onClick={() => props.handleChange('', 'priority')}>
                             <p> </p>
                         </section>
                     </div>

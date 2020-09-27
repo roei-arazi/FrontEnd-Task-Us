@@ -80,7 +80,7 @@ class _UserProfile extends Component {
                 <div className="user-container relative">
                     <header className="header-container padding-x-15 padding-y-15 flex justify-center  align-center">
                         {imgUrl ? <img className="user-profile-big" src={imgUrl} alt="" /> :
-                            <div className="user-profile-big flex align-center justify-center">{initials}</div>}
+                            <div className="user-profile-big initials flex align-center justify-center">{initials}</div>}
                     </header>
                     <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">
                         {(loggedUser._id === _id && loggedUser._id !== guestId) ? <h2 onClick={this.toggleModal}

@@ -59,21 +59,13 @@ class _Task extends Component {
             this.props.onEditTask(this.state.task, this.props.task, desc)
         })
     }
-    handleChange = (data, tags) => {
-        let desc = ''
-        if (data === 'Stuck' || data === 'Working on it' || data === 'Done' || data === 'empty') {
-            this.setState({ task: { ...this.state.task, status: data } }, () => {
-                desc = `${this.props.loggedUser.fullName} changed task: ${this.state.task.name} status from ${this.props.task.status} to ${this.state.task.status} at group - ${this.props.group.name}`
-                this.props.onEditTask(this.state.task, this.props.task, desc)
-                if (!this.state.isUpdatesShown) this.closeModal()
-            })
-        } else {
-            this.setState({ task: { ...this.state.task, priority: data } }, () => {
-                desc = `${this.props.loggedUser.fullName} changed task: ${this.state.task.name} priority from ${this.props.task.priority} to ${this.state.task.priority} at group - ${this.props.group.name}`
-                this.props.onEditTask(this.state.task, this.props.task, desc)
-                this.closeModal()
-            })
-        }
+    handleChange = (data, property) => {
+        let desc = '';
+        this.setState({ task: { ...this.state.task, [property]: data } }, () => {
+            desc = `${this.props.loggedUser.fullName} changed task: ${this.state.task.name} ${property} from ${this.props.task[property]} to ${this.state.task[property]} at group - ${this.props.group.name}`
+            this.props.onEditTask(this.state.task, this.props.task, desc)
+            if (!this.state.isUpdatesShown) this.closeModal()
+        })
     }
     sendNote = (newUpdates) => {
         let desc = ''
