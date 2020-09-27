@@ -16,7 +16,8 @@ export class _BoardHeader extends React.Component {
         isActivitiesOpen: false,
         isFiltersOpen: false,
         isUsersOpen: false,
-        elSetting: null
+        elSetting: null,
+        isModalShown:false
     }
     componentDidMount() {
         this.editableName = React.createRef();
@@ -109,6 +110,9 @@ export class _BoardHeader extends React.Component {
         if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
         if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
         return [firstNameChar, lastNameChar]
+    }
+    openModal=()=>{
+        this.setState({isModalShown: !this.state.isModalShown})
     }
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
@@ -247,6 +251,13 @@ export class _BoardHeader extends React.Component {
                             {boardCreator.fullName}
                             </NavLink>
                             </p>
+                    </div>
+                    <div className="relative">
+                    <button onClick={this.openModal}>Table</button>
+                            <div className={`options-modal absolute ${!this.state.isModalShown && 'hidden'}`}>
+                                <p onClick={this.props.showBoard}>Board</p>
+                                <p onClick={this.props.showDashboard}>Dashboard</p>
+                            </div>
                     </div>
                     <div className="header-options flex">
                         <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
