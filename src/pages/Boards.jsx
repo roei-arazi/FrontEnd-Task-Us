@@ -29,6 +29,14 @@ class _Boards extends Component {
     onAddBoard = () => {
         this.props.addBoard(this.props.loggedUser)
     }
+    _getMemeberInitials(member) {
+        let [firstName, lastName] = member.fullName.split(" ")
+        let firstNameChar = ''
+        let lastNameChar = ''
+        if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
+        if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
+        return [firstNameChar, lastNameChar]
+    }
     render() {
         if (this.props.boards.length === 0) return <h1>Loading...</h1>
         return (
@@ -39,8 +47,16 @@ class _Boards extends Component {
                         <div key={board._id} className="board-details flex column" onClick={() => this.goToBoard(board._id)}>
                             <div className="board-details-header flex  space-between">
                                 <h2>{board.name}</h2>
-                                <div className="board-members-imgs">
-                                    {board.members.map(member => <img className="member-img" key={member._id} src={member.imgUrl} alt="" />)}
+                                <div className="board-members-imgs flex">
+                                    {board.members.map(member =>
+                                        member.imgUrl ?
+                                            <img className="member-img" key={member._id} src={member.imgUrl} alt="" />
+                                            :
+                                            <div key={member._id} className="member-letter member-img">
+                                                {this._getMemeberInitials(member)[0]}
+                                                {this._getMemeberInitials(member)[1]}
+                                            </div>
+                                    )}
                                 </div>
                             </div>
                             <div className="board-details-main flex column wrap">

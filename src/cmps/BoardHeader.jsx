@@ -5,6 +5,7 @@ import ContentEditable from 'react-contenteditable';
 import { NavLink, withRouter } from 'react-router-dom';
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
+import { IoMdArrowDropdown } from 'react-icons/io';
 // inside imports
 import Activities from './Activities';
 import { Filter } from './Filter';
@@ -16,7 +17,8 @@ export class _BoardHeader extends React.Component {
         isActivitiesOpen: false,
         isFiltersOpen: false,
         isUsersOpen: false,
-        elSetting: null
+        elSetting: null,
+        isModalShown: false
     }
     componentDidMount() {
         this.editableName = React.createRef();
@@ -110,6 +112,7 @@ export class _BoardHeader extends React.Component {
         if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
         return [firstNameChar, lastNameChar]
     }
+
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members, boardCreator } = this.state.board
@@ -219,37 +222,47 @@ export class _BoardHeader extends React.Component {
                 </div>
                 <div className="board-header-footer flex align-center space-between">
                     <div className="board-header-footer-left flex column space-between">
-                    <h3>
-                        <ContentEditable
-                            onFocus={this.focusText}
-                            className="content-editable cursor-initial"
-                            innerRef={this.editableDescription}
-                            html={this.state.board.desc} // innerHTML of the editable div
-                            disabled={false}        // use true to disable editing
-                            onChange={this.handleChangeDesc} // handle innerHTML change
-                            onBlur={() => {
-                                const desc = `${loggedUser.fullName} Changed ${this.state.board.name} description to ${this.state.board.desc}`
-                                const board = {
-                                    ...this.props.board,
-                                    desc: this.state.board.desc
-                                }
-                                this.props.onEditBoard(board, desc)
-                            }}
-                            onKeyDown={(ev) => {
-                                if (ev.key === 'Enter') {
-                                    ev.target.blur()
-                                }
-                            }}
-                        />
-                    </h3>
-                        <p className="created-by">Created By:  
+                        <h3>
+                            <ContentEditable
+                                onFocus={this.focusText}
+                                className="content-editable cursor-initial"
+                                innerRef={this.editableDescription}
+                                html={this.state.board.desc} // innerHTML of the editable div
+                                disabled={false}        // use true to disable editing
+                                onChange={this.handleChangeDesc} // handle innerHTML change
+                                onBlur={() => {
+                                    const desc = `${loggedUser.fullName} Changed ${this.state.board.name} description to ${this.state.board.desc}`
+                                    const board = {
+                                        ...this.props.board,
+                                        desc: this.state.board.desc
+                                    }
+                                    this.props.onEditBoard(board, desc)
+                                }}
+                                onKeyDown={(ev) => {
+                                    if (ev.key === 'Enter') {
+                                        ev.target.blur()
+                                    }
+                                }}
+                            />
+                        </h3>
+                        <p className="created-by">Created By:
                             <NavLink to={`/user/${boardCreator._id}`}>
-                            {boardCreator.fullName}
+                                {boardCreator.fullName}
                             </NavLink>
-                            </p>
+                        </p>
                     </div>
                     <div className="header-options flex">
                         <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
+                    <div className="relative">
+                        {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
+                        <button className="flex align-center" onClick={this.props.toggleModal}>
+                            <p>{this.props.isBoardShown ? 'Board' : 'Dashboard'}</p> <IoMdArrowDropdown />
+                            </button>
+                        <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
+                            <p onClick={this.props.showBoard}>Board</p>
+                            <p onClick={this.props.showDashboard}>Dashboard</p>
+                        </div>
+                    </div>
                         <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
                             <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />
                             <GoSearch />

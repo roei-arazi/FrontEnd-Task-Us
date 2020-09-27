@@ -1,6 +1,6 @@
-import React, { Component, Framgnet } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Fade, Tooltip } from '@material-ui/core';
+import { Fade } from '@material-ui/core';
 // Inside imports
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
@@ -61,7 +61,7 @@ class _UserProfile extends Component {
     }
 
     render() {
-        let { email, fullName, username, imgUrl, _id } = this.state.user;
+        let { email, fullName, imgUrl, _id } = this.state.user;
         if (!_id) {
             return (
                 <div className="loader-container flex justify-center align-center">
@@ -122,7 +122,6 @@ class _UserProfile extends Component {
                                             })
                                         }
                                         </h3>
-
                                 }
                             </div>
                             <div className="col-right">

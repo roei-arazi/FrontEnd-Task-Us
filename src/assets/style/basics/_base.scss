@@ -118,6 +118,28 @@ span.span-user-details {
   border: 2px solid #e5f4ff;
 }
 
+.member-letter{
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: font1;
+  font-weight: 700;
+  font-size: 12px;
+  width: 30px;
+  height: 30px;
+  color: $colorBgBoardBars;
+  background-color: $pink;
+}        
+
+>:not(:first-child).user-img-container {
+    margin-left: -15px;
+}
+
+.hidden{
+  display:none;
+}
+
 .content-editable {
   padding: 0 4px;
   border: 2px dotted transparent;
