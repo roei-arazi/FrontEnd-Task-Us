@@ -61,7 +61,10 @@ class _Navbar extends Component {
                         <li className="icon-container"><BsCalendar /></li>
                     </NavLink>
                     <NavLink to={loggedUser ? `/user/${loggedUser._id}` : '/login'}>
-                        <li className="icon-container"> {loggedUser.imgUrl ? <img class="small-profile-img" src={loggedUser.imgUrl} alt="" /> : <FaRegUser />}</li>
+                        <li className="icon-container"> {loggedUser.imgUrl ?
+                            <img className="small-profile-img" src={loggedUser.imgUrl} alt="" />
+                            :
+                            <FaRegUser />}</li>
                     </NavLink>
                     <li className="icon-container" ><BiLogOut onClick={this.onLogout} /></li>
                 </ul>

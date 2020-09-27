@@ -13,14 +13,43 @@
     transition: width .3s;
 
     &.board-bar-shown {
-        width: 180px;
-        padding: 15px 10px;
+        width: 320px;
+        padding: 15px 0;
         overflow: visible;
+    }
+  
+    .boardbar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 15px;
+        margin-top: 35px;
+        padding: 0 15px;
+
+        button {
+            display: flex;
+            padding: 5px;
+            height: fit-content;
+            border-radius: 50%;
+        }
+
+        svg {
+            margin-left: 5px;
+            color: $buttonMainBg;
+            font-size: 2rem;
+
+            &:hover {
+                transition: .3s;
+                color: $buttonMainHover;
+            }
+        }
     }
 
     ul {
         overflow-y: overlay;
         overflow-x: hidden;
+        width:100%;
 
         li {
             border-radius: 5px;
@@ -92,33 +121,6 @@
         }
     }
 
-    .boardbar-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 15px;
-        margin-top: 35px;
-
-        button {
-            display: flex;
-            padding: 5px;
-            height: fit-content;
-            border-radius: 50%;
-        }
-
-        svg {
-            margin-left: 5px;
-            margin-right: 10px;
-            color: $buttonMainBg;
-            font-size: 1.5rem;
-
-            &:hover {
-                transition: .3s;
-                color: $buttonMainHover;
-            }
-        }
-    }
 
     li {
         margin-bottom: 10px;
