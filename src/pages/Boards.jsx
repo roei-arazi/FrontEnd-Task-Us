@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BsFillPlusCircleFill, } from 'react-icons/bs';
-
-
+// inside imports
 import { loadUsers } from '../store/actions/userActions';
 import { addBoard, loadBoards } from '../store/actions/boardActions.js';
 import { MobileNav } from '../mobile-pages/MobileNav';
 
 class _Boards extends Component {
-
-
     async componentDidMount() {
         try {
             if (!this.props.boards || !this.props.boards.length) {
@@ -26,16 +23,12 @@ class _Boards extends Component {
             console.log('Error', err)
         }
     }
-
     goToBoard = (boardId) => {
         this.props.history.push(`/board/${boardId}`)
     }
-
-
     onAddBoard = () => {
         this.props.addBoard(this.props.loggedUser)
     }
-
     render() {
         if (this.props.boards.length === 0) return <h1>Loading...</h1>
         return (
@@ -61,7 +54,6 @@ class _Boards extends Component {
         )
     }
 }
-
 const mapStateToProps = state => {
     return {
         boards: state.boardReducer.boards,
@@ -69,11 +61,9 @@ const mapStateToProps = state => {
         loggedUser: state.userReducer.loggedUser
     }
 }
-
 const mapDispatchToProps = {
     loadBoards,
     addBoard,
     loadUsers
 }
-
 export const Boards = connect(mapStateToProps, mapDispatchToProps)(_Boards);

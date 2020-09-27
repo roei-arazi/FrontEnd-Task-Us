@@ -1,7 +1,7 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Fade } from '@material-ui/core';
+// Inside imports
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
 import { loadBoards } from '../store/actions/boardActions';
@@ -22,48 +22,38 @@ class _UserProfile extends Component {
             imgUrl: '',
         }
     }
-
     async componentDidMount() {
         this.props.loadBoards();
-        setTimeout(async () => { //for loading extravaganza
+        setTimeout(async () => {
             const user = await userService.getUserById(this.props.match.params.id)
             this.setState({ user: { ...user } })
         }, 2000);
     }
-
     async componentDidUpdate(prevProps) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
             this.setState({ user: {} }, () => {
-                setTimeout(async () => { //for loading extravaganza
+                setTimeout(async () => {
                     const user = await userService.getUserById(this.props.match.params.id)
                     this.setState({ user: { ...user } })
-
                 }, 2000)
             });
         }
     }
-
-
     toggleModal = () => {
         this.setState({ isModalOpen: !this.state.isModalOpen })
     }
-
     handleChange = ({ target }) => {
         this.setState({ user: { ...this.state.user, [target.name]: target.value } })
     }
-
     updateProfile = (ev) => {
         ev.preventDefault()
         this.props.updateUser(this.state.user)
         this.toggleModal()
     }
-
-
     uploadImg = async (ev) => {
         const res = await cloudinaryService.uploadImg(ev.target.files[0])
         this.setState({ user: { ...this.state.user, imgUrl: res.url } })
     }
-
     render() {
         let { email, fullName, username, imgUrl, _id } = this.state.user;
         if (!_id) {
@@ -79,7 +69,6 @@ class _UserProfile extends Component {
         const guestId = '5f6efc73805dbf6054d58794';
         const { loggedUser } = this.props
         return (
-
             <section className={`user-profile flex ${window.innerWidth < 450 && 'column'}`}>
                 {window.innerWidth > 450 ?
                     <React.Fragment>
@@ -93,7 +82,6 @@ class _UserProfile extends Component {
                         {imgUrl ? <img className="user-profile-big" src={imgUrl} alt="" /> :
                             <div className="user-profile-big flex align-center justify-center">{initials}</div>}
                     </header>
-
                     <div className="user-details-container padding-x-30 padding-y-45 align-center  flex column">
                         {(loggedUser._id === _id && loggedUser._id !== guestId) ? <h2 onClick={this.toggleModal}
                             className="clickable-header">Edit Profile</h2> : ''}
@@ -104,20 +92,15 @@ class _UserProfile extends Component {
                             <h3>Username: <span className="span-user-details">{username}</span> </h3>
                         </div>
                     </div>
-                    {/* Modal */}
                     <Fade in={this.state.isModalOpen}>
                         <div className="modal-screen flex justify-center align-center">
                             <div className="modal-container absolute">
-
                                 <div className="user-modal-header padding-x-15 padding-y-15 flex justify-center align-center">
-
-
                                     <label> {this.state.user.imgUrl ?
                                         <img className="user-profile-big" src={this.state.user.imgUrl} alt="profile-img" />
                                         : <div>{this.props.loggedUser.fullName}</div>}
                                         <input type="file" onChange={this.uploadImg} hidden />
                                     </label>
-
                                 </div>
                                 <div className="user-modal-main">
                                     <form className="form-container flex justify-center column  align-center" onSubmit={this.updateProfile}>
@@ -132,14 +115,11 @@ class _UserProfile extends Component {
                             </div>
                         </div>
                     </Fade>
-
-
                 </div>
             </section>
         )
     }
 }
-
 const mapStateToProps = state => {
     return {
         modal: state.systemReducer.modal,
@@ -147,10 +127,8 @@ const mapStateToProps = state => {
         boards: state.boardReducer.boards
     }
 }
-
 const mapDispatchToProps = {
     loadBoards,
     updateUser
 }
-
 export const UserProfile = connect(mapStateToProps, mapDispatchToProps)(_UserProfile);

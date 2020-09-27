@@ -1,5 +1,5 @@
-import { Fade } from '@material-ui/core'
 import React from 'react'
+import { Fade } from '@material-ui/core'
 
 export function Priority(props) {
     return (
@@ -19,9 +19,11 @@ export function Priority(props) {
                         <section className="label-selector flex align-center justify-center high" onClick={() => props.handleChange("High")}>
                             <p>High</p>
                         </section>
+                        <section className="label-selector flex align-center justify-center empty-priority" onClick={() => props.handleChange("")}>
+                            <p> </p>
+                        </section>
                     </div>
                 </Fade>
-
             </div>
         </div>
     )

@@ -4,23 +4,16 @@ import { FiMinus } from 'react-icons/fi'
 import { FiPlus } from 'react-icons/fi';
 
 export function Members(props) {
-
-
     function _getMemeberInitials(member) {
         let [firstName, lastName] = member.fullName.split(" ")
         let firstNameChar = ''
         let lastNameChar = ''
-
         if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
         if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
         return [firstNameChar, lastNameChar]
-
-
     }
-
     const usersToAdd = props.users.filter(user => !props.members.some(member => member._id === user._id))
     return (
-
         <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
             {props.members.length ? <div className="member-img-container flex relative ">
                 {props.members.map(member => member.imgUrl ?
@@ -30,8 +23,6 @@ export function Members(props) {
                         {_getMemeberInitials(member)[0]}
                         {_getMemeberInitials(member)[1]}
                     </div>
-
-
                 )
                 }
                 <FiPlus className="no-members-icon-plus absolute" />
@@ -41,7 +32,6 @@ export function Members(props) {
                     <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="" className="no-members-icon" />
                     <FiPlus className="no-members-icon-plus" />
                 </div>}
-
             <Fade in={props.isUsersShown} >
                 <div className="users-modal modal-fade-in absolute">
                     <div className="task-users-box">
@@ -55,7 +45,6 @@ export function Members(props) {
                                 <FiMinus onClick={() => props.onRemoveMemberFromTask(member._id)} />
                             </section>
                         )}
-
                     </div>
                     <div className="board-users-box">
                         <h3>Board Members</h3>
@@ -73,10 +62,8 @@ export function Members(props) {
                             </section>
                         })}
                     </div>
-
                 </div>
             </Fade>
-
         </div>
     )
 }

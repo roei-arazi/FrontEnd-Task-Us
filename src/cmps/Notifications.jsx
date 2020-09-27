@@ -4,11 +4,9 @@ import { Fade } from '@material-ui/core';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 export class Notifications extends Component {
-
     state = {
         isModalOpen: null
     }
-
     componentDidMount() {
         this.setState({ isModalOpen: true })
     }
@@ -16,22 +14,17 @@ export class Notifications extends Component {
         this.props.removeNotifications(this.props.loggedUser)
         this.setState({ isModalOpen: true })
     }
-
     _getMemeberInitials(member) {
         let [firstName, lastName] = member.fullName.split(" ")
         let firstNameChar = ''
         let lastNameChar = ''
-
         if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
         if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
         return [firstNameChar, lastNameChar]
     }
-
-
     render() {
         const { loggedUser } = this.props;
         return (
-
             <Fade in={this.state.isModalOpen}>
                 <section className="notifications padding-x-15 padding-y-15">
                     <header className="flex space-between align-center">
@@ -74,11 +67,8 @@ export class Notifications extends Component {
                                             </div>
                                         </div>
                                     )
-
                                 })
                             )
-
-
                         }
                     </div>
                 </section>

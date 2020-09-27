@@ -2,16 +2,15 @@ import React from 'react';
 import { GoSearch } from 'react-icons/go'
 import { VscListFilter } from 'react-icons/vsc'
 import ContentEditable from 'react-contenteditable';
-import Activities from './Activities';
-import { Filter } from './Filter';
 import { withRouter } from 'react-router-dom';
-import socketService from '../services/socketService.js'
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
-
+// inside imports
+import Activities from './Activities';
+import { Filter } from './Filter';
+import socketService from '../services/socketService.js'
 
 export class _BoardHeader extends React.Component {
-
     state = {
         _id: '',
         isActivitiesOpen: false,
@@ -19,18 +18,15 @@ export class _BoardHeader extends React.Component {
         isUsersOpen: false,
         elSetting: null
     }
-
     componentDidMount() {
         this.editableName = React.createRef();
         this.editableDescription = React.createRef();
         this.searchInput = React.createRef();
-
         socketService.on('updatedBoard', () => {
             this.setState({ board: this.props.board })
         })
         this.setState({ board: this.props.board, _id: this.props.board._id })
     }
-
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.board._id !== this.props.board._id) {
             this.setState({ board: this.props.board })
@@ -46,7 +42,6 @@ export class _BoardHeader extends React.Component {
     handleChangeDesc = (ev) => {
         this.setState({ board: { ...this.state.board, desc: ev.target.value } })
     }
-
     focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
@@ -54,7 +49,7 @@ export class _BoardHeader extends React.Component {
     }
     onToggleActivities = () => {
         let board = this.props.board;
-        const{_id} = this.props.loggedUser;
+        const { _id } = this.props.loggedUser;
 
         if (this.state.isActivitiesOpen) {
             board = {
@@ -64,30 +59,22 @@ export class _BoardHeader extends React.Component {
                     return activity
                 })
             }
-
         }
-
         this.props.onEditBoard(board)
         this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
-
     }
-
     onToggleFilters = () => {
         this.setState({ isFiltersOpen: !this.state.isFiltersOpen })
     }
-
     handleMenuOpen = (ev, boardId) => {
         this.setState({ elSetting: ev.currentTarget })
     }
-
     handleMenuClose = () => {
         this.setState({ elSetting: null })
     }
-
     onToggleUsers = () => {
         this.setState({ isUsersOpen: !this.state.isUsersOpen })
     }
-
     onRemoveMemberFromBoard = (memberId) => {
         const user = this.state.board.members.find(member => member._id === memberId)
         const desc = `${this.props.loggedUser.fullName} removed ${user.fullName} from ${this.state.board.name}`
@@ -114,20 +101,15 @@ export class _BoardHeader extends React.Component {
         this.setState({ board }, () => {
             this.props.onEditBoard(board)
         })
-
-
     }
-
     _getMemeberInitials(member) {
         let [firstName, lastName] = member.fullName.split(" ")
         let firstNameChar = ''
         let lastNameChar = ''
-
         if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
         if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
         return [firstNameChar, lastNameChar]
     }
-
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members } = this.state.board
@@ -136,8 +118,6 @@ export class _BoardHeader extends React.Component {
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
         const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity[loggedUser._id])
         const activitiesRead = this.props.board.activityLog.filter(activity => activity[loggedUser._id])
-
-
         return (
             <section className="board-header flex column padding-x-30">
                 <div className="board-header-header flex space-between grow align-center">
@@ -155,7 +135,6 @@ export class _BoardHeader extends React.Component {
                                     ...this.props.board,
                                     name: this.state.board.name
                                 }
-
                                 this.props.onEditBoard(board, desc)
                             }}
                             onKeyDown={(ev) => {
@@ -180,7 +159,6 @@ export class _BoardHeader extends React.Component {
                                                 {this._getMemeberInitials(member)[0]}
                                                 {this._getMemeberInitials(member)[1]}
                                             </div>
-
                                     }
                                 </div>
                             })}
@@ -207,7 +185,6 @@ export class _BoardHeader extends React.Component {
                                             }
                                         </section>
                                     )}
-
                                 </div>
                                 <div className="site-users-box">
                                     <h3>Site Users</h3>
@@ -231,7 +208,6 @@ export class _BoardHeader extends React.Component {
                                         </section>
                                     })}
                                 </div>
-
                             </div>}
                         <div onClick={this.onToggleActivities} className="activities-outer-container flex align-center  cursor-pointer">
                             <h2>
@@ -242,7 +218,6 @@ export class _BoardHeader extends React.Component {
                             </h2>
                         </div>
                     </div>
-
                 </div>
                 <div className="board-header-footer flex align-center space-between">
                     <h3>
@@ -255,12 +230,10 @@ export class _BoardHeader extends React.Component {
                             onChange={this.handleChangeDesc} // handle innerHTML change
                             onBlur={() => {
                                 const desc = `${loggedUser.fullName} Changed ${this.state.board.name} description to ${this.state.board.desc}`
-
                                 const board = {
                                     ...this.props.board,
                                     desc: this.state.board.desc
                                 }
-
                                 this.props.onEditBoard(board, desc)
                             }}
                             onKeyDown={(ev) => {
@@ -277,17 +250,12 @@ export class _BoardHeader extends React.Component {
                             <GoSearch />
                         </div>
                         <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}
-
                             className="filters-outer-container relative flex align-center cursor-pointer"  >
                             {isFiltering && <div className="filter-active-indicator"></div>}
                             <VscListFilter className={isFiltering ? 'filter-active' : ''} />
                             <h2 className={isFiltering ? 'filter-active' : ''}>Filter</h2>
-
                             <Filter isFiltersOpen={this.state.isFiltersOpen} board={this.props.board} />
                         </div>
-
-
-
                     </div>
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
                         <Activities loggedUser={loggedUser} onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
@@ -304,13 +272,8 @@ export class _BoardHeader extends React.Component {
                         this.state.isUsersOpen && <div onClick={this.onToggleUsers} className='modal-screen-wrapper'></div>
                     }
                 </div>
-
-
             </section>
         )
     }
-
 }
-
-
 export const BoardHeader = withRouter(_BoardHeader)
