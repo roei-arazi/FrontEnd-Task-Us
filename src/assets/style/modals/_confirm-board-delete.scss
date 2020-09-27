@@ -4,5 +4,27 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
+    height: 250px;
+    width: 450px;
     background-color: $colorBgBoardBars;
+    // text-align: center;
+    border-radius: 10px;
+    section{
+        flex-direction: row-reverse;
+    }
+    p{
+        color: $mainLightGrey;
+    }
+    button{
+        border-radius: 5px;
+        margin-left: 20px;
+        font-size: 1.2rem;
+    }
+    .delete-button{
+        background-color: #dd4444;
+    }
+}
+
+.boardbar .modal-screen-wrapper{
+    background-color: rgba(50,50,50,0.5);
 }

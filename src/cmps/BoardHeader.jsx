@@ -5,7 +5,7 @@ import ContentEditable from 'react-contenteditable';
 import { NavLink, withRouter } from 'react-router-dom';
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
-import { ImMenu3 } from 'react-icons/im'
+import { IoMdArrowDropdown } from 'react-icons/io';
 // inside imports
 import Activities from './Activities';
 import { Filter } from './Filter';
@@ -251,18 +251,18 @@ export class _BoardHeader extends React.Component {
                             </NavLink>
                         </p>
                     </div>
+                    <div className="header-options flex">
+                        <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
                     <div className="relative">
                         {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
                         <button className="flex align-center" onClick={this.props.toggleModal}>
-                            <p>Table</p> <ImMenu3 />
+                            <p>{this.props.isBoardShown ? 'Board' : 'Dashboard'}</p> <IoMdArrowDropdown />
                             </button>
                         <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
                             <p onClick={this.props.showBoard}>Board</p>
                             <p onClick={this.props.showDashboard}>Dashboard</p>
                         </div>
                     </div>
-                    <div className="header-options flex">
-                        <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
                         <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
                             <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />
                             <GoSearch />

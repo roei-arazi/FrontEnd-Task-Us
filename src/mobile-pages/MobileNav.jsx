@@ -18,6 +18,14 @@ export class MobileNav extends React.Component {
     closeMenuModal = () => {
         this.setState({ isMenuShown: false })
     }
+    _getMemeberInitials(member) {
+        let [firstName, lastName] = member.fullName.split(" ")
+        let firstNameChar = ''
+        let lastNameChar = ''
+        if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
+        if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
+        return [firstNameChar, lastNameChar]
+    }
     render() {
         const { loggedUser, params, members, boardName } = this.props
         return (
@@ -36,8 +44,10 @@ export class MobileNav extends React.Component {
                                     {
                                         member.imgUrl ? <img className="member-img" src={member.imgUrl} alt="" />
                                             :
-                                            <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="" />
-                                    }
+                                            <div className="member-letter">
+                                            {this._getMemeberInitials(member)[0]}
+                                            {this._getMemeberInitials(member)[1]}
+                                        </div>                                    }
                                 </div>
                             })}
                         </div>

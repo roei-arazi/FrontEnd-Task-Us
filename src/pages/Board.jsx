@@ -291,7 +291,8 @@ class _Board extends Component {
                 <div className="board-container">
                 {window.innerWidth > 450 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                     handleSearch={this.handleSearch} users={users} showBoard={this.showBoard} 
-                    showDashboard={this.showDashboard} toggleModal={this.toggleModal} isModalShown={this.state.isModalShown} />}
+                    showDashboard={this.showDashboard} toggleModal={this.toggleModal} isModalShown={this.state.isModalShown}
+                    isBoardShown={this.state.isBoardShown} />}
                     {this.state.isBoardShown ? 
                 <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
                     <DragDropContext

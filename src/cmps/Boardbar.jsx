@@ -55,20 +55,21 @@ class _Boardbar extends Component {
         userService.notifyUsers(notif, 'add', loggedUser)
         socketService.emit('add-delete-board')
     }
-    onBoardRemove = async (boardId) => {
-        const { boards, match, history, removeBoard, loggedUser } = this.props
-        const board = boards.find(board => board._id === boardId);
+    onBoardRemove = async () => {
+        const { boards, match, history, removeBoard, loggedUser } = this.props;
+        const {selectedBoardId} = this.state;
+        const board = boards.find(board => board._id === selectedBoardId);
         const notif = `${loggedUser.fullName} deleted ${board.name}`;
         userService.notifyUsers(notif, board.members, loggedUser)
         const { id } = match.params;
         if (boards.length === 1) {
             return;
         }
-        await removeBoard(boardId);
+        await removeBoard(selectedBoardId);
         socketService.emit('add-delete-board')
         this.displayPopup('Removed board.');
-        if (id === boardId) {
-            const idx = boards.findIndex(board => board._id !== boardId)
+        if (id === selectedBoardId) {
+            const idx = boards.findIndex(board => board._id !== selectedBoardId)
             history.push(`/board/${boards[idx]._id}`)
         }
     }
@@ -81,7 +82,7 @@ class _Boardbar extends Component {
         this.setState({ isShown: !this.state.isShown })
     }
 
-    onToggleModal(){
+    onToggleModal = () => {
         this.setState({isModalShown: !this.state.isModalShown})
     }
 
@@ -129,11 +130,12 @@ class _Boardbar extends Component {
                     })}
                 </ul>
                 {isModalShown && <div className="modal-screen-wrapper" onClick={this.onToggleModal}>
-                    <div className="confirm-board-delete">
-                        <h2>Are you sure you want to delete {selectedBoardName}</h2>
-                        <section>
-                            <button className="delete-button" onClick={this.onBoardRemove}>Delete</button>
+                    <div className="confirm-board-delete flex column space-between">
+                        <h1>Are you sure you want to delete {selectedBoardName}?</h1>
+                        <p>You can't take this back</p>
+                        <section className="flex">
                             <button className="cancel-button" onClick={this.onToggleModal}>Cancel</button>
+                            <button className="delete-button" onClick={this.onBoardRemove}>Delete</button>
                         </section>
                     </div>
                 </div>}

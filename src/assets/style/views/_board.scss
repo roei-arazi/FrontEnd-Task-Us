@@ -10,11 +10,14 @@
             height: 81.5vh;
             overflow-y: overlay;
             background-color: $colorBgBoardBars;
+
+            @media(max-width: 450px){
+                overflow-x: hidden;
+            }
         }
     }
 
     @media (max-width:450px) {
-
         .group-add-btn {
             position: fixed;
             bottom: 10px;
