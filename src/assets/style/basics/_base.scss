@@ -111,6 +111,13 @@ span.span-user-details {
   align-items: center;
 }
 
+.small-profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #e5f4ff;
+}
+
 .content-editable {
   padding: 0 4px;
   border: 2px dotted transparent;
