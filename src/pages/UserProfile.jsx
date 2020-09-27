@@ -148,7 +148,8 @@ class _UserProfile extends Component {
                                     <form className="form-container flex justify-center column  align-center" onSubmit={this.updateProfile}>
                                         <input value={this.state.user.email} autoComplete="current-email" onChange={this.handleChange} name="email" placeholder="Email" type="email" />
                                         <input value={this.state.user.username} autoComplete="current-username" onChange={this.handleChange} name="username" placeholder="Username" type="text" />
-                                        <input value={this.state.user.password} autoComplete="current-password" onChange={this.handleChange} name="password" placeholder="Password" type="password" />
+                                        <input autoComplete="current-password" name="password" placeholder="Old password" type="password" />
+                                        <input autoComplete="current-password" onChange={this.handleChange} name="password" placeholder="New Password" type="password" />
                                         <input value={this.state.user.fullName} autoComplete="current-fullname" onChange={this.handleChange} name="fullName" placeholder="Full Name" type="text" />
                                         <button onClick={this.updateProfile}>Save Changes</button>
                                         <button type="button" className="secondary-btn" onClick={this.toggleModal}>Cancel</button>
