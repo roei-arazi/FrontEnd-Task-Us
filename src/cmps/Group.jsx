@@ -78,7 +78,7 @@ export class Group extends Component {
             if(value && value !== 'empty') acc[value] = acc[value] ? ++acc[value] : 1; 
             return acc;
         }, {});
-        const res = [];
+        const res = []; 
         for (let key in data) {
             data[key] /= percent;
             res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0' }}
