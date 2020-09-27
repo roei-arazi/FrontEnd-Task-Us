@@ -31,6 +31,9 @@ class _Login extends Component {
     }
     onGuestLogin = async () => {
         await this.props.guestLogin();
+        this.setState({ isLoading: true })
+        await this.props.loadBoards()
+        this.setState({ isLoading: false })
         this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
     responseFacebook = async (response) => {

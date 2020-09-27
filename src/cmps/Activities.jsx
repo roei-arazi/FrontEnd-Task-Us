@@ -139,7 +139,7 @@ class _Activities extends Component {
                                                 {moment(activity.createdAt).format("DD MMM")}
                                             </p>
                                         </div>
-                                        {activity.byUser.imgUrl ? <img onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" /> :
+                                        {activity.byUser.imgUrl ? <img className="cursor-pointer" onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" /> :
                                             <div onClick={() => this.moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
                                         <h2 onClick={() => this.moveToProfile(activity.byUser._id)}>{activity.byUser.fullName}</h2>
                                     </div>
@@ -171,7 +171,7 @@ class _Activities extends Component {
                                                     {moment(activity.createdAt).format("DD MMM")}
                                                 </p>
                                             </div>
-                                            {activity.byUser.imgUrl ? <img onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" /> :
+                                            {activity.byUser.imgUrl ? <img className="cursor-pointer" onClick={() => this.moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" /> :
                                                 <div onClick={() => this.moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{this.getInitials(activity.byUser.fullName)}</div>}
                                             <h2 onClick={() => this.moveToProfile(activity.byUser._id)}>{activity.byUser.fullName}</h2>
                                         </div>
