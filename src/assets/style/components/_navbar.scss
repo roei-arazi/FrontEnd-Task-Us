@@ -53,19 +53,19 @@
 
     .notifications-counter {
         position: absolute;
-        right: 10px;
-        top: 4px;
+        right: 5px;
+        top: 2px;
         font-size: 14px;
         color: #e8e9ee;
-        background: #f13838;
+        background: $pink;
         justify-content: center;
         display: flex;
         align-items: center;
         border-radius: 50%;
         font-weight: 700;
         line-height: initial;
-        padding: 1px;
-        min-width: 19px;
-        min-height: 19px;
+        padding: 0px;
+        min-width: 22px;
+        min-height: 22px;
     }
 }

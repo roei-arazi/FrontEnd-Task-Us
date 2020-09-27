@@ -5,7 +5,6 @@ import { BsFillPlusCircleFill, } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md'
 import { AiOutlineRight } from 'react-icons/ai';
 // inside imports
-import { Dashboard } from './Dashboard'
 import { updateUser } from '../store/actions/userActions.js';
 import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 import socketService from '../services/socketService';
@@ -47,6 +46,10 @@ class _Boardbar extends Component {
     onMoveToBoard(id) {
         this.props.history.push(`/board/${id}`)
     }
+    onMoveToDashboard = (ev) => {
+        this.props.history.push(`/dashboard`)
+
+    }
     onAddBoard = async () => {
         const { loggedUser } = this.props;
         await this.props.addBoard(this.props.loggedUser)
@@ -75,9 +78,11 @@ class _Boardbar extends Component {
         this.props.toggleBoardbar()
         this.setState({ isShown: !this.state.isShown })
     }
-    handleSearchChange = (ev) => {
-        this.setState({ searchVal: ev.target.value })
+    onToggleShown = () => {
+        this.props.toggleBoardbar()
+        this.setState({ isShown: !this.state.isShown })
     }
+
     handleSearch = () => {
         const filteredBoards =
             this.props.boards.filter(board => board.name.toLowerCase().includes(this.state.searchVal.toLowerCase()))
@@ -95,6 +100,7 @@ class _Boardbar extends Component {
                 </div>
                 {isShown && <div className="boardbar-header">
                     <h1>Boards</h1>
+                    <button onClick={this.onMoveToDashboard}>DASHBOARD WIP</button>
                     <BsFillPlusCircleFill onClick={this.onAddBoard} />
                 </div>}
                 {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}
@@ -119,7 +125,7 @@ class _Boardbar extends Component {
                         </li>
                     })}
                 </ul>
-                <Dashboard />
+
             </section>
         )
     }
