@@ -125,4 +125,21 @@
             cursor: pointer;
         }
     }
+
+    @media (max-width:450px) {
+
+        .filter-outer-container {
+
+            >button {
+                padding: 4px;
+                font-size: 0.8em;
+
+                &:first-of-type {
+                    margin-right: 6px;
+                }
+
+
+            }
+        }
+    }
 }

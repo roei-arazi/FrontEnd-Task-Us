@@ -1,23 +1,21 @@
 import React, { Component, Fragment } from 'react'
 import moment from 'moment'
-import { AiOutlineClose } from 'react-icons/ai';
 import { Fade } from '@material-ui/core';
 import { VscListFilter } from 'react-icons/vsc';
-import { IoIosArrowDropdown } from 'react-icons/io';
 import { connect } from 'react-redux';
 // inside imports
 import { loadBoards, updateBoard } from '../store/actions/boardActions'
 import { NavLink } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Activities } from '../cmps/Activities';
 
 
-export class _mobActivities extends Component {
+export class _MobActivitiesModal extends Component {
     state = {
         isOrderReversed: false,
         isFilterOpen: false,
         filterBy: {},
         searchVal: '',
-        isActivitiesShown: true,
-        isActivitiesNotReadShown: true
     }
     async componentDidMount() {
         try {
@@ -76,12 +74,7 @@ export class _mobActivities extends Component {
         })
         return res;
     }
-    toggleActivities = () => {
-        this.setState({ isActivitiesShown: !this.state.isActivitiesShown })
-    }
-    toggleActivitiesNotRead = () => {
-        this.setState({ isActivitiesNotReadShown: !this.state.isActivitiesNotReadShown })
-    }
+
     onClearLog = () => {
         const board = {
             ...this.state.board,
@@ -91,6 +84,18 @@ export class _mobActivities extends Component {
             this.props.updateBoard(board)
         })
     }
+
+    getInitials(fullName) {
+        const [firstName, lastName] = fullName.split(' ');
+        let initials = firstName.charAt(0).toUpperCase();
+        if (lastName) initials += lastName.charAt(0).toUpperCase();
+        return initials;
+    }
+
+    moveToProfile = (userId) => {
+        this.props.history.push(`/user/${userId}`)
+    }
+
     render() {
         if (!this.state.board) return <h1>Loading...</h1>
         const { isFilterOpen, filterBy, searchVal } = this.state;
@@ -99,11 +104,12 @@ export class _mobActivities extends Component {
         const members = this.getActivityMembers();
         activities = this.applyFilter(activities)
         activitiesNotRead = this.applyFilter(activitiesNotRead)
+
         return (
             <section className="activities flex column">
                 <header className="padding-x-15 padding-y-15">
                     <NavLink to={`/board/${this.props.match.params.id}`}>
-                        <AiOutlineClose />
+                        <FaArrowLeft className="go-back-arrow" />
                     </NavLink>
                     <h1><span>{this.props.boardName}</span> Log</h1>
                     <div className='filters-container space-between flex align-center'>
@@ -140,66 +146,13 @@ export class _mobActivities extends Component {
                     </div>
                 </header>
                 <div className="all-activities-container">
-                    <div className="activity-list-not-read column flex  padding-y-15">
-                        <h1 className="flex space-between">
-                            New Activities ({activitiesNotRead.length})
-                         <IoIosArrowDropdown className={this.state.isActivitiesNotReadShown ? " toggle-btn rotate0" : " toggle-btn rotate90"} onClick={this.toggleActivitiesNotRead} />
-                        </h1>
-                        {this.state.isActivitiesNotReadShown && activitiesNotRead.length !== 0 && activitiesNotRead.map((activity, idx) => {
-                            return (
-                                <div key={idx} className="activity flex align-center padding-y-15 ">
-                                    <div className="user-img-container flex align-center">
-                                        <div className="date-container">
-                                            <p className="date-created">
-                                                {moment(activity.createdAt).format("DD MMM")}
-                                            </p>
-                                        </div>
-                                        <img src={activity.byUser.imgUrl} alt="" />
-                                        <h2>{activity.byUser.fullName}</h2>
-                                    </div>
-                                    <div className="activity-desc-container flex align-center">
-                                        <p>
-                                            {activity.desc}
-                                        </p>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                        {activitiesNotRead.length === 0 &&
-                            <h3 className="padding-x-15">No new board activities!</h3>
-                        }
-                    </div>
-                    <div className="activity-list column flex  padding-y-15">
-                        <h1 className="flex space-between">
-                            Activities Read ({activities.length})
-                        <IoIosArrowDropdown onClick={this.toggleActivities} className={this.state.isActivitiesShown ? "toggle-btn rotate0" : "toggle-btn rotate90"} />
-                        </h1>
-                        {
-                            this.state.isActivitiesShown && activities.length !== 0 && activities.map((activity, idx) => {
-                                return (
-                                    <div key={idx} className="activity  space-between flex align-center padding-y-15 ">
-                                        <div className="user-img-container flex align-center">
-                                            <div className="date-container">
-                                                <p className="date-created">
-                                                    {moment(activity.createdAt).format("DD MMM")}
-                                                </p>
-                                            </div>
-                                            <img src={activity.byUser.imgUrl} alt="" />
-                                            <h2>{activity.byUser.fullName}</h2>
-                                        </div>
-                                        <div className="activity-desc-container flex align-center">
-                                            <p>
-                                                {activity.desc}
-                                            </p>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                        {activities.length === 0 &&
-                            <h3 className="padding-x-15">No read board activities!</h3>
-                        }
-                    </div>
+
+                    <Activities getInitials={this.getInitials}
+                        activities={activitiesNotRead} moveToProfile={this.moveToProfile} />
+
+                    <Activities type={'activitiesRead'} getInitials={this.getInitials}
+                        activities={activities} moveToProfile={this.moveToProfile} />
+
                 </div>
             </section>
         )
@@ -214,4 +167,4 @@ const mapDispatchToProps = {
     loadBoards,
     updateBoard
 }
-export const mobActivities = connect(mapStateToProps, mapDispatchToProps)(_mobActivities);
+export const MobActivitiesModal = connect(mapStateToProps, mapDispatchToProps)(_MobActivitiesModal);

@@ -89,7 +89,6 @@ class _UserProfile extends Component {
                 })
             })
         })
-        console.log('props', this.props)
         return (
             <section className={`user-profile flex ${window.innerWidth < 450 && 'column'}`}>
                 {window.innerWidth > 450 ?
@@ -114,6 +113,7 @@ class _UserProfile extends Component {
                                 <h3>Email: {email}</h3>
                                 <h3>Full Name: {fullName}</h3>
                             </div>
+                            <hr />
                             <div className="col-mid">
                                 <h1>Boards</h1>
                                 {
@@ -127,6 +127,8 @@ class _UserProfile extends Component {
                                         </h3>
                                 }
                             </div>
+                            <hr />
+
                             <div className="col-right">
                                 <h1>Tasks</h1>
                                 <h3>Number of tasks assigned to this user: {numOfUserTasks}</h3>
