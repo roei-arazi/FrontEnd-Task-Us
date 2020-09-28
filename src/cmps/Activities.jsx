@@ -23,8 +23,8 @@ export class Activities extends Component {
 
                 <h1 className="flex space-between">
                     <Fragment>
-                        Activities Read ({activities.length})
-                                 <IoIosArrowDropdown
+                        {type === 'activitiesRead' ? 'Activities Read' : 'New Activities'}  {activities.length}
+                        <IoIosArrowDropdown
                             onClick={this.toggleIsShown}
                             className={this.state.isShown ? " toggle-btn rotate0" : " toggle-btn rotate90"} />
 

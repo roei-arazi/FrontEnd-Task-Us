@@ -18,6 +18,7 @@ export class _MobActivitiesModal extends Component {
         searchVal: '',
     }
     async componentDidMount() {
+        console.log('AM I HERE',)
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();
@@ -33,7 +34,10 @@ export class _MobActivitiesModal extends Component {
     }
     get activities() {
         const { activityLog } = this.state.board;
-        return [activityLog.filter(activity => activity.isRead), activityLog.filter(activity => !activity.isRead)]
+        return [
+            activityLog.filter(activity => activity[this.props.loggedUser._id]),
+            activityLog.filter(activity => !activity[this.props.loggedUser._id])
+        ]
     }
     handleChange = ({ target }) => {
         this.setState({ searchVal: target.value })
@@ -95,6 +99,23 @@ export class _MobActivitiesModal extends Component {
     moveToProfile = (userId) => {
         this.props.history.push(`/user/${userId}`)
     }
+    onToggleActivities = () => {
+
+        let board = this.state.board;
+        const { _id } = this.props.loggedUser;
+
+        board = {
+            ...board,
+            activityLog: board.activityLog.map(activity => {
+                activity[_id] = true
+                return activity
+            })
+        }
+        console.log('BOARD:', board)
+        this.props.updateBoard(board, '', this.props.loggedUser)
+        this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
+        this.props.history.push(`/board/${this.props.match.params.id}`)
+    }
 
     render() {
         if (!this.state.board) return <h1>Loading...</h1>
@@ -108,9 +129,7 @@ export class _MobActivitiesModal extends Component {
         return (
             <section className="activities flex column">
                 <header className="padding-x-15 padding-y-15">
-                    <NavLink to={`/board/${this.props.match.params.id}`}>
-                        <FaArrowLeft className="go-back-arrow" />
-                    </NavLink>
+                    <FaArrowLeft onClick={this.onToggleActivities} className="go-back-arrow" />
                     <h1><span>{this.props.boardName}</span> Log</h1>
                     <div className='filters-container space-between flex align-center'>
                         <input value={searchVal} onChange={this.handleChange} type="text" placeholder="Search" />
@@ -161,10 +180,11 @@ export class _MobActivitiesModal extends Component {
 const mapStateToProps = state => {
     return {
         boards: state.boardReducer.boards,
+        loggedUser: state.userReducer.loggedUser
     }
 }
 const mapDispatchToProps = {
     loadBoards,
-    updateBoard
+    updateBoard,
 }
 export const MobActivitiesModal = connect(mapStateToProps, mapDispatchToProps)(_MobActivitiesModal);

@@ -5,8 +5,17 @@ nav {
     background-color: $colorBgBoardBars;
     padding: 0 10px;
 
-    h1{
-        margin-left:15px;
+    h1 {
+        margin-left: 15px;
+    }
+
+    .mobile-nav-left {
+        h1 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 15ch;
+        }
     }
 
     .board-users-container {
