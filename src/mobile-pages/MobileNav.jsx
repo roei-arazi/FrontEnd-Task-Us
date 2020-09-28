@@ -8,9 +8,32 @@ import { BsCalendar, BsCardList } from 'react-icons/bs';
 import { MdNotificationsActive } from 'react-icons/md';
 import { AiOutlineHome } from 'react-icons/ai';
 
-export class MobileNav extends React.Component {
+import socketService from '../services/socketService.js';
+import {recieveUpdate, loadBoards} from '../store/actions/boardActions.js';
+import {updateUser} from '../store/actions/userActions.js'
+import { connect } from 'react-redux';
+
+export class _MobileNav extends React.Component {
     state = {
         isMenuShown: false
+    }
+    componentDidMount() {
+        socketService.on('updatedBoard', updatedBoard => {
+            this.props.recieveUpdate(updatedBoard)
+        });
+        socketService.on('reloadBoards', () => {
+            this.props.loadBoards()
+        })
+        socketService.on('accept-notif', (notification) => {
+            this.props.updateUser({ ...this.props.loggedUser, notifications: [notification, ...this.props.loggedUser.notifications] })
+        })
+        socketService.emit('user', this.props.loggedUser._id)
+        this.setState({ isShown: this.props.isBoardbarShown })
+    }
+    componentWillUnmount() {
+        socketService.off('updatedBoard')
+        socketService.off('reloadBoards')
+        socketService.off('accept-notif')
     }
     toggleMenuModal = () => {
         this.setState({ isMenuShown: !this.state.isMenuShown })
@@ -78,3 +101,16 @@ export class MobileNav extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state =>{
+    return {}
+}
+
+const mapDispatchToProps={
+    loadBoards,
+    recieveUpdate,
+    updateUser
+}
+
+
+export const MobileNav = connect(mapStateToProps, mapDispatchToProps)(_MobileNav)
