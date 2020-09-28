@@ -72,7 +72,7 @@ class _UserProfile extends Component {
         const [firstName, lastName] = fullName.split(' ');
         let initials = firstName.charAt(0).toUpperCase();
         if (lastName) initials += lastName.charAt(0).toUpperCase()
-        const guestId = '5f6efc73805dbf6054d58794';
+        const guestId = '5f71dbb63ba1780c44c9a6c9';
         const { loggedUser } = this.props
         const userCreatedBoards = this.props.boards.filter(board => board.boardCreator._id === this.state.user._id)
 
@@ -156,7 +156,7 @@ class _UserProfile extends Component {
                                 </div>
                             </div>
                         </div>
-                    </Fade> 
+                    </Fade>
                 </div>
             </section>
         )
