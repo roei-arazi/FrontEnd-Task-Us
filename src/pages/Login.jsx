@@ -14,6 +14,7 @@ class _Login extends Component {
         isErrLogin: false
     }
     componentDidMount() {
+    
     }
     onLogin = async (values, { resetForm }) => {
         try {
@@ -48,6 +49,9 @@ class _Login extends Component {
             facebookId: response.userID
         }
         await this.props.login(user)
+        this.setState({ isLoading: true })
+        await this.props.loadBoards()
+        this.setState({ isLoading: false })
         if (this.props.loggedUser) this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
 
