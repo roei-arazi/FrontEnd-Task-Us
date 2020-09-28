@@ -10,6 +10,7 @@
             color: $colorBgBoardBars;
             font-size: 10rem;
             border: 5px solid $colorBgBoardBars;
+            object-fit: cover;
 
             &.initials {
                 background-color: $pink;
