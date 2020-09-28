@@ -59,7 +59,7 @@
             min-height: 25px;
             transition: .3s;
 
-            &:hover {
+            &:hover, &.curr-board {
                 background-color: #88cded3d;
             }
 

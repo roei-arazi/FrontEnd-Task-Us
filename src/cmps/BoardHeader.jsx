@@ -116,7 +116,7 @@ export class _BoardHeader extends React.Component {
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members, boardCreator } = this.state.board
-        const { users, loggedUser, filterBy } = this.props;
+        const { users, loggedUser, filterBy, isBoardShown } = this.props;
         const isFiltering = Object.values(filterBy).some(value => value)
         const usersToAdd = users.filter(user => !members.some(member => member._id === user._id))
         const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity[loggedUser._id])
@@ -252,28 +252,28 @@ export class _BoardHeader extends React.Component {
                         </p>
                     </div>
                     <div className="header-options flex">
-                        <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>
+                        {isBoardShown && <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>}
                         <div className="relative">
                             {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
                             <button className="flex align-center" onClick={this.props.toggleModal}>
-                                <h3>{this.props.isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
+                                <h3>{isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
                             </button>
                             <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
                                 <p onClick={this.props.showBoard}>Board</p>
                                 <p onClick={this.props.showDashboard}>Dashboard</p>
                             </div>
                         </div>
-                        <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
+                        {isBoardShown && <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
                             <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />
                             <GoSearch />
-                        </div>
-                        <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}
+                        </div>}
+                        {isBoardShown && <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}
                             className="filters-outer-container relative flex align-center cursor-pointer"  >
                             {isFiltering && <div className="filter-active-indicator"></div>}
                             <VscListFilter className={isFiltering ? 'filter-active' : ''} />
                             <h2 className={isFiltering ? 'filter-active' : ''}>Filter</h2>
                             <Filter isFiltersOpen={this.state.isFiltersOpen} board={this.props.board} />
-                        </div>
+                        </div>}
                     </div>
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
                         <Activities loggedUser={loggedUser} onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}

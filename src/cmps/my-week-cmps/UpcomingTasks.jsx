@@ -8,9 +8,7 @@ class _UpcomingTasks extends Component {
     state = {
         isShown: true
     }
-    componentDidMount() {
-        console.log('state cmpdm', this.state)
-    }
+    
     getDaysFromNow(date) {
         if (moment(date).isAfter(moment().add(1, 'day').endOf('day'))) {
             return moment(date).format('MMM DD')
@@ -21,7 +19,6 @@ class _UpcomingTasks extends Component {
         this.props.history.push(`/user/${userId}`)
     }
     toggleIsShown = () => {
-        console.log('state:', this.state)
         this.setState({ isShown: !this.state.isShown })
     }
     render() {
@@ -32,10 +29,8 @@ class _UpcomingTasks extends Component {
                 <IoIosArrowDropdown onClick={this.toggleIsShown}
                     className={this.state.isShown ? "toggle-btn rotate0" : "toggle-btn rotate90"} />
             </header>
-
-            {this.state.isShown &&
-
-                tasks.map(task => <div
+            <div className={`upcoming-tasks-container ${!this.state.isShown && 'not-shown'}`}>
+                {tasks.map(task => <div
                     key={task.id}
                     className="task-preview space-between align-center">
                     <div className="left-column">
@@ -52,9 +47,9 @@ class _UpcomingTasks extends Component {
                             <h2 >{this.getDaysFromNow(task.dueDate)}</h2>
                         </div>
                     </section>
-                </div>)
+                </div>)}
 
-            }
+            </div>
 
 
 

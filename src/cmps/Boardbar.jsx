@@ -89,6 +89,7 @@ class _Boardbar extends Component {
         return filteredBoards
     }
     render() {
+        const currBoardId = this.props.match.params.id;
         const { isShown, isModalShown, selectedBoardName} = this.state;
         const {loggedUser} = this.props;
         const filteredBoards = this.handleSearch()
@@ -107,7 +108,7 @@ class _Boardbar extends Component {
                     {isShown && filteredBoards.map((board, idx) => {
                         return <li
                             style={{ paddingLeft: (loggedUser._id === board.boardCreator._id || loggedUser.isAdmin) ? '' : '25px' }}
-                            className="flex align-center cursor-pointer"
+                            className={`flex align-center cursor-pointer ${board._id === currBoardId && 'curr-board'}`}
                             key={idx}
                             onClick={() => this.onMoveToBoard(board._id)} >
                             {

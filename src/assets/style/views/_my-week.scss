@@ -90,109 +90,121 @@
             font-weight: 400;
             margin-bottom: 15px;
         }
-
-        .task-preview {
-            display: flex;
-            height: 64px;
-            border-radius: 8px;
-            border: 1px solid #c5c7d0;
-            margin-bottom: 10px;
-
-            @media(max-width:450px) {
-                height: 50px;
-            }
-
-            .task-preview-name {
-                margin-bottom: 5px;
-            }
-
-            .left-column {
-                margin: 0 16px;
-
-                @media(max-width:450px) {
-                    margin: 0 5px;
-                }
-
-                .task-location {
-                    color: $mainLightGrey;
-
-                    span {
-                        cursor: pointer;
-                        transition: .3s;
-
-                        &:hover {
-                            text-decoration: underline;
-                            color: #4999c8;
-                        }
-                    }
-                }
-
-                .task-preview-name {
-                    font-size: 1.125rem;
-                    font-weight: 700;
-                }
-            }
-
-            .right-column {
-                height: 100%;
-                width: 200px;
-                border-bottom-right-radius: 8px;
-                border-top-right-radius: 8px;
-
-                @media (max-width: 450px) {
-                    width: auto;
-                }
-
-
-                .user-img-container {
-
-                    img,
-                    .member-letter {
-                        height: 35px;
-                        width: 35px;
-                        margin-right: 5px;
-                    }
-
-                    img {
-                        border-radius: 50%;
-                        cursor: pointer;
-                        transition: .3s;
-
-                        &:hover {
-                            box-shadow: $brightBoxShadow;
-                        }
-                    }
-
-                    .task-number-of-imgs {
-                        right: 15px;
-                        height: 20px;
-                        width: 20px;
-                    }
-                }
-
-                .deadline-container {
-                    width: 145px;
-                    height: 100%;
-                    justify-content: center;
-                    background-color: #4999c8;
-                    border-bottom-right-radius: 8px;
-                    border-top-right-radius: 8px;
-                    cursor: pointer;
-                    transition: .3s;
-
-                    @media (max-width: 450px) {
-                        width: 70px;
-                    }
-
-                    h2 {
-                        color: $colorBgBoardBars;
-                    }
-
-                    &:hover {
-                        background-color: #3179a3;
-                    }
-                }
-            }
+        
+        .toggle-btn{  
+            transition: .3s;
+        }
+         .upcoming-tasks-container{
+            overflow: overlay;
+            max-height: 250%;
+            transition: max-height .4s ease-in-out;
+            &.not-shown{  
+                overflow: hidden;
+                max-height: 0px; 
+            } 
+             .task-preview {
+                 display: flex; 
+                 height: 64px;
+                 border-radius: 8px;
+                 border: 1px solid #c5c7d0;
+                 margin-bottom: 10px;
+     
+                 @media(max-width:450px) {
+                     height: 50px;
+                 }
+     
+                 .task-preview-name {
+                     margin-bottom: 5px;
+                 }
+     
+                 .left-column {
+                     margin: 0 16px;
+     
+                     @media(max-width:450px) {
+                         margin: 0 5px;
+                     }
+     
+                     .task-location {
+                         color: $mainLightGrey;
+     
+                         span {
+                             cursor: pointer;
+                             transition: .3s;
+     
+                             &:hover {
+                                 text-decoration: underline;
+                                 color: #4999c8;
+                             }
+                         }
+                     }
+     
+                     .task-preview-name {
+                         font-size: 1.125rem;
+                         font-weight: 700;
+                     }
+                 }
+     
+                 .right-column {
+                     height: 100%;
+                     width: 200px;
+                     border-bottom-right-radius: 8px;
+                     border-top-right-radius: 8px;
+     
+                     @media (max-width: 450px) {
+                         width: auto;
+                     }
+     
+     
+                     .user-img-container {
+     
+                         img,
+                         .member-letter {
+                             height: 35px;
+                             width: 35px;
+                             margin-right: 5px;
+                         }
+     
+                         img {
+                             border-radius: 50%;
+                             cursor: pointer;
+                             transition: .3s;
+     
+                             &:hover {
+                                 box-shadow: $brightBoxShadow;
+                             }
+                         }
+     
+                         .task-number-of-imgs {
+                             right: 15px;
+                             height: 20px;
+                             width: 20px;
+                         }
+                     }
+     
+                     .deadline-container {
+                         width: 145px;
+                         height: 100%;
+                         justify-content: center;
+                         background-color: #4999c8;
+                         border-bottom-right-radius: 8px;
+                         border-top-right-radius: 8px;
+                         cursor: pointer;
+                         transition: .3s;
+     
+                         @media (max-width: 450px) {
+                             width: 70px;
+                         }
+     
+                         h2 {
+                             color: $colorBgBoardBars;
+                         }
+     
+                         &:hover {
+                             background-color: #3179a3;
+                         }
+                     }
+                 } 
+         }
 
 
         }

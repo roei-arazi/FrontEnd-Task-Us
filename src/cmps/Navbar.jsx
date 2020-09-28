@@ -38,6 +38,7 @@ class _Navbar extends Component {
     render() {
         const { isNotificationShown } = this.state
         const { loggedUser, removeNotifications } = this.props
+        const firstName = loggedUser.fullName.split(' ')[0];
         return (
             <section className="navbar flex column space-between align-center padding-y-15">
                 <ul className="navbar-links flex column space-around">
@@ -65,6 +66,7 @@ class _Navbar extends Component {
                         }
                     </li>
                 </ul>
+                    <div className="user-greeting">Hello {firstName || loggedUser.fullName}</div>
                 <ul className="navbar-links flex column space-around">
                     <NavLink to={loggedUser ? "/myweek" : '/login'}>
                         <li className="icon-container"><BsCalendar /></li>
