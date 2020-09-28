@@ -131,7 +131,7 @@ class _UserProfile extends Component {
 
                             <div className="col-right">
                                 <h1>Tasks</h1>
-                                <h3>Number of tasks assigned to this user: {numOfUserTasks}</h3>
+                                <h3>Number of tasks assigned to {loggedUser._id === this.props.match.params.id ? 'you' : 'this user:'} : {numOfUserTasks}</h3>
                             </div>
                         </div>
                     </div>
