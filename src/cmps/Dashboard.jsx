@@ -88,5 +88,7 @@ export function Dashboard(props) {
             data: other
         }
     ]
-    return <Chart options={options} series={series} type="bar" width={'90%'} height={'75%'} />
+    return (
+        <Chart options={options} series={series} type="bar" width={'90%'} height={'75%'} />
+    )
 }

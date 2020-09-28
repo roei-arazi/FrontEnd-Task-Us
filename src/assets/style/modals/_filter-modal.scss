@@ -22,6 +22,9 @@
         margin: 0 10px;
 
         .filter-list {
+            overflow: overlay;
+            padding-right: 15px;
+
             button {
                 padding: 5px;
                 border-radius: 10px;
