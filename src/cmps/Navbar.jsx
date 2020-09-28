@@ -80,7 +80,7 @@ class _Navbar extends Component {
                                 {this._getMemeberInitials(loggedUser)[0]}
                                 {this._getMemeberInitials(loggedUser)[1]}
                             </div>}</li>
-                    </NavLink>
+                    </NavLink> 
                     <li className="icon-container" ><BiLogOut onClick={this.onLogout} /></li>
                 </ul>
             </section>
