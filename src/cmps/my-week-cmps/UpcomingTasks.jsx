@@ -1,14 +1,12 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import { IoIosArrowDropdown } from 'react-icons/io';
-import { Fade } from '@material-ui/core';
 
 class _UpcomingTasks extends Component {
     state = {
         isShown: true
     }
-    
     getDaysFromNow(date) {
         if (moment(date).isAfter(moment().add(1, 'day').endOf('day'))) {
             return moment(date).format('MMM DD')
