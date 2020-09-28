@@ -156,7 +156,7 @@ class _UserProfile extends Component {
                                 </div>
                             </div>
                         </div>
-                    </Fade>
+                    </Fade> 
                 </div>
             </section>
         )
