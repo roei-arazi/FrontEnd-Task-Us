@@ -7,7 +7,7 @@ import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import { IoMdArrowDropdown } from 'react-icons/io';
 // inside imports
-import Activities from './Activities';
+import { ActivitiesModal } from './ActivitiesModal';
 import { Filter } from './Filter';
 import socketService from '../services/socketService.js'
 
@@ -276,7 +276,7 @@ export class _BoardHeader extends React.Component {
                         </div>}
                     </div>
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
-                        <Activities loggedUser={loggedUser} onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
+                        <ActivitiesModal loggedUser={loggedUser} onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
                             boardName={this.state.board.name} activityLog={this.props.board.activityLog} />
                     </div>
                     {

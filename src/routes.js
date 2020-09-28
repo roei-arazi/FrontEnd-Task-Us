@@ -5,7 +5,7 @@ import { Login } from './pages/Login.jsx';
 import { Signup } from './pages/Signup.jsx';
 import { UserProfile } from './pages/UserProfile.jsx';
 import { MyWeek } from './pages/MyWeek.jsx';
-import { mobActivities } from './mobile-pages/mobActivities.jsx';
+import { MobActivitiesModal } from './mobile-pages/MobActivitiesModal.jsx';
 
 export default [
     {
@@ -38,6 +38,6 @@ export default [
     },
     {
         path: '/mob-activities/:id',
-        component: mobActivities
+        component: MobActivitiesModal
     }
 ]
