@@ -15,7 +15,7 @@ export const boardService = {
     handleBoardChanges
 }
 async function loadBoards() {
-    const boards = await httpService.get(`board`)
+    const boards = await httpService.get('board')
     return boards
 }
 function removeBoard(boardId) {
