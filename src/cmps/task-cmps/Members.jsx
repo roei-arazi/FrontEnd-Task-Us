@@ -16,16 +16,21 @@ export function Members(props) {
     return (
         <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
             {props.members.length ? <div className="member-img-container flex relative ">
-                {props.members.map(member => member.imgUrl ?
-                    <img key={member._id} className="member-img" src={member.imgUrl} alt="" />
-                    :
-                    <div key={member._id} className="member-letter ">
-                        {_getMemeberInitials(member)[0]}
-                        {_getMemeberInitials(member)[1]}
-                    </div>
-                )
+                {props.members.map((member, idx) => {
+                    if (idx > 2) return <div key={member._id} className="task-number-of-members">
+                    <span>{props.members.length > 9 ? '+9' : `+${props.members.length - 2}`}</span>
+                </div>
+                   return member.imgUrl ?
+                        <img key={member._id} className="member-img" src={member.imgUrl} alt="" />
+                        :
+                        <div key={member._id} className="member-letter ">
+                            {_getMemeberInitials(member)[0]}
+                            {_getMemeberInitials(member)[1]}
+                        </div>
+                })
                 }
-                <FiPlus className="no-members-icon-plus absolute" />
+                {props.members.length<2 && <FiPlus className="no-members-icon-plus absolute" />}
+                
             </div>
                 :
                 <div className="no-members-container">
