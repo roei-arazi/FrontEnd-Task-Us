@@ -55,17 +55,6 @@ export class Group extends Component {
         }
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
-
-
-
-
-
-
-
-
-
-
-
     convertToBar(property) {
         const { tasks } = this.props.group;
         const taskCount = tasks.length;
@@ -87,16 +76,6 @@ export class Group extends Component {
         }
         return res;
     }
-
-
-
-
-
-
-
-
-
-
     render() {
         if (!this.state.id) return <h1>Loading...</h1>
         const priority = this.convertToBar('priority')
