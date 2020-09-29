@@ -33,13 +33,28 @@ export class Reply extends React.Component {
     toggleOptionsModal = () => {
         this.setState({ isOptionsModal: !this.state.isOptionsModal })
     }
+    _getMemeberInitials(member) {
+        let [firstName, lastName] = member.fullName.split(" ")
+        let firstNameChar = ''
+        let lastNameChar = ''
+        if (firstName) firstNameChar = firstName.charAt(0).toUpperCase()
+        if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
+        return [firstNameChar, lastNameChar]
+    }
     render() {
         const { reply, idx } = this.props
         return (
             <div key={idx} className="reply-box flex column relative">
                 <HiOutlineDotsHorizontal className="options-reply-btn cursor-pointer" onClick={this.toggleOptionsModal} />
                 <div className="reply-content flex align-center">
-                    <img src={reply.member.imgUrl} alt="" />
+                    {
+                        reply.member.imgUrl ? <img src={reply.member.imgUrl} alt="" />
+                            : <div className="member-letter ">
+                                {this._getMemeberInitials(reply.member)[0]}
+                                {this._getMemeberInitials(reply.member)[1]}
+                            </div>
+                    }
+
                     <p className="reply-name">{reply.member.fullName}</p>
                     {!this.state.isEditMode ?
                         <p className="reply-text">{reply.txt}</p>

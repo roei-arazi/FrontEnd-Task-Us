@@ -362,6 +362,8 @@
                 overflow: hidden;
                 transition: .3s;
 
+
+
                 &:hover {
                     .options-reply-btn {
                         transition: .3s;
@@ -374,6 +376,10 @@
                     }
                 }
 
+                img,
+                .member-letter {
+                    margin-right: 10px;
+                }
 
             }
 
