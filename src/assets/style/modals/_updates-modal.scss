@@ -241,11 +241,7 @@
 
     }
 
-    img {
-        max-height: 200px;
-        max-width: fit-content;
-        object-fit: fill;
-    }
+
 
 
     .update-box {
@@ -256,6 +252,8 @@
         background-color: $white;
         border-radius: 5px;
         overflow: hidden;
+
+
 
         .update-options-modal {
             align-self: flex-end;
@@ -302,6 +300,13 @@
         .update-box-main {
             min-height: 100px;
             width: 100%;
+
+            img {
+                max-height: 200px;
+                max-width: fit-content;
+                object-fit: fill;
+                object-fit: contain;
+            }
 
             .update-text {
                 font-weight: initial;
