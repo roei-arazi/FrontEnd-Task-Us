@@ -10,6 +10,12 @@
     max-height: 400px;
 
     section {
+        h3 {
+            align-self: auto;
+            padding-right: 15px;
+
+        }
+
         button {
             padding: 5px;
             border-radius: 0;
@@ -26,7 +32,7 @@
             padding-right: 15px;
 
             button {
-                padding: 5px;
+                padding: 8px;
                 border-radius: 10px;
                 width: 100%;
                 background-color: $buttonMainBg;
@@ -67,4 +73,6 @@
             background-color: $buttonMainHover;
         }
     }
+
+
 }
