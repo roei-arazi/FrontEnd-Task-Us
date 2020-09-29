@@ -269,7 +269,7 @@ export class _BoardHeader extends React.Component {
                             </Fade>
                         </div>
                         {isBoardShown && <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
-                            <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />
+                            <input ref={(input) => { this.searchInput = input; }} placeholder=" Search Tasks" type='text' onChange={this.props.handleSearch} />
                             <GoSearch />
                         </div>}
                         {isBoardShown && <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}

@@ -93,6 +93,14 @@
                 max-height: 400px;
                 overflow: overlay;
 
+                >div {
+                    margin-top: 10px;
+
+                    h3 {
+                        margin: 10px 0;
+                    }
+                }
+
                 .board-users-box {
                     border-bottom: 1px solid #a8a8a87d;
                     cursor: auto;

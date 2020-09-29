@@ -86,6 +86,17 @@
 
     .navbar-links {
         height: 25%;
+
+        [data-title]:hover:after {
+            left: 100px;
+            top: 0;
+
+        }
+
+        [data-title]:hover:before {
+            top: 0;
+
+        }
     }
 
     .notifications-counter {
