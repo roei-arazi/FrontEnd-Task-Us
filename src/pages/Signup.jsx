@@ -9,7 +9,9 @@ import { loadBoards } from '../store/actions/boardActions'
 
 class _Signup extends Component {
     state = {
-        isLoading: false
+        isLoading: false,
+        isErrSignup: false,
+        errMsg: ''
     }
 
     onSignup = async (values, { resetForm }) => {
@@ -22,8 +24,11 @@ class _Signup extends Component {
             this.setState({ isLoading: false })
             this.props.history.push(`/board/${this.props.boards[0]._id}`)
         } catch (err) {
-            console.log('Signup: Couldn\'t sign up');
-            throw err;
+            console.log('err', err);
+            this.setState({ isErrSignup: true, errMsg: err})
+            setTimeout(() => {
+                this.setState({ isErrSignup: false })
+            }, 2000);
         }
     }
     onGuestLogin = async () => {
@@ -32,6 +37,7 @@ class _Signup extends Component {
     }
     render() {
         const initialValues = { username: '', password: '', confirm: '', email: '', fullName: '' }
+        const {isErrSignup, errMsg} = this.state;
         if (this.state.isLoading) return (
             <div className="loader-container flex justify-center align-center">
                 <img src="loading.gif" alt="" />
@@ -85,6 +91,9 @@ class _Signup extends Component {
             </Formik>
             <div data-title="Back to home" className="go-back">
                 <NavLink to="/"><FaArrowLeft /></NavLink>
+            </div>
+            <div className={`sign-login-err-modal flex justify-center align-center ${isErrSignup && "animate-sign-login-err-modal"}`}>
+                <h2>{errMsg}</h2>
             </div>
         </div>
     }

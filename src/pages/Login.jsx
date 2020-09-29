@@ -11,10 +11,8 @@ import { loadBoards } from '../store/actions/boardActions'
 class _Login extends Component {
     state = {
         isLoading: false,
-        isErrLogin: false
-    }
-    componentDidMount() {
-    
+        isErrLogin: false,
+        errMsg: ''
     }
     onLogin = async (values, { resetForm }) => {
         try {
@@ -26,9 +24,8 @@ class _Login extends Component {
             if (this.props.loggedUser) this.props.history.push(`/board/${this.props.boards[0]._id}`)
         }
         catch (err) {
-            this.setState({ isErrLogin: true })
+            this.setState({ isErrLogin: true, errMsg: 'Wrong username or password' })
             setTimeout(() => {
-
                 this.setState({ isErrLogin: false })
             }, 2000);
         }
@@ -57,6 +54,7 @@ class _Login extends Component {
 
     render() {
         const initialValues = { username: '', password: '' }
+        const {isErrLogin, errMsg} = this.state;
         if (this.state.isLoading) return (
             <div className="loader-container flex justify-center align-center">
                 <img src="loading.gif" alt="" />
@@ -103,8 +101,8 @@ class _Login extends Component {
             <div data-title="Back to home" className="go-back">
                 <NavLink to="/"><FaArrowLeft /></NavLink>
             </div>
-            <div className={`login-err-modal flex justify-center align-center ${this.state.isErrLogin && "animate-login-err-modal"}`}>
-                <h2>Wrong password / username</h2>
+            <div className={`sign-login-err-modal flex justify-center align-center ${isErrLogin && "animate-sign-login-err-modal"}`}>
+                <h2>{errMsg}</h2>
             </div>
         </div>
 

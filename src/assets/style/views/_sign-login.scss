@@ -141,9 +141,9 @@
     }
 }
 
-.login-err-modal {
+.sign-login-err-modal {
     position: fixed;
-    bottom: 0;
+    top: 0;
     right: 0;
     padding: 30px;
     transform: translate(300px, 0);
@@ -151,7 +151,7 @@
     z-index: 999;
     box-shadow: $modalsShadow;
     border-radius: 10px;
-    transition: .3s;
+    transition: .3s; 
 
     h2 {
         color: #dd4444;
@@ -159,7 +159,7 @@
 
 }
 
-.animate-login-err-modal {
+.animate-sign-login-err-modal {
     transform: translate(0, 0);
     transition: .3s;
 
