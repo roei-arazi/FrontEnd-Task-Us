@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { VscBell } from 'react-icons/vsc'
 import { BsCalendar } from 'react-icons/bs'
-import { BiLogOut } from 'react-icons/bi'
+import { RiLogoutBoxLine } from 'react-icons/ri'
 // inside imports
 import { Notifications } from './Notifications';
 import { markAsRead, removeNotifications, logout } from '../store/actions/userActions'
- 
+
 class _Navbar extends Component {
     state = {
         isNotificationShown: false
@@ -65,7 +65,7 @@ class _Navbar extends Component {
                         }
                     </li>
                 </ul>
-                    <div className="user-greeting">Hello {firstName || loggedUser.fullName}</div>
+                <div className="user-greeting">Hello {firstName || loggedUser.fullName}</div>
                 <ul className="navbar-links flex column space-around">
                     <NavLink to={loggedUser ? "/myweek" : '/login'}>
                         <li className="icon-container"><BsCalendar /></li>
@@ -79,8 +79,8 @@ class _Navbar extends Component {
                                 {this._getMemeberInitials(loggedUser)[0]}
                                 {this._getMemeberInitials(loggedUser)[1]}
                             </div>}</li>
-                    </NavLink> 
-                    <li className="icon-container" ><BiLogOut onClick={this.onLogout} /></li>
+                    </NavLink>
+                    <li className="icon-container" ><RiLogoutBoxLine onClick={this.onLogout} /></li>
                 </ul>
             </section>
         )
