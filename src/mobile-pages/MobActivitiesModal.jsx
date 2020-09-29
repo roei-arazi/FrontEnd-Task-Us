@@ -5,7 +5,6 @@ import { VscListFilter } from 'react-icons/vsc';
 import { connect } from 'react-redux';
 // inside imports
 import { loadBoards, updateBoard } from '../store/actions/boardActions'
-import { NavLink } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Activities } from '../cmps/Activities';
 
