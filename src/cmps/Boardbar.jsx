@@ -57,7 +57,7 @@ class _Boardbar extends Component {
     }
     onBoardRemove = async () => {
         const { boards, match, history, removeBoard, loggedUser } = this.props;
-        const {selectedBoardId} = this.state;
+        const { selectedBoardId } = this.state;
         const board = boards.find(board => board._id === selectedBoardId);
         const notif = `${loggedUser.fullName} deleted ${board.name}`;
         userService.notifyUsers(notif, board.members, loggedUser)
@@ -80,7 +80,7 @@ class _Boardbar extends Component {
 
 
     onToggleModal = () => {
-        this.setState({isModalShown: !this.state.isModalShown})
+        this.setState({ isModalShown: !this.state.isModalShown })
     }
 
     handleSearch = () => {
@@ -90,8 +90,8 @@ class _Boardbar extends Component {
     }
     render() {
         const currBoardId = this.props.match.params.id;
-        const { isShown, isModalShown, selectedBoardName} = this.state;
-        const {loggedUser} = this.props;
+        const { isShown, isModalShown, selectedBoardName } = this.state;
+        const { loggedUser } = this.props;
         const filteredBoards = this.handleSearch()
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
@@ -115,8 +115,7 @@ class _Boardbar extends Component {
                                 (loggedUser._id === board.boardCreator._id || loggedUser.isAdmin) &&
                                 <MdDelete onClick={ev => {
                                     ev.stopPropagation()
-                                    // this.onBoardRemove(board._id)
-                                    this.setState({selectedBoardId: board._id, selectedBoardName: board.name});
+                                    this.setState({ selectedBoardId: board._id, selectedBoardName: board.name });
                                     this.onToggleModal()
                                 }
                                 } />

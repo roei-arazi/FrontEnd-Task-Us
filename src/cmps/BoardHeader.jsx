@@ -10,6 +10,7 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { ActivitiesModal } from './ActivitiesModal';
 import { Filter } from './Filter';
 import socketService from '../services/socketService.js'
+import { Fade } from '@material-ui/core';
 
 export class _BoardHeader extends React.Component {
     state = {
@@ -133,6 +134,7 @@ export class _BoardHeader extends React.Component {
                             disabled={false}
                             onChange={this.handleChangeName}
                             onBlur={() => {
+                                if (this.props.board.name === this.state.board.name) return
                                 const desc = `${loggedUser.fullName} Changed the board title from ${this.props.board.name} to ${this.state.board.name}`
                                 const board = {
                                     ...this.props.board,
@@ -231,6 +233,7 @@ export class _BoardHeader extends React.Component {
                                 disabled={false}        // use true to disable editing
                                 onChange={this.handleChangeDesc} // handle innerHTML change
                                 onBlur={() => {
+                                    if (this.state.board.desc === this.props.board.desc) return
                                     const desc = `${loggedUser.fullName} Changed ${this.state.board.name} description to ${this.state.board.desc}`
                                     const board = {
                                         ...this.props.board,
@@ -258,10 +261,12 @@ export class _BoardHeader extends React.Component {
                             <button className="flex align-center" onClick={this.props.toggleModal}>
                                 <h3>{isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
                             </button>
-                            <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
-                                <p onClick={this.props.showBoard}>Board</p>
-                                <p onClick={this.props.showDashboard}>Dashboard</p>
-                            </div>
+                            <Fade in={this.props.isModalShown}>
+                                <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
+                                    <p onClick={this.props.showBoard}>Board</p>
+                                    <p onClick={this.props.showDashboard}>Dashboard</p>
+                                </div>
+                            </Fade>
                         </div>
                         {isBoardShown && <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
                             <input ref={(input) => { this.searchInput = input; }} placeholder="Search" type='text' onChange={this.props.handleSearch} />

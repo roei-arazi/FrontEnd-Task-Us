@@ -31,7 +31,7 @@
             width: 100%;
             background-color: $buttonMainBg;
             border-bottom: 1px solid rgba($colorFontTaskGroup, .35);
-            height: 40vh;
+            min-height: 40vh;
         }
 
 
@@ -57,6 +57,7 @@
             margin-bottom: 20px;
             font-size: 15px;
             transition: .3s;
+            top: 30px;
 
             &:hover {
                 color: $buttonMainBg
@@ -65,7 +66,6 @@
         }
 
         .user-details-inner-container {
-            margin-top: 100px;
             display: flex;
             width: 100%;
 
@@ -73,7 +73,6 @@
             li {
                 cursor: pointer;
                 color: $buttonMainBg;
-                text-indent: 10%;
                 line-height: 2;
                 transition: .3s;
 
@@ -83,7 +82,7 @@
             }
 
             >:not(:first-child) {
-                margin-left: 100px;
+                margin-left: 50px;
 
             }
 
@@ -96,6 +95,30 @@
             .col-mid {
                 >h3:not(:first-child) {
                     margin-top: 50px;
+                }
+
+                .user-boards-container {
+                    margin-top: 10px;
+                    padding: 0 5px;
+                    max-height: 150px;
+                    overflow-y: overlay;
+
+                    li {
+                        min-height: 30px;
+                    }
+
+                    svg {
+                        font-size: 15px;
+                        margin-right: 5px;
+                        flex-shrink: 0;
+                    }
+
+                }
+            }
+
+            @media (max-width: 450px) {
+                ::-webkit-scrollbar {
+                    display: initial;
                 }
             }
 

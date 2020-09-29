@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Fade } from '@material-ui/core';
 // Inside imports
 import { Boardbar } from '../cmps/Boardbar';
 import { Navbar } from '../cmps/Navbar';
-import { loadBoards } from '../store/actions/boardActions';
 import { userService } from '../services/userService.js';
 import { updateUser } from '../store/actions/userActions';
 import { cloudinaryService } from '../services/cloudinaryService';
 import { MobileNav } from '../mobile-pages/MobileNav';
 import { FaArrowLeft } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
+import socketService from '../services/socketService';
+import { removeBoard, loadBoards } from '../store/actions/boardActions.js';
+import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
 
 class _UserProfile extends Component {
     state = {
@@ -19,7 +22,10 @@ class _UserProfile extends Component {
             email: '',
             username: '',
             fullName: '',
-            imgUrl: ''
+            imgUrl: '',
+            selectedBoardId: '',
+            selectedBoardName: '',
+            isModalShown: false
         }
 
     }
@@ -60,6 +66,34 @@ class _UserProfile extends Component {
         this.props.history.push(`/board/${id}`)
     }
 
+    onToggleModal = () => {
+        this.setState({ isModalShown: !this.state.isModalShown })
+    }
+
+    displayPopup(msg) {
+        this.props.showSnackbar(msg)
+        setTimeout(this.props.hideSnackbar, 3000)
+    }
+
+    onBoardRemove = async () => {
+        const { boards, match, history, removeBoard, loggedUser } = this.props;
+        const { selectedBoardId } = this.state;
+        const board = boards.find(board => board._id === selectedBoardId);
+        const notif = `${loggedUser.fullName} deleted ${board.name}`;
+        userService.notifyUsers(notif, board.members, loggedUser)
+        const { id } = match.params;
+        if (boards.length === 1) {
+            return;
+        }
+        await removeBoard(selectedBoardId);
+        socketService.emit('add-delete-board')
+        this.displayPopup('Removed board.');
+        if (id === selectedBoardId) {
+            const idx = boards.findIndex(board => board._id !== selectedBoardId)
+            history.push(`/board/${boards[idx]._id}`)
+        }
+    }
+
     render() {
         let { email, fullName, imgUrl, _id } = this.state.user;
         if (!_id) {
@@ -75,6 +109,7 @@ class _UserProfile extends Component {
         const guestId = '5f71dbb63ba1780c44c9a6c9';
         const { loggedUser } = this.props
         const userCreatedBoards = this.props.boards.filter(board => board.boardCreator._id === this.state.user._id)
+        const { isShown, isModalShown, selectedBoardName } = this.state;
 
         let numOfUserTasks = 0
         this.props.boards.forEach(board => {
@@ -102,8 +137,8 @@ class _UserProfile extends Component {
                         {imgUrl ? <img className="user-profile-big" src={imgUrl} alt="" /> :
                             <div className="user-profile-big initials flex align-center justify-center">{initials}</div>}
                     </header>
-                    <div className="user-details-container padding-x-30 padding-y-45 align-center  flex  column">
-                        <FaArrowLeft className="go-back-arrow" onClick={() => this.props.history.goBack()} />
+                    <div className="user-details-container relative padding-x-30 padding-y-45 align-center justify-center flex  column">
+                        <FaArrowLeft className="go-back-arrow absolute" onClick={() => this.props.history.goBack()} />
                         {(loggedUser._id === _id && loggedUser._id !== guestId) ? <h2 onClick={this.toggleModal}
                             className="clickable-header">Edit Profile</h2> : ''}
                         <div className="user-details-inner-container flex justify-center">
@@ -118,13 +153,29 @@ class _UserProfile extends Component {
                                 {
                                     !userCreatedBoards.length
                                         ? <h3>No boards created.</h3>
-                                        : <h3> Boards created by {loggedUser._id === this.props.match.params.id ? 'you' : 'this user:'}  <br />  {
-                                            userCreatedBoards.map((board, idx) => {
-                                                return <li onClick={() => this.onMoveToBoard(board._id)} key={idx}>{board.name}</li>
-                                            })
-                                        }
-                                        </h3>
+                                        : <Fragment>
+                                            <h3> Boards created by {loggedUser._id === this.props.match.params.id ? 'you' : 'this user:'} </h3>
+                                            <div className="user-boards-container">
+                                                {
+                                                    userCreatedBoards.map((board, idx) => {
+                                                        return <li className="flex" key={idx}>
+                                                            {
+                                                                loggedUser._id === this.props.match.params.id &&
+                                                                <MdDelete onClick={ev => {
+                                                                    this.setState({ selectedBoardId: board._id, selectedBoardName: board.name });
+                                                                    this.onToggleModal()
+                                                                }
+                                                                } />
+                                                            }
+                                                            <p onClick={() => this.onMoveToBoard(board._id)}>{board.name}</p>
+                                                        </li>
+                                                    })
+                                                }
+
+                                            </div>
+                                        </Fragment>
                                 }
+
                             </div>
                             <hr />
 
@@ -158,6 +209,16 @@ class _UserProfile extends Component {
                         </div>
                     </Fade>
                 </div>
+                {isModalShown && <div className="modal-screen-wrapper" onClick={this.onToggleModal}>
+                    <div className="confirm-board-delete flex column space-between">
+                        <h1>Are you sure you want to delete {selectedBoardName}?</h1>
+                        <p>You can't take this back</p>
+                        <section className="flex">
+                            <button className="cancel-button" onClick={this.onToggleModal}>Cancel</button>
+                            <button className="delete-button" onClick={this.onBoardRemove}>Delete</button>
+                        </section>
+                    </div>
+                </div>}
             </section>
         )
     }
@@ -171,6 +232,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = {
     loadBoards,
-    updateUser
+    updateUser,
+    removeBoard,
+    showSnackbar
 }
 export const UserProfile = connect(mapStateToProps, mapDispatchToProps)(_UserProfile);
