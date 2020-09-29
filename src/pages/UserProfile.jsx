@@ -109,7 +109,7 @@ class _UserProfile extends Component {
         const guestId = '5f71dbb63ba1780c44c9a6c9';
         const { loggedUser } = this.props
         const userCreatedBoards = this.props.boards.filter(board => board.boardCreator._id === this.state.user._id)
-        const { isShown, isModalShown, selectedBoardName } = this.state;
+        const { isModalShown, selectedBoardName } = this.state;
 
         let numOfUserTasks = 0
         this.props.boards.forEach(board => {
