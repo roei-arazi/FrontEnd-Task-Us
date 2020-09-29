@@ -6,16 +6,18 @@
     padding-top: 20px;
     border-right: 1px solid rgba($colorFontTaskGroup, .35);
     border-top-left-radius: 15px;
-    margin-left: -15px;
     z-index: 2;
     display: flex;
     align-items: center;
     transition: width .3s;
 
+
     &.board-bar-shown {
         width: 320px;
         padding: 15px 0;
         overflow: visible;
+        margin-left: -15px;
+
     }
 
     .boardbar-header {
@@ -59,7 +61,8 @@
             min-height: 25px;
             transition: .3s;
 
-            &:hover, &.curr-board {
+            &:hover,
+            &.curr-board {
                 background-color: #88cded3d;
             }
 

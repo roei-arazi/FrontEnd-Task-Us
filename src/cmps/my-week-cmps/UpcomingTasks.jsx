@@ -7,7 +7,6 @@ class _UpcomingTasks extends Component {
     state = {
         isShown: true
     }
-    
     getDaysFromNow(date) {
         if (moment(date).isAfter(moment().add(1, 'day').endOf('day'))) {
             return moment(date).format('MMM DD')

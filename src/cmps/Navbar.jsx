@@ -7,7 +7,7 @@ import { BiLogOut } from 'react-icons/bi'
 // inside imports
 import { Notifications } from './Notifications';
 import { markAsRead, removeNotifications, logout } from '../store/actions/userActions'
-
+ 
 class _Navbar extends Component {
     state = {
         isNotificationShown: false
