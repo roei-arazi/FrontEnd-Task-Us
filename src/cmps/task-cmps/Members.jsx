@@ -44,7 +44,8 @@ export function Members(props) {
                         {props.members.map((member, idx) =>
                             <section key={idx} className="user-box flex space-between align-center">
                                 <div className="user-box-info flex align-center" onClick={() => props.goToUserProfile(member._id)}>
-                                    {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()}</div>}
+                                    {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()
+                                    +member.fullName.split(" ")[1].charAt(0).toUpperCase()}</div>}
                                     <p className="member-name">{member.fullName}</p>
                                 </div>
                                 <FiMinus onClick={() => props.onRemoveMemberFromTask(member._id)} />
