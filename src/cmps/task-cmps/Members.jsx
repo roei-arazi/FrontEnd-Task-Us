@@ -17,7 +17,7 @@ export function Members(props) {
         <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
             {props.members.length ? <div className="member-img-container flex relative ">
                 {props.members.map((member, idx) => {
-                    if (idx > 2) return <div key={member._id} className="task-number-of-members">
+                    if (idx > 1) return <div key={member._id} className="task-number-of-members">
                     <span>{props.members.length > 9 ? '+9' : `+${props.members.length - 2}`}</span>
                 </div>
                    return member.imgUrl ?
@@ -29,7 +29,7 @@ export function Members(props) {
                         </div>
                 })
                 }
-                {props.members.length<2 && <FiPlus className="no-members-icon-plus absolute" />}
+                {props.members.length<3 && <FiPlus className="no-members-icon-plus absolute" />}
                 
             </div>
                 :

@@ -58,18 +58,21 @@ export class Group extends Component {
     convertToBar(property) {
         const { tasks } = this.props.group;
         const taskCount = tasks.length;
-        const percent = tasks.length / 100;
+        const percent = taskCount / 100;
         const data = tasks.reduce((acc, task) => {
             const value = task[property];
-            if (value) acc[value] = acc[value] ? ++acc[value] : 1;
+            if (value) acc[value] = acc[value] ? acc[value] + 1 : 1;
             return acc;
         }, {});
         const res = [];
         for (let key in data) {
             data[key] /= percent;
-            res.push(<div key={key} style={{ width: data[key] ? `${data[key]}%` : '0' }}
-                data-title={data[key] ? ` ${key} ${Math.round(taskCount * data[key] / 100)}/${taskCount} ${data[key].toFixed(1)}%` : ''}
-                className={`precent-bar ${key.toLowerCase()}`}></div>)
+            const style = { width: data[key] ? `${data[key]}%` : '0' }
+            const toolTip = data[key] ? ` ${key} ${Math.round(taskCount * data[key] / 100)}/${taskCount} ${data[key].toFixed(1)}%` : ''
+            res.push(<div key={key} style={style}
+                data-title={toolTip}
+                className={`precent-bar ${key.toLowerCase()}`}>
+            </div>)
         }
         return res;
     }
