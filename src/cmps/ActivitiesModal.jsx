@@ -90,7 +90,7 @@ class _ActivitiesModal extends Component {
                                     <Fade in={true}>
                                         <div className="filter-modal flex absolute">
                                             <section className="activity-member-filter">
-                                                <h3>Member</h3>
+                                                <h3 className="flex justify-center">Member</h3>
                                                 <div className="filter-list flex justify-center align-center column">
                                                     {members.map((member, idx) => <button
                                                         className={filterBy.member === member ? 'remove-filter-btn' : ''}
@@ -99,7 +99,7 @@ class _ActivitiesModal extends Component {
                                                 </div>
                                             </section>
                                             <section className="activity-date-filter">
-                                                <h3>Date</h3>
+                                                <h3 className="flex justify-center">Date</h3>
                                                 <div className="filter-list flex justify-center align-center column">
                                                     {dates.map((date, idx) => <button
                                                         className={filterBy.date === date ? 'remove-filter-btn' : ''}

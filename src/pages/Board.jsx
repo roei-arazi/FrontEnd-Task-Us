@@ -64,7 +64,7 @@ class _Board extends Component {
         if (desc) this.displayPopup('Updated board.')
     }
     applyFilter = (board, filterBy) => {
-        const filteredBoard = JSON.parse(JSON.stringify(board))
+        const filteredBoard = lodash.cloneDeep(board)
         if (filterBy.groupId) {
             filteredBoard.groups = filteredBoard.groups.filter(group => group.id === filterBy.groupId)
         }
@@ -95,6 +95,7 @@ class _Board extends Component {
                 )
             })
         }
+        filteredBoard.groups = filteredBoard.groups.filter(group => group.tasks.length)
         return filteredBoard
     }
     //------------------GROUP CRUD-----------------

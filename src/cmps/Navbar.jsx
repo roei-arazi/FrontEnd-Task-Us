@@ -68,7 +68,7 @@ class _Navbar extends Component {
                 <div className="user-greeting">Hello {firstName || loggedUser.fullName}</div>
                 <ul className="navbar-links flex column space-around">
                     <NavLink to={loggedUser ? "/myweek" : '/login'}>
-                        <li className="icon-container"><BsCalendar /></li>
+                        <li data-title="My Week" className="icon-container"><BsCalendar /></li>
                     </NavLink>
                     <NavLink to={loggedUser ? `/user/${loggedUser._id}` : '/login'}>
                         <li className="icon-container cursor-pointer"> {loggedUser.imgUrl ?
@@ -80,7 +80,7 @@ class _Navbar extends Component {
                                 {this._getMemeberInitials(loggedUser)[1]}
                             </div>}</li>
                     </NavLink>
-                    <li className="icon-container" ><RiLogoutBoxLine onClick={this.onLogout} /></li>
+                    <li data-title="Logout" className="icon-container" ><RiLogoutBoxLine onClick={this.onLogout} /></li>
                 </ul>
             </section>
         )
