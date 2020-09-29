@@ -48,6 +48,7 @@
         font-weight: 700;
         width: 40px;
         height: 40px;
+        font-size: 15px;
     }
 
     svg {
@@ -89,8 +90,8 @@
 
     .notifications-counter {
         position: absolute;
-        right: 5px;
-        top: 2px;
+        right: 8px;
+        top: 4px;
         font-size: 14px;
         color: #e8e9ee;
         background: $pink;
@@ -103,5 +104,6 @@
         padding: 0px;
         min-width: 22px;
         min-height: 22px;
+
     }
 }

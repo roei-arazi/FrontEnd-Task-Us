@@ -158,17 +158,37 @@
         .user-img-container {
             position: relative;
 
+            .task-number-of-members {
+                font-family: monospace;
+                font-size: 12px;
+                width: 18px;
+                height: 18px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                background-color: $buttonMainBg;
+                color: $colorPlusCircleFont;
+                border-radius: 50%;
+                text-align: center;
+                right: 5px;
+                bottom: 2px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
             img {
                 cursor: pointer;
                 border-radius: 50%;
-                width: 30px;
-                height: 30px;
+                width: 35px;
+                height: 35px;
+                border: 2px solid #f1f1f1;
             }
 
             .member-img-container {
 
                 >*:not(:first-child) {
-                    margin-left: -15px;
+                    margin-left: -6px;
                 }
             }
 
@@ -209,8 +229,9 @@
                 padding: 8px;
                 background-color: $pink;
                 font-weight: 700;
-                width: 30px;
-                height: 30px;
+                width: 35px;
+                height: 35px;
+                border: 2px solid #f1f1f1;
             }
 
             .task-number-of-imgs {

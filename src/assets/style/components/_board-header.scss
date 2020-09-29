@@ -37,10 +37,11 @@
 
                 svg,
                 img {
-                    width: 30px;
-                    height: 30px;
+                    width: 35px;
+                    height: 35px;
                     border-radius: 50%;
-                    margin-left: -15px;
+                    margin-left: -8px;
+                    border: 2px solid $white;
                 }
 
                 svg {
@@ -64,8 +65,8 @@
                 }
 
                 .member-letter {
-                    width: 30px;
-                    height: 30px;
+                    width: 35px;
+                    height: 35px;
                     margin-left: -10px;
                     border-radius: 50%;
                     background: #e6e6e6;
