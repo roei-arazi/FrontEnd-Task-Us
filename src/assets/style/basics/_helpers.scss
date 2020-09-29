@@ -79,9 +79,14 @@
     }
 }
 
-.clickable-header:hover {
+.clickable-header {
+    position: absolute;
+    top: 60px;
     transition: color .3s;
-    color: rgba($colorIconsTasksHover, .75);
+
+    &:hover {
+        color: rgba($colorIconsTasksHover, .75);
+    }
 }
 
 .cursor-initial {
