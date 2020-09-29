@@ -12,15 +12,16 @@ export function Members(props) {
         if (lastName) lastNameChar = lastName.charAt(0).toUpperCase()
         return [firstNameChar, lastNameChar]
     }
+
     const usersToAdd = props.users.filter(user => !props.members.some(member => member._id === user._id))
     return (
         <div className="user-img-container relative flex justify-center align-center" onClick={() => props.openModal('users')}>
             {props.members.length ? <div className="member-img-container flex relative ">
                 {props.members.map((member, idx) => {
                     if (idx > 1) return <div key={member._id} className="task-number-of-members">
-                    <span>{props.members.length > 9 ? '+9' : `+${props.members.length - 2}`}</span>
-                </div>
-                   return member.imgUrl ?
+                        <span>{props.members.length > 9 ? '+9' : `+${props.members.length - 2}`}</span>
+                    </div>
+                    return member.imgUrl ?
                         <img key={member._id} className="member-img" src={member.imgUrl} alt="" />
                         :
                         <div key={member._id} className="member-letter ">
@@ -29,8 +30,8 @@ export function Members(props) {
                         </div>
                 })
                 }
-                {props.members.length<3 && <FiPlus className="no-members-icon-plus absolute" />}
-                
+                {props.members.length < 3 && <FiPlus className="no-members-icon-plus absolute" />}
+
             </div>
                 :
                 <div className="no-members-container">
@@ -44,8 +45,10 @@ export function Members(props) {
                         {props.members.map((member, idx) =>
                             <section key={idx} className="user-box flex space-between align-center">
                                 <div className="user-box-info flex align-center" onClick={() => props.goToUserProfile(member._id)}>
-                                    {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">{member.fullName.charAt(0).toUpperCase()
-                                    +member.fullName.split(" ")[1].charAt(0).toUpperCase()}</div>}
+                                    {member.imgUrl ? <img src={member.imgUrl} alt="profile" /> : <div className="member-letter">
+                                        {_getMemeberInitials(member)[0]}
+                                        {_getMemeberInitials(member)[1]}
+                                    </div>}
                                     <p className="member-name">{member.fullName}</p>
                                 </div>
                                 <FiMinus onClick={() => props.onRemoveMemberFromTask(member._id)} />

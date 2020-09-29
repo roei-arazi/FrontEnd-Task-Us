@@ -54,7 +54,7 @@ class _Login extends Component {
 
     render() {
         const initialValues = { username: '', password: '' }
-        const {isErrLogin, errMsg} = this.state;
+        const { isErrLogin, errMsg } = this.state;
         if (this.state.isLoading) return (
             <div className="loader-container flex justify-center align-center">
                 <img src="loading.gif" alt="" />
