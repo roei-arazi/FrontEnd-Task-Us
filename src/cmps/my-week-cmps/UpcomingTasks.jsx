@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component} from 'react'
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import { IoIosArrowDropdown } from 'react-icons/io';
-import { Fade } from '@material-ui/core';
 
 class _UpcomingTasks extends Component {
     state = {

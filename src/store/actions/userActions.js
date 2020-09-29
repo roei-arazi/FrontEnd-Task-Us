@@ -28,8 +28,8 @@ export function signup(userCred) {
             const user = await userService.signup(userCred);
             dispatch({ type: 'SET_USER', user })
         } catch (err) {
-            console.log('userActions: Couldn\'t signup');
-            throw err;
+            console.log('userActions: Couldn\'t signup', err);
+            return Promise.reject(err);
         }
     }
 }

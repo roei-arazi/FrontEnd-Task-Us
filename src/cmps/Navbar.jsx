@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { FaRegUser } from 'react-icons/fa'
 import { VscBell } from 'react-icons/vsc'
 import { BsCalendar } from 'react-icons/bs'
 import { BiLogOut } from 'react-icons/bi'

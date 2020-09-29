@@ -67,8 +67,9 @@ async function signup(userCred) {
         const newUser = await httpService.post('auth/signup', user)
         return _handleLogin(newUser)
     } catch (err) {
-        console.log('userService: Couldn\'t sign up');
-        throw err;
+        console.log('userService: Couldn\'t sign up', err);
+        return Promise.reject(err.response.data);
+        // throw err;
     }
 }
 async function guestLogin() {
