@@ -84,9 +84,6 @@ $ npm i
 | [![Liam Zety](http://res.cloudinary.com/dtg7n0zye/image/upload/v1601298953/bdaamqpuvcx1tj1qyst3.jpg?s=200)](https://www.linkedin.com/in/liam-zety-0b157b1b6/)    | [![Osher Kabeda](https://cdn.discordapp.com/attachments/752472970047258644/760881627768291338/WIN_20200930_18_11_38_Pro.jpg?s=200)](http://fvcproductions.com) | [![Roei Arazi](https://media.discordapp.net/attachments/752472970047258644/760883616321503232/prrofile-pic.jpeg?s=200)](http://fvcproductions.com)  |
 | <a href="https://github.com/liamzety" target="_blank">`https://github.com/liamzety`</a> | <a href="https://github.com/OsherK" target="_blank">`https://github.com/OsherK`</a> | <a href="https://github.com/FriZe6" target="_blank">`https://github.com/FriZe6`</a> |
 
-- You can just grab their GitHub profile image URL
----
-
 
 
 ## License
