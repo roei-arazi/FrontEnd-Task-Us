@@ -1,5 +1,5 @@
 ***INSERT LOGO AND LINK TO THE WEBSITE HERE (include hyperlink in image)***
-<a href="https://task-us.herokuapp.com/"><img src="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601478805/i95febe9khi7qqvswefq.png"></a>
+<a href="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"></a>
 
 # Task-Us
 
@@ -80,11 +80,10 @@ $ npm i
 ---
 
 ## Team
-*** UPLOAD USER IMAGES HERE ***
-| <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> |
+| <a href="https://github.com/liamzety" target="_blank">**Liam Zety**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> |
 | :---: |:---:| :---:|
-| [![FVCproductions](http://res.cloudinary.com/dtg7n0zye/image/upload/v1601298953/bdaamqpuvcx1tj1qyst3.jpg)](http://fvcproductions.com)    | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)  |
-| <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> |
+| [![Liam Zety](http://res.cloudinary.com/dtg7n0zye/image/upload/v1601298953/bdaamqpuvcx1tj1qyst3.jpg)](https://www.linkedin.com/in/liam-zety-0b157b1b6/)    | [![Osher Kabeda](https://cdn.discordapp.com/attachments/752472970047258644/760881627768291338/WIN_20200930_18_11_38_Pro.jpg)](http://fvcproductions.com) | [![Roei Arazi](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)  |
+| <a href="https://github.com/liamzety" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`https://github.com/liamzety`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> |
 
 - You can just grab their GitHub profile image URL
 - You should probably resize their picture using `?s=200` at the end of the image URL.
