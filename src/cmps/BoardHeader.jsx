@@ -297,6 +297,8 @@ export class _BoardHeader extends React.Component {
                         <div className="modal-screen-wrapper flex justify-center align-center" onClick={this.props.toggleModal}>
                             <BoardHeaderModal
                                 isFiltersOpen={this.state.isFiltersOpen}
+                                onToggleFilter={this.onToggleFilters}
+                                isFiltering={isFiltering}
                                 showBoard={this.state.showBoard}
                                 showDashboard={this.state.showDashboard}
                                 handleSearch={this.props.handleSearch}
