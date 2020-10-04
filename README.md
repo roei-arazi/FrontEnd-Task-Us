@@ -1,10 +1,10 @@
-<a href="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"><img src="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"/></a>
+<a href="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"><img                  src="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"/></a>
 
 # Task-Us
 
 > Managing our work together.
 
-<img src="https://i.ibb.co/mhHy0bN/home.jpg" />
+<img src="https://i.ibb.co/mhHy0bN/home.jpg?s=200" />
 
 ## About
 - **Working in a large scale company?**
@@ -37,14 +37,11 @@
 - add tags for easier search
 - send updates and posts about individual tasks
 
-> Task 
-![Recordit GIF](http://g.recordit.co/RUMaib3pvA.gif)
+Task ![Recordit GIF](http://g.recordit.co/RUMaib3pvA.gif)
 
-> Drag and Drop 
-![Recordit GIF](http://g.recordit.co/7BQdb1PWAK.gif)
+Drag and Drop ![Recordit GIF](http://g.recordit.co/7BQdb1PWAK.gif)
 
-> Posts 
-![Recordit GIF](http://g.recordit.co/Qo8fhDv9GK.gif)
+Posts </br> ![Recordit GIF](http://g.recordit.co/Qo8fhDv9GK.gif)
 
 
 ### Side navigation bar, here you can:
@@ -54,11 +51,9 @@
 - navigate to your profile page
 - logout
 
-> Navbar
-![Recordit GIF](http://g.recordit.co/MLuqJ2cy90.gif)
+Navbar </br> ![Recordit GIF](http://g.recordit.co/MLuqJ2cy90.gif)
 
-> My Week 
-![Recordit GIF](http://g.recordit.co/bFOWboH02T.gif) 
+My Week ![Recordit GIF](http://g.recordit.co/bFOWboH02T.gif) 
 
 ### Board Header, here you can:
 
@@ -68,14 +63,12 @@
 - extensive search and filter system
 - switch to the dashboard to view statistics about idividuals
 
-> Board Header 
-![Recordit GIF](http://g.recordit.co/GfxRa5q9Ve.gif)
+Board Header ![Recordit GIF](http://g.recordit.co/GfxRa5q9Ve.gif)
 
-> Board's Activity Log  
-![Recordit GIF](http://g.recordit.co/FhWx1cFsIr.gif) 
+Board's Activity Log </br> ![Recordit GIF](http://g.recordit.co/FhWx1cFsIr.gif) 
 
-Dashboard  
-![Recordit GIF](http://g.recordit.co/DMNIf03n1t.gif)  
+Dashboard  ![Recordit GIF](http://g.recordit.co/DMNIf03n1t.gif)  
+
 ---
 
 ## Installation
