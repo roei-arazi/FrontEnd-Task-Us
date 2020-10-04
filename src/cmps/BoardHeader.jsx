@@ -9,6 +9,7 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 // inside imports
 import { ActivitiesModal } from './ActivitiesModal';
 import { Filter } from './Filter';
+import { BoardHeaderModal } from './BoardHeaderModal';
 import socketService from '../services/socketService.js'
 import { Fade } from '@material-ui/core';
 
@@ -19,7 +20,7 @@ export class _BoardHeader extends React.Component {
         isFiltersOpen: false,
         isUsersOpen: false,
         elSetting: null,
-        isModalShown: false
+        isOptionsOpen:false
     }
     componentDidMount() {
         this.editableName = React.createRef();
@@ -114,6 +115,10 @@ export class _BoardHeader extends React.Component {
         return [firstNameChar, lastNameChar]
     }
 
+    toggleOptionsModal = () => {
+        this.setState({ isOptionsOpen: !this.state.isOptionsOpen })
+    }
+
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members, boardCreator } = this.state.board
@@ -150,12 +155,15 @@ export class _BoardHeader extends React.Component {
                         />
                     </h1>
                     <div className="board-header-right relative flex align-center">
-                        <div className="board-users flex justify-center" onClick={this.onToggleUsers}>
+                        <div className="board-users flex justify-center relative" onClick={this.onToggleUsers}>
                             {members.length === 0 && <div className="no-members-container relative">
                                 <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="" />
                                 <FiPlus className="no-members-icon-plus" />
                             </div>}
                             {members.length !== 0 && members.map((member, idx) => {
+                                if (idx > 2) return <div key={member._id} className="board-number-of-members absolute">
+                                    <span>{members.length > 9 ? '+9' : `+${members.length - 2}`}</span>
+                                </div>
                                 return <div key={idx} className="user-img-container">
                                     {
                                         member.imgUrl ? <img src={member.imgUrl} alt="" />
@@ -254,32 +262,53 @@ export class _BoardHeader extends React.Component {
                             </NavLink>
                         </p>
                     </div>
-                    <div className="header-options flex">
-                        {isBoardShown && <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>}
-                        <div className="relative">
-                            {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
-                            <button className="flex align-center" onClick={this.props.toggleModal}>
-                                <h3>{isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
-                            </button>
-                            <Fade in={this.props.isModalShown}>
-                                <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
-                                    <p onClick={this.props.showBoard}>Board</p>
-                                    <p onClick={this.props.showDashboard}>Dashboard</p>
-                                </div>
-                            </Fade>
+                    {window.innerWidth < 1050 ?
+                        <button onClick={this.toggleOptionsModal}>Menu</button>
+                        :
+                        <div className="header-options flex">
+                            {isBoardShown && <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>}
+                            <div className="relative">
+                                {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
+                                <button className="flex align-center" onClick={this.props.toggleModal}>
+                                    <h3>{isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
+                                </button>
+                                <Fade in={this.props.isModalShown}>
+                                    <div className={`options-modal absolute ${!this.props.isModalShown && 'hidden'}`}>
+                                        <p onClick={this.props.showBoard}>Board</p>
+                                        <p onClick={this.props.showDashboard}>Dashboard</p>
+                                    </div>
+                                </Fade>
+                            </div>
+                            {isBoardShown && <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
+                                <input ref={(input) => { this.searchInput = input; }} placeholder=" Search Tasks" type='text' onChange={this.props.handleSearch} />
+                                <GoSearch />
+                            </div>}
+                            {isBoardShown && <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}
+                                className="filters-outer-container relative flex align-center cursor-pointer"  >
+                                {isFiltering && <div className="filter-active-indicator"></div>}
+                                <VscListFilter className={isFiltering ? 'filter-active' : ''} />
+                                <h2 className={isFiltering ? 'filter-active' : ''}>Filter</h2>
+                                <Filter isFiltersOpen={this.state.isFiltersOpen} board={this.props.board} />
+                            </div>}
                         </div>
-                        {isBoardShown && <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
-                            <input ref={(input) => { this.searchInput = input; }} placeholder=" Search Tasks" type='text' onChange={this.props.handleSearch} />
-                            <GoSearch />
-                        </div>}
-                        {isBoardShown && <div onClick={!this.state.isFiltersOpen ? this.onToggleFilters : () => { }}
-                            className="filters-outer-container relative flex align-center cursor-pointer"  >
-                            {isFiltering && <div className="filter-active-indicator"></div>}
-                            <VscListFilter className={isFiltering ? 'filter-active' : ''} />
-                            <h2 className={isFiltering ? 'filter-active' : ''}>Filter</h2>
-                            <Filter isFiltersOpen={this.state.isFiltersOpen} board={this.props.board} />
-                        </div>}
-                    </div>
+                    }
+                    <Fade in={this.state.isOptionsOpen}>
+                        <div className="modal-screen-wrapper flex justify-center align-center" onClick={this.props.toggleModal}>
+                            <BoardHeaderModal
+                                isFiltersOpen={this.state.isFiltersOpen}
+                                onToggleFilters={this.onToggleFilters}
+                                isFiltering={isFiltering}
+                                showBoard={this.props.showBoard}
+                                showDashboard={this.props.showDashboard}
+                                handleSearch={this.props.handleSearch}
+                                board={this.props.board}
+                                toggleModal={this.props.toggleModal}
+                                isModalShown={this.props.isModalShown}
+                                isBoardShown={isBoardShown}
+                            />
+                        </div>
+                    </Fade>
+
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
                         <ActivitiesModal loggedUser={loggedUser} onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
                             boardName={this.state.board.name} activityLog={this.props.board.activityLog} />
