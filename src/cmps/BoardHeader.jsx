@@ -20,7 +20,6 @@ export class _BoardHeader extends React.Component {
         isFiltersOpen: false,
         isUsersOpen: false,
         elSetting: null,
-        isModalShown: false,
         isOptionsOpen:false
     }
     componentDidMount() {
@@ -297,15 +296,15 @@ export class _BoardHeader extends React.Component {
                         <div className="modal-screen-wrapper flex justify-center align-center" onClick={this.props.toggleModal}>
                             <BoardHeaderModal
                                 isFiltersOpen={this.state.isFiltersOpen}
-                                onToggleFilter={this.onToggleFilters}
+                                onToggleFilters={this.onToggleFilters}
                                 isFiltering={isFiltering}
-                                showBoard={this.state.showBoard}
-                                showDashboard={this.state.showDashboard}
+                                showBoard={this.props.showBoard}
+                                showDashboard={this.props.showDashboard}
                                 handleSearch={this.props.handleSearch}
                                 board={this.props.board}
-                                toggleModal={this.toggleModal}
-                                isModalShown={this.state.isModalShown}
-                                isBoardShown={this.state.isBoardShown}
+                                toggleModal={this.props.toggleModal}
+                                isModalShown={this.props.isModalShown}
+                                isBoardShown={isBoardShown}
                             />
                         </div>
                     </Fade>

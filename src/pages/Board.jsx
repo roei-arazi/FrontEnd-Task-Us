@@ -268,6 +268,7 @@ class _Board extends Component {
         this.setState({ isDashboardShown: true, isBoardShown: false, isModalShown: false })
     }
     toggleModal = () => {
+        console.log('hello');
         this.setState({ isModalShown: !this.state.isModalShown })
     }
     render() {
