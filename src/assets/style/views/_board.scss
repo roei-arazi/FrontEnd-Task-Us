@@ -11,13 +11,13 @@
             overflow-y: overlay;
             background-color: $colorBgBoardBars;
 
-            @media(max-width: 450px){
+            @media(max-width: 600px){
                 overflow-x: hidden;
             }
         }
     }
 
-    @media (max-width:450px) {
+    @media (max-width:600px) {
         .group-add-btn {
             position: fixed;
             bottom: 10px;

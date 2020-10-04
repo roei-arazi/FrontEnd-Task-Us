@@ -23,13 +23,16 @@
         height: 50%;
 
         h1 {
+            width: 50%;
             align-self: flex-end;
             font-size: 2rem;
         }
 
 
         .board-header-right {
+            width: 50%;
             align-self: flex-end;
+            justify-content: flex-end;
 
 
             .board-users {
@@ -227,8 +230,14 @@
     .board-header-footer {
         height: 50%;
 
+
         .board-header-footer-left {
             height: 100%;
+            width: 50%;
+
+            h3 {
+                width: 100%;
+            }
 
             .created-by {
                 padding-left: 7px;
@@ -261,6 +270,7 @@
             background-color: $buttonMainBg;
             border-radius: 15px;
             transition: .3s;
+            width: 100px;
 
             &:hover {
                 background-color: $buttonMainHover;

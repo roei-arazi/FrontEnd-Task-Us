@@ -62,7 +62,7 @@ class _MyWeek extends Component {
         return (
             <section className="my-week flex">
                 {
-                    window.innerWidth > 450 ?
+                    window.innerWidth > 600 ?
                         <React.Fragment>
                             <Navbar />
                             <Boardbar />

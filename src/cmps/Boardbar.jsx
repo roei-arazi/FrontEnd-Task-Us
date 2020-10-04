@@ -24,6 +24,7 @@ class _Boardbar extends Component {
         selectedBoardName: ''
     }
     componentDidMount() {
+      
         socketService.on('updatedBoard', updatedBoard => {
             this.props.recieveUpdate(updatedBoard)
         });
@@ -35,6 +36,11 @@ class _Boardbar extends Component {
         })
         socketService.emit('user', this.props.loggedUser._id)
         this.setState({ isShown: this.props.isBoardbarShown })
+        
+        if(window.innerWidth < 600) {
+            console.log('hi')
+            this.onToggleShown()
+        } 
     }
     componentWillUnmount() {
         socketService.off('updatedBoard')
@@ -74,6 +80,7 @@ class _Boardbar extends Component {
         }
     }
     onToggleShown = () => {
+        console.log('bye', )
         this.props.toggleBoardbar()
         this.setState({ isShown: !this.state.isShown })
     }
@@ -93,6 +100,7 @@ class _Boardbar extends Component {
         const { isShown, isModalShown, selectedBoardName } = this.state;
         const { loggedUser } = this.props;
         const filteredBoards = this.handleSearch()
+         
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
                 <div onClick={this.onToggleShown} className="board-bar-toggle-container">

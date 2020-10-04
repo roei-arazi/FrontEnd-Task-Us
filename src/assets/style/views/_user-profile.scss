@@ -116,7 +116,7 @@
                 }
             }
 
-            @media (max-width: 450px) {
+            @media (max-width: 600px) {
                 ::-webkit-scrollbar {
                     display: initial;
                 }
@@ -142,7 +142,7 @@
                 }
             }
 
-            @media(max-width:450px) {
+            @media(max-width:600px) {
                 flex-direction: column;
                 margin-top: 50px;
                 text-align: center;
@@ -154,7 +154,7 @@
             }
         }
 
-        @media(max-width:450px) {
+        @media(max-width:600px) {
             height: auto;
 
             hr {
