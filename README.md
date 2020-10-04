@@ -1,14 +1,16 @@
-***INSERT LOGO AND LINK TO THE WEBSITE HERE (include hyperlink in image)***
-<a href="http://fvcproductions.com"><img src="https://avatars1.githubusercontent.com/u/4284691?v=3&s=200" title="FVCproductions" alt="FVCproductions"></a>
+<a href="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"><img                  src="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"/></a>
 
 # Task-Us
 
 > Managing our work together.
 
+<img src="https://i.ibb.co/mhHy0bN/home.jpg?s=200" />
+
 ## About
 - **Working in a large scale company?**
   - Do you need to keep track of hundreds of tasks?
   - Need an efficient way to manage your co-workers / employees?
+  > Made with the latest Tech including React, Redux, SCSS, MongoDB, NodeJS, Express and more.
 
 ***Things you can do in our app***
 
@@ -24,16 +26,48 @@
 
 - Enjoy clean, responsive and intuitive UI to keep it simple.
 
-[![Build Status](https://travis-ci.org/doge/wow.svg)](https://travis-ci.org/doge/wow)
-[![Dependency Status](http://img.shields.io/gemnasium/doge/wow.svg)](https://gemnasium.com/doge/wow)
-[![Coverage Status](http://img.shields.io/coveralls/doge/wow.svg)](https://coveralls.io/r/doge/wow)
-[![Code Climate](http://img.shields.io/codeclimate/github/doge/wow.svg)](https://codeclimate.com/github/doge/wow)
-[![Gem Version](http://img.shields.io/gem/v/suchgem.svg)](https://rubygems.org/gems/suchgem)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
-[![Badges](http://img.shields.io/:badges-7/7-ff6799.svg)](https://github.com/badges/badgerbadgerbadger)
+
+## Parts of our app
+
+### Groups and Tasks
+
+- position tasks AND groups with drag and drop
+- change task description with content editable
+- change the task's status, priority , due-date
+- add tags for easier search
+- send updates and posts about individual tasks
+
+Task ![Recordit GIF](http://g.recordit.co/RUMaib3pvA.gif)
+
+Drag and Drop ![Recordit GIF](http://g.recordit.co/7BQdb1PWAK.gif)
+
+Posts </br> ![Recordit GIF](http://g.recordit.co/Qo8fhDv9GK.gif)
 
 
-*** USE RECORDIT TO UPLOAD DEMO GIFS ***
+### Side navigation bar, here you can:
+
+- check incoming notifications
+- navigate to "My Week" page
+- navigate to your profile page
+- logout
+
+Navbar </br> ![Recordit GIF](http://g.recordit.co/MLuqJ2cy90.gif)
+
+My Week ![Recordit GIF](http://g.recordit.co/bFOWboH02T.gif) 
+
+### Board Header, here you can:
+
+- Change the board's name and description
+- invite members to work on the board
+- check the activity log
+- extensive search and filter system
+- switch to the dashboard to view statistics about idividuals
+
+Board Header ![Recordit GIF](http://g.recordit.co/GfxRa5q9Ve.gif)
+
+Board's Activity Log </br> ![Recordit GIF](http://g.recordit.co/FhWx1cFsIr.gif) 
+
+Dashboard  ![Recordit GIF](http://g.recordit.co/DMNIf03n1t.gif)  
 
 ---
 
@@ -80,24 +114,12 @@ $ npm i
 ---
 
 ## Team
-*** UPLOAD USER IMAGES HERE ***
-| <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> |
+| <a href="https://github.com/liamzety" target="_blank">**Liam Zety**</a> | <a href="https://github.com/OsherK" target="_blank">**Osher Kabeda**</a> | <a href="https://github.com/FriZe6" target="_blank">**Roei Arazi**</a> |
 | :---: |:---:| :---:|
-| [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)    | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)  |
-| <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> |
+| [![Liam Zety](http://res.cloudinary.com/dtg7n0zye/image/upload/v1601298953/bdaamqpuvcx1tj1qyst3.jpg?s=200)](https://www.linkedin.com/in/liam-zety-0b157b1b6/)    | [![Osher Kabeda](https://cdn.discordapp.com/attachments/752472970047258644/760881627768291338/WIN_20200930_18_11_38_Pro.jpg?s=200)](https://github.com/OsherK) | [![Roei Arazi](https://media.discordapp.net/attachments/752472970047258644/760883616321503232/prrofile-pic.jpeg?s=200)](https://github.com/FriZe6)  |
+| <a href="https://github.com/liamzety" target="_blank">`https://github.com/liamzety`</a> | <a href="https://github.com/OsherK" target="_blank">`https://github.com/OsherK`</a> | <a href="https://github.com/FriZe6" target="_blank">`https://github.com/FriZe6`</a> |
 
-- You can just grab their GitHub profile image URL
-- You should probably resize their picture using `?s=200` at the end of the image URL.
 
----
-
-## Social
-
-Reach us out at one of the following places!
-
-- Insert social links here.
-
----
 
 ## License
 
