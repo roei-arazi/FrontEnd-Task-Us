@@ -175,7 +175,9 @@ class _Board extends Component {
         }
     }
     onEditTask = async (task, prevTask, desc) => {
-        if (lodash.isEqual(task, prevTask)) return;
+        console.log('Task:', task)
+        console.log('Preav task:', prevTask);
+        // if (lodash.isEqual(task, prevTask)) return;
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
         this.props.editTask(task, board, desc, this.props.loggedUser)
