@@ -14,8 +14,9 @@ componentDidMount() {
     this.searchInput = React.createRef();
 }
     render() {
+        
         return (
-            <div>
+            <section className="board-header-modal">
                <div onClick={!this.props.isFiltersOpen ? this.props.onToggleFilters : () => { }}
                                 className="filters-outer-container relative flex align-center cursor-pointer"  >
 
@@ -31,11 +32,12 @@ componentDidMount() {
                                 <input ref={(input) => { this.searchInput = input; }} placeholder=" Search Tasks" type='text' onChange={this.props.handleSearch} />
                                 <GoSearch />
                             </div>
-                            {this.props.isModalShown && <div className="modal-screen-wrapper" onClick={this.props.toggleModal}></div>}
+                        {/* MODAL */}
+                            {this.props.isModalShown && <section className="modal-screen-wrapper" onClick={this.props.toggleModal}></section>}
                                 <button className="flex align-center" onClick={this.props.toggleModal}>
                                     <h3>{this.props.isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
                                 </button>
-            </div>
+            </section>
         )
     }
 }
