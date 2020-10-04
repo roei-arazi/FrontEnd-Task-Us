@@ -7,6 +7,7 @@ import { RiLogoutBoxLine } from 'react-icons/ri'
 // inside imports
 import { Notifications } from './Notifications';
 import { markAsRead, removeNotifications, logout } from '../store/actions/userActions'
+import { AiOutlineUnorderedList } from 'react-icons/ai';
 
 class _Navbar extends Component {
     state = {
@@ -64,6 +65,7 @@ class _Navbar extends Component {
                             <Notifications goToUserProfile={this.goToUserProfile} removeNotifications={removeNotifications} loggedUser={loggedUser} />
                         }
                     </li>
+                    {window.innerWidth < 1050 && <AiOutlineUnorderedList onClick={() => this.props.history.push('/boards')} />}
                 </ul>
                 <div className="user-greeting">Hello {firstName || loggedUser.fullName}</div>
                 <ul className="navbar-links flex column space-around">

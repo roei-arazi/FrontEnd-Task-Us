@@ -1,7 +1,14 @@
 .boards-list {
     background-color: $colorBgBoardBars;
 
-    svg {
+    .remove-board-icon{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 1em; 
+    }
+
+    .add-group-icon { 
         position: fixed;
         bottom: 10px;
         right: 15px;
@@ -11,7 +18,7 @@
         border-radius: 50%;
         color: $buttonMainBg
     }
-
+ 
     .board-details {
         padding: 10px;
         border: 1px solid rgba($colorFontTaskGroup, .35);
