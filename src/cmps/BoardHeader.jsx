@@ -119,6 +119,7 @@ export class _BoardHeader extends React.Component {
         this.setState({ isOptionsOpen: !this.state.isOptionsOpen })
     }
 
+
     render() {
         if (!this.state._id) return <h1>Loading...</h1>
         const { members, boardCreator } = this.state.board
@@ -293,9 +294,13 @@ export class _BoardHeader extends React.Component {
                         </div>
                     }
                     <Fade in={this.state.isOptionsOpen}>
-                        <div className="modal-screen-wrapper flex justify-center align-center" onClick={this.props.toggleModal}>
+                        <div className="modal-screen-wrapper flex justify-center align-center" onClick={() => {
+                            this.toggleOptionsModal()
+                            this.props.toggleModal()
+                        }}>
                             <BoardHeaderModal
                                 isFiltersOpen={this.state.isFiltersOpen}
+                                toggleOptionsModal={this.toggleOptionsModal}
                                 onToggleFilters={this.onToggleFilters}
                                 isFiltering={isFiltering}
                                 showBoard={this.props.showBoard}

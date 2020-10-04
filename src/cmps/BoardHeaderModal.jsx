@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import { Fade } from '@material-ui/core';
+import React, { Component, Fragment } from 'react'
 import { GoSearch } from 'react-icons/go';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { VscListFilter } from 'react-icons/vsc';
@@ -7,16 +8,23 @@ import {Filter} from './Filter'
 export  class BoardHeaderModal extends Component {
 
     state = {
-
+        isInnerModal: false
     }
 
 componentDidMount() {
-    this.searchInput = React.createRef();
+        this.searchInput = React.createRef();
+    }
+toggleInnerModal = () => {
+    this.setState({isInnerModal: !this.state.isInnerModal})
 }
+closeInnerModal = () => {
+    this.setState({isInnerModal: false})
+}
+
     render() {
-        
+       const {isInnerModal} = this.state
         return (
-            <section className="board-header-modal">
+            <section onClick={ev => ev.stopPropagation()} className="board-header-modal">
                <div onClick={!this.props.isFiltersOpen ? this.props.onToggleFilters : () => { }}
                                 className="filters-outer-container relative flex align-center cursor-pointer"  >
 
@@ -33,10 +41,28 @@ componentDidMount() {
                                 <GoSearch />
                             </div>
                         {/* MODAL */}
-                            {this.props.isModalShown && <section className="modal-screen-wrapper" onClick={this.props.toggleModal}></section>}
-                                <button className="flex align-center" onClick={this.props.toggleModal}>
-                                    <h3>{this.props.isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
+                            <div  className="relative">
+                                <button className="flex align-center" onClick={this.toggleInnerModal}>
+                                    <h3 >{this.props.isBoardShown ? 'Board' : 'Dashboard'}</h3> <IoMdArrowDropdown />
                                 </button>
+                               {isInnerModal &&
+                               <div>
+                                <Fragment>
+                                    <div className={`options-modal absolute`}>
+                                        <p onClick={() => {
+                                            this.toggleInnerModal()
+                                                this.props.showBoard()
+                                        }}>Board</p>
+                                        <p onClick={() => {
+                                            this.toggleInnerModal()
+                                                this.props.showDashboard()
+                                        }}>Dashboard</p>
+                                    </div>
+                                    <div className="modal-screen-wrapper" onClick={this.closeInnerModal}></div>
+                                </Fragment>
+                                </div>
+                            }
+                            </div>
             </section>
         )
     }
