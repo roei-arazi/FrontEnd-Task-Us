@@ -31,9 +31,28 @@
         .board-header-right {
             align-self: flex-end;
 
+
             .board-users {
                 cursor: pointer;
                 text-align: center;
+
+                .board-number-of-members {
+                    font-family: monospace;
+                    font-size: 12px;
+                    width: 18px;
+                    height: 18px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: $buttonMainBg;
+                    color: $colorPlusCircleFont;
+                    border-radius: 50%;
+                    text-align: center;
+                    right: -5px;
+                    bottom: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
 
                 svg,
                 img {
