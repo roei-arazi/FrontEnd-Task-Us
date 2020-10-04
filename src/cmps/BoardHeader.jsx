@@ -20,7 +20,8 @@ export class _BoardHeader extends React.Component {
         isFiltersOpen: false,
         isUsersOpen: false,
         elSetting: null,
-        isModalShown: false
+        isModalShown: false,
+        isOptionsOpen:false
     }
     componentDidMount() {
         this.editableName = React.createRef();
@@ -293,10 +294,9 @@ export class _BoardHeader extends React.Component {
                         </div>
                     }
                     <Fade in={this.state.isOptionsOpen}>
-                        {this.props.isOptionsOpen && 
                         <div className="modal-screen-wrapper flex justify-center align-center" onClick={this.props.toggleModal}>
                         <BoardHeaderModal />
-                        </div>}
+                        </div>
                     </Fade>
 
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
