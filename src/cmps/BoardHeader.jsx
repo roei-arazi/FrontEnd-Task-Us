@@ -295,7 +295,16 @@ export class _BoardHeader extends React.Component {
                     }
                     <Fade in={this.state.isOptionsOpen}>
                         <div className="modal-screen-wrapper flex justify-center align-center" onClick={this.props.toggleModal}>
-                        <BoardHeaderModal />
+                            <BoardHeaderModal
+                                isFiltersOpen={this.state.isFiltersOpen}
+                                showBoard={this.state.showBoard}
+                                showDashboard={this.state.showDashboard}
+                                handleSearch={this.props.handleSearch}
+                                board={this.props.board}
+                                toggleModal={this.toggleModal}
+                                isModalShown={this.state.isModalShown}
+                                isBoardShown={this.state.isBoardShown}
+                            />
                         </div>
                     </Fade>
 
