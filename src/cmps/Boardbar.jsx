@@ -36,11 +36,7 @@ class _Boardbar extends Component {
         })
         socketService.emit('user', this.props.loggedUser._id)
         this.setState({ isShown: this.props.isBoardbarShown })
-        
-        if(window.innerWidth < 600) {
-            console.log('hi')
-            this.onToggleShown()
-        } 
+
     }
     componentWillUnmount() {
         socketService.off('updatedBoard')
@@ -80,7 +76,6 @@ class _Boardbar extends Component {
         }
     }
     onToggleShown = () => {
-        console.log('bye', )
         this.props.toggleBoardbar()
         this.setState({ isShown: !this.state.isShown })
     }
@@ -94,6 +89,9 @@ class _Boardbar extends Component {
         const filteredBoards =
             this.props.boards.filter(board => board.name.toLowerCase().includes(this.state.searchVal.toLowerCase()))
         return filteredBoards
+    }
+    handleSearchChange = ({target}) => {
+        this.setState({searchVal:target.value})
     }
     render() {
         const currBoardId = this.props.match.params.id;
@@ -111,7 +109,7 @@ class _Boardbar extends Component {
                     <h1>Boards</h1>
                     <BsFillPlusCircleFill onClick={this.onAddBoard} />
                 </div>}
-                {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search Board" />}
+                {isShown && <input onChange={this.handleSearchChange} type="text" placeholder="Search a Board" />}
                 <ul>
                     {isShown && filteredBoards.map((board, idx) => {
                         return <li
