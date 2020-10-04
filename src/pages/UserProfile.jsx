@@ -124,8 +124,8 @@ class _UserProfile extends Component {
             })
         })
         return (
-            <section className={`user-profile flex ${window.innerWidth < 450 && 'column'}`}>
-                {window.innerWidth > 450 ?
+            <section className={`user-profile flex ${window.innerWidth < 600 && 'column'}`}>
+                {window.innerWidth > 600 ?
                     <React.Fragment>
                         <Navbar />
                         <Boardbar />

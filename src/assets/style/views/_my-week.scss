@@ -1,7 +1,7 @@
 .my-week {
     position: relative;
 
-    @media (max-width: 450px) {
+    @media (max-width: 600px) {
         flex-direction: column;
     }
 
@@ -20,7 +20,7 @@
         height: 100vh;
         overflow-y: overlay;
 
-        @media (max-width: 450px) {
+        @media (max-width: 600px) {
             padding: 50px 15px 0;
             height: 92vh;
         }
@@ -52,7 +52,7 @@
             font-size: 1.9rem;
 
 
-            @media(max-width: 450px) {
+            @media(max-width: 600px) {
                 font-size: 1.4rem;
             }
         }
@@ -63,7 +63,7 @@
         height: 15vh;
         width: 500px;
 
-        @media(max-width: 450px) {
+        @media(max-width: 600px) {
 
             width: auto;
         }
@@ -109,7 +109,7 @@
                  border: 1px solid #c5c7d0;
                  margin-bottom: 10px;
      
-                 @media(max-width:450px) {
+                 @media(max-width:600px) {
                      height: 50px;
                  }
      
@@ -120,7 +120,7 @@
                  .left-column {
                      margin: 0 16px;
      
-                     @media(max-width:450px) {
+                     @media(max-width:600px) {
                          margin: 0 5px;
                      }
      
@@ -150,7 +150,7 @@
                      border-bottom-right-radius: 8px;
                      border-top-right-radius: 8px;
      
-                     @media (max-width: 450px) {
+                     @media (max-width: 600px) {
                          width: auto;
                      }
      
@@ -191,7 +191,7 @@
                          cursor: pointer;
                          transition: .3s;
      
-                         @media (max-width: 450px) {
+                         @media (max-width: 600px) {
                              width: 70px;
                          }
      

@@ -85,7 +85,7 @@ export class Group extends Component {
         return (
             <Draggable draggableId={group.id} index={index}>
                 {(provided, snapshot) =>
-                    <section key={group.id} className={`group ${window.innerWidth > 450 ? 'padding-y-45 padding-x-30' : 'padding-y-15'}`}
+                    <section key={group.id} className={`group ${window.innerWidth > 600 ? 'padding-y-45 padding-x-30' : 'padding-y-15'}`}
                         {...provided.draggableProps}
                         ref={provided.innerRef}>
                         <div className="group-header-container flex space-between align-center">
@@ -175,7 +175,7 @@ export class Group extends Component {
                                 <input ref={this.elInputAdd} className="padding-x-30" placeholder="+ Add Task" type="text" />
                             </form>
                         </div>
-                        {window.innerWidth > 450 &&
+                        {window.innerWidth > 600 &&
                             <section className="group-precent-container flex">
                                 <div className="group-precent flex">
                                     {status}

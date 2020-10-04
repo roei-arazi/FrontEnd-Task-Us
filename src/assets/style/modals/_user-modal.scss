@@ -22,7 +22,7 @@
             height: 100vh;
             position: absolute;
 
-            @media (max-width: 450px) {
+            @media (max-width: 600px) {
                 height: 92vh;
             }
 
@@ -54,14 +54,14 @@
                 flex-direction: column;
                 background-color: $colorBgBoardBars;
 
-                @media (max-width: 450px) {
+                @media (max-width: 600px) {
                     height: 50vh;
                 }
 
                 form {
                     margin-top: 40px;
 
-                    @media (max-width: 450px) {
+                    @media (max-width: 600px) {
                         margin-top: 15px;
 
                         input {
@@ -80,7 +80,7 @@
                             filter: brightness(80%);
                         }
 
-                        @media (max-width: 450px) {
+                        @media (max-width: 600px) {
                             margin-top: 15px;
                         }
                     }

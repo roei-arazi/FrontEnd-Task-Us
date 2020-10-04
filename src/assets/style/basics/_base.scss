@@ -215,7 +215,7 @@ div[role="menuContainer"]>div>ul {
   height: 100vh;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 600px) {
   .loader-container {
     img {
       width: 85vw;
@@ -242,7 +242,7 @@ div[role="menuContainer"]>div>ul {
   border-radius: 1px;
 }
 
-@media(max-width: 450px) {
+@media(max-width: 600px) {
 
   ::-webkit-scrollbar {
     display: none;

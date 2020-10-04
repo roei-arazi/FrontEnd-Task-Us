@@ -280,8 +280,8 @@ class _Board extends Component {
         }
         const filteredBoard = this.applyFilter(board, filterBy);
         return (
-            <section className={`board ${window.innerWidth > 450 ? 'flex' : 'flex column'}`}>
-                {window.innerWidth > 450 ?
+            <section className={`board ${window.innerWidth > 600 ? 'flex' : 'flex column'}`}>
+                {window.innerWidth > 600 ?
                     <React.Fragment>
                         <Navbar />
                         <Boardbar handleBoardBarSearch={this.handleBoardBarSearch} />
@@ -290,12 +290,12 @@ class _Board extends Component {
                     <MobileNav boardName={board.name} members={board.members} params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
-                    {window.innerWidth > 450 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
+                    {window.innerWidth > 600 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} users={users} showBoard={this.showBoard}
                         showDashboard={this.showDashboard} toggleModal={this.toggleModal} isModalShown={this.state.isModalShown}
                         isBoardShown={this.state.isBoardShown} />}
                     {this.state.isBoardShown ?
-                        <div className={`groups-container ${window.innerwidth > 450 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 450 && 94 + 'vh'}` }}>
+                        <div className={`groups-container ${window.innerwidth > 600 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 600 && 94 + 'vh'}` }}>
                             <DragDropContext
                                 onDragEnd={this.onDragEnd}>
                                 <Droppable droppableId={board._id} type="group">
@@ -314,7 +314,7 @@ class _Board extends Component {
                                     }
                                 </Droppable>
                             </DragDropContext>
-                            {window.innerWidth < 450 &&
+                            {window.innerWidth < 600 &&
                                 <BsFillPlusCircleFill className="group-add-btn" onClick={this.onAddGroup} />
                             }
                         </div>

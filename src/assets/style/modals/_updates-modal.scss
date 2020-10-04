@@ -4,7 +4,7 @@
     padding-top: 15px;
     padding-left: 15px;
 
-    @media(max-width:450px) {
+    @media(max-width:600px) {
         padding-top: 30px;
     }
 
@@ -12,7 +12,7 @@
         color: $buttonMainBg;
         transition: .3s;
 
-        @media(max-width:450px) {
+        @media(max-width:600px) {
             position: absolute;
             top: 10px;
             left: 10px;
@@ -27,7 +27,7 @@
 
         margin: 10px 15px 20px;
 
-        @media(max-width:450px) {
+        @media(max-width:600px) {
             margin-bottom: 5px;
             font-size: 1.2rem;
         }
@@ -79,7 +79,7 @@
                         background-color: $buttonMainHover;
                     }
 
-                    @media(max-width:450px) {
+                    @media(max-width:600px) {
                         position: relative;
                         top: auto;
                         left: auto;
@@ -390,7 +390,7 @@
                 position: absolute;
                 top: 0;
 
-                @media (max-width:450px) {
+                @media (max-width:600px) {
                     transform: translate(0, 0);
                 }
             }
