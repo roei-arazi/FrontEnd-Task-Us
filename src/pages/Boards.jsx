@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { BsFillPlusCircleFill, } from 'react-icons/bs';
 // inside imports
 import { loadUsers } from '../store/actions/userActions';
-import { addBoard, loadBoards } from '../store/actions/boardActions.js';
+import { addBoard, loadBoards, removeBoard } from '../store/actions/boardActions.js';
 import { MobileNav } from '../mobile-pages/MobileNav';
+import { FaTrash } from 'react-icons/fa';
 
 class _Boards extends Component {
     async componentDidMount() {
@@ -44,8 +45,9 @@ class _Boards extends Component {
                 <MobileNav loggedUser={this.props.loggedUser} />
                 <div className="boards-list flex column align-center relative">
                     {this.props.boards.map(board =>
-                        <div key={board._id} className="board-details flex column" onClick={() => this.goToBoard(board._id)}>
+                        <div key={board._id} className="board-details flex column relative" onClick={() => this.goToBoard(board._id)}>
                             <div className="board-details-header flex  space-between">
+                                <FaTrash className="remove-board-icon" onClick={() => this.props.removeBoard(board._id)} />
                                 <h2>{board.name}</h2>
                                 <div className="board-members-imgs flex">
                                     {board.members.map(member =>
@@ -64,7 +66,7 @@ class _Boards extends Component {
                             </div>
                         </div>
                     )}
-                    <BsFillPlusCircleFill onClick={this.onAddBoard} />
+                    <BsFillPlusCircleFill className="add-group-icon" onClick={this.onAddBoard} />
                 </div>
             </React.Fragment>
         )
@@ -80,6 +82,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     loadBoards,
     addBoard,
-    loadUsers
+    loadUsers,
+    removeBoard
 }
 export const Boards = connect(mapStateToProps, mapDispatchToProps)(_Boards);
