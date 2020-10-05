@@ -1,11 +1,12 @@
-import React from 'react';
-import { GoSearch } from 'react-icons/go'
-import { VscListFilter } from 'react-icons/vsc'
+import React, { Fragment } from 'react';
 import ContentEditable from 'react-contenteditable';
 import { NavLink, withRouter } from 'react-router-dom';
-import { FiMinus } from 'react-icons/fi';
-import { FiPlus } from 'react-icons/fi';
+import { FiMinus,FiPlus } from 'react-icons/fi';
+import { GoSearch } from 'react-icons/go'
+import { VscListFilter } from 'react-icons/vsc'
 import { IoMdArrowDropdown } from 'react-icons/io';
+import { BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs';
+
 // inside imports
 import { ActivitiesModal } from './ActivitiesModal';
 import { Filter } from './Filter';
@@ -117,6 +118,9 @@ export class _BoardHeader extends React.Component {
 
     toggleOptionsModal = () => {
         this.setState({ isOptionsOpen: !this.state.isOptionsOpen })
+    }
+    onCloseFilters = () => {
+        this.setState({isFiltersOpen: false})
     }
 
 
@@ -264,7 +268,33 @@ export class _BoardHeader extends React.Component {
                         </p>
                     </div>
                     {window.innerWidth < 1050 ?
-                        <button onClick={this.toggleOptionsModal}>Menu</button>
+                        <div className="relative">
+                        <BsThreeDots onClick={this.toggleOptionsModal}/>
+                        {this.state.isOptionsOpen && 
+                        <Fragment>
+                        <div className="modal-screen-wrapper flex justify-center align-center" onClick={() => {
+                            this.onCloseFilters()
+                            this.toggleOptionsModal()
+                            this.props.toggleModal()
+                        }}>
+                         </div>
+                            <BoardHeaderModal
+                                isFiltersOpen={this.state.isFiltersOpen}
+                                toggleOptionsModal={this.toggleOptionsModal}
+                                onToggleFilters={this.onToggleFilters}
+                                isFiltering={isFiltering}
+                                showBoard={this.props.showBoard}
+                                showDashboard={this.props.showDashboard}
+                                handleSearch={this.props.handleSearch}
+                                board={this.props.board}
+                                toggleModal={this.props.toggleModal}
+                                isModalShown={this.props.isModalShown}
+                                isBoardShown={isBoardShown}
+                            />
+                       </Fragment>
+                    }
+                        </div>
+                     
                         :
                         <div className="header-options flex">
                             {isBoardShown && <button className="new-group-btn" onClick={this.props.onAddGroup}>New Group</button>}
@@ -293,33 +323,16 @@ export class _BoardHeader extends React.Component {
                             </div>}
                         </div>
                     }
-                    <Fade in={this.state.isOptionsOpen}>
-                        <div className="modal-screen-wrapper flex justify-center align-center" onClick={() => {
-                            this.toggleOptionsModal()
-                            this.props.toggleModal()
-                        }}>
-                            <BoardHeaderModal
-                                isFiltersOpen={this.state.isFiltersOpen}
-                                toggleOptionsModal={this.toggleOptionsModal}
-                                onToggleFilters={this.onToggleFilters}
-                                isFiltering={isFiltering}
-                                showBoard={this.props.showBoard}
-                                showDashboard={this.props.showDashboard}
-                                handleSearch={this.props.handleSearch}
-                                board={this.props.board}
-                                toggleModal={this.props.toggleModal}
-                                isModalShown={this.props.isModalShown}
-                                isBoardShown={isBoardShown}
-                            />
-                        </div>
-                    </Fade>
+        
 
                     <div className={`${this.state.isActivitiesOpen && 'animate-side-modal'} side-modal`}>
                         <ActivitiesModal loggedUser={loggedUser} onClearLog={this.onClearLog} onToggleActivities={this.onToggleActivities}
                             boardName={this.state.board.name} activityLog={this.props.board.activityLog} />
                     </div>
                     {
-                        this.state.isFiltersOpen && <div onClick={this.onToggleFilters} className='modal-screen-wrapper'></div>
+                        window.innerWidth > 1050 &&
+                         this.state.isFiltersOpen &&
+                          <div onClick={this.onToggleFilters} className='modal-screen-wrapper'></div>
                     }
 
                     {

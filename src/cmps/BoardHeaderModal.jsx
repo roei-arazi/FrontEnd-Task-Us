@@ -1,4 +1,3 @@
-import { Fade } from '@material-ui/core';
 import React, { Component, Fragment } from 'react'
 import { GoSearch } from 'react-icons/go';
 import { IoMdArrowDropdown } from 'react-icons/io';
@@ -12,7 +11,7 @@ export  class BoardHeaderModal extends Component {
     }
 
 componentDidMount() {
-        this.searchInput = React.createRef();
+       
     }
 toggleInnerModal = () => {
     this.setState({isInnerModal: !this.state.isInnerModal})
@@ -24,7 +23,7 @@ closeInnerModal = () => {
     render() {
        const {isInnerModal} = this.state
         return (
-            <section onClick={ev => ev.stopPropagation()} className="board-header-modal">
+            <section onClick={ev => ev.stopPropagation()} className="board-header-modal absolute">
                <div onClick={!this.props.isFiltersOpen ? this.props.onToggleFilters : () => { }}
                                 className="filters-outer-container relative flex align-center cursor-pointer"  >
 
@@ -36,10 +35,10 @@ closeInnerModal = () => {
                                 <Filter isFiltersOpen={this.props.isFiltersOpen} board={this.props.board} />
                             </div>
 
-               <div onClick={() => this.searchInput.focus()} className="search-outer-container flex align-center">
-                                <input ref={(input) => { this.searchInput = input; }} placeholder=" Search Tasks" type='text' onChange={this.props.handleSearch} />
-                                <GoSearch />
-                            </div>
+        
+                                <input  placeholder=" Search Tasks" type='text' onChange={this.props.handleSearch} />
+                              
+                           
                         {/* MODAL */}
                             <div  className="relative">
                                 <button className="flex align-center" onClick={this.toggleInnerModal}>
@@ -52,10 +51,12 @@ closeInnerModal = () => {
                                         <p onClick={() => {
                                             this.toggleInnerModal()
                                                 this.props.showBoard()
+                                            this.props.toggleOptionsModal()
                                         }}>Board</p>
                                         <p onClick={() => {
                                             this.toggleInnerModal()
                                                 this.props.showDashboard()
+                                            this.props.toggleOptionsModal()
                                         }}>Dashboard</p>
                                     </div>
                                     <div className="modal-screen-wrapper" onClick={this.closeInnerModal}></div>

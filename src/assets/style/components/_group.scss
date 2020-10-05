@@ -1,206 +1,201 @@
 .group {
-    position: relative;
-    min-width: 1080px;
+  position: relative;
+  min-width: 1080px;
 
-    @media(max-width:600px) {
-        padding: 5px;
-        width: 100%;
-        overflow-x: overlay;
-        overflow-y: hidden;
-        height: auto;
-        min-width: auto;
+  @media (max-width: 600px) {
+    padding: 5px;
+    width: 100%;
+    overflow-x: overlay;
+    overflow-y: hidden;
+    height: auto;
+    min-width: auto;
+  }
+
+  svg {
+    font-size: 1.5rem;
+    transition: 0.3s;
+
+    &:hover {
+      color: $colorIconsTasksHover;
+    }
+  }
+
+  .group-header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .group-header-right {
+      > * {
+        width: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media (max-width: 600px) {
+        position: absolute;
+        right: -80px;
+        font-size: 0.8rem;
+        > * {
+          width: 70px;
+        }
+      }
     }
 
+    @media (max-width: 600px) {
+      .group-header-left {
+        margin-left: 28px;
+      }
+    }
 
+    .color-picker {
+      width: 120px;
+      height: 150px;
+      background-color: #fff;
+      z-index: 10000;
+      top: -10px;
+      left: 130px;
+      border-radius: 5px;
+      box-shadow: 0px 3px 10px -5px #484444;
+      cursor: auto;
+      background-color: #ffffff;
 
-    svg {
-        font-size: 1.5rem;
-        transition: .3s;
+      .color-pick {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 5px;
+        cursor: pointer;
+        transition: 0.3s;
 
         &:hover {
-            color: $colorIconsTasksHover;
+          width: 32px;
+          height: 32px;
+          margin: 4px;
         }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
+
+  .task-list {
+    min-height: 35px;
+  }
+
+  @media (max-width: 600px) {
+    min-height: 30px;
+  }
+
+  .task-add {
+    form {
+      width: 100%;
     }
 
-    .group-header-container {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
+    input {
+      height: 100%;
+      margin: 0;
+      text-align: initial;
+      font-family: font1;
+      font-size: 1em;
+      font-weight: 700;
+      background-color: #f7f7f7;
+      border: 1px solid transparent;
+      transition: 0.3s;
 
-        .group-header-right {
+      &::placeholder {
+        font-weight: 400;
+      }
 
-            >* {
-                width: 120px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+      &:hover {
+        border: 1px solid $colorFontTaskGroup;
+      }
 
-            @media(max-width: 600px) {
-                position: absolute;
-                right: -225px;
-                font-size: 0.8rem;
+      &:focus {
+        border: 1px solid $buttonMainBg;
+      }
+    }
+  }
 
-                >* {
-                    width: 70px;
-                }
-            }
-        }
+  .drag-icon {
+    transition: 0.3s;
 
-        @media (max-width: 600px) {
-
-            .group-header-left {
-                margin-left: 28px;
-            }
-        }
-
-        .color-picker {
-            width: 120px;
-            height: 150px;
-            background-color: #fff;
-            z-index: 10000;
-            top: -10px;
-            left: 130px;
-            border-radius: 5px;
-            box-shadow: 0px 3px 10px -5px #484444;
-            cursor: auto;
-            background-color: #ffffff;
-
-            .color-pick {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                margin: 5px;
-                cursor: pointer;
-                transition: .3s;
-
-                &:hover {
-                    width: 32px;
-                    height: 32px;
-                    margin: 4px;
-                }
-            }
-        }
+    svg {
+      color: $mainLightGrey;
+      cursor: grab;
+      margin: 0px 8px 0 12px;
     }
 
-    @media (max-width: 600px) {
-        font-size: 0.9rem;
+    &:hover,
+    &:active {
+      svg {
+        color: $mainBlack;
+      }
+    }
+  }
+
+  .group-precent-container {
+    margin-right: 30px;
+
+    [data-title]:hover:after {
+      font-size: 1rem;
+      width: max-content;
     }
 
-    .task-list {
-        min-height: 35px;
+    height: 25px;
+    position: absolute;
+    right: 0px;
+
+    .group-precent {
+      margin-right: 120px;
+      width: 120px;
+      background-color: $emptyStatusBg;
+
+      .precent-bar {
+        height: 100%;
+
+        &:hover {
+          z-index: 1;
+          transform: scale(1.1);
+        }
+
+        &.stuck {
+          background-color: #e44258;
+        }
+
+        &.working {
+          background-color: #fdab3d;
+        }
+
+        &.done {
+          background-color: #00ca72;
+        }
+
+        &.low {
+          background-color: #7bb0ae;
+        }
+
+        &.medium {
+          background-color: #a028c7;
+        }
+
+        &.high {
+          background-color: #e82d2d;
+        }
+      }
     }
-
-    @media (max-width: 600px) {
-        min-height: 30px;
-    }
-
-    .task-add {
-        form {
-            width: 100%;
-        }
-
-        input {
-            height: 100%;
-            margin: 0;
-            text-align: initial;
-            font-family: font1;
-            font-size: 1em;
-            font-weight: 700;
-            background-color: #f7f7f7;
-            border: 1px solid transparent;
-            transition: .3s;
-
-            &::placeholder {
-                font-weight: 400;
-            }
-
-            &:hover {
-                border: 1px solid $colorFontTaskGroup;
-            }
-
-            &:focus {
-                border: 1px solid $buttonMainBg;
-            }
-        }
-    }
-
-    .drag-icon {
-        transition: .3s;
-
-        svg {
-            color: $mainLightGrey;
-            cursor: grab;
-            margin: 0px 8px 0 12px;
-        }
-
-        &:hover,
-        &:active {
-            svg {
-                color: $mainBlack;
-            }
-        }
-    }
-
-    .group-precent-container {
-        margin-right: 30px;
-
-        [data-title]:hover:after {
-            font-size: 1rem;
-            width: max-content;
-        }
-
-        height: 25px;
-        position: absolute;
-        right: 0px;
-
-        .group-precent {
-            margin-right: 120px;
-            width: 120px;
-            background-color: $emptyStatusBg;
-
-            .precent-bar {
-                height: 100%;
-
-                &:hover {
-                    z-index: 1;
-                    transform: scale(1.1);
-                }
-
-                &.stuck {
-                    background-color: #e44258;
-                }
-
-                &.working {
-                    background-color: #fdab3d;
-                }
-
-                &.done {
-                    background-color: #00ca72;
-                }
-
-                &.low {
-                    background-color: #7bb0ae;
-                }
-
-                &.medium {
-                    background-color: #a028c7;
-                }
-
-                &.high {
-                    background-color: #e82d2d;
-                }
-            }
-        }
-    }
+  }
 }
 
 .drag-over {
-    transition: 0.3s ease;
-    background-color: rgba($mainLightGrey, 0.3)
+  transition: 0.3s ease;
+  background-color: rgba($mainLightGrey, 0.3);
 }
 
 .delete-group-icon,
 .color-group-icon {
-    margin-right: 8px;
+  margin-right: 8px;
 }
