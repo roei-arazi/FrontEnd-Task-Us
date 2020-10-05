@@ -17,7 +17,6 @@ export class _MobActivitiesModal extends Component {
         searchVal: '',
     }
     async componentDidMount() {
-        console.log('AM I HERE',)
         try {
             if (!this.props.boards || !this.props.boards.length) {
                 await this.props.loadBoards();
@@ -110,7 +109,6 @@ export class _MobActivitiesModal extends Component {
                 return activity
             })
         }
-        console.log('BOARD:', board)
         this.props.updateBoard(board, '', this.props.loggedUser)
         this.setState({ isActivitiesOpen: !this.state.isActivitiesOpen })
         this.props.history.push(`/board/${this.props.match.params.id}`)

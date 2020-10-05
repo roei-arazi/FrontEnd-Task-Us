@@ -45,7 +45,6 @@ async function getUserById(userId) {
 }
 async function login(userCred) {
     try {
-        console.log('USEr?', userCred)
         const user = await httpService.post('auth/login', userCred);
         return _handleLogin(user)
     } catch (err) {

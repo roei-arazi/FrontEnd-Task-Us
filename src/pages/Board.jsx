@@ -175,8 +175,6 @@ class _Board extends Component {
         }
     }
     onEditTask = async (task, prevTask, desc) => {
-        console.log('Task:', task)
-        console.log('Preav task:', prevTask);
         // if (lodash.isEqual(task, prevTask)) return;
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
@@ -268,7 +266,6 @@ class _Board extends Component {
         this.setState({ isDashboardShown: true, isBoardShown: false, isModalShown: false })
     }
     toggleModal = () => {
-        console.log('hello');
         this.setState({ isModalShown: !this.state.isModalShown })
     }
     render() {

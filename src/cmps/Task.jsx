@@ -81,8 +81,8 @@ class _Task extends Component {
     openModal = (data, ev) => {
         const translateY = ev.clientY > window.innerHeight / 2 ? '-100%' : '0';
         const translateX = ev.clientX > window.innerWidth / 2 ? '-100%' : '0';
-        const modalPosition = {top: ev.clientY, left: ev.clientX, transform: `translate(${translateX}, ${translateY})`};
-        this.setState({modalPosition})
+        const modalPosition = { top: ev.clientY, left: ev.clientX, transform: `translate(${translateX}, ${translateY})` };
+        this.setState({ modalPosition })
         switch (data) {
             case 'status':
                 this.setState({ isStatusShown: true })
@@ -190,12 +190,13 @@ class _Task extends Component {
                                                 }
                                             }} />
                                     </h2>
-                                    <div onClick={(ev) => this.openModal('updates', ev)} className="notes-container relative grow"><BsChatDots />
-                                        {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
-                                    </div>
+
                                 </div>
                             </div>
                             <div className="task-right flex align-center">
+                                <div onClick={(ev) => this.openModal('updates', ev)} className="notes-container relative grow"><BsChatDots />
+                                    {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
+                                </div>
                                 <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask}

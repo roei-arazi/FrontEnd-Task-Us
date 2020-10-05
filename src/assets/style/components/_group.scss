@@ -25,6 +25,7 @@
     justify-content: space-between;
     margin-bottom: 10px;
 
+    
     .group-header-right {
       > * {
         width: 120px;
@@ -33,21 +34,24 @@
         align-items: center;
       }
 
-      @media (max-width: 600px) {
-        position: absolute;
-        right: -80px;
+    }
+    
+    @media (max-width: 600px) { 
+      width: 635px;
+      
+      .group-header-right{
         font-size: 0.8rem;
         > * {
           width: 70px;
         }
       }
-    }
 
-    @media (max-width: 600px) {
       .group-header-left {
         margin-left: 28px;
       }
     }
+
+ 
 
     .color-picker {
       width: 120px;
