@@ -53,7 +53,7 @@ export class Tags extends Component {
     render() {
         if (!this.state.tags || this.state.tags === 0) return <h1>no tags</h1>
         return (
-            <div onClick={() => this.props.openModal('tags')} className="label-container tags relative">
+            <div onClick={(ev) => this.props.openModal('tags', ev)} className="label-container tags relative">
                 <div className="task-label-name flex justify-center align-center ">
                     {this.state.tags.map((tag, idx) => {
                         if (idx > 2) return []

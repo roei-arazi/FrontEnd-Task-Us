@@ -41,7 +41,11 @@ class _Task extends Component {
             isPriorityShown: false,
             isUsersShown: false,
             isUpdatesShown: false,
-            isTagsShown: false
+            isTagsShown: false,
+            modalPosition: {
+                top: 0,
+                left: 0
+            }
         })
     }
     componentWillUnmount() {
@@ -74,7 +78,9 @@ class _Task extends Component {
             this.props.onEditTask(this.state.task, this.props.task, desc)
         })
     }
-    openModal = (data) => {
+    openModal = (data, ev) => {
+        const modalPosition = {top: ev.clientY, left: ev.clientX};
+        this.setState({modalPosition})
         switch (data) {
             case 'status':
                 this.setState({ isStatusShown: true })
@@ -138,7 +144,7 @@ class _Task extends Component {
     render() {
         if (!this.state.task) return <h1>Loading...</h1>
         const { name, members, status, priority, dueDate, updates, id } = this.state.task;
-        const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown } = this.state
+        const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown, modalPosition } = this.state
         return (
             <React.Fragment>
                 {isUpdatesShown &&
@@ -182,7 +188,7 @@ class _Task extends Component {
                                                 }
                                             }} />
                                     </h2>
-                                    <div onClick={() => this.openModal('updates')} className="notes-container relative grow"><BsChatDots />
+                                    <div onClick={(ev) => this.openModal('updates', ev)} className="notes-container relative grow"><BsChatDots />
                                         {(updates.length !== 0) && <div className="task-number-of-imgs flex justify-center align-center"><span>{updates.length}</span></div>}
                                     </div>
                                 </div>
@@ -190,15 +196,19 @@ class _Task extends Component {
                             <div className="task-right flex align-center">
                                 <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
-                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask} />
+                                    onRemoveMemberFromTask={this.onRemoveMemberFromTask}
+                                    modalPosition={modalPosition} />
                                 <Status status={status} isStatusShown={isStatusShown}
-                                    handleChange={this.handleChange} openModal={this.openModal} />
+                                    handleChange={this.handleChange} openModal={this.openModal}
+                                    modalPosition={modalPosition} />
                                 <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={priority} isPriorityShown={isPriorityShown}
-                                    openModal={this.openModal} handleChange={this.handleChange} />
+                                    openModal={this.openModal} handleChange={this.handleChange}
+                                    modalPosition={modalPosition} />
                                 <Tags onEditTags={this.onEditTags}
                                     task={this.state.task} isTagsShown={isTagsShown}
-                                    openModal={this.openModal} handleChange={this.handleChange} />
+                                    openModal={this.openModal} handleChange={this.handleChange}
+                                    modalPosition={modalPosition} />
                             </div>
                         </section>
                     )}

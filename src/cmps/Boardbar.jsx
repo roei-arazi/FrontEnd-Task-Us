@@ -98,7 +98,7 @@ class _Boardbar extends Component {
         const { isShown, isModalShown, selectedBoardName } = this.state;
         const { loggedUser } = this.props;
         const filteredBoards = this.handleSearch()
-         
+         if(window.innerWidth <= 1050) return <div></div>
         return (
             <section className={`boardbar fixed column ${isShown && 'board-bar-shown'}`}>
                 <div onClick={this.onToggleShown} className="board-bar-toggle-container">

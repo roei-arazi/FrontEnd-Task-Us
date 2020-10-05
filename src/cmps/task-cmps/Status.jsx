@@ -5,7 +5,7 @@ export function Status(props) {
     return (
         <div className="label-container relative flex align-center ">
 
-            <div className={`label-box ${props.status.split(" ")[0].toLowerCase()}`} onClick={() => props.openModal('status')}>
+            <div className={`label-box ${props.status.split(" ")[0].toLowerCase()}`} onClick={(ev) => props.openModal('status', ev)}>
                 <div className="task-label-name flex align-center justify-center">
                     <p>{props.status === 'empty' ? ' ' : props.status}</p>
                 </div>

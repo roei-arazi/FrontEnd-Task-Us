@@ -4,7 +4,7 @@ import { Fade } from '@material-ui/core'
 export function Priority(props) {
     return (
         <div className="label-container relative flex align-center">
-            <div className={`label-box ${props.priority.toLowerCase()}`} onClick={() => props.openModal('priority')}>
+            <div className={`label-box ${props.priority.toLowerCase()}`} onClick={(ev) => props.openModal('priority', ev)}>
                 <div className="task-label-name flex align-center justify-center">
                     <p>{props.priority}</p>
                 </div>
