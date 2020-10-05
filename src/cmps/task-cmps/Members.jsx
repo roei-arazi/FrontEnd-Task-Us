@@ -42,7 +42,7 @@ export function Members(props) {
                 </div>}
             <Fade in={props.isUsersShown} >
                 <div  style={{modalPosition}} className="users-modal modal-fade-in absolute">
-                    <div className="task-users-box">
+                    <div className="task-users-box"> 
                         <h3>Task Members</h3>
                         {props.members.map((member, idx) =>
                             <section key={idx} className="user-box flex space-between align-center">
