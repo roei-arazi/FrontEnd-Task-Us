@@ -2,6 +2,7 @@ import React from 'react'
 import { Fade } from '@material-ui/core'
 
 export function Priority(props) {
+    const { modalPosition } = props;
     return (
         <div className="label-container relative flex align-center">
             <div className={`label-box ${props.priority.toLowerCase()}`} onClick={(ev) => props.openModal('priority', ev)}>
@@ -9,7 +10,7 @@ export function Priority(props) {
                     <p>{props.priority}</p>
                 </div>
                 <Fade in={props.isPriorityShown} >
-                    <div className="label-list absolute flex column align-center modal-fade-in">
+                    <div style={modalPosition} className="label-list fixed flex column align-center modal-fade-in">
                         <section className="label-selector flex align-center justify-center low" onClick={() => props.handleChange('Low', 'priority')}>
                             <p>Low</p>
                         </section>

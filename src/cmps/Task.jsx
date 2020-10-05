@@ -79,7 +79,9 @@ class _Task extends Component {
         })
     }
     openModal = (data, ev) => {
-        const modalPosition = {top: ev.clientY, left: ev.clientX};
+        const translateY = ev.clientY > window.innerHeight / 2 ? '-100%' : '0';
+        const translateX = ev.clientX > window.innerWidth / 2 ? '-100%' : '0';
+        const modalPosition = {top: ev.clientY, left: ev.clientX, transform: `translate(${translateX}, ${translateY})`};
         this.setState({modalPosition})
         switch (data) {
             case 'status':
@@ -201,7 +203,7 @@ class _Task extends Component {
                                 <Status status={status} isStatusShown={isStatusShown}
                                     handleChange={this.handleChange} openModal={this.openModal}
                                     modalPosition={modalPosition} />
-                                <Date dueDate={dueDate} handleDateChange={this.handleDateChange} />
+                                <Date modalPosition={modalPosition} dueDate={dueDate} handleDateChange={this.handleDateChange} />
                                 <Priority priority={priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange}
                                     modalPosition={modalPosition} />

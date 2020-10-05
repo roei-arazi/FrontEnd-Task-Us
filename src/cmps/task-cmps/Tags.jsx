@@ -52,6 +52,7 @@ export class Tags extends Component {
     }
     render() {
         if (!this.state.tags || this.state.tags === 0) return <h1>no tags</h1>
+        const {modalPosition} = this.props;
         return (
             <div onClick={(ev) => this.props.openModal('tags', ev)} className="label-container tags relative">
                 <div className="task-label-name flex justify-center align-center ">
@@ -70,7 +71,7 @@ export class Tags extends Component {
                     })}
                 </div>
                 <Fade in={this.props.isTagsShown}>
-                    <div className="label-list tags-modal absolute flex column align-center ">
+                    <div style={modalPosition} className="label-list tags-modal fixed flex column align-center ">
                         <div className="tag-add-container  flex justify-center align-center">
                             <BsBookmarkPlus onClick={(ev) => {
                                 this.onAddTag()

@@ -15,7 +15,7 @@ export function Members(props) {
 
     const usersToAdd = props.users.filter(user => !props.members.some(member => member._id === user._id))
     const {modalPosition} = props;
-    console.log('position:', modalPosition);
+    
     return (
         <div className="user-img-container relative flex justify-center align-center" onClick={(ev) => props.openModal('users', ev)}>
             {props.members.length ? <div className="member-img-container flex relative ">
@@ -41,7 +41,7 @@ export function Members(props) {
                     <FiPlus className="no-members-icon-plus" />
                 </div>}
             <Fade in={props.isUsersShown} >
-                <div  style={{modalPosition}} className="users-modal modal-fade-in absolute">
+                <div  style={{...modalPosition}} className="users-modal modal-fade-in fixed">
                     <div className="task-users-box"> 
                         <h3>Task Members</h3>
                         {props.members.map((member, idx) =>
