@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { VscBell } from 'react-icons/vsc'
-import { BsCalendar } from 'react-icons/bs'
+import { BsCalendar, BsCardList } from 'react-icons/bs'
 import { RiLogoutBoxLine } from 'react-icons/ri'
 // inside imports
 import { Notifications } from './Notifications';
 import { markAsRead, removeNotifications, logout } from '../store/actions/userActions'
-import { AiOutlineUnorderedList } from 'react-icons/ai';
 
 class _Navbar extends Component {
     state = {
@@ -65,7 +64,9 @@ class _Navbar extends Component {
                             <Notifications goToUserProfile={this.goToUserProfile} removeNotifications={removeNotifications} loggedUser={loggedUser} />
                         }
                     </li>
-                    {window.innerWidth < 1050 && <AiOutlineUnorderedList onClick={() => this.props.history.push('/boards')} />}
+                    {window.innerWidth < 1050 && <li data-title="Boards List" className="icon-container cursor-pointer">
+                        <BsCardList  onClick={() => this.props.history.push('/boards')} />
+                        </li>}
                 </ul>
                 <div className="user-greeting">Hello {firstName || loggedUser.fullName}</div>
                 <ul className="navbar-links flex column space-around">
