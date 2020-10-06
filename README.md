@@ -1,6 +1,6 @@
 <a href="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"><img                  src="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"/></a>
 
-***Check it out LIVE*** https://task-us.herokuapp.com/#/
+***Check it out LIVE <a href="https://task-us.herokuapp.com/#/">Task-Us</a>*** 
 
 # Task-Us
 
