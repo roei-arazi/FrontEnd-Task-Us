@@ -133,7 +133,7 @@ export class _BoardHeader extends React.Component {
         const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity[loggedUser._id])
         const activitiesRead = this.props.board.activityLog.filter(activity => activity[loggedUser._id])
         return (
-            <section className="board-header flex column padding-x-30 padding-y-30">
+            <section className="board-header flex column padding-x-30 ">
                 <div className="board-header-header flex space-between grow align-center">
                     <h1 className="flex align-center">
                         <ContentEditable
