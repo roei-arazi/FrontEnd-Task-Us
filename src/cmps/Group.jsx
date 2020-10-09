@@ -42,7 +42,7 @@ export class Group extends Component {
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
     handleColorsOpen = (ev) => {
-        this.setState({ elGroupColors: ev.currentTarget })
+        if(this.props.isAuth) this.setState({ elGroupColors: ev.currentTarget })
     }
     handleColorsToggle = () => {
         this.setState({ elGroupColors: !this.state.elGroupColors })
@@ -81,7 +81,7 @@ export class Group extends Component {
         const priority = this.convertToBar('priority')
         const status = this.convertToBar('status')
         const { name, ElGroupSettings, elGroupColors } = this.state;
-        const { group, index } = this.props;
+        const { group, index, isAuth } = this.props;
         return (
             <Draggable draggableId={group.id} index={index}>
                 {(provided, snapshot) =>
@@ -99,7 +99,7 @@ export class Group extends Component {
                                     open={Boolean(ElGroupSettings)}
                                     onClose={this.handleMenuClose}>
                                     <MenuItem onClick={() => {
-                                        this.props.onRemoveGroup(group.id)
+                                        if(this.props.isAuth) this.props.onRemoveGroup(group.id)
                                     }}>
                                         <AiOutlineDelete className="delete-group-icon" /> Delete Group
                                     </MenuItem>
@@ -129,7 +129,7 @@ export class Group extends Component {
                                         className="content-editable cursor-initial"
                                         innerRef={this.contentEditable}
                                         html={name} // innerHTML of the editable div
-                                        disabled={false}       // use true to disable editing
+                                        disabled={!isAuth}       // use true to disable editing
                                         onChange={this.handleChange} // handle innerHTML change
                                         onBlur={() => {
                                             this.props.onEditGroup(group.id, this.state.name, 'name')
@@ -156,7 +156,7 @@ export class Group extends Component {
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}>
                                     {group.tasks.map((task, index) => {
-                                        return <Task onToggleUpdates={this.props.onToggleUpdates}
+                                        return <Task onToggleUpdates={this.props.onToggleUpdates} isAuth={isAuth}
                                             onEditTask={this.props.onEditTask} index={index}
                                             onRemoveTask={this.props.onRemoveTask} key={task.id}
                                             group={group} task={task} users={this.props.users} />

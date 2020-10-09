@@ -275,6 +275,7 @@ class _Board extends Component {
     checkIfBoardMember = () => {
         const { loggedUser } = this.props;
         const board = this._getCurrBoard()
+        console.log('got board:', board);
         return loggedUser.isAdmin || board.members.some(member => member._id === loggedUser._id) 
     }
     render() {
@@ -287,6 +288,7 @@ class _Board extends Component {
                 </div>
             )
         }
+        const isAuth = this.checkIfBoardMember();
         const filteredBoard = this.applyFilter(board, filterBy);
         return (
             <section className={`board ${window.innerWidth > 600 ? 'flex' : 'flex column'}`}>
@@ -299,7 +301,7 @@ class _Board extends Component {
                     <MobileNav boardName={board.name} members={board.members} params={this.props.match.params} loggedUser={this.props.loggedUser} />
                 }
                 <div className="board-container">
-                    {window.innerWidth > 600 && <BoardHeader filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
+                    {window.innerWidth > 600 && <BoardHeader isAuth={isAuth} filterBy={filterBy} loggedUser={this.props.loggedUser} board={board} onAddGroup={this.onAddGroup} onEditBoard={this.onEditBoard}
                         handleSearch={this.handleSearch} users={users} showBoard={this.showBoard}
                         showDashboard={this.showDashboard} toggleModal={this.toggleModal} isModalShown={this.state.isModalShown}
                         isBoardShown={this.state.isBoardShown} />}
@@ -313,7 +315,7 @@ class _Board extends Component {
                                             ref={provided.innerRef}
                                             {...provided.droppableProps} >
                                             {filteredBoard.groups.map((group, index) => {
-                                                return <Group key={group.id} index={index}
+                                                return <Group key={group.id} index={index} isAuth={isAuth}
                                                     onEditTask={this.onEditTask} onAddTask={this.onAddTask} onRemoveTask={this.onRemoveTask}
                                                     onRemoveGroup={this.onRemoveGroup} onEditGroup={this.onEditGroup}
                                                     onChangeGroupColor={this.onChangeGroupColor} group={group} users={board.members} />
