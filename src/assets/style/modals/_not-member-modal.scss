@@ -1,0 +1,16 @@
+.not-member-modal {
+    bottom: 10px;
+    z-index: 1;
+    right: 10px;
+    padding: 15px;
+    color: #f1f1f1;
+    background: rgba($pink,0.95);
+    width: 210px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 6px 0px #343434;
+
+    P:first-child {
+        margin-bottom: 15px;
+    }
+}

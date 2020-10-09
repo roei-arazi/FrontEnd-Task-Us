@@ -60,6 +60,7 @@ class _Task extends Component {
         this.setState({ task: { ...this.state.task, name: ev.target.value } });
     }
     handleDateChange = date => {
+        if(!this.props.isAuth) return
         const prevDate = moment(this.state.task.dueDate).format('DD/MMM/YYYY')
         const changedDate = moment(date).format('DD/MMM/YYYY')
         if (prevDate === changedDate) return

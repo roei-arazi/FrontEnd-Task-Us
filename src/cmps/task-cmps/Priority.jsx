@@ -2,15 +2,20 @@ import React from 'react'
 import { Fade } from '@material-ui/core'
 
 export function Priority(props) {
-    const { modalPosition } = props;
+    const { modalPosition, isAuth } = props;
     return (
         <div className="label-container relative flex align-center">
-            <div className={`label-box ${props.priority.toLowerCase()}`} onClick={(ev) => props.openModal('priority', ev)}>
+            <div className={`label-box ${props.priority.toLowerCase()}`} onClick={(ev) => {
+                if (!isAuth) return
+                props.openModal('priority', ev)
+            }}>
                 <div className="task-label-name flex align-center justify-center">
                     <p>{props.priority}</p>
                 </div>
                 <Fade in={props.isPriorityShown} >
-                    <div style={modalPosition} className="label-list fixed flex column align-center modal-fade-in">
+                    <div onClick={(ev) =>
+                        ev.stopPropagation()
+                    } style={modalPosition} className="label-list fixed flex column align-center modal-fade-in">
                         <section className="label-selector flex align-center justify-center low" onClick={() => props.handleChange('Low', 'priority')}>
                             <p>Low</p>
                         </section>

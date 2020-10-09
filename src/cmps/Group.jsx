@@ -99,6 +99,7 @@ export class _Group extends Component {
                     <section key={group.id} className={`group ${window.innerWidth > 600 ? 'padding-y-45 padding-x-30' : 'padding-y-15'}`}
                         {...provided.draggableProps}
                         ref={provided.innerRef}>
+                    
                         <div className="group-header-container flex space-between align-center">
                             <div className="group-header-left align-center flex relative">
                                 <IoIosArrowDropdownCircle style={{ color: group.color }}

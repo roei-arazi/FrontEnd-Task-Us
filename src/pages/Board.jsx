@@ -59,8 +59,8 @@ class _Board extends Component {
     onEditBoard = async (newBoard, desc) => {
         const { loggedUser } = this.props;
 
-      this.checkIfBoardMember()
-      
+        this.checkIfBoardMember()
+
         this.props.updateBoard(newBoard, desc, loggedUser)
         userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
         if (desc) this.displayPopup('Updated board.')
@@ -178,7 +178,7 @@ class _Board extends Component {
     }
     onEditTask = async (task, prevTask, desc) => {
 
-       if (!this.checkIfBoardMember()) return
+        if (!this.checkIfBoardMember()) return
 
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
@@ -276,7 +276,7 @@ class _Board extends Component {
         const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         console.log('got board:', board);
-        return loggedUser.isAdmin || board.members.some(member => member._id === loggedUser._id) 
+        return loggedUser.isAdmin || board.members.some(member => member._id === loggedUser._id)
     }
     render() {
         const board = this._getCurrBoard()
@@ -307,6 +307,18 @@ class _Board extends Component {
                         isBoardShown={this.state.isBoardShown} />}
                     {this.state.isBoardShown ?
                         <div className={`groups-container ${window.innerwidth > 600 && 'padding-x-30'}`} style={{ height: `${window.innerWidth < 600 && 94 + 'vh'}` }}>
+                                {
+                                !isAuth &&
+                                <div className="fixed not-member-modal">
+                                    <p>
+                                         You are not a member of this board.
+                                    </p>
+                                     <p>
+                                        Most actions will be restricted.
+                                    </p>
+                                </div>
+                                }
+                            
                             <DragDropContext
                                 onDragEnd={this.onDragEnd}>
                                 <Droppable droppableId={board._id} type="group">
