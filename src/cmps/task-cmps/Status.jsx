@@ -11,7 +11,9 @@ export function Status(props) {
                     <p>{props.status === 'empty' ? ' ' : props.status}</p>
                 </div>
                 <Fade in={props.isStatusShown} >
-                    <div style={modalPosition} className="label-list fixed flex column align-center modal-fade-in">
+                    <div onClick={ (ev) =>
+                          ev.stopPropagation()
+                    } style={modalPosition} className="label-list fixed flex column align-center modal-fade-in">
                         <section className="label-selector flex align-center justify-center stuck" onClick={() => props.handleChange('Stuck', 'status')}>
                             <p>Stuck</p>
                         </section>
