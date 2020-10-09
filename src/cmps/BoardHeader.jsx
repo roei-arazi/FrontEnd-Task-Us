@@ -141,7 +141,7 @@ export class _BoardHeader extends React.Component {
                             className="content-editable cursor-initial"
                             innerRef={this.editableName}
                             html={this.state.board.name}
-                            disabled={false}
+                            disabled={!this.props.isAuth}
                             onChange={this.handleChangeName}
                             onBlur={() => {
                                 if (this.props.board.name === this.state.board.name) return
@@ -243,7 +243,7 @@ export class _BoardHeader extends React.Component {
                                 className="content-editable cursor-initial"
                                 innerRef={this.editableDescription}
                                 html={this.state.board.desc} // innerHTML of the editable div
-                                disabled={false}        // use true to disable editing
+                                disabled={!this.props.isAuth}        // use true to disable editing
                                 onChange={this.handleChangeDesc} // handle innerHTML change
                                 onBlur={() => {
                                     if (this.state.board.desc === this.props.board.desc) return

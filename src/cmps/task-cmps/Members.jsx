@@ -41,7 +41,9 @@ export function Members(props) {
                     <FiPlus className="no-members-icon-plus" />
                 </div>}
             <Fade in={props.isUsersShown} >
-                <div  style={{...modalPosition}} className="users-modal modal-fade-in fixed">
+                <div onClick={ (ev) =>
+                      ev.stopPropagation()
+                }  style={{...modalPosition}} className="users-modal modal-fade-in fixed">
                     <div className="task-users-box"> 
                         <h3>Task Members</h3>
                         {props.members.map((member, idx) =>
