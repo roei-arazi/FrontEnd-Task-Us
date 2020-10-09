@@ -16,6 +16,7 @@ import { Date } from './task-cmps/Date';
 import { Priority } from './task-cmps/Priority';
 import { Updates } from './task-cmps/Updates';
 import { Tags } from './task-cmps/Tags';
+import {showSnackbar, hideSnackbar} from '../store/actions/systemActions.js';
 
 class _Task extends Component {
     state = {
@@ -50,6 +51,10 @@ class _Task extends Component {
     }
     componentWillUnmount() {
         socketService.off('updatedBoard', this.reloadProps)
+    }
+    displayPopup(msg) {
+        this.props.showSnackbar(msg)
+        setTimeout(this.props.hideSnackbar, 3000)
     }
     handleNameChange = (ev) => {
         this.setState({ task: { ...this.state.task, name: ev.target.value } });
@@ -145,6 +150,7 @@ class _Task extends Component {
     }
     render() {
         if (!this.state.task) return <h1>Loading...</h1>
+        const {isAuth} = this.props;
         const { name, members, status, priority, dueDate, updates, id } = this.state.task;
         const { isUsersShown, isStatusShown, isPriorityShown, isUpdatesShown, isTagsShown, modalPosition } = this.state
         return (
@@ -168,7 +174,12 @@ class _Task extends Component {
                                 <div className="task-color-remove">
                                     <div style={{ backgroundColor: this.props.group.color }} className="task-color"></div>
                                     <div className='icon-container'>
-                                        <MdDelete className="task-remove-icon" onClick={() => { this.props.onRemoveTask(id, this.props.group) }} />
+                                        <MdDelete className="task-remove-icon" onClick={() => {
+                                            if(!isAuth){
+                                                this.displayPopup('You are not a member of this board!')
+                                                return;
+                                            }
+                                             this.props.onRemoveTask(id, this.props.group) }} />
                                     </div>
                                 </div>
                                 <div className="task-title-updates flex align-center space-between grow">
@@ -178,7 +189,7 @@ class _Task extends Component {
                                             className="cursor-initial content-editable"
                                             innerRef={this.contentEditable}
                                             html={name}
-                                            disabled={false}
+                                            disabled={!isAuth}
                                             onChange={this.handleNameChange}
                                             onBlur={() => {
                                                 const desc = `${this.props.loggedUser.fullName} changed task name from ${this.state.task.name} to ${name} at group - ${this.props.group.name}`
@@ -201,18 +212,18 @@ class _Task extends Component {
                                 <Members members={members} users={this.props.users} isUsersShown={isUsersShown}
                                     openModal={this.openModal} goToUserProfile={this.goToUserProfile} onAddUserToTask={this.onAddUserToTask}
                                     onRemoveMemberFromTask={this.onRemoveMemberFromTask}
-                                    modalPosition={modalPosition} />
+                                    modalPosition={modalPosition} isAuth={isAuth} />
                                 <Status status={status} isStatusShown={isStatusShown}
                                     handleChange={this.handleChange} openModal={this.openModal}
-                                    modalPosition={modalPosition} />
-                                <Date modalPosition={modalPosition} dueDate={dueDate} handleDateChange={this.handleDateChange} />
+                                    modalPosition={modalPosition} isAuth={isAuth} />
+                                <Date modalPosition={modalPosition} dueDate={dueDate} handleDateChange={this.handleDateChange} isAuth={isAuth} />
                                 <Priority priority={priority} isPriorityShown={isPriorityShown}
                                     openModal={this.openModal} handleChange={this.handleChange}
-                                    modalPosition={modalPosition} />
+                                    modalPosition={modalPosition} isAuth={isAuth} />
                                 <Tags onEditTags={this.onEditTags}
                                     task={this.state.task} isTagsShown={isTagsShown}
                                     openModal={this.openModal} handleChange={this.handleChange}
-                                    modalPosition={modalPosition} />
+                                    modalPosition={modalPosition} isAuth={isAuth} />
                             </div>
                         </section>
                     )}
@@ -230,4 +241,8 @@ const mapStateToProps = state => {
         loggedUser: state.userReducer.loggedUser
     }
 }
-export const Task = connect(mapStateToProps)(withRouter(_Task));
+const mapDispatchToProps = {
+    hideSnackbar,
+    showSnackbar
+}
+export const Task = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Task));
