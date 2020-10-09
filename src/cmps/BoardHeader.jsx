@@ -5,7 +5,7 @@ import { FiMinus,FiPlus } from 'react-icons/fi';
 import { GoSearch } from 'react-icons/go'
 import { VscListFilter } from 'react-icons/vsc'
 import { IoMdArrowDropdown } from 'react-icons/io';
-import { BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs';
+import { BsThreeDots } from 'react-icons/bs';
 
 // inside imports
 import { ActivitiesModal } from './ActivitiesModal';
@@ -133,7 +133,7 @@ export class _BoardHeader extends React.Component {
         const activitiesNotRead = this.props.board.activityLog.filter(activity => !activity[loggedUser._id])
         const activitiesRead = this.props.board.activityLog.filter(activity => activity[loggedUser._id])
         return (
-            <section className="board-header flex column padding-x-30">
+            <section className="board-header flex column padding-x-30 padding-y-30">
                 <div className="board-header-header flex space-between grow align-center">
                     <h1 className="flex align-center">
                         <ContentEditable

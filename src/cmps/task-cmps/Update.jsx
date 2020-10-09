@@ -50,6 +50,12 @@ export class Update extends React.Component {
     toggleOptionsModal = () => {
         this.setState({ isOptionsModal: !this.state.isOptionsModal })
     }
+    getInitials(fullName) {
+        const [firstName, lastName] = fullName.split(' ');
+        let initials = firstName.charAt(0).toUpperCase();
+        if (lastName) initials += lastName.charAt(0).toUpperCase();
+        return initials;
+    }
     render() {
         const { update, idx } = this.props
         return (
@@ -73,7 +79,14 @@ export class Update extends React.Component {
                     </Fragment>
                 }
                 <div className="update-box-header flex align-center">
-                    <img src={update.member.imgUrl} alt="" />
+                {
+                    update.member.imgUrl ?  <img src={update.member.imgUrl} alt="" />
+                 : 
+                 <div className="member-letter flex align-center justify-center"> 
+                 {this.getInitials(update.member.fullName)[0]}
+                 {this.getInitials(update.member.fullName)[1]}
+                 </div>
+                 }
                     <p className="member-name">{update.member.fullName}</p>
                 </div>
                 {this.state.isEditMode ?

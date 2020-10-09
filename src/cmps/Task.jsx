@@ -182,6 +182,7 @@ class _Task extends Component {
                                             onChange={this.handleNameChange}
                                             onBlur={() => {
                                                 const desc = `${this.props.loggedUser.fullName} changed task name from ${this.state.task.name} to ${name} at group - ${this.props.group.name}`
+                                                if(this.state.task.name === this.props.task.name) return
                                                 this.props.onEditTask(this.state.task, this.props.task, desc)
                                             }}
                                             onKeyDown={(ev) => {

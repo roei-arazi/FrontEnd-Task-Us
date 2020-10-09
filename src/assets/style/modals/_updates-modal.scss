@@ -284,8 +284,12 @@
             margin-bottom: 10px;
             width: 100%;
 
-            .member-name {
+            p.member-name {
                 font-weight: bold;
+            }
+            .member-letter {
+                margin-right: 10px;
+
             }
 
             img {

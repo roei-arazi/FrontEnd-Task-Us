@@ -37,12 +37,12 @@
     }
     
     @media (max-width: 600px) { 
-      width: 635px;
+      width: 780px;
       
       .group-header-right{
         font-size: 0.8rem;
         > * {
-          width: 70px;
+          width:100px
         }
       }
 

@@ -50,7 +50,12 @@ export class Activities extends Component {
                                         </p>
                                     </div>
                                     {activity.byUser.imgUrl ? <img className="cursor-pointer" onClick={() => moveToProfile(activity.byUser._id)} src={activity.byUser.imgUrl} alt="" /> :
-                                        <div onClick={() => moveToProfile(activity.byUser._id)} className="member-letter flex align-center justify-center">{getInitials(activity.byUser.fullName)}</div>}
+                                        <div onClick={() => moveToProfile(activity.byUser._id)}
+                                         className="member-letter flex align-center justify-center">
+
+                                        {getInitials(activity.byUser.fullName)}
+                                        
+                                        </div>}
                                     <h2 onClick={() => moveToProfile(activity.byUser._id)}>{activity.byUser.fullName}</h2>
                                 </div>
                                 <div className="activity-desc-container flex align-center">

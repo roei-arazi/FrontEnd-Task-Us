@@ -59,6 +59,8 @@ class _Board extends Component {
     onEditBoard = async (newBoard, desc) => {
         const { loggedUser } = this.props;
 
+      this.checkIfBoardMember()
+      
         this.props.updateBoard(newBoard, desc, loggedUser)
         userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
         if (desc) this.displayPopup('Updated board.')
@@ -175,7 +177,9 @@ class _Board extends Component {
         }
     }
     onEditTask = async (task, prevTask, desc) => {
-        // if (lodash.isEqual(task, prevTask)) return;
+
+       if (!this.checkIfBoardMember()) return
+
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
         this.props.editTask(task, board, desc, this.props.loggedUser)
@@ -267,6 +271,11 @@ class _Board extends Component {
     }
     toggleModal = () => {
         this.setState({ isModalShown: !this.state.isModalShown })
+    }
+    checkIfBoardMember = () => {
+        const { loggedUser } = this.props;
+        const board = this._getCurrBoard()
+        return loggedUser.isAdmin || board.members.some(member => member._id === loggedUser._id) 
     }
     render() {
         const board = this._getCurrBoard()

@@ -225,7 +225,8 @@ div[role="menuContainer"]>div>ul {
 
 ::-webkit-scrollbar {
   width: 10px;
-}
+  height: 10px;
+}  
 
 ::-webkit-scrollbar-track {
   background: $white;
@@ -239,7 +240,7 @@ div[role="menuContainer"]>div>ul {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #a0a0a0;
-  border-radius: 1px;
+ 
 }
 
 @media(max-width: 600px) {
