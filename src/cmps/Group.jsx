@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { Task } from './Task'
+import { Task } from './Task';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { Menu, MenuItem } from '@material-ui/core';
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
-import { AiOutlineDelete, AiOutlineDrag } from 'react-icons/ai'
+import { AiOutlineDelete, AiOutlineDrag } from 'react-icons/ai';
 import ContentEditable from 'react-contenteditable';
 import { CgColorPicker } from 'react-icons/cg';
 // Inside imports
-import socketService from '../services/socketService.js'
+import socketService from '../services/socketService.js';
+import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import { connect } from 'react-redux';
 
-export class Group extends Component {
+export class _Group extends Component {
     state = {
         id: '',
         ElGroupSettings: null,
@@ -30,6 +32,10 @@ export class Group extends Component {
     handleChange = (ev) => {
         this.setState({ name: ev.target.value });
     }
+    displayPopup(msg) {
+        this.props.showSnackbar(msg)
+        setTimeout(this.props.hideSnackbar, 3000)
+    }
     focusText = () => {
         setTimeout(() => {
             document.execCommand('selectAll', false, null)
@@ -42,9 +48,14 @@ export class Group extends Component {
         this.setState({ ElGroupSettings: null, elGroupColors: false })
     }
     handleColorsOpen = (ev) => {
-        if(this.props.isAuth) this.setState({ elGroupColors: ev.currentTarget })
+
+        this.setState({ elGroupColors: ev.currentTarget })
     }
     handleColorsToggle = () => {
+        if (!this.props.isAuth) {
+            this.displayPopup('You are not a member of this board!')
+            return;
+        }
         this.setState({ elGroupColors: !this.state.elGroupColors })
     }
     onChangeGroupColor = (color) => {
@@ -99,7 +110,10 @@ export class Group extends Component {
                                     open={Boolean(ElGroupSettings)}
                                     onClose={this.handleMenuClose}>
                                     <MenuItem onClick={() => {
-                                        if(this.props.isAuth) this.props.onRemoveGroup(group.id)
+                                        if (!this.props.isAuth) {
+                                            this.displayPopup('You are not a member of this board!')
+                                            return;
+                                        } this.props.onRemoveGroup(group.id)
                                     }}>
                                         <AiOutlineDelete className="delete-group-icon" /> Delete Group
                                     </MenuItem>
@@ -190,4 +204,15 @@ export class Group extends Component {
             </Draggable>
         )
     }
-} 
+}
+
+const mapStateToProps = state => {
+    return {}
+}
+
+const mapDispatchToProps = {
+    showSnackbar,
+    hideSnackbar
+}
+
+export const Group = connect(mapStateToProps, mapDispatchToProps)(_Group);
