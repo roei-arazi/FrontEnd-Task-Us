@@ -275,7 +275,6 @@ class _Board extends Component {
     checkIfBoardMember = () => {
         const { loggedUser } = this.props;
         const board = this._getCurrBoard()
-        console.log('got board:', board);
         return loggedUser.isAdmin || board.members.some(member => member._id === loggedUser._id)
     }
     render() {
