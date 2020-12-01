@@ -1,9 +1,8 @@
 <a href="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"><img                  src="http://res.cloudinary.com/dtg7n0zye/image/upload/v1601479025/ptn1e4ignc6ubtihl2n6.png"/></a>
 
-***Check it out LIVE <a target="_blank" href="https://task-us.herokuapp.com/#/">Task-Us</a>*** 
+***Check it out LIVE <a href="https://task-us.herokuapp.com/#/">Task-Us</a>*** 
 
-***You can also watch a live demo presentation <a target="_blank" href="https://vimeo.com/467803554">HERE</a>***
-
+***You can also watch a live demo presentation <a href="https://vimeo.com/467803554">HERE</a>***
 # Task-Us
 
 > Managing our work together.
@@ -75,11 +74,6 @@ Dashboard  ![Recordit GIF](http://g.recordit.co/DMNIf03n1t.gif)
 
 ---
 
-## Installation
-
-- All the `code` required to get started
-- Images of what it should look like
-
 ### Clone
 
 - Clone this repo to your local machine using `https://github.com/FriZe6/FrontEnd-Task-Us.git`
@@ -94,10 +88,6 @@ $ npm i
 ```
 
 ---
-
-## Contributing
-
-> To get started...
 
 ### Step 1
 
