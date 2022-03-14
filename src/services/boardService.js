@@ -18,8 +18,8 @@ async function loadBoards() {
     const boards = await httpService.get('board')
     return boards
 }
-function removeBoard(boardId) {
-    return httpService.delete(`board/${boardId}`)
+async function removeBoard(boardId) {
+    return await httpService.delete(`board/${boardId}`)
 }
 async function addBoard(loggedUser) {
     const board = {
@@ -77,7 +77,7 @@ async function addBoard(loggedUser) {
     const newBoard = await httpService.post(`board`, board);
     return newBoard;
 }
-function addGroup(board, loggedUser) {
+async function addGroup(board, loggedUser) {
     const group = {
         "id": _makeid(),
         "name": 'week1',
@@ -102,15 +102,15 @@ function addGroup(board, loggedUser) {
         }]
     }
     try {
-        board.groups.push(group)
+        const updateBoard = {...board, groups:[group, ...board.groups]}
         const desc = `${loggedUser.fullName} Added a new group.`
-        return handleBoardChanges(desc, loggedUser, board)
+        return await handleBoardChanges(desc, loggedUser, updateBoard)
     } catch (err) {
         console.log('boardService: Couldn\'t add group');
         throw err;
     }
 }
-function removeGroup(groupId, board, loggedUser) {
+async function removeGroup(groupId, board, loggedUser) {
     let group = null;
     board.groups = board.groups.filter(currGroup => {
         const isGroup = currGroup.id === groupId;
@@ -118,13 +118,13 @@ function removeGroup(groupId, board, loggedUser) {
         return !isGroup;
     })
     const desc = `${loggedUser.fullName} Removed group: ${group.name}`
-    return handleBoardChanges(desc, loggedUser, board)
+    return await handleBoardChanges(desc, loggedUser, board)
 }
-function updateGroup(updatedGroup, board, desc, loggedUser) {
+async function updateGroup(updatedGroup, board, desc, loggedUser) {
     board.groups = board.groups.map(group => group.id === updatedGroup.id ? updatedGroup : group)
-    return handleBoardChanges(desc, loggedUser, board)
+    return await handleBoardChanges(desc, loggedUser, board)
 }
-function removeTask(taskId, board, group, loggedUser) {
+async function removeTask(taskId, board, group, loggedUser) {
     let task = null
     const groupIdx = board.groups.findIndex(currGroup => currGroup.id === group.id)
     board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(currTask => {
@@ -136,9 +136,9 @@ function removeTask(taskId, board, group, loggedUser) {
         board.groups.splice(groupIdx, 1)
     }
     const desc = `${loggedUser.fullName} Removed task: ${task.name} from group ${group.name}`;
-    return handleBoardChanges(desc, loggedUser, board)
+    return await handleBoardChanges(desc, loggedUser, board)
 }
-function addTask(groupId, taskName, board, loggedUser) {
+async function addTask(groupId, taskName, board, loggedUser) {
     const task = {
         id: _makeid(),
         name: taskName,
@@ -156,17 +156,17 @@ function addTask(groupId, taskName, board, loggedUser) {
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
     const desc = `${loggedUser.fullName} Added a new task: ${taskName} to group ${board.groups[groupIdx].name}`
     board.groups[groupIdx].tasks.push(task)
-    return handleBoardChanges(desc, loggedUser, board)
+    return await handleBoardChanges(desc, loggedUser, board)
 }
-function updateTask(updatedTask, board, desc, loggedUser) {
+async function updateTask(updatedTask, board, desc, loggedUser) {
     board.groups = board.groups.map(group => {
         group.tasks = group.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
         return group;
     })
-    return handleBoardChanges(desc, loggedUser, board)
+    return await handleBoardChanges(desc, loggedUser, board)
 }
-function handleBoardChanges(desc, loggedUser, board) {
-    if (!desc) return updateBoard(board)
+async function handleBoardChanges(desc, loggedUser, board) {
+    if (!desc) return await updateBoard(board)
     const changes = {
         id: _makeid(),
         changedAt: Date.now(),
@@ -177,12 +177,12 @@ function handleBoardChanges(desc, loggedUser, board) {
             imgUrl: loggedUser.imgUrl
         },
     }
-    const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog,] }
-    return updateBoard(updatedBoard)
+    const updatedBoard = { ...board, activityLog: [changes, ...board.activityLog] }
+    return await updateBoard(updatedBoard)
 }
-function updateBoard(boardToSave) {
+async function updateBoard(boardToSave) {
     socketService.emit('updateBoard', boardToSave);
-    httpService.put(`board/${boardToSave._id}`, boardToSave)
+    await httpService.put(`board/${boardToSave._id}`, boardToSave)
     return boardToSave
 }
 function _makeid(length = 7) {

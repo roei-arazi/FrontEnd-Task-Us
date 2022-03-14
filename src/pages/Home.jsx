@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 // Inside imports
-import { loadBoards } from '../store/actions/boardActions'
+import { loadBoards, addBoard } from '../store/actions/boardActions'
 import { guestLogin } from '../store/actions/userActions'
 
 class _Home extends Component {
@@ -18,9 +18,11 @@ class _Home extends Component {
 
         await this.props.guestLogin()
         await this.props.loadBoards()
-
+        if(!this.props.boards || !this.props.boards.length){
+            await this.props.addBoard(this.props.loggedUser)
+            await this.props.loadBoards()
+        }
         this.setState({ isLoading: false })
-
         this.props.history.push(`/board/${this.props.boards[0]._id}`)
     }
 
@@ -69,6 +71,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = {
     loadBoards,
+    addBoard,
     guestLogin
 }
 export const Home = connect(mapStateToProps, mapDispatchToProps)(_Home);

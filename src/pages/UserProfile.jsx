@@ -12,7 +12,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import socketService from '../services/socketService';
 import { removeBoard, loadBoards } from '../store/actions/boardActions.js';
-import { showSnackbar, hideSnackbar } from '../store/actions/systemActions.js';
+import { showSnackbar } from '../store/actions/systemActions.js';
 
 class _UserProfile extends Component {
     state = {

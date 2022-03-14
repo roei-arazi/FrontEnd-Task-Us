@@ -61,8 +61,8 @@ class _Board extends Component {
 
         this.checkIfBoardMember()
 
-        this.props.updateBoard(newBoard, desc, loggedUser)
-        userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
+        await this.props.updateBoard(newBoard, desc, loggedUser)
+        await userService.notifyUsers(`${newBoard.name}: ${desc}`, newBoard.members, loggedUser)
         if (desc) this.displayPopup('Updated board.')
     }
     applyFilter = (board, filterBy) => {
@@ -105,7 +105,7 @@ class _Board extends Component {
         const { loggedUser } = this.props;
         const board = this._getCurrBoard()
         try {
-            this.props.addGroup(board, this.props.loggedUser);
+            await this.props.addGroup(board, this.props.loggedUser);
             userService.notifyUsers(`${board.name}: ${loggedUser.fullName} added a group.`, board.members, loggedUser)
             this.props.clearFilter();
             this.displayPopup('Added group.')
@@ -113,7 +113,7 @@ class _Board extends Component {
         } catch (err) {
             console.log('Error', err)
         }
-        this.props.history.push(`/board/${this.state.boardId}`)
+        await this.props.loadBoards()
     }
     onRemoveGroup = async (groupId) => {
         const { loggedUser } = this.props;
@@ -121,8 +121,8 @@ class _Board extends Component {
         const group = board.groups.find(group => group.id === groupId);
         const notif = `${board.name}: ${loggedUser.fullName} removed group ${group.name}`;
         try {
-            this.props.removeGroup(groupId, board, this.props.loggedUser)
-            userService.notifyUsers(notif, board.members, loggedUser);
+            await this.props.removeGroup(groupId, board, this.props.loggedUser)
+            await userService.notifyUsers(notif, board.members, loggedUser);
             this.displayPopup('Removed group.')
         } catch (err) {
             console.log('Error', err)
@@ -137,8 +137,8 @@ class _Board extends Component {
         group[key] = changedValue;
         try {
             const desc = `${group.name}: ${loggedUser.fullName} Changed ${key} from ${originalValue} to ${changedValue}`;
-            this.props.editGroup(group, board, desc, loggedUser)
-            userService.notifyUsers(desc, board.members, loggedUser);
+            await this.props.editGroup(group, board, desc, loggedUser)
+            await userService.notifyUsers(desc, board.members, loggedUser);
             this.displayPopup('Updated group.')
         } catch (err) {
             console.log('Error', err)
@@ -153,8 +153,8 @@ class _Board extends Component {
         try {
             const task = group.tasks.find(task => task.id === taskId);
             const notif = `${loggedUser.fullName} Removed the task ${task.name} from ${group.name}`;
-            this.props.removeTask(taskId, board, group, loggedUser);
-            userService.notifyUsers(notif, board.members, loggedUser);
+            await this.props.removeTask(taskId, board, group, loggedUser);
+            await userService.notifyUsers(notif, board.members, loggedUser);
             this.displayPopup('Removed task.');
         } catch (err) {
             console.log('Error', err)
@@ -167,8 +167,8 @@ class _Board extends Component {
         const group = board.groups.find(group => group.id === groupId)
         const notif = ` ${board.name}: ${loggedUser.fullName} Added a task to ${group.name}`;
         try {
-            this.props.addTask(groupId, taskName, board, loggedUser)
-            userService.notifyUsers(notif, board.members, loggedUser)
+            await this.props.addTask(groupId, taskName, board, loggedUser)
+            await userService.notifyUsers(notif, board.members, loggedUser)
             this.props.clearFilter()
             this.displayPopup('Added task.')
 
@@ -182,8 +182,8 @@ class _Board extends Component {
 
         const board = this._getCurrBoard()
         const { loggedUser } = this.props;
-        this.props.editTask(task, board, desc, this.props.loggedUser)
-        userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
+        await this.props.editTask(task, board, desc, this.props.loggedUser)
+        await userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
         this.displayPopup('Updated task.')
     }
     //---------------------Draggable----------------------
@@ -201,7 +201,7 @@ class _Board extends Component {
             newGroups.splice(destination.index, 0, draggedGroup)
             board.groups = newGroups
             try {
-                this.props.updateBoard(board)
+                await this.props.updateBoard(board)
 
             } catch (err) {
                 console.log('Error', err);
@@ -221,7 +221,7 @@ class _Board extends Component {
                 const newIdx = board.groups.findIndex(group => group.id === newGroup.id)
                 board.groups.splice(newIdx, 1, newGroup)
                 try {
-                    this.props.updateBoard(board)
+                    await this.props.updateBoard(board)
                 } catch (err) {
                     console.log('Error', err);
                 }
@@ -246,8 +246,8 @@ class _Board extends Component {
                 try {
                     const { loggedUser } = this.props;
                     const desc = `${loggedUser.fullName} Moved ${newTaskToPaste.name} from ${newStartGroup.name} to ${newFinishGroup.name}`
-                    this.props.updateBoard(this._getCurrBoard(), desc, loggedUser)
-                    userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
+                    await this.props.updateBoard(this._getCurrBoard(), desc, loggedUser)
+                    await userService.notifyUsers(`${board.name}: ${desc}`, board.members, loggedUser)
                 } catch (err) {
                     console.log('Error', err);
                 }

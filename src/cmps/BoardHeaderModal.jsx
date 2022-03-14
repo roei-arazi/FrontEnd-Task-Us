@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react'
-import { GoSearch } from 'react-icons/go';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { VscListFilter } from 'react-icons/vsc';
 import {Filter} from './Filter'

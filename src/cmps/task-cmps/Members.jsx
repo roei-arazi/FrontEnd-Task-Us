@@ -40,7 +40,7 @@ export function Members(props) {
             </div>
                 :
                 <div className="no-members-container">
-                    <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="" className="no-members-icon" />
+                    <img src="https://img.icons8.com/external-becris-flat-becris/64/000000/external-user-avatars-becris-flat-becris-1.png" alt="" className="no-members-icon" />
                     <FiPlus className="no-members-icon-plus" />
                 </div>}
             <Fade in={props.isUsersShown} >

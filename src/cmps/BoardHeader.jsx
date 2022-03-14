@@ -162,7 +162,7 @@ export class _BoardHeader extends React.Component {
                     <div className="board-header-right relative flex align-center">
                         <div className="board-users flex justify-center relative" onClick={this.onToggleUsers}>
                             {members.length === 0 && <div className="no-members-container relative">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" alt="" />
+                            <img src="https://img.icons8.com/external-becris-flat-becris/64/000000/external-user-avatars-becris-flat-becris-1.png" alt="" className="no-members-icon" />
                                 <FiPlus className="no-members-icon-plus" />
                             </div>}
                             {members.length !== 0 && members.map((member, idx) => {
